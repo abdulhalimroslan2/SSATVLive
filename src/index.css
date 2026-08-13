@@ -39,7 +39,7 @@ h1, h2, h3, h4, h5, h6 {
 
 /* App Layout Grid */
 .app-layout {
-  display: flex;
+  display: block;
   min-height: 100vh;
   background-color: var(--bg-primary);
 }
