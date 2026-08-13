@@ -1,0 +1,60 @@
+{
+  "rewrites": [
+    {
+      "source": "/astro-linear/:match*",
+      "destination": "/api/proxy?path=/astro-linear/:match*"
+    },
+    {
+      "source": "/rtm-stream/:match*",
+      "destination": "/api/proxy?path=/rtm-stream/:match*"
+    },
+    {
+      "source": "/cf-d2xz/:match*",
+      "destination": "/api/proxy?path=/cf-d2xz/:match*"
+    },
+    {
+      "source": "/cf-d2tj/:match*",
+      "destination": "/api/proxy?path=/cf-d2tj/:match*"
+    },
+    {
+      "source": "/cf-d84q/:match*",
+      "destination": "/api/proxy?path=/cf-d84q/:match*"
+    },
+    {
+      "source": "/cf-d3b0/:match*",
+      "destination": "/api/proxy?path=/cf-d3b0/:match*"
+    },
+    {
+      "source": "/cf-df14/:match*",
+      "destination": "/api/proxy?path=/cf-df14/:match*"
+    },
+    {
+      "source": "/mana2/:match*",
+      "destination": "/api/proxy?path=/mana2/:match*"
+    },
+    {
+      "source": "/ptv2026/:match*",
+      "destination": "/api/proxy?path=/ptv2026/:match*"
+    },
+    {
+      "source": "/load-ptv/:match*",
+      "destination": "/api/proxy?path=/load-ptv/:match*"
+    },
+    {
+      "source": "/perfecttv/:match*",
+      "destination": "/api/proxy?path=/perfecttv/:match*"
+    },
+    {
+      "source": "/gcdn-s/:match*",
+      "destination": "/api/proxy?path=/gcdn-s/:match*"
+    },
+    {
+      "source": "/gcdn/:match*",
+      "destination": "/api/proxy?path=/gcdn/:match*"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
+}
