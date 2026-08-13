@@ -78,6 +78,11 @@ export default async function handler(req) {
     resHeaders.set('Access-Control-Allow-Methods', 'GET, OPTIONS');
     resHeaders.set('Access-Control-Allow-Headers', '*');
     
+    // Prevent Vercel Edge Caching (fixes live stream freezing)
+    resHeaders.set('Cache-Control', 'no-cache, no-store, must-revalidate');
+    resHeaders.set('Pragma', 'no-cache');
+    resHeaders.set('Expires', '0');
+    
     // Make sure content-type is correct for video streams
     if (path.includes('.mpd')) resHeaders.set('Content-Type', 'application/dash+xml');
     else if (path.includes('.m3u8')) resHeaders.set('Content-Type', 'application/vnd.apple.mpegurl');
