@@ -258,9 +258,20 @@ export const Player: React.FC<PlayerProps> = ({ channel }) => {
 
       // Attempt Playback Hierarchy
       let success = await tryShakaPlayer();
+      
       if (!success && isHls) {
-        success = await tryHlsJs();
+        // Apple devices (iOS Safari/Chrome, macOS Safari) have flawless native HLS support.
+        // Hls.js via MSE often freezes or stalls on iOS.
+        if (video.canPlayType('application/vnd.apple.mpegurl')) {
+          success = await tryNativeVideo();
+        }
+        
+        // If native HLS failed or wasn't supported (e.g. Windows/Android), fallback to hls.js
+        if (!success) {
+          success = await tryHlsJs();
+        }
       }
+      
       if (!success) {
         success = await tryNativeVideo();
       }
