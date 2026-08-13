@@ -107,16 +107,15 @@ export const Player: React.FC<PlayerProps> = ({ channel }) => {
             });
 
             // RESPONSE FILTER: rewrite MPD — swap Widevine UUID → ClearKey UUID
-            // This allows Shaka to use its built-in ClearKey EME path
+            // This allows Shaka to use its built-in ClearKey EME path on all MPD updates
             if (isDash && channel.clearKey) {
               networkEngine.registerResponseFilter((_type: any, response: any) => {
-                const url: string = response.uri || '';
-                if (!url.includes('.mpd')) return;
-
                 let mpd: string;
                 try {
                   mpd = new TextDecoder().decode(response.data);
                 } catch (_e) { return; }
+
+                if (!mpd.includes('<MPD') && !mpd.includes('<mpd')) return;
 
                 // 1. Replace Widevine UUID with W3C ClearKey UUID (for Astro streams)
                 const widevineUuid = 'urn:uuid:edef8ba9-79d6-4ace-a3c8-27dcd51d21ed';
@@ -140,6 +139,9 @@ export const Player: React.FC<PlayerProps> = ({ channel }) => {
 
             // LICENSE REQUEST INTERCEPTOR: intercept ClearKey license requests
             // and return JWK key set directly (no external server needed)
+            const clearKeysMap: Record<string, string> = {};
+            let jwkSetDataUrl = '';
+
             if (channel.clearKey) {
               const [rawKeyId, rawKey] = channel.clearKey.split(':');
               const normalizeHex = (s: string) => s.replace(/-/g, '').toLowerCase();
@@ -156,25 +158,18 @@ export const Player: React.FC<PlayerProps> = ({ channel }) => {
               const kidB64 = hexToBase64Url(keyIdHex);
               const keyB64 = hexToBase64Url(keyValueHex);
 
+              jwkSetDataUrl = 'data:application/json,' + encodeURIComponent(JSON.stringify({
+                keys: [{ kty: 'oct', kid: kidB64, k: keyB64 }],
+                type: 'temporary'
+              }));
+
               networkEngine.registerRequestFilter((type: any, request: any) => {
-                // type 5 = LICENSE
-                if (type !== 5) return;
-                const url: string = request.uris[0] || '';
-                // Only intercept ClearKey license requests
-                if (!url.includes('clearkey') && !url.includes('1077efec')) return;
-
-                // Parse license request to get requested KIDs, return JWK response
-                const jwkSet = JSON.stringify({
-                  keys: [{ kty: 'oct', kid: kidB64, k: keyB64 }],
-                  type: 'temporary'
-                });
-
-                // Override: respond directly by throwing a special shaka response
-                request.uris[0] = 'data:application/json,' + encodeURIComponent(jwkSet);
+                // Intercept ANY license request for this channel
+                if (type === shaka.net.NetworkingEngine.RequestType.LICENSE || type === 5) {
+                  request.uris[0] = jwkSetDataUrl;
+                }
               });
 
-              // Configure clearKeys map as backup
-              const clearKeysMap: Record<string, string> = {};
               clearKeysMap[keyIdHex] = keyValueHex;
 
               // Also add URL kid param variant
@@ -183,12 +178,6 @@ export const Player: React.FC<PlayerProps> = ({ channel }) => {
                 const kidParam = urlObj.searchParams.get('kid');
                 if (kidParam) clearKeysMap[normalizeHex(kidParam)] = keyValueHex;
               } catch (_e) { /* ignore */ }
-
-              player.configure({
-                drm: {
-                  clearKeys: clearKeysMap,
-                }
-              });
             }
 
             // Streaming Configuration (iOS WebKit & Desktop optimized)
@@ -196,12 +185,17 @@ export const Player: React.FC<PlayerProps> = ({ channel }) => {
                           (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
 
             player.configure({
+              drm: {
+                clearKeys: clearKeysMap,
+                servers: jwkSetDataUrl ? { 'org.w3.clearkey': jwkSetDataUrl } : {}
+              },
               streaming: {
                 lowLatencyMode: false,
-                bufferingGoal: isIOS ? 8 : 20,
+                inaccurateManifestTolerance: 2,
+                bufferingGoal: isIOS ? 6 : 15,
                 rebufferingGoal: isIOS ? 2 : 4,
-                bufferBehind: isIOS ? 5 : 20,
-                smallGapLimit: 0.5,
+                bufferBehind: isIOS ? 5 : 15,
+                smallGapLimit: 0.8,
                 jumpLargeGaps: true,
                 stallEnabled: true,
                 stallThreshold: 1,
@@ -220,7 +214,9 @@ export const Player: React.FC<PlayerProps> = ({ channel }) => {
                 dash: {
                   ignoreMinBufferTime: true,
                   autoCorrectDrift: true,
+                  initialSegmentLimit: 2,
                 },
+                availabilityWindowOverride: 60,
                 retryParameters: {
                   maxAttempts: 6,
                   baseDelay: 500,
@@ -229,6 +225,23 @@ export const Player: React.FC<PlayerProps> = ({ channel }) => {
                   timeout: 30000
                 }
               }
+            });
+
+            player.addEventListener('error', (event: any) => {
+              console.warn('[Player] Shaka error event:', event?.detail);
+              if (event?.detail && event.detail.isRecoverable) {
+                try {
+                  player.retryStreaming();
+                } catch (_e) {}
+              }
+            });
+
+            player.addEventListener('stalldetected', () => {
+              console.log('[Player] Shaka stall detected, auto-nudging playback...');
+              try {
+                video.currentTime += 0.25;
+                video.play().catch(() => {});
+              } catch (_e) {}
             });
           }
 
