@@ -118,10 +118,21 @@ export const Player: React.FC<PlayerProps> = ({ channel }) => {
                   mpd = new TextDecoder().decode(response.data);
                 } catch (_e) { return; }
 
-                // Replace Widevine UUID with W3C ClearKey UUID
+                // 1. Replace Widevine UUID with W3C ClearKey UUID (for Astro streams)
                 const widevineUuid = 'urn:uuid:edef8ba9-79d6-4ace-a3c8-27dcd51d21ed';
                 const clearKeyUuid = 'urn:uuid:1077efec-c0b2-4d02-ace3-3c1e52e2fb4b';
-                const rewritten = mpd.replaceAll(widevineUuid, clearKeyUuid);
+                let rewritten = mpd.replaceAll(widevineUuid, clearKeyUuid);
+
+                // 2. Fix Mixed Content (HTTP -> HTTPS) for BaseURL (for Unifi TV streams)
+                rewritten = rewritten.replaceAll('<BaseURL>http://', '<BaseURL>https://');
+
+                // 3. Inject ClearKey ContentProtection node if it's completely missing (Unifi TV)
+                if (!rewritten.includes(clearKeyUuid) && rewritten.includes('mp4protection')) {
+                   rewritten = rewritten.replace(
+                     /(<ContentProtection schemeIdUri="urn:mpeg:dash:mp4protection:2011"[^>]*>)/g,
+                     `$1\n      <ContentProtection schemeIdUri="urn:uuid:1077efec-c0b2-4d02-ace3-3c1e52e2fb4b"/>`
+                   );
+                }
 
                 response.data = new TextEncoder().encode(rewritten).buffer;
               });
