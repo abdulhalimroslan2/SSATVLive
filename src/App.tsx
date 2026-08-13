@@ -112,7 +112,7 @@ function App() {
                     <span className="badge-live-dot"></span> LIVE
                   </span>
                 </div>
-                <Player channel={activeChannel} />
+                <Player key={activeChannel.contentId} channel={activeChannel} />
               </section>
             )}
 
