@@ -1,0 +1,14 @@
+{
+  "header": {
+    "source": "002-01",
+    "code": 0,
+    "message": "Success",
+    "system_time": 1786625131232,
+    "tracking_id": "3ed2192a-ac5a-4476-b7ea-5e8966622d2e"
+  },
+  "data": {
+    "secret": "ukDtuvizZkFX3PKjUwgsXCpdmz5JZGMuNYSVpJDjhe4=",
+    "expiry": 30,
+    "deviceId": "7a18714d-633d-4f02-8f0f-c53594b98381"
+  }
+}

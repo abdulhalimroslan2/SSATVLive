@@ -1,0 +1,18 @@
+{
+  "header": {
+    "source": "238-01",
+    "code": 0,
+    "message": "Success",
+    "system_time": 1786625231281,
+    "tracking_id": "aaf8821a-15f5-4196-b84d-9fd5a9d7c821"
+  },
+  "data": {
+    "qoe": {
+      "enable": true,
+      "threshold": {
+        "vod": 2100,
+        "live": 2100
+      }
+    }
+  }
+}

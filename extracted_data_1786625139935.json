@@ -1,0 +1,32 @@
+{
+  "header": {
+    "source": "005-01",
+    "code": 0,
+    "message": "Success",
+    "system_time": 1786625139913,
+    "tracking_id": "22fff06a-aba7-494c-941c-2cccec0c2f4d"
+  },
+  "data": {
+    "contentId": "F01074B2-F6DD-441B-9477-1DF50C081978",
+    "contentUrl": "https://ngtv-live-cbj.gcdn.co/Content/DASH/Live/channel(TV1)/master.mpd?hdnts=st%3D1786625079~exp%3D1786625259~acl%3D%2FContent%2FDASH%2FLive%2Fchannel%28TV1%29%2F%2A~id%3DGRuAfjryQZH6pvnMnsiFGkAz7zKG0jF7um2ZnmphuI0n~hmac%3Dce9ea67a6070c45b6bd98f35a110b1d5a6ca2d38ee604165c2df0217dfd20e2c",
+    "licenseUrl": "https://widevine-proxy.api.tm.quickplay.com/getlicense?service=tm&version=1.0&kid=1FE3D74E-8CBC-4EE0-B071-A64257068E38&ptoken=eyJjb250ZW50SWQiOiIxRkUzRDc0RS04Q0JDLTRFRTAtQjA3MS1BNjQyNTcwNjhFMzgiLCJsaWNlbnNlRXhwaXJ5VGltZSI6MTc4Njc5NzkzOTkxMiwiZW50aXRsZWRDb250ZW50SWRzIjoiTVVaRk0wUTNORVV0T0VOQ1F5MDBSVVV3TFVJd056RXRRVFkwTWpVM01EWTRSVE00IiwibWF4VXNlcyI6MSwic2lnbmF0dXJlIjoiMjNmZTYwMDgyZGJmYmYzZDAyMDIzOWE4MDUxMzNlZGY1OGFiYWRiM2MwNTZkODUyZTZhMDYwODY0ODg1YTU0NyIsInVuaXF1ZUlkIjoiN2ExODcxNGQtNjMzZC00ZjAyLThmMGYtYzUzNTk0Yjk4MzgxIiwiaXNzdWVyIjoiU0lHTktFWV9QVE9LRU5fQ09OU1VNRV9JU1NVRVIiLCJhcGlLZXkiOiJhcGlLZXkiLCJrZXlWZXJzaW9uIjoidmVyczAxIiwiZXhwaXJ5VGltZSI6MTc4NjYyNTE5OTkxMiwiY3JlYXRlZFRpbWUiOjE3ODY2MjUxMzk5MTIsInRva2VuTW9kZWxWZXJzaW9uIjoiVjMifQ==",
+    "licenseProvider": {
+      "provider": "firstlight",
+      "version": "1.0"
+    },
+    "mediaFormat": "dash",
+    "drm": "widevine",
+    "skd": "1FE3D74E-8CBC-4EE0-B071-A64257068E38",
+    "heartbeatFlag": true,
+    "heartbeatToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsicXVpY2twbGF5Il0sImV4cCI6MTc4Njc5NzkzOSwiaGVhcnRiZWF0Ijp7ImNvbnRlbnQiOnsiY2F0YWxvZ1R5cGUiOiJjaGFubmVsIiwiY29udGVudElkIjoiRjAxMDc0QjItRjZERC00NDFCLTk0NzctMURGNTBDMDgxOTc4IiwiY29udGVudFR5cGVJZCI6ImxpdmUiLCJkZWxpdmVyeSI6InN0cmVhbWluZyIsImxpdmVFbmRUaW1lIjoiMjAyNi0wOC0xNVQxMjozMDowMFoiLCJsaXZlUGxheWJhY2tNb2RlIjoibGl2ZSIsImxpdmVTdGFydFRpbWUiOiIyMDI2LTA4LTEzVDEyOjMwOjAwWiIsIm1lZGlhRm9ybWF0IjoiZGFzaCIsInBnbUVuZFRpbWUiOiIyMDI2LTA4LTEzVDEzOjAwOjAwWiIsInBnbVN0YXJ0VGltZSI6IjIwMjYtMDgtMTNUMTI6MzA6MDBaIiwic2NoZWR1bGVJZCI6ImFpcmluZy10djEtMjAyNi0wOC0xMy0yMDozMCJ9LCJkZXZpY2UiOnsiZGV2aWNlSWQiOiI3YTE4NzE0ZC02MzNkLTRmMDItOGYwZi1jNTM1OTRiOTgzODEiLCJkZXZpY2VOYW1lIjoid2ViIn0sImxvY2F0aW9uIjp7ImNvdW50cnkiOiJteSIsImlwYWRkcmVzcyI6IjE4MC43NS4yNDMuMTEyIn0sInN0cmVhbUJ5cGFzcyI6ZmFsc2V9LCJpYXQiOjE3ODY2MjUxMzksImlzcyI6InF1aWNrcGxheSIsImp0aSI6IjdhMTg3MTRkLTYzM2QtNGYwMi04ZjBmLWM1MzU5NGI5ODM4MS1GMDEwNzRCMi1GNkRELTQ0MUItOTQ3Ny0xREY1MEMwODE5NzgiLCJzdWIiOiI3YTE4NzE0ZC02MzNkLTRmMDItOGYwZi1jNTM1OTRiOTgzODEtRjAxMDc0QjItRjZERC00NDFCLTk0NzctMURGNTBDMDgxOTc4In0.69BXtILeOmnoZPmhg3tslNFxPh9OcEJYootcVDmp0Pg",
+    "heartbeatFreq": 120000,
+    "livePlaybackMode": "live",
+    "licenseRefreshToken": "/yAkz6Ek0r8HLkhv35RZaaRPhLmwXCE0Q11XGb5Qqw4=",
+    "streamId": "74c9b0f1-d8d7-4a55-8702-0ca32ab9ecc7",
+    "liveStartTime": "2026-08-13T12:30:00Z",
+    "liveEndTime": "2026-08-15T12:31:44Z",
+    "pgmStartTime": "2026-08-13T12:30:00Z",
+    "pgmEndTime": "2026-08-13T13:00:09Z",
+    "pgmBlackout": false
+  }
+}

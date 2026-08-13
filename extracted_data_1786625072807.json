@@ -1,0 +1,16 @@
+{
+  "header": {
+    "source": "009-02",
+    "code": -1,
+    "message": "Failure",
+    "system_time": 1786625072773,
+    "tracking_id": "3dea0429-a3f3-4ebf-b540-bed815f9389a",
+    "errors": [
+      {
+        "code": "40870401",
+        "description": "Item not found"
+      }
+    ]
+  },
+  "data": null
+}

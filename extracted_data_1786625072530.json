@@ -1,0 +1,21 @@
+{
+  "header": {
+    "source": "057-01",
+    "code": 0,
+    "message": "Success",
+    "system_time": 1786625072523,
+    "tracking_id": "d31cb368-1e81-4911-b4ce-de1958d3e858"
+  },
+  "data": {
+    "country": "my",
+    "countryName": "malaysia",
+    "region": "02",
+    "regionName": "kedah",
+    "city": "kampung bemban",
+    "zip": "06000",
+    "lat": 6.32492,
+    "lon": 100.39486,
+    "group": "my",
+    "asn": "4788"
+  }
+}

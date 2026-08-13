@@ -1,0 +1,39 @@
+{
+  "url": "https://playback-auth-service.api.tm.quickplay.com/media/content/authorize",
+  "method": "POST",
+  "headers": {
+    "sec-ch-ua-platform": "\"macOS\"",
+    "authorization": "Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6InB1YmxpYzo5MDk1Zjg5Zi0yMjAxLTRmZGMtOGNmMS1kMmY1ZWVkNjU2MTciLCJ0eXAiOiJKV1QifQ.eyJhdWQiOlsiZWRnZS1zZXJ2aWNlIl0sImNsaWVudF9pZCI6IndlYmNsaWVudC11aS1hcHAiLCJleHAiOjE3ODcyNDU2NDQsImV4dCI6e30sImlhdCI6MTc4NjAzNjA0NCwiaXNzIjoiaHR0cHM6Ly9hdXRoLmFwaS50bS5xdWlja3BsYXkuY29tLyIsImp0aSI6IjBlMTZmODcyLTQwYmQtNGM4Yi1iMmQ5LTdhMDVmNjdjODRjMiIsIm5iZiI6MTc4NjAzNjA0NCwic2NwIjpbIm9mZmxpbmUiLCJvcGVuaWQiXSwic3ViIjoid2ViY2xpZW50LXVpLWFwcCJ9.pus54S2aGwB7AGnpivG521PLwM5R7mVQ-hY0MuhxBoW4RCmGwe_mznU_i-iMnH8Ep63PFadj0xa9uuPstwwA8SIgi7a3Jm3N1B4pTthT8ftigVXhp5rC5MpwwD4e7xUHqeVMySei26uhoNnBMsOIKcdSDlcrPuKGpTB9OcH3_UL4tKt9NVc9313Q3SkUxjps1bUEZmR9jAKbGAfD-D5RtWcGkyyk15cfmv7xbNzQBnNKhNwCduXu0rScUSart2w2Vl0msv-Il5lNsiJ3jJBEY-GpyHYicdhQ16vPOND_R9lX8O_pmWlj-pRFwf3MdruraGCJvvqcTIVq8mXuE5BKbIlkekPDJvQ_WldbXhn9JckyNPKvz1NsvhMVo1peczokbe-qpiuQy3xBLZ8OiKFVg-P0x_KhvUb3VJ_AQYILh63efKC4hTeQcY6mN5LW-vGIGrT4fi_ZoaffjXqoQlW9_v5OZaMB5jnyLAzsxfdYyitK3SQ22hltLpUvleyOCKkdZlSopg55pNci9gcUxecd14yCdTVGcHIgiZ929jvfPDsEVu3z15OSs7INpKVnqGTUqGipF6BgtZsyVf_J_3bw6l5ozEF0gCThzBdzvJSn1JuZDEXXJH_nTGpqHvEYTBhF_Vj4YE4mpXN7z-qUuo0wGT8zTq-ySiW_MmVD8ikp5LY",
+    "referer": "https://unifitv.com.my/",
+    "x-device-id": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkZXZpY2VJZCI6ImJlYTY0ZmUzLTgxYzItNGExOS05NDM5LTM3MGM3ODEwMDMwZCIsImF1ZCI6InBsYXliYWNrLWF1dGgtc2VydmljZSIsImlhdCI6MTc4NjYyNzM2My43ODIsImV4cCI6MTc4NjYyNzM5My43ODJ9.Un9CSGwYTF_mHIe-36Ywn5p1XmohtyMrkQMke0RuiXU",
+    "accept-language": "en-GB,en;q=0.9",
+    "sec-ch-ua": "\"Chromium\";v=\"151\", \"Not=A?Brand\";v=\"99\"",
+    "x-authorization": "eyJlbmMiOiJBMjU2R0NNIiwiYWxnIjoiZGlyIn0..HAvPvSHfHymFBbBc.us2GCRrxZst83ONfPF0JLKhOs9IifNyF4tlydPVDpLYZddrnLvxIX0joJ7FQBn53m3LQkYsDHkgNPTxOMi77EiL0NYE5Z11pfHQnq5l0WGWV9-sdvi3wjgLZOYFak4uQQmHNVQ5L6sbuObeAy7yTrYdu-HLy6sTpDhWwTr4nJi3DVrMXjduCJxaVaVUFrUBoCq8uCco4idHLXDEsX9ETFV8Md-XCd-048wgoRUY6B08R0ukqUQd1hmUhBxT0c_PNrHxyxPQRyfOy9hA9aIUSPD_ZT8oDRyoLyYjbWYCLAygy0kCUN128NvsybpiBXhNhTjiHJ_Qgnu4bdteblJGeYz8r55VGszph9LQoxKpIo-wqao_KlGpL-fJ2sDeVsrtjg5mPgiyW2k0-dhrVf0zPch3Kc2hrfcINKrXh0BK2tvXuQPmVD05Gz3R7GFHkgm4dZs0m6qxSnmH-bkU-vSjsz5XhGJZFUNKnZW6NFd7tE9wUWPQZwbrelI0EQsmzYxF3Tf7XXNIQUY3md6QPTzbYLPu5J3IM-I248MbYCk-FgaPKzlx_UvGvSlHznbv8wS2EMIdF7WbqNBxIEHf1kfoSshrLisHHu6gTEBEFwFvIhT40RrMvS32OZsRL-9ypxhUqYOsR2eVZ0p1lmm6wHTEZTlKYupJc4b-6bbwreNmhGOrJps_0hbPsGK86n8cw22PIByKgSWy1C30XAD-NghaYExBTXondsjdqBAsRUckrjd2IPDw8VVW1QyUYcxO5BakNQjsouSPr0IhmDKIRav2H4sB__yFotQzHWon6qQkb4ERAVOTvIgNwe7c.JUgC6evjphpzCTMLsoESLQ",
+    "sec-ch-ua-mobile": "?0",
+    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36",
+    "x-client-id": "tm-unifitv-web",
+    "content-type": "application/json"
+  },
+  "postData": {
+    "deviceName": "web",
+    "deviceId": "bea64fe3-81c2-4a19-9439-370c7810030d",
+    "contentId": "tv1-tv",
+    "contentTypeId": "live",
+    "catalogType": "channel",
+    "mediaFormat": "dash",
+    "drm": "widevine",
+    "delivery": "streaming",
+    "disableSsai": "false",
+    "playbackMode": "live",
+    "deviceManufacturer": "web",
+    "deviceModelName": "web",
+    "deviceModelNumber": "chrome",
+    "deviceOs": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36",
+    "supportedAudioCodecs": "mp4a",
+    "supportedVideoCodecs": "avc,hevc,av01",
+    "deviceToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkZXZpY2VJZCI6ImJlYTY0ZmUzLTgxYzItNGExOS05NDM5LTM3MGM3ODEwMDMwZCIsImF1ZCI6InBsYXliYWNrLWF1dGgtc2VydmljZSIsImlhdCI6MTc4NjYyNzM2My43ODIsImV4cCI6MTc4NjYyNzM5My43ODJ9.Un9CSGwYTF_mHIe-36Ywn5p1XmohtyMrkQMke0RuiXU",
+    "custom": {
+      "pf.multiaudiocodecsupport": "true"
+    }
+  }
+}

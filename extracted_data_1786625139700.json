@@ -1,0 +1,337 @@
+{
+  "header": {
+    "source": "024-04",
+    "code": 0,
+    "message": "Success",
+    "system_time": 1786625139670,
+    "tracking_id": "7dbdca8d-41d6-4aca-bc17-32149f63ceee"
+  },
+  "data": {
+    "ae": "true",
+    "aq": "Stereo",
+    "aud_lg": [
+      "Malay"
+    ],
+    "chty": "regular",
+    "cn": 101,
+    "co": "MY",
+    "cs": "tv1",
+    "cty": "channel",
+    "cz": 101,
+    "de": true,
+    "ent": [
+      {
+        "con": "my",
+        "det": "all",
+        "dt": "all",
+        "f_ed_dt": "2030-11-22T05:56:00Z",
+        "f_st_dt": "2024-11-22T05:56:00Z",
+        "prd": "unifitv",
+        "sp": [
+          "urn:package:dtc:free",
+          "urn:package:telco:basic:free",
+          "urn:package:telco:unifitvplus:free",
+          "urn:package:telco:tv:promotion",
+          "urn:package:telco:tv:varnamplus",
+          "urn:package:telco:tv:anekaplus",
+          "urn:package:telco:tv:rubyplus",
+          "urn:package:telco:tv:ultimate",
+          "urn:package:telco:tv:ultimateplus",
+          "urn:package:telco:tv:ultimatemax",
+          "urn:package:telco:tv:staffplus",
+          "urn:package:telco:tv:staffmax",
+          "urn:package:telco:tv:staff",
+          "urn:package:telco:tv:movies",
+          "urn:package:telco:tv:family",
+          "urn:package:telco:tv:sports",
+          "urn:package:telco:tv:kids",
+          "urn:package:telco:tv:legacy-hypptv-jumbo-lite",
+          "urn:package:telco:tv:legacy-hypptv-mega",
+          "urn:package:telco:tv:legacy-hypptv-platinum2",
+          "urn:package:telco:tv:legacy-hypptv-platinum",
+          "urn:package:telco:tv:legacy-hypptv-sports",
+          "urn:package:telco:tv:legacy-hypptv-sports2",
+          "urn:package:telco:tv:legacy-ultimatemax",
+          "urn:package:telco:tv:legacy-ultimateplus",
+          "urn:package:telco:biz:fun",
+          "urn:package:telco:biz:corporate",
+          "urn:package:telco:biz:sports",
+          "urn:package:telco:tv:star",
+          "urn:package:telco:tv:wira",
+          "urn:package:telco:tv:yingxiong",
+          "urn:package:telco:tv:veeran",
+          "urn:package:telco:tv:kids2025",
+          "urn:package:telco:tv:sports2025",
+          "urn:package:telco:tv:max",
+          "urn:package:telco:tv:disneyplus",
+          "urn:package:telco:tv:maxplus",
+          "urn:package:telco:tv:netflix",
+          "urn:package:telco:tv:superstar",
+          "urn:package:telco:tv:allstar",
+          "urn:package:telco:hotes:tv1",
+          "urn:package:telco:hosp:tv1",
+          "urn:package:telco:tv:basic",
+          "urn:package:telco:tv:unifitvplus",
+          "urn:package:telco:biz:basic"
+        ]
+      }
+    ],
+    "ex_id": "F01074B2-F6DD-441B-9477-1DF50C081978-123",
+    "fpe": "true",
+    "ia": [
+      "0-16x9",
+      "0-1x1",
+      "0-2x3",
+      "0-3x1",
+      "1-1x1",
+      "3-1x1"
+    ],
+    "id": "F01074B2-F6DD-441B-9477-1DF50C081978",
+    "l2ve": false,
+    "loc": [
+      {
+        "lang": "en",
+        "n": [
+          "Free TV"
+        ]
+      }
+    ],
+    "lod": [
+      {
+        "lang": "en",
+        "n": "RTM TV1 is Malaysia’s free-to-air television network, owned and operated by Radio Televisyen Malaysia (RTM)."
+      }
+    ],
+    "lodn": [
+      {
+        "lang": "en",
+        "n": "TV1"
+      }
+    ],
+    "log": [
+      {
+        "lang": "en",
+        "n": [
+          " "
+        ]
+      }
+    ],
+    "lold": [
+      {
+        "lang": "en",
+        "n": "RTM TV1 is a free to air television network in Malaysia which is owned and operated by Radio Televisyen Malaysia (RTM)."
+      }
+    ],
+    "lon": [
+      {
+        "lang": "en",
+        "n": "TV1"
+      }
+    ],
+    "net": "tv1",
+    "nu": "tv1-tv",
+    "ol": "Malay",
+    "pn": "unifitv",
+    "prt_ic": "false",
+    "pt": "SVOD",
+    "rat": [
+      {
+        "cc": "my",
+        "s": "FCB",
+        "v": "U"
+      }
+    ],
+    "rat_epg": [
+      {
+        "cc": "my",
+        "s": "FCB",
+        "v": "U"
+      }
+    ],
+    "sv_pc": [
+      {
+        "prd": "unifitv",
+        "sku": [
+          "1801"
+        ],
+        "sku_ty": "TVPACK",
+        "sp_ed_dt": "2030-12-31T00:00:00Z",
+        "sp_st_dt": "2024-01-01T00:00:00Z",
+        "sub_ty": [
+          "cohort1",
+          "cohort2",
+          "cohort3",
+          "cohort5"
+        ]
+      },
+      {
+        "prd": "unifitv",
+        "sku": [
+          "1802"
+        ],
+        "sku_ty": "TVPACK",
+        "sp_ed_dt": "2030-12-31T00:00:00Z",
+        "sp_st_dt": "2024-01-01T00:00:00Z",
+        "sub_ty": [
+          "cohort1",
+          "cohort2",
+          "cohort3",
+          "cohort5"
+        ]
+      },
+      {
+        "prd": "unifitv",
+        "sku": [
+          "1803"
+        ],
+        "sku_ty": "TVPACK",
+        "sp_ed_dt": "2030-12-31T00:00:00Z",
+        "sp_st_dt": "2024-01-01T00:00:00Z",
+        "sub_ty": [
+          "cohort1",
+          "cohort2",
+          "cohort3",
+          "cohort5"
+        ]
+      },
+      {
+        "prd": "unifitv",
+        "sku": [
+          "1804"
+        ],
+        "sku_ty": "TVPACK",
+        "sp_ed_dt": "2030-12-31T00:00:00Z",
+        "sp_st_dt": "2024-01-01T00:00:00Z",
+        "sub_ty": [
+          "cohort1",
+          "cohort2",
+          "cohort3",
+          "cohort5"
+        ]
+      },
+      {
+        "prd": "unifitv",
+        "sku": [
+          "1805"
+        ],
+        "sku_ty": "TVPACK",
+        "sp_ed_dt": "2030-12-31T00:00:00Z",
+        "sp_st_dt": "2024-01-01T00:00:00Z",
+        "sub_ty": [
+          "cohort1",
+          "cohort2",
+          "cohort3",
+          "cohort5"
+        ]
+      },
+      {
+        "prd": "unifitv",
+        "sku": [
+          "1806"
+        ],
+        "sku_ty": "TVPACK",
+        "sp_ed_dt": "2030-12-31T00:00:00Z",
+        "sp_st_dt": "2024-01-01T00:00:00Z",
+        "sub_ty": [
+          "cohort1",
+          "cohort2",
+          "cohort3",
+          "cohort5"
+        ]
+      },
+      {
+        "prd": "unifitv",
+        "sku": [
+          "1807"
+        ],
+        "sku_ty": "TVPACK",
+        "sp_ed_dt": "2030-12-31T00:00:00Z",
+        "sp_st_dt": "2024-01-01T00:00:00Z",
+        "sub_ty": [
+          "cohort1",
+          "cohort2",
+          "cohort3",
+          "cohort5"
+        ]
+      },
+      {
+        "prd": "unifitv",
+        "sku": [
+          "1831"
+        ],
+        "sku_ty": "TVPACK",
+        "sp_ed_dt": "2030-12-31T00:00:00Z",
+        "sp_st_dt": "2024-01-01T00:00:00Z",
+        "sub_ty": [
+          "cohort1",
+          "cohort2",
+          "cohort3",
+          "cohort5"
+        ]
+      },
+      {
+        "prd": "unifitv",
+        "sku": [
+          "1832"
+        ],
+        "sku_ty": "TVPACK",
+        "sp_ed_dt": "2030-12-31T00:00:00Z",
+        "sp_st_dt": "2024-01-01T00:00:00Z",
+        "sub_ty": [
+          "cohort1",
+          "cohort2",
+          "cohort3",
+          "cohort5"
+        ]
+      },
+      {
+        "prd": "unifitv",
+        "sku": [
+          "1833"
+        ],
+        "sku_ty": "TVPACK",
+        "sp_ed_dt": "2030-12-31T00:00:00Z",
+        "sp_st_dt": "2024-01-01T00:00:00Z",
+        "sub_ty": [
+          "cohort1",
+          "cohort2",
+          "cohort3",
+          "cohort5"
+        ]
+      },
+      {
+        "prd": "unifitv",
+        "sku": [
+          "1834"
+        ],
+        "sku_ty": "TVPACK",
+        "sp_ed_dt": "2030-12-31T00:00:00Z",
+        "sp_st_dt": "2024-01-01T00:00:00Z",
+        "sub_ty": [
+          "cohort1",
+          "cohort2",
+          "cohort3",
+          "cohort5"
+        ]
+      },
+      {
+        "prd": "unifitv",
+        "sku": [
+          "1835"
+        ],
+        "sku_ty": "TVPACK",
+        "sp_ed_dt": "2030-12-31T00:00:00Z",
+        "sp_st_dt": "2024-01-01T00:00:00Z",
+        "sub_ty": [
+          "cohort1",
+          "cohort2",
+          "cohort3",
+          "cohort5"
+        ]
+      }
+    ],
+    "urn": "urn:resource:catalog:channel",
+    "ut": "2026-07-10T16:40:29Z",
+    "vq": "FHD"
+  }
+}

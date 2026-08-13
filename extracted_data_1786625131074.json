@@ -1,0 +1,260 @@
+{
+  "header": {
+    "source": "024-04",
+    "code": 0,
+    "message": "Success",
+    "system_time": 1786625043457,
+    "tracking_id": "79abd348-9ec1-41a7-ac56-6b4ba9cff3b7"
+  },
+  "data": {
+    "ae": "true",
+    "aq": "Stereo",
+    "aud_lg": [
+      "Malay"
+    ],
+    "chty": "regular",
+    "cn": 118,
+    "co": "MY",
+    "cs": "inspirasi",
+    "cty": "channel",
+    "cust_ch_grp": [
+      "cohort3"
+    ],
+    "cz": 10,
+    "dd": 604800,
+    "de": true,
+    "ent": [
+      {
+        "con": "my",
+        "det": "all",
+        "dt": "all",
+        "f_ed_dt": "2030-11-22T05:56:00Z",
+        "f_st_dt": "2024-11-22T05:56:00Z",
+        "prd": "unifitv",
+        "sp": [
+          "urn:package:dtc:channel:inspirasihd",
+          "urn:package:telco:channel:inspirasihd",
+          "urn:package:telco:byop:inspirasihd",
+          "urn:package:telco:tv:promotion",
+          "urn:package:telco:tv:anekaplus",
+          "urn:package:telco:tv:ultimate",
+          "urn:package:telco:tv:ultimateplus",
+          "urn:package:telco:tv:ultimatemax",
+          "urn:package:telco:tv:staffplus",
+          "urn:package:telco:tv:staffmax",
+          "urn:package:telco:tv:staff",
+          "urn:package:telco:tv:family",
+          "urn:package:telco:tv:legacy-hypptv-sports",
+          "urn:package:telco:tv:legacy-hypptv-sports2",
+          "urn:package:telco:tv:legacy-ultimatemax",
+          "urn:package:telco:tv:legacy-ultimateplus",
+          "urn:package:telco:biz:fun",
+          "urn:package:telco:biz:corporate",
+          "urn:package:telco:tv:wira",
+          "urn:package:telco:tv:wiraaddon",
+          "urn:package:telco:tv:disneyplus",
+          "urn:package:telco:tv:maxplus",
+          "urn:package:telco:tv:netflix",
+          "urn:package:telco:tv:superstar",
+          "urn:package:telco:hotes:inspirasihd",
+          "urn:package:telco:hosp:inspirasihd",
+          "urn:package:telco:biz:inspirasihd"
+        ]
+      }
+    ],
+    "ex_id": "571B75B0-7857-425F-BB88-9D8E12E7903B-123",
+    "fpe": "true",
+    "ia": [
+      "0-16x9",
+      "0-1x1",
+      "0-2x3",
+      "0-3x1",
+      "1-1x1",
+      "3-1x1"
+    ],
+    "id": "571B75B0-7857-425F-BB88-9D8E12E7903B",
+    "l2ve": false,
+    "loc": [
+      {
+        "lang": "en",
+        "n": [
+          "Malay"
+        ]
+      }
+    ],
+    "lod": [
+      {
+        "lang": "en",
+        "n": "Inspirasi HD – the go-to lifestyle channel for Malay youth! From travel and reality to food and music, enjoy fresh, vibrant entertainment all in stunning HD."
+      }
+    ],
+    "lodn": [
+      {
+        "lang": "en",
+        "n": "Inspirasi"
+      }
+    ],
+    "log": [
+      {
+        "lang": "en",
+        "n": [
+          " "
+        ]
+      }
+    ],
+    "lold": [
+      {
+        "lang": "en",
+        "n": "Inspirasi is a youth lifestyle channel targeted at Malay youth between 15-35 years old. The channel emphasis on four main genres – lifestyle / travelogue, reality, food and music in HD. Formerly known as EC Inspirasi."
+      }
+    ],
+    "lon": [
+      {
+        "lang": "en",
+        "n": "Inspirasi"
+      }
+    ],
+    "net": "inspirasi",
+    "nu": "inspirasi",
+    "ol": "Malay",
+    "pn": "unifitv",
+    "prt_ic": "false",
+    "pt": "SVOD",
+    "rat": [
+      {
+        "cc": "my",
+        "s": "FCB",
+        "v": "U"
+      }
+    ],
+    "rat_epg": [
+      {
+        "cc": "my",
+        "s": "FCB",
+        "v": "U"
+      }
+    ],
+    "sv_pc": [
+      {
+        "prd": "unifitv",
+        "sku": [
+          "inspirasihd"
+        ],
+        "sku_ty": "CHANNEL",
+        "sp_ed_dt": "2030-12-31T00:00:00Z",
+        "sp_st_dt": "2024-01-01T00:00:00Z",
+        "sub_ty": [
+          "cohort3"
+        ]
+      },
+      {
+        "prd": "unifitv",
+        "sku": [
+          "1900"
+        ],
+        "sku_ty": "TVPACK",
+        "sp_ed_dt": "2030-12-31T00:00:00Z",
+        "sp_st_dt": "2024-01-01T00:00:00Z",
+        "sub_ty": [
+          "cohort1",
+          "cohort2",
+          "cohort3",
+          "cohort5"
+        ]
+      },
+      {
+        "prd": "unifitv",
+        "sku": [
+          "1802"
+        ],
+        "sku_ty": "TVPACK",
+        "sp_ed_dt": "2030-12-31T00:00:00Z",
+        "sp_st_dt": "2024-01-01T00:00:00Z",
+        "sub_ty": [
+          "cohort1",
+          "cohort2",
+          "cohort3",
+          "cohort5"
+        ]
+      },
+      {
+        "prd": "unifitv",
+        "sku": [
+          "1861"
+        ],
+        "sku_ty": "TVPACK",
+        "sp_ed_dt": "2030-12-31T00:00:00Z",
+        "sp_st_dt": "2024-01-01T00:00:00Z",
+        "sub_ty": [
+          "cohort1",
+          "cohort2",
+          "cohort3",
+          "cohort5"
+        ]
+      },
+      {
+        "prd": "unifitv",
+        "sku": [
+          "1831"
+        ],
+        "sku_ty": "TVPACK",
+        "sp_ed_dt": "2030-12-31T00:00:00Z",
+        "sp_st_dt": "2024-01-01T00:00:00Z",
+        "sub_ty": [
+          "cohort1",
+          "cohort2",
+          "cohort3",
+          "cohort5"
+        ]
+      },
+      {
+        "prd": "unifitv",
+        "sku": [
+          "1832"
+        ],
+        "sku_ty": "TVPACK",
+        "sp_ed_dt": "2030-12-31T00:00:00Z",
+        "sp_st_dt": "2024-01-01T00:00:00Z",
+        "sub_ty": [
+          "cohort1",
+          "cohort2",
+          "cohort3",
+          "cohort5"
+        ]
+      },
+      {
+        "prd": "unifitv",
+        "sku": [
+          "1833"
+        ],
+        "sku_ty": "TVPACK",
+        "sp_ed_dt": "2030-12-31T00:00:00Z",
+        "sp_st_dt": "2024-01-01T00:00:00Z",
+        "sub_ty": [
+          "cohort1",
+          "cohort2",
+          "cohort3",
+          "cohort5"
+        ]
+      },
+      {
+        "prd": "unifitv",
+        "sku": [
+          "1834"
+        ],
+        "sku_ty": "TVPACK",
+        "sp_ed_dt": "2030-12-31T00:00:00Z",
+        "sp_st_dt": "2024-01-01T00:00:00Z",
+        "sub_ty": [
+          "cohort1",
+          "cohort2",
+          "cohort3",
+          "cohort5"
+        ]
+      }
+    ],
+    "urn": "urn:resource:catalog:channel",
+    "ut": "2026-08-13T03:24:13Z",
+    "vq": "FHD"
+  }
+}

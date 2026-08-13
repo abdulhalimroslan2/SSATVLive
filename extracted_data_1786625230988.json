@@ -1,0 +1,3594 @@
+{
+  "header": {
+    "source": "024-17",
+    "code": 0,
+    "message": "Success",
+    "system_time": 1786624800475,
+    "start": 1,
+    "rows": 1,
+    "count": 1,
+    "tracking_id": "bff7cb88-f85d-4c0e-8917-5c18dd384d68"
+  },
+  "data": [
+    {
+      "airing": [
+        {
+          "ch": {
+            "acs": "tv9",
+            "cs": "tv9",
+            "dd": 0,
+            "de": false,
+            "ex_id": "01A5D01A-1DAE-4E0F-8003-0B570E9F474E-123",
+            "fpe": "true",
+            "ia": [
+              "0-16x9",
+              "0-1x1",
+              "0-2x3",
+              "0-3x1",
+              "1-1x1",
+              "3-1x1"
+            ],
+            "log": [
+              {
+                "lang": "en",
+                "n": [
+                  " "
+                ]
+              }
+            ],
+            "lon": [
+              {
+                "lang": "en",
+                "n": "TV9"
+              }
+            ],
+            "rat": [
+              {
+                "cc": "my",
+                "s": "FCB",
+                "v": "U"
+              }
+            ]
+          },
+          "cid": "01A5D01A-1DAE-4E0F-8003-0B570E9F474E",
+          "ct": "2026-08-07T00:36:24Z",
+          "cty": "airing",
+          "dur": 30,
+          "ex_id": "airing-tv9-2026-08-12-23:30",
+          "id": "airing-tv9-2026-08-12-23:30",
+          "key": "airing-tv9-2026-08-12-23:30",
+          "pgm": {
+            "en": "16",
+            "ex_id": "program-tv9-2026-08-12-23:30",
+            "lod": [
+              {
+                "lang": "en",
+                "n": "Episod ini memaparkan adegan 'candid' dan 'prankster' kelakar, termasuk gimik 'Kopi Power', cabaran selebriti Eyka Farhana, pelbagai permainan santai GCLB, serta kejutan serbuan pejabat dalam segmen Bang Bang Boom."
+              }
+            ],
+            "loepn": [
+              {
+                "lang": "en",
+                "n": "BANG BANG BOOM SEASON 11 & 12_EP16"
+              }
+            ],
+            "log": [
+              {
+                "lang": "en",
+                "n": [
+                  "Entertainment",
+                  "News"
+                ]
+              }
+            ],
+            "lold": [
+              {
+                "lang": "en",
+                "n": "Episod ini memaparkan adegan 'candid' dan 'prankster' kelakar, termasuk gimik 'Kopi Power', cabaran selebriti Eyka Farhana, pelbagai permainan santai GCLB, serta kejutan serbuan pejabat dalam segmen Bang Bang Boom."
+              }
+            ],
+            "lon": [
+              {
+                "lang": "en",
+                "n": "BANG BANG BOOM SEASON 11 & 12"
+              }
+            ],
+            "losetl": [
+              {
+                "lang": "en",
+                "n": "BANG BANG BOOM SEASON 11 & 12-Season 1"
+              }
+            ],
+            "lostl": [
+              {
+                "lang": "en",
+                "n": "BANG BANG BOOM SEASON 11 & 12"
+              }
+            ],
+            "pgm_ty": "tvepisode",
+            "rat": [
+              {
+                "cc": "my",
+                "s": "FCB",
+                "v": "U"
+              }
+            ],
+            "sn": 1
+          },
+          "pgm_id": "program-tv9-2026-08-12-23:30",
+          "sc_chty": "regular",
+          "sc_ed_dt": "2026-08-12T16:00:00Z",
+          "sc_st_dt": "2026-08-12T15:30:00Z",
+          "st": "published",
+          "urn": "urn:resource:catalog:airing",
+          "ut": "2026-08-07T00:36:24Z"
+        },
+        {
+          "ch": {
+            "acs": "tv9",
+            "cs": "tv9",
+            "dd": 0,
+            "de": false,
+            "ex_id": "01A5D01A-1DAE-4E0F-8003-0B570E9F474E-123",
+            "fpe": "true",
+            "ia": [
+              "0-16x9",
+              "0-1x1",
+              "0-2x3",
+              "0-3x1",
+              "1-1x1",
+              "3-1x1"
+            ],
+            "log": [
+              {
+                "lang": "en",
+                "n": [
+                  " "
+                ]
+              }
+            ],
+            "lon": [
+              {
+                "lang": "en",
+                "n": "TV9"
+              }
+            ],
+            "rat": [
+              {
+                "cc": "my",
+                "s": "FCB",
+                "v": "U"
+              }
+            ]
+          },
+          "cid": "01A5D01A-1DAE-4E0F-8003-0B570E9F474E",
+          "ct": "2026-08-07T00:36:27Z",
+          "cty": "airing",
+          "dur": 60,
+          "ex_id": "airing-tv9-2026-08-13-00:00",
+          "id": "airing-tv9-2026-08-13-00:00",
+          "key": "airing-tv9-2026-08-13-00:00",
+          "pgm": {
+            "ex_id": "program-tv9-2026-08-13-00:00",
+            "lod": [
+              {
+                "lang": "en",
+                "n": "WOW SHOP"
+              }
+            ],
+            "log": [
+              {
+                "lang": "en",
+                "n": [
+                  "Entertainment",
+                  "News"
+                ]
+              }
+            ],
+            "lold": [
+              {
+                "lang": "en",
+                "n": "WOW SHOP"
+              }
+            ],
+            "lon": [
+              {
+                "lang": "en",
+                "n": "WOW SHOP"
+              }
+            ],
+            "losetl": [
+              {
+                "lang": "en",
+                "n": "WOW SHOP-Season 1"
+              }
+            ],
+            "lostl": [
+              {
+                "lang": "en",
+                "n": "WOW SHOP"
+              }
+            ],
+            "pgm_ty": "movie",
+            "rat": [
+              {
+                "cc": "my",
+                "s": "FCB",
+                "v": "U"
+              }
+            ]
+          },
+          "pgm_id": "program-tv9-2026-08-13-00:00",
+          "sc_chty": "regular",
+          "sc_ed_dt": "2026-08-12T17:00:00Z",
+          "sc_st_dt": "2026-08-12T16:00:00Z",
+          "st": "published",
+          "urn": "urn:resource:catalog:airing",
+          "ut": "2026-08-07T00:36:27Z"
+        },
+        {
+          "ch": {
+            "acs": "tv9",
+            "cs": "tv9",
+            "dd": 0,
+            "de": false,
+            "ex_id": "01A5D01A-1DAE-4E0F-8003-0B570E9F474E-123",
+            "fpe": "true",
+            "ia": [
+              "0-16x9",
+              "0-1x1",
+              "0-2x3",
+              "0-3x1",
+              "1-1x1",
+              "3-1x1"
+            ],
+            "log": [
+              {
+                "lang": "en",
+                "n": [
+                  " "
+                ]
+              }
+            ],
+            "lon": [
+              {
+                "lang": "en",
+                "n": "TV9"
+              }
+            ],
+            "rat": [
+              {
+                "cc": "my",
+                "s": "FCB",
+                "v": "U"
+              }
+            ]
+          },
+          "cid": "01A5D01A-1DAE-4E0F-8003-0B570E9F474E",
+          "ct": "2026-08-07T00:36:27Z",
+          "cty": "airing",
+          "dur": 50,
+          "ex_id": "airing-tv9-2026-08-13-01:00",
+          "id": "airing-tv9-2026-08-13-01:00",
+          "key": "airing-tv9-2026-08-13-01:00",
+          "pgm": {
+            "ex_id": "program-tv9-2026-08-13-01:00",
+            "lod": [
+              {
+                "lang": "en",
+                "n": "WOW SHOP"
+              }
+            ],
+            "log": [
+              {
+                "lang": "en",
+                "n": [
+                  "Entertainment",
+                  "News"
+                ]
+              }
+            ],
+            "lold": [
+              {
+                "lang": "en",
+                "n": "WOW SHOP"
+              }
+            ],
+            "lon": [
+              {
+                "lang": "en",
+                "n": "WOW SHOP"
+              }
+            ],
+            "losetl": [
+              {
+                "lang": "en",
+                "n": "WOW SHOP-Season 1"
+              }
+            ],
+            "lostl": [
+              {
+                "lang": "en",
+                "n": "WOW SHOP"
+              }
+            ],
+            "pgm_ty": "movie",
+            "rat": [
+              {
+                "cc": "my",
+                "s": "FCB",
+                "v": "U"
+              }
+            ]
+          },
+          "pgm_id": "program-tv9-2026-08-13-01:00",
+          "sc_chty": "regular",
+          "sc_ed_dt": "2026-08-12T17:50:00Z",
+          "sc_st_dt": "2026-08-12T17:00:00Z",
+          "st": "published",
+          "urn": "urn:resource:catalog:airing",
+          "ut": "2026-08-07T00:36:27Z"
+        },
+        {
+          "ch": {
+            "acs": "tv9",
+            "cs": "tv9",
+            "dd": 0,
+            "de": false,
+            "ex_id": "01A5D01A-1DAE-4E0F-8003-0B570E9F474E-123",
+            "fpe": "true",
+            "ia": [
+              "0-16x9",
+              "0-1x1",
+              "0-2x3",
+              "0-3x1",
+              "1-1x1",
+              "3-1x1"
+            ],
+            "log": [
+              {
+                "lang": "en",
+                "n": [
+                  " "
+                ]
+              }
+            ],
+            "lon": [
+              {
+                "lang": "en",
+                "n": "TV9"
+              }
+            ],
+            "rat": [
+              {
+                "cc": "my",
+                "s": "FCB",
+                "v": "U"
+              }
+            ]
+          },
+          "cid": "01A5D01A-1DAE-4E0F-8003-0B570E9F474E",
+          "ct": "2026-08-07T00:36:27Z",
+          "cty": "airing",
+          "dur": 5,
+          "ex_id": "airing-tv9-2026-08-13-01:50",
+          "id": "airing-tv9-2026-08-13-01:50",
+          "key": "airing-tv9-2026-08-13-01:50",
+          "pgm": {
+            "en": "145",
+            "ex_id": "program-tv9-2026-08-13-01:50",
+            "lod": [
+              {
+                "lang": "en",
+                "n": "Koleksi sedutan klip video dari rancangan hiburan."
+              }
+            ],
+            "loepn": [
+              {
+                "lang": "en",
+                "n": "SENANG TERHIBUR SHORTS_EP145"
+              }
+            ],
+            "log": [
+              {
+                "lang": "en",
+                "n": [
+                  "Entertainment",
+                  "News"
+                ]
+              }
+            ],
+            "lold": [
+              {
+                "lang": "en",
+                "n": "Koleksi sedutan klip video dari rancangan hiburan."
+              }
+            ],
+            "lon": [
+              {
+                "lang": "en",
+                "n": "SENANG TERHIBUR SHORTS"
+              }
+            ],
+            "losetl": [
+              {
+                "lang": "en",
+                "n": "SENANG TERHIBUR SHORTS-Season 1"
+              }
+            ],
+            "lostl": [
+              {
+                "lang": "en",
+                "n": "SENANG TERHIBUR SHORTS"
+              }
+            ],
+            "pgm_ty": "tvepisode",
+            "rat": [
+              {
+                "cc": "my",
+                "s": "FCB",
+                "v": "U"
+              }
+            ],
+            "sn": 1
+          },
+          "pgm_id": "program-tv9-2026-08-13-01:50",
+          "sc_chty": "regular",
+          "sc_ed_dt": "2026-08-12T17:55:00Z",
+          "sc_st_dt": "2026-08-12T17:50:00Z",
+          "st": "published",
+          "urn": "urn:resource:catalog:airing",
+          "ut": "2026-08-07T00:36:27Z"
+        },
+        {
+          "ch": {
+            "acs": "tv9",
+            "cs": "tv9",
+            "dd": 0,
+            "de": false,
+            "ex_id": "01A5D01A-1DAE-4E0F-8003-0B570E9F474E-123",
+            "fpe": "true",
+            "ia": [
+              "0-16x9",
+              "0-1x1",
+              "0-2x3",
+              "0-3x1",
+              "1-1x1",
+              "3-1x1"
+            ],
+            "log": [
+              {
+                "lang": "en",
+                "n": [
+                  " "
+                ]
+              }
+            ],
+            "lon": [
+              {
+                "lang": "en",
+                "n": "TV9"
+              }
+            ],
+            "rat": [
+              {
+                "cc": "my",
+                "s": "FCB",
+                "v": "U"
+              }
+            ]
+          },
+          "cid": "01A5D01A-1DAE-4E0F-8003-0B570E9F474E",
+          "ct": "2026-08-07T00:36:27Z",
+          "cty": "airing",
+          "dur": 5,
+          "ex_id": "airing-tv9-2026-08-13-01:55",
+          "id": "airing-tv9-2026-08-13-01:55",
+          "key": "airing-tv9-2026-08-13-01:55",
+          "pgm": {
+            "en": "25",
+            "ex_id": "program-tv9-2026-08-13-01:55",
+            "lod": [
+              {
+                "lang": "en",
+                "n": "Program yang menampilkan hos Fedtri Yahya akan melontarkan pelbagai soalan kuiz yang menguji pengetahuan agama dan dunia Islam."
+              }
+            ],
+            "loepn": [
+              {
+                "lang": "en",
+                "n": "KUIZ PACAK_EP25"
+              }
+            ],
+            "log": [
+              {
+                "lang": "en",
+                "n": [
+                  "Entertainment",
+                  "News"
+                ]
+              }
+            ],
+            "lold": [
+              {
+                "lang": "en",
+                "n": "Program yang menampilkan hos Fedtri Yahya akan melontarkan pelbagai soalan kuiz yang menguji pengetahuan agama dan dunia Islam."
+              }
+            ],
+            "lon": [
+              {
+                "lang": "en",
+                "n": "KUIZ PACAK"
+              }
+            ],
+            "losetl": [
+              {
+                "lang": "en",
+                "n": "KUIZ PACAK-Season 1"
+              }
+            ],
+            "lostl": [
+              {
+                "lang": "en",
+                "n": "KUIZ PACAK"
+              }
+            ],
+            "pgm_ty": "tvepisode",
+            "rat": [
+              {
+                "cc": "my",
+                "s": "FCB",
+                "v": "U"
+              }
+            ],
+            "sn": 1
+          },
+          "pgm_id": "program-tv9-2026-08-13-01:55",
+          "sc_chty": "regular",
+          "sc_ed_dt": "2026-08-12T18:00:00Z",
+          "sc_st_dt": "2026-08-12T17:55:00Z",
+          "st": "published",
+          "urn": "urn:resource:catalog:airing",
+          "ut": "2026-08-07T00:36:27Z"
+        },
+        {
+          "ch": {
+            "acs": "tv9",
+            "cs": "tv9",
+            "dd": 0,
+            "de": false,
+            "ex_id": "01A5D01A-1DAE-4E0F-8003-0B570E9F474E-123",
+            "fpe": "true",
+            "ia": [
+              "0-16x9",
+              "0-1x1",
+              "0-2x3",
+              "0-3x1",
+              "1-1x1",
+              "3-1x1"
+            ],
+            "log": [
+              {
+                "lang": "en",
+                "n": [
+                  " "
+                ]
+              }
+            ],
+            "lon": [
+              {
+                "lang": "en",
+                "n": "TV9"
+              }
+            ],
+            "rat": [
+              {
+                "cc": "my",
+                "s": "FCB",
+                "v": "U"
+              }
+            ]
+          },
+          "cid": "01A5D01A-1DAE-4E0F-8003-0B570E9F474E",
+          "ct": "2026-08-07T00:36:27Z",
+          "cty": "airing",
+          "dur": 90,
+          "ex_id": "airing-tv9-2026-08-13-02:00",
+          "id": "airing-tv9-2026-08-13-02:00",
+          "key": "airing-tv9-2026-08-13-02:00",
+          "pgm": {
+            "en": "1",
+            "ex_id": "program-tv9-2026-08-13-02:00",
+            "lod": [
+              {
+                "lang": "en",
+                "n": "Yatim, 50-an, seorang yang lurus bendul, menyara hidupnya dengan menjual cendol menggunakan basikal roda tiga. Suatu hari, hati Yatim tersentuh melihat kesedihan seorang ibu terpaksa menghantar anaknya, Rizqi ke rumah anak yatim."
+              }
+            ],
+            "loepn": [
+              {
+                "lang": "en",
+                "n": "KAYUHAN KASIH AYAH_EP1"
+              }
+            ],
+            "log": [
+              {
+                "lang": "en",
+                "n": [
+                  "Entertainment",
+                  "News"
+                ]
+              }
+            ],
+            "lold": [
+              {
+                "lang": "en",
+                "n": "Yatim, 50-an, seorang yang lurus bendul, menyara hidupnya dengan menjual cendol menggunakan basikal roda tiga. Suatu hari, hati Yatim tersentuh melihat kesedihan seorang ibu terpaksa menghantar anaknya, Rizqi ke rumah anak yatim."
+              }
+            ],
+            "lon": [
+              {
+                "lang": "en",
+                "n": "KAYUHAN KASIH AYAH"
+              }
+            ],
+            "losetl": [
+              {
+                "lang": "en",
+                "n": "KAYUHAN KASIH AYAH-Season 1"
+              }
+            ],
+            "lostl": [
+              {
+                "lang": "en",
+                "n": "KAYUHAN KASIH AYAH"
+              }
+            ],
+            "pgm_ty": "tvepisode",
+            "rat": [
+              {
+                "cc": "my",
+                "s": "FCB",
+                "v": "U"
+              }
+            ],
+            "sn": 1
+          },
+          "pgm_id": "program-tv9-2026-08-13-02:00",
+          "sc_chty": "regular",
+          "sc_ed_dt": "2026-08-12T19:30:00Z",
+          "sc_st_dt": "2026-08-12T18:00:00Z",
+          "st": "published",
+          "urn": "urn:resource:catalog:airing",
+          "ut": "2026-08-07T00:36:27Z"
+        },
+        {
+          "ch": {
+            "acs": "tv9",
+            "cs": "tv9",
+            "dd": 0,
+            "de": false,
+            "ex_id": "01A5D01A-1DAE-4E0F-8003-0B570E9F474E-123",
+            "fpe": "true",
+            "ia": [
+              "0-16x9",
+              "0-1x1",
+              "0-2x3",
+              "0-3x1",
+              "1-1x1",
+              "3-1x1"
+            ],
+            "log": [
+              {
+                "lang": "en",
+                "n": [
+                  " "
+                ]
+              }
+            ],
+            "lon": [
+              {
+                "lang": "en",
+                "n": "TV9"
+              }
+            ],
+            "rat": [
+              {
+                "cc": "my",
+                "s": "FCB",
+                "v": "U"
+              }
+            ]
+          },
+          "cid": "01A5D01A-1DAE-4E0F-8003-0B570E9F474E",
+          "ct": "2026-08-07T00:36:27Z",
+          "cty": "airing",
+          "dur": 60,
+          "ex_id": "airing-tv9-2026-08-13-03:30",
+          "id": "airing-tv9-2026-08-13-03:30",
+          "key": "airing-tv9-2026-08-13-03:30",
+          "pgm": {
+            "en": "187",
+            "ex_id": "program-tv9-2026-08-13-03:30",
+            "lod": [
+              {
+                "lang": "en",
+                "n": "KOOL 101@TV9 (2026)"
+              }
+            ],
+            "loepn": [
+              {
+                "lang": "en",
+                "n": "KOOL 101@TV9 (2026)_EP187"
+              }
+            ],
+            "log": [
+              {
+                "lang": "en",
+                "n": [
+                  "Entertainment",
+                  "News"
+                ]
+              }
+            ],
+            "lold": [
+              {
+                "lang": "en",
+                "n": "KOOL 101@TV9 (2026)"
+              }
+            ],
+            "lon": [
+              {
+                "lang": "en",
+                "n": "KOOL 101@TV9 (2026)"
+              }
+            ],
+            "losetl": [
+              {
+                "lang": "en",
+                "n": "KOOL 101@TV9 (2026)-Season 1"
+              }
+            ],
+            "lostl": [
+              {
+                "lang": "en",
+                "n": "KOOL 101@TV9 (2026)"
+              }
+            ],
+            "pgm_ty": "tvepisode",
+            "rat": [
+              {
+                "cc": "my",
+                "s": "FCB",
+                "v": "U"
+              }
+            ],
+            "sn": 1
+          },
+          "pgm_id": "program-tv9-2026-08-13-03:30",
+          "sc_chty": "regular",
+          "sc_ed_dt": "2026-08-12T20:30:00Z",
+          "sc_st_dt": "2026-08-12T19:30:00Z",
+          "st": "published",
+          "urn": "urn:resource:catalog:airing",
+          "ut": "2026-08-07T00:36:27Z"
+        },
+        {
+          "ch": {
+            "acs": "tv9",
+            "cs": "tv9",
+            "dd": 0,
+            "de": false,
+            "ex_id": "01A5D01A-1DAE-4E0F-8003-0B570E9F474E-123",
+            "fpe": "true",
+            "ia": [
+              "0-16x9",
+              "0-1x1",
+              "0-2x3",
+              "0-3x1",
+              "1-1x1",
+              "3-1x1"
+            ],
+            "log": [
+              {
+                "lang": "en",
+                "n": [
+                  " "
+                ]
+              }
+            ],
+            "lon": [
+              {
+                "lang": "en",
+                "n": "TV9"
+              }
+            ],
+            "rat": [
+              {
+                "cc": "my",
+                "s": "FCB",
+                "v": "U"
+              }
+            ]
+          },
+          "cid": "01A5D01A-1DAE-4E0F-8003-0B570E9F474E",
+          "ct": "2026-08-07T00:36:27Z",
+          "cty": "airing",
+          "dur": 30,
+          "ex_id": "airing-tv9-2026-08-13-04:30",
+          "id": "airing-tv9-2026-08-13-04:30",
+          "key": "airing-tv9-2026-08-13-04:30",
+          "pgm": {
+            "en": "17",
+            "ex_id": "program-tv9-2026-08-13-04:30",
+            "lod": [
+              {
+                "lang": "en",
+                "n": "Mami Zainab tumpangkan Banu tinggal di rumah mamu Piee. Asraf tidak selesa kerana terpaksa menjaga tata terbib selain penampilan Banu yang tidak menarik. Namun Asraf terpesona melihat Banu bertukar wajah setelah mendapat sentuhan solekan."
+              }
+            ],
+            "loepn": [
+              {
+                "lang": "en",
+                "n": "ANAK MAMI_EP17"
+              }
+            ],
+            "log": [
+              {
+                "lang": "en",
+                "n": [
+                  "Entertainment",
+                  "News"
+                ]
+              }
+            ],
+            "lold": [
+              {
+                "lang": "en",
+                "n": "Mami Zainab tumpangkan Banu tinggal di rumah mamu Piee. Asraf tidak selesa kerana terpaksa menjaga tata terbib selain penampilan Banu yang tidak menarik. Namun Asraf terpesona melihat Banu bertukar wajah setelah mendapat sentuhan solekan."
+              }
+            ],
+            "lon": [
+              {
+                "lang": "en",
+                "n": "ANAK MAMI"
+              }
+            ],
+            "losetl": [
+              {
+                "lang": "en",
+                "n": "ANAK MAMI-Season 1"
+              }
+            ],
+            "lostl": [
+              {
+                "lang": "en",
+                "n": "ANAK MAMI"
+              }
+            ],
+            "pgm_ty": "tvepisode",
+            "rat": [
+              {
+                "cc": "my",
+                "s": "FCB",
+                "v": "U"
+              }
+            ],
+            "sn": 1
+          },
+          "pgm_id": "program-tv9-2026-08-13-04:30",
+          "sc_chty": "regular",
+          "sc_ed_dt": "2026-08-12T21:00:00Z",
+          "sc_st_dt": "2026-08-12T20:30:00Z",
+          "st": "published",
+          "urn": "urn:resource:catalog:airing",
+          "ut": "2026-08-07T00:36:27Z"
+        },
+        {
+          "ch": {
+            "acs": "tv9",
+            "cs": "tv9",
+            "dd": 0,
+            "de": false,
+            "ex_id": "01A5D01A-1DAE-4E0F-8003-0B570E9F474E-123",
+            "fpe": "true",
+            "ia": [
+              "0-16x9",
+              "0-1x1",
+              "0-2x3",
+              "0-3x1",
+              "1-1x1",
+              "3-1x1"
+            ],
+            "log": [
+              {
+                "lang": "en",
+                "n": [
+                  " "
+                ]
+              }
+            ],
+            "lon": [
+              {
+                "lang": "en",
+                "n": "TV9"
+              }
+            ],
+            "rat": [
+              {
+                "cc": "my",
+                "s": "FCB",
+                "v": "U"
+              }
+            ]
+          },
+          "cid": "01A5D01A-1DAE-4E0F-8003-0B570E9F474E",
+          "ct": "2026-08-07T00:36:27Z",
+          "cty": "airing",
+          "dur": 60,
+          "ex_id": "airing-tv9-2026-08-13-05:00",
+          "id": "airing-tv9-2026-08-13-05:00",
+          "key": "airing-tv9-2026-08-13-05:00",
+          "pgm": {
+            "en": "1337",
+            "ex_id": "program-tv9-2026-08-13-05:00",
+            "lod": [
+              {
+                "lang": "en",
+                "n": "My #QuranTime akan meneroka isi kandungan Al-Quran dan mengenali kitab suci bagi umat Islam dengan lebih mendalam."
+              }
+            ],
+            "loepn": [
+              {
+                "lang": "en",
+                "n": "MY #QURANTIME 2.0_EP1337"
+              }
+            ],
+            "log": [
+              {
+                "lang": "en",
+                "n": [
+                  "Entertainment",
+                  "News"
+                ]
+              }
+            ],
+            "lold": [
+              {
+                "lang": "en",
+                "n": "My #QuranTime akan meneroka isi kandungan Al-Quran dan mengenali kitab suci bagi umat Islam dengan lebih mendalam."
+              }
+            ],
+            "lon": [
+              {
+                "lang": "en",
+                "n": "MY #QURANTIME 2.0"
+              }
+            ],
+            "losetl": [
+              {
+                "lang": "en",
+                "n": "MY #QURANTIME 2.0-Season 1"
+              }
+            ],
+            "lostl": [
+              {
+                "lang": "en",
+                "n": "MY #QURANTIME 2.0"
+              }
+            ],
+            "pgm_ty": "tvepisode",
+            "rat": [
+              {
+                "cc": "my",
+                "s": "FCB",
+                "v": "U"
+              }
+            ],
+            "sn": 1
+          },
+          "pgm_id": "program-tv9-2026-08-13-05:00",
+          "sc_chty": "regular",
+          "sc_ed_dt": "2026-08-12T22:00:00Z",
+          "sc_st_dt": "2026-08-12T21:00:00Z",
+          "st": "published",
+          "urn": "urn:resource:catalog:airing",
+          "ut": "2026-08-07T00:36:27Z"
+        },
+        {
+          "ch": {
+            "acs": "tv9",
+            "cs": "tv9",
+            "dd": 0,
+            "de": false,
+            "ex_id": "01A5D01A-1DAE-4E0F-8003-0B570E9F474E-123",
+            "fpe": "true",
+            "ia": [
+              "0-16x9",
+              "0-1x1",
+              "0-2x3",
+              "0-3x1",
+              "1-1x1",
+              "3-1x1"
+            ],
+            "log": [
+              {
+                "lang": "en",
+                "n": [
+                  " "
+                ]
+              }
+            ],
+            "lon": [
+              {
+                "lang": "en",
+                "n": "TV9"
+              }
+            ],
+            "rat": [
+              {
+                "cc": "my",
+                "s": "FCB",
+                "v": "U"
+              }
+            ]
+          },
+          "cid": "01A5D01A-1DAE-4E0F-8003-0B570E9F474E",
+          "ct": "2026-08-07T00:36:27Z",
+          "cty": "airing",
+          "dur": 20,
+          "ex_id": "airing-tv9-2026-08-13-06:00",
+          "id": "airing-tv9-2026-08-13-06:00",
+          "key": "airing-tv9-2026-08-13-06:00",
+          "pgm": {
+            "en": "1",
+            "ex_id": "program-tv9-2026-08-13-06:00",
+            "lod": [
+              {
+                "lang": "en",
+                "n": "Bacaan Surah Yasin"
+              }
+            ],
+            "loepn": [
+              {
+                "lang": "en",
+                "n": "BACAAN YASIN 2025_EP1"
+              }
+            ],
+            "log": [
+              {
+                "lang": "en",
+                "n": [
+                  "Entertainment",
+                  "News"
+                ]
+              }
+            ],
+            "lold": [
+              {
+                "lang": "en",
+                "n": "Bacaan Surah Yasin"
+              }
+            ],
+            "lon": [
+              {
+                "lang": "en",
+                "n": "BACAAN YASIN 2025"
+              }
+            ],
+            "losetl": [
+              {
+                "lang": "en",
+                "n": "BACAAN YASIN 2025-Season 1"
+              }
+            ],
+            "lostl": [
+              {
+                "lang": "en",
+                "n": "BACAAN YASIN 2025"
+              }
+            ],
+            "pgm_ty": "tvepisode",
+            "rat": [
+              {
+                "cc": "my",
+                "s": "FCB",
+                "v": "U"
+              }
+            ],
+            "sn": 1
+          },
+          "pgm_id": "program-tv9-2026-08-13-06:00",
+          "sc_chty": "regular",
+          "sc_ed_dt": "2026-08-12T22:20:00Z",
+          "sc_st_dt": "2026-08-12T22:00:00Z",
+          "st": "published",
+          "urn": "urn:resource:catalog:airing",
+          "ut": "2026-08-07T00:36:27Z"
+        },
+        {
+          "ch": {
+            "acs": "tv9",
+            "cs": "tv9",
+            "dd": 0,
+            "de": false,
+            "ex_id": "01A5D01A-1DAE-4E0F-8003-0B570E9F474E-123",
+            "fpe": "true",
+            "ia": [
+              "0-16x9",
+              "0-1x1",
+              "0-2x3",
+              "0-3x1",
+              "1-1x1",
+              "3-1x1"
+            ],
+            "log": [
+              {
+                "lang": "en",
+                "n": [
+                  " "
+                ]
+              }
+            ],
+            "lon": [
+              {
+                "lang": "en",
+                "n": "TV9"
+              }
+            ],
+            "rat": [
+              {
+                "cc": "my",
+                "s": "FCB",
+                "v": "U"
+              }
+            ]
+          },
+          "cid": "01A5D01A-1DAE-4E0F-8003-0B570E9F474E",
+          "ct": "2026-08-07T00:36:27Z",
+          "cty": "airing",
+          "dur": 30,
+          "ex_id": "airing-tv9-2026-08-13-06:20",
+          "id": "airing-tv9-2026-08-13-06:20",
+          "key": "airing-tv9-2026-08-13-06:20",
+          "pgm": {
+            "en": "76",
+            "ex_id": "program-tv9-2026-08-13-06:20",
+            "lod": [
+              {
+                "lang": "en",
+                "n": "Episod ini hos Talib Husin membincangkan tajuk \"Pilihan Sunah dan Adab Nabi\" bersama Ustaz Amirul Amin merujuk Kitab Riyadhus Shalihin. Rancangan ini turut mempromosikan pembinaan Kompleks Masjid As-Syakirin."
+              }
+            ],
+            "loepn": [
+              {
+                "lang": "en",
+                "n": "JURNAL MUSLIM (2025) PART 2_EP76"
+              }
+            ],
+            "log": [
+              {
+                "lang": "en",
+                "n": [
+                  "Entertainment",
+                  "News"
+                ]
+              }
+            ],
+            "lold": [
+              {
+                "lang": "en",
+                "n": "Episod ini hos Talib Husin membincangkan tajuk \"Pilihan Sunah dan Adab Nabi\" bersama Ustaz Amirul Amin merujuk Kitab Riyadhus Shalihin. Rancangan ini turut mempromosikan pembinaan Kompleks Masjid As-Syakirin."
+              }
+            ],
+            "lon": [
+              {
+                "lang": "en",
+                "n": "JURNAL MUSLIM (2025) PART 2"
+              }
+            ],
+            "losetl": [
+              {
+                "lang": "en",
+                "n": "JURNAL MUSLIM (2025) PART 2-Season 1"
+              }
+            ],
+            "lostl": [
+              {
+                "lang": "en",
+                "n": "JURNAL MUSLIM (2025) PART 2"
+              }
+            ],
+            "pgm_ty": "tvepisode",
+            "rat": [
+              {
+                "cc": "my",
+                "s": "FCB",
+                "v": "U"
+              }
+            ],
+            "sn": 1
+          },
+          "pgm_id": "program-tv9-2026-08-13-06:20",
+          "sc_chty": "regular",
+          "sc_ed_dt": "2026-08-12T22:50:00Z",
+          "sc_st_dt": "2026-08-12T22:20:00Z",
+          "st": "published",
+          "urn": "urn:resource:catalog:airing",
+          "ut": "2026-08-07T00:36:27Z"
+        },
+        {
+          "ch": {
+            "acs": "tv9",
+            "cs": "tv9",
+            "dd": 0,
+            "de": false,
+            "ex_id": "01A5D01A-1DAE-4E0F-8003-0B570E9F474E-123",
+            "fpe": "true",
+            "ia": [
+              "0-16x9",
+              "0-1x1",
+              "0-2x3",
+              "0-3x1",
+              "1-1x1",
+              "3-1x1"
+            ],
+            "log": [
+              {
+                "lang": "en",
+                "n": [
+                  " "
+                ]
+              }
+            ],
+            "lon": [
+              {
+                "lang": "en",
+                "n": "TV9"
+              }
+            ],
+            "rat": [
+              {
+                "cc": "my",
+                "s": "FCB",
+                "v": "U"
+              }
+            ]
+          },
+          "cid": "01A5D01A-1DAE-4E0F-8003-0B570E9F474E",
+          "ct": "2026-08-07T00:36:27Z",
+          "cty": "airing",
+          "dur": 70,
+          "ex_id": "airing-tv9-2026-08-13-06:50",
+          "id": "airing-tv9-2026-08-13-06:50",
+          "key": "airing-tv9-2026-08-13-06:50",
+          "pgm": {
+            "en": "32",
+            "ex_id": "program-tv9-2026-08-13-06:50",
+            "lod": [
+              {
+                "lang": "en",
+                "n": "TANYALAH USTAZ JULY – DEC 2026"
+              }
+            ],
+            "loepn": [
+              {
+                "lang": "en",
+                "n": "TANYALAH USTAZ JULY – DEC 2026_EP32"
+              }
+            ],
+            "log": [
+              {
+                "lang": "en",
+                "n": [
+                  "Entertainment",
+                  "News"
+                ]
+              }
+            ],
+            "lold": [
+              {
+                "lang": "en",
+                "n": "TANYALAH USTAZ JULY – DEC 2026"
+              }
+            ],
+            "lon": [
+              {
+                "lang": "en",
+                "n": "TANYALAH USTAZ JULY – DEC 2026"
+              }
+            ],
+            "losetl": [
+              {
+                "lang": "en",
+                "n": "TANYALAH USTAZ JULY – DEC 2026-Season 1"
+              }
+            ],
+            "lostl": [
+              {
+                "lang": "en",
+                "n": "TANYALAH USTAZ JULY – DEC 2026"
+              }
+            ],
+            "pgm_ty": "tvepisode",
+            "rat": [
+              {
+                "cc": "my",
+                "s": "FCB",
+                "v": "U"
+              }
+            ],
+            "sn": 1
+          },
+          "pgm_id": "program-tv9-2026-08-13-06:50",
+          "sc_chty": "regular",
+          "sc_ed_dt": "2026-08-13T00:00:00Z",
+          "sc_st_dt": "2026-08-12T22:50:00Z",
+          "st": "published",
+          "urn": "urn:resource:catalog:airing",
+          "ut": "2026-08-07T00:36:27Z"
+        },
+        {
+          "ch": {
+            "acs": "tv9",
+            "cs": "tv9",
+            "dd": 0,
+            "de": false,
+            "ex_id": "01A5D01A-1DAE-4E0F-8003-0B570E9F474E-123",
+            "fpe": "true",
+            "ia": [
+              "0-16x9",
+              "0-1x1",
+              "0-2x3",
+              "0-3x1",
+              "1-1x1",
+              "3-1x1"
+            ],
+            "log": [
+              {
+                "lang": "en",
+                "n": [
+                  " "
+                ]
+              }
+            ],
+            "lon": [
+              {
+                "lang": "en",
+                "n": "TV9"
+              }
+            ],
+            "rat": [
+              {
+                "cc": "my",
+                "s": "FCB",
+                "v": "U"
+              }
+            ]
+          },
+          "cid": "01A5D01A-1DAE-4E0F-8003-0B570E9F474E",
+          "ct": "2026-08-07T00:36:27Z",
+          "cty": "airing",
+          "dur": 30,
+          "ex_id": "airing-tv9-2026-08-13-08:00",
+          "id": "airing-tv9-2026-08-13-08:00",
+          "key": "airing-tv9-2026-08-13-08:00",
+          "pgm": {
+            "en": "32",
+            "ex_id": "program-tv9-2026-08-13-08:00",
+            "lod": [
+              {
+                "lang": "en",
+                "n": "TANYALAH USTAZ JULY – DEC 2026"
+              }
+            ],
+            "loepn": [
+              {
+                "lang": "en",
+                "n": "TANYALAH USTAZ JULY – DEC 2026_EP32"
+              }
+            ],
+            "log": [
+              {
+                "lang": "en",
+                "n": [
+                  "Entertainment",
+                  "News"
+                ]
+              }
+            ],
+            "lold": [
+              {
+                "lang": "en",
+                "n": "TANYALAH USTAZ JULY – DEC 2026"
+              }
+            ],
+            "lon": [
+              {
+                "lang": "en",
+                "n": "TANYALAH USTAZ JULY – DEC 2026"
+              }
+            ],
+            "losetl": [
+              {
+                "lang": "en",
+                "n": "TANYALAH USTAZ JULY – DEC 2026-Season 1"
+              }
+            ],
+            "lostl": [
+              {
+                "lang": "en",
+                "n": "TANYALAH USTAZ JULY – DEC 2026"
+              }
+            ],
+            "pgm_ty": "tvepisode",
+            "rat": [
+              {
+                "cc": "my",
+                "s": "FCB",
+                "v": "U"
+              }
+            ],
+            "sn": 1
+          },
+          "pgm_id": "program-tv9-2026-08-13-08:00",
+          "sc_chty": "regular",
+          "sc_ed_dt": "2026-08-13T00:30:00Z",
+          "sc_st_dt": "2026-08-13T00:00:00Z",
+          "st": "published",
+          "urn": "urn:resource:catalog:airing",
+          "ut": "2026-08-07T00:36:27Z"
+        },
+        {
+          "ch": {
+            "acs": "tv9",
+            "cs": "tv9",
+            "dd": 0,
+            "de": false,
+            "ex_id": "01A5D01A-1DAE-4E0F-8003-0B570E9F474E-123",
+            "fpe": "true",
+            "ia": [
+              "0-16x9",
+              "0-1x1",
+              "0-2x3",
+              "0-3x1",
+              "1-1x1",
+              "3-1x1"
+            ],
+            "log": [
+              {
+                "lang": "en",
+                "n": [
+                  " "
+                ]
+              }
+            ],
+            "lon": [
+              {
+                "lang": "en",
+                "n": "TV9"
+              }
+            ],
+            "rat": [
+              {
+                "cc": "my",
+                "s": "FCB",
+                "v": "U"
+              }
+            ]
+          },
+          "cid": "01A5D01A-1DAE-4E0F-8003-0B570E9F474E",
+          "ct": "2026-08-07T00:36:27Z",
+          "cty": "airing",
+          "dur": 60,
+          "ex_id": "airing-tv9-2026-08-13-08:30",
+          "id": "airing-tv9-2026-08-13-08:30",
+          "key": "airing-tv9-2026-08-13-08:30",
+          "pgm": {
+            "ex_id": "program-tv9-2026-08-13-08:30",
+            "lod": [
+              {
+                "lang": "en",
+                "n": "WOW SHOP"
+              }
+            ],
+            "log": [
+              {
+                "lang": "en",
+                "n": [
+                  "Entertainment",
+                  "News"
+                ]
+              }
+            ],
+            "lold": [
+              {
+                "lang": "en",
+                "n": "WOW SHOP"
+              }
+            ],
+            "lon": [
+              {
+                "lang": "en",
+                "n": "WOW SHOP"
+              }
+            ],
+            "losetl": [
+              {
+                "lang": "en",
+                "n": "WOW SHOP-Season 1"
+              }
+            ],
+            "lostl": [
+              {
+                "lang": "en",
+                "n": "WOW SHOP"
+              }
+            ],
+            "pgm_ty": "movie",
+            "rat": [
+              {
+                "cc": "my",
+                "s": "FCB",
+                "v": "U"
+              }
+            ]
+          },
+          "pgm_id": "program-tv9-2026-08-13-08:30",
+          "sc_chty": "regular",
+          "sc_ed_dt": "2026-08-13T01:30:00Z",
+          "sc_st_dt": "2026-08-13T00:30:00Z",
+          "st": "published",
+          "urn": "urn:resource:catalog:airing",
+          "ut": "2026-08-07T00:36:27Z"
+        },
+        {
+          "ch": {
+            "acs": "tv9",
+            "cs": "tv9",
+            "dd": 0,
+            "de": false,
+            "ex_id": "01A5D01A-1DAE-4E0F-8003-0B570E9F474E-123",
+            "fpe": "true",
+            "ia": [
+              "0-16x9",
+              "0-1x1",
+              "0-2x3",
+              "0-3x1",
+              "1-1x1",
+              "3-1x1"
+            ],
+            "log": [
+              {
+                "lang": "en",
+                "n": [
+                  " "
+                ]
+              }
+            ],
+            "lon": [
+              {
+                "lang": "en",
+                "n": "TV9"
+              }
+            ],
+            "rat": [
+              {
+                "cc": "my",
+                "s": "FCB",
+                "v": "U"
+              }
+            ]
+          },
+          "cid": "01A5D01A-1DAE-4E0F-8003-0B570E9F474E",
+          "ct": "2026-08-07T00:36:27Z",
+          "cty": "airing",
+          "dur": 60,
+          "ex_id": "airing-tv9-2026-08-13-09:30",
+          "id": "airing-tv9-2026-08-13-09:30",
+          "key": "airing-tv9-2026-08-13-09:30",
+          "pgm": {
+            "ex_id": "program-tv9-2026-08-13-09:30",
+            "lod": [
+              {
+                "lang": "en",
+                "n": "WOW SHOP"
+              }
+            ],
+            "log": [
+              {
+                "lang": "en",
+                "n": [
+                  "Entertainment",
+                  "News"
+                ]
+              }
+            ],
+            "lold": [
+              {
+                "lang": "en",
+                "n": "WOW SHOP"
+              }
+            ],
+            "lon": [
+              {
+                "lang": "en",
+                "n": "WOW SHOP"
+              }
+            ],
+            "losetl": [
+              {
+                "lang": "en",
+                "n": "WOW SHOP-Season 1"
+              }
+            ],
+            "lostl": [
+              {
+                "lang": "en",
+                "n": "WOW SHOP"
+              }
+            ],
+            "pgm_ty": "movie",
+            "rat": [
+              {
+                "cc": "my",
+                "s": "FCB",
+                "v": "U"
+              }
+            ]
+          },
+          "pgm_id": "program-tv9-2026-08-13-09:30",
+          "sc_chty": "regular",
+          "sc_ed_dt": "2026-08-13T02:30:00Z",
+          "sc_st_dt": "2026-08-13T01:30:00Z",
+          "st": "published",
+          "urn": "urn:resource:catalog:airing",
+          "ut": "2026-08-07T00:36:27Z"
+        },
+        {
+          "ch": {
+            "acs": "tv9",
+            "cs": "tv9",
+            "dd": 0,
+            "de": false,
+            "ex_id": "01A5D01A-1DAE-4E0F-8003-0B570E9F474E-123",
+            "fpe": "true",
+            "ia": [
+              "0-16x9",
+              "0-1x1",
+              "0-2x3",
+              "0-3x1",
+              "1-1x1",
+              "3-1x1"
+            ],
+            "log": [
+              {
+                "lang": "en",
+                "n": [
+                  " "
+                ]
+              }
+            ],
+            "lon": [
+              {
+                "lang": "en",
+                "n": "TV9"
+              }
+            ],
+            "rat": [
+              {
+                "cc": "my",
+                "s": "FCB",
+                "v": "U"
+              }
+            ]
+          },
+          "cid": "01A5D01A-1DAE-4E0F-8003-0B570E9F474E",
+          "ct": "2026-08-07T00:36:27Z",
+          "cty": "airing",
+          "dur": 60,
+          "ex_id": "airing-tv9-2026-08-13-10:30",
+          "id": "airing-tv9-2026-08-13-10:30",
+          "key": "airing-tv9-2026-08-13-10:30",
+          "pgm": {
+            "en": "20",
+            "ex_id": "program-tv9-2026-08-13-10:30",
+            "lod": [
+              {
+                "lang": "en",
+                "n": "Nasi Lemak Kopi O akan menghidupkan semula pagi anda dengan sentuhan baharu dan kontemporari. Rancangan ini akan kembali dengan penampilan baharu dan kandungan penuh menarik buat penonton setia kami."
+              }
+            ],
+            "loepn": [
+              {
+                "lang": "en",
+                "n": "NASI LEMAK KOPI O 2026,2027_EP20"
+              }
+            ],
+            "log": [
+              {
+                "lang": "en",
+                "n": [
+                  "Entertainment",
+                  "News"
+                ]
+              }
+            ],
+            "lold": [
+              {
+                "lang": "en",
+                "n": "Nasi Lemak Kopi O akan menghidupkan semula pagi anda dengan sentuhan baharu dan kontemporari. Rancangan ini akan kembali dengan penampilan baharu dan kandungan penuh menarik buat penonton setia kami."
+              }
+            ],
+            "lon": [
+              {
+                "lang": "en",
+                "n": "NASI LEMAK KOPI O 2026/2027"
+              }
+            ],
+            "losetl": [
+              {
+                "lang": "en",
+                "n": "NASI LEMAK KOPI O 2026/2027-Season 1"
+              }
+            ],
+            "lostl": [
+              {
+                "lang": "en",
+                "n": "NASI LEMAK KOPI O 2026/2027"
+              }
+            ],
+            "pgm_ty": "tvepisode",
+            "rat": [
+              {
+                "cc": "my",
+                "s": "FCB",
+                "v": "U"
+              }
+            ],
+            "sn": 1
+          },
+          "pgm_id": "program-tv9-2026-08-13-10:30",
+          "sc_chty": "regular",
+          "sc_ed_dt": "2026-08-13T03:30:00Z",
+          "sc_st_dt": "2026-08-13T02:30:00Z",
+          "st": "published",
+          "urn": "urn:resource:catalog:airing",
+          "ut": "2026-08-07T00:36:27Z"
+        },
+        {
+          "ch": {
+            "acs": "tv9",
+            "cs": "tv9",
+            "dd": 0,
+            "de": false,
+            "ex_id": "01A5D01A-1DAE-4E0F-8003-0B570E9F474E-123",
+            "fpe": "true",
+            "ia": [
+              "0-16x9",
+              "0-1x1",
+              "0-2x3",
+              "0-3x1",
+              "1-1x1",
+              "3-1x1"
+            ],
+            "log": [
+              {
+                "lang": "en",
+                "n": [
+                  " "
+                ]
+              }
+            ],
+            "lon": [
+              {
+                "lang": "en",
+                "n": "TV9"
+              }
+            ],
+            "rat": [
+              {
+                "cc": "my",
+                "s": "FCB",
+                "v": "U"
+              }
+            ]
+          },
+          "cid": "01A5D01A-1DAE-4E0F-8003-0B570E9F474E",
+          "ct": "2026-08-07T00:36:27Z",
+          "cty": "airing",
+          "dur": 30,
+          "ex_id": "airing-tv9-2026-08-13-11:30",
+          "id": "airing-tv9-2026-08-13-11:30",
+          "key": "airing-tv9-2026-08-13-11:30",
+          "pgm": {
+            "ex_id": "program-tv9-2026-08-13-11:30",
+            "lod": [
+              {
+                "lang": "en",
+                "n": "WOW SHOP"
+              }
+            ],
+            "log": [
+              {
+                "lang": "en",
+                "n": [
+                  "Entertainment",
+                  "News"
+                ]
+              }
+            ],
+            "lold": [
+              {
+                "lang": "en",
+                "n": "WOW SHOP"
+              }
+            ],
+            "lon": [
+              {
+                "lang": "en",
+                "n": "WOW SHOP"
+              }
+            ],
+            "losetl": [
+              {
+                "lang": "en",
+                "n": "WOW SHOP-Season 1"
+              }
+            ],
+            "lostl": [
+              {
+                "lang": "en",
+                "n": "WOW SHOP"
+              }
+            ],
+            "pgm_ty": "movie",
+            "rat": [
+              {
+                "cc": "my",
+                "s": "FCB",
+                "v": "U"
+              }
+            ]
+          },
+          "pgm_id": "program-tv9-2026-08-13-11:30",
+          "sc_chty": "regular",
+          "sc_ed_dt": "2026-08-13T04:00:00Z",
+          "sc_st_dt": "2026-08-13T03:30:00Z",
+          "st": "published",
+          "urn": "urn:resource:catalog:airing",
+          "ut": "2026-08-07T00:36:27Z"
+        },
+        {
+          "ch": {
+            "acs": "tv9",
+            "cs": "tv9",
+            "dd": 0,
+            "de": false,
+            "ex_id": "01A5D01A-1DAE-4E0F-8003-0B570E9F474E-123",
+            "fpe": "true",
+            "ia": [
+              "0-16x9",
+              "0-1x1",
+              "0-2x3",
+              "0-3x1",
+              "1-1x1",
+              "3-1x1"
+            ],
+            "log": [
+              {
+                "lang": "en",
+                "n": [
+                  " "
+                ]
+              }
+            ],
+            "lon": [
+              {
+                "lang": "en",
+                "n": "TV9"
+              }
+            ],
+            "rat": [
+              {
+                "cc": "my",
+                "s": "FCB",
+                "v": "U"
+              }
+            ]
+          },
+          "cid": "01A5D01A-1DAE-4E0F-8003-0B570E9F474E",
+          "ct": "2026-08-07T00:36:27Z",
+          "cty": "airing",
+          "dur": 60,
+          "ex_id": "airing-tv9-2026-08-13-12:00",
+          "id": "airing-tv9-2026-08-13-12:00",
+          "key": "airing-tv9-2026-08-13-12:00",
+          "pgm": {
+            "en": "1339",
+            "ex_id": "program-tv9-2026-08-13-12:00",
+            "lod": [
+              {
+                "lang": "en",
+                "n": "My #QuranTime akan meneroka isi kandungan Al-Quran dan mengenali kitab suci bagi umat Islam dengan lebih mendalam."
+              }
+            ],
+            "loepn": [
+              {
+                "lang": "en",
+                "n": "MY #QURANTIME 2.0_EP1339"
+              }
+            ],
+            "log": [
+              {
+                "lang": "en",
+                "n": [
+                  "Entertainment",
+                  "News"
+                ]
+              }
+            ],
+            "lold": [
+              {
+                "lang": "en",
+                "n": "My #QuranTime akan meneroka isi kandungan Al-Quran dan mengenali kitab suci bagi umat Islam dengan lebih mendalam."
+              }
+            ],
+            "lon": [
+              {
+                "lang": "en",
+                "n": "MY #QURANTIME 2.0"
+              }
+            ],
+            "losetl": [
+              {
+                "lang": "en",
+                "n": "MY #QURANTIME 2.0-Season 1"
+              }
+            ],
+            "lostl": [
+              {
+                "lang": "en",
+                "n": "MY #QURANTIME 2.0"
+              }
+            ],
+            "pgm_ty": "tvepisode",
+            "rat": [
+              {
+                "cc": "my",
+                "s": "FCB",
+                "v": "U"
+              }
+            ],
+            "sn": 1
+          },
+          "pgm_id": "program-tv9-2026-08-13-12:00",
+          "sc_chty": "regular",
+          "sc_ed_dt": "2026-08-13T05:00:00Z",
+          "sc_st_dt": "2026-08-13T04:00:00Z",
+          "st": "published",
+          "urn": "urn:resource:catalog:airing",
+          "ut": "2026-08-07T00:36:27Z"
+        },
+        {
+          "ch": {
+            "acs": "tv9",
+            "cs": "tv9",
+            "dd": 0,
+            "de": false,
+            "ex_id": "01A5D01A-1DAE-4E0F-8003-0B570E9F474E-123",
+            "fpe": "true",
+            "ia": [
+              "0-16x9",
+              "0-1x1",
+              "0-2x3",
+              "0-3x1",
+              "1-1x1",
+              "3-1x1"
+            ],
+            "log": [
+              {
+                "lang": "en",
+                "n": [
+                  " "
+                ]
+              }
+            ],
+            "lon": [
+              {
+                "lang": "en",
+                "n": "TV9"
+              }
+            ],
+            "rat": [
+              {
+                "cc": "my",
+                "s": "FCB",
+                "v": "U"
+              }
+            ]
+          },
+          "cid": "01A5D01A-1DAE-4E0F-8003-0B570E9F474E",
+          "ct": "2026-08-07T00:36:27Z",
+          "cty": "airing",
+          "dur": 60,
+          "ex_id": "airing-tv9-2026-08-13-13:00",
+          "id": "airing-tv9-2026-08-13-13:00",
+          "key": "airing-tv9-2026-08-13-13:00",
+          "pgm": {
+            "ex_id": "program-tv9-2026-08-13-13:00",
+            "lod": [
+              {
+                "lang": "en",
+                "n": "WOW SHOP"
+              }
+            ],
+            "log": [
+              {
+                "lang": "en",
+                "n": [
+                  "Entertainment",
+                  "News"
+                ]
+              }
+            ],
+            "lold": [
+              {
+                "lang": "en",
+                "n": "WOW SHOP"
+              }
+            ],
+            "lon": [
+              {
+                "lang": "en",
+                "n": "WOW SHOP"
+              }
+            ],
+            "losetl": [
+              {
+                "lang": "en",
+                "n": "WOW SHOP-Season 1"
+              }
+            ],
+            "lostl": [
+              {
+                "lang": "en",
+                "n": "WOW SHOP"
+              }
+            ],
+            "pgm_ty": "movie",
+            "rat": [
+              {
+                "cc": "my",
+                "s": "FCB",
+                "v": "U"
+              }
+            ]
+          },
+          "pgm_id": "program-tv9-2026-08-13-13:00",
+          "sc_chty": "regular",
+          "sc_ed_dt": "2026-08-13T06:00:00Z",
+          "sc_st_dt": "2026-08-13T05:00:00Z",
+          "st": "published",
+          "urn": "urn:resource:catalog:airing",
+          "ut": "2026-08-07T00:36:27Z"
+        },
+        {
+          "ch": {
+            "acs": "tv9",
+            "cs": "tv9",
+            "dd": 0,
+            "de": false,
+            "ex_id": "01A5D01A-1DAE-4E0F-8003-0B570E9F474E-123",
+            "fpe": "true",
+            "ia": [
+              "0-16x9",
+              "0-1x1",
+              "0-2x3",
+              "0-3x1",
+              "1-1x1",
+              "3-1x1"
+            ],
+            "log": [
+              {
+                "lang": "en",
+                "n": [
+                  " "
+                ]
+              }
+            ],
+            "lon": [
+              {
+                "lang": "en",
+                "n": "TV9"
+              }
+            ],
+            "rat": [
+              {
+                "cc": "my",
+                "s": "FCB",
+                "v": "U"
+              }
+            ]
+          },
+          "cid": "01A5D01A-1DAE-4E0F-8003-0B570E9F474E",
+          "ct": "2026-08-07T00:36:27Z",
+          "cty": "airing",
+          "dur": 90,
+          "ex_id": "airing-tv9-2026-08-13-14:00",
+          "id": "airing-tv9-2026-08-13-14:00",
+          "key": "airing-tv9-2026-08-13-14:00",
+          "pgm": {
+            "en": "1",
+            "ex_id": "program-tv9-2026-08-13-14:00",
+            "lod": [
+              {
+                "lang": "en",
+                "n": "Zakuan seorang warden penjara terpaksa bertugas pada Hari Raya. Remuk hati isteri Zakuan kerana Zakuan lebih mementingkan tugas. Zamri, seorang banduan pula tertekan kerana memikirkan keselamatan isteri dan anak-anaknya."
+              }
+            ],
+            "loepn": [
+              {
+                "lang": "en",
+                "n": "REMUK_EP1"
+              }
+            ],
+            "log": [
+              {
+                "lang": "en",
+                "n": [
+                  "Entertainment",
+                  "News"
+                ]
+              }
+            ],
+            "lold": [
+              {
+                "lang": "en",
+                "n": "Zakuan seorang warden penjara terpaksa bertugas pada Hari Raya. Remuk hati isteri Zakuan kerana Zakuan lebih mementingkan tugas. Zamri, seorang banduan pula tertekan kerana memikirkan keselamatan isteri dan anak-anaknya."
+              }
+            ],
+            "lon": [
+              {
+                "lang": "en",
+                "n": "REMUK"
+              }
+            ],
+            "losetl": [
+              {
+                "lang": "en",
+                "n": "REMUK-Season 1"
+              }
+            ],
+            "lostl": [
+              {
+                "lang": "en",
+                "n": "REMUK"
+              }
+            ],
+            "pgm_ty": "tvepisode",
+            "rat": [
+              {
+                "cc": "my",
+                "s": "FCB",
+                "v": "U"
+              }
+            ],
+            "sn": 1
+          },
+          "pgm_id": "program-tv9-2026-08-13-14:00",
+          "sc_chty": "regular",
+          "sc_ed_dt": "2026-08-13T07:30:00Z",
+          "sc_st_dt": "2026-08-13T06:00:00Z",
+          "st": "published",
+          "urn": "urn:resource:catalog:airing",
+          "ut": "2026-08-07T00:36:27Z"
+        },
+        {
+          "ch": {
+            "acs": "tv9",
+            "cs": "tv9",
+            "dd": 0,
+            "de": false,
+            "ex_id": "01A5D01A-1DAE-4E0F-8003-0B570E9F474E-123",
+            "fpe": "true",
+            "ia": [
+              "0-16x9",
+              "0-1x1",
+              "0-2x3",
+              "0-3x1",
+              "1-1x1",
+              "3-1x1"
+            ],
+            "log": [
+              {
+                "lang": "en",
+                "n": [
+                  " "
+                ]
+              }
+            ],
+            "lon": [
+              {
+                "lang": "en",
+                "n": "TV9"
+              }
+            ],
+            "rat": [
+              {
+                "cc": "my",
+                "s": "FCB",
+                "v": "U"
+              }
+            ]
+          },
+          "cid": "01A5D01A-1DAE-4E0F-8003-0B570E9F474E",
+          "ct": "2026-08-07T00:36:27Z",
+          "cty": "airing",
+          "dur": 30,
+          "ex_id": "airing-tv9-2026-08-13-15:30",
+          "id": "airing-tv9-2026-08-13-15:30",
+          "key": "airing-tv9-2026-08-13-15:30",
+          "pgm": {
+            "en": "18",
+            "ex_id": "program-tv9-2026-08-13-15:30",
+            "lod": [
+              {
+                "lang": "en",
+                "n": "Usaha Asraf untuk memikat Banu sering terganggu. Mamu Piee dilihat seperti sengaja menghalang hasrat Asraf untuk mendekati Banu. Mak Bee memahami perasaan Asraf memberi galakkan dan tips untuk memikat."
+              }
+            ],
+            "loepn": [
+              {
+                "lang": "en",
+                "n": "ANAK MAMI_EP18"
+              }
+            ],
+            "log": [
+              {
+                "lang": "en",
+                "n": [
+                  "Entertainment",
+                  "News"
+                ]
+              }
+            ],
+            "lold": [
+              {
+                "lang": "en",
+                "n": "Usaha Asraf untuk memikat Banu sering terganggu. Mamu Piee dilihat seperti sengaja menghalang hasrat Asraf untuk mendekati Banu. Mak Bee memahami perasaan Asraf memberi galakkan dan tips untuk memikat."
+              }
+            ],
+            "lon": [
+              {
+                "lang": "en",
+                "n": "ANAK MAMI"
+              }
+            ],
+            "losetl": [
+              {
+                "lang": "en",
+                "n": "ANAK MAMI-Season 1"
+              }
+            ],
+            "lostl": [
+              {
+                "lang": "en",
+                "n": "ANAK MAMI"
+              }
+            ],
+            "pgm_ty": "tvepisode",
+            "rat": [
+              {
+                "cc": "my",
+                "s": "FCB",
+                "v": "U"
+              }
+            ],
+            "sn": 1
+          },
+          "pgm_id": "program-tv9-2026-08-13-15:30",
+          "sc_chty": "regular",
+          "sc_ed_dt": "2026-08-13T08:00:00Z",
+          "sc_st_dt": "2026-08-13T07:30:00Z",
+          "st": "published",
+          "urn": "urn:resource:catalog:airing",
+          "ut": "2026-08-07T00:36:27Z"
+        },
+        {
+          "ch": {
+            "acs": "tv9",
+            "cs": "tv9",
+            "dd": 0,
+            "de": false,
+            "ex_id": "01A5D01A-1DAE-4E0F-8003-0B570E9F474E-123",
+            "fpe": "true",
+            "ia": [
+              "0-16x9",
+              "0-1x1",
+              "0-2x3",
+              "0-3x1",
+              "1-1x1",
+              "3-1x1"
+            ],
+            "log": [
+              {
+                "lang": "en",
+                "n": [
+                  " "
+                ]
+              }
+            ],
+            "lon": [
+              {
+                "lang": "en",
+                "n": "TV9"
+              }
+            ],
+            "rat": [
+              {
+                "cc": "my",
+                "s": "FCB",
+                "v": "U"
+              }
+            ]
+          },
+          "cid": "01A5D01A-1DAE-4E0F-8003-0B570E9F474E",
+          "ct": "2026-08-07T00:36:27Z",
+          "cty": "airing",
+          "dur": 60,
+          "ex_id": "airing-tv9-2026-08-13-16:00",
+          "id": "airing-tv9-2026-08-13-16:00",
+          "key": "airing-tv9-2026-08-13-16:00",
+          "pgm": {
+            "en": "17",
+            "ex_id": "program-tv9-2026-08-13-16:00",
+            "lod": [
+              {
+                "lang": "en",
+                "n": "Rizman ke rumah Marlia untuk mengambil Qistina pulang tetapi dihalang oleh Marlia. Dafi dan Melisa bertengkar mengenai tanggungjawab sebagai anak terhadap ibu bapa mereka. Marlia menasihati Qistina bercerai dengan Rizman."
+              }
+            ],
+            "loepn": [
+              {
+                "lang": "en",
+                "n": "SPA Q_EP17"
+              }
+            ],
+            "log": [
+              {
+                "lang": "en",
+                "n": [
+                  "Entertainment",
+                  "News"
+                ]
+              }
+            ],
+            "lold": [
+              {
+                "lang": "en",
+                "n": "Rizman ke rumah Marlia untuk mengambil Qistina pulang tetapi dihalang oleh Marlia. Dafi dan Melisa bertengkar mengenai tanggungjawab sebagai anak terhadap ibu bapa mereka. Marlia menasihati Qistina bercerai dengan Rizman."
+              }
+            ],
+            "lon": [
+              {
+                "lang": "en",
+                "n": "SPA Q"
+              }
+            ],
+            "losetl": [
+              {
+                "lang": "en",
+                "n": "SPA Q-Season 1"
+              }
+            ],
+            "lostl": [
+              {
+                "lang": "en",
+                "n": "SPA Q"
+              }
+            ],
+            "pgm_ty": "tvepisode",
+            "rat": [
+              {
+                "cc": "my",
+                "s": "FCB",
+                "v": "U"
+              }
+            ],
+            "sn": 1
+          },
+          "pgm_id": "program-tv9-2026-08-13-16:00",
+          "sc_chty": "regular",
+          "sc_ed_dt": "2026-08-13T09:00:00Z",
+          "sc_st_dt": "2026-08-13T08:00:00Z",
+          "st": "published",
+          "urn": "urn:resource:catalog:airing",
+          "ut": "2026-08-07T00:36:27Z"
+        },
+        {
+          "ch": {
+            "acs": "tv9",
+            "cs": "tv9",
+            "dd": 0,
+            "de": false,
+            "ex_id": "01A5D01A-1DAE-4E0F-8003-0B570E9F474E-123",
+            "fpe": "true",
+            "ia": [
+              "0-16x9",
+              "0-1x1",
+              "0-2x3",
+              "0-3x1",
+              "1-1x1",
+              "3-1x1"
+            ],
+            "log": [
+              {
+                "lang": "en",
+                "n": [
+                  " "
+                ]
+              }
+            ],
+            "lon": [
+              {
+                "lang": "en",
+                "n": "TV9"
+              }
+            ],
+            "rat": [
+              {
+                "cc": "my",
+                "s": "FCB",
+                "v": "U"
+              }
+            ]
+          },
+          "cid": "01A5D01A-1DAE-4E0F-8003-0B570E9F474E",
+          "ct": "2026-08-07T00:36:27Z",
+          "cty": "airing",
+          "dur": 30,
+          "ex_id": "airing-tv9-2026-08-13-17:00",
+          "id": "airing-tv9-2026-08-13-17:00",
+          "key": "airing-tv9-2026-08-13-17:00",
+          "pgm": {
+            "en": "92",
+            "ex_id": "program-tv9-2026-08-13-17:00",
+            "lod": [
+              {
+                "lang": "en",
+                "n": "Animasi lagu dan puisi berima kanak-kanak."
+              }
+            ],
+            "loepn": [
+              {
+                "lang": "en",
+                "n": "COCOMELON_EP92"
+              }
+            ],
+            "log": [
+              {
+                "lang": "en",
+                "n": [
+                  "Entertainment",
+                  "News"
+                ]
+              }
+            ],
+            "lold": [
+              {
+                "lang": "en",
+                "n": "Animasi lagu dan puisi berima kanak-kanak."
+              }
+            ],
+            "lon": [
+              {
+                "lang": "en",
+                "n": "COCOMELON"
+              }
+            ],
+            "losetl": [
+              {
+                "lang": "en",
+                "n": "COCOMELON-Season 1"
+              }
+            ],
+            "lostl": [
+              {
+                "lang": "en",
+                "n": "COCOMELON"
+              }
+            ],
+            "pgm_ty": "tvepisode",
+            "rat": [
+              {
+                "cc": "my",
+                "s": "FCB",
+                "v": "U"
+              }
+            ],
+            "sn": 1
+          },
+          "pgm_id": "program-tv9-2026-08-13-17:00",
+          "sc_chty": "regular",
+          "sc_ed_dt": "2026-08-13T09:30:00Z",
+          "sc_st_dt": "2026-08-13T09:00:00Z",
+          "st": "published",
+          "urn": "urn:resource:catalog:airing",
+          "ut": "2026-08-07T00:36:27Z"
+        },
+        {
+          "ch": {
+            "acs": "tv9",
+            "cs": "tv9",
+            "dd": 0,
+            "de": false,
+            "ex_id": "01A5D01A-1DAE-4E0F-8003-0B570E9F474E-123",
+            "fpe": "true",
+            "ia": [
+              "0-16x9",
+              "0-1x1",
+              "0-2x3",
+              "0-3x1",
+              "1-1x1",
+              "3-1x1"
+            ],
+            "log": [
+              {
+                "lang": "en",
+                "n": [
+                  " "
+                ]
+              }
+            ],
+            "lon": [
+              {
+                "lang": "en",
+                "n": "TV9"
+              }
+            ],
+            "rat": [
+              {
+                "cc": "my",
+                "s": "FCB",
+                "v": "U"
+              }
+            ]
+          },
+          "cid": "01A5D01A-1DAE-4E0F-8003-0B570E9F474E",
+          "ct": "2026-08-07T00:36:27Z",
+          "cty": "airing",
+          "dur": 30,
+          "ex_id": "airing-tv9-2026-08-13-17:30",
+          "id": "airing-tv9-2026-08-13-17:30",
+          "key": "airing-tv9-2026-08-13-17:30",
+          "pgm": {
+            "en": "26",
+            "ex_id": "program-tv9-2026-08-13-17:30",
+            "lod": [
+              {
+                "lang": "en",
+                "n": "Fuse ingin memenangi pertandingan aksi trak raksasa tetapi yang mengejutkannya, Jeff adalah salah seorang pesaingnya. Untuk mengalahkan Jeff, Fuse mengubah suai trak raksasanya dan kedua-dua Oddbod bersaing sengit."
+              }
+            ],
+            "loepn": [
+              {
+                "lang": "en",
+                "n": "ODDBODS SEASON 4_EP26"
+              }
+            ],
+            "log": [
+              {
+                "lang": "en",
+                "n": [
+                  "Entertainment",
+                  "News"
+                ]
+              }
+            ],
+            "lold": [
+              {
+                "lang": "en",
+                "n": "Fuse ingin memenangi pertandingan aksi trak raksasa tetapi yang mengejutkannya, Jeff adalah salah seorang pesaingnya. Untuk mengalahkan Jeff, Fuse mengubah suai trak raksasanya dan kedua-dua Oddbod bersaing sengit."
+              }
+            ],
+            "lon": [
+              {
+                "lang": "en",
+                "n": "ODDBODS SEASON 4"
+              }
+            ],
+            "losetl": [
+              {
+                "lang": "en",
+                "n": "ODDBODS SEASON 4-Season 1"
+              }
+            ],
+            "lostl": [
+              {
+                "lang": "en",
+                "n": "ODDBODS SEASON 4"
+              }
+            ],
+            "pgm_ty": "tvepisode",
+            "rat": [
+              {
+                "cc": "my",
+                "s": "FCB",
+                "v": "U"
+              }
+            ],
+            "sn": 1
+          },
+          "pgm_id": "program-tv9-2026-08-13-17:30",
+          "sc_chty": "regular",
+          "sc_ed_dt": "2026-08-13T10:00:00Z",
+          "sc_st_dt": "2026-08-13T09:30:00Z",
+          "st": "published",
+          "urn": "urn:resource:catalog:airing",
+          "ut": "2026-08-07T00:36:27Z"
+        },
+        {
+          "ch": {
+            "acs": "tv9",
+            "cs": "tv9",
+            "dd": 0,
+            "de": false,
+            "ex_id": "01A5D01A-1DAE-4E0F-8003-0B570E9F474E-123",
+            "fpe": "true",
+            "ia": [
+              "0-16x9",
+              "0-1x1",
+              "0-2x3",
+              "0-3x1",
+              "1-1x1",
+              "3-1x1"
+            ],
+            "log": [
+              {
+                "lang": "en",
+                "n": [
+                  " "
+                ]
+              }
+            ],
+            "lon": [
+              {
+                "lang": "en",
+                "n": "TV9"
+              }
+            ],
+            "rat": [
+              {
+                "cc": "my",
+                "s": "FCB",
+                "v": "U"
+              }
+            ]
+          },
+          "cid": "01A5D01A-1DAE-4E0F-8003-0B570E9F474E",
+          "ct": "2026-08-07T00:36:27Z",
+          "cty": "airing",
+          "dur": 30,
+          "ex_id": "airing-tv9-2026-08-13-18:00",
+          "id": "airing-tv9-2026-08-13-18:00",
+          "key": "airing-tv9-2026-08-13-18:00",
+          "pgm": {
+            "en": "29",
+            "ex_id": "program-tv9-2026-08-13-18:00",
+            "lod": [
+              {
+                "lang": "en",
+                "n": "WHISKERS. Blippi mencari tahu sebab kucing mempunyai misai. Rupa-rupanya misai kucing boleh membantu mereka mengemudi persekitaran."
+              }
+            ],
+            "loepn": [
+              {
+                "lang": "en",
+                "n": "BLIPPI WONDERS_EP29"
+              }
+            ],
+            "log": [
+              {
+                "lang": "en",
+                "n": [
+                  "Entertainment",
+                  "News"
+                ]
+              }
+            ],
+            "lold": [
+              {
+                "lang": "en",
+                "n": "WHISKERS. Blippi mencari tahu sebab kucing mempunyai misai. Rupa-rupanya misai kucing boleh membantu mereka mengemudi persekitaran."
+              }
+            ],
+            "lon": [
+              {
+                "lang": "en",
+                "n": "BLIPPI WONDERS"
+              }
+            ],
+            "losetl": [
+              {
+                "lang": "en",
+                "n": "BLIPPI WONDERS-Season 1"
+              }
+            ],
+            "lostl": [
+              {
+                "lang": "en",
+                "n": "BLIPPI WONDERS"
+              }
+            ],
+            "pgm_ty": "tvepisode",
+            "rat": [
+              {
+                "cc": "my",
+                "s": "FCB",
+                "v": "U"
+              }
+            ],
+            "sn": 1
+          },
+          "pgm_id": "program-tv9-2026-08-13-18:00",
+          "sc_chty": "regular",
+          "sc_ed_dt": "2026-08-13T10:30:00Z",
+          "sc_st_dt": "2026-08-13T10:00:00Z",
+          "st": "published",
+          "urn": "urn:resource:catalog:airing",
+          "ut": "2026-08-07T00:36:27Z"
+        },
+        {
+          "ch": {
+            "acs": "tv9",
+            "cs": "tv9",
+            "dd": 0,
+            "de": false,
+            "ex_id": "01A5D01A-1DAE-4E0F-8003-0B570E9F474E-123",
+            "fpe": "true",
+            "ia": [
+              "0-16x9",
+              "0-1x1",
+              "0-2x3",
+              "0-3x1",
+              "1-1x1",
+              "3-1x1"
+            ],
+            "log": [
+              {
+                "lang": "en",
+                "n": [
+                  " "
+                ]
+              }
+            ],
+            "lon": [
+              {
+                "lang": "en",
+                "n": "TV9"
+              }
+            ],
+            "rat": [
+              {
+                "cc": "my",
+                "s": "FCB",
+                "v": "U"
+              }
+            ]
+          },
+          "cid": "01A5D01A-1DAE-4E0F-8003-0B570E9F474E",
+          "ct": "2026-08-07T00:36:27Z",
+          "cty": "airing",
+          "dur": 30,
+          "ex_id": "airing-tv9-2026-08-13-18:30",
+          "id": "airing-tv9-2026-08-13-18:30",
+          "key": "airing-tv9-2026-08-13-18:30",
+          "pgm": {
+            "en": "34",
+            "ex_id": "program-tv9-2026-08-13-18:30",
+            "lod": [
+              {
+                "lang": "en",
+                "n": "ON KLAUS INSPECTION. Supa Strikas bersedia untuk perlawanan dengan Iron Tank F.C di stadium Fortress hujung minggu ini. Apabila mereka memilih ruang untuk berehat, mereka telah bertemu dengan 3 lelaki: Uber, Skarra dan Toni Vern."
+              }
+            ],
+            "loepn": [
+              {
+                "lang": "en",
+                "n": "SUPA STRIKAS (SEASON 4 - 6)_EP34"
+              }
+            ],
+            "log": [
+              {
+                "lang": "en",
+                "n": [
+                  "Entertainment",
+                  "News"
+                ]
+              }
+            ],
+            "lold": [
+              {
+                "lang": "en",
+                "n": "ON KLAUS INSPECTION. Supa Strikas bersedia untuk perlawanan dengan Iron Tank F.C di stadium Fortress hujung minggu ini. Apabila mereka memilih ruang untuk berehat, mereka telah bertemu dengan 3 lelaki: Uber, Skarra dan Toni Vern."
+              }
+            ],
+            "lon": [
+              {
+                "lang": "en",
+                "n": "SUPA STRIKAS (SEASON 4 - 6)"
+              }
+            ],
+            "losetl": [
+              {
+                "lang": "en",
+                "n": "SUPA STRIKAS (SEASON 4 - 6)-Season 1"
+              }
+            ],
+            "lostl": [
+              {
+                "lang": "en",
+                "n": "SUPA STRIKAS (SEASON 4 - 6)"
+              }
+            ],
+            "pgm_ty": "tvepisode",
+            "rat": [
+              {
+                "cc": "my",
+                "s": "FCB",
+                "v": "U"
+              }
+            ],
+            "sn": 1
+          },
+          "pgm_id": "program-tv9-2026-08-13-18:30",
+          "sc_chty": "regular",
+          "sc_ed_dt": "2026-08-13T11:00:00Z",
+          "sc_st_dt": "2026-08-13T10:30:00Z",
+          "st": "published",
+          "urn": "urn:resource:catalog:airing",
+          "ut": "2026-08-07T00:36:27Z"
+        },
+        {
+          "ch": {
+            "acs": "tv9",
+            "cs": "tv9",
+            "dd": 0,
+            "de": false,
+            "ex_id": "01A5D01A-1DAE-4E0F-8003-0B570E9F474E-123",
+            "fpe": "true",
+            "ia": [
+              "0-16x9",
+              "0-1x1",
+              "0-2x3",
+              "0-3x1",
+              "1-1x1",
+              "3-1x1"
+            ],
+            "log": [
+              {
+                "lang": "en",
+                "n": [
+                  " "
+                ]
+              }
+            ],
+            "lon": [
+              {
+                "lang": "en",
+                "n": "TV9"
+              }
+            ],
+            "rat": [
+              {
+                "cc": "my",
+                "s": "FCB",
+                "v": "U"
+              }
+            ]
+          },
+          "cid": "01A5D01A-1DAE-4E0F-8003-0B570E9F474E",
+          "ct": "2026-08-07T00:36:27Z",
+          "cty": "airing",
+          "dur": 50,
+          "ex_id": "airing-tv9-2026-08-13-19:00",
+          "id": "airing-tv9-2026-08-13-19:00",
+          "key": "airing-tv9-2026-08-13-19:00",
+          "pgm": {
+            "en": "44",
+            "ex_id": "program-tv9-2026-08-13-19:00",
+            "lod": [
+              {
+                "lang": "en",
+                "n": "BULETIN TV9 2026/2027"
+              }
+            ],
+            "loepn": [
+              {
+                "lang": "en",
+                "n": "BULETIN TV9 2026,2027_EP44"
+              }
+            ],
+            "log": [
+              {
+                "lang": "en",
+                "n": [
+                  "Entertainment",
+                  "News"
+                ]
+              }
+            ],
+            "lold": [
+              {
+                "lang": "en",
+                "n": "BULETIN TV9 2026/2027"
+              }
+            ],
+            "lon": [
+              {
+                "lang": "en",
+                "n": "BULETIN TV9 2026/2027"
+              }
+            ],
+            "losetl": [
+              {
+                "lang": "en",
+                "n": "BULETIN TV9 2026/2027-Season 1"
+              }
+            ],
+            "lostl": [
+              {
+                "lang": "en",
+                "n": "BULETIN TV9 2026/2027"
+              }
+            ],
+            "pgm_ty": "tvepisode",
+            "rat": [
+              {
+                "cc": "my",
+                "s": "FCB",
+                "v": "U"
+              }
+            ],
+            "sn": 1
+          },
+          "pgm_id": "program-tv9-2026-08-13-19:00",
+          "sc_chty": "regular",
+          "sc_ed_dt": "2026-08-13T11:50:00Z",
+          "sc_st_dt": "2026-08-13T11:00:00Z",
+          "st": "published",
+          "urn": "urn:resource:catalog:airing",
+          "ut": "2026-08-07T00:36:27Z"
+        },
+        {
+          "ch": {
+            "acs": "tv9",
+            "cs": "tv9",
+            "dd": 0,
+            "de": false,
+            "ex_id": "01A5D01A-1DAE-4E0F-8003-0B570E9F474E-123",
+            "fpe": "true",
+            "ia": [
+              "0-16x9",
+              "0-1x1",
+              "0-2x3",
+              "0-3x1",
+              "1-1x1",
+              "3-1x1"
+            ],
+            "log": [
+              {
+                "lang": "en",
+                "n": [
+                  " "
+                ]
+              }
+            ],
+            "lon": [
+              {
+                "lang": "en",
+                "n": "TV9"
+              }
+            ],
+            "rat": [
+              {
+                "cc": "my",
+                "s": "FCB",
+                "v": "U"
+              }
+            ]
+          },
+          "cid": "01A5D01A-1DAE-4E0F-8003-0B570E9F474E",
+          "ct": "2026-08-07T00:36:27Z",
+          "cty": "airing",
+          "dur": 50,
+          "ex_id": "airing-tv9-2026-08-13-19:50",
+          "id": "airing-tv9-2026-08-13-19:50",
+          "key": "airing-tv9-2026-08-13-19:50",
+          "pgm": {
+            "en": "16",
+            "ex_id": "program-tv9-2026-08-13-19:50",
+            "lod": [
+              {
+                "lang": "en",
+                "n": "Fiya dan Zarul terpaksa balik ke Kuala Lumpur kerana kematian Puan Som, ibu Wina. Wina nampak dengan jelas apabila Pn Kartina tak nak bersalam dengan Fiya. Apa kaitan Pn Kartina dengan Fiya?"
+              }
+            ],
+            "loepn": [
+              {
+                "lang": "en",
+                "n": "SEADANYA AKU_EP16"
+              }
+            ],
+            "log": [
+              {
+                "lang": "en",
+                "n": [
+                  "Entertainment",
+                  "News"
+                ]
+              }
+            ],
+            "lold": [
+              {
+                "lang": "en",
+                "n": "Fiya dan Zarul terpaksa balik ke Kuala Lumpur kerana kematian Puan Som, ibu Wina. Wina nampak dengan jelas apabila Pn Kartina tak nak bersalam dengan Fiya. Apa kaitan Pn Kartina dengan Fiya?"
+              }
+            ],
+            "lon": [
+              {
+                "lang": "en",
+                "n": "SEADANYA AKU"
+              }
+            ],
+            "losetl": [
+              {
+                "lang": "en",
+                "n": "SEADANYA AKU-Season 1"
+              }
+            ],
+            "lostl": [
+              {
+                "lang": "en",
+                "n": "SEADANYA AKU"
+              }
+            ],
+            "pgm_ty": "tvepisode",
+            "rat": [
+              {
+                "cc": "my",
+                "s": "FCB",
+                "v": "U"
+              }
+            ],
+            "sn": 1
+          },
+          "pgm_id": "program-tv9-2026-08-13-19:50",
+          "sc_chty": "regular",
+          "sc_ed_dt": "2026-08-13T12:40:00Z",
+          "sc_st_dt": "2026-08-13T11:50:00Z",
+          "st": "published",
+          "urn": "urn:resource:catalog:airing",
+          "ut": "2026-08-07T00:36:27Z"
+        },
+        {
+          "ch": {
+            "acs": "tv9",
+            "cs": "tv9",
+            "dd": 0,
+            "de": false,
+            "ex_id": "01A5D01A-1DAE-4E0F-8003-0B570E9F474E-123",
+            "fpe": "true",
+            "ia": [
+              "0-16x9",
+              "0-1x1",
+              "0-2x3",
+              "0-3x1",
+              "1-1x1",
+              "3-1x1"
+            ],
+            "log": [
+              {
+                "lang": "en",
+                "n": [
+                  " "
+                ]
+              }
+            ],
+            "lon": [
+              {
+                "lang": "en",
+                "n": "TV9"
+              }
+            ],
+            "rat": [
+              {
+                "cc": "my",
+                "s": "FCB",
+                "v": "U"
+              }
+            ]
+          },
+          "cid": "01A5D01A-1DAE-4E0F-8003-0B570E9F474E",
+          "ct": "2026-08-07T00:36:27Z",
+          "cty": "airing",
+          "dur": 110,
+          "ex_id": "airing-tv9-2026-08-13-20:40",
+          "id": "airing-tv9-2026-08-13-20:40",
+          "key": "airing-tv9-2026-08-13-20:40",
+          "pgm": {
+            "en": "1",
+            "ex_id": "program-tv9-2026-08-13-20:40",
+            "lod": [
+              {
+                "lang": "en",
+                "n": "Rita seorang berkerjaya, setia kepada suaminya Azlan walaupun sering dikasari kerana sikap panas baran suaminya. Rita mempunyai minat terhadap lukisan sama seperti majikannya Razif, yang isterinya menderita penyakit barah."
+              }
+            ],
+            "loepn": [
+              {
+                "lang": "en",
+                "n": "LUKISAN TAKDIR_EP1"
+              }
+            ],
+            "log": [
+              {
+                "lang": "en",
+                "n": [
+                  "Entertainment",
+                  "News"
+                ]
+              }
+            ],
+            "lold": [
+              {
+                "lang": "en",
+                "n": "Rita seorang berkerjaya, setia kepada suaminya Azlan walaupun sering dikasari kerana sikap panas baran suaminya. Rita mempunyai minat terhadap lukisan sama seperti majikannya Razif, yang isterinya menderita penyakit barah."
+              }
+            ],
+            "lon": [
+              {
+                "lang": "en",
+                "n": "LUKISAN TAKDIR"
+              }
+            ],
+            "losetl": [
+              {
+                "lang": "en",
+                "n": "LUKISAN TAKDIR-Season 1"
+              }
+            ],
+            "lostl": [
+              {
+                "lang": "en",
+                "n": "LUKISAN TAKDIR"
+              }
+            ],
+            "pgm_ty": "tvepisode",
+            "rat": [
+              {
+                "cc": "my",
+                "s": "FCB",
+                "v": "U"
+              }
+            ],
+            "sn": 1
+          },
+          "pgm_id": "program-tv9-2026-08-13-20:40",
+          "sc_chty": "regular",
+          "sc_ed_dt": "2026-08-13T14:30:00Z",
+          "sc_st_dt": "2026-08-13T12:40:00Z",
+          "st": "published",
+          "urn": "urn:resource:catalog:airing",
+          "ut": "2026-08-07T00:36:27Z"
+        },
+        {
+          "ch": {
+            "acs": "tv9",
+            "cs": "tv9",
+            "dd": 0,
+            "de": false,
+            "ex_id": "01A5D01A-1DAE-4E0F-8003-0B570E9F474E-123",
+            "fpe": "true",
+            "ia": [
+              "0-16x9",
+              "0-1x1",
+              "0-2x3",
+              "0-3x1",
+              "1-1x1",
+              "3-1x1"
+            ],
+            "log": [
+              {
+                "lang": "en",
+                "n": [
+                  " "
+                ]
+              }
+            ],
+            "lon": [
+              {
+                "lang": "en",
+                "n": "TV9"
+              }
+            ],
+            "rat": [
+              {
+                "cc": "my",
+                "s": "FCB",
+                "v": "U"
+              }
+            ]
+          },
+          "cid": "01A5D01A-1DAE-4E0F-8003-0B570E9F474E",
+          "ct": "2026-08-07T00:36:27Z",
+          "cty": "airing",
+          "dur": 60,
+          "ex_id": "airing-tv9-2026-08-13-22:30",
+          "id": "airing-tv9-2026-08-13-22:30",
+          "key": "airing-tv9-2026-08-13-22:30",
+          "pgm": {
+            "en": "8",
+            "ex_id": "program-tv9-2026-08-13-22:30",
+            "lod": [
+              {
+                "lang": "en",
+                "n": "Woo Young menghadiri perbicaraan perceraian di mahkamah. Dia menyatakan bahawa dia adalah wakil Dae Young dan membacakan sepucuk surat yang diberikan kepadanya oleh Dae Young mengenai nafkah dan hak penjagaan dua orang anaknya."
+              }
+            ],
+            "loepn": [
+              {
+                "lang": "en",
+                "n": "18 AGAIN_EP8"
+              }
+            ],
+            "log": [
+              {
+                "lang": "en",
+                "n": [
+                  "Entertainment",
+                  "News"
+                ]
+              }
+            ],
+            "lold": [
+              {
+                "lang": "en",
+                "n": "Woo Young menghadiri perbicaraan perceraian di mahkamah. Dia menyatakan bahawa dia adalah wakil Dae Young dan membacakan sepucuk surat yang diberikan kepadanya oleh Dae Young mengenai nafkah dan hak penjagaan dua orang anaknya."
+              }
+            ],
+            "lon": [
+              {
+                "lang": "en",
+                "n": "18 AGAIN"
+              }
+            ],
+            "losetl": [
+              {
+                "lang": "en",
+                "n": "18 AGAIN-Season 1"
+              }
+            ],
+            "lostl": [
+              {
+                "lang": "en",
+                "n": "18 AGAIN"
+              }
+            ],
+            "pgm_ty": "tvepisode",
+            "rat": [
+              {
+                "cc": "my",
+                "s": "FCB",
+                "v": "U"
+              }
+            ],
+            "sn": 1
+          },
+          "pgm_id": "program-tv9-2026-08-13-22:30",
+          "sc_chty": "regular",
+          "sc_ed_dt": "2026-08-13T15:30:00Z",
+          "sc_st_dt": "2026-08-13T14:30:00Z",
+          "st": "published",
+          "urn": "urn:resource:catalog:airing",
+          "ut": "2026-08-07T00:36:27Z"
+        },
+        {
+          "ch": {
+            "acs": "tv9",
+            "cs": "tv9",
+            "dd": 0,
+            "de": false,
+            "ex_id": "01A5D01A-1DAE-4E0F-8003-0B570E9F474E-123",
+            "fpe": "true",
+            "ia": [
+              "0-16x9",
+              "0-1x1",
+              "0-2x3",
+              "0-3x1",
+              "1-1x1",
+              "3-1x1"
+            ],
+            "log": [
+              {
+                "lang": "en",
+                "n": [
+                  " "
+                ]
+              }
+            ],
+            "lon": [
+              {
+                "lang": "en",
+                "n": "TV9"
+              }
+            ],
+            "rat": [
+              {
+                "cc": "my",
+                "s": "FCB",
+                "v": "U"
+              }
+            ]
+          },
+          "cid": "01A5D01A-1DAE-4E0F-8003-0B570E9F474E",
+          "ct": "2026-08-07T00:36:27Z",
+          "cty": "airing",
+          "dur": 30,
+          "ex_id": "airing-tv9-2026-08-13-23:30",
+          "id": "airing-tv9-2026-08-13-23:30",
+          "key": "airing-tv9-2026-08-13-23:30",
+          "pgm": {
+            "en": "20",
+            "ex_id": "program-tv9-2026-08-13-23:30",
+            "lod": [
+              {
+                "lang": "en",
+                "n": "Episod ini hos Saiful Azmi dibantu krew produksi melakukan penyiasatan kejadian misteri di beberapa lubuk ikan sepanjang Sungai Perak. Dua orang penduduk tempatan berkongsi tentang pengalaman misteri mereka ketika di sungai"
+              }
+            ],
+            "loepn": [
+              {
+                "lang": "en",
+                "n": "DETIK 12 MALAM 2022_EP20"
+              }
+            ],
+            "log": [
+              {
+                "lang": "en",
+                "n": [
+                  "Entertainment",
+                  "News"
+                ]
+              }
+            ],
+            "lold": [
+              {
+                "lang": "en",
+                "n": "Episod ini hos Saiful Azmi dibantu krew produksi melakukan penyiasatan kejadian misteri di beberapa lubuk ikan sepanjang Sungai Perak. Dua orang penduduk tempatan berkongsi tentang pengalaman misteri mereka ketika di sungai"
+              }
+            ],
+            "lon": [
+              {
+                "lang": "en",
+                "n": "DETIK 12 MALAM 2022"
+              }
+            ],
+            "losetl": [
+              {
+                "lang": "en",
+                "n": "DETIK 12 MALAM 2022-Season 1"
+              }
+            ],
+            "lostl": [
+              {
+                "lang": "en",
+                "n": "DETIK 12 MALAM 2022"
+              }
+            ],
+            "pgm_ty": "tvepisode",
+            "rat": [
+              {
+                "cc": "my",
+                "s": "FCB",
+                "v": "U"
+              }
+            ],
+            "sn": 1
+          },
+          "pgm_id": "program-tv9-2026-08-13-23:30",
+          "sc_chty": "regular",
+          "sc_ed_dt": "2026-08-13T16:00:00Z",
+          "sc_st_dt": "2026-08-13T15:30:00Z",
+          "st": "published",
+          "urn": "urn:resource:catalog:airing",
+          "ut": "2026-08-07T00:36:27Z"
+        },
+        {
+          "ch": {
+            "acs": "tv9",
+            "cs": "tv9",
+            "dd": 0,
+            "de": false,
+            "ex_id": "01A5D01A-1DAE-4E0F-8003-0B570E9F474E-123",
+            "fpe": "true",
+            "ia": [
+              "0-16x9",
+              "0-1x1",
+              "0-2x3",
+              "0-3x1",
+              "1-1x1",
+              "3-1x1"
+            ],
+            "log": [
+              {
+                "lang": "en",
+                "n": [
+                  " "
+                ]
+              }
+            ],
+            "lon": [
+              {
+                "lang": "en",
+                "n": "TV9"
+              }
+            ],
+            "rat": [
+              {
+                "cc": "my",
+                "s": "FCB",
+                "v": "U"
+              }
+            ]
+          },
+          "cid": "01A5D01A-1DAE-4E0F-8003-0B570E9F474E",
+          "ct": "2026-08-07T00:36:29Z",
+          "cty": "airing",
+          "dur": 60,
+          "ex_id": "airing-tv9-2026-08-14-00:00",
+          "id": "airing-tv9-2026-08-14-00:00",
+          "key": "airing-tv9-2026-08-14-00:00",
+          "pgm": {
+            "ex_id": "program-tv9-2026-08-14-00:00",
+            "lod": [
+              {
+                "lang": "en",
+                "n": "WOW SHOP"
+              }
+            ],
+            "log": [
+              {
+                "lang": "en",
+                "n": [
+                  "Entertainment",
+                  "News"
+                ]
+              }
+            ],
+            "lold": [
+              {
+                "lang": "en",
+                "n": "WOW SHOP"
+              }
+            ],
+            "lon": [
+              {
+                "lang": "en",
+                "n": "WOW SHOP"
+              }
+            ],
+            "losetl": [
+              {
+                "lang": "en",
+                "n": "WOW SHOP-Season 1"
+              }
+            ],
+            "lostl": [
+              {
+                "lang": "en",
+                "n": "WOW SHOP"
+              }
+            ],
+            "pgm_ty": "movie",
+            "rat": [
+              {
+                "cc": "my",
+                "s": "FCB",
+                "v": "U"
+              }
+            ]
+          },
+          "pgm_id": "program-tv9-2026-08-14-00:00",
+          "sc_chty": "regular",
+          "sc_ed_dt": "2026-08-13T17:00:00Z",
+          "sc_st_dt": "2026-08-13T16:00:00Z",
+          "st": "published",
+          "urn": "urn:resource:catalog:airing",
+          "ut": "2026-08-07T00:36:29Z"
+        }
+      ],
+      "cid": "01A5D01A-1DAE-4E0F-8003-0B570E9F474E",
+      "cs": "tv9",
+      "de": false,
+      "lodn": [
+        {
+          "lang": "en",
+          "n": "TV9"
+        }
+      ],
+      "log": [
+        {
+          "lang": "en",
+          "n": [
+            " "
+          ]
+        }
+      ],
+      "lon": [
+        {
+          "lang": "en",
+          "n": "TV9"
+        }
+      ],
+      "rat": [
+        {
+          "cc": "my",
+          "s": "FCB",
+          "v": "U"
+        }
+      ],
+      "ut": "2026-07-10T16:40:33Z"
+    }
+  ],
+  "facet": {
+    "field": "category",
+    "terms": [
+      {
+        "count": 14,
+        "term": "Movies"
+      },
+      {
+        "count": 10,
+        "term": "News"
+      },
+      {
+        "count": 9,
+        "term": "Free Tv"
+      },
+      {
+        "count": 8,
+        "term": "International Variety"
+      },
+      {
+        "count": 8,
+        "term": "Kids"
+      },
+      {
+        "count": 7,
+        "term": "Chinese"
+      },
+      {
+        "count": 7,
+        "term": "Malay"
+      },
+      {
+        "count": 7,
+        "term": "Sports"
+      },
+      {
+        "count": 6,
+        "term": "Lifestyle & Knowledge"
+      },
+      {
+        "count": 4,
+        "term": "Indian"
+      },
+      {
+        "count": 4,
+        "term": "Korean & Japanese"
+      }
+    ]
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "header": {
+    "source": "209-04",
+    "code": -1,
+    "message": "Failure",
+    "system_time": 1786625131031,
+    "tracking_id": "9444e8c7-7815-4efd-a209-cc50ff966da3",
+    "errors": [
+      {
+        "code": "42090406",
+        "description": "No records found"
+      }
+    ]
+  }
+}

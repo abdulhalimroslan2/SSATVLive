@@ -1,0 +1,82 @@
+[
+  {
+    "avatarId": "bb0d1661-fb24-4b83-a033-c9d33178ecca",
+    "avatarName": "default-main",
+    "avatarUrl": "https://static-assets-cdn.tmcms-stag.quickplay.com/staticAssets/images/avatar/bb0d1661-fb24-4b83-a033-c9d33178ecca/default-main.png"
+  },
+  {
+    "avatarId": "ffcad370-fafc-4b26-901c-408ee165a6c7",
+    "avatarName": "default-kids",
+    "avatarUrl": "https://static-assets-cdn.tmcms-stag.quickplay.com/staticAssets/images/avatar/ffcad370-fafc-4b26-901c-408ee165a6c7/default-kids.png"
+  },
+  {
+    "avatarId": "6465218a-e4e7-4004-8b3d-1abe43990fb1",
+    "avatarName": "default-customprofile1",
+    "avatarUrl": "https://static-assets-cdn.tmcms-stag.quickplay.com/staticAssets/images/avatar/6465218a-e4e7-4004-8b3d-1abe43990fb1/default-customprofile1.png"
+  },
+  {
+    "avatarId": "84b0436d-e000-43d3-b939-54858cf37533",
+    "avatarName": "default-customprofile2",
+    "avatarUrl": "https://static-assets-cdn.tmcms-stag.quickplay.com/staticAssets/images/avatar/84b0436d-e000-43d3-b939-54858cf37533/default-customprofile2.png"
+  },
+  {
+    "avatarId": "3ddee040-60c1-4b1d-9816-72bf16410ad2",
+    "avatarName": "default-customprofile3",
+    "avatarUrl": "https://static-assets-cdn.tmcms-stag.quickplay.com/staticAssets/images/avatar/3ddee040-60c1-4b1d-9816-72bf16410ad2/default-customprofile3.png"
+  },
+  {
+    "avatarId": "ca00dc5c-9ff8-43b5-be63-cfb5df0bef22",
+    "avatarName": "userprofile1",
+    "avatarUrl": "https://static-assets-cdn.tmcms-stag.quickplay.com/staticAssets/images/avatar/ca00dc5c-9ff8-43b5-be63-cfb5df0bef22/userprofile1.png"
+  },
+  {
+    "avatarId": "94a7cb62-e185-4ff4-a9db-ea65fe4d052d",
+    "avatarName": "userprofile2",
+    "avatarUrl": "https://static-assets-cdn.tmcms-stag.quickplay.com/staticAssets/images/avatar/94a7cb62-e185-4ff4-a9db-ea65fe4d052d/userprofile2.png"
+  },
+  {
+    "avatarId": "1fbd9684-401d-412c-bbd7-648dc7f5fa2c",
+    "avatarName": "userprofile3",
+    "avatarUrl": "https://static-assets-cdn.tmcms-stag.quickplay.com/staticAssets/images/avatar/1fbd9684-401d-412c-bbd7-648dc7f5fa2c/userprofile3.png"
+  },
+  {
+    "avatarId": "f680f38a-0251-482e-91ed-ef051df61981",
+    "avatarName": "userprofile4",
+    "avatarUrl": "https://static-assets-cdn.tmcms-stag.quickplay.com/staticAssets/images/avatar/f680f38a-0251-482e-91ed-ef051df61981/userprofile4.png"
+  },
+  {
+    "avatarId": "6aa11fbc-a064-40b5-a94a-9c883f0d3c52",
+    "avatarName": "userprofile5",
+    "avatarUrl": "https://static-assets-cdn.tmcms-stag.quickplay.com/staticAssets/images/avatar/6aa11fbc-a064-40b5-a94a-9c883f0d3c52/userprofile5.png"
+  },
+  {
+    "avatarId": "265477e6-0bcb-4df1-9a67-9fbd232b8c5b",
+    "avatarName": "userprofile6",
+    "avatarUrl": "https://static-assets-cdn.tmcms-stag.quickplay.com/staticAssets/images/avatar/265477e6-0bcb-4df1-9a67-9fbd232b8c5b/userprofile6.png"
+  },
+  {
+    "avatarId": "0e84f4dd-17d4-432e-ab83-dd4fde5509d5",
+    "avatarName": "userprofile18",
+    "avatarUrl": "https://static-assets-cdn.tmcms-stag.quickplay.com/staticAssets/images/avatar/0e84f4dd-17d4-432e-ab83-dd4fde5509d5/userprofile18.png"
+  },
+  {
+    "avatarId": "e9458395-3e25-4e3f-878b-3aadf46f735d",
+    "avatarName": "userprofile19",
+    "avatarUrl": "https://static-assets-cdn.tmcms-stag.quickplay.com/staticAssets/images/avatar/e9458395-3e25-4e3f-878b-3aadf46f735d/userprofile19.png"
+  },
+  {
+    "avatarId": "8b48db70-1ea8-4461-ab94-4b5ca4bc4ceb",
+    "avatarName": "userprofile20",
+    "avatarUrl": "https://static-assets-cdn.tmcms-stag.quickplay.com/staticAssets/images/avatar/8b48db70-1ea8-4461-ab94-4b5ca4bc4ceb/userprofile20.png"
+  },
+  {
+    "avatarId": "650680e1-b615-4bec-9bd3-fa000c751ac9",
+    "avatarName": "userprofile21",
+    "avatarUrl": "https://static-assets-cdn.tmcms-stag.quickplay.com/staticAssets/images/avatar/650680e1-b615-4bec-9bd3-fa000c751ac9/userprofile21.png"
+  },
+  {
+    "avatarId": "55cf066a-d713-4e69-a433-c0021bc739ed",
+    "avatarName": "userprofile22",
+    "avatarUrl": "https://static-assets-cdn.tmcms-stag.quickplay.com/staticAssets/images/avatar/55cf066a-d713-4e69-a433-c0021bc739ed/userprofile22.png"
+  }
+]

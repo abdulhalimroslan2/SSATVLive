@@ -1,0 +1,337 @@
+{
+  "header": {
+    "source": "024-04",
+    "code": 0,
+    "message": "Success",
+    "system_time": 1786625230935,
+    "tracking_id": "6b6f193d-63e2-4229-810e-3ab5f5ebf313"
+  },
+  "data": {
+    "ae": "true",
+    "aq": "Stereo",
+    "aud_lg": [
+      "Malay"
+    ],
+    "chty": "regular",
+    "cn": 109,
+    "co": "MY",
+    "cs": "tv9",
+    "cty": "channel",
+    "cz": 109,
+    "de": false,
+    "ent": [
+      {
+        "con": "my",
+        "det": "all",
+        "dt": "all",
+        "f_ed_dt": "2030-11-22T05:56:00Z",
+        "f_st_dt": "2024-11-22T05:56:00Z",
+        "prd": "unifitv",
+        "sp": [
+          "urn:package:dtc:free",
+          "urn:package:telco:basic:free",
+          "urn:package:telco:unifitvplus:free",
+          "urn:package:telco:tv:promotion",
+          "urn:package:telco:tv:varnamplus",
+          "urn:package:telco:tv:anekaplus",
+          "urn:package:telco:tv:rubyplus",
+          "urn:package:telco:tv:ultimate",
+          "urn:package:telco:tv:ultimateplus",
+          "urn:package:telco:tv:ultimatemax",
+          "urn:package:telco:tv:staffplus",
+          "urn:package:telco:tv:staffmax",
+          "urn:package:telco:tv:staff",
+          "urn:package:telco:tv:movies",
+          "urn:package:telco:tv:family",
+          "urn:package:telco:tv:sports",
+          "urn:package:telco:tv:kids",
+          "urn:package:telco:tv:legacy-hypptv-jumbo-lite",
+          "urn:package:telco:tv:legacy-hypptv-mega",
+          "urn:package:telco:tv:legacy-hypptv-platinum2",
+          "urn:package:telco:tv:legacy-hypptv-platinum",
+          "urn:package:telco:tv:legacy-hypptv-sports",
+          "urn:package:telco:tv:legacy-hypptv-sports2",
+          "urn:package:telco:tv:legacy-ultimatemax",
+          "urn:package:telco:tv:legacy-ultimateplus",
+          "urn:package:telco:biz:fun",
+          "urn:package:telco:biz:corporate",
+          "urn:package:telco:biz:sports",
+          "urn:package:telco:tv:star",
+          "urn:package:telco:tv:wira",
+          "urn:package:telco:tv:yingxiong",
+          "urn:package:telco:tv:veeran",
+          "urn:package:telco:tv:kids2025",
+          "urn:package:telco:tv:sports2025",
+          "urn:package:telco:tv:max",
+          "urn:package:telco:tv:disneyplus",
+          "urn:package:telco:tv:maxplus",
+          "urn:package:telco:tv:netflix",
+          "urn:package:telco:tv:superstar",
+          "urn:package:telco:tv:allstar",
+          "urn:package:telco:hotes:tv9",
+          "urn:package:telco:hosp:tv9",
+          "urn:package:telco:tv:basic",
+          "urn:package:telco:tv:unifitvplus",
+          "urn:package:telco:biz:basic"
+        ]
+      }
+    ],
+    "ex_id": "01A5D01A-1DAE-4E0F-8003-0B570E9F474E-123",
+    "fpe": "true",
+    "ia": [
+      "0-16x9",
+      "0-1x1",
+      "0-2x3",
+      "0-3x1",
+      "1-1x1",
+      "3-1x1"
+    ],
+    "id": "01A5D01A-1DAE-4E0F-8003-0B570E9F474E",
+    "l2ve": false,
+    "loc": [
+      {
+        "lang": "en",
+        "n": [
+          "Free TV"
+        ]
+      }
+    ],
+    "lod": [
+      {
+        "lang": "en",
+        "n": "TV9, with the tagline Di Hatiku, brings programs that resonate with young semi-urban & rural Malays, celebrating traditions and Malay cultural values."
+      }
+    ],
+    "lodn": [
+      {
+        "lang": "en",
+        "n": "TV9"
+      }
+    ],
+    "log": [
+      {
+        "lang": "en",
+        "n": [
+          " "
+        ]
+      }
+    ],
+    "lold": [
+      {
+        "lang": "en",
+        "n": "With its tagline Di Hatiku, TV9 aims to endear itself to young semi-urban and rural Malays who associate themselves with traditional Malay values, an important sub-group of the largest and fastest-growing consumer segment in Malaysia."
+      }
+    ],
+    "lon": [
+      {
+        "lang": "en",
+        "n": "TV9"
+      }
+    ],
+    "net": "tv9",
+    "nu": "unifitv",
+    "ol": "Malay",
+    "pn": "unifitv",
+    "prt_ic": "false",
+    "pt": "SVOD",
+    "rat": [
+      {
+        "cc": "my",
+        "s": "FCB",
+        "v": "U"
+      }
+    ],
+    "rat_epg": [
+      {
+        "cc": "my",
+        "s": "FCB",
+        "v": "U"
+      }
+    ],
+    "sv_pc": [
+      {
+        "prd": "unifitv",
+        "sku": [
+          "1801"
+        ],
+        "sku_ty": "TVPACK",
+        "sp_ed_dt": "2030-12-31T00:00:00Z",
+        "sp_st_dt": "2024-01-01T00:00:00Z",
+        "sub_ty": [
+          "cohort1",
+          "cohort2",
+          "cohort3",
+          "cohort5"
+        ]
+      },
+      {
+        "prd": "unifitv",
+        "sku": [
+          "1802"
+        ],
+        "sku_ty": "TVPACK",
+        "sp_ed_dt": "2030-12-31T00:00:00Z",
+        "sp_st_dt": "2024-01-01T00:00:00Z",
+        "sub_ty": [
+          "cohort1",
+          "cohort2",
+          "cohort3",
+          "cohort5"
+        ]
+      },
+      {
+        "prd": "unifitv",
+        "sku": [
+          "1803"
+        ],
+        "sku_ty": "TVPACK",
+        "sp_ed_dt": "2030-12-31T00:00:00Z",
+        "sp_st_dt": "2024-01-01T00:00:00Z",
+        "sub_ty": [
+          "cohort1",
+          "cohort2",
+          "cohort3",
+          "cohort5"
+        ]
+      },
+      {
+        "prd": "unifitv",
+        "sku": [
+          "1804"
+        ],
+        "sku_ty": "TVPACK",
+        "sp_ed_dt": "2030-12-31T00:00:00Z",
+        "sp_st_dt": "2024-01-01T00:00:00Z",
+        "sub_ty": [
+          "cohort1",
+          "cohort2",
+          "cohort3",
+          "cohort5"
+        ]
+      },
+      {
+        "prd": "unifitv",
+        "sku": [
+          "1805"
+        ],
+        "sku_ty": "TVPACK",
+        "sp_ed_dt": "2030-12-31T00:00:00Z",
+        "sp_st_dt": "2024-01-01T00:00:00Z",
+        "sub_ty": [
+          "cohort1",
+          "cohort2",
+          "cohort3",
+          "cohort5"
+        ]
+      },
+      {
+        "prd": "unifitv",
+        "sku": [
+          "1806"
+        ],
+        "sku_ty": "TVPACK",
+        "sp_ed_dt": "2030-12-31T00:00:00Z",
+        "sp_st_dt": "2024-01-01T00:00:00Z",
+        "sub_ty": [
+          "cohort1",
+          "cohort2",
+          "cohort3",
+          "cohort5"
+        ]
+      },
+      {
+        "prd": "unifitv",
+        "sku": [
+          "1807"
+        ],
+        "sku_ty": "TVPACK",
+        "sp_ed_dt": "2030-12-31T00:00:00Z",
+        "sp_st_dt": "2024-01-01T00:00:00Z",
+        "sub_ty": [
+          "cohort1",
+          "cohort2",
+          "cohort3",
+          "cohort5"
+        ]
+      },
+      {
+        "prd": "unifitv",
+        "sku": [
+          "1831"
+        ],
+        "sku_ty": "TVPACK",
+        "sp_ed_dt": "2030-12-31T00:00:00Z",
+        "sp_st_dt": "2024-01-01T00:00:00Z",
+        "sub_ty": [
+          "cohort1",
+          "cohort2",
+          "cohort3",
+          "cohort5"
+        ]
+      },
+      {
+        "prd": "unifitv",
+        "sku": [
+          "1832"
+        ],
+        "sku_ty": "TVPACK",
+        "sp_ed_dt": "2030-12-31T00:00:00Z",
+        "sp_st_dt": "2024-01-01T00:00:00Z",
+        "sub_ty": [
+          "cohort1",
+          "cohort2",
+          "cohort3",
+          "cohort5"
+        ]
+      },
+      {
+        "prd": "unifitv",
+        "sku": [
+          "1833"
+        ],
+        "sku_ty": "TVPACK",
+        "sp_ed_dt": "2030-12-31T00:00:00Z",
+        "sp_st_dt": "2024-01-01T00:00:00Z",
+        "sub_ty": [
+          "cohort1",
+          "cohort2",
+          "cohort3",
+          "cohort5"
+        ]
+      },
+      {
+        "prd": "unifitv",
+        "sku": [
+          "1834"
+        ],
+        "sku_ty": "TVPACK",
+        "sp_ed_dt": "2030-12-31T00:00:00Z",
+        "sp_st_dt": "2024-01-01T00:00:00Z",
+        "sub_ty": [
+          "cohort1",
+          "cohort2",
+          "cohort3",
+          "cohort5"
+        ]
+      },
+      {
+        "prd": "unifitv",
+        "sku": [
+          "1835"
+        ],
+        "sku_ty": "TVPACK",
+        "sp_ed_dt": "2030-12-31T00:00:00Z",
+        "sp_st_dt": "2024-01-01T00:00:00Z",
+        "sub_ty": [
+          "cohort1",
+          "cohort2",
+          "cohort3",
+          "cohort5"
+        ]
+      }
+    ],
+    "urn": "urn:resource:catalog:channel",
+    "ut": "2026-07-10T16:40:33Z",
+    "vq": "FHD"
+  }
+}

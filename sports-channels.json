@@ -1,0 +1,262 @@
+[
+  {
+    "id": "sports_0hei5",
+    "contentId": "sports_unifi_sport",
+    "name": "Unifi Sport",
+    "description": "Siaran Langsung Sukan - Unifi Sport",
+    "thumbnail": "https://ptv2026.com/logo/unifisport.png",
+    "streamUrl": "/ptv2026/myunifi.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&channel=unifi1&kid=90c7eb5d-66b4-42a9-a591-775cc1154bc9",
+    "isFreeContent": true,
+    "isFreePreviewEnabledContent": true,
+    "clearKey": "90c7eb5d66b442a9a591775cc1154bc9:4af842b9ad5315a01d7655b8b502196f"
+  },
+  {
+    "id": "sports_ompca",
+    "contentId": "sports_rtm_sukan",
+    "name": "RTM Sukan",
+    "description": "Siaran Langsung Sukan - RTM Sukan",
+    "thumbnail": "https://ptv2026.com/logo/rtmsukan.png",
+    "streamUrl": "/rtm-stream/live/media0/sukan/DASH/sukan.mpd",
+    "isFreeContent": true,
+    "isFreePreviewEnabledContent": true
+  },
+  {
+    "id": "sports_eek6j",
+    "contentId": "sports_mutv",
+    "name": "MUTV",
+    "description": "Siaran Langsung Sukan - MUTV",
+    "thumbnail": "https://ptv2026.com/logo/mutv.png",
+    "streamUrl": "/ptv2026/mutv.mpd",
+    "isFreeContent": true,
+    "isFreePreviewEnabledContent": true
+  },
+  {
+    "id": "sports_phv8y",
+    "contentId": "sports_arena_fhd",
+    "name": "Arena FHD",
+    "description": "Siaran Langsung Sukan - Arena FHD",
+    "thumbnail": "https://ptv2026.com/logo/arenafhd.png",
+    "streamUrl": "/astro-linear/dash-wv/linear/2604/default_primary.mpd",
+    "isFreeContent": true,
+    "isFreePreviewEnabledContent": true,
+    "clearKey": "efda647dad723563b625be8c05ee6110:6776985938b332164b97b81fe566a34a"
+  },
+  {
+    "id": "sports_nmnob",
+    "contentId": "sports_arena_2_fhd",
+    "name": "Arena 2 FHD",
+    "description": "Siaran Langsung Sukan - Arena 2 FHD",
+    "thumbnail": "https://ptv2026.com/logo/arena2fhd.png",
+    "streamUrl": "/astro-linear/dash-wv/linear/5057/default_primary.mpd",
+    "isFreeContent": true,
+    "isFreePreviewEnabledContent": true,
+    "clearKey": "03768503343f451faa1b1f1f3d33b463:29e3bf0c0910c77bf0fcf8b30ebcd256"
+  },
+  {
+    "id": "sports_ws76i",
+    "contentId": "sports_bola_1",
+    "name": "Bola 1",
+    "description": "Siaran Langsung Sukan - Bola 1",
+    "thumbnail": "https://ptv2026.com/logo/bola1.png",
+    "streamUrl": "/astro-linear/dash-wv/linear/2604/default_primary.mpd",
+    "isFreeContent": true,
+    "isFreePreviewEnabledContent": true,
+    "clearKey": "efda647dad723563b625be8c05ee6110:6776985938b332164b97b81fe566a34a"
+  },
+  {
+    "id": "sports_j42qq",
+    "contentId": "sports_bola_2",
+    "name": "Bola 2",
+    "description": "Siaran Langsung Sukan - Bola 2",
+    "thumbnail": "https://ptv2026.com/logo/bola2.png",
+    "streamUrl": "/astro-linear/dash-wv/linear/5057/default_primary.mpd",
+    "isFreeContent": true,
+    "isFreePreviewEnabledContent": true,
+    "clearKey": "03768503343f451faa1b1f1f3d33b463:29e3bf0c0910c77bf0fcf8b30ebcd256"
+  },
+  {
+    "id": "sports_fv2qk",
+    "contentId": "sports_grandstand",
+    "name": "Grandstand",
+    "description": "Siaran Langsung Sukan - Grandstand",
+    "thumbnail": "https://ptv2026.com/logo/grandstand.png",
+    "streamUrl": "/astro-linear/dash-wv/linear/2506/default_primary.mpd",
+    "isFreeContent": true,
+    "isFreePreviewEnabledContent": true,
+    "clearKey": "79f4028730acca9ab8b00f26158ddb10:91febe843c08c7cc523efd827292e40e"
+  },
+  {
+    "id": "sports_e1oww",
+    "contentId": "sports_epl_1",
+    "name": "EPL 1",
+    "description": "Siaran Langsung Sukan - EPL 1",
+    "thumbnail": "https://ptv2026.com/logo/epl1.png",
+    "streamUrl": "/ptv2026/myunifi.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&channel=Bein1&kid=d48b6088-253c-443e-b94d-27cb7828f707",
+    "isFreeContent": true,
+    "isFreePreviewEnabledContent": true,
+    "clearKey": "1a655189ab5c49eb235308c2b1a9e710:3c4508af348844107f5e026a4fd6b16e"
+  },
+  {
+    "id": "sports_qea3l",
+    "contentId": "sports_epl_2",
+    "name": "EPL 2",
+    "description": "Siaran Langsung Sukan - EPL 2",
+    "thumbnail": "https://ptv2026.com/logo/epl2.png",
+    "streamUrl": "/ptv2026/myunifi.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&channel=Bein1&kid=d48b6088-253c-443e-b94d-27cb7828f707",
+    "isFreeContent": true,
+    "isFreePreviewEnabledContent": true,
+    "clearKey": "1a655189ab5c49eb235308c2b1a9e710:3c4508af348844107f5e026a4fd6b16e"
+  },
+  {
+    "id": "sports_7ossl",
+    "contentId": "sports_football",
+    "name": "Football",
+    "description": "Siaran Langsung Sukan - Football",
+    "thumbnail": "https://ptv2026.com/logo/football.png",
+    "streamUrl": "/astro-linear/dash-wv/linear/2506/default_primary.mpd",
+    "isFreeContent": true,
+    "isFreePreviewEnabledContent": true,
+    "clearKey": "79f4028730acca9ab8b00f26158ddb10:91febe843c08c7cc523efd827292e40e"
+  },
+  {
+    "id": "sports_vzn59",
+    "contentId": "sports_badminton",
+    "name": "Badminton",
+    "description": "Siaran Langsung Sukan - Badminton",
+    "thumbnail": "https://ptv2026.com/logo/badminton.png",
+    "streamUrl": "/load-ptv/rwt.m3u8?username=vip_gzidmjzr&password=Uk7WNjrs&channel=badminton1",
+    "isFreeContent": true,
+    "isFreePreviewEnabledContent": true
+  },
+  {
+    "id": "sports_0es7z",
+    "contentId": "sports_badminton_2",
+    "name": "Badminton 2",
+    "description": "Siaran Langsung Sukan - Badminton 2",
+    "thumbnail": "https://ptv2026.com/logo/badminton2.png",
+    "streamUrl": "/load-ptv/rwt.m3u8?username=vip_gzidmjzr&password=Uk7WNjrs&channel=badminton2",
+    "isFreeContent": true,
+    "isFreePreviewEnabledContent": true
+  },
+  {
+    "id": "sports_6bi43",
+    "contentId": "sports_sports_plus",
+    "name": "Sports Plus",
+    "description": "Siaran Langsung Sukan - Sports Plus",
+    "thumbnail": "https://ptv2026.com/logo/sportsplus.png",
+    "streamUrl": "/astro-linear/dash-wv/linear/5171/default_primary.mpd",
+    "isFreeContent": true,
+    "isFreePreviewEnabledContent": true,
+    "clearKey": "81352bc47ec1177b321ee65ac1be7f10:c8b886142005d7e5067c8717777eaac4"
+  },
+  {
+    "id": "sports_fgitq",
+    "contentId": "sports_sports_uhd",
+    "name": "Sports UHD",
+    "description": "Siaran Langsung Sukan - Sports UHD",
+    "thumbnail": "https://ptv2026.com/logo/sportsuhd.png",
+    "streamUrl": "/astro-linear/dash-wv/linear/1600/default_primary.mpd",
+    "isFreeContent": true,
+    "isFreePreviewEnabledContent": true,
+    "clearKey": "8ac8b2f7af05ad829805345a517bc110:ee1ae1cd086fa9bfc0505e6d5e9e27e9"
+  },
+  {
+    "id": "sports_aejpa",
+    "contentId": "sports_bein_fhd",
+    "name": "Bein FHD",
+    "description": "Siaran Langsung Sukan - Bein FHD",
+    "thumbnail": "https://ptv2026.com/logo/beinfhd.png",
+    "streamUrl": "/ptv2026/myunifi.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&channel=Bein1&kid=d48b6088-253c-443e-b94d-27cb7828f707",
+    "isFreeContent": true,
+    "isFreePreviewEnabledContent": true,
+    "clearKey": "1a655189ab5c49eb235308c2b1a9e710:3c4508af348844107f5e026a4fd6b16e"
+  },
+  {
+    "id": "sports_zg3qa",
+    "contentId": "sports_bein_2_fhd",
+    "name": "Bein 2 FHD",
+    "description": "Siaran Langsung Sukan - Bein 2 FHD",
+    "thumbnail": "https://ptv2026.com/logo/bein2fhd.png",
+    "streamUrl": "/ptv2026/myunifi.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&channel=Bein2&kid=efa6ff1a-cefa-4304-8e8b-7adc21d98871",
+    "isFreeContent": true,
+    "isFreePreviewEnabledContent": true,
+    "clearKey": "39c175581e237eff9559607eb9b23c10:5102b12aac7756c65dcb46a101d960d3"
+  },
+  {
+    "id": "sports_ago0z",
+    "contentId": "sports_bein_3_fhd",
+    "name": "Bein 3 FHD",
+    "description": "Siaran Langsung Sukan - Bein 3 FHD",
+    "thumbnail": "https://ptv2026.com/logo/bein3fhd.png",
+    "streamUrl": "/ptv2026/myunifi.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&channel=Bein3&kid=816ee2f7-c19f-49ed-8427-6f34541b465b",
+    "isFreeContent": true,
+    "isFreePreviewEnabledContent": true,
+    "clearKey": "20c884ef8ed26b2762f8b1a78f2d1910:042a21bf236ca729b1e343ed6e0a6337"
+  },
+  {
+    "id": "sports_fyhf3",
+    "contentId": "sports_bein_4_fhd",
+    "name": "Bein 4 FHD",
+    "description": "Siaran Langsung Sukan - Bein 4 FHD",
+    "thumbnail": "https://ptv2026.com/logo/bein4fhd.png",
+    "streamUrl": "/ptv2026/myunifi.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&channel=Bein4&kid=d561ff97-6397-473e-9b45-6b44cdffcdd2",
+    "isFreeContent": true,
+    "isFreePreviewEnabledContent": true,
+    "clearKey": "d561ff976397473e9b456b44cdffcdd2:2b6cff42f7fae7e8bc32f3d5c62dc3c2"
+  },
+  {
+    "id": "sports_kyxo8",
+    "contentId": "sports_spotv_fhd",
+    "name": "Spotv FHD",
+    "description": "Siaran Langsung Sukan - Spotv FHD",
+    "thumbnail": "https://ptv2026.com/logo/spotvfhd.png",
+    "streamUrl": "/ptv2026/myunifi.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&channel=spoTV&kid=5b593bd5-30f1-403a-8f3e-b9b2cd9236c8",
+    "isFreeContent": true,
+    "isFreePreviewEnabledContent": true,
+    "clearKey": "5b593bd530f1403a8f3eb9b2cd9236c8:d07c6a7f0b37a4090341e6380ff85060"
+  },
+  {
+    "id": "sports_w3jfo",
+    "contentId": "sports_spotv2_fhd",
+    "name": "Spotv2 FHD",
+    "description": "Siaran Langsung Sukan - Spotv2 FHD",
+    "thumbnail": "https://ptv2026.com/logo/spotv2fhd.png",
+    "streamUrl": "/ptv2026/myunifi.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&channel=spoTV2&kid=1af079fb-8e1d-43d8-90c1-d804431ad84c",
+    "isFreeContent": true,
+    "isFreePreviewEnabledContent": true,
+    "clearKey": "1af079fb8e1d43d890c1d804431ad84c:3dc40bc5aaf09af8b1572646a45b1242"
+  },
+  {
+    "id": "sports_9pl0u",
+    "contentId": "sports_w_sport_fhd",
+    "name": "W Sport FHD",
+    "description": "Siaran Langsung Sukan - W Sport FHD",
+    "thumbnail": "https://ptv2026.com/logo/wsportfhd.png",
+    "streamUrl": "/astro-linear/dash-wv/linear/5060/default_primary.mpd",
+    "isFreeContent": true,
+    "isFreePreviewEnabledContent": true,
+    "clearKey": "579e19ae6da24199ab27e57c22b952e2:667c95071d405a86e707a1edb07db03a"
+  },
+  {
+    "id": "sports_4xi6r",
+    "contentId": "sports_golf",
+    "name": "Golf",
+    "description": "Siaran Langsung Sukan - Golf",
+    "thumbnail": "https://ptv2026.com/logo/golf.png",
+    "streamUrl": "/ptv2026/dash2.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&channel=golf",
+    "isFreeContent": true,
+    "isFreePreviewEnabledContent": true,
+    "clearKey": "705bab5e645b6d7c95588b29520f8110:28639bcfb5cbee8ff9ca398fcf5bfcd0"
+  },
+  {
+    "id": "sports_8m7mx",
+    "contentId": "sports_nba_tv",
+    "name": "NBA TV",
+    "description": "Siaran Langsung Sukan - NBA TV",
+    "thumbnail": "https://ptv2026.com/logo/nbatv.png",
+    "streamUrl": "/ptv2026/vidio_live.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&id=6717",
+    "isFreeContent": true,
+    "isFreePreviewEnabledContent": true,
+    "clearKey": "e35dc3fb8d20bf4e57df2101b6eec782:840171ea994e02a22f0b5c889ce197ec"
+  }
+]

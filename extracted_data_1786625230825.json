@@ -1,0 +1,15 @@
+{
+  "header": {
+    "source": "209-03",
+    "code": -1,
+    "message": "Failure",
+    "system_time": 1786625230813,
+    "tracking_id": "b2f05b7b-df86-4283-a1eb-04a1f97c5977",
+    "errors": [
+      {
+        "code": "42090303",
+        "description": "Item not found"
+      }
+    ]
+  }
+}
