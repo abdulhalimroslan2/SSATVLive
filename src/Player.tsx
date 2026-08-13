@@ -65,7 +65,7 @@ export const Player: React.FC<PlayerProps> = ({ channel }) => {
       // -------------------------------------------------------------
       // STRATEGY 1: SHAKA PLAYER (Best for ClearKey DRM & DASH/HLS)
       // -------------------------------------------------------------
-      const tryShakaPlayer = async () => {
+      const tryShakaPlayer = async (): Promise<boolean> => {
         try {
           shaka.polyfill.installAll();
           if (!shaka.Player.isBrowserSupported()) throw new Error('Shaka not supported');
@@ -74,7 +74,7 @@ export const Player: React.FC<PlayerProps> = ({ channel }) => {
           playerRef.current = player;
 
           await player.attach(video);
-          if (isCancelled) return;
+          if (isCancelled) return false;
 
           const ui = new shaka.ui.Overlay(player, container, video);
           uiRef.current = ui;
@@ -187,22 +187,49 @@ export const Player: React.FC<PlayerProps> = ({ channel }) => {
               player.configure({
                 drm: {
                   clearKeys: clearKeysMap,
-                },
-                streaming: {
-                  lowLatencyMode: false,
-                  bufferingGoal: 30,
-                  rebufferingGoal: 5,
-                  bufferBehind: 30,
-                  retryParameters: {
-                    maxAttempts: 6,
-                    baseDelay: 500,
-                    backoffFactor: 1.5,
-                    fuzzFactor: 0.3,
-                    timeout: 30000
-                  }
                 }
               });
             }
+
+            // Streaming Configuration (iOS WebKit & Desktop optimized)
+            const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) || 
+                          (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+
+            player.configure({
+              streaming: {
+                lowLatencyMode: false,
+                bufferingGoal: isIOS ? 8 : 20,
+                rebufferingGoal: isIOS ? 2 : 4,
+                bufferBehind: isIOS ? 5 : 20,
+                smallGapLimit: 0.5,
+                jumpLargeGaps: true,
+                stallEnabled: true,
+                stallThreshold: 1,
+                stallSkip: 0.5,
+                safeSeekOffset: 2,
+                alwaysStreamLookup: true,
+                retryParameters: {
+                  maxAttempts: 6,
+                  baseDelay: 500,
+                  backoffFactor: 1.5,
+                  fuzzFactor: 0.3,
+                  timeout: 30000
+                }
+              },
+              manifest: {
+                dash: {
+                  ignoreMinBufferTime: true,
+                  autoCorrectDrift: true,
+                },
+                retryParameters: {
+                  maxAttempts: 6,
+                  baseDelay: 500,
+                  backoffFactor: 1.5,
+                  fuzzFactor: 0.3,
+                  timeout: 30000
+                }
+              }
+            });
           }
 
           let mimeType: string | undefined = undefined;
@@ -211,7 +238,7 @@ export const Player: React.FC<PlayerProps> = ({ channel }) => {
 
           console.log(`[Player] Loading ${channel.name} via Shaka: ${cleanUrl.substring(0, 80)}...`);
           await player.load(cleanUrl, null, mimeType);
-          if (isCancelled) return;
+          if (isCancelled) return false;
 
           console.log(`[Player] ✅ ${channel.name} loaded successfully via Shaka`);
           await startPlay(video);
@@ -268,16 +295,24 @@ export const Player: React.FC<PlayerProps> = ({ channel }) => {
       };
 
       // Attempt Playback Hierarchy
-      let success = await tryShakaPlayer();
+      let success = false;
+      const isIOSDevice = /iPad|iPhone|iPod/.test(navigator.userAgent) || 
+                          (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+
+      // On iOS, native HLS (.m3u8) is handled by AVFoundation hardware engine and is most stable
+      if (isHls && isIOSDevice && video.canPlayType('application/vnd.apple.mpegurl')) {
+        success = await tryNativeVideo();
+      }
+
+      if (!success) {
+        success = await tryShakaPlayer();
+      }
       
       if (!success && isHls) {
-        // Apple devices (iOS Safari/Chrome, macOS Safari) have flawless native HLS support.
-        // Hls.js via MSE often freezes or stalls on iOS.
         if (video.canPlayType('application/vnd.apple.mpegurl')) {
           success = await tryNativeVideo();
         }
         
-        // If native HLS failed or wasn't supported (e.g. Windows/Android), fallback to hls.js
         if (!success) {
           success = await tryHlsJs();
         }
@@ -302,10 +337,34 @@ export const Player: React.FC<PlayerProps> = ({ channel }) => {
       }
     };
 
+    // Watchdog to detect and automatically recover from iOS WebKit stalls
+    let lastTime = -1;
+    let stallCount = 0;
+    const stallCheckInterval = setInterval(() => {
+      const video = videoRef.current;
+      if (video && !video.paused && !video.ended && video.readyState >= 2) {
+        if (lastTime >= 0 && Math.abs(video.currentTime - lastTime) < 0.05) {
+          stallCount++;
+          if (stallCount >= 2) {
+            console.log('[Player] iOS playback stall detected, auto-nudging decoder forward...');
+            try {
+              video.currentTime += 0.2;
+              video.play().catch(() => {});
+            } catch (_e) {}
+            stallCount = 0;
+          }
+        } else {
+          stallCount = 0;
+          lastTime = video.currentTime;
+        }
+      }
+    }, 1000);
+
     initStream();
 
     return () => {
       isCancelled = true;
+      clearInterval(stallCheckInterval);
       cleanupPlayers();
     };
   }, [channel.contentId]);

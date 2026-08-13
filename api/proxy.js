@@ -5,6 +5,19 @@ export const config = {
 const ASTRO_UA = 'Mozilla/5.0 (Linux; Android 10; MiTV-AXSO0 Build/QTZCS200912.005) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.159 Safari/537.36';
 
 export default async function handler(req) {
+  // 1. Handle CORS Preflight immediately
+  if (req.method === 'OPTIONS') {
+    return new Response(null, {
+      status: 204,
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'GET, HEAD, OPTIONS',
+        'Access-Control-Allow-Headers': '*',
+        'Access-Control-Max-Age': '86400',
+      },
+    });
+  }
+
   const url = new URL(req.url);
   const path = url.searchParams.get('path');
   
@@ -83,7 +96,7 @@ export default async function handler(req) {
     
     // Allow CORS
     resHeaders.set('Access-Control-Allow-Origin', '*');
-    resHeaders.set('Access-Control-Allow-Methods', 'GET, OPTIONS');
+    resHeaders.set('Access-Control-Allow-Methods', 'GET, HEAD, OPTIONS');
     resHeaders.set('Access-Control-Allow-Headers', '*');
     
     // Prevent Vercel Edge Caching (fixes live stream freezing)
@@ -91,6 +104,12 @@ export default async function handler(req) {
     resHeaders.set('Pragma', 'no-cache');
     resHeaders.set('Expires', '0');
     
+    // Strip hop-by-hop and conflicting transfer encoding headers that cause iOS WebKit decoding aborts
+    resHeaders.delete('content-encoding');
+    resHeaders.delete('content-length');
+    resHeaders.delete('transfer-encoding');
+    resHeaders.delete('connection');
+
     // Make sure content-type is correct for video streams
     if (path.includes('.mpd')) resHeaders.set('Content-Type', 'application/dash+xml');
     else if (path.includes('.m3u8')) resHeaders.set('Content-Type', 'application/vnd.apple.mpegurl');
