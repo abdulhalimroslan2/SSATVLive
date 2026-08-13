@@ -11,6 +11,10 @@ export default async function handler(req) {
   if (!path) {
     return new Response('Missing path', { status: 400 });
   }
+
+  // Preserve all query parameters that came with the original request
+  url.searchParams.delete('path');
+  const remainingQueryString = url.searchParams.toString();
   
   let targetUrl = '';
   let headers = new Headers();
@@ -62,6 +66,10 @@ export default async function handler(req) {
   }
   else {
     return new Response('Invalid path prefix', { status: 400 });
+  }
+
+  if (remainingQueryString) {
+    targetUrl += (targetUrl.includes('?') ? '&' : '?') + remainingQueryString;
   }
 
   try {
