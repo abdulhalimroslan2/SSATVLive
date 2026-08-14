@@ -131,11 +131,11 @@ export const Player: React.FC<PlayerProps> = ({ channel }) => {
                 // Fix Mixed Content (HTTP -> HTTPS) for BaseURL
                 rewritten = rewritten.replaceAll('<BaseURL>http://', '<BaseURL>https://');
 
-                // Inject ClearKey ContentProtection node if missing
+                // Inject ClearKey ContentProtection node preserving cenc:default_KID if missing (Unifi TV streams like TV3 FHD)
                 if (!rewritten.includes(clearKeyUuid) && rewritten.includes('mp4protection')) {
                    rewritten = rewritten.replace(
-                     /(<ContentProtection schemeIdUri="urn:mpeg:dash:mp4protection:2011"[^>]*>)/g,
-                     `$1\n      <ContentProtection schemeIdUri="urn:uuid:1077efec-c0b2-4d02-ace3-3c1e52e2fb4b"/>`
+                     /<ContentProtection schemeIdUri="urn:mpeg:dash:mp4protection:2011"([^>]*)\/?>/g,
+                     `<ContentProtection schemeIdUri="urn:mpeg:dash:mp4protection:2011"$1/>\n      <ContentProtection schemeIdUri="${clearKeyUuid}"$1/>`
                    );
                 }
 
@@ -173,12 +173,23 @@ export const Player: React.FC<PlayerProps> = ({ channel }) => {
                 }
               });
 
+              // Register key in all potential lookup formats (hex, raw, hyphenated GUID)
               clearKeysMap[keyIdHex] = keyValueHex;
+              if (rawKeyId.includes('-')) {
+                clearKeysMap[rawKeyId.toLowerCase()] = keyValueHex;
+              }
+              if (keyIdHex.length === 32) {
+                const hyphenatedKid = `${keyIdHex.slice(0,8)}-${keyIdHex.slice(8,12)}-${keyIdHex.slice(12,16)}-${keyIdHex.slice(16,20)}-${keyIdHex.slice(20)}`;
+                clearKeysMap[hyphenatedKid] = keyValueHex;
+              }
 
               try {
                 const urlObj = new URL(cleanUrl);
                 const kidParam = urlObj.searchParams.get('kid');
-                if (kidParam) clearKeysMap[normalizeHex(kidParam)] = keyValueHex;
+                if (kidParam) {
+                  clearKeysMap[normalizeHex(kidParam)] = keyValueHex;
+                  clearKeysMap[kidParam.toLowerCase()] = keyValueHex;
+                }
               } catch (_e) { /* ignore */ }
             }
 
@@ -436,7 +447,7 @@ export const Player: React.FC<PlayerProps> = ({ channel }) => {
       clearInterval(stallCheckInterval);
       cleanupPlayers();
     };
-  }, [channel.contentId]);
+  }, [channel.id, channel.contentId, channel.streamUrl, channel.clearKey]);
 
   const handleManualPlayUnmute = async () => {
     if (videoRef.current) {

@@ -53,7 +53,7 @@ export const mockChannels: Channel[] = [
   },
   {
     id: "malaysia_2",
-    contentId: "tv3",
+    contentId: "tv3_fhd",
     name: "TV3 FHD",
     description: "Malaysia - TV3 FHD",
     category: "MALAYSIA",
@@ -65,7 +65,7 @@ export const mockChannels: Channel[] = [
   },
   {
     id: "malaysia_3",
-    contentId: "tv3",
+    contentId: "tv3_sd",
     name: "TV3 SD",
     description: "Malaysia - TV3 SD",
     category: "MALAYSIA",
