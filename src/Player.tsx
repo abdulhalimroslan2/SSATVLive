@@ -390,10 +390,26 @@ export const Player: React.FC<PlayerProps> = ({ channel }) => {
     const startPlay = async (video: HTMLVideoElement) => {
       try {
         video.muted = true;
+        video.playsInline = true;
         await video.play();
-      } catch (playErr) {
-        console.warn('Autoplay blocked by browser policy', playErr);
-        setHasAutoplayError(true);
+      } catch (playErr: any) {
+        // Check if video actually has data loaded
+        if (video.readyState >= 2) {
+          // Video has data but autoplay is blocked by browser policy
+          console.warn('Autoplay blocked by browser policy', playErr);
+          setHasAutoplayError(true);
+        } else {
+          // Video has no data - this is a loading error, not autoplay block
+          // Wait a moment for data to arrive, then try again
+          console.warn('Video not ready yet, waiting...', playErr);
+          await new Promise(r => setTimeout(r, 2000));
+          try {
+            await video.play();
+          } catch (_e2) {
+            console.warn('Retry play also failed, showing play button');
+            setHasAutoplayError(true);
+          }
+        }
       }
     };
 
@@ -450,12 +466,30 @@ export const Player: React.FC<PlayerProps> = ({ channel }) => {
 
   const handleManualPlayUnmute = async () => {
     if (videoRef.current) {
-      videoRef.current.muted = false;
+      const video = videoRef.current;
       try {
-        await videoRef.current.play();
+        // First try playing muted (guaranteed to work)
+        video.muted = true;
+        await video.play();
+        // Once playing, unmute
+        video.muted = false;
         setHasAutoplayError(false);
-      } catch (e) {
-        console.error('Manual play failed', e);
+      } catch (e1) {
+        console.warn('Muted play failed, trying unmuted user-gesture play', e1);
+        try {
+          // Fallback: try unmuted play (should work within user gesture)
+          video.muted = false;
+          await video.play();
+          setHasAutoplayError(false);
+        } catch (e2) {
+          console.error('All play attempts failed', e2);
+          // Last resort: keep it muted but playing
+          try {
+            video.muted = true;
+            await video.play();
+            setHasAutoplayError(false);
+          } catch (_e3) {}
+        }
       }
     }
   };
