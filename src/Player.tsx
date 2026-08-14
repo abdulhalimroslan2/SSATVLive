@@ -131,11 +131,11 @@ export const Player: React.FC<PlayerProps> = ({ channel }) => {
                 // Fix Mixed Content (HTTP -> HTTPS) for BaseURL
                 rewritten = rewritten.replaceAll('<BaseURL>http://', '<BaseURL>https://');
 
-                // Inject ClearKey ContentProtection node preserving cenc:default_KID if missing (Unifi TV streams like TV3 FHD)
+                // Inject ClearKey ContentProtection node if missing
                 if (!rewritten.includes(clearKeyUuid) && rewritten.includes('mp4protection')) {
                    rewritten = rewritten.replace(
-                     /<ContentProtection schemeIdUri="urn:mpeg:dash:mp4protection:2011"([^>]*)\/?>/g,
-                     `<ContentProtection schemeIdUri="urn:mpeg:dash:mp4protection:2011"$1/>\n      <ContentProtection schemeIdUri="${clearKeyUuid}"$1/>`
+                     /(<ContentProtection schemeIdUri="urn:mpeg:dash:mp4protection:2011"[^>]*>)/g,
+                     `$1\n      <ContentProtection schemeIdUri="urn:uuid:1077efec-c0b2-4d02-ace3-3c1e52e2fb4b"/>`
                    );
                 }
 
@@ -173,7 +173,6 @@ export const Player: React.FC<PlayerProps> = ({ channel }) => {
                 }
               });
 
-              // Register key in all potential lookup formats (hex, raw, hyphenated GUID)
               clearKeysMap[keyIdHex] = keyValueHex;
               if (rawKeyId.includes('-')) {
                 clearKeysMap[rawKeyId.toLowerCase()] = keyValueHex;
