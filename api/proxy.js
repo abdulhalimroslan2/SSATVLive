@@ -153,6 +153,13 @@ export default async function handler(request) {
       });
     }
 
+    // Static video chunk caching for zero-buffer edge acceleration
+    if (/\.(ts|m4s|m4f|m4v|m4a|mp4)(\?|$)/i.test(path)) {
+      responseHeaders.set('Cache-Control', 'public, max-age=120, s-maxage=300, stale-while-revalidate=600');
+    } else if (/\.(mpd|m3u8)(\?|$)/i.test(path)) {
+      responseHeaders.set('Cache-Control', 'no-cache, no-store, must-revalidate');
+    }
+
     return new Response(response.body, {
       status: response.status,
       statusText: response.statusText,

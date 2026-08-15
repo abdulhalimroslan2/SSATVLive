@@ -114,6 +114,18 @@ export const Player: React.FC<PlayerProps> = ({ channel }) => {
           uiRef.current = ui;
           ui.getControls();
 
+          // Determine DRM Mode
+          const isLicenseUrl = Boolean(
+            channel.clearKey && (
+              channel.clearKey.startsWith('http://') ||
+              channel.clearKey.startsWith('https://') ||
+              channel.clearKey.includes('/wvmax')
+            )
+          );
+          const isClearKeyHex = Boolean(
+            channel.clearKey && !isLicenseUrl && channel.clearKey.includes(':')
+          );
+
           // Configure Network Request Filter for Proxies
           const networkEngine = player.getNetworkingEngine();
           if (networkEngine) {
@@ -126,18 +138,6 @@ export const Player: React.FC<PlayerProps> = ({ channel }) => {
                 }
               }
             });
-
-            // Determine DRM Mode
-            const isLicenseUrl = Boolean(
-              channel.clearKey && (
-                channel.clearKey.startsWith('http://') ||
-                channel.clearKey.startsWith('https://') ||
-                channel.clearKey.includes('/wvmax')
-              )
-            );
-            const isClearKeyHex = Boolean(
-              channel.clearKey && !isLicenseUrl && channel.clearKey.includes(':')
-            );
 
             // RESPONSE FILTER: ONLY rewrite MPD for ClearKey DRM (NOT for Widevine license server)
             if (isDash && isClearKeyHex) {
@@ -175,9 +175,10 @@ export const Player: React.FC<PlayerProps> = ({ channel }) => {
                 response.data = new TextEncoder().encode(rewritten);
               });
             }
+          }
 
-            // In Shaka Player: Configure DRM appropriately
-            const drmConfig: any = {};
+          // In Shaka Player: Configure DRM appropriately
+          const drmConfig: any = {};
 
             if (isLicenseUrl) {
               let licenseUrl = channel.clearKey!.trim();
@@ -211,25 +212,26 @@ export const Player: React.FC<PlayerProps> = ({ channel }) => {
               }
             }
 
-            // Configure Shaka Player DRM & Streaming
+            // Configure Shaka Player DRM & Streaming for Zero-Buffer Playback
             player.configure({
               drm: drmConfig,
               streaming: {
                 lowLatencyMode: false,
                 inaccurateManifestTolerance: 2,
-                bufferingGoal: IS_IOS ? 6 : 15,
-                rebufferingGoal: IS_IOS ? 2 : 4,
+                bufferingGoal: IS_IOS ? 8 : 20,
+                rebufferingGoal: IS_IOS ? 2 : 2.5,
                 bufferBehind: IS_IOS ? 5 : 15,
                 stallEnabled: true,
-                stallThreshold: 1,
-                stallSkip: 0.5,
+                stallThreshold: 0.8,
+                stallSkip: 0.3,
                 safeSeekOffset: 2,
+                alwaysStreamAudio: true,
                 retryParameters: {
-                  maxAttempts: 8,
-                  baseDelay: 500,
-                  backoffFactor: 1.5,
-                  fuzzFactor: 0.3,
-                  timeout: 30000
+                  maxAttempts: 6,
+                  baseDelay: 200,
+                  backoffFactor: 1.3,
+                  fuzzFactor: 0.2,
+                  timeout: 12000,
                 }
               },
               manifest: {
@@ -240,17 +242,22 @@ export const Player: React.FC<PlayerProps> = ({ channel }) => {
                 },
                 availabilityWindowOverride: 60,
                 retryParameters: {
-                  maxAttempts: 8,
-                  baseDelay: 500,
-                  backoffFactor: 1.5,
-                  fuzzFactor: 0.3,
-                  timeout: 30000
+                  maxAttempts: 6,
+                  baseDelay: 200,
+                  backoffFactor: 1.3,
+                  fuzzFactor: 0.2,
+                  timeout: 12000,
                 }
               },
               abr: {
+                enabled: true,
+                defaultBandwidthEstimate: 3500000,
+                switchInterval: 2,
+                bandwidthUpgradeTarget: 0.85,
+                bandwidthDowngradeTarget: 0.95,
                 restrictions: IS_IOS ? {
-                  maxHeight: 480,
-                  maxBandwidth: 1000000
+                  maxHeight: 720,
+                  maxBandwidth: 2500000
                 } : {}
               }
             });
@@ -278,85 +285,75 @@ export const Player: React.FC<PlayerProps> = ({ channel }) => {
               }
             });
 
-            player.addEventListener('stalldetected', () => {
-              console.log('[Player] Shaka stall detected, auto-nudging playback...');
-              try {
-                video.currentTime += 0.25;
-                video.play().catch(() => {});
-              } catch (_e) {}
-            });
+            console.log(`[Player] 🚀 Shaka loading ${cleanUrl}`);
+            await player.load(cleanUrl);
+            if (isCancelled) return false;
+
+            await startPlay(video);
+            return true;
+          } catch (err: any) {
+            console.error(`[Player] ❌ Shaka failed for ${channel.name}:`, err?.message || err, err);
+            return false;
           }
+        };
 
-          let mimeType: string | undefined = undefined;
-          if (isHls) mimeType = 'application/x-mpegurl';
-          else if (isDash) mimeType = 'application/dash+xml';
-
-          console.log(`[Player] Loading ${channel.name} via Shaka: ${cleanUrl.substring(0, 80)}...`);
-          await player.load(cleanUrl, null, mimeType);
-          if (isCancelled) return false;
-
-          console.log(`[Player] ✅ ${channel.name} loaded successfully via Shaka`);
-          await startPlay(video);
-          return true;
-        } catch (err: any) {
-          console.error(`[Player] ❌ Shaka failed for ${channel.name}:`, err?.message || err, err);
-          return false;
-        }
-      };
-
-      // -------------------------------------------------------------
-      // STRATEGY 2: HLS.JS (For HLS .m3u8 fallback)
-      // -------------------------------------------------------------
-      const tryHlsJs = async () => {
-        if (!isHls || !Hls.isSupported()) return false;
-        try {
-          const hls = new Hls({
-            enableWorker: !IS_IOS,
-            lowLatencyMode: false,
-            maxBufferLength: IS_IOS ? 5 : 30,
-            maxMaxBufferLength: IS_IOS ? 8 : 60,
-            maxBufferSize: IS_IOS ? 5 * 1000000 : 60 * 1000000,
-            maxBufferHole: 0.5,
-            liveSyncDurationCount: IS_IOS ? 2 : 3,
-            liveMaxLatencyDurationCount: IS_IOS ? 4 : 10,
-            capLevelToPlayerSize: IS_IOS,
-          });
-          hlsRef.current = hls;
-          hls.loadSource(cleanUrl);
-          hls.attachMedia(video);
-
-          return new Promise<boolean>((resolve) => {
-            hls.on(Hls.Events.MANIFEST_PARSED, async () => {
-              if (isCancelled) return resolve(false);
-              
-              if (IS_IOS && hls.levels.length > 1) {
-                const safeLevel = hls.levels.findIndex(l => l.height <= 480);
-                if (safeLevel >= 0) {
-                  hls.currentLevel = safeLevel;
-                  hls.autoLevelCapping = safeLevel;
-                }
-              }
-              
-              await startPlay(video);
-              resolve(true);
+        // -------------------------------------------------------------
+        // STRATEGY 2: HLS.JS (For HLS .m3u8 fallback with high buffer)
+        // -------------------------------------------------------------
+        const tryHlsJs = async () => {
+          if (!isHls || !Hls.isSupported()) return false;
+          try {
+            const hls = new Hls({
+              enableWorker: !IS_IOS,
+              lowLatencyMode: false,
+              maxBufferLength: IS_IOS ? 8 : 30,
+              maxMaxBufferLength: IS_IOS ? 12 : 60,
+              maxBufferSize: IS_IOS ? 10 * 1000000 : 80 * 1000000,
+              maxBufferHole: 0.5,
+              liveSyncDurationCount: IS_IOS ? 3 : 3,
+              liveMaxLatencyDurationCount: IS_IOS ? 6 : 10,
+              capLevelToPlayerSize: IS_IOS,
+              nudgeOffset: 0.1,
+              nudgeMaxRetry: 5,
+              fragLoadingTimeOut: 12000,
+              manifestLoadingTimeOut: 10000,
             });
-            hls.on(Hls.Events.ERROR, (_event, data) => {
-              if (data.fatal) {
-                console.warn('Hls.js fatal error:', data);
-                if (data.type === Hls.ErrorTypes.NETWORK_ERROR) {
-                  hls.startLoad();
-                } else if (data.type === Hls.ErrorTypes.MEDIA_ERROR) {
-                  hls.recoverMediaError();
-                } else {
-                  resolve(false);
+            hlsRef.current = hls;
+            hls.loadSource(cleanUrl);
+            hls.attachMedia(video);
+
+            return new Promise<boolean>((resolve) => {
+              hls.on(Hls.Events.MANIFEST_PARSED, async () => {
+                if (isCancelled) return resolve(false);
+                
+                if (IS_IOS && hls.levels.length > 1) {
+                  const safeLevel = hls.levels.findIndex(l => l.height <= 720);
+                  if (safeLevel >= 0) {
+                    hls.currentLevel = safeLevel;
+                    hls.autoLevelCapping = safeLevel;
+                  }
                 }
-              }
+                
+                await startPlay(video);
+                resolve(true);
+              });
+              hls.on(Hls.Events.ERROR, (_event, data) => {
+                if (data.fatal) {
+                  console.warn('Hls.js fatal error:', data);
+                  if (data.type === Hls.ErrorTypes.NETWORK_ERROR) {
+                    hls.startLoad();
+                  } else if (data.type === Hls.ErrorTypes.MEDIA_ERROR) {
+                    hls.recoverMediaError();
+                  } else {
+                    resolve(false);
+                  }
+                }
+              });
             });
-          });
-        } catch (e) {
-          return false;
-        }
-      };
+          } catch (e) {
+            return false;
+          }
+        };
 
       // -------------------------------------------------------------
       // STRATEGY 3: NATIVE HTML5 VIDEO (HLS on Safari/iOS only)

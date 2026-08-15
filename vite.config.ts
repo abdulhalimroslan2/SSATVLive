@@ -94,6 +94,10 @@ function proxyPlugin() {
             else if (/\.(m4f|m4s|m4v|m4a|mp4)/.test(url)) res.setHeader('Content-Type', 'video/mp4')
 
             const baseArgs = [
+              '--compressed',
+              '--tcp-nodelay',
+              '--connect-timeout', '4',
+              '--max-time', '20',
               '-H', `User-Agent: ${ASTRO_UA}`,
               '-H', 'X-Forwarded-For:',
               '-H', 'X-Real-IP:',
