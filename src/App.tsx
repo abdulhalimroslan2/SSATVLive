@@ -1,33 +1,26 @@
 import { useEffect, useState } from 'react';
 import type { Channel } from './mockData';
-import { fetchChannels } from './mockData';
+import { fetchChannels, CATEGORIES } from './mockData';
 import { type VodItem } from './vodData';
-import { PerfectTvLive } from './PerfectTvLive';
+import { Sidebar } from './Sidebar';
+import { TopNav } from './TopNav';
+import { Player } from './Player';
+import { ChannelCard } from './ChannelCard';
+import { ChannelRow } from './ChannelRow';
+import { ContinueWatching, type WatchingItem } from './ContinueWatching';
 import { VodHub } from './VodHub';
 import { SearchView } from './SearchView';
-import { Tv, Film, Video, Search, ShieldCheck } from 'lucide-react';
 
 function App() {
   const [channels, setChannels] = useState<Channel[]>([]);
   const [activeChannel, setActiveChannel] = useState<Channel | null>(null);
-  const [activeTab, setActiveTab] = useState<'livetv' | 'movies' | 'series' | 'search'>('livetv');
-  const [searchQuery] = useState('');
+  const [activeTab, setActiveTab] = useState('home');
+  const [activeCategory, setActiveCategory] = useState('all');
+  const [searchQuery, setSearchQuery] = useState('');
   const [isLoading, setIsLoading] = useState(true);
-  const [currentTime, setCurrentTime] = useState('');
 
   useEffect(() => {
     loadChannels();
-
-    // Digital Clock
-    const updateTime = () => {
-      const now = new Date();
-      const timeStr = now.toLocaleTimeString('ms-MY', { hour: '2-digit', minute: '2-digit' });
-      const dateStr = now.toLocaleDateString('ms-MY', { day: 'numeric', month: 'short', year: 'numeric' });
-      setCurrentTime(`${timeStr} • ${dateStr}`);
-    };
-    updateTime();
-    const timer = setInterval(updateTime, 1000);
-    return () => clearInterval(timer);
   }, []);
 
   // Keyboard shortcut '/' to search
@@ -36,12 +29,6 @@ function App() {
       if (e.key === '/' && (document.activeElement?.tagName !== 'INPUT')) {
         e.preventDefault();
         setActiveTab('search');
-      } else if (e.key === '1') {
-        setActiveTab('livetv');
-      } else if (e.key === '2') {
-        setActiveTab('movies');
-      } else if (e.key === '3') {
-        setActiveTab('series');
       }
     };
     window.addEventListener('keydown', handleKeyDown);
@@ -52,14 +39,26 @@ function App() {
     setIsLoading(true);
     const data = await fetchChannels();
     setChannels(data);
-    if (data.length > 0) {
-      setActiveChannel(data[0]);
-    }
     setIsLoading(false);
   };
 
+  // Movie channels
+  const movieChannels = channels.filter(ch => ch.category === 'MOVIES');
+
+  // Filter channels by active category
+  const filteredChannels = activeCategory === 'all'
+    ? channels
+    : channels.filter(ch => ch.category.toLowerCase().replace(' ', '_') === activeCategory);
+
+  // Group channels by category for the "home" view
+  const channelsByCategory = CATEGORIES.map(cat => ({
+    ...cat,
+    channels: channels.filter(ch => ch.category.toLowerCase().replace(' ', '_') === cat.id)
+  })).filter(group => group.channels.length > 0);
+
   const handleChannelSelect = (channel: Channel) => {
     setActiveChannel(channel);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const handlePlayVodItem = (item: VodItem, episodeNumber?: number) => {
@@ -91,110 +90,169 @@ function App() {
       isFreePreviewEnabledContent: true,
     };
     setActiveChannel(vodChannel);
-    setActiveTab('livetv');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  // Movie channels
-  const movieChannels = channels.filter(ch => ch.category === 'MOVIES');
+  const handleContinueWatchingSelect = (_item: WatchingItem) => {
+    if (channels.length > 0 && !activeChannel) {
+      setActiveChannel(channels[0]);
+    }
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  // Map sidebar tabs
+  const handleSidebarTab = (tab: string) => {
+    setActiveTab(tab);
+    if (tab === 'search') {
+      setActiveCategory('all');
+    } else if (tab === 'vod' || tab === 'movies' || tab === 'series') {
+      setActiveCategory('vod');
+    } else {
+      const tabToCat: Record<string, string> = {
+        'home': 'all',
+        'livetv': 'all',
+        'sports': 'sports_fhd',
+        'kids': 'kids',
+      };
+      if (tabToCat[tab] !== undefined) {
+        setActiveCategory(tabToCat[tab]);
+      }
+    }
+  };
+
+  const handleCategoryChange = (catId: string) => {
+    setActiveCategory(catId);
+    if (catId === 'vod') {
+      setActiveTab('vod');
+    } else if (activeTab === 'search') {
+      setActiveTab('home');
+    }
+  };
+
+  const handleSearchTrigger = () => {
+    setActiveTab('search');
+  };
+
+  const handleSearchQueryChange = (q: string) => {
+    setSearchQuery(q);
+    if (activeTab !== 'search') {
+      setActiveTab('search');
+    }
+  };
+
+  // Build category pills for TopNav
+  const categoryPills = [
+    { id: 'all', label: 'Semua' },
+    { id: 'vod', label: '🎬 VOD Filem & Siri' },
+    ...CATEGORIES.map(c => ({ id: c.id, label: c.label }))
+  ];
 
   return (
-    <div className="ptv-master-layout">
-      {/* =========================================================================
-          PERFECT TV TOP NAVIGATION BAR
-          ========================================================================= */}
-      <header className="ptv-topbar">
-        <div className="ptv-brand">
-          <div className="ptv-brand-icon">S+</div>
-          <div className="ptv-brand-text">
-            <span className="ptv-brand-name">SSA TV</span>
-            <span className="ptv-brand-sub">LIVE PRO</span>
-          </div>
-        </div>
+    <div className="app-layout">
+      <Sidebar activeTab={activeTab} setActiveTab={handleSidebarTab} />
 
-        <nav className="ptv-nav-tabs">
-          <button
-            className={`ptv-nav-tab ${activeTab === 'livetv' ? 'is-active' : ''}`}
-            onClick={() => setActiveTab('livetv')}
-          >
-            <Tv size={18} />
-            <span>LIVE TV</span>
-            <span className="ptv-tab-key">1</span>
-          </button>
+      <main className="main-wrapper">
+        <TopNav
+          activeCategory={activeCategory}
+          setActiveCategory={handleCategoryChange}
+          categories={categoryPills}
+          searchQuery={searchQuery}
+          onSearchInputClick={handleSearchTrigger}
+          onSearchChange={handleSearchQueryChange}
+        />
 
-          <button
-            className={`ptv-nav-tab ${activeTab === 'movies' ? 'is-active' : ''}`}
-            onClick={() => setActiveTab('movies')}
-          >
-            <Film size={18} />
-            <span>FILEM VOD</span>
-            <span className="ptv-tab-key">2</span>
-          </button>
-
-          <button
-            className={`ptv-nav-tab ${activeTab === 'series' ? 'is-active' : ''}`}
-            onClick={() => setActiveTab('series')}
-          >
-            <Video size={18} />
-            <span>SIRI DRAMA</span>
-            <span className="ptv-tab-key">3</span>
-          </button>
-
-          <button
-            className={`ptv-nav-tab ${activeTab === 'search' ? 'is-active' : ''}`}
-            onClick={() => setActiveTab('search')}
-          >
-            <Search size={18} />
-            <span>CARIAN</span>
-            <span className="ptv-tab-key">/</span>
-          </button>
-        </nav>
-
-        <div className="ptv-top-status">
-          <div className="ptv-clock">{currentTime}</div>
-          <div className="ptv-vip-badge">
-            <ShieldCheck size={14} />
-            <span>VIP UNCAPPED</span>
-          </div>
-        </div>
-      </header>
-
-      {/* =========================================================================
-          MAIN CONTENT VIEWPORT
-          ========================================================================= */}
-      <main className="ptv-main-body">
         {isLoading ? (
-          <div className="ptv-loading-state">
-            <div className="ptv-spinner"></div>
-            <p>Memuatkan Siaran Langsung & Saluran TV...</p>
-          </div>
-        ) : activeTab === 'livetv' ? (
-          <PerfectTvLive
-            channels={channels}
-            activeChannel={activeChannel}
-            onSelectChannel={handleChannelSelect}
-          />
-        ) : activeTab === 'movies' || activeTab === 'series' ? (
-          <div className="ptv-vod-wrapper">
-            <VodHub
-              movieChannels={movieChannels}
-              onSelectChannel={handleChannelSelect}
-              activeChannelId={activeChannel?.id}
-              onPlayVodItem={handlePlayVodItem}
-            />
+          <div style={{ textAlign: 'center', padding: '6rem', color: 'var(--text-secondary)', fontSize: '1.2rem' }}>
+            Memuatkan Saluran TV & VOD...
           </div>
         ) : (
-          <div className="ptv-search-wrapper">
-            <SearchView
-              channels={channels}
-              onSelectChannel={(ch) => {
-                handleChannelSelect(ch);
-                setActiveTab('livetv');
-              }}
-              activeChannelId={activeChannel?.id}
-              onPlayVodItem={handlePlayVodItem}
-              initialQuery={searchQuery}
-            />
-          </div>
+          <>
+            {/* Active Video Player */}
+            {activeChannel && (
+              <section style={{ marginBottom: '2.5rem' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
+                  <div>
+                    <h2 style={{ fontSize: '1.75rem', marginBottom: '0.2rem' }}>{activeChannel.name}</h2>
+                    <span style={{ fontSize: '0.85rem', color: 'var(--text-secondary)' }}>
+                      {activeChannel.description}
+                    </span>
+                  </div>
+                  <span className="badge-live">
+                    <span className="badge-live-dot"></span> SEDANG DIMAINKAN
+                  </span>
+                </div>
+                <Player key={activeChannel.id} channel={activeChannel} />
+              </section>
+            )}
+
+            {/* TAB 1: SEARCH VIEW */}
+            {activeTab === 'search' ? (
+              <SearchView
+                channels={channels}
+                onSelectChannel={handleChannelSelect}
+                activeChannelId={activeChannel?.id}
+                onPlayVodItem={handlePlayVodItem}
+                initialQuery={searchQuery}
+              />
+            ) : activeTab === 'vod' || activeTab === 'movies' || activeTab === 'series' || activeCategory === 'vod' ? (
+              /* TAB 2: VOD HUB (ALL MOVIES & SERIES) */
+              <VodHub
+                movieChannels={movieChannels}
+                onSelectChannel={handleChannelSelect}
+                activeChannelId={activeChannel?.id}
+                onPlayVodItem={handlePlayVodItem}
+              />
+            ) : (
+              /* TAB 3: HOME & LIVE TV VIEW */
+              <>
+                {/* Category-filtered view OR grouped home view */}
+                {activeCategory !== 'all' ? (
+                  /* Single category view */
+                  <section style={{ marginBottom: '3rem' }}>
+                    <div className="section-header">
+                      <h3 className="section-title">
+                        <span style={{ color: 'var(--accent-red)' }}>•</span>{' '}
+                        {categoryPills.find(c => c.id === activeCategory)?.label || 'Saluran'}{' '}
+                        <span style={{ fontSize: '0.85rem', fontWeight: 400, color: 'var(--text-secondary)' }}>
+                          ({filteredChannels.length} saluran)
+                        </span>
+                      </h3>
+                    </div>
+                    <div className="channels-grid">
+                      {filteredChannels.map((channel) => (
+                        <ChannelCard
+                          key={channel.id}
+                          channel={channel}
+                          isActive={activeChannel?.id === channel.id}
+                          onSelect={handleChannelSelect}
+                        />
+                      ))}
+                    </div>
+                  </section>
+                ) : (
+                  /* Home: show all categories grouped */
+                  <>
+                    {channelsByCategory.map((group) => (
+                      <ChannelRow
+                        key={group.id}
+                        label={group.label}
+                        count={group.channels.length}
+                        channels={group.channels}
+                        activeChannelId={activeChannel?.id}
+                        onSelectChannel={handleChannelSelect}
+                        onViewAll={() => handleCategoryChange(group.id)}
+                      />
+                    ))}
+                  </>
+                )}
+
+                {/* Continue Watching */}
+                {activeCategory === 'all' && (
+                  <ContinueWatching onSelectItem={handleContinueWatchingSelect} />
+                )}
+              </>
+            )}
+          </>
         )}
       </main>
     </div>
@@ -202,4 +260,3 @@ function App() {
 }
 
 export default App;
-
