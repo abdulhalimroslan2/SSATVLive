@@ -127,8 +127,20 @@ export const Player: React.FC<PlayerProps> = ({ channel }) => {
               }
             });
 
-            // RESPONSE FILTER: rewrite MPD for ClearKey DRM
-            if (isDash && channel.clearKey) {
+            // Determine DRM Mode
+            const isLicenseUrl = Boolean(
+              channel.clearKey && (
+                channel.clearKey.startsWith('http://') ||
+                channel.clearKey.startsWith('https://') ||
+                channel.clearKey.includes('/wvmax')
+              )
+            );
+            const isClearKeyHex = Boolean(
+              channel.clearKey && !isLicenseUrl && channel.clearKey.includes(':')
+            );
+
+            // RESPONSE FILTER: ONLY rewrite MPD for ClearKey DRM (NOT for Widevine license server)
+            if (isDash && isClearKeyHex) {
               networkEngine.registerResponseFilter((type: any, response: any) => {
                 // Only process MANIFEST responses
                 if (type !== shaka.net.NetworkingEngine.RequestType.MANIFEST && type !== 0) return;
@@ -164,25 +176,44 @@ export const Player: React.FC<PlayerProps> = ({ channel }) => {
               });
             }
 
-            // In Shaka Player, drm.clearKeys MUST BE pure hex strings in even length (no hyphens)
-            const clearKeysMap: Record<string, string> = {};
+            // In Shaka Player: Configure DRM appropriately
+            const drmConfig: any = {};
 
-            if (channel.clearKey) {
-              const [rawKeyId, rawKey] = channel.clearKey.split(':');
+            if (isLicenseUrl) {
+              let licenseUrl = channel.clearKey!.trim();
+              for (const [from, to] of PROXY_MAP) {
+                if (licenseUrl.startsWith(from)) {
+                  licenseUrl = window.location.origin + licenseUrl.replace(from, to);
+                  break;
+                }
+              }
+              drmConfig.servers = {
+                'com.widevine.alpha': licenseUrl,
+                'com.microsoft.playready': licenseUrl,
+              };
+              drmConfig.advanced = {
+                'com.widevine.alpha': {
+                  videoRobustness: 'SW_SECURE_CRYPTO',
+                  audioRobustness: 'SW_SECURE_CRYPTO',
+                },
+              };
+              console.log(`[Player] Using Widevine license server: ${licenseUrl}`);
+            } else if (isClearKeyHex) {
+              const [rawKeyId, rawKey] = channel.clearKey!.split(':');
               const normalizeHex = (s: string) => s.replace(/[^0-9a-fA-F]/g, '').toLowerCase().trim();
               const keyIdHex = normalizeHex(rawKeyId);
               const keyValueHex = normalizeHex(rawKey);
 
               if (keyIdHex.length > 0 && keyIdHex.length % 2 === 0 && keyValueHex.length > 0 && keyValueHex.length % 2 === 0) {
-                clearKeysMap[keyIdHex] = keyValueHex;
+                drmConfig.clearKeys = {
+                  [keyIdHex]: keyValueHex,
+                };
               }
             }
 
             // Configure Shaka Player DRM & Streaming
             player.configure({
-              drm: {
-                clearKeys: clearKeysMap,
-              },
+              drm: drmConfig,
               streaming: {
                 lowLatencyMode: false,
                 inaccurateManifestTolerance: 2,

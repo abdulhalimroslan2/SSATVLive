@@ -89,6 +89,14 @@ function proxyPlugin() {
             else if (url.includes('.ts')) res.setHeader('Content-Type', 'video/mp2t')
             else if (/\.(m4f|m4s|m4v|m4a|mp4)/.test(url)) res.setHeader('Content-Type', 'video/mp4')
 
+            if (req.method === 'POST') {
+              const curl = spawn('curl', ['-s', '-L', '-X', 'POST', '-H', 'Content-Type: application/octet-stream', '--data-binary', '@-', ...(args || []), targetUrl])
+              req.pipe(curl.stdin)
+              curl.stdout.pipe(res)
+              curl.on('error', () => { if (!res.headersSent) { res.writeHead(500); res.end() } })
+              return
+            }
+
             const curl = spawn('curl', ['-s', '-L', ...(args || []), targetUrl])
             curl.stdout.pipe(res)
             curl.on('error', () => { if (!res.headersSent) { res.writeHead(500); res.end() } })
