@@ -112,9 +112,12 @@ export const Player: React.FC<PlayerProps> = ({ channel }) => {
               }
             });
 
-            // RESPONSE FILTER: rewrite MPD — swap Widevine UUID → ClearKey UUID
+            // RESPONSE FILTER: rewrite MPD for ClearKey DRM
             if (isDash && channel.clearKey) {
-              networkEngine.registerResponseFilter((_type: any, response: any) => {
+              networkEngine.registerResponseFilter((type: any, response: any) => {
+                // Only process MANIFEST responses
+                if (type !== shaka.net.NetworkingEngine.RequestType.MANIFEST && type !== 0) return;
+
                 let mpd: string;
                 try {
                   mpd = new TextDecoder().decode(response.data);
@@ -124,12 +127,17 @@ export const Player: React.FC<PlayerProps> = ({ channel }) => {
 
                 const widevineUuid = 'urn:uuid:edef8ba9-79d6-4ace-a3c8-27dcd51d21ed';
                 const clearKeyUuid = 'urn:uuid:1077efec-c0b2-4d02-ace3-3c1e52e2fb4b';
+
+                // 1. Replace Widevine UUID with ClearKey UUID
                 let rewritten = mpd.replaceAll(widevineUuid, clearKeyUuid);
 
-                // Fix Mixed Content (HTTP -> HTTPS) for BaseURL
+                // 2. Remove Widevine PSSH boxes from ClearKey ContentProtection so CDM uses default_KID directly
+                rewritten = rewritten.replace(/<cenc:pssh>[^<]*<\/cenc:pssh>/g, '');
+
+                // 3. Fix Mixed Content (HTTP -> HTTPS) for BaseURL
                 rewritten = rewritten.replaceAll('<BaseURL>http://', '<BaseURL>https://');
 
-                // Inject ClearKey ContentProtection node if missing
+                // 4. Inject ClearKey ContentProtection node if missing
                 if (!rewritten.includes(clearKeyUuid) && rewritten.includes('mp4protection')) {
                    rewritten = rewritten.replace(
                      /(<ContentProtection schemeIdUri="urn:mpeg:dash:mp4protection:2011"[^>]*>)/g,
@@ -137,36 +145,22 @@ export const Player: React.FC<PlayerProps> = ({ channel }) => {
                    );
                 }
 
-                response.data = new TextEncoder().encode(rewritten).buffer;
+                response.data = new TextEncoder().encode(rewritten);
               });
             }
 
-            // Build ClearKey map for Shaka Player
+            // In Shaka Player, drm.clearKeys MUST BE pure hex strings in even length (no hyphens)
             const clearKeysMap: Record<string, string> = {};
 
             if (channel.clearKey) {
               const [rawKeyId, rawKey] = channel.clearKey.split(':');
-              const normalizeHex = (s: string) => s.replace(/-/g, '').toLowerCase();
+              const normalizeHex = (s: string) => s.replace(/[^0-9a-fA-F]/g, '').toLowerCase().trim();
               const keyIdHex = normalizeHex(rawKeyId);
               const keyValueHex = normalizeHex(rawKey);
 
-              clearKeysMap[keyIdHex] = keyValueHex;
-              if (rawKeyId.includes('-')) {
-                clearKeysMap[rawKeyId.toLowerCase()] = keyValueHex;
+              if (keyIdHex.length > 0 && keyIdHex.length % 2 === 0 && keyValueHex.length > 0 && keyValueHex.length % 2 === 0) {
+                clearKeysMap[keyIdHex] = keyValueHex;
               }
-              if (keyIdHex.length === 32) {
-                const hyphenatedKid = `${keyIdHex.slice(0,8)}-${keyIdHex.slice(8,12)}-${keyIdHex.slice(12,16)}-${keyIdHex.slice(16,20)}-${keyIdHex.slice(20)}`;
-                clearKeysMap[hyphenatedKid] = keyValueHex;
-              }
-
-              try {
-                const urlObj = new URL(cleanUrl);
-                const kidParam = urlObj.searchParams.get('kid');
-                if (kidParam) {
-                  clearKeysMap[normalizeHex(kidParam)] = keyValueHex;
-                  clearKeysMap[kidParam.toLowerCase()] = keyValueHex;
-                }
-              } catch (_e) { /* ignore */ }
             }
 
             // Configure Shaka Player DRM & Streaming
@@ -180,13 +174,10 @@ export const Player: React.FC<PlayerProps> = ({ channel }) => {
                 bufferingGoal: IS_IOS ? 6 : 15,
                 rebufferingGoal: IS_IOS ? 2 : 4,
                 bufferBehind: IS_IOS ? 5 : 15,
-                smallGapLimit: 0.8,
-                jumpLargeGaps: true,
                 stallEnabled: true,
                 stallThreshold: 1,
                 stallSkip: 0.5,
                 safeSeekOffset: 2,
-                alwaysStreamLookup: true,
                 retryParameters: {
                   maxAttempts: 8,
                   baseDelay: 500,
@@ -220,7 +211,7 @@ export const Player: React.FC<PlayerProps> = ({ channel }) => {
 
             player.addEventListener('error', (event: any) => {
               const detail = event?.detail;
-              console.warn('[Player] Shaka error event:', detail?.code, detail?.message);
+              console.warn('[Player] Shaka error event:', detail?.code, detail?.message, detail);
               
               // QuotaExceededError or BUFFER_APPEND_ERROR on iOS
               if (detail?.code === 3017 || detail?.code === 3015) {
@@ -262,7 +253,7 @@ export const Player: React.FC<PlayerProps> = ({ channel }) => {
           await startPlay(video);
           return true;
         } catch (err: any) {
-          console.warn(`[Player] ❌ Shaka failed for ${channel.name}:`, err?.message || err);
+          console.error(`[Player] ❌ Shaka failed for ${channel.name}:`, err?.message || err, err);
           return false;
         }
       };
@@ -325,7 +316,6 @@ export const Player: React.FC<PlayerProps> = ({ channel }) => {
       // STRATEGY 3: NATIVE HTML5 VIDEO (HLS on Safari/iOS only)
       // -------------------------------------------------------------
       const tryNativeVideo = async () => {
-        // Native video src only works for HLS (.m3u8) on Safari/iOS
         if (!isHls && !cleanUrl.includes('.mp4')) {
           return false;
         }
@@ -428,7 +418,6 @@ export const Player: React.FC<PlayerProps> = ({ channel }) => {
     if (videoRef.current) {
       const video = videoRef.current;
       try {
-        // Unmute and play on user gesture
         video.muted = false;
         await video.play();
         setHasAutoplayError(false);

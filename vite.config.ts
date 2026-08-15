@@ -78,6 +78,8 @@ function corsPlugin() {
 export default defineConfig({
   plugins: [react(), corsPlugin(), proxyPlugin()],
   server: {
+    host: '0.0.0.0',
+    port: 5173,
     cors: true,
     proxy: {
       '/mediatailor-us': {
