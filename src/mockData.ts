@@ -270,10 +270,10 @@ export const MOCK_CHANNELS: Channel[] = [
     "id": "malaysia_20",
     "contentId": "611",
     "name": "Ceria",
-    "description": "MALAYSIA - Ceria",
+    "description": "MALAYSIA - Astro Ceria",
     "category": "MALAYSIA",
     "thumbnail": "https://ptv2026.com/logo/vip_Ceria.png",
-    "streamUrl": "/load-ptv/rwt.m3u8?username=vip_gzidmjzr&password=Uk7WNjrs&channel=ceria",
+    "streamUrl": "/cf-df14/v1/dash/951fbca46ac9b52422f8e3d6d4d6dab33623c3cc/FASTOO_CH7_CERIA/dash.mpd?aws.sessionId=653a17be-4813-4757-8724-ae68ab7a34b7&channel=myceria",
     "clearKey": "",
     "isFreeContent": true,
     "isFreePreviewEnabledContent": true
