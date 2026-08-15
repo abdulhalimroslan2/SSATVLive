@@ -757,28 +757,43 @@ h1, h2, h3, h4, h5, h6 {
   letter-spacing: 0.5px;
 }
 
+.channel-hover-epg-next {
+  font-size: 0.65rem;
+  color: #c4ccdb;
+  background: rgba(0, 0, 0, 0.7);
+  padding: 2px 8px;
+  border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  white-space: nowrap;
+  max-width: 90%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 /* Live Progress Indicator */
 .channel-live-progress {
   position: absolute;
   bottom: 0;
   left: 0;
   right: 0;
-  height: 3px;
-  background: rgba(255, 255, 255, 0.15);
+  height: 4px;
+  background: rgba(255, 255, 255, 0.12);
   z-index: 2;
 }
 
 .channel-live-bar {
   height: 100%;
-  background: linear-gradient(90deg, #ff4500, #e50914);
+  background: linear-gradient(90deg, #ff8c00 0%, #e50914 100%);
+  box-shadow: 0 0 8px rgba(229, 9, 20, 0.8);
+  transition: width 0.5s ease-in-out;
 }
 
 /* Card Content Details */
 .channel-card-content {
-  padding: 0.9rem 1rem 1rem 1rem;
+  padding: 0.85rem 1rem 0.95rem 1rem;
   display: flex;
   flex-direction: column;
-  gap: 0.3rem;
+  gap: 0.35rem;
   flex: 1;
 }
 
@@ -790,12 +805,25 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .channel-card-name {
-  font-size: 1rem;
+  font-size: 0.98rem;
   font-weight: 700;
   color: #ffffff;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.channel-time-badge {
+  font-size: 0.68rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 1px 6px;
+  border-radius: 4px;
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
 }
 
 .channel-playing-indicator {
@@ -808,28 +836,57 @@ h1, h2, h3, h4, h5, h6 {
   animation: pulse-dot 1.5s infinite ease-in-out;
 }
 
-.channel-card-desc {
-  font-size: 0.78rem;
-  color: var(--text-secondary);
+/* Current EPG Program Box */
+.channel-epg-current {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  padding: 0.3rem 0.5rem;
+  border-radius: 6px;
+  margin: 0.15rem 0;
+}
+
+.epg-icon-tag {
+  font-size: 0.75rem;
+  flex-shrink: 0;
+}
+
+.epg-title-text {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #e2e8f0;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  letter-spacing: -0.2px;
 }
 
 .channel-card-footer {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-top: 0.4rem;
+  margin-top: 0.2rem;
 }
 
-.channel-card-status {
-  color: #00d26a;
-  font-weight: 600;
-  display: inline-flex;
+.channel-epg-timing {
+  display: flex;
   align-items: center;
-  gap: 0.25rem;
-  font-size: 0.72rem;
+  gap: 0.5rem;
+}
+
+.channel-live-indicator-text {
+  color: #ff3344;
+  font-weight: 800;
+  font-size: 0.68rem;
+  letter-spacing: 0.3px;
+}
+
+.channel-epg-remaining {
+  color: #94a3b8;
+  font-size: 0.7rem;
+  font-weight: 500;
 }
 
 .channel-quality-badge {
