@@ -1,0 +1,111 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<MPD xmlns="urn:mpeg:dash:schema:mpd:2011" xmlns:cenc="urn:mpeg:cenc:2013" xmlns:mspr="urn:microsoft:playready" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" profiles="urn:mpeg:dash:profile:isoff-live:2011" type="dynamic" availabilityStartTime="2026-04-16T09:16:16Z" minimumUpdatePeriod="PT4.0S" minBufferTime="PT4.0S" publishTime="2026-08-13T16:07:05.737Z" timeShiftBufferDepth="PT60.0S" suggestedPresentationDelay="PT4.0S" xsi:schemaLocation="urn:mpeg:dash:schema:mpd:2011 DASH-MPD.xsd">
+  <BaseURL>https://ngtv-live-cbj.gcdn.co/Content/DASH/Live/channel(HBO)/</BaseURL>
+  <Location>https://ngtv-live-cbj.gcdn.co/Content/DASH/Live/channel(HBO)/master.mpd?hdntl=st=1786621505~exp=1786711505~acl=/Content/DASH/Live/channel(HBO)/*~id=iawB2DEoCtPV9YyLQjx4aq4skqNBFdRFQ_7TJXGdK-tBrw~hmac=e020aa2bced645565d1ad6b89793df55f6f39cd2649aecda5fb48f29efbaf1d7</Location>
+  <Period start="PT0S" id="1">
+    <AdaptationSet mimeType="video/mp4" startWithSAP="1" segmentAlignment="true" par="16:9">
+      <SegmentTemplate timescale="10000000" presentationTimeOffset="0" media="$RepresentationID$_Segment-$Time$.m4v?hdntl=st=1786621505~exp=1786711505~acl=/Content/DASH/Live/channel(HBO)/*~id=iawB2DEoCtPV9YyLQjx4aq4skqNBFdRFQ_7TJXGdK-tBrw~hmac=e020aa2bced645565d1ad6b89793df55f6f39cd2649aecda5fb48f29efbaf1d7" initialization="$RepresentationID$_init.m4i?hdntl=st=1786621505~exp=1786711505~acl=/Content/DASH/Live/channel(HBO)/*~id=iawB2DEoCtPV9YyLQjx4aq4skqNBFdRFQ_7TJXGdK-tBrw~hmac=e020aa2bced645565d1ad6b89793df55f6f39cd2649aecda5fb48f29efbaf1d7">
+        <SegmentTimeline>
+          <S t="103062012859850" d="40000000" r="14"/>
+        </SegmentTimeline>
+      </SegmentTemplate>
+      <Representation width="480" height="270" frameRate="25" codecs="avc1.428016" scanType="progressive" sar="1:1" id="1776330964440item-01item" bandwidth="500000"/>
+      <Representation width="640" height="360" frameRate="25" codecs="avc1.4d4020" scanType="progressive" sar="1:1" id="1776330964440item-02item" bandwidth="1000000"/>
+      <Representation width="960" height="540" frameRate="25" codecs="avc1.4d4029" scanType="progressive" sar="1:1" id="1776330964440item-03item" bandwidth="2000000"/>
+      <Representation width="1280" height="720" frameRate="25" codecs="avc1.640029" scanType="progressive" sar="1:1" id="1776330964440item-04item" bandwidth="3000000"/>
+      <Representation width="1920" height="1080" frameRate="25" codecs="avc1.64002a" scanType="progressive" sar="1:1" id="1776330964440item-05item" bandwidth="4000000"/>
+      <ContentProtection schemeIdUri="urn:mpeg:dash:mp4protection:2011" value="cenc" cenc:default_KID="7ad888ee-5dd6-496a-8c2c-77a6284ff936"/>
+      <ContentProtection schemeIdUri="urn:uuid:1077efec-c0b2-4d02-ace3-3c1e52e2fb4b"/>
+    </AdaptationSet>
+    <AdaptationSet mimeType="audio/mp4" startWithSAP="1" lang="eng" segmentAlignment="true">
+      <SegmentTemplate timescale="10000000" presentationTimeOffset="0" media="$RepresentationID$_Segment-$Time$.m4a?hdntl=st=1786621505~exp=1786711505~acl=/Content/DASH/Live/channel(HBO)/*~id=iawB2DEoCtPV9YyLQjx4aq4skqNBFdRFQ_7TJXGdK-tBrw~hmac=e020aa2bced645565d1ad6b89793df55f6f39cd2649aecda5fb48f29efbaf1d7" initialization="$RepresentationID$_init.m4i?hdntl=st=1786621505~exp=1786711505~acl=/Content/DASH/Live/channel(HBO)/*~id=iawB2DEoCtPV9YyLQjx4aq4skqNBFdRFQ_7TJXGdK-tBrw~hmac=e020aa2bced645565d1ad6b89793df55f6f39cd2649aecda5fb48f29efbaf1d7">
+        <SegmentTimeline>
+          <S t="103062013246072" d="39680000"/>
+          <S t="103062052926072" d="40106666"/>
+          <S t="103062093032738" d="40106667" r="1"/>
+          <S t="103062173246072" d="39680000"/>
+          <S t="103062212926072" d="40106666"/>
+          <S t="103062253032738" d="40106667" r="1"/>
+          <S t="103062333246072" d="39680000"/>
+          <S t="103062372926072" d="40106666"/>
+          <S t="103062413032738" d="40106667" r="1"/>
+          <S t="103062493246072" d="39680000"/>
+          <S t="103062532926072" d="40106666"/>
+          <S t="103062573032738" d="40106667"/>
+        </SegmentTimeline>
+      </SegmentTemplate>
+      <Representation audioSamplingRate="48000" codecs="mp4a.40.5" id="1776330964440item-06item" bandwidth="64000"/>
+      <ContentProtection schemeIdUri="urn:mpeg:dash:mp4protection:2011" value="cenc" cenc:default_KID="7ad888ee-5dd6-496a-8c2c-77a6284ff936"/>
+      <ContentProtection schemeIdUri="urn:uuid:1077efec-c0b2-4d02-ace3-3c1e52e2fb4b"/>
+    </AdaptationSet>
+    <AdaptationSet mimeType="audio/mp4" startWithSAP="1" lang="may" segmentAlignment="true">
+      <SegmentTemplate timescale="10000000" presentationTimeOffset="0" media="$RepresentationID$_Segment-$Time$.m4a?hdntl=st=1786621505~exp=1786711505~acl=/Content/DASH/Live/channel(HBO)/*~id=iawB2DEoCtPV9YyLQjx4aq4skqNBFdRFQ_7TJXGdK-tBrw~hmac=e020aa2bced645565d1ad6b89793df55f6f39cd2649aecda5fb48f29efbaf1d7" initialization="$RepresentationID$_init.m4i?hdntl=st=1786621505~exp=1786711505~acl=/Content/DASH/Live/channel(HBO)/*~id=iawB2DEoCtPV9YyLQjx4aq4skqNBFdRFQ_7TJXGdK-tBrw~hmac=e020aa2bced645565d1ad6b89793df55f6f39cd2649aecda5fb48f29efbaf1d7">
+        <SegmentTimeline>
+          <S t="103062013246072" d="39680000"/>
+          <S t="103062052926072" d="40106666"/>
+          <S t="103062093032738" d="40106667" r="1"/>
+          <S t="103062173246072" d="39680000"/>
+          <S t="103062212926072" d="40106666"/>
+          <S t="103062253032738" d="40106667" r="1"/>
+          <S t="103062333246072" d="39680000"/>
+          <S t="103062372926072" d="40106666"/>
+          <S t="103062413032738" d="40106667" r="1"/>
+          <S t="103062493246072" d="39680000"/>
+          <S t="103062532926072" d="40106666"/>
+          <S t="103062573032738" d="40106667"/>
+        </SegmentTimeline>
+      </SegmentTemplate>
+      <Representation audioSamplingRate="48000" codecs="mp4a.40.5" id="1776330964440item-07item" bandwidth="64000"/>
+      <ContentProtection schemeIdUri="urn:mpeg:dash:mp4protection:2011" value="cenc" cenc:default_KID="7ad888ee-5dd6-496a-8c2c-77a6284ff936"/>
+      <ContentProtection schemeIdUri="urn:uuid:1077efec-c0b2-4d02-ace3-3c1e52e2fb4b"/>
+    </AdaptationSet>
+    <AdaptationSet mimeType="audio/mp4" startWithSAP="1" lang="cmn" segmentAlignment="true">
+      <SegmentTemplate timescale="10000000" presentationTimeOffset="0" media="$RepresentationID$_Segment-$Time$.m4a?hdntl=st=1786621505~exp=1786711505~acl=/Content/DASH/Live/channel(HBO)/*~id=iawB2DEoCtPV9YyLQjx4aq4skqNBFdRFQ_7TJXGdK-tBrw~hmac=e020aa2bced645565d1ad6b89793df55f6f39cd2649aecda5fb48f29efbaf1d7" initialization="$RepresentationID$_init.m4i?hdntl=st=1786621505~exp=1786711505~acl=/Content/DASH/Live/channel(HBO)/*~id=iawB2DEoCtPV9YyLQjx4aq4skqNBFdRFQ_7TJXGdK-tBrw~hmac=e020aa2bced645565d1ad6b89793df55f6f39cd2649aecda5fb48f29efbaf1d7">
+        <SegmentTimeline>
+          <S t="103062013246072" d="39680000"/>
+          <S t="103062052926072" d="40106666"/>
+          <S t="103062093032738" d="40106667" r="1"/>
+          <S t="103062173246072" d="39680000"/>
+          <S t="103062212926072" d="40106666"/>
+          <S t="103062253032738" d="40106667" r="1"/>
+          <S t="103062333246072" d="39680000"/>
+          <S t="103062372926072" d="40106666"/>
+          <S t="103062413032738" d="40106667" r="1"/>
+          <S t="103062493246072" d="39680000"/>
+          <S t="103062532926072" d="40106666"/>
+          <S t="103062573032738" d="40106667"/>
+        </SegmentTimeline>
+      </SegmentTemplate>
+      <Representation audioSamplingRate="48000" codecs="mp4a.40.5" id="1776330964440item-08item" bandwidth="64000"/>
+      <ContentProtection schemeIdUri="urn:mpeg:dash:mp4protection:2011" value="cenc" cenc:default_KID="7ad888ee-5dd6-496a-8c2c-77a6284ff936"/>
+      <ContentProtection schemeIdUri="urn:uuid:1077efec-c0b2-4d02-ace3-3c1e52e2fb4b"/>
+    </AdaptationSet>
+    <AdaptationSet mimeType="application/mp4" startWithSAP="1" lang="cmn" segmentAlignment="true">
+      <Role schemeIdUri="urn:mpeg:dash:role:2011" value="subtitle"/>
+      <SegmentTemplate timescale="10000000" presentationTimeOffset="0" media="$RepresentationID$_Segment-$Time$.m4s?hdntl=st=1786621505~exp=1786711505~acl=/Content/DASH/Live/channel(HBO)/*~id=iawB2DEoCtPV9YyLQjx4aq4skqNBFdRFQ_7TJXGdK-tBrw~hmac=e020aa2bced645565d1ad6b89793df55f6f39cd2649aecda5fb48f29efbaf1d7" initialization="$RepresentationID$_init.m4i?hdntl=st=1786621505~exp=1786711505~acl=/Content/DASH/Live/channel(HBO)/*~id=iawB2DEoCtPV9YyLQjx4aq4skqNBFdRFQ_7TJXGdK-tBrw~hmac=e020aa2bced645565d1ad6b89793df55f6f39cd2649aecda5fb48f29efbaf1d7">
+        <SegmentTimeline>
+          <S t="103062012859850" d="40000000" r="14"/>
+        </SegmentTimeline>
+      </SegmentTemplate>
+      <Representation codecs="stpp" id="1776330964440item-09item" bandwidth="15000"/>
+    </AdaptationSet>
+    <AdaptationSet mimeType="application/mp4" startWithSAP="1" lang="eng" segmentAlignment="true">
+      <Role schemeIdUri="urn:mpeg:dash:role:2011" value="subtitle"/>
+      <SegmentTemplate timescale="10000000" presentationTimeOffset="0" media="$RepresentationID$_Segment-$Time$.m4s?hdntl=st=1786621505~exp=1786711505~acl=/Content/DASH/Live/channel(HBO)/*~id=iawB2DEoCtPV9YyLQjx4aq4skqNBFdRFQ_7TJXGdK-tBrw~hmac=e020aa2bced645565d1ad6b89793df55f6f39cd2649aecda5fb48f29efbaf1d7" initialization="$RepresentationID$_init.m4i?hdntl=st=1786621505~exp=1786711505~acl=/Content/DASH/Live/channel(HBO)/*~id=iawB2DEoCtPV9YyLQjx4aq4skqNBFdRFQ_7TJXGdK-tBrw~hmac=e020aa2bced645565d1ad6b89793df55f6f39cd2649aecda5fb48f29efbaf1d7">
+        <SegmentTimeline>
+          <S t="103062012859850" d="40000000" r="14"/>
+        </SegmentTimeline>
+      </SegmentTemplate>
+      <Representation codecs="stpp" id="1776330964440item-10item" bandwidth="15000"/>
+    </AdaptationSet>
+    <AdaptationSet mimeType="application/mp4" startWithSAP="1" lang="msa" segmentAlignment="true">
+      <Role schemeIdUri="urn:mpeg:dash:role:2011" value="subtitle"/>
+      <SegmentTemplate timescale="10000000" presentationTimeOffset="0" media="$RepresentationID$_Segment-$Time$.m4s?hdntl=st=1786621505~exp=1786711505~acl=/Content/DASH/Live/channel(HBO)/*~id=iawB2DEoCtPV9YyLQjx4aq4skqNBFdRFQ_7TJXGdK-tBrw~hmac=e020aa2bced645565d1ad6b89793df55f6f39cd2649aecda5fb48f29efbaf1d7" initialization="$RepresentationID$_init.m4i?hdntl=st=1786621505~exp=1786711505~acl=/Content/DASH/Live/channel(HBO)/*~id=iawB2DEoCtPV9YyLQjx4aq4skqNBFdRFQ_7TJXGdK-tBrw~hmac=e020aa2bced645565d1ad6b89793df55f6f39cd2649aecda5fb48f29efbaf1d7">
+        <SegmentTimeline>
+          <S t="103062012859850" d="40000000" r="14"/>
+        </SegmentTimeline>
+      </SegmentTemplate>
+      <Representation codecs="stpp" id="1776330964440item-11item" bandwidth="15000"/>
+    </AdaptationSet>
+  </Period>
+</MPD>

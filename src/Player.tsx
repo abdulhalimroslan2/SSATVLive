@@ -3,7 +3,7 @@ import type { Channel } from './mockData';
 import shaka from 'shaka-player/dist/shaka-player.ui.js';
 import 'shaka-player/dist/controls.css';
 import Hls from 'hls.js';
-import { Play, AlertCircle, RefreshCw } from 'lucide-react';
+import { Play, AlertCircle, RefreshCw, Maximize, Minimize, Volume2, VolumeX, Tv } from 'lucide-react';
 
 interface PlayerProps {
   channel: Channel;
@@ -20,10 +20,102 @@ export const Player: React.FC<PlayerProps> = ({ channel }) => {
   const videoContainerRef = useRef<HTMLDivElement>(null);
   const [hasAutoplayError, setHasAutoplayError] = useState(false);
   const [engineError, setEngineError] = useState<string | null>(null);
+  const [isFullscreen, setIsFullscreen] = useState(false);
+  const [isMuted, setIsMuted] = useState(true);
+  const [showOverlayControls, setShowOverlayControls] = useState(true);
+  const hideControlsTimerRef = useRef<any>(null);
 
   const playerRef = useRef<shaka.Player | null>(null);
   const uiRef = useRef<shaka.ui.Overlay | null>(null);
   const hlsRef = useRef<Hls | null>(null);
+
+  const toggleFullscreen = () => {
+    const container = videoContainerRef.current;
+    const video = videoRef.current;
+    if (!container) return;
+
+    if (!document.fullscreenElement && !(document as any).webkitFullscreenElement) {
+      if (container.requestFullscreen) {
+        container.requestFullscreen().catch(() => {});
+      } else if ((container as any).webkitRequestFullscreen) {
+        (container as any).webkitRequestFullscreen();
+      } else if (video && (video as any).webkitEnterFullscreen) {
+        (video as any).webkitEnterFullscreen();
+      }
+    } else {
+      if (document.exitFullscreen) {
+        document.exitFullscreen().catch(() => {});
+      } else if ((document as any).webkitExitFullscreen) {
+        (document as any).webkitExitFullscreen();
+      }
+    }
+  };
+
+  const toggleMute = () => {
+    if (videoRef.current) {
+      videoRef.current.muted = !videoRef.current.muted;
+      setIsMuted(videoRef.current.muted);
+    }
+  };
+
+  const resetHideTimer = () => {
+    setShowOverlayControls(true);
+    if (hideControlsTimerRef.current) clearTimeout(hideControlsTimerRef.current);
+    hideControlsTimerRef.current = setTimeout(() => {
+      setShowOverlayControls(false);
+    }, 3500);
+  };
+
+  useEffect(() => {
+    const handleFsChange = () => {
+      setIsFullscreen(Boolean(document.fullscreenElement || (document as any).webkitFullscreenElement));
+    };
+    document.addEventListener('fullscreenchange', handleFsChange);
+    document.addEventListener('webkitfullscreenchange', handleFsChange);
+    return () => {
+      document.removeEventListener('fullscreenchange', handleFsChange);
+      document.removeEventListener('webkitfullscreenchange', handleFsChange);
+    };
+  }, []);
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (['input', 'textarea', 'select'].includes((e.target as HTMLElement)?.tagName?.toLowerCase())) return;
+
+      const key = e.key.toLowerCase();
+      const code = e.keyCode || e.which;
+
+      resetHideTimer();
+
+      // 'F' / 'f' -> Toggle Fullscreen
+      if (key === 'f') {
+        e.preventDefault();
+        toggleFullscreen();
+      }
+      // 'M' / 'm' -> Toggle Mute
+      else if (key === 'm') {
+        e.preventDefault();
+        toggleMute();
+      }
+      // Space or Enter on container -> Fullscreen
+      else if (key === ' ' || key === 'enter' || code === 13) {
+        if (document.activeElement === videoContainerRef.current) {
+          e.preventDefault();
+          toggleFullscreen();
+        }
+      }
+      // Escape / Back Key (Remote Back KeyCode 4 or 27)
+      else if (key === 'escape' || code === 27 || code === 4) {
+        if (document.fullscreenElement || (document as any).webkitFullscreenElement) {
+          e.preventDefault();
+          if (document.exitFullscreen) document.exitFullscreen().catch(() => {});
+        }
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
 
   const cleanupPlayers = async () => {
     if (hlsRef.current) {
@@ -521,7 +613,11 @@ export const Player: React.FC<PlayerProps> = ({ channel }) => {
     <div className="main-player-section">
       <div 
         ref={videoContainerRef} 
+        className={`video-player-container ${isFullscreen ? 'is-fullscreen' : ''}`}
         style={{ position: 'relative', width: '100%', aspectRatio: '16/9', backgroundColor: '#000' }}
+        onMouseMove={resetHideTimer}
+        onTouchStart={resetHideTimer}
+        tabIndex={0}
       >
         <video
           ref={videoRef}
@@ -532,6 +628,83 @@ export const Player: React.FC<PlayerProps> = ({ channel }) => {
           muted
           controls
         />
+
+        {/* Dedicated TV Remote & Mobile Full Screen Overlay Bar */}
+        <div 
+          className={`player-custom-overlay ${showOverlayControls ? 'visible' : 'hidden'}`}
+          style={{
+            position: 'absolute',
+            inset: 0,
+            pointerEvents: 'none',
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'space-between',
+            padding: '1.25rem',
+            background: 'linear-gradient(180deg, rgba(0,0,0,0.7) 0%, transparent 25%, transparent 75%, rgba(0,0,0,0.8) 100%)',
+            transition: 'opacity 0.3s ease',
+            opacity: showOverlayControls ? 1 : 0,
+            zIndex: 25,
+          }}
+        >
+          {/* Top Bar: Channel Details & Dedicated Full Screen Button */}
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+              <div className="live-pill" style={{ pointerEvents: 'auto' }}>
+                <span className="live-dot" /> LIVE
+              </div>
+              <span style={{ color: '#fff', fontWeight: 700, fontSize: '1.1rem', textShadow: '0 2px 4px rgba(0,0,0,0.8)' }}>
+                {channel.name}
+              </span>
+              <span style={{ color: 'rgba(255,255,255,0.7)', fontSize: '0.85rem' }}>
+                • {channel.category}
+              </span>
+            </div>
+
+            {/* Top Right: Dedicated Fullscreen Toggle Button */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', pointerEvents: 'auto' }}>
+              <button
+                className="player-tv-action-btn"
+                onClick={toggleMute}
+                title={isMuted ? 'Nyahbisu (M)' : 'Bisu (M)'}
+                aria-label={isMuted ? 'Nyahbisu' : 'Bisu'}
+              >
+                {isMuted ? <VolumeX size={20} color="#fff" /> : <Volume2 size={20} color="#fff" />}
+              </button>
+
+              <button
+                className="player-dedicated-fullscreen-btn"
+                onClick={toggleFullscreen}
+                title="Skrin Penuh (F / Remote OK)"
+                aria-label="Skrin Penuh"
+                autoFocus={false}
+              >
+                {isFullscreen ? <Minimize size={22} color="#fff" /> : <Maximize size={22} color="#fff" />}
+                <span className="fs-btn-label">
+                  {isFullscreen ? 'Keluar Penuh' : 'Skrin Penuh'}
+                </span>
+                <span className="fs-key-hint">F / OK</span>
+              </button>
+            </div>
+          </div>
+
+          {/* Bottom Bar: Android TV Remote Helper Pill */}
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%' }}>
+            <div className="tv-remote-hint-badge">
+              <Tv size={15} style={{ marginRight: '6px' }} />
+              <span>Gunakan Remote [OK] / [F] untuk Skrin Penuh • [ESC/Back] untuk Keluar</span>
+            </div>
+
+            {/* Quick Floating Fullscreen Icon on Bottom Right */}
+            <button
+              className="player-quick-fs-fab"
+              onClick={toggleFullscreen}
+              style={{ pointerEvents: 'auto' }}
+              title="Toggle Fullscreen"
+            >
+              {isFullscreen ? <Minimize size={20} color="#fff" /> : <Maximize size={20} color="#fff" />}
+            </button>
+          </div>
+        </div>
 
         {/* Manual Autoplay / Unmute Overlay */}
         {hasAutoplayError && (
