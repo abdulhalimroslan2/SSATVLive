@@ -9,7 +9,7 @@ interface PlayerProps {
   channel: Channel;
 }
 
-// Detect iOS once at module level
+// Detect iOS device
 const IS_IOS = typeof navigator !== 'undefined' && (
   /iPad|iPhone|iPod/.test(navigator.userAgent) ||
   (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)
@@ -89,8 +89,6 @@ export const Player: React.FC<PlayerProps> = ({ channel }) => {
           // Configure Network Request Filter for Proxies
           const networkEngine = player.getNetworkingEngine();
           if (networkEngine) {
-            // On iOS, only proxy manifest requests. Let segments go direct to CDN.
-            // This avoids the latency of double-hop through Vercel Edge for every 6s segment.
             networkEngine.registerRequestFilter((_type: any, request: any) => {
               const url = request.uris[0];
               const proxyMap: [string, string][] = [
@@ -143,35 +141,14 @@ export const Player: React.FC<PlayerProps> = ({ channel }) => {
               });
             }
 
-            // LICENSE REQUEST INTERCEPTOR
+            // Build ClearKey map for Shaka Player
             const clearKeysMap: Record<string, string> = {};
-            let jwkSetDataUrl = '';
 
             if (channel.clearKey) {
               const [rawKeyId, rawKey] = channel.clearKey.split(':');
               const normalizeHex = (s: string) => s.replace(/-/g, '').toLowerCase();
               const keyIdHex = normalizeHex(rawKeyId);
               const keyValueHex = normalizeHex(rawKey);
-
-              const hexToBase64Url = (hex: string): string => {
-                const bytes = new Uint8Array(hex.match(/.{1,2}/g)!.map(b => parseInt(b, 16)));
-                return btoa(String.fromCharCode(...bytes))
-                  .replace(/\+/g, '-').replace(/\//g, '_').replace(/=/g, '');
-              };
-
-              const kidB64 = hexToBase64Url(keyIdHex);
-              const keyB64 = hexToBase64Url(keyValueHex);
-
-              jwkSetDataUrl = 'data:application/json,' + encodeURIComponent(JSON.stringify({
-                keys: [{ kty: 'oct', kid: kidB64, k: keyB64 }],
-                type: 'temporary'
-              }));
-
-              networkEngine.registerRequestFilter((type: any, request: any) => {
-                if (type === shaka.net.NetworkingEngine.RequestType.LICENSE || type === 5) {
-                  request.uris[0] = jwkSetDataUrl;
-                }
-              });
 
               clearKeysMap[keyIdHex] = keyValueHex;
               if (rawKeyId.includes('-')) {
@@ -192,65 +169,63 @@ export const Player: React.FC<PlayerProps> = ({ channel }) => {
               } catch (_e) { /* ignore */ }
             }
 
-            // =====================================================
-            // iOS-SPECIFIC: Extreme buffer minimization to prevent
-            // WebKit SourceBuffer QuotaExceededError
-            // =====================================================
+            // Configure Shaka Player DRM & Streaming
             player.configure({
               drm: {
                 clearKeys: clearKeysMap,
-                servers: jwkSetDataUrl ? { 'org.w3.clearkey': jwkSetDataUrl } : {}
               },
               streaming: {
                 lowLatencyMode: false,
-                // iOS WebKit has ~30MB SourceBuffer limit.
-                // At 4Mbps 1080p, 30 seconds = 15MB. Keep buffers tiny on iOS.
-                bufferingGoal: IS_IOS ? 4 : 15,
-                rebufferingGoal: IS_IOS ? 1 : 4,
-                bufferBehind: IS_IOS ? 3 : 15,
-                smallGapLimit: 1.0,
+                inaccurateManifestTolerance: 2,
+                bufferingGoal: IS_IOS ? 6 : 15,
+                rebufferingGoal: IS_IOS ? 2 : 4,
+                bufferBehind: IS_IOS ? 5 : 15,
+                smallGapLimit: 0.8,
                 jumpLargeGaps: true,
+                stallEnabled: true,
+                stallThreshold: 1,
+                stallSkip: 0.5,
+                safeSeekOffset: 2,
+                alwaysStreamLookup: true,
                 retryParameters: {
                   maxAttempts: 8,
-                  baseDelay: 300,
+                  baseDelay: 500,
                   backoffFactor: 1.5,
                   fuzzFactor: 0.3,
-                  timeout: 20000
+                  timeout: 30000
                 }
               },
               manifest: {
                 dash: {
                   ignoreMinBufferTime: true,
                   autoCorrectDrift: true,
+                  initialSegmentLimit: 2,
                 },
+                availabilityWindowOverride: 60,
                 retryParameters: {
                   maxAttempts: 8,
-                  baseDelay: 300,
+                  baseDelay: 500,
                   backoffFactor: 1.5,
                   fuzzFactor: 0.3,
-                  timeout: 20000
+                  timeout: 30000
                 }
               },
               abr: {
                 restrictions: IS_IOS ? {
-                  // Force max 480p on iOS to dramatically reduce segment sizes
-                  // and prevent SourceBuffer memory overflow
                   maxHeight: 480,
                   maxBandwidth: 1000000
                 } : {}
               }
             });
 
-            // Error recovery: automatically retry on recoverable errors
             player.addEventListener('error', (event: any) => {
               const detail = event?.detail;
-              console.warn('[Player] Shaka error:', detail?.code, detail?.message);
+              console.warn('[Player] Shaka error event:', detail?.code, detail?.message);
               
-              // QuotaExceededError or BUFFER_APPEND_ERROR
+              // QuotaExceededError or BUFFER_APPEND_ERROR on iOS
               if (detail?.code === 3017 || detail?.code === 3015) {
-                console.log('[Player] SourceBuffer quota exceeded, clearing buffer and retrying...');
+                console.log('[Player] Buffer quota exceeded, seeking to live edge...');
                 try {
-                  // Seek to live edge to discard old buffered data
                   if (player.isLive()) {
                     video.currentTime = player.seekRange().end - 3;
                   }
@@ -259,9 +234,19 @@ export const Player: React.FC<PlayerProps> = ({ channel }) => {
                 return;
               }
               
-              if (detail?.severity === shaka.util.Error.Severity.RECOVERABLE) {
-                try { player.retryStreaming(); } catch (_e) {}
+              if (detail?.isRecoverable || detail?.severity === shaka.util.Error.Severity.RECOVERABLE) {
+                try {
+                  player.retryStreaming();
+                } catch (_e) {}
               }
+            });
+
+            player.addEventListener('stalldetected', () => {
+              console.log('[Player] Shaka stall detected, auto-nudging playback...');
+              try {
+                video.currentTime += 0.25;
+                video.play().catch(() => {});
+              } catch (_e) {}
             });
           }
 
@@ -289,11 +274,11 @@ export const Player: React.FC<PlayerProps> = ({ channel }) => {
         if (!isHls || !Hls.isSupported()) return false;
         try {
           const hls = new Hls({
-            enableWorker: !IS_IOS, // Disable workers on iOS (WebKit compat)
+            enableWorker: !IS_IOS,
             lowLatencyMode: false,
             maxBufferLength: IS_IOS ? 5 : 30,
             maxMaxBufferLength: IS_IOS ? 8 : 60,
-            maxBufferSize: IS_IOS ? 5 * 1000000 : 60 * 1000000, // 5MB on iOS
+            maxBufferSize: IS_IOS ? 5 * 1000000 : 60 * 1000000,
             maxBufferHole: 0.5,
             liveSyncDurationCount: IS_IOS ? 2 : 3,
             liveMaxLatencyDurationCount: IS_IOS ? 4 : 10,
@@ -307,9 +292,7 @@ export const Player: React.FC<PlayerProps> = ({ channel }) => {
             hls.on(Hls.Events.MANIFEST_PARSED, async () => {
               if (isCancelled) return resolve(false);
               
-              // On iOS: cap quality to lowest available level
               if (IS_IOS && hls.levels.length > 1) {
-                // Find 480p or below
                 const safeLevel = hls.levels.findIndex(l => l.height <= 480);
                 if (safeLevel >= 0) {
                   hls.currentLevel = safeLevel;
@@ -323,7 +306,6 @@ export const Player: React.FC<PlayerProps> = ({ channel }) => {
             hls.on(Hls.Events.ERROR, (_event, data) => {
               if (data.fatal) {
                 console.warn('Hls.js fatal error:', data);
-                // Try recovery before giving up
                 if (data.type === Hls.ErrorTypes.NETWORK_ERROR) {
                   hls.startLoad();
                 } else if (data.type === Hls.ErrorTypes.MEDIA_ERROR) {
@@ -340,9 +322,13 @@ export const Player: React.FC<PlayerProps> = ({ channel }) => {
       };
 
       // -------------------------------------------------------------
-      // STRATEGY 3: NATIVE HTML5 VIDEO FALLBACK
+      // STRATEGY 3: NATIVE HTML5 VIDEO (HLS on Safari/iOS only)
       // -------------------------------------------------------------
       const tryNativeVideo = async () => {
+        // Native video src only works for HLS (.m3u8) on Safari/iOS
+        if (!isHls && !cleanUrl.includes('.mp4')) {
+          return false;
+        }
         try {
           video.src = cleanUrl;
           await startPlay(video);
@@ -357,29 +343,25 @@ export const Player: React.FC<PlayerProps> = ({ channel }) => {
       // =============================================================
       let success = false;
 
+      // On iOS + HLS: Native AVFoundation is the most reliable
       if (IS_IOS && isHls && video.canPlayType('application/vnd.apple.mpegurl')) {
-        // iOS + HLS: Always use native AVFoundation (most stable, hardware accelerated)
         console.log(`[Player] iOS detected, using native HLS for ${channel.name}`);
         success = await tryNativeVideo();
       }
 
+      // Default primary: Shaka Player (handles DASH, ClearKey DRM, and HLS)
       if (!success) {
-        // Desktop or iOS+DASH: use Shaka Player
         success = await tryShakaPlayer();
       }
       
+      // Fallback for HLS streams
       if (!success && isHls) {
-        // Fallback chain for HLS
         if (video.canPlayType('application/vnd.apple.mpegurl')) {
           success = await tryNativeVideo();
         }
         if (!success) {
           success = await tryHlsJs();
         }
-      }
-      
-      if (!success) {
-        success = await tryNativeVideo();
       }
 
       if (!success && !isCancelled) {
@@ -392,32 +374,14 @@ export const Player: React.FC<PlayerProps> = ({ channel }) => {
         video.muted = true;
         video.playsInline = true;
         await video.play();
+        setHasAutoplayError(false);
       } catch (playErr: any) {
-        // Check if video actually has data loaded
-        if (video.readyState >= 2) {
-          // Video has data but autoplay is blocked by browser policy
-          console.warn('Autoplay blocked by browser policy', playErr);
-          setHasAutoplayError(true);
-        } else {
-          // Video has no data - this is a loading error, not autoplay block
-          // Wait a moment for data to arrive, then try again
-          console.warn('Video not ready yet, waiting...', playErr);
-          await new Promise(r => setTimeout(r, 2000));
-          try {
-            await video.play();
-          } catch (_e2) {
-            console.warn('Retry play also failed, showing play button');
-            setHasAutoplayError(true);
-          }
-        }
+        console.warn('Autoplay blocked or failed', playErr);
+        setHasAutoplayError(true);
       }
     };
 
-    // ===============================================================
-    // iOS STALL WATCHDOG: Detect frozen playback and auto-recover
-    // Checks every 1.5 seconds if currentTime has moved.
-    // After 3 consecutive stalls (~4.5s frozen), force seek to live edge.
-    // ===============================================================
+    // Watchdog to recover from decoder stalls
     let lastTime = -1;
     let stallCount = 0;
     const stallCheckInterval = setInterval(() => {
@@ -431,19 +395,15 @@ export const Player: React.FC<PlayerProps> = ({ channel }) => {
       const currentTime = video.currentTime;
       if (lastTime >= 0 && Math.abs(currentTime - lastTime) < 0.05) {
         stallCount++;
-        console.log(`[Player] Stall detected #${stallCount} at t=${currentTime.toFixed(1)}`);
-        
         if (stallCount >= 3) {
-          console.log('[Player] Persistent stall — seeking to live edge...');
+          console.log('[Player] Playback stall detected, nudging forward...');
           try {
             if (player && player.isLive()) {
-              // Seek to 3 seconds before live edge
               const seekRange = player.seekRange();
               video.currentTime = seekRange.end - 3;
               player.retryStreaming();
             } else {
-              // Non-Shaka: just nudge forward
-              video.currentTime += 1;
+              video.currentTime += 0.5;
             }
             video.play().catch(() => {});
           } catch (_e) {}
@@ -468,27 +428,19 @@ export const Player: React.FC<PlayerProps> = ({ channel }) => {
     if (videoRef.current) {
       const video = videoRef.current;
       try {
-        // First try playing muted (guaranteed to work)
-        video.muted = true;
-        await video.play();
-        // Once playing, unmute
+        // Unmute and play on user gesture
         video.muted = false;
+        await video.play();
         setHasAutoplayError(false);
-      } catch (e1) {
-        console.warn('Muted play failed, trying unmuted user-gesture play', e1);
+      } catch (err) {
+        console.warn('Direct unmuted play failed, playing muted first:', err);
         try {
-          // Fallback: try unmuted play (should work within user gesture)
-          video.muted = false;
+          video.muted = true;
           await video.play();
+          video.muted = false;
           setHasAutoplayError(false);
-        } catch (e2) {
-          console.error('All play attempts failed', e2);
-          // Last resort: keep it muted but playing
-          try {
-            video.muted = true;
-            await video.play();
-            setHasAutoplayError(false);
-          } catch (_e3) {}
+        } catch (_e2) {
+          console.error('All play attempts failed:', _e2);
         }
       }
     }
