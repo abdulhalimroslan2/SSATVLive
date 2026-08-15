@@ -9,7 +9,8 @@ const CORS_HEADERS = {
   'Access-Control-Max-Age': '86400',
 };
 
-const ASTRO_UA = 'Mozilla/5.0 (Linux; Android 10; MiTV-AXSO0 Build/QTZCS200912.005) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.159 Safari/537.36';
+// Unified static device fingerprint (Disguised as a single MiTV Android STB)
+const UNIFIED_DEVICE_UA = 'Mozilla/5.0 (Linux; Android 10; MiTV-AXSO0 Build/QTZCS200912.005) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.159 Safari/537.36';
 
 export default async function handler(request) {
   if (request.method === 'OPTIONS') {
@@ -26,20 +27,24 @@ export default async function handler(request) {
   const remainingQueryString = url.searchParams.toString();
   
   let targetUrl = '';
-  let headers = new Headers();
   
+  // Anti-Tracking Header Sanitization:
+  // Strips all client device signatures, real IPs, and tracking telemetry.
+  // Upstream servers will only ever see 1 single MiTV device via the proxy IP.
+  const headers = new Headers();
+  headers.set('User-Agent', UNIFIED_DEVICE_UA);
+  headers.set('Accept', '*/*');
+  headers.set('Accept-Language', 'en-US,en;q=0.9');
+
   // Astro Linear & VOD
   if (path.startsWith('/astro-linear/')) {
     targetUrl = path.replace('/astro-linear/', 'https://linearjitp-playback.astro.com.my/');
-    headers.set('User-Agent', ASTRO_UA);
   } 
   else if (path.startsWith('/astro-vod/')) {
     targetUrl = path.replace('/astro-vod/', 'https://vodejitp-asset-playback-b.astro.com.my/');
-    headers.set('User-Agent', ASTRO_UA);
   }
   else if (path.startsWith('/iris-synamedia/')) {
     targetUrl = path.replace('/iris-synamedia/', 'https://vod-dai-ott-ap.ssai.iris.synamedia.com/');
-    headers.set('User-Agent', ASTRO_UA);
   }
   else if (path.startsWith('/ngtv-vod/')) {
     targetUrl = path.replace('/ngtv-vod/', 'https://ngtv-vod.gcdn.co/');
@@ -53,7 +58,7 @@ export default async function handler(request) {
     headers.set('Origin', 'https://rtmklik.rtm.gov.my');
     headers.set('Referer', 'https://rtmklik.rtm.gov.my/');
   }
-  // Other Cloudfront targeting
+  // Cloudfront & CDN targeting
   else if (path.startsWith('/cf-d2xz/')) {
     targetUrl = path.replace('/cf-d2xz/', 'https://d2xz2v5wuvgur6.cloudfront.net/');
   }
@@ -87,6 +92,9 @@ export default async function handler(request) {
   else if (path.startsWith('/gcdn/')) {
     targetUrl = path.replace('/gcdn/', 'http://ngtv-live-cbj.gcdn.co/');
   }
+  else if (path.startsWith('/gcdn-live/')) {
+    targetUrl = path.replace('/gcdn-live/', 'https://ngtv-live.gcdn.co/');
+  }
   else {
     return new Response('Invalid path prefix', { status: 400 });
   }
@@ -96,15 +104,25 @@ export default async function handler(request) {
   }
 
   try {
-    const response = await fetch(targetUrl, {
+    let fetchOptions = {
+      method: request.method,
       headers: headers,
       redirect: 'follow',
-    });
+    };
+
+    if (request.method === 'POST') {
+      fetchOptions.body = await request.arrayBuffer();
+    }
+
+    const response = await fetch(targetUrl, fetchOptions);
 
     const responseHeaders = new Headers(response.headers);
     Object.entries(CORS_HEADERS).forEach(([key, value]) => {
       responseHeaders.set(key, value);
     });
+
+    // Strip any upstream tracking cookies
+    responseHeaders.delete('set-cookie');
 
     // If it's okayru MPD/M3U8, rewrite relative paths
     if (path.includes('okayru')) {
