@@ -70,9 +70,13 @@ function proxyPlugin() {
           { prefix: '/cf-d2tj/', target: 'https://d2tjypxxy769fn.cloudfront.net/' },
           { prefix: '/cf-d84q/', target: 'https://d84q7nw4qf3j3.cloudfront.net/' },
           { prefix: '/cf-d3b0/', target: 'https://d3b0v7fggu5zwm.cloudfront.net/' },
+          { prefix: '/cf-df14/', target: 'https://df14pcdp16s98.cloudfront.net/' },
           { prefix: '/mana2/', target: 'https://slive.mana2.my/' },
           { prefix: '/ptv2026/', target: 'https://ptv2026.com/' },
           { prefix: '/load-ptv/', target: 'https://load.ptv2026.com/' },
+          { prefix: '/gcdn-s/', target: 'https://ngtv-live-cbj.gcdn.co/' },
+          { prefix: '/gcdn/', target: 'http://ngtv-live-cbj.gcdn.co/' },
+          { prefix: '/gcdn-live/', target: 'https://ngtv-live.gcdn.co/' },
           { prefix: '/rtm-stream/', target: 'https://d25tgymtnqzu8s.cloudfront.net/', args: [
             '-H', 'Origin: https://rtmklik.rtm.gov.my', '-H', 'Referer: https://rtmklik.rtm.gov.my/'
           ]},

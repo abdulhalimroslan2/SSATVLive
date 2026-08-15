@@ -164,12 +164,12 @@ export const Player: React.FC<PlayerProps> = ({ channel }) => {
                 // 3. Fix Mixed Content (HTTP -> HTTPS) for BaseURL
                 rewritten = rewritten.replaceAll('<BaseURL>http://', '<BaseURL>https://');
 
-                // 4. Inject ClearKey ContentProtection node if missing
-                if (!rewritten.includes(clearKeyUuid) && rewritten.includes('mp4protection')) {
-                   rewritten = rewritten.replace(
-                     /(<ContentProtection schemeIdUri="urn:mpeg:dash:mp4protection:2011"[^>]*>)/g,
-                     `$1\n      <ContentProtection schemeIdUri="urn:uuid:1077efec-c0b2-4d02-ace3-3c1e52e2fb4b"/>`
-                   );
+                // 4. Inject ClearKey ContentProtection node preserving all KID attributes
+                if (!rewritten.includes(clearKeyUuid)) {
+                  rewritten = rewritten.replace(
+                    /<ContentProtection\s+([^>]*?)schemeIdUri="urn:mpeg:dash:mp4protection:2011"([^>]*?)(\/?>)/gi,
+                    (match, p1, p2, p3) => `${match}\n      <ContentProtection schemeIdUri="${clearKeyUuid}"${p1}${p2}${p3}`
+                  );
                 }
 
                 response.data = new TextEncoder().encode(rewritten);
