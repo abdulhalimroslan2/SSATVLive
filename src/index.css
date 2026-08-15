@@ -2316,10 +2316,576 @@ html, body {
   .top-header {
     margin-bottom: 1rem !important;
   }
-  .vod-cards-grid {
-    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)) !important;
+}
+
+/* =========================================================================
+   PERFECT TV / XCIPTV MASTER ARCHITECTURE STYLES (ULTRA-LIGHTWEIGHT)
+   ========================================================================= */
+
+.ptv-master-layout {
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background-color: #07090e;
+  color: #ffffff;
+}
+
+/* Top Bar */
+.ptv-topbar {
+  height: 60px;
+  background: #0b0f17;
+  border-bottom: 1px solid #161f2e;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1.5rem;
+  flex-shrink: 0;
+  z-index: 100;
+}
+
+.ptv-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.ptv-brand-icon {
+  background: #e50914;
+  color: #fff;
+  font-weight: 900;
+  font-size: 0.95rem;
+  padding: 0.25rem 0.6rem;
+  border-radius: 6px;
+  letter-spacing: -0.5px;
+  box-shadow: 0 0 12px rgba(229, 9, 20, 0.4);
+}
+
+.ptv-brand-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.ptv-brand-name {
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.15rem;
+  font-weight: 800;
+  line-height: 1.1;
+  color: #fff;
+}
+
+.ptv-brand-sub {
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  color: #e50914;
+}
+
+.ptv-nav-tabs {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.ptv-nav-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.45rem 1rem;
+  border-radius: 8px;
+  background: #111722;
+  border: 1px solid #1c2638;
+  color: #8c9bb0;
+  font-size: 0.88rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.15s ease, background 0.15s ease;
+}
+
+.ptv-nav-tab:hover,
+.ptv-nav-tab:focus-visible {
+  background: #182233;
+  color: #fff;
+  border-color: #3b4d6b;
+  outline: none;
+}
+
+.ptv-nav-tab.is-active {
+  background: #e50914;
+  color: #fff;
+  border-color: #ff333d;
+  box-shadow: 0 0 15px rgba(229, 9, 20, 0.4);
+}
+
+.ptv-tab-key {
+  font-size: 0.68rem;
+  background: rgba(0, 0, 0, 0.35);
+  padding: 1px 5px;
+  border-radius: 4px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.ptv-top-status {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.ptv-clock {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #9cb0cc;
+  font-family: monospace;
+}
+
+.ptv-vip-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  background: #0f241a;
+  border: 1px solid #107c41;
+  color: #2ed573;
+  font-size: 0.72rem;
+  font-weight: 800;
+  padding: 0.25rem 0.65rem;
+  border-radius: 20px;
+}
+
+/* Main Body Viewport */
+.ptv-main-body {
+  flex: 1;
+  display: flex;
+  width: 100vw;
+  height: calc(100vh - 60px);
+  overflow: hidden;
+}
+
+/* 3-Panel IPTV Layout */
+.ptv-container {
+  display: grid;
+  grid-template-columns: 230px 330px 1fr;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+/* Panel Common */
+.ptv-panel {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+  border-right: 1px solid #161e2c;
+}
+
+.ptv-panel-header {
+  height: 48px;
+  background: #0c1018;
+  border-bottom: 1px solid #161e2c;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1rem;
+  font-size: 0.85rem;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  color: #9cb0cc;
+  flex-shrink: 0;
+}
+
+.ptv-header-icon {
+  color: #e50914;
+  margin-right: 0.4rem;
+}
+
+.ptv-header-left {
+  display: flex;
+  align-items: center;
+}
+
+/* Panel 1: Categories */
+.ptv-panel-categories {
+  background: #080b11;
+}
+
+.ptv-categories-scroll {
+  flex: 1;
+  overflow-y: auto;
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.ptv-category-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.65rem 0.85rem;
+  border-radius: 8px;
+  background: transparent;
+  border: 1px solid transparent;
+  color: #8c9eb5;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.ptv-category-item:hover,
+.ptv-category-item:focus-visible {
+  background: #121824;
+  color: #fff;
+  outline: none;
+}
+
+.ptv-category-item.is-active {
+  background: #182233;
+  color: #fff;
+  border-left: 4px solid #e50914;
+  border-color: #233047;
+}
+
+.ptv-cat-badge {
+  font-size: 0.72rem;
+  background: #111722;
+  padding: 2px 7px;
+  border-radius: 12px;
+  color: #72849c;
+}
+
+.ptv-category-item.is-active .ptv-cat-badge {
+  background: #e50914;
+  color: #fff;
+}
+
+/* Panel 2: Channels */
+.ptv-panel-channels {
+  background: #0b0f17;
+}
+
+.ptv-channel-quick-search {
+  background: #131924;
+  border: 1px solid #1f2a3d;
+  color: #fff;
+  font-size: 0.78rem;
+  padding: 0.25rem 0.6rem;
+  border-radius: 6px;
+  width: 110px;
+  outline: none;
+}
+
+.ptv-channels-scroll {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.ptv-channel-item {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.6rem 0.85rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+  cursor: pointer;
+  transition: background 0.1s ease;
+  outline: none;
+}
+
+.ptv-channel-item:hover,
+.ptv-channel-item:focus-visible {
+  background: #141c2b;
+}
+
+.ptv-channel-item.is-active {
+  background: #182233;
+  border-left: 4px solid #e50914;
+}
+
+.ptv-ch-num {
+  font-family: monospace;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #637791;
+  width: 28px;
+}
+
+.ptv-ch-logo-box {
+  width: 38px;
+  height: 28px;
+  background: #131924;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  overflow: hidden;
+  padding: 2px;
+}
+
+.ptv-ch-logo {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.ptv-ch-logo-fallback {
+  color: #e50914;
+}
+
+.ptv-ch-details {
+  flex: 1;
+  min-width: 0;
+}
+
+.ptv-ch-title {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: #ffffff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ptv-ch-cat {
+  font-size: 0.7rem;
+  color: #6c7f96;
+}
+
+.ptv-ch-live-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  background: #e50914;
+  color: #fff;
+  font-size: 0.65rem;
+  font-weight: 800;
+  padding: 1px 6px;
+  border-radius: 4px;
+}
+
+.ptv-live-pulse-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #fff;
+}
+
+/* Panel 3: Live Preview Player & Info */
+.ptv-panel-preview {
+  background: #06080d;
+  padding: 1.25rem;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.ptv-preview-player-box {
+  width: 100%;
+  aspect-ratio: 16/9;
+  background: #000;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid #1c2638;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+  flex-shrink: 0;
+}
+
+.ptv-preview-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: #55667d;
+  gap: 0.5rem;
+}
+
+.ptv-channel-info-card {
+  background: #0c1018;
+  border: 1px solid #161f2e;
+  border-radius: 12px;
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.ptv-info-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.ptv-info-title {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 0.35rem;
+}
+
+.ptv-info-badges {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.ptv-badge-fhd {
+  background: #101929;
+  border: 1px solid #1d3356;
+  color: #38bdf8;
+  font-size: 0.72rem;
+  font-weight: 800;
+  padding: 2px 7px;
+  border-radius: 4px;
+}
+
+.ptv-badge-cat {
+  background: #1a2233;
+  color: #cbd5e1;
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: 4px;
+}
+
+.ptv-badge-live {
+  background: rgba(229, 9, 20, 0.15);
+  border: 1px solid #e50914;
+  color: #ff333d;
+  font-size: 0.72rem;
+  font-weight: 800;
+  padding: 2px 7px;
+  border-radius: 4px;
+}
+
+.ptv-info-desc {
+  font-size: 0.85rem;
+  color: #8c9bb0;
+  line-height: 1.4;
+}
+
+.ptv-specs-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+  background: #080b11;
+  border: 1px solid #141b29;
+  border-radius: 8px;
+  padding: 0.85rem;
+}
+
+.ptv-spec-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.ptv-spec-label {
+  font-size: 0.7rem;
+  color: #637791;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.ptv-spec-val {
+  font-size: 0.82rem;
+  color: #e2e8f0;
+  font-weight: 600;
+}
+
+.ptv-remote-legend {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+  padding-top: 0.5rem;
+  border-top: 1px solid #141b29;
+}
+
+.ptv-legend-item {
+  font-size: 0.75rem;
+  color: #72849c;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.ptv-legend-item kbd {
+  background: #141b29;
+  border: 1px solid #233047;
+  color: #fff;
+  padding: 1px 5px;
+  border-radius: 4px;
+  font-family: monospace;
+  font-weight: bold;
+}
+
+.ptv-vod-wrapper,
+.ptv-search-wrapper {
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  padding: 1.5rem 2rem;
+}
+
+.ptv-loading-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  color: #8c9bb0;
+  gap: 1rem;
+}
+
+.ptv-spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid #161e2c;
+  border-top-color: #e50914;
+  border-radius: 50%;
+  animation: ptv-spin 0.8s linear infinite;
+}
+
+@keyframes ptv-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Mobile & Tablet Responsive Breakdown */
+@media (max-width: 960px) {
+  .ptv-container {
+    grid-template-columns: 180px 240px 1fr;
   }
 }
+
+@media (max-width: 720px) {
+  .ptv-container {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    overflow-y: auto;
+  }
+  .ptv-panel {
+    border-right: none;
+    border-bottom: 1px solid #161e2c;
+    height: auto;
+  }
+  .ptv-categories-scroll {
+    flex-direction: row;
+    overflow-x: auto;
+    max-height: 54px;
+  }
+  .ptv-channels-scroll {
+    max-height: 250px;
+  }
+}
+
 
 
 
