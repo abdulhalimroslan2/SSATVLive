@@ -22,6 +22,42 @@ function proxyPlugin() {
           setCors(); res.writeHead(200); res.end(); return
         }
 
+        // Special handler for okayru VOD (resolves redirect host and fixes BaseURL)
+        if (url.startsWith('/ptv2026/okayru')) {
+          setCors()
+          const targetUrl = url.replace('/ptv2026/', 'https://ptv2026.com/')
+          const curl = spawn('curl', ['-s', '-L', '-w', '\nEFFECTIVE_URL:%{url_effective}', targetUrl])
+          let body = ''
+          curl.stdout.on('data', (d) => { body += d.toString() })
+          curl.on('close', () => {
+            const parts = body.split('\nEFFECTIVE_URL:')
+            let content = parts[0]
+            const effectiveUrl = parts[1] ? parts[1].trim() : ''
+            let host = 'https://ptv2026.com'
+            try {
+              if (effectiveUrl) {
+                host = new URL(effectiveUrl).origin
+              }
+            } catch (_) {}
+
+            if (url.includes('.mpd')) {
+              res.setHeader('Content-Type', 'application/dash+xml')
+              content = content.replace(/<BaseURL>\?/g, `<BaseURL>${host}/?`)
+            } else if (url.includes('.m3u8')) {
+              res.setHeader('Content-Type', 'application/vnd.apple.mpegurl')
+              const baseUrl = effectiveUrl.substring(0, effectiveUrl.lastIndexOf('/') + 1)
+              content = content.split('\n').map(line => {
+                if (line.trim() && !line.startsWith('#') && !line.startsWith('http')) {
+                  return baseUrl + line.trim()
+                }
+                return line
+              }).join('\n')
+            }
+            res.end(content)
+          })
+          return
+        }
+
         // All curl proxy targets
         const curlTargets: { prefix: string; target: string; args?: string[] }[] = [
           { prefix: '/astro-linear/', target: 'https://linearjitp-playback.astro.com.my/', args: ['-H', `User-Agent: ${ASTRO_UA}`] },

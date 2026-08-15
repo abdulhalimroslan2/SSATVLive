@@ -106,6 +106,35 @@ export default async function handler(request) {
       responseHeaders.set(key, value);
     });
 
+    // If it's okayru MPD/M3U8, rewrite relative paths
+    if (path.includes('okayru')) {
+      let text = await response.text();
+      const finalUrl = response.url || targetUrl;
+      let host = 'https://ptv2026.com';
+      try {
+        if (finalUrl) host = new URL(finalUrl).origin;
+      } catch (_) {}
+
+      if (path.includes('.mpd')) {
+        text = text.replace(/<BaseURL>\?/g, `<BaseURL>${host}/?`);
+        responseHeaders.set('Content-Type', 'application/dash+xml');
+      } else if (path.includes('.m3u8')) {
+        const baseUrl = finalUrl.substring(0, finalUrl.lastIndexOf('/') + 1);
+        text = text.split('\n').map(line => {
+          if (line.trim() && !line.startsWith('#') && !line.startsWith('http')) {
+            return baseUrl + line.trim();
+          }
+          return line;
+        }).join('\n');
+        responseHeaders.set('Content-Type', 'application/vnd.apple.mpegurl');
+      }
+
+      return new Response(text, {
+        status: response.status,
+        headers: responseHeaders,
+      });
+    }
+
     return new Response(response.body, {
       status: response.status,
       statusText: response.statusText,
