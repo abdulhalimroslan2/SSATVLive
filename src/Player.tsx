@@ -285,6 +285,18 @@ export const Player: React.FC<PlayerProps> = ({ channel }) => {
               }
             });
 
+            player.addEventListener('stalldetected', () => {
+              console.log('[Player] Shaka stall detected, auto-recovering...');
+              if (video.duration && video.currentTime >= video.duration - 2) {
+                video.currentTime = 0;
+                video.play().catch(() => {});
+              } else {
+                try {
+                  player.retryStreaming();
+                } catch (_e) {}
+              }
+            });
+
             console.log(`[Player] 🚀 Shaka loading ${cleanUrl}`);
             await player.load(cleanUrl);
             if (isCancelled) return false;
@@ -337,6 +349,14 @@ export const Player: React.FC<PlayerProps> = ({ channel }) => {
                 await startPlay(video);
                 resolve(true);
               });
+
+              // Auto-loop seamlessly if playlist segments end
+              hls.on(Hls.Events.BUFFER_EOS, () => {
+                console.log('[Player] End of buffer reached in Hls.js, looping seamlessly...');
+                video.currentTime = 0;
+                video.play().catch(() => {});
+              });
+
               hls.on(Hls.Events.ERROR, (_event, data) => {
                 if (data.fatal) {
                   console.warn('Hls.js fatal error:', data);
@@ -376,23 +396,28 @@ export const Player: React.FC<PlayerProps> = ({ channel }) => {
       // =============================================================
       let success = false;
 
-      // On iOS + HLS: Native AVFoundation is the most reliable
-      if (IS_IOS && isHls && video.canPlayType('application/vnd.apple.mpegurl')) {
-        console.log(`[Player] iOS detected, using native HLS for ${channel.name}`);
-        success = await tryNativeVideo();
-      }
+      const onEnded = () => {
+        console.log('[Player] Video ended, restarting stream seamlessly...');
+        video.currentTime = 0;
+        video.play().catch(() => {});
+      };
+      video.addEventListener('ended', onEnded);
 
-      // Default primary: Shaka Player (handles DASH, ClearKey DRM, and HLS)
-      if (!success) {
-        success = await tryShakaPlayer();
-      }
-      
-      // Fallback for HLS streams
-      if (!success && isHls) {
-        if (video.canPlayType('application/vnd.apple.mpegurl')) {
+      // 1. For plain HLS (.m3u8) streams without DRM: Hls.js provides the best live loop & buffer management
+      if (isHls && !channel.clearKey) {
+        if (IS_IOS && video.canPlayType('application/vnd.apple.mpegurl')) {
           success = await tryNativeVideo();
         }
         if (!success) {
+          success = await tryHlsJs();
+        }
+        if (!success) {
+          success = await tryShakaPlayer();
+        }
+      } else {
+        // 2. For DASH (.mpd) or DRM streams (ClearKey / Widevine): Shaka Player is the primary engine
+        success = await tryShakaPlayer();
+        if (!success && isHls) {
           success = await tryHlsJs();
         }
       }
