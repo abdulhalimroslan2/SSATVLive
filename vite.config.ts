@@ -58,6 +58,66 @@ function proxyPlugin() {
           return
         }
 
+        // Special handler for load-ptv rwt.m3u8 (converts static loops into continuous infinite live sliding windows)
+        if (url.startsWith('/load-ptv/rwt.m3u8')) {
+          setCors()
+          const targetUrl = url.replace('/load-ptv/', 'https://load.ptv2026.com/')
+          const curl = spawn('curl', ['-s', '-L', targetUrl])
+          let body = ''
+          curl.stdout.on('data', (d) => { body += d.toString() })
+          curl.on('close', () => {
+            res.setHeader('Content-Type', 'application/vnd.apple.mpegurl')
+            res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate')
+            
+            const lines = body.split('\n')
+            const segments: { file: string; duration: number }[] = []
+            let lastDuration = 10.0
+            
+            for (let i = 0; i < lines.length; i++) {
+              const line = lines[i].trim()
+              if (line.startsWith('#EXTINF:')) {
+                const durMatch = line.match(/#EXTINF:([\d.]+)/)
+                if (durMatch) lastDuration = parseFloat(durMatch[1])
+              } else if (line.endsWith('.ts') && !line.startsWith('#')) {
+                segments.push({ file: line, duration: lastDuration })
+              }
+            }
+            
+            if (segments.length > 0) {
+              const totalDuration = segments.reduce((sum, s) => sum + s.duration, 0)
+              const nowSec = Date.now() / 1000
+              const cycleTime = nowSec % totalDuration
+              
+              let cum = 0
+              let curIdx = 0
+              for (let i = 0; i < segments.length; i++) {
+                if (cum + segments[i].duration > cycleTime) {
+                  curIdx = i
+                  break
+                }
+                cum += segments[i].duration
+              }
+              
+              const cycleCount = Math.floor(nowSec / totalDuration)
+              const mediaSequence = cycleCount * segments.length + curIdx
+              
+              let dynamicM3u8 = `#EXTM3U\n#EXT-X-VERSION:3\n#EXT-X-TARGETDURATION:20\n#EXT-X-MEDIA-SEQUENCE:${mediaSequence}\n`
+              
+              // Provide 5 continuous segments in sliding window
+              for (let i = 0; i < Math.max(5, segments.length); i++) {
+                const s = segments[(curIdx + i) % segments.length]
+                dynamicM3u8 += `#EXTINF:${s.duration.toFixed(6)},\n${s.file}\n`
+              }
+              
+              res.end(dynamicM3u8)
+              return
+            }
+            
+            res.end(body)
+          })
+          return
+        }
+
         // All curl proxy targets
         const curlTargets: { prefix: string; target: string; args?: string[] }[] = [
           { prefix: '/astro-linear/', target: 'https://linearjitp-playback.astro.com.my/', args: ['-H', `User-Agent: ${ASTRO_UA}`] },

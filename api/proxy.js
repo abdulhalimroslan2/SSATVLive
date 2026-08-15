@@ -153,6 +153,57 @@ export default async function handler(request) {
       });
     }
 
+    // If it's load-ptv rwt.m3u8, convert static loops into continuous infinite live sliding windows
+    if (path.includes('rwt.m3u8')) {
+      const text = await response.text();
+      const lines = text.split('\n');
+      const segments = [];
+      let lastDuration = 10.0;
+      
+      for (let i = 0; i < lines.length; i++) {
+        const line = lines[i].trim();
+        if (line.startsWith('#EXTINF:')) {
+          const durMatch = line.match(/#EXTINF:([\d.]+)/);
+          if (durMatch) lastDuration = parseFloat(durMatch[1]);
+        } else if (line.endsWith('.ts') && !line.startsWith('#')) {
+          segments.push({ file: line, duration: lastDuration });
+        }
+      }
+      
+      if (segments.length > 0) {
+        const totalDuration = segments.reduce((sum, s) => sum + s.duration, 0);
+        const nowSec = Date.now() / 1000;
+        const cycleTime = nowSec % totalDuration;
+        
+        let cum = 0;
+        let curIdx = 0;
+        for (let i = 0; i < segments.length; i++) {
+          if (cum + segments[i].duration > cycleTime) {
+            curIdx = i;
+            break;
+          }
+          cum += segments[i].duration;
+        }
+        
+        const cycleCount = Math.floor(nowSec / totalDuration);
+        const mediaSequence = cycleCount * segments.length + curIdx;
+        
+        let dynamicM3u8 = `#EXTM3U\n#EXT-X-VERSION:3\n#EXT-X-TARGETDURATION:20\n#EXT-X-MEDIA-SEQUENCE:${mediaSequence}\n`;
+        
+        for (let i = 0; i < Math.max(5, segments.length); i++) {
+          const s = segments[(curIdx + i) % segments.length];
+          dynamicM3u8 += `#EXTINF:${s.duration.toFixed(6)},\n${s.file}\n`;
+        }
+        
+        responseHeaders.set('Content-Type', 'application/vnd.apple.mpegurl');
+        responseHeaders.set('Cache-Control', 'no-cache, no-store, must-revalidate');
+        return new Response(dynamicM3u8, {
+          status: response.status,
+          headers: responseHeaders,
+        });
+      }
+    }
+
     // Static video chunk caching for zero-buffer edge acceleration
     if (/\.(ts|m4s|m4f|m4v|m4a|mp4)(\?|$)/i.test(path)) {
       responseHeaders.set('Cache-Control', 'public, max-age=120, s-maxage=300, stale-while-revalidate=600');

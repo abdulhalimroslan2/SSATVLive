@@ -439,13 +439,23 @@ export const Player: React.FC<PlayerProps> = ({ channel }) => {
       }
     };
 
-    // Watchdog to recover from decoder stalls
+    // Watchdog to recover from decoder stalls and auto-loop bounded live streams
     let lastTime = -1;
     let stallCount = 0;
     const stallCheckInterval = setInterval(() => {
       const video = videoRef.current;
       const player = playerRef.current;
-      if (!video || video.paused || video.ended || video.readyState < 2) {
+      if (!video) return;
+
+      // If video has ended or reached the end of available duration, loop back to start immediately
+      if (video.ended || (video.duration > 0 && video.duration < 120 && video.currentTime >= video.duration - 0.5)) {
+        console.log('[Player] Watchdog detected end of stream, auto-looping...');
+        video.currentTime = 0;
+        video.play().catch(() => {});
+        return;
+      }
+
+      if (video.paused || video.readyState < 2) {
         stallCount = 0;
         return;
       }
@@ -453,12 +463,16 @@ export const Player: React.FC<PlayerProps> = ({ channel }) => {
       const currentTime = video.currentTime;
       if (lastTime >= 0 && Math.abs(currentTime - lastTime) < 0.05) {
         stallCount++;
-        if (stallCount >= 3) {
-          console.log('[Player] Playback stall detected, nudging forward...');
+        if (stallCount >= 2) {
+          console.log('[Player] Playback stall detected, auto-recovering...');
           try {
-            if (player && player.isLive()) {
+            if (video.duration > 0 && video.duration < 120 && video.currentTime >= video.duration - 1.5) {
+              video.currentTime = 0;
+            } else if (player && player.isLive()) {
               const seekRange = player.seekRange();
-              video.currentTime = seekRange.end - 3;
+              if (seekRange && seekRange.end) {
+                video.currentTime = seekRange.end - 3;
+              }
               player.retryStreaming();
             } else {
               video.currentTime += 0.5;
@@ -471,7 +485,7 @@ export const Player: React.FC<PlayerProps> = ({ channel }) => {
         stallCount = 0;
       }
       lastTime = currentTime;
-    }, 1500);
+    }, 1000);
 
     initStream();
 
