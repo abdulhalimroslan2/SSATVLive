@@ -10,6 +10,7 @@ import {
   History as HistoryIcon, 
   Settings, 
   Search,
+  Sparkles,
   ChevronDown
 } from 'lucide-react';
 
@@ -20,27 +21,32 @@ interface SidebarProps {
 
 export const Sidebar: React.FC<SidebarProps> = ({ activeTab, setActiveTab }) => {
   const navItems = [
-    { id: 'search', label: 'Search', icon: Search },
-    { id: 'home', label: 'Home', icon: Home },
+    { id: 'search', label: 'Carian', icon: Search, shortcut: '/' },
+    { id: 'home', label: 'Utama', icon: Home },
     { id: 'livetv', label: 'Live TV', icon: Tv },
-    { id: 'movies', label: 'Movies', icon: Film },
-    { id: 'series', label: 'Series', icon: Video },
-    { id: 'sports', label: 'Sports', icon: Trophy },
-    { id: 'kids', label: 'Kids', icon: Smile },
-    { id: 'mylist', label: 'My List', icon: Plus },
-    { id: 'history', label: 'History', icon: HistoryIcon },
-    { id: 'settings', label: 'Settings', icon: Settings },
+    { id: 'vod', label: 'VOD On Demand', icon: Sparkles, badge: 'HOT', isHighlight: true },
+    { id: 'movies', label: 'Filem', icon: Film },
+    { id: 'series', label: 'Siri Drama', icon: Video },
+    { id: 'sports', label: 'Sukan', icon: Trophy },
+    { id: 'kids', label: 'Kanak-Kanak', icon: Smile },
+    { id: 'mylist', label: 'Senarai Saya', icon: Plus },
+    { id: 'history', label: 'Sejarah', icon: HistoryIcon },
+    { id: 'settings', label: 'Tetapan', icon: Settings },
   ];
 
   return (
     <aside className="sidebar">
       <div>
         {/* Brand Logo */}
-        <div className="sidebar-brand">
+        <div 
+          className="sidebar-brand" 
+          onClick={() => setActiveTab('home')}
+          style={{ cursor: 'pointer' }}
+        >
           <Tv color="#e50914" size={32} />
           <div>
             <div className="brand-logo-text">LIVE TV</div>
-            <div className="brand-logo-sub">STREAMING</div>
+            <div className="brand-logo-sub">STREAMING & VOD</div>
           </div>
         </div>
 
@@ -52,11 +58,14 @@ export const Sidebar: React.FC<SidebarProps> = ({ activeTab, setActiveTab }) => 
             return (
               <button
                 key={item.id}
-                className={`nav-item ${isActive ? 'active' : ''}`}
+                className={`nav-item ${isActive ? 'active' : ''} ${item.isHighlight ? 'highlight-nav-item' : ''}`}
                 onClick={() => setActiveTab(item.id)}
               >
-                <Icon size={20} />
-                <span>{item.label}</span>
+                <Icon size={20} className={item.isHighlight ? 'nav-icon-sparkle' : ''} />
+                <span style={{ flex: 1, textAlign: 'left' }}>{item.label}</span>
+                {item.badge && (
+                  <span className="nav-badge-hot">{item.badge}</span>
+                )}
               </button>
             );
           })}
@@ -72,7 +81,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ activeTab, setActiveTab }) => 
         />
         <div className="user-info" style={{ flex: 1 }}>
           <div className="user-name">Abdul Halim</div>
-          <div className="user-status">Premium</div>
+          <div className="user-status">VIP Premium</div>
         </div>
         <ChevronDown size={16} color="var(--text-secondary)" />
       </div>

@@ -1,12 +1,15 @@
 import { useEffect, useState } from 'react';
 import type { Channel } from './mockData';
 import { fetchChannels, CATEGORIES } from './mockData';
+import { type VodItem } from './vodData';
 import { Sidebar } from './Sidebar';
 import { TopNav } from './TopNav';
 import { HeroBanner } from './HeroBanner';
 import { Player } from './Player';
 import { ChannelCard } from './ChannelCard';
 import { ContinueWatching, type WatchingItem } from './ContinueWatching';
+import { VodHub } from './VodHub';
+import { SearchView } from './SearchView';
 import { ChevronRight } from 'lucide-react';
 
 function App() {
@@ -14,10 +17,23 @@ function App() {
   const [activeChannel, setActiveChannel] = useState<Channel | null>(null);
   const [activeTab, setActiveTab] = useState('home');
   const [activeCategory, setActiveCategory] = useState('all');
+  const [searchQuery, setSearchQuery] = useState('');
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     loadChannels();
+  }, []);
+
+  // Keyboard shortcut '/' to search
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === '/' && (document.activeElement?.tagName !== 'INPUT')) {
+        e.preventDefault();
+        setActiveTab('search');
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
   }, []);
 
   const loadChannels = async () => {
@@ -26,6 +42,9 @@ function App() {
     setChannels(data);
     setIsLoading(false);
   };
+
+  // Movie channels
+  const movieChannels = channels.filter(ch => ch.category === 'MOVIES');
 
   // Filter channels by active category
   const filteredChannels = activeCategory === 'all'
@@ -40,6 +59,23 @@ function App() {
 
   const handleChannelSelect = (channel: Channel) => {
     setActiveChannel(channel);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const handlePlayVodItem = (item: VodItem) => {
+    const vodChannel: Channel = {
+      id: item.id,
+      contentId: item.id,
+      name: `${item.title} (${item.type === 'movie' ? 'Filem' : 'Siri'})`,
+      description: item.synopsis,
+      category: item.type === 'movie' ? 'MOVIES' : 'SERIES',
+      thumbnail: item.poster,
+      streamUrl: item.streamUrl,
+      clearKey: item.clearKey,
+      isFreeContent: true,
+      isFreePreviewEnabledContent: true,
+    };
+    setActiveChannel(vodChannel);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
@@ -60,24 +96,50 @@ function App() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  // Map sidebar tabs to categories
+  // Map sidebar tabs
   const handleSidebarTab = (tab: string) => {
     setActiveTab(tab);
-    const tabToCat: Record<string, string> = {
-      'home': 'all',
-      'livetv': 'all',
-      'sports': 'sports_fhd',
-      'movies': 'movies',
-      'kids': 'kids',
-    };
-    if (tabToCat[tab] !== undefined) {
-      setActiveCategory(tabToCat[tab]);
+    if (tab === 'search') {
+      setActiveCategory('all');
+    } else if (tab === 'vod' || tab === 'movies' || tab === 'series') {
+      setActiveCategory('vod');
+    } else {
+      const tabToCat: Record<string, string> = {
+        'home': 'all',
+        'livetv': 'all',
+        'sports': 'sports_fhd',
+        'kids': 'kids',
+      };
+      if (tabToCat[tab] !== undefined) {
+        setActiveCategory(tabToCat[tab]);
+      }
+    }
+  };
+
+  const handleCategoryChange = (catId: string) => {
+    setActiveCategory(catId);
+    if (catId === 'vod') {
+      setActiveTab('vod');
+    } else if (activeTab === 'search') {
+      setActiveTab('home');
+    }
+  };
+
+  const handleSearchTrigger = () => {
+    setActiveTab('search');
+  };
+
+  const handleSearchQueryChange = (q: string) => {
+    setSearchQuery(q);
+    if (activeTab !== 'search') {
+      setActiveTab('search');
     }
   };
 
   // Build category pills for TopNav
   const categoryPills = [
     { id: 'all', label: 'Semua' },
+    { id: 'vod', label: '🎬 VOD Filem & Siri' },
     ...CATEGORIES.map(c => ({ id: c.id, label: c.label }))
   ];
 
@@ -88,13 +150,16 @@ function App() {
       <main className="main-wrapper">
         <TopNav
           activeCategory={activeCategory}
-          setActiveCategory={setActiveCategory}
+          setActiveCategory={handleCategoryChange}
           categories={categoryPills}
+          searchQuery={searchQuery}
+          onSearchInputClick={handleSearchTrigger}
+          onSearchChange={handleSearchQueryChange}
         />
 
         {isLoading ? (
           <div style={{ textAlign: 'center', padding: '6rem', color: 'var(--text-secondary)', fontSize: '1.2rem' }}>
-            Memuatkan Saluran TV...
+            Memuatkan Saluran TV & VOD...
           </div>
         ) : (
           <>
@@ -109,78 +174,117 @@ function App() {
                     </span>
                   </div>
                   <span className="badge-live">
-                    <span className="badge-live-dot"></span> LIVE
+                    <span className="badge-live-dot"></span> SEDANG DIMAINKAN
                   </span>
                 </div>
                 <Player key={activeChannel.id} channel={activeChannel} />
               </section>
             )}
 
-            {/* Hero Banner (home view only) */}
-            {activeTab === 'home' && activeCategory === 'all' && (
-              <HeroBanner onWatchLive={handleWatchLiveHero} />
-            )}
-
-            {/* Category-filtered view OR grouped home view */}
-            {activeCategory !== 'all' ? (
-              /* Single category view */
-              <section style={{ marginBottom: '3rem' }}>
-                <div className="section-header">
-                  <h3 className="section-title">
-                    <span style={{ color: 'var(--accent-red)' }}>•</span>{' '}
-                    {categoryPills.find(c => c.id === activeCategory)?.label || 'Saluran'}{' '}
-                    <span style={{ fontSize: '0.85rem', fontWeight: 400, color: 'var(--text-secondary)' }}>
-                      ({filteredChannels.length} saluran)
-                    </span>
-                  </h3>
-                </div>
-                <div className="channels-grid">
-                  {filteredChannels.map((channel) => (
-                    <ChannelCard
-                      key={channel.id}
-                      channel={channel}
-                      isActive={activeChannel?.id === channel.id}
-                      onSelect={handleChannelSelect}
-                    />
-                  ))}
-                </div>
-              </section>
+            {/* TAB 1: SEARCH VIEW */}
+            {activeTab === 'search' ? (
+              <SearchView
+                channels={channels}
+                onSelectChannel={handleChannelSelect}
+                activeChannelId={activeChannel?.id}
+                onPlayVodItem={handlePlayVodItem}
+                initialQuery={searchQuery}
+              />
+            ) : activeTab === 'vod' || activeTab === 'movies' || activeTab === 'series' || activeCategory === 'vod' ? (
+              /* TAB 2: VOD HUB (ALL MOVIES & SERIES) */
+              <VodHub
+                movieChannels={movieChannels}
+                onSelectChannel={handleChannelSelect}
+                activeChannelId={activeChannel?.id}
+                onPlayVodItem={handlePlayVodItem}
+              />
             ) : (
-              /* Home: show all categories grouped */
-              channelsByCategory.map((group) => (
-                <section key={group.id} style={{ marginBottom: '2.5rem' }}>
-                  <div className="section-header">
-                    <h3 className="section-title">
-                      <span style={{ color: 'var(--accent-red)' }}>•</span>{' '}
-                      {group.label}{' '}
-                      <span style={{ fontSize: '0.85rem', fontWeight: 400, color: 'var(--text-secondary)' }}>
-                        ({group.channels.length})
-                      </span>
-                    </h3>
-                    <span
-                      className="section-link"
-                      onClick={() => setActiveCategory(group.id)}
-                    >
-                      Lihat Semua <ChevronRight size={16} />
-                    </span>
-                  </div>
-                  <div className="channels-scroll">
-                    {group.channels.slice(0, 8).map((channel) => (
-                      <ChannelCard
-                        key={channel.id}
-                        channel={channel}
-                        isActive={activeChannel?.id === channel.id}
-                        onSelect={handleChannelSelect}
-                      />
-                    ))}
-                  </div>
-                </section>
-              ))
-            )}
+              /* TAB 3: HOME & LIVE TV VIEW */
+              <>
+                {/* Hero Banner (home view only) */}
+                {activeTab === 'home' && activeCategory === 'all' && (
+                  <HeroBanner onWatchLive={handleWatchLiveHero} />
+                )}
 
-            {/* Continue Watching */}
-            {activeCategory === 'all' && (
-              <ContinueWatching onSelectItem={handleContinueWatchingSelect} />
+                {/* Category-filtered view OR grouped home view */}
+                {activeCategory !== 'all' ? (
+                  /* Single category view */
+                  <section style={{ marginBottom: '3rem' }}>
+                    <div className="section-header">
+                      <h3 className="section-title">
+                        <span style={{ color: 'var(--accent-red)' }}>•</span>{' '}
+                        {categoryPills.find(c => c.id === activeCategory)?.label || 'Saluran'}{' '}
+                        <span style={{ fontSize: '0.85rem', fontWeight: 400, color: 'var(--text-secondary)' }}>
+                          ({filteredChannels.length} saluran)
+                        </span>
+                      </h3>
+                    </div>
+                    <div className="channels-grid">
+                      {filteredChannels.map((channel) => (
+                        <ChannelCard
+                          key={channel.id}
+                          channel={channel}
+                          isActive={activeChannel?.id === channel.id}
+                          onSelect={handleChannelSelect}
+                        />
+                      ))}
+                    </div>
+                  </section>
+                ) : (
+                  /* Home: show all categories grouped */
+                  <>
+                    {/* Quick VOD Promo Banner on Home */}
+                    <div 
+                      className="vod-home-promo"
+                      onClick={() => handleSidebarTab('vod')}
+                    >
+                      <div className="vod-promo-badge">VOD ON DEMAND</div>
+                      <div className="vod-promo-text">
+                        <h3>🎬 Koleksi Filem & Siri Drama Terkini</h3>
+                        <p>Tonton Polis Evo 3, High Council, Mat Kilau, Queen of Tears dan ratusan tajuk lain sekarang!</p>
+                      </div>
+                      <button className="btn-red" style={{ flexShrink: 0 }}>
+                        Buka VOD Hub <ChevronRight size={16} />
+                      </button>
+                    </div>
+
+                    {channelsByCategory.map((group) => (
+                      <section key={group.id} style={{ marginBottom: '2.5rem' }}>
+                        <div className="section-header">
+                          <h3 className="section-title">
+                            <span style={{ color: 'var(--accent-red)' }}>•</span>{' '}
+                            {group.label}{' '}
+                            <span style={{ fontSize: '0.85rem', fontWeight: 400, color: 'var(--text-secondary)' }}>
+                              ({group.channels.length})
+                            </span>
+                          </h3>
+                          <span
+                            className="section-link"
+                            onClick={() => handleCategoryChange(group.id)}
+                          >
+                            Lihat Semua <ChevronRight size={16} />
+                          </span>
+                        </div>
+                        <div className="channels-scroll">
+                          {group.channels.slice(0, 8).map((channel) => (
+                            <ChannelCard
+                              key={channel.id}
+                              channel={channel}
+                              isActive={activeChannel?.id === channel.id}
+                              onSelect={handleChannelSelect}
+                            />
+                          ))}
+                        </div>
+                      </section>
+                    ))}
+                  </>
+                )}
+
+                {/* Continue Watching */}
+                {activeCategory === 'all' && (
+                  <ContinueWatching onSelectItem={handleContinueWatchingSelect} />
+                )}
+              </>
             )}
           </>
         )}
