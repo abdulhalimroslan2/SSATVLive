@@ -18,13 +18,15 @@ export default async function handler(request) {
   }
 
   const url = new URL(request.url);
-  let path = url.pathname;
+  let path = url.searchParams.get('path') || url.pathname;
   
   if (path.startsWith('/api/proxy')) {
     path = path.replace('/api/proxy', '');
   }
 
-  const remainingQueryString = url.searchParams.toString();
+  const queryParams = new URLSearchParams(url.searchParams);
+  queryParams.delete('path');
+  const remainingQueryString = queryParams.toString();
   
   let targetUrl = '';
   
