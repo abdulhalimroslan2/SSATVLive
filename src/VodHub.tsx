@@ -10,7 +10,7 @@ interface VodHubProps {
   movieChannels: Channel[];
   onSelectChannel: (channel: Channel) => void;
   activeChannelId?: string;
-  onPlayVodItem: (item: VodItem) => void;
+  onPlayVodItem: (item: VodItem, episodeNumber?: number) => void;
 }
 
 export const VodHub: React.FC<VodHubProps> = ({
@@ -296,9 +296,9 @@ export const VodHub: React.FC<VodHubProps> = ({
       <VodModal
         item={activeModalItem}
         onClose={() => setActiveModalItem(null)}
-        onPlay={(item) => {
+        onPlay={(item, episodeNumber) => {
           setActiveModalItem(null);
-          onPlayVodItem(item);
+          onPlayVodItem(item, episodeNumber);
         }}
         isBookmarked={activeModalItem ? bookmarkedIds.includes(activeModalItem.id) : false}
         onToggleBookmark={toggleBookmark}

@@ -5,6 +5,22 @@
       "destination": "/api/proxy?path=/astro-linear/:match*"
     },
     {
+      "source": "/astro-vod/:match*",
+      "destination": "/api/proxy?path=/astro-vod/:match*"
+    },
+    {
+      "source": "/iris-synamedia/:match*",
+      "destination": "/api/proxy?path=/iris-synamedia/:match*"
+    },
+    {
+      "source": "/ngtv-vod/:match*",
+      "destination": "/api/proxy?path=/ngtv-vod/:match*"
+    },
+    {
+      "source": "/viu-vod/:match*",
+      "destination": "/api/proxy?path=/viu-vod/:match*"
+    },
+    {
       "source": "/rtm-stream/:match*",
       "destination": "/api/proxy?path=/rtm-stream/:match*"
     },

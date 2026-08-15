@@ -2,48 +2,58 @@ export const config = {
   runtime: 'edge',
 };
 
+const CORS_HEADERS = {
+  'Access-Control-Allow-Origin': '*',
+  'Access-Control-Allow-Methods': 'GET, POST, OPTIONS, HEAD',
+  'Access-Control-Allow-Headers': '*',
+  'Access-Control-Max-Age': '86400',
+};
+
 const ASTRO_UA = 'Mozilla/5.0 (Linux; Android 10; MiTV-AXSO0 Build/QTZCS200912.005) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.159 Safari/537.36';
 
-export default async function handler(req) {
-  // 1. Handle CORS Preflight immediately
-  if (req.method === 'OPTIONS') {
-    return new Response(null, {
-      status: 204,
-      headers: {
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Methods': 'GET, HEAD, OPTIONS',
-        'Access-Control-Allow-Headers': '*',
-        'Access-Control-Max-Age': '86400',
-      },
-    });
+export default async function handler(request) {
+  if (request.method === 'OPTIONS') {
+    return new Response(null, { status: 204, headers: CORS_HEADERS });
   }
 
-  const url = new URL(req.url);
-  const path = url.searchParams.get('path');
+  const url = new URL(request.url);
+  let path = url.pathname;
   
-  if (!path) {
-    return new Response('Missing path', { status: 400 });
+  if (path.startsWith('/api/proxy')) {
+    path = path.replace('/api/proxy', '');
   }
 
-  // Preserve all query parameters that came with the original request
-  url.searchParams.delete('path');
   const remainingQueryString = url.searchParams.toString();
   
   let targetUrl = '';
   let headers = new Headers();
   
-  // Astro Linear
+  // Astro Linear & VOD
   if (path.startsWith('/astro-linear/')) {
     targetUrl = path.replace('/astro-linear/', 'https://linearjitp-playback.astro.com.my/');
     headers.set('User-Agent', ASTRO_UA);
   } 
+  else if (path.startsWith('/astro-vod/')) {
+    targetUrl = path.replace('/astro-vod/', 'https://vodejitp-asset-playback-b.astro.com.my/');
+    headers.set('User-Agent', ASTRO_UA);
+  }
+  else if (path.startsWith('/iris-synamedia/')) {
+    targetUrl = path.replace('/iris-synamedia/', 'https://vod-dai-ott-ap.ssai.iris.synamedia.com/');
+    headers.set('User-Agent', ASTRO_UA);
+  }
+  else if (path.startsWith('/ngtv-vod/')) {
+    targetUrl = path.replace('/ngtv-vod/', 'https://ngtv-vod.gcdn.co/');
+  }
+  else if (path.startsWith('/viu-vod/')) {
+    targetUrl = path.replace('/viu-vod/', 'https://dms-api.viu.com/');
+  }
   // RTM Stream
   else if (path.startsWith('/rtm-stream/')) {
     targetUrl = path.replace('/rtm-stream/', 'https://d25tgymtnqzu8s.cloudfront.net/');
     headers.set('Origin', 'https://rtmklik.rtm.gov.my');
     headers.set('Referer', 'https://rtmklik.rtm.gov.my/');
   }
-  // Other Cloudfront targeting (for RTM / others that need simple proxy)
+  // Other Cloudfront targeting
   else if (path.startsWith('/cf-d2xz/')) {
     targetUrl = path.replace('/cf-d2xz/', 'https://d2xz2v5wuvgur6.cloudfront.net/');
   }
@@ -88,41 +98,23 @@ export default async function handler(req) {
   try {
     const response = await fetch(targetUrl, {
       headers: headers,
-      redirect: 'follow'
+      redirect: 'follow',
     });
-    
-    // Copy headers from the target response
-    const resHeaders = new Headers(response.headers);
-    
-    // Allow CORS
-    resHeaders.set('Access-Control-Allow-Origin', '*');
-    resHeaders.set('Access-Control-Allow-Methods', 'GET, HEAD, OPTIONS');
-    resHeaders.set('Access-Control-Allow-Headers', '*');
-    
-    // Prevent Vercel Edge Caching (fixes live stream freezing)
-    resHeaders.set('Cache-Control', 'no-cache, no-store, must-revalidate');
-    resHeaders.set('Pragma', 'no-cache');
-    resHeaders.set('Expires', '0');
-    
-    // Strip hop-by-hop and conflicting transfer encoding headers that cause iOS WebKit decoding aborts
-    resHeaders.delete('content-encoding');
-    resHeaders.delete('content-length');
-    resHeaders.delete('transfer-encoding');
-    resHeaders.delete('connection');
 
-    // Make sure content-type is correct for video streams
-    if (path.includes('.mpd')) resHeaders.set('Content-Type', 'application/dash+xml');
-    else if (path.includes('.m3u8')) resHeaders.set('Content-Type', 'application/vnd.apple.mpegurl');
-    else if (path.includes('.ts')) resHeaders.set('Content-Type', 'video/mp2t');
-    else if (/\.(m4f|m4s|m4v|m4a|mp4)/.test(path)) resHeaders.set('Content-Type', 'video/mp4');
+    const responseHeaders = new Headers(response.headers);
+    Object.entries(CORS_HEADERS).forEach(([key, value]) => {
+      responseHeaders.set(key, value);
+    });
 
-    // Edge functions can stream response body directly
     return new Response(response.body, {
       status: response.status,
       statusText: response.statusText,
-      headers: resHeaders
+      headers: responseHeaders,
     });
-  } catch (err) {
-    return new Response('Proxy Error: ' + err.message, { status: 500 });
+  } catch (error) {
+    return new Response(JSON.stringify({ error: error.message }), {
+      status: 502,
+      headers: { ...CORS_HEADERS, 'Content-Type': 'application/json' },
+    });
   }
 }

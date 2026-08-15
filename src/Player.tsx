@@ -53,8 +53,36 @@ export const Player: React.FC<PlayerProps> = ({ channel }) => {
       const video = videoRef.current;
       const container = videoContainerRef.current;
 
-      // Clean up URL
+      const PROXY_MAP: [string, string][] = [
+        ['https://linearjitp-playback.astro.com.my/', '/astro-linear/'],
+        ['http://linearjitp-playback.astro.com.my/', '/astro-linear/'],
+        ['https://vodejitp-asset-playback-b.astro.com.my/', '/astro-vod/'],
+        ['http://vodejitp-asset-playback-b.astro.com.my/', '/astro-vod/'],
+        ['https://vod-dai-ott-ap.ssai.iris.synamedia.com/', '/iris-synamedia/'],
+        ['https://ngtv-vod.gcdn.co/', '/ngtv-vod/'],
+        ['https://dms-api.viu.com/', '/viu-vod/'],
+        ['https://get.perfecttv.net/', '/perfecttv/'],
+        ['https://ptv2026.com/', '/ptv2026/'],
+        ['http://ptv2026.com/', '/ptv2026/'],
+        ['https://load.ptv2026.com/', '/load-ptv/'],
+        ['https://d25tgymtnqzu8s.cloudfront.net/', '/rtm-stream/'],
+        ['https://d2xz2v5wuvgur6.cloudfront.net/', '/cf-d2xz/'],
+        ['https://d2tjypxxy769fn.cloudfront.net/', '/cf-d2tj/'],
+        ['https://d84q7nw4qf3j3.cloudfront.net/', '/cf-d84q/'],
+        ['https://d3b0v7fggu5zwm.cloudfront.net/', '/cf-d3b0/'],
+        ['https://slive.mana2.my/', '/mana2/'],
+        ['http://ngtv-live-cbj.gcdn.co/', '/gcdn/'],
+        ['https://ngtv-live-cbj.gcdn.co/', '/gcdn-s/'],
+      ];
+
+      // Clean up URL and route through proxy if needed
       let cleanUrl = channel.streamUrl ? channel.streamUrl.split('|')[0].trim() : '';
+      for (const [from, to] of PROXY_MAP) {
+        if (cleanUrl.startsWith(from)) {
+          cleanUrl = window.location.origin + cleanUrl.replace(from, to);
+          break;
+        }
+      }
       if (cleanUrl.startsWith('/')) {
         cleanUrl = window.location.origin + cleanUrl;
       }
@@ -91,20 +119,7 @@ export const Player: React.FC<PlayerProps> = ({ channel }) => {
           if (networkEngine) {
             networkEngine.registerRequestFilter((_type: any, request: any) => {
               const url = request.uris[0];
-              const proxyMap: [string, string][] = [
-                ['https://linearjitp-playback.astro.com.my/', '/astro-linear/'],
-                ['https://d2xz2v5wuvgur6.cloudfront.net/', '/cf-d2xz/'],
-                ['https://d2tjypxxy769fn.cloudfront.net/', '/cf-d2tj/'],
-                ['https://d84q7nw4qf3j3.cloudfront.net/', '/cf-d84q/'],
-                ['https://d3b0v7fggu5zwm.cloudfront.net/', '/cf-d3b0/'],
-                ['https://d25tgymtnqzu8s.cloudfront.net/', '/rtm-stream/'],
-                ['https://ptv2026.com/', '/ptv2026/'],
-                ['https://load.ptv2026.com/', '/load-ptv/'],
-                ['https://slive.mana2.my/', '/mana2/'],
-                ['http://ngtv-live-cbj.gcdn.co/', '/gcdn/'],
-                ['https://ngtv-live-cbj.gcdn.co/', '/gcdn-s/'],
-              ];
-              for (const [from, to] of proxyMap) {
+              for (const [from, to] of PROXY_MAP) {
                 if (url.startsWith(from)) {
                   request.uris[0] = window.location.origin + url.replace(from, to);
                   break;

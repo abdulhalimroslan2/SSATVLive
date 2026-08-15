@@ -62,16 +62,31 @@ function App() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  const handlePlayVodItem = (item: VodItem) => {
+  const handlePlayVodItem = (item: VodItem, episodeNumber?: number) => {
+    let playStreamUrl = item.streamUrl;
+    let playClearKey = item.clearKey;
+    let title = item.title;
+    let desc = item.synopsis;
+
+    if (episodeNumber && item.episodes && item.episodes.length > 0) {
+      const ep = item.episodes.find(e => e.episodeNumber === episodeNumber) || item.episodes[0];
+      if (ep) {
+        playStreamUrl = ep.streamUrl;
+        playClearKey = ep.clearKey || item.clearKey;
+        title = `${item.title} - ${ep.title}`;
+        desc = ep.synopsis || item.synopsis;
+      }
+    }
+
     const vodChannel: Channel = {
-      id: item.id,
+      id: `vod_${item.id}_${episodeNumber || 1}_${Date.now()}`,
       contentId: item.id,
-      name: `${item.title} (${item.type === 'movie' ? 'Filem' : 'Siri'})`,
-      description: item.synopsis,
+      name: `${title} (${item.type === 'movie' ? 'Filem VOD' : 'Siri Drama'})`,
+      description: desc,
       category: item.type === 'movie' ? 'MOVIES' : 'SERIES',
       thumbnail: item.poster,
-      streamUrl: item.streamUrl,
-      clearKey: item.clearKey,
+      streamUrl: playStreamUrl,
+      clearKey: playClearKey,
       isFreeContent: true,
       isFreePreviewEnabledContent: true,
     };

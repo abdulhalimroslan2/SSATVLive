@@ -19,7 +19,7 @@ interface SearchViewProps {
   channels: Channel[];
   onSelectChannel: (channel: Channel) => void;
   activeChannelId?: string;
-  onPlayVodItem: (item: VodItem) => void;
+  onPlayVodItem: (item: VodItem, episodeNumber?: number) => void;
   initialQuery?: string;
 }
 
@@ -320,9 +320,9 @@ export const SearchView: React.FC<SearchViewProps> = ({
       <VodModal
         item={activeModalItem}
         onClose={() => setActiveModalItem(null)}
-        onPlay={(item) => {
+        onPlay={(item, episodeNumber) => {
           setActiveModalItem(null);
-          onPlayVodItem(item);
+          onPlayVodItem(item, episodeNumber);
         }}
       />
     </div>

@@ -14,7 +14,7 @@ function proxyPlugin() {
 
         const setCors = () => {
           res.setHeader('Access-Control-Allow-Origin', '*')
-          res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS')
+          res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS, POST')
           res.setHeader('Access-Control-Allow-Headers', '*')
         }
 
@@ -25,6 +25,11 @@ function proxyPlugin() {
         // All curl proxy targets
         const curlTargets: { prefix: string; target: string; args?: string[] }[] = [
           { prefix: '/astro-linear/', target: 'https://linearjitp-playback.astro.com.my/', args: ['-H', `User-Agent: ${ASTRO_UA}`] },
+          { prefix: '/astro-vod/', target: 'https://vodejitp-asset-playback-b.astro.com.my/', args: ['-H', `User-Agent: ${ASTRO_UA}`] },
+          { prefix: '/iris-synamedia/', target: 'https://vod-dai-ott-ap.ssai.iris.synamedia.com/', args: ['-H', `User-Agent: ${ASTRO_UA}`] },
+          { prefix: '/ngtv-vod/', target: 'https://ngtv-vod.gcdn.co/' },
+          { prefix: '/viu-vod/', target: 'https://dms-api.viu.com/' },
+          { prefix: '/perfecttv/', target: 'https://get.perfecttv.net/' },
           { prefix: '/cf-d2xz/', target: 'https://d2xz2v5wuvgur6.cloudfront.net/' },
           { prefix: '/cf-d2tj/', target: 'https://d2tjypxxy769fn.cloudfront.net/' },
           { prefix: '/cf-d84q/', target: 'https://d84q7nw4qf3j3.cloudfront.net/' },
@@ -98,24 +103,19 @@ export default defineConfig({
         rewrite: (path) => path.replace(/^\/cf-df14/, '')
       },
       '/iptv-direct': {
-        target: 'http://103.107.198.46:8080',
+        target: 'https://tstgo.1000966.xyz',
         changeOrigin: true, followRedirects: true,
         rewrite: (path) => path.replace(/^\/iptv-direct/, '')
       },
-      '/perfecttv': {
-        target: 'https://get.perfecttv.net',
+      '/yupptv': {
+        target: 'https://yuppmedtast-vh.akamaihd.net',
         changeOrigin: true, followRedirects: true,
-        rewrite: (path) => path.replace(/^\/perfecttv/, '')
+        rewrite: (path) => path.replace(/^\/yupptv/, '')
       },
-      '/gcdn': {
-        target: 'http://ngtv-live-cbj.gcdn.co',
+      '/stream-m3u8': {
+        target: 'https://m3u8.stream263.com',
         changeOrigin: true, followRedirects: true,
-        rewrite: (path) => path.replace(/^\/gcdn/, '')
-      },
-      '/gcdn-s': {
-        target: 'https://ngtv-live-cbj.gcdn.co',
-        changeOrigin: true, followRedirects: true,
-        rewrite: (path) => path.replace(/^\/gcdn-s/, '')
+        rewrite: (path) => path.replace(/^\/stream-m3u8/, '')
       }
     }
   }
