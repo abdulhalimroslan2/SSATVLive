@@ -484,7 +484,7 @@ h1, h2, h3, h4, h5, h6 {
   align-items: center;
   gap: 0.5rem;
   background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: var(--glass-blur);
+  background: rgba(21, 26, 38, 0.95);
   color: #ffffff;
   padding: 0.75rem 1.5rem;
   border-radius: 10px;
@@ -550,7 +550,7 @@ h1, h2, h3, h4, h5, h6 {
   height: 44px;
   border-radius: 50%;
   background: rgba(15, 20, 30, 0.88);
-  backdrop-filter: blur(10px);
+  /* GPU accelerated */
   border: 1px solid rgba(255, 255, 255, 0.18);
   color: #ffffff;
   display: flex;
@@ -613,6 +613,10 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .channels-scroll .channel-card {
+  transform: translateZ(0);
+  will-change: transform;
+  content-visibility: auto;
+  contain-intrinsic-size: 220px 150px;
   min-width: 230px;
   max-width: 230px;
   flex-shrink: 0;
@@ -628,6 +632,10 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Channel Card - Netflix / Apple TV Ultra Premium */
 .channel-card {
+  transform: translateZ(0);
+  will-change: transform;
+  content-visibility: auto;
+  contain-intrinsic-size: 220px 150px;
   background: linear-gradient(180deg, #181d2a 0%, #111520 100%);
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 16px;
@@ -688,7 +696,7 @@ h1, h2, h3, h4, h5, h6 {
   align-items: center;
   gap: 0.35rem;
   background: rgba(229, 9, 20, 0.92);
-  backdrop-filter: blur(8px);
+  /* GPU accelerated */
   color: #ffffff;
   font-size: 0.68rem;
   font-weight: 800;
@@ -713,7 +721,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .channel-badge-cat {
   background: rgba(0, 0, 0, 0.7);
-  backdrop-filter: blur(6px);
+  /* GPU accelerated */
   border: 1px solid rgba(255, 255, 255, 0.12);
   color: #c4ccdb;
   font-size: 0.62rem;
@@ -771,7 +779,7 @@ h1, h2, h3, h4, h5, h6 {
   position: absolute;
   inset: 0;
   background: rgba(10, 13, 20, 0.65);
-  backdrop-filter: blur(3px);
+  /* GPU accelerated */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -1188,6 +1196,10 @@ h1, h2, h3, h4, h5, h6 {
 
 /* VOD Card */
 .vod-card {
+  transform: translateZ(0);
+  will-change: transform;
+  content-visibility: auto;
+  contain-intrinsic-size: 180px 270px;
   background: var(--bg-card);
   border: 1px solid var(--glass-border);
   border-radius: 16px;
@@ -1273,7 +1285,7 @@ h1, h2, h3, h4, h5, h6 {
   position: absolute;
   inset: 0;
   background: rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(2px);
+  /* GPU accelerated */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1393,7 +1405,7 @@ h1, h2, h3, h4, h5, h6 {
   position: fixed;
   inset: 0;
   background: rgba(0, 0, 0, 0.85);
-  backdrop-filter: blur(8px);
+  /* GPU accelerated */
   z-index: 100;
   display: flex;
   align-items: center;
@@ -2125,7 +2137,7 @@ h1, h2, h3, h4, h5, h6 {
   height: 44px;
   border-radius: 50%;
   background: rgba(15, 20, 30, 0.85);
-  backdrop-filter: blur(10px);
+  /* GPU accelerated */
   border: 1px solid rgba(255, 255, 255, 0.2);
   color: #ffffff;
   display: flex;
@@ -2149,7 +2161,7 @@ h1, h2, h3, h4, h5, h6 {
   height: 44px;
   border-radius: 50%;
   background: rgba(15, 20, 30, 0.85);
-  backdrop-filter: blur(10px);
+  /* GPU accelerated */
   border: 1px solid rgba(255, 255, 255, 0.2);
   color: #ffffff;
   display: flex;
@@ -2172,7 +2184,7 @@ h1, h2, h3, h4, h5, h6 {
   display: inline-flex;
   align-items: center;
   background: rgba(10, 14, 22, 0.85);
-  backdrop-filter: blur(8px);
+  /* GPU accelerated */
   border: 1px solid rgba(255, 255, 255, 0.15);
   border-radius: 20px;
   padding: 0.35rem 0.85rem;

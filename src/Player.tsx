@@ -311,7 +311,7 @@ export const Player: React.FC<PlayerProps> = ({ channel }) => {
               let licenseUrl = channel.clearKey!.trim();
               for (const [from, to] of PROXY_MAP) {
                 if (licenseUrl.startsWith(from)) {
-                  licenseUrl = window.location.origin + licenseUrl.replace(from, to);
+                  licenseUrl = getProxyBaseUrl() + licenseUrl.replace(from, to);
                   break;
                 }
               }
