@@ -7,6 +7,7 @@ import { TopNav } from './TopNav';
 import { HeroBanner } from './HeroBanner';
 import { Player } from './Player';
 import { ChannelCard } from './ChannelCard';
+import { ChannelRow } from './ChannelRow';
 import { ContinueWatching, type WatchingItem } from './ContinueWatching';
 import { VodHub } from './VodHub';
 import { SearchView } from './SearchView';
@@ -264,33 +265,15 @@ function App() {
                     </div>
 
                     {channelsByCategory.map((group) => (
-                      <section key={group.id} style={{ marginBottom: '2.5rem' }}>
-                        <div className="section-header">
-                          <h3 className="section-title">
-                            <span style={{ color: 'var(--accent-red)' }}>•</span>{' '}
-                            {group.label}{' '}
-                            <span style={{ fontSize: '0.85rem', fontWeight: 400, color: 'var(--text-secondary)' }}>
-                              ({group.channels.length})
-                            </span>
-                          </h3>
-                          <span
-                            className="section-link"
-                            onClick={() => handleCategoryChange(group.id)}
-                          >
-                            Lihat Semua <ChevronRight size={16} />
-                          </span>
-                        </div>
-                        <div className="channels-scroll">
-                          {group.channels.slice(0, 8).map((channel) => (
-                            <ChannelCard
-                              key={channel.id}
-                              channel={channel}
-                              isActive={activeChannel?.id === channel.id}
-                              onSelect={handleChannelSelect}
-                            />
-                          ))}
-                        </div>
-                      </section>
+                      <ChannelRow
+                        key={group.id}
+                        label={group.label}
+                        count={group.channels.length}
+                        channels={group.channels}
+                        activeChannelId={activeChannel?.id}
+                        onSelectChannel={handleChannelSelect}
+                        onViewAll={() => handleCategoryChange(group.id)}
+                      />
                     ))}
                   </>
                 )}

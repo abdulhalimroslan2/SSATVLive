@@ -531,6 +531,59 @@ h1, h2, h3, h4, h5, h6 {
   color: var(--accent-red);
 }
 
+/* Channel Row Section & Carousel Controls */
+.channel-row-section {
+  position: relative;
+  margin-bottom: 2.75rem;
+}
+
+.channel-row-carousel-container {
+  position: relative;
+  width: 100%;
+}
+
+.carousel-nav-btn {
+  position: absolute;
+  top: 42%;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(15, 20, 30, 0.88);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.7);
+  transition: all 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  outline: none;
+}
+
+.carousel-nav-btn:hover {
+  background: var(--accent-red);
+  border-color: var(--accent-red);
+  transform: translateY(-50%) scale(1.12);
+  box-shadow: 0 6px 22px var(--accent-red-glow);
+}
+
+.nav-btn-left {
+  left: -14px;
+}
+
+.nav-btn-right {
+  right: -14px;
+}
+
+@media (max-width: 768px) {
+  .carousel-nav-btn {
+    display: none;
+  }
+}
+
 /* Horizontal Scrolling Channels Container */
 .channels-scroll {
   display: flex;
