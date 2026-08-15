@@ -4,14 +4,12 @@ import { fetchChannels, CATEGORIES } from './mockData';
 import { type VodItem } from './vodData';
 import { Sidebar } from './Sidebar';
 import { TopNav } from './TopNav';
-import { HeroBanner } from './HeroBanner';
 import { Player } from './Player';
 import { ChannelCard } from './ChannelCard';
 import { ChannelRow } from './ChannelRow';
 import { ContinueWatching, type WatchingItem } from './ContinueWatching';
 import { VodHub } from './VodHub';
 import { SearchView } from './SearchView';
-import { ChevronRight } from 'lucide-react';
 
 function App() {
   const [channels, setChannels] = useState<Channel[]>([]);
@@ -92,16 +90,6 @@ function App() {
       isFreePreviewEnabledContent: true,
     };
     setActiveChannel(vodChannel);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
-
-  const handleWatchLiveHero = () => {
-    const sportsCh = channels.find(c => c.category === 'SPORTS FHD');
-    if (sportsCh) {
-      setActiveChannel(sportsCh);
-    } else if (channels.length > 0) {
-      setActiveChannel(channels[0]);
-    }
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
@@ -217,11 +205,6 @@ function App() {
             ) : (
               /* TAB 3: HOME & LIVE TV VIEW */
               <>
-                {/* Hero Banner (home view only) */}
-                {activeTab === 'home' && activeCategory === 'all' && (
-                  <HeroBanner onWatchLive={handleWatchLiveHero} />
-                )}
-
                 {/* Category-filtered view OR grouped home view */}
                 {activeCategory !== 'all' ? (
                   /* Single category view */
@@ -249,21 +232,6 @@ function App() {
                 ) : (
                   /* Home: show all categories grouped */
                   <>
-                    {/* Quick VOD Promo Banner on Home */}
-                    <div 
-                      className="vod-home-promo"
-                      onClick={() => handleSidebarTab('vod')}
-                    >
-                      <div className="vod-promo-badge">VOD ON DEMAND</div>
-                      <div className="vod-promo-text">
-                        <h3>🎬 Koleksi Filem & Siri Drama Terkini</h3>
-                        <p>Tonton Polis Evo 3, High Council, Mat Kilau, Queen of Tears dan ratusan tajuk lain sekarang!</p>
-                      </div>
-                      <button className="btn-red" style={{ flexShrink: 0 }}>
-                        Buka VOD Hub <ChevronRight size={16} />
-                      </button>
-                    </div>
-
                     {channelsByCategory.map((group) => (
                       <ChannelRow
                         key={group.id}

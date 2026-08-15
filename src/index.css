@@ -2208,3 +2208,63 @@ h1, h2, h3, h4, h5, h6 {
   outline-offset: 3px !important;
 }
 
+/* =========================================================================
+   LANDSCAPE & ANDROID TV / TABLET RESPONSIVE FIXES
+   ========================================================================= */
+
+@media (orientation: landscape) and (max-height: 768px) {
+  .app-container {
+    display: flex;
+    flex-direction: row;
+    width: 100vw;
+    overflow-x: hidden;
+  }
+  .sidebar {
+    width: 70px !important;
+    padding: 1rem 0.35rem !important;
+    position: fixed !important;
+    top: 0 !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    z-index: 100 !important;
+  }
+  .brand-logo-text, .brand-logo-sub, .nav-item span, .user-info, .nav-badge-hot {
+    display: none !important;
+  }
+  .main-wrapper {
+    margin-left: 70px !important;
+    padding: 1rem 1.5rem 2.5rem 1.5rem !important;
+    width: calc(100vw - 70px) !important;
+    max-width: 100% !important;
+  }
+  .top-header {
+    margin-bottom: 1rem !important;
+    gap: 0.75rem !important;
+  }
+  .top-search-bar {
+    width: 220px !important;
+  }
+  .main-player-section {
+    margin-bottom: 1.5rem !important;
+  }
+  .category-pill {
+    padding: 0.35rem 0.85rem !important;
+    font-size: 0.8rem !important;
+  }
+}
+
+@media (max-width: 900px) {
+  .sidebar {
+    width: 68px !important;
+    padding: 1rem 0.25rem !important;
+  }
+  .brand-logo-text, .brand-logo-sub, .nav-item span, .user-info, .nav-badge-hot {
+    display: none !important;
+  }
+  .main-wrapper {
+    margin-left: 68px !important;
+    padding: 1rem 1rem 2rem 1rem !important;
+  }
+}
+
+

@@ -15,6 +15,21 @@ const IS_IOS = typeof navigator !== 'undefined' && (
   (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)
 );
 
+// Detect if running inside Capacitor Android native app or standalone APK
+const IS_NATIVE_APP = typeof window !== 'undefined' && (
+  Boolean((window as any).Capacitor?.isNativePlatform?.()) ||
+  window.location.protocol === 'capacitor:' ||
+  window.location.protocol === 'file:' ||
+  (window.location.hostname === 'localhost' && window.location.port !== '5173')
+);
+
+export const getProxyBaseUrl = (): string => {
+  if (IS_NATIVE_APP) {
+    return 'https://ssatvlive.vercel.app';
+  }
+  return window.location.origin;
+};
+
 export const Player: React.FC<PlayerProps> = ({ channel }) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const videoContainerRef = useRef<HTMLDivElement>(null);
@@ -123,7 +138,7 @@ export const Player: React.FC<PlayerProps> = ({ channel }) => {
       hlsRef.current = null;
     }
     if (uiRef.current) {
-      await uiRef.current.destroy();
+      uiRef.current.destroy();
       uiRef.current = null;
     }
     if (playerRef.current) {
@@ -134,6 +149,7 @@ export const Player: React.FC<PlayerProps> = ({ channel }) => {
 
   useEffect(() => {
     let isCancelled = false;
+    let stallCheckInterval: any = null;
     setEngineError(null);
     setHasAutoplayError(false);
 
@@ -157,6 +173,8 @@ export const Player: React.FC<PlayerProps> = ({ channel }) => {
         ['https://ptv2026.com/', '/ptv2026/'],
         ['http://ptv2026.com/', '/ptv2026/'],
         ['https://load.ptv2026.com/', '/load-ptv/'],
+        ['https://depanptv.com/', '/depan-ptv/'],
+        ['https://df14pcdp16s98.cloudfront.net/', '/cf-df14/'],
         ['https://d25tgymtnqzu8s.cloudfront.net/', '/rtm-stream/'],
         ['https://d2xz2v5wuvgur6.cloudfront.net/', '/cf-d2xz/'],
         ['https://d2tjypxxy769fn.cloudfront.net/', '/cf-d2tj/'],
@@ -167,16 +185,18 @@ export const Player: React.FC<PlayerProps> = ({ channel }) => {
         ['https://ngtv-live-cbj.gcdn.co/', '/gcdn-s/'],
       ];
 
+      const proxyBase = getProxyBaseUrl();
+
       // Clean up URL and route through proxy if needed
       let cleanUrl = channel.streamUrl ? channel.streamUrl.split('|')[0].trim() : '';
       for (const [from, to] of PROXY_MAP) {
         if (cleanUrl.startsWith(from)) {
-          cleanUrl = window.location.origin + cleanUrl.replace(from, to);
+          cleanUrl = proxyBase + cleanUrl.replace(from, to);
           break;
         }
       }
       if (cleanUrl.startsWith('/')) {
-        cleanUrl = window.location.origin + cleanUrl;
+        cleanUrl = proxyBase + cleanUrl;
       }
 
       if (!cleanUrl) {
@@ -222,10 +242,25 @@ export const Player: React.FC<PlayerProps> = ({ channel }) => {
           const networkEngine = player.getNetworkingEngine();
           if (networkEngine) {
             networkEngine.registerRequestFilter((_type: any, request: any) => {
-              const url = request.uris[0];
+              const pBase = getProxyBaseUrl();
+              let url = request.uris[0];
+
+              if (url.startsWith('/')) {
+                request.uris[0] = pBase + url;
+                return;
+              }
+              if (IS_NATIVE_APP && (url.startsWith('https://localhost/') || url.startsWith('http://localhost/'))) {
+                url = url.replace(/https?:\/\/localhost/, pBase);
+                request.uris[0] = url;
+              }
+              if (IS_NATIVE_APP && url.startsWith('capacitor://localhost/')) {
+                url = url.replace('capacitor://localhost', pBase);
+                request.uris[0] = url;
+              }
+
               for (const [from, to] of PROXY_MAP) {
                 if (url.startsWith(from)) {
-                  request.uris[0] = window.location.origin + url.replace(from, to);
+                  request.uris[0] = pBase + url.replace(from, to);
                   break;
                 }
               }
@@ -534,7 +569,7 @@ export const Player: React.FC<PlayerProps> = ({ channel }) => {
     // Watchdog to recover from decoder stalls and auto-loop bounded live streams
     let lastTime = -1;
     let stallCount = 0;
-    const stallCheckInterval = setInterval(() => {
+    stallCheckInterval = setInterval(() => {
       const video = videoRef.current;
       const player = playerRef.current;
       if (!video) return;
