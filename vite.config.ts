@@ -230,6 +230,7 @@ function proxyPlugin() {
           { prefix: '/load-ptv/', target: 'https://load.ptv2026.com/' },
           { prefix: '/gcdn-s/', target: 'https://ngtv-live-cbj.gcdn.co/' },
           { prefix: '/gcdn/', target: 'http://ngtv-live-cbj.gcdn.co/' },
+          { prefix: '/gcdn-live/', target: 'https://ngtv-live.gcdn.co/' },
           { prefix: '/okcdn/', target: 'https://vd466.okcdn.ru/' },
           { prefix: '/rtm-stream/', target: 'https://d25tgymtnqzu8s.cloudfront.net/', args: [
             '-H', 'Origin: https://rtmklik.rtm.gov.my', '-H', 'Referer: https://rtmklik.rtm.gov.my/'

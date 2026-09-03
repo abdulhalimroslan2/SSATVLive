@@ -173,6 +173,10 @@ export const Player: React.FC<PlayerProps> = ({ channel, hideOverlay = false }) 
         ['http://ptv2026.com/', '/ptv2026/'],
         ['https://load.ptv2026.com/', '/load-ptv/'],
         ['https://depanptv.com/', '/depan-ptv/'],
+        ['https://ngtv-live-cbj.gcdn.co/', '/gcdn-s/'],
+        ['http://ngtv-live-cbj.gcdn.co/', '/gcdn-s/'],
+        ['https://ngtv-live.gcdn.co/', '/gcdn-live/'],
+        ['http://ngtv-live.gcdn.co/', '/gcdn-live/'],
         ['https://df14pcdp16s98.cloudfront.net/', '/cf-df14/'],
         ['https://d25tgymtnqzu8s.cloudfront.net/', '/rtm-stream/'],
         ['https://d2xz2v5wuvgur6.cloudfront.net/', '/cf-d2xz/'],
@@ -281,10 +285,9 @@ export const Player: React.FC<PlayerProps> = ({ channel, hideOverlay = false }) 
               }
             });
 
-            // RESPONSE FILTER: Rewrite MPD for ClearKey DRM (Case-insensitive & XML-safe)
+            // RESPONSE FILTER: Rewrite MPD for ClearKey DRM & Edge Acceleration
             if (isDash && isClearKeyHex) {
               networkEngine.registerResponseFilter((type: any, response: any) => {
-                // Only process MANIFEST responses
                 if (type !== shaka.net.NetworkingEngine.RequestType.MANIFEST && type !== 0) return;
 
                 let mpd: string;
@@ -296,21 +299,40 @@ export const Player: React.FC<PlayerProps> = ({ channel, hideOverlay = false }) 
 
                 const clearKeyUuid = 'urn:uuid:1077efec-c0b2-4d02-ace3-3c1e52e2fb4b';
 
-                // 1. Replace Widevine UUID with ClearKey UUID case-insensitively (handles uppercase & lowercase UUIDs)
-                let rewritten = mpd.replace(/urn:uuid:edef8ba9-79d6-4ace-a3c8-27dcd51d21ed/gi, clearKeyUuid);
+                // Extract and format clean KID as UUID (8-4-4-4-12) from channel.clearKey
+                const rawKeyId = channel.clearKey!.split(':')[0].replace(/[^0-9a-fA-F]/g, '').toLowerCase();
+                const kidUuid = rawKeyId.length === 32
+                  ? `${rawKeyId.slice(0, 8)}-${rawKeyId.slice(8, 12)}-${rawKeyId.slice(12, 16)}-${rawKeyId.slice(16, 20)}-${rawKeyId.slice(20)}`
+                  : rawKeyId;
 
-                // 2. Remove Widevine PSSH boxes so CDM uses default_KID directly
+                // 1. STRIP <Location> tags completely so Shaka NEVER redirects manifest refreshes to foreign CDNs that drop KIDs
+                let rewritten = mpd.replace(/<Location>[\s\S]*?<\/Location>/gi, '');
+
+                // 2. Rewrite BaseURL to use our accelerated proxy
+                const pBase = getProxyBaseUrl();
+                rewritten = rewritten.replace(/<BaseURL>https?:\/\/ngtv-live-cbj\.gcdn\.co\//gi, `<BaseURL>${pBase}/gcdn-s/`);
+                rewritten = rewritten.replace(/<BaseURL>https?:\/\/ngtv-live\.gcdn\.co\//gi, `<BaseURL>${pBase}/gcdn-live/`);
+                // Only fix mixed content on external domains, NEVER for localhost dev server
+                rewritten = rewritten.replace(/<BaseURL>http:\/\/(?!localhost|127\.0\.0\.1)/gi, '<BaseURL>https://');
+
+                // 3. Remove Widevine & PlayReady ContentProtection tags so CDM binds directly to ClearKey
+                rewritten = rewritten.replace(/<ContentProtection[^>]*?urn:uuid:9a04f079-9840-4286-ab92-e65be0885f95[^>]*>[\s\S]*?<\/ContentProtection>/gi, '');
+                rewritten = rewritten.replace(/<ContentProtection[^>]*?urn:uuid:9a04f079-9840-4286-ab92-e65be0885f95[^>]*\/>/gi, '');
+                rewritten = rewritten.replace(/<ContentProtection[^>]*?urn:uuid:edef8ba9-79d6-4ace-a3c8-27dcd51d21ed[^>]*>[\s\S]*?<\/ContentProtection>/gi, '');
+                rewritten = rewritten.replace(/<ContentProtection[^>]*?urn:uuid:edef8ba9-79d6-4ace-a3c8-27dcd51d21ed[^>]*\/>/gi, '');
                 rewritten = rewritten.replace(/<(?:cenc:)?pssh[^>]*>[\s\S]*?<\/(?:cenc:)?pssh>/gi, '');
 
-                // 3. Fix Mixed Content (HTTP -> HTTPS) for BaseURL and Location
-                rewritten = rewritten.replaceAll('<BaseURL>http://', '<BaseURL>https://');
-                rewritten = rewritten.replaceAll('<Location>http://', '<Location>https://');
-
-                // 4. Inject ClearKey ContentProtection node safely if still not present
+                // 4. Unconditionally inject ClearKey ContentProtection with kidUuid into EVERY AdaptationSet
                 if (!rewritten.includes(clearKeyUuid)) {
                   rewritten = rewritten.replace(
-                    /<ContentProtection\s+[^>]*?schemeIdUri="urn:mpeg:dash:mp4protection:2011"[^>]*?cenc:default_KID="([^"]+)"[^>]*?>/gi,
-                    (match, kid) => `${match}\n      <ContentProtection schemeIdUri="${clearKeyUuid}" value="cenc" cenc:default_KID="${kid}" />`
+                    /<AdaptationSet([^>]*)>/gi,
+                    `<AdaptationSet$1>\n      <ContentProtection schemeIdUri="urn:mpeg:dash:mp4protection:2011" value="cenc" cenc:default_KID="${kidUuid}" />\n      <ContentProtection schemeIdUri="${clearKeyUuid}" value="cenc" cenc:default_KID="${kidUuid}" />`
+                  );
+                } else if (!rewritten.includes(`cenc:default_KID="${kidUuid}"`)) {
+                  // Ensure default_KID is attached to existing ClearKey tags
+                  rewritten = rewritten.replace(
+                    new RegExp(`(<ContentProtection[^>]*?${clearKeyUuid}[^>]*?)(/?>)`, 'gi'),
+                    `$1 cenc:default_KID="${kidUuid}"$2`
                   );
                 }
 
@@ -360,15 +382,13 @@ export const Player: React.FC<PlayerProps> = ({ channel, hideOverlay = false }) 
             streaming: {
               lowLatencyMode: false,
               inaccurateManifestTolerance: 2,
-              bufferingGoal: 20, // Keep healthy 20s buffer cushion on all platforms
-              rebufferingGoal: 4, // Buffer at least 1 full segment (4s) before resuming
-              bufferBehind: 15,
+              bufferingGoal: IS_IOS ? 12 : 20,
+              rebufferingGoal: IS_IOS ? 2 : 4,
+              bufferBehind: IS_IOS ? 4 : 15,
               stallEnabled: true,
-              stallThreshold: 4.0, // Don't panic on mobile network jitter
+              stallThreshold: 4.0,
               stallSkip: 0.5,
-              safeSeekOffset: 8, // Stay 8-10 seconds behind live edge so segments are published on CDN!
-              jumpLargeGaps: true, // Seamlessly jump timestamp discontinuities
-              smallGapLimit: 1.5,
+              safeSeekOffset: 8,
               retryParameters: {
                 maxAttempts: 10,
                 baseDelay: 300,
@@ -381,9 +401,8 @@ export const Player: React.FC<PlayerProps> = ({ channel, hideOverlay = false }) 
               dash: {
                 ignoreMinBufferTime: false,
                 autoCorrectDrift: true,
-                initialSegmentLimit: 4, // Preload 4 segments
+                initialSegmentLimit: 4,
               },
-              availabilityWindowOverride: 120, // 2 minutes window so live streams don't clip
               retryParameters: {
                 maxAttempts: 10,
                 baseDelay: 300,
@@ -394,11 +413,13 @@ export const Player: React.FC<PlayerProps> = ({ channel, hideOverlay = false }) 
             },
             abr: {
               enabled: true,
-              defaultBandwidthEstimate: 3000000,
-              switchInterval: 4,
+              defaultBandwidthEstimate: 2500000,
+              switchInterval: 2,
               bandwidthUpgradeTarget: 0.85,
               bandwidthDowngradeTarget: 0.95,
-              restrictions: {} // No artificial bandwidth or height restrictions
+              restrictions: {
+                maxHeight: IS_IOS ? 1080 : 2160,
+              }
             }
           });
 

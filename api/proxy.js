@@ -254,6 +254,21 @@ export default async function handler(request) {
       }
     }
 
+    // DASH MPD processing: strip <Location> to ensure player keeps polling original URL with KIDs, and route BaseURL through proxy
+    if (path.includes('.mpd')) {
+      let text = await response.text();
+      text = text.replace(/<Location>[\s\S]*?<\/Location>/gi, '');
+      text = text.replace(/<BaseURL>https?:\/\/ngtv-live-cbj\.gcdn\.co\//gi, '<BaseURL>/gcdn-s/');
+      text = text.replace(/<BaseURL>http:\/\/ngtv-live-cbj\.gcdn\.co\//gi, '<BaseURL>/gcdn-s/');
+      text = text.replace(/<BaseURL>https?:\/\/ngtv-live\.gcdn\.co\//gi, '<BaseURL>/gcdn-live/');
+      responseHeaders.set('Content-Type', 'application/dash+xml');
+      responseHeaders.set('Cache-Control', 'no-cache, no-store, must-revalidate');
+      return new Response(text, {
+        status: response.status,
+        headers: responseHeaders,
+      });
+    }
+
     // Static video chunk caching for zero-buffer edge acceleration
     if (/\.(ts|m4s|m4f|m4v|m4a|mp4)(\?|$)/i.test(path)) {
       responseHeaders.set('Cache-Control', 'public, max-age=120, s-maxage=300, stale-while-revalidate=600');
