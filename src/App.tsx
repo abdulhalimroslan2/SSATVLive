@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import type { Channel } from './mockData';
-import { fetchChannels, CATEGORIES } from './mockData';
+import { fetchChannels } from './mockData';
 import { VOD_CATALOG, type VodItem } from './vodData';
 import { Header } from './Header';
 import { HeroExperience, type HeroSlide } from './HeroExperience';
@@ -16,15 +16,17 @@ import {
 } from './ssatvHomeData';
 import { Player } from './Player';
 import { ChannelCard } from './ChannelCard';
-import { VodHub } from './VodHub';
 import { SearchView } from './SearchView';
+import { LiveTvView } from './LiveTvView';
+import { MoviesView } from './MoviesView';
+import { SeriesView } from './SeriesView';
+import { Sidebar } from './Sidebar';
 import { X, Tv } from 'lucide-react';
 
 function App() {
   const [channels, setChannels] = useState<Channel[]>([]);
   const [activeChannel, setActiveChannel] = useState<Channel | null>(null);
   const [activeTab, setActiveTab] = useState('home');
-  const [activeCategory, setActiveCategory] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
   const [isLoading, setIsLoading] = useState(true);
 
@@ -50,17 +52,6 @@ function App() {
     setChannels(data);
     setIsLoading(false);
   };
-
-  // Movie channels
-  const movieChannels = channels.filter((ch) => ch.category === 'MOVIES');
-
-  // Filter channels by active category
-  const filteredChannels =
-    activeCategory === 'all'
-      ? channels
-      : channels.filter(
-          (ch) => ch.category.toLowerCase().replace(' ', '_') === activeCategory
-        );
 
   // Sports channels
   const sportsChannels = channels.filter(
@@ -254,22 +245,30 @@ function App() {
   );
 
   return (
-    <div className="ssatv-app-container">
-      {/* 1. SSATV+ TOP NAVIGATION HEADER */}
-      <Header
+    <div className="ssatv-app-shell">
+      {/* 0. APPLE TV LEFT SIDEBAR (Matching ref_movies & ref_series 1:1) */}
+      <Sidebar
         activeTab={activeTab}
-        onTabChange={(tab) => {
-          setActiveTab(tab);
-          if (tab === 'live') setActiveCategory('all');
-        }}
+        onTabChange={(tab) => setActiveTab(tab)}
         onSearchClick={() => {
           setSearchQuery('');
           setActiveTab('search');
         }}
       />
 
-      {/* Main Content Area */}
-      <main className="ssatv-main-content">
+      <div className="ssatv-app-main-viewport">
+        {/* 1. SSATV+ TOP NAVIGATION HEADER */}
+        <Header
+          activeTab={activeTab}
+          onTabChange={(tab) => setActiveTab(tab)}
+          onSearchClick={() => {
+            setSearchQuery('');
+            setActiveTab('search');
+          }}
+        />
+
+        {/* Main Content Area */}
+        <main className="ssatv-main-content">
         {isLoading ? (
           <div
             style={{
@@ -283,8 +282,8 @@ function App() {
           </div>
         ) : (
           <>
-            {/* Active Video Player Cinema View */}
-            {activeChannel && (
+            {/* Active Video Player Cinema View (Shown outside Live TV view) */}
+            {activeChannel && activeTab !== 'live' && (
               <section
                 style={{
                   padding: '24px 48px 12px 48px',
@@ -428,71 +427,28 @@ function App() {
               </>
             )}
 
-            {/* TAB 2: LIVE TV CHANNELS */}
+            {/* TAB 2: LIVE TV EXPERIENCE (Matching reference design 1:1) */}
             {activeTab === 'live' && (
-              <section style={{ padding: '32px 48px' }}>
-                <div className="section-header" style={{ marginBottom: '24px' }}>
-                  <h2
-                    style={{
-                      fontSize: '1.8rem',
-                      fontWeight: 800,
-                      color: '#fff',
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: '10px',
-                    }}
-                  >
-                    <span style={{ color: 'var(--ssatv-red)' }}>●</span> Semua
-                    Saluran TV Langsung ({filteredChannels.length})
-                  </h2>
-                </div>
-
-                {/* Category Filter Pills */}
-                <div
-                  style={{
-                    display: 'flex',
-                    gap: '10px',
-                    flexWrap: 'wrap',
-                    marginBottom: '28px',
-                  }}
-                >
-                  <button
-                    className={`apple-pill-btn ${activeCategory === 'all' ? 'active' : ''}`}
-                    onClick={() => setActiveCategory('all')}
-                  >
-                    Semua
-                  </button>
-                  {CATEGORIES.map((cat) => (
-                    <button
-                      key={cat.id}
-                      className={`apple-pill-btn ${activeCategory === cat.id ? 'active' : ''}`}
-                      onClick={() => setActiveCategory(cat.id)}
-                    >
-                      {cat.label}
-                    </button>
-                  ))}
-                </div>
-
-                <div className="channels-grid">
-                  {filteredChannels.map((channel) => (
-                    <ChannelCard
-                      key={channel.id}
-                      channel={channel}
-                      isActive={activeChannel?.id === channel.id}
-                      onSelect={handleChannelSelect}
-                    />
-                  ))}
-                </div>
-              </section>
+              <LiveTvView
+                channels={channels}
+                activeChannel={activeChannel}
+                onSelectChannel={handleChannelSelect}
+              />
             )}
 
-            {/* TAB 3 & 4: MOVIES & SERIES (VOD HUB) */}
-            {(activeTab === 'movies' || activeTab === 'series') && (
-              <VodHub
-                movieChannels={movieChannels}
-                onSelectChannel={handleChannelSelect}
-                activeChannelId={activeChannel?.id}
-                onPlayVodItem={handlePlayVodItem}
+            {/* TAB 3: MOVIES (Matching ref_movies.png 1:1) */}
+            {activeTab === 'movies' && (
+              <MoviesView
+                onPlayMovie={handlePlayVodItem}
+                onNavigateTab={(tab) => setActiveTab(tab)}
+              />
+            )}
+
+            {/* TAB 4: TV SERIES (Matching ref_series.png 1:1) */}
+            {activeTab === 'series' && (
+              <SeriesView
+                onPlayEpisode={(item, ep) => handlePlayVodItem(item, ep)}
+                onNavigateTab={(tab) => setActiveTab(tab)}
               />
             )}
 
@@ -571,6 +527,7 @@ function App() {
           </>
         )}
       </main>
+      </div>
     </div>
   );
 }

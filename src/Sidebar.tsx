@@ -1,96 +1,95 @@
 import React from 'react';
-import { 
+import {
   Search,
-  Home, 
-  Tv, 
-  Shield,
-  ShoppingBag,
+  Home,
+  Tv,
+  Film,
+  Clapperboard,
+  Plus,
   Clock,
-  Film, 
-  Monitor,
-  Users, 
-  User
+  History,
+  ChevronDown,
 } from 'lucide-react';
 
 interface SidebarProps {
   activeTab: string;
-  setActiveTab: (tab: string) => void;
+  onTabChange: (tab: string) => void;
+  onSearchClick: () => void;
 }
 
-export const Sidebar: React.FC<SidebarProps> = ({ activeTab, setActiveTab }) => {
-  const mainNav = [
-    { id: 'search', label: 'Search', icon: Search },
+export const Sidebar: React.FC<SidebarProps> = ({
+  activeTab,
+  onTabChange,
+  onSearchClick,
+}) => {
+  const navItems = [
+    { id: 'search', label: 'Search', icon: Search, isAction: true },
     { id: 'home', label: 'Home', icon: Home },
-    { id: 'appletv', label: 'Apple TV', icon: Tv },
-    { id: 'sports', label: 'MLS', icon: Shield },
-    { id: 'store', label: 'Store', icon: ShoppingBag },
-  ];
-
-  const libraryNav = [
-    { id: 'recent', label: 'Recently Added', icon: Clock },
+    { id: 'live', label: 'Live TV', icon: Tv },
     { id: 'movies', label: 'Movies', icon: Film },
-    { id: 'series', label: 'TV Shows', icon: Monitor },
-    { id: 'family', label: 'Family Sharing', icon: Users },
+    { id: 'series', label: 'Series', icon: Clapperboard },
   ];
 
   return (
-    <aside className="sidebar">
-      <div className="apple-sidebar-top">
-        {/* macOS Window Traffic Lights */}
-        <div className="macos-traffic-lights">
-          <span className="traffic-dot dot-close" title="Close"></span>
-          <span className="traffic-dot dot-minimize" title="Minimize"></span>
-          <span className="traffic-dot dot-maximize" title="Zoom"></span>
-        </div>
-
-        {/* Primary Navigation */}
-        <nav className="sidebar-nav" style={{ gap: '0.25rem' }}>
-          {mainNav.map((item) => {
-            const Icon = item.icon;
-            const isActive = activeTab === item.id;
-            return (
-              <button
-                key={item.id}
-                className={`nav-item ${isActive ? 'apple-active' : ''}`}
-                onClick={() => setActiveTab(item.id)}
-              >
-                <Icon size={18} strokeWidth={isActive ? 2.4 : 1.8} />
-                <span>{item.label}</span>
-              </button>
-            );
-          })}
-        </nav>
-
-        {/* Library Section */}
-        <div className="sidebar-section-header">Library</div>
-        <nav className="sidebar-nav" style={{ gap: '0.25rem' }}>
-          {libraryNav.map((item) => {
-            const Icon = item.icon;
-            const isActive = activeTab === item.id;
-            return (
-              <button
-                key={item.id}
-                className={`nav-item ${isActive ? 'apple-active' : ''}`}
-                onClick={() => setActiveTab(item.id)}
-              >
-                <Icon size={18} strokeWidth={isActive ? 2.4 : 1.8} />
-                <span>{item.label}</span>
-              </button>
-            );
-          })}
-        </nav>
+    <aside className="ssatv-apple-sidebar">
+      {/* 1. SSATV+ Top Brand */}
+      <div className="ssatv-sidebar-brand" onClick={() => onTabChange('home')}>
+        <span className="brand-ssatv">SSATV</span>
+        <span className="brand-plus">+</span>
       </div>
 
-      {/* Apple TV User Profile at Bottom */}
-      <div 
-        className="apple-user-profile"
-        onClick={() => setActiveTab('home')}
-        title="Akaun Halim Roslan"
-      >
-        <div className="apple-avatar">
-          <User size={18} />
+      {/* 2. Main Navigation Links */}
+      <nav className="ssatv-sidebar-nav">
+        {navItems.map((item) => {
+          const Icon = item.icon;
+          const isActive = activeTab === item.id;
+          return (
+            <button
+              key={item.id}
+              className={`ssatv-sidebar-link ${isActive ? 'active' : ''}`}
+              onClick={() => {
+                if (item.isAction) {
+                  onSearchClick();
+                } else {
+                  onTabChange(item.id);
+                }
+              }}
+            >
+              <Icon size={19} className="ssatv-sidebar-icon" />
+              <span>{item.label}</span>
+            </button>
+          );
+        })}
+      </nav>
+
+      {/* 3. My Library Section */}
+      <div className="ssatv-sidebar-section">
+        <div className="ssatv-sidebar-heading">MY LIBRARY</div>
+        <div className="ssatv-sidebar-library-links">
+          <button className="ssatv-sidebar-link">
+            <Plus size={18} className="ssatv-sidebar-icon" />
+            <span>My List</span>
+          </button>
+          <button className="ssatv-sidebar-link">
+            <Clock size={18} className="ssatv-sidebar-icon" />
+            <span>Recently Added</span>
+          </button>
+          <button className="ssatv-sidebar-link">
+            <History size={18} className="ssatv-sidebar-icon" />
+            <span>Watch History</span>
+          </button>
         </div>
-        <span className="apple-username">Halim Roslan</span>
+      </div>
+
+      {/* 4. Bottom User Profile Pill (Halim Roslan) */}
+      <div className="ssatv-sidebar-bottom-profile">
+        <img
+          src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=120"
+          alt="Halim Roslan"
+          className="ssatv-sidebar-avatar"
+        />
+        <span className="ssatv-sidebar-username">Halim Roslan</span>
+        <ChevronDown size={14} className="ssatv-sidebar-chevron" />
       </div>
     </aside>
   );
