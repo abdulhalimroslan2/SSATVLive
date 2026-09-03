@@ -295,7 +295,7 @@ export const Player: React.FC<PlayerProps> = ({ channel }) => {
                 let rewritten = mpd.replace(/urn:uuid:edef8ba9-79d6-4ace-a3c8-27dcd51d21ed/gi, clearKeyUuid);
 
                 // 2. Remove Widevine PSSH boxes so CDM uses default_KID directly
-                rewritten = rewritten.replace(/<cenc:pssh>[^<]*<\/cenc:pssh>/gi, '');
+                rewritten = rewritten.replace(/<(?:cenc:)?pssh[^>]*>[\s\S]*?<\/(?:cenc:)?pssh>/gi, '');
 
                 // 3. Fix Mixed Content (HTTP -> HTTPS) for BaseURL
                 rewritten = rewritten.replaceAll('<BaseURL>http://', '<BaseURL>https://');
@@ -401,6 +401,16 @@ export const Player: React.FC<PlayerProps> = ({ channel }) => {
               const detail = event?.detail;
               console.warn('[Player] Shaka error event:', detail?.code, detail?.message, detail);
               
+              // Restrictions cannot be met (e.g. 4K UHD format)
+              if (detail?.code === 6001) {
+                console.log('[Player] Code 6001: Clearing ABR restrictions and retrying...');
+                try {
+                  player.configure({ abr: { restrictions: {} } });
+                  player.retryStreaming();
+                } catch (_e) {}
+                return;
+              }
+
               // QuotaExceededError or BUFFER_APPEND_ERROR on iOS
               if (detail?.code === 3017 || detail?.code === 3015) {
                 console.log('[Player] Buffer quota exceeded, seeking to live edge...');
