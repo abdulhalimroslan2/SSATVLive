@@ -4,6 +4,7 @@ import { type TrendingItem } from './TrendingGrid';
 import { type LiveRailItem } from './LiveNowSidebar';
 import { VOD_CATALOG, type VodItem } from './vodData';
 import type { Channel } from './mockData';
+import { getCurrentProgramme } from './epgService';
 
 // Helper to format Quickplay 16:9 widescreen backdrop
 const getWidescreenBackdrop = (url: string, width = 1920): string => {
@@ -169,27 +170,13 @@ export const getRealLiveRail = (channels: Channel[] = []): LiveRailItem[] => {
     }
 
     return matchedChannels.slice(0, 5).map((ch, idx) => {
-      let program = ch.description || 'Siaran Langsung HD';
-      if (ch.name.includes('TV1')) program = 'Berita Perdana';
-      else if (ch.name.includes('TV3')) program = 'Buletin Utama';
-      else if (ch.name.includes('HBO')) program = 'Hollywood Premiere';
-      else if (ch.name.includes('Arena')) program = 'Nadi Arena Live';
-      else if (ch.name.includes('Celestial')) program = 'Asian Cinema Blockbuster';
-
-      const timeSlots = [
-        '8:00 PM – 9:00 PM',
-        '9:00 PM – 11:00 PM',
-        '10:00 PM – 11:30 PM',
-        '8:30 PM – 10:30 PM',
-        '9:30 PM – 11:30 PM',
-      ];
-
+      const epg = getCurrentProgramme(ch);
       return {
         id: `live_rail_${ch.id}_${idx}`,
         badge: 'LIVE',
         name: ch.name,
-        program: program,
-        timeSlot: timeSlots[idx % timeSlots.length],
+        program: epg.title || ch.description || 'Siaran Langsung HD',
+        timeSlot: epg.timeSlot || 'Siaran Langsung',
         thumbnail: ch.thumbnail || 'https://ptv2026.com/logo/tv1.png',
         channel: ch,
       };

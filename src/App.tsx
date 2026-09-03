@@ -210,15 +210,22 @@ function App() {
     })
   );
 
+  const handleTabChange = (tab: string) => {
+    setActiveTab(tab);
+    // When switching tabs (e.g. from Live TV to Movies), immediately stop any active playback
+    setActiveChannel(null);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   return (
     <div className="ssatv-app-shell">
       {/* 0. APPLE TV LEFT SIDEBAR (Matching ref_movies & ref_series 1:1) */}
       <Sidebar
         activeTab={activeTab}
-        onTabChange={(tab) => setActiveTab(tab)}
+        onTabChange={handleTabChange}
         onSearchClick={() => {
           setSearchQuery('');
-          setActiveTab('search');
+          handleTabChange('search');
         }}
       />
 
@@ -226,10 +233,10 @@ function App() {
         {/* 1. SSATV+ TOP NAVIGATION HEADER */}
         <Header
           activeTab={activeTab}
-          onTabChange={(tab) => setActiveTab(tab)}
+          onTabChange={handleTabChange}
           onSearchClick={() => {
             setSearchQuery('');
-            setActiveTab('search');
+            handleTabChange('search');
           }}
         />
 
@@ -248,8 +255,8 @@ function App() {
           </div>
         ) : (
           <>
-            {/* Active Video Player Cinema View (Shown outside Live TV view) */}
-            {activeChannel && activeTab !== 'live' && (
+            {/* Active Video Player Cinema View (Shown outside Live TV ONLY when user explicitly plays a VOD item) */}
+            {activeChannel && activeTab !== 'live' && activeChannel.id.startsWith('vod_') && (
               <section
                 style={{
                   padding: '24px 48px 12px 48px',
@@ -379,7 +386,7 @@ function App() {
                       items={recommendedItems}
                       variant="stylized-title"
                       onSelect={handleTrendingSelect}
-                      onViewAll={() => setActiveTab('series')}
+                      onViewAll={() => handleTabChange('series')}
                     />
                   </div>
 
@@ -387,7 +394,7 @@ function App() {
                   <LiveNowSidebar
                     items={liveRailItems}
                     onSelect={handleLiveRailSelect}
-                    onViewAll={() => setActiveTab('live')}
+                    onViewAll={() => handleTabChange('live')}
                   />
                 </div>
               </>
@@ -406,7 +413,7 @@ function App() {
             {activeTab === 'movies' && (
               <MoviesView
                 onPlayMovie={handlePlayVodItem}
-                onNavigateTab={(tab) => setActiveTab(tab)}
+                onNavigateTab={handleTabChange}
               />
             )}
 
@@ -414,7 +421,7 @@ function App() {
             {activeTab === 'series' && (
               <SeriesView
                 onPlayEpisode={(item, ep) => handlePlayVodItem(item, ep)}
-                onNavigateTab={(tab) => setActiveTab(tab)}
+                onNavigateTab={handleTabChange}
               />
             )}
 

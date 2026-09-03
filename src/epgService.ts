@@ -23,10 +23,55 @@ export interface EpgProgram {
   description: string;
 }
 
+export interface DynamicTimelineSlot {
+  timeLabel: string;
+  hour: number;
+  programme: EpgProgramme;
+  isNow: boolean;
+}
+
+export function formatEpgTime(date: Date): string {
+  let h = date.getHours();
+  const m = date.getMinutes();
+  const ampm = h >= 12 ? 'PM' : 'AM';
+  h = h % 12;
+  h = h ? h : 12;
+  const mStr = m < 10 ? '0' + m : m;
+  return `${h}:${mStr} ${ampm}`;
+}
+
+export function formatTimeSlot(start: Date, stop: Date): string {
+  return `${formatEpgTime(start)} – ${formatEpgTime(stop)}`;
+}
+
+export function parseEpgTimestamp(raw: string): Date | null {
+  if (!raw) return null;
+  const digits = raw.replace(/[^0-9]/g, '');
+  if (digits.length < 14) return null;
+  const y = parseInt(digits.slice(0, 4), 10);
+  const m = parseInt(digits.slice(4, 6), 10) - 1;
+  const d = parseInt(digits.slice(6, 8), 10);
+  const h = parseInt(digits.slice(8, 10), 10);
+  const min = parseInt(digits.slice(10, 12), 10);
+  const s = parseInt(digits.slice(12, 14), 10);
+  return new Date(y, m, d, h, min, s);
+}
+
+export function formatDateToTimestamp(date: Date): string {
+  const y = date.getFullYear();
+  const m = String(date.getMonth() + 1).padStart(2, '0');
+  const d = String(date.getDate()).padStart(2, '0');
+  const h = String(date.getHours()).padStart(2, '0');
+  const min = String(date.getMinutes()).padStart(2, '0');
+  const s = String(date.getSeconds()).padStart(2, '0');
+  return `${y}${m}${d}${h}${min}${s}`;
+}
+
 export function getChannelEpg(
   channelOrId: Channel | string,
   channelName?: string,
-  category?: string
+  category?: string,
+  referenceDate?: Date
 ): EpgProgram {
   let ch: Channel;
   if (typeof channelOrId === 'object' && channelOrId !== null) {
@@ -45,17 +90,51 @@ export function getChannelEpg(
     };
   }
 
-  const curr = getCurrentProgramme(ch);
-  const slots = getTimelineSlotsForChannel(ch);
+  const now = referenceDate || new Date();
+  const curr = getCurrentProgramme(ch, now);
+
+  let startMs = 0;
+  let stopMs = 0;
+  const parsedStart = parseEpgTimestamp(curr.start);
+  const parsedStop = parseEpgTimestamp(curr.stop);
+
+  if (parsedStart && parsedStop) {
+    startMs = parsedStart.getTime();
+    stopMs = parsedStop.getTime();
+  } else {
+    const slotStart = new Date(now);
+    slotStart.setMinutes(0, 0, 0);
+    const slotEnd = new Date(slotStart);
+    slotEnd.setHours(slotEnd.getHours() + 1);
+    startMs = slotStart.getTime();
+    stopMs = slotEnd.getTime();
+  }
+
+  const nowMs = now.getTime();
+  const total = stopMs - startMs;
+  let progressPercent = 50;
+  let remainingMinutes = 30;
+
+  if (total > 0) {
+    const elapsed = Math.max(0, nowMs - startMs);
+    progressPercent = Math.min(100, Math.max(0, Math.round((elapsed / total) * 100)));
+    remainingMinutes = Math.max(1, Math.round((stopMs - nowMs) / 60000));
+  }
+
+  const nextProg = getNextProgramme(ch, curr, now);
 
   return {
     channelId: ch.id,
     currentTitle: curr.title,
-    nextTitle: slots.h11pm.title || 'Rancangan Seterusnya',
-    startTimeStr: curr.timeSlot.split('–')[0]?.trim() || '10:00 PM',
-    endTimeStr: curr.timeSlot.split('–')[1]?.trim() || '11:00 PM',
-    progressPercent: 60,
-    remainingMinutes: 24,
+    nextTitle: nextProg ? nextProg.title : 'Rancangan Seterusnya',
+    startTimeStr: parsedStart
+      ? formatEpgTime(parsedStart)
+      : curr.timeSlot.split('–')[0]?.trim() || '12:00 AM',
+    endTimeStr: parsedStop
+      ? formatEpgTime(parsedStop)
+      : curr.timeSlot.split('–')[1]?.trim() || '1:00 AM',
+    progressPercent,
+    remainingMinutes,
     description: curr.desc,
   };
 }
@@ -211,13 +290,42 @@ export function getEpgKeyForChannel(channel: Channel): string | null {
   return null;
 }
 
-export function getCurrentProgramme(
+export function getNextProgramme(
   channel: Channel,
-  targetTimestamp: string = '20260903223000'
-): EpgProgramme {
+  currentProg: EpgProgramme,
+  referenceDate: Date = new Date()
+): EpgProgramme | null {
   const epgKey = getEpgKeyForChannel(channel);
   if (epgKey && epgMap[epgKey]) {
     const list = epgMap[epgKey];
+    const idx = list.findIndex(
+      (p) => p.title === currentProg.title && p.start === currentProg.start
+    );
+    if (idx !== -1 && idx + 1 < list.length) {
+      return {
+        ...list[idx + 1],
+        genre: channel.category || 'Live TV',
+      };
+    }
+  }
+
+  const nextHourDate = new Date(referenceDate);
+  nextHourDate.setHours(nextHourDate.getHours() + 1);
+  return getProgrammeAtHour(channel, nextHourDate);
+}
+
+export function getProgrammeAtHour(
+  channel: Channel,
+  targetDate: Date
+): EpgProgramme {
+  const epgKey = getEpgKeyForChannel(channel);
+  const targetTimestamp = formatDateToTimestamp(targetDate);
+  const targetHour = targetDate.getHours();
+
+  if (epgKey && epgMap[epgKey]) {
+    const list = epgMap[epgKey];
+
+    // 1. Direct timestamp match
     for (const prog of list) {
       const s = prog.start.replace(/[^0-9]/g, '').slice(0, 14);
       const e = prog.stop.replace(/[^0-9]/g, '').slice(0, 14);
@@ -228,64 +336,133 @@ export function getCurrentProgramme(
         };
       }
     }
-    // If no exact time match, return first item for today
-    const todayProg = list.find((p) => p.date === '2026-09-03');
-    if (todayProg) {
+
+    // 2. Start hour match in list
+    const hourMatch = list.find((p) => p.startHour === targetHour);
+    if (hourMatch) {
       return {
-        ...todayProg,
+        ...hourMatch,
+        genre: channel.category || 'Live TV',
+      };
+    }
+
+    // 3. Match by formatted time slot
+    const targetSlotStr = `${targetHour % 12 === 0 ? 12 : targetHour % 12}:`;
+    const ampmStr = targetHour >= 12 ? 'PM' : 'AM';
+    const slotMatch = list.find(
+      (p) => p.timeSlot?.includes(targetSlotStr) && p.timeSlot?.includes(ampmStr)
+    );
+    if (slotMatch) {
+      return {
+        ...slotMatch,
         genre: channel.category || 'Live TV',
       };
     }
   }
 
-  // Authentic fallback if channel has no EPG
+  // Fallback for target hour
+  const slotStart = new Date(targetDate);
+  slotStart.setMinutes(0, 0, 0);
+  const slotEnd = new Date(slotStart);
+  slotEnd.setHours(slotEnd.getHours() + 1);
+
   return {
-    title: `${channel.name} Siaran Langsung`,
-    desc: `Tonton siaran langsung saluran ${channel.name} dalam kualiti definisi penuh HD di SSATV.`,
-    start: '20260903220000',
-    stop: '20260903230000',
-    date: '2026-09-03',
-    startHour: 22,
-    timeSlot: '10:00 PM – 11:00 PM',
+    title: `${channel.name} Siaran ${formatEpgTime(slotStart)}`,
+    desc: `Tonton siaran langsung saluran ${channel.name} dalam kualiti definisi tinggi di SSATV.`,
+    start: formatDateToTimestamp(slotStart),
+    stop: formatDateToTimestamp(slotEnd),
+    date: `${slotStart.getFullYear()}-${String(slotStart.getMonth() + 1).padStart(2, '0')}-${String(slotStart.getDate()).padStart(2, '0')}`,
+    startHour: slotStart.getHours(),
+    timeSlot: formatTimeSlot(slotStart, slotEnd),
     genre: channel.category || 'Live TV',
   };
 }
 
-export function getTimelineSlotsForChannel(channel: Channel): {
+export function getCurrentProgramme(
+  channel: Channel,
+  referenceDateOrTimestamp?: Date | string
+): EpgProgramme {
+  let targetDate: Date;
+  if (referenceDateOrTimestamp instanceof Date) {
+    targetDate = referenceDateOrTimestamp;
+  } else if (typeof referenceDateOrTimestamp === 'string') {
+    const parsed = parseEpgTimestamp(referenceDateOrTimestamp);
+    targetDate = parsed || new Date();
+  } else {
+    targetDate = new Date();
+  }
+
+  return getProgrammeAtHour(channel, targetDate);
+}
+
+export function getDynamicTimelineLabels(referenceDate: Date = new Date()): string[] {
+  const currentHour = referenceDate.getHours();
+  const labels = ['NOW'];
+  for (let i = 1; i <= 4; i++) {
+    const h = (currentHour + i) % 24;
+    const ampm = h >= 12 ? 'PM' : 'AM';
+    const h12 = h % 12 === 0 ? 12 : h % 12;
+    labels.push(`${h12} ${ampm}`);
+  }
+  return labels;
+}
+
+export function getDynamicTimelineSlotsForChannel(
+  channel: Channel,
+  referenceDate: Date = new Date()
+): DynamicTimelineSlot[] {
+  const currentHour = referenceDate.getHours();
+  const slots: DynamicTimelineSlot[] = [];
+
+  // Slot 0: NOW
+  const curr = getCurrentProgramme(channel, referenceDate);
+  slots.push({
+    timeLabel: 'NOW',
+    hour: currentHour,
+    programme: curr,
+    isNow: true,
+  });
+
+  // Next 4 slots
+  for (let i = 1; i <= 4; i++) {
+    const targetHour = (currentHour + i) % 24;
+    const targetDate = new Date(referenceDate);
+    targetDate.setHours(currentHour + i, 0, 0, 0);
+
+    const ampm = targetHour >= 12 ? 'PM' : 'AM';
+    const h12 = targetHour % 12 === 0 ? 12 : targetHour % 12;
+    const timeLabel = `${h12} ${ampm}`;
+
+    const prog = getProgrammeAtHour(channel, targetDate);
+    slots.push({
+      timeLabel,
+      hour: targetHour,
+      programme: prog,
+      isNow: false,
+    });
+  }
+
+  return slots;
+}
+
+export function getTimelineSlotsForChannel(
+  channel: Channel,
+  referenceDate: Date = new Date()
+): {
   now: EpgProgramme;
   h9pm: EpgProgramme;
   h10pm: EpgProgramme;
   h11pm: EpgProgramme;
   h12am: EpgProgramme;
+  dynamicSlots: DynamicTimelineSlot[];
 } {
-  const epgKey = getEpgKeyForChannel(channel);
-  const progs = epgKey ? epgMap[epgKey] || [] : [];
-
-  const findSlot = (targetTime: string, labelTime: string, defaultTitle: string): EpgProgramme => {
-    for (const p of progs) {
-      const s = p.start.replace(/[^0-9]/g, '').slice(0, 14);
-      const e = p.stop.replace(/[^0-9]/g, '').slice(0, 14);
-      if (s <= targetTime && targetTime < e) {
-        return p;
-      }
-    }
-    return {
-      title: defaultTitle,
-      desc: `Siaran siaran saluran ${channel.name}.`,
-      start: targetTime,
-      stop: targetTime,
-      date: targetTime.slice(0, 8),
-      startHour: parseInt(targetTime.slice(8, 10), 10),
-      timeSlot: labelTime,
-      genre: channel.category,
-    };
-  };
-
+  const dynamicSlots = getDynamicTimelineSlotsForChannel(channel, referenceDate);
   return {
-    now: findSlot('20260903223000', '10:00 PM – 11:00 PM', `${channel.name} Live`),
-    h9pm: findSlot('20260903210000', '9:00 PM – 10:00 PM', 'Slot Hiburan Perdana'),
-    h10pm: findSlot('20260903220000', '10:00 PM – 11:00 PM', 'Slot Utama Malam'),
-    h11pm: findSlot('20260903230000', '11:00 PM – 12:00 AM', 'Layar Terkini'),
-    h12am: findSlot('20260904000000', '12:00 AM – 1:00 AM', 'Siaran Tengah Malam'),
+    now: dynamicSlots[0].programme,
+    h9pm: dynamicSlots[1]?.programme || dynamicSlots[0].programme,
+    h10pm: dynamicSlots[2]?.programme || dynamicSlots[0].programme,
+    h11pm: dynamicSlots[3]?.programme || dynamicSlots[0].programme,
+    h12am: dynamicSlots[4]?.programme || dynamicSlots[0].programme,
+    dynamicSlots,
   };
 }

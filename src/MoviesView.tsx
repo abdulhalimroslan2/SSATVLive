@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { Play, Plus, Check, ChevronRight, Star } from 'lucide-react';
+import { ChevronRight, Star } from 'lucide-react';
 import type { VodItem } from './vodData';
 import { VOD_CATALOG } from './vodData';
+import { HeroExperience, type HeroSlide } from './HeroExperience';
 
 interface MoviesViewProps {
   onPlayMovie: (item: VodItem) => void;
@@ -11,17 +12,43 @@ interface MoviesViewProps {
 export const MoviesView: React.FC<MoviesViewProps> = ({
   onPlayMovie,
 }) => {
-  const [inList, setInList] = useState(false);
   const [activeGenre, setActiveGenre] = useState('ALL');
-  const [heroIndex, setHeroIndex] = useState(0);
 
-  // Curated hero slides matching reference image 1:1
-  const heroSlides = [
+  // Curated hero slides for Movies with real Quickplay & blockbuster backdrops
+  const movieHeroSlides: HeroSlide[] = [
+    {
+      id: 'movie_bulan_henti',
+      badge: 'FILEM TERBAHARU 2025',
+      titleLines: ['BULAN HENTI', 'BICARA'],
+      meta: '2025 • 2 Jam 05 Minit • Drama • Romantik • 13+',
+      synopsis:
+        'Kisah cinta, pengorbanan dan rahsia silam yang terungkai di bawah sinaran bulan purnama yang mendamaikan.',
+      backdrop:
+        'https://image-resizer-cloud-cdn.api.tmcms.quickplay.com/image/83726BF7-B225-45C6-8BFB-A62E8CDA166A/0-16x9.jpg?width=1920',
+      vodItem:
+        VOD_CATALOG.find((v) => v.id === 'vod_m_345') ||
+        VOD_CATALOG.find((v) => v.type === 'movie') ||
+        VOD_CATALOG[0],
+    },
+    {
+      id: 'movie_penunggu_istana',
+      badge: 'FILEM SERAM BLOKBUSTER',
+      titleLines: ['PENUNGGU', 'ISTANA'],
+      meta: '2023 • 1 Jam 48 Minit • Seram • Misteri • 18+',
+      synopsis:
+        'Siasatan sekumpulan pembuat filem dokumentari di istana terbiar bertukar menjadi igauan ngeri penuh misteri.',
+      backdrop:
+        'https://image-resizer-cloud-cdn.api.tmcms.quickplay.com/image/567FFDC8-DDB8-4A4F-8569-4E12A8E8E572/0-16x9.jpg?width=1920',
+      vodItem:
+        VOD_CATALOG.find((v) => v.id === 'vod_m_348') ||
+        VOD_CATALOG.find((v) => v.type === 'movie') ||
+        VOD_CATALOG[0],
+    },
     {
       id: 'movie_last_horizon',
-      badge: 'FEATURED MOVIE',
-      title: 'THE LAST\nHORIZON',
-      meta: '2026 • 2h 14m • Sci-Fi • 16+',
+      badge: 'FEATURED SCI-FI MOVIE',
+      titleLines: ['THE LAST', 'HORIZON'],
+      meta: '2026 • 2h 14m • Sci-Fi • Action • 16+',
       synopsis:
         'Humanity faces its final journey beyond the boundaries of Earth in an epic quest for survival across the cosmos.',
       backdrop:
@@ -29,36 +56,17 @@ export const MoviesView: React.FC<MoviesViewProps> = ({
       vodItem: VOD_CATALOG.find((v) => v.type === 'movie') || VOD_CATALOG[0],
     },
     {
-      id: 'movie_penunggu_istana',
-      badge: 'BLOCKBUSTER MOVIE',
-      title: 'PENUNGGU\nISTANA',
-      meta: '2023 • 1h 48m • Action • Thriller • 18+',
+      id: 'movie_keluang_man',
+      badge: 'FILEM AKSI ADIWIRA',
+      titleLines: ['KELUANG', 'MAN'],
+      meta: '2025 • 2 Jam 10 Minit • Aksi • Komedi • P13',
       synopsis:
-        'Siasatan sekumpulan pembuat filem dokumentari di istana terbiar bertukar menjadi igauan ngeri penuh misteri.',
+        'Kisah adiwira tempatan ikonik yang bangkit menegakkan keadilan di waktu malam dengan keberanian luar biasa.',
       backdrop:
-        'https://image-resizer-cloud-cdn.api.tmcms.quickplay.com/image/567FFDC8-DDB8-4A4F-8569-4E12A8E8E572/0-2x3.jpg?width=1200',
-      vodItem:
-        VOD_CATALOG.find((v) => v.id === 'vod_m_348') ||
-        VOD_CATALOG.find((v) => v.type === 'movie') ||
-        VOD_CATALOG[0],
-    },
-    {
-      id: 'movie_bulan_henti',
-      badge: 'NEW MOVIE',
-      title: 'BULAN HENTI\nBICARA',
-      meta: '2025 • 2h 05m • Drama • Romantik • 13+',
-      synopsis:
-        'Kisah cinta, pengorbanan dan rahsia silam yang terungkai di bawah sinaran bulan purnama yang mendamaikan.',
-      backdrop:
-        'https://image-resizer-cloud-cdn.api.tmcms.quickplay.com/image/83726BF7-B225-45C6-8BFB-A62E8CDA166A/0-2x3.jpg?width=1200',
-      vodItem:
-        VOD_CATALOG.find((v) => v.id === 'vod_m_345') ||
-        VOD_CATALOG.find((v) => v.type === 'movie') ||
-        VOD_CATALOG[0],
+        'https://images.unsplash.com/photo-1509198397868-475647b2a1e5?auto=format&fit=crop&q=80&w=1920',
+      vodItem: VOD_CATALOG[1] || VOD_CATALOG[0],
     },
   ];
-
-  const currentHero = heroSlides[heroIndex];
 
   // Genres list from reference image
   const genres = [
@@ -246,76 +254,15 @@ export const MoviesView: React.FC<MoviesViewProps> = ({
 
   return (
     <div className="ssatv-movies-view">
-      {/* 1. HERO FEATURED MOVIE BANNER */}
-      <section className="ssatv-hero-banner" style={{ minHeight: '560px' }}>
-        <div
-          className="ssatv-hero-backdrop"
-          style={{ backgroundImage: `url(${currentHero.backdrop})` }}
-        />
-        <div className="ssatv-hero-gradient-overlay" />
-
-        <div className="ssatv-hero-content-wrap">
-          {/* Red Featured Badge */}
-          <div className="ssatv-hero-badge">{currentHero.badge}</div>
-
-          {/* Monumental Stacked Title */}
-          <h1 className="ssatv-hero-title">
-            {currentHero.title.split('\n').map((line, i) => (
-              <span key={i} className="ssatv-hero-title-line">
-                {line}
-              </span>
-            ))}
-          </h1>
-
-          {/* Metadata */}
-          <div className="ssatv-hero-meta">
-            <span className="ssatv-meta-text">{currentHero.meta}</span>
-          </div>
-
-          {/* Synopsis */}
-          <p className="ssatv-hero-synopsis">{currentHero.synopsis}</p>
-
-          {/* Action Buttons */}
-          <div className="ssatv-hero-actions">
-            <button
-              className="ssatv-btn-watch"
-              onClick={() => onPlayMovie(currentHero.vodItem)}
-            >
-              <Play size={19} fill="#000" color="#000" />
-              <span>PLAY</span>
-            </button>
-
-            <button
-              className={`ssatv-btn-list ${inList ? 'in-list' : ''}`}
-              onClick={() => setInList(!inList)}
-            >
-              {inList ? (
-                <>
-                  <Check size={18} color="#ff2a4b" />
-                  <span>IN MY LIST</span>
-                </>
-              ) : (
-                <>
-                  <Plus size={18} />
-                  <span>MY LIST</span>
-                </>
-              )}
-            </button>
-          </div>
-        </div>
-
-        {/* Pagination Dots (bottom-right) */}
-        <div className="ssatv-hero-pagination">
-          {heroSlides.map((slide, idx) => (
-            <button
-              key={slide.id}
-              className={`ssatv-page-dot ${idx === heroIndex ? 'active' : ''}`}
-              onClick={() => setHeroIndex(idx)}
-              aria-label={`Go to slide ${idx + 1}`}
-            />
-          ))}
-        </div>
-      </section>
+      {/* 1. CINEMATIC HERO MOVIE BANNER (Dynamic Apple TV/Netflix experience with real Quickplay & blockbuster backdrops) */}
+      <HeroExperience
+        slides={movieHeroSlides}
+        onPlay={(slide) => {
+          if (slide.vodItem) {
+            onPlayMovie(slide.vodItem);
+          }
+        }}
+      />
 
       {/* 2. BROWSE BY GENRE BAR */}
       <section className="ssatv-genre-browse-bar">

@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { Play, Plus, Check, ChevronRight } from 'lucide-react';
+import { ChevronRight } from 'lucide-react';
 import type { VodItem } from './vodData';
 import { VOD_CATALOG } from './vodData';
+import { HeroExperience, type HeroSlide } from './HeroExperience';
 
 interface SeriesViewProps {
   onPlayEpisode: (item: VodItem, episodeNumber?: number) => void;
@@ -11,19 +12,17 @@ interface SeriesViewProps {
 export const SeriesView: React.FC<SeriesViewProps> = ({
   onPlayEpisode,
 }) => {
-  const [inList, setInList] = useState(false);
   const [activeGenre, setActiveGenre] = useState('ALL');
-  const [heroIndex, setHeroIndex] = useState(0);
 
   // Real Series from VOD Catalog
   const realSeries = VOD_CATALOG.filter((v) => v.type === 'series');
 
   // Hero Featured Series matching ref_series.png
-  const heroSlides = [
+  const seriesHeroSlides: HeroSlide[] = [
     {
       id: 'series_last_horizon',
-      badge: 'FEATURED SERIES',
-      title: 'THE LAST\nHORIZON',
+      badge: 'FEATURED SCI-FI SERIES',
+      titleLines: ['THE LAST', 'HORIZON'],
       meta: 'Season 3 • 8 Episodes • Sci-Fi • Drama • 16+',
       synopsis:
         "Humanity's search for a new world begins beyond the edge of the known universe as the expedition faces unexpected frontiers.",
@@ -33,21 +32,19 @@ export const SeriesView: React.FC<SeriesViewProps> = ({
     },
     {
       id: 'series_600_kolong',
-      badge: 'POPULAR SERIES',
-      title: '600\nKOLONG',
+      badge: 'SIRI DRAMA POPULAR',
+      titleLines: ['600', 'KOLONG'],
       meta: 'Season 1 • 20 Episodes • Drama • Aksi • 16+',
       synopsis:
         'Kisah perjuangan, dendam, dan persaudaraan di sebalik lorong hitam bandar raya metropolis.',
       backdrop:
-        'https://image-resizer-cloud-cdn.api.tmcms.quickplay.com/image/93AE763A-FE75-4089-9A0F-C99BD9517590/0-2x3.jpg?width=1200',
+        'https://image-resizer-cloud-cdn.api.tmcms.quickplay.com/image/93AE763A-FE75-4089-9A0F-C99BD9517590/0-16x9.jpg?width=1920',
       vodItem:
         realSeries.find((s) => s.id === 'vod_s_351') ||
         realSeries[1] ||
         VOD_CATALOG[0],
     },
   ];
-
-  const currentHero = heroSlides[heroIndex];
 
   // Continue Watching items from reference image 1:1
   const continueWatchingItems = [
@@ -259,71 +256,15 @@ export const SeriesView: React.FC<SeriesViewProps> = ({
 
   return (
     <div className="ssatv-series-view">
-      {/* 1. HERO FEATURED SERIES BANNER */}
-      <section className="ssatv-hero-banner" style={{ minHeight: '560px' }}>
-        <div
-          className="ssatv-hero-backdrop"
-          style={{ backgroundImage: `url(${currentHero.backdrop})` }}
-        />
-        <div className="ssatv-hero-gradient-overlay" />
-
-        <div className="ssatv-hero-content-wrap">
-          <div className="ssatv-hero-badge">{currentHero.badge}</div>
-
-          <h1 className="ssatv-hero-title">
-            {currentHero.title.split('\n').map((line, i) => (
-              <span key={i} className="ssatv-hero-title-line">
-                {line}
-              </span>
-            ))}
-          </h1>
-
-          <div className="ssatv-hero-meta">
-            <span className="ssatv-meta-text">{currentHero.meta}</span>
-          </div>
-
-          <p className="ssatv-hero-synopsis">{currentHero.synopsis}</p>
-
-          <div className="ssatv-hero-actions">
-            <button
-              className="ssatv-btn-watch"
-              onClick={() => onPlayEpisode(currentHero.vodItem)}
-            >
-              <Play size={19} fill="#000" color="#000" />
-              <span>CONTINUE WATCHING</span>
-            </button>
-
-            <button
-              className={`ssatv-btn-list ${inList ? 'in-list' : ''}`}
-              onClick={() => setInList(!inList)}
-            >
-              {inList ? (
-                <>
-                  <Check size={18} color="#ff2a4b" />
-                  <span>IN MY LIST</span>
-                </>
-              ) : (
-                <>
-                  <Plus size={18} />
-                  <span>MY LIST</span>
-                </>
-              )}
-            </button>
-          </div>
-        </div>
-
-        {/* Pagination Dots */}
-        <div className="ssatv-hero-pagination">
-          {heroSlides.map((slide, idx) => (
-            <button
-              key={slide.id}
-              className={`ssatv-page-dot ${idx === heroIndex ? 'active' : ''}`}
-              onClick={() => setHeroIndex(idx)}
-              aria-label={`Go to slide ${idx + 1}`}
-            />
-          ))}
-        </div>
-      </section>
+      {/* 1. CINEMATIC HERO SERIES BANNER */}
+      <HeroExperience
+        slides={seriesHeroSlides}
+        onPlay={(slide) => {
+          if (slide.vodItem) {
+            onPlayEpisode(slide.vodItem);
+          }
+        }}
+      />
 
       {/* 2. CONTINUE WATCHING (With Red Progress Bar) */}
       <section className="ssatv-shelf-row-wrap" style={{ padding: '0 48px', marginTop: '24px' }}>

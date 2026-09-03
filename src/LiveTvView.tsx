@@ -19,6 +19,7 @@ import { Player } from './Player';
 import {
   getCurrentProgramme,
   getTimelineSlotsForChannel,
+  getDynamicTimelineLabels,
   type EpgProgramme,
 } from './epgService';
 
@@ -174,22 +175,29 @@ export const LiveTvView: React.FC<LiveTvViewProps> = ({
     return defaultTv3 || channels[0] || ({} as Channel);
   }, [activeChannel, categoryChannels, channels]);
 
-  // Real currently airing programme from EPG
+  // Real-time clock sync (ticks every 30s so EPG dynamically stays synchronized with device)
+  const [clockNow, setClockNow] = useState(() => new Date());
+  useEffect(() => {
+    const timer = setInterval(() => setClockNow(new Date()), 30000);
+    return () => clearInterval(timer);
+  }, []);
+
+  // Real currently airing programme from EPG matching device clock
   const currentProgram: EpgProgramme = useMemo(() => {
     if (!currentChannel || !currentChannel.name) {
       return {
         title: 'Siaran Langsung',
         desc: 'Tonton siaran langsung saluran definisi tinggi di SSATV.',
-        start: '20260903220000',
-        stop: '20260903230000',
-        date: '2026-09-03',
-        startHour: 22,
-        timeSlot: '10:00 PM – 11:00 PM',
+        start: '',
+        stop: '',
+        date: '',
+        startHour: clockNow.getHours(),
+        timeSlot: `${clockNow.getHours() % 12 || 12}:00 - ${(clockNow.getHours() + 1) % 12 || 12}:00`,
         genre: 'Live TV',
       };
     }
-    return getCurrentProgramme(currentChannel);
-  }, [currentChannel]);
+    return getCurrentProgramme(currentChannel, clockNow);
+  }, [currentChannel, clockNow]);
 
   // Live Channels carousel list (top 10 channels in active category)
   const carouselChannels = useMemo(() => {
@@ -234,7 +242,12 @@ export const LiveTvView: React.FC<LiveTvViewProps> = ({
     }
   };
 
-  const epgTimeline = ['NOW', '9 PM', '10 PM', '11 PM', '12 AM'];
+  const epgTimeline = useMemo(() => getDynamicTimelineLabels(clockNow), [clockNow]);
+
+  const liveScrubberPercent = useMemo(() => {
+    const m = clockNow.getMinutes();
+    return Math.min(100, Math.max(5, Math.round((m / 60) * 100)));
+  }, [clockNow]);
 
   return (
     <div className="ssatv-livetv-container">
@@ -306,10 +319,10 @@ export const LiveTvView: React.FC<LiveTvViewProps> = ({
                 </span>
               </div>
 
-              {/* Scrubber Bar */}
+              {/* Scrubber Bar synced with real hour progress */}
               <div className="ssatv-hud-scrubber-track">
-                <div className="ssatv-hud-scrubber-fill" style={{ width: '75%' }} />
-                <div className="ssatv-hud-scrubber-handle" style={{ left: '75%' }} />
+                <div className="ssatv-hud-scrubber-fill" style={{ width: `${liveScrubberPercent}%` }} />
+                <div className="ssatv-hud-scrubber-handle" style={{ left: `${liveScrubberPercent}%` }} />
               </div>
 
               <div className="ssatv-hud-right">
@@ -741,16 +754,9 @@ export const LiveTvView: React.FC<LiveTvViewProps> = ({
           {/* Channel Program Rows from Real EPG */}
           <div className="ssatv-epg-rows-stack">
             {guideChannels.map((ch) => {
-              const slots = getTimelineSlotsForChannel(ch);
+              const slotsData = getTimelineSlotsForChannel(ch, clockNow);
               const isSelected = currentChannel.id === ch.id;
-
-              const slotList = [
-                { slot: slots.now, isNow: true },
-                { slot: slots.h9pm, isNow: false },
-                { slot: slots.h10pm, isNow: false },
-                { slot: slots.h11pm, isNow: false },
-                { slot: slots.h12am, isNow: false },
-              ];
+              const slotList = slotsData.dynamicSlots;
 
               return (
                 <div key={ch.id} className={`ssatv-epg-row ${isSelected ? 'active-row' : ''}`}>
@@ -774,13 +780,13 @@ export const LiveTvView: React.FC<LiveTvViewProps> = ({
                         className={`ssatv-epg-program-block ${item.isNow ? 'is-airing-now' : ''}`}
                         onClick={() => handleSelectChannel(ch)}
                       >
-                        <div className="ssatv-epg-slot-title" title={item.slot.title}>
-                          {item.slot.title}
+                        <div className="ssatv-epg-slot-title" title={item.programme.title}>
+                          {item.programme.title}
                         </div>
                         <div className="ssatv-epg-slot-meta">
-                          <span className="ssatv-epg-slot-time">{item.slot.timeSlot}</span>
+                          <span className="ssatv-epg-slot-time">{item.programme.timeSlot}</span>
                           <span className="ssatv-epg-slot-genre">
-                            {item.slot.genre || ch.category}
+                            {item.programme.genre || ch.category}
                           </span>
                         </div>
                       </div>
