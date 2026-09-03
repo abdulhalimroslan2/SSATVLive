@@ -1,25 +1,19 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap');
 
 :root {
-  --bg-primary: #0d0f15;
-  --bg-secondary: #12151f;
-  --bg-card: #181b24;
-  --bg-card-hover: #222634;
-  --bg-sidebar: #10121a;
-  --apple-blue: #0071e3;
-  --apple-blue-hover: #0077ed;
-  --apple-blue-glow: rgba(0, 113, 227, 0.4);
+  --bg-primary: #07090e;
+  --bg-secondary: #0c1017;
+  --bg-card: #111622;
+  --bg-card-hover: #171d2c;
+  --ssatv-red: #ff2a4b;
+  --ssatv-red-hover: #ff4765;
+  --ssatv-red-glow: rgba(255, 42, 75, 0.45);
   --text-primary: #ffffff;
-  --text-secondary: #949aa8;
-  --text-muted: #626978;
-  --accent-red: #e50914;
-  --accent-red-hover: #f6121d;
-  --accent-red-glow: rgba(229, 9, 20, 0.35);
-  --accent-gold: #ffb800;
-  --accent-blue: #0071e3;
-  --glass-bg: rgba(20, 24, 34, 0.75);
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  --glass-bg: rgba(12, 16, 23, 0.85);
   --glass-border: rgba(255, 255, 255, 0.08);
-  --glass-blur: blur(20px);
+  --glass-blur: blur(24px);
   --transition-fast: 0.18s cubic-bezier(0.2, 0, 0, 1);
   --transition-smooth: 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
@@ -2977,3 +2971,901 @@ html, body {
   color: #8c93a4;
   margin-top: 2px;
 }
+
+/* ==========================================================================
+   SSATV+ REDESIGN DESIGN SYSTEM (Matching User Uploaded Photo 1:1)
+   ========================================================================== */
+
+/* Full-width App Container */
+.ssatv-app-container {
+  min-height: 100vh;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* 1. SSATV+ TOP NAVIGATION HEADER */
+.ssatv-header {
+  position: sticky;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 72px;
+  background: rgba(7, 9, 14, 0.88);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 48px;
+  z-index: 100;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.ssatv-logo-wrap {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
+  transition: transform 0.2s ease;
+}
+
+.ssatv-logo-wrap:hover {
+  transform: scale(1.03);
+}
+
+.ssatv-logo-text {
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.55rem;
+  font-weight: 900;
+  letter-spacing: -0.5px;
+  color: #ffffff;
+}
+
+.ssatv-logo-plus {
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.6rem;
+  font-weight: 900;
+  color: var(--ssatv-red);
+  margin-left: 1px;
+  text-shadow: 0 0 12px var(--ssatv-red-glow);
+}
+
+.ssatv-nav-tabs {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+.ssatv-nav-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 8px 4px;
+  position: relative;
+}
+
+.ssatv-nav-label {
+  font-size: 0.84rem;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+  color: #94a3b8;
+  transition: color 0.2s ease;
+}
+
+.ssatv-nav-btn:hover .ssatv-nav-label {
+  color: #ffffff;
+}
+
+.ssatv-nav-btn.active .ssatv-nav-label {
+  color: #ffffff;
+}
+
+.ssatv-active-pill-glow {
+  position: absolute;
+  bottom: -2px;
+  width: 28px;
+  height: 3px;
+  background: var(--ssatv-red);
+  border-radius: 2px;
+  box-shadow: 0 0 12px var(--ssatv-red);
+}
+
+.ssatv-header-right {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.ssatv-icon-btn {
+  background: transparent;
+  border: none;
+  color: #cbd5e1;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.ssatv-icon-btn:hover {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.ssatv-notif-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.ssatv-notif-badge {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  width: 15px;
+  height: 15px;
+  background: var(--ssatv-red);
+  color: #ffffff;
+  font-size: 0.65rem;
+  font-weight: 800;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid var(--bg-primary);
+}
+
+.ssatv-profile-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  padding: 4px 6px;
+  border-radius: 24px;
+  transition: background 0.2s ease;
+}
+
+.ssatv-profile-btn:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.ssatv-avatar-img {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1.5px solid rgba(255, 255, 255, 0.25);
+}
+
+.ssatv-chevron-icon {
+  color: #94a3b8;
+}
+
+/* 2. CINEMATIC HERO EXPERIENCE */
+.ssatv-hero-section {
+  position: relative;
+  width: 100%;
+  height: 78vh;
+  min-height: 560px;
+  max-height: 720px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  padding: 0 48px;
+}
+
+.ssatv-hero-bg-container {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.ssatv-hero-bg-slide {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center top;
+  opacity: 0;
+  transform: scale(1.04);
+  transition: opacity 1s ease-in-out, transform 8s cubic-bezier(0.1, 0.8, 0.2, 1);
+}
+
+.ssatv-hero-bg-slide.active {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Cinematic Multi-Stop Gradients */
+.ssatv-hero-vignette-left {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    rgba(7, 9, 14, 0.95) 0%,
+    rgba(7, 9, 14, 0.82) 32%,
+    rgba(7, 9, 14, 0.45) 55%,
+    rgba(7, 9, 14, 0.05) 100%
+  );
+  z-index: 2;
+}
+
+.ssatv-hero-gradient-bottom {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 280px;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(7, 9, 14, 0.6) 45%,
+    #07090e 100%
+  );
+  z-index: 2;
+}
+
+.ssatv-hero-subtle-radial {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at 75% 35%,
+    transparent 20%,
+    rgba(7, 9, 14, 0.4) 80%
+  );
+  z-index: 2;
+}
+
+.ssatv-hero-content {
+  position: relative;
+  z-index: 10;
+  max-width: 620px;
+  margin-top: -30px;
+}
+
+.ssatv-hero-badge {
+  display: inline-block;
+  color: var(--ssatv-red);
+  font-size: 0.82rem;
+  font-weight: 800;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+  text-shadow: 0 0 12px var(--ssatv-red-glow);
+}
+
+.ssatv-hero-title {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 14px;
+}
+
+.ssatv-hero-title-line {
+  font-family: 'Outfit', sans-serif;
+  font-size: clamp(2.8rem, 4.8vw, 4.6rem);
+  font-weight: 900;
+  line-height: 1.0;
+  letter-spacing: -1.5px;
+  color: #ffffff;
+  text-transform: uppercase;
+  text-shadow: 0 4px 24px rgba(0, 0, 0, 0.8);
+}
+
+.ssatv-hero-meta {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #94a3b8;
+  letter-spacing: 0.5px;
+  margin-bottom: 14px;
+}
+
+.ssatv-hero-synopsis {
+  font-size: 1.05rem;
+  line-height: 1.55;
+  color: #cbd5e1;
+  margin-bottom: 26px;
+  max-width: 520px;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+}
+
+.ssatv-hero-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.ssatv-btn-watch {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #ffffff;
+  color: #000000;
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.92rem;
+  font-weight: 800;
+  letter-spacing: 0.6px;
+  padding: 13px 28px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 6px 20px rgba(255, 255, 255, 0.25);
+  transition: all 0.25s cubic-bezier(0.2, 0, 0, 1);
+}
+
+.ssatv-btn-watch:hover {
+  transform: translateY(-2px) scale(1.02);
+  background: #f1f5f9;
+  box-shadow: 0 8px 26px rgba(255, 255, 255, 0.38);
+}
+
+.ssatv-btn-watch:active {
+  transform: translateY(0) scale(0.99);
+}
+
+.ssatv-btn-list {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  padding: 13px 24px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.ssatv-btn-list:hover {
+  background: rgba(255, 255, 255, 0.22);
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+.ssatv-btn-list.in-list {
+  border-color: var(--ssatv-red);
+  background: rgba(255, 42, 75, 0.15);
+}
+
+.ssatv-hero-dots {
+  position: absolute;
+  bottom: 34px;
+  right: 48px;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  z-index: 10;
+}
+
+.ssatv-hero-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.35);
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: all 0.3s ease;
+}
+
+.ssatv-hero-dot.active {
+  width: 24px;
+  border-radius: 4px;
+  background: #ffffff;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
+}
+
+/* 3. HOME LAYOUT: MAIN SHELVES + LIVE NOW SIDEBAR */
+.ssatv-home-layout {
+  display: flex;
+  gap: 36px;
+  padding: 0 48px 64px 48px;
+  position: relative;
+  z-index: 5;
+}
+
+.ssatv-main-shelves {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 38px;
+}
+
+/* 4. ROW & CARD SHELVES */
+.ssatv-row-section {
+  display: flex;
+  flex-direction: column;
+}
+
+.ssatv-row-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.ssatv-row-title {
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.22rem;
+  font-weight: 700;
+  color: #ffffff;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.ssatv-row-title:hover {
+  color: var(--ssatv-red);
+}
+
+.ssatv-row-chevron {
+  color: #94a3b8;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.ssatv-row-title:hover .ssatv-row-chevron {
+  transform: translateX(4px);
+  color: var(--ssatv-red);
+}
+
+.ssatv-row-controls {
+  display: flex;
+  gap: 6px;
+}
+
+.ssatv-scroll-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.ssatv-scroll-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.3);
+  transform: scale(1.08);
+}
+
+.ssatv-cards-scroll {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  padding-bottom: 12px;
+  scrollbar-width: none;
+}
+
+.ssatv-cards-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+/* 5. CONTINUE WATCHING CARDS (16:9 Landscape) */
+.ssatv-continue-card {
+  flex: 0 0 260px;
+  cursor: pointer;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.ssatv-continue-card:hover {
+  transform: translateY(-4px);
+}
+
+.ssatv-continue-thumb-wrap {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  border-radius: 10px;
+  overflow: hidden;
+  background: #111622;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.ssatv-continue-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.ssatv-continue-card:hover .ssatv-continue-img {
+  transform: scale(1.05);
+}
+
+.ssatv-continue-gradient {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    transparent 35%,
+    rgba(7, 9, 14, 0.75) 75%,
+    rgba(7, 9, 14, 0.95) 100%
+  );
+}
+
+.ssatv-continue-info {
+  position: absolute;
+  bottom: 10px;
+  left: 12px;
+  right: 12px;
+  z-index: 3;
+}
+
+.ssatv-continue-title {
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: #ffffff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ssatv-continue-sub {
+  font-size: 0.76rem;
+  color: #94a3b8;
+  margin-top: 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Red Progress Bar */
+.ssatv-progress-track {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3.5px;
+  background: rgba(255, 255, 255, 0.2);
+  z-index: 4;
+}
+
+.ssatv-progress-fill {
+  height: 100%;
+  background: var(--ssatv-red);
+  box-shadow: 0 0 8px var(--ssatv-red);
+}
+
+/* Hover Play Overlay */
+.ssatv-card-hover-play {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  z-index: 5;
+}
+
+.ssatv-continue-card:hover .ssatv-card-hover-play,
+.ssatv-poster-card:hover .ssatv-card-hover-play {
+  opacity: 1;
+}
+
+.ssatv-play-circle {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(255, 42, 75, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 16px rgba(255, 42, 75, 0.6);
+  transform: scale(0.9);
+  transition: transform 0.2s ease;
+}
+
+.ssatv-continue-card:hover .ssatv-play-circle,
+.ssatv-poster-card:hover .ssatv-play-circle {
+  transform: scale(1);
+}
+
+/* 6. POSTER CARDS (Trending Now & New Releases) */
+.ssatv-poster-card {
+  flex: 0 0 176px;
+  cursor: pointer;
+  transition: transform 0.25s ease;
+}
+
+.ssatv-poster-card:hover {
+  transform: translateY(-4px);
+}
+
+.ssatv-poster-wrap {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  border-radius: 10px;
+  overflow: hidden;
+  background: #111622;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.ssatv-poster-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.ssatv-poster-card:hover .ssatv-poster-img {
+  transform: scale(1.06);
+}
+
+.ssatv-badge-new {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  background: var(--ssatv-red);
+  color: #ffffff;
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.65rem;
+  font-weight: 800;
+  padding: 2px 7px;
+  border-radius: 4px;
+  letter-spacing: 0.5px;
+  box-shadow: 0 2px 8px var(--ssatv-red-glow);
+  z-index: 4;
+}
+
+.ssatv-poster-gradient {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    transparent 40%,
+    rgba(7, 9, 14, 0.8) 75%,
+    rgba(7, 9, 14, 0.96) 100%
+  );
+  display: flex;
+  align-items: flex-end;
+  padding: 10px 12px;
+}
+
+.ssatv-stylized-title {
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.88rem;
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.9);
+}
+
+.ssatv-below-info {
+  margin-top: 8px;
+}
+
+.ssatv-below-title {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #ffffff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ssatv-below-meta {
+  font-size: 0.78rem;
+  color: #94a3b8;
+  margin-top: 2px;
+}
+
+/* 7. RIGHT DEDICATED RAIL: LIVE NOW */
+.ssatv-live-rail {
+  width: 320px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.ssatv-rail-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 14px;
+  cursor: pointer;
+}
+
+.ssatv-rail-title {
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.22rem;
+  font-weight: 700;
+  color: #ffffff;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: color 0.2s ease;
+}
+
+.ssatv-rail-title:hover {
+  color: var(--ssatv-red);
+}
+
+.ssatv-rail-chevron {
+  color: #94a3b8;
+  transition: transform 0.2s ease;
+}
+
+.ssatv-rail-title:hover .ssatv-rail-chevron {
+  transform: translateX(4px);
+  color: var(--ssatv-red);
+}
+
+.ssatv-rail-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.ssatv-live-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(18, 24, 38, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 12px 14px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.ssatv-live-card:hover {
+  background: rgba(26, 34, 52, 0.9);
+  border-color: rgba(255, 42, 75, 0.4);
+  transform: translateX(3px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+}
+
+.ssatv-live-info {
+  flex: 1;
+  min-width: 0;
+  margin-right: 12px;
+}
+
+.ssatv-live-badge-wrap {
+  margin-bottom: 5px;
+}
+
+.ssatv-live-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: var(--ssatv-red);
+  color: #ffffff;
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.65rem;
+  font-weight: 800;
+  padding: 2px 7px;
+  border-radius: 4px;
+  letter-spacing: 0.6px;
+  box-shadow: 0 2px 8px var(--ssatv-red-glow);
+}
+
+.ssatv-live-pulse-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #ffffff;
+  animation: ssatv-pulse 1.5s infinite;
+}
+
+@keyframes ssatv-pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.8); }
+}
+
+.ssatv-live-name {
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.96rem;
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: 0.3px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ssatv-live-program {
+  font-size: 0.8rem;
+  color: #cbd5e1;
+  margin-top: 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ssatv-live-time {
+  font-size: 0.73rem;
+  color: #94a3b8;
+  margin-top: 2px;
+}
+
+.ssatv-live-thumb-wrap {
+  position: relative;
+  width: 90px;
+  height: 60px;
+  border-radius: 8px;
+  overflow: hidden;
+  flex-shrink: 0;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.ssatv-live-thumb {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.ssatv-live-card:hover .ssatv-live-thumb {
+  transform: scale(1.08);
+}
+
+.ssatv-live-thumb-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ssatv-live-icon-subtle {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* Responsive Breakpoints */
+@media (max-width: 1100px) {
+  .ssatv-home-layout {
+    flex-direction: column;
+    padding: 0 24px 48px 24px;
+  }
+  .ssatv-live-rail {
+    width: 100%;
+  }
+  .ssatv-header {
+    padding: 0 24px;
+  }
+  .ssatv-hero-section {
+    padding: 0 24px;
+    height: 70vh;
+  }
+}
+
+@media (max-width: 768px) {
+  .ssatv-nav-tabs {
+    display: none;
+  }
+  .ssatv-hero-title-line {
+    font-size: 2.4rem;
+  }
+  .ssatv-hero-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+
