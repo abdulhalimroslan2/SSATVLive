@@ -156,7 +156,7 @@ export const LiveTvView: React.FC<LiveTvViewProps> = ({
         <div className="ssatv-live-player-pane">
           <div className="ssatv-live-viewport">
             {currentChannel && currentChannel.streamUrl ? (
-              <Player key={currentChannel.id || 'live_hero'} channel={currentChannel} />
+              <Player key={currentChannel.id || 'live_hero'} channel={currentChannel} hideOverlay />
             ) : (
               <div className="ssatv-live-fallback-img" style={{ background: '#07090e' }} />
             )}

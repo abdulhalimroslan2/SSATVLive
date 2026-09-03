@@ -3938,18 +3938,41 @@ html, body {
   box-shadow: 0 2px 10px var(--ssatv-red-glow);
 }
 
-/* Live HUD Controls */
+/* Live HUD Controls - Clean & Transparent without dark shield/scrim */
 .ssatv-live-hud-bar {
   position: absolute;
   bottom: 0;
   left: 0;
   right: 0;
-  background: linear-gradient(to top, rgba(7, 9, 14, 0.96) 0%, rgba(7, 9, 14, 0.5) 65%, transparent 100%);
+  background: transparent;
   padding: 12px 20px;
   display: flex;
   align-items: center;
   gap: 16px;
   z-index: 10;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+  pointer-events: none;
+}
+
+.ssatv-live-viewport:hover .ssatv-live-hud-bar {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Remove any dark gradient/shield/scrim on player */
+.player-quick-fs-fab {
+  display: none !important;
+}
+
+.player-custom-overlay {
+  background: transparent !important;
+}
+
+.shaka-controls-container,
+.shaka-scrim-container {
+  display: none !important;
+  background: transparent !important;
 }
 
 .ssatv-hud-left,

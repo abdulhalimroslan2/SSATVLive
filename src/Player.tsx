@@ -3,10 +3,11 @@ import type { Channel } from './mockData';
 import shaka from 'shaka-player/dist/shaka-player.ui.js';
 import 'shaka-player/dist/controls.css';
 import Hls from 'hls.js';
-import { Play, AlertCircle, RefreshCw, Maximize, Minimize } from 'lucide-react';
+import { Play, AlertCircle, RefreshCw } from 'lucide-react';
 
 interface PlayerProps {
   channel: Channel;
+  hideOverlay?: boolean;
 }
 
 // Detect iOS device
@@ -30,7 +31,7 @@ export const getProxyBaseUrl = (): string => {
   return window.location.origin;
 };
 
-export const Player: React.FC<PlayerProps> = ({ channel }) => {
+export const Player: React.FC<PlayerProps> = ({ channel, hideOverlay = false }) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const videoContainerRef = useRef<HTMLDivElement>(null);
   const [hasAutoplayError, setHasAutoplayError] = useState(false);
@@ -223,9 +224,11 @@ export const Player: React.FC<PlayerProps> = ({ channel }) => {
           await player.attach(video);
           if (isCancelled) return false;
 
-          const ui = new shaka.ui.Overlay(player, container, video);
-          uiRef.current = ui;
-          ui.getControls();
+          if (!hideOverlay) {
+            const ui = new shaka.ui.Overlay(player, container, video);
+            uiRef.current = ui;
+            ui.getControls();
+          }
 
           // Determine DRM Mode
           const isLicenseUrl = Boolean(
@@ -678,56 +681,42 @@ export const Player: React.FC<PlayerProps> = ({ channel }) => {
           autoPlay
           playsInline
           muted
-          controls
         />
 
-        {/* Dedicated TV Remote & Mobile Full Screen Overlay Bar */}
-        <div 
-          className={`player-custom-overlay ${showOverlayControls ? 'visible' : 'hidden'}`}
-          style={{
-            position: 'absolute',
-            inset: 0,
-            pointerEvents: 'none',
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'space-between',
-            padding: '1.25rem',
-            background: 'linear-gradient(180deg, rgba(0,0,0,0.7) 0%, transparent 25%, transparent 75%, rgba(0,0,0,0.8) 100%)',
-            transition: 'opacity 0.3s ease',
-            opacity: showOverlayControls ? 1 : 0,
-            zIndex: 25,
-          }}
-        >
-          {/* Top Bar: Channel Details & Dedicated Full Screen Button */}
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-              <div className="live-pill" style={{ pointerEvents: 'auto' }}>
-                <span className="live-dot" /> LIVE
+        {/* Dedicated TV Remote & Full Screen Overlay Bar (hidden when hideOverlay is true) */}
+        {!hideOverlay && (
+          <div 
+            className={`player-custom-overlay ${showOverlayControls ? 'visible' : 'hidden'}`}
+            style={{
+              position: 'absolute',
+              inset: 0,
+              pointerEvents: 'none',
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'space-between',
+              padding: '1.25rem',
+              background: 'transparent',
+              transition: 'opacity 0.3s ease',
+              opacity: showOverlayControls ? 1 : 0,
+              zIndex: 25,
+            }}
+          >
+            {/* Top Bar: Channel Details */}
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                <div className="live-pill" style={{ pointerEvents: 'auto' }}>
+                  <span className="live-dot" /> LIVE
+                </div>
+                <span style={{ color: '#fff', fontWeight: 700, fontSize: '1.1rem', textShadow: '0 2px 4px rgba(0,0,0,0.8)' }}>
+                  {channel.name}
+                </span>
+                <span style={{ color: 'rgba(255,255,255,0.7)', fontSize: '0.85rem' }}>
+                  • {channel.category}
+                </span>
               </div>
-              <span style={{ color: '#fff', fontWeight: 700, fontSize: '1.1rem', textShadow: '0 2px 4px rgba(0,0,0,0.8)' }}>
-                {channel.name}
-              </span>
-              <span style={{ color: 'rgba(255,255,255,0.7)', fontSize: '0.85rem' }}>
-                • {channel.category}
-              </span>
             </div>
-
           </div>
-
-          {/* Bottom Bar */}
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end', width: '100%' }}>
-
-            {/* Quick Floating Fullscreen Icon on Bottom Right */}
-            <button
-              className="player-quick-fs-fab"
-              onClick={toggleFullscreen}
-              style={{ pointerEvents: 'auto' }}
-              title="Toggle Fullscreen"
-            >
-              {isFullscreen ? <Minimize size={20} color="#fff" /> : <Maximize size={20} color="#fff" />}
-            </button>
-          </div>
-        </div>
+        )}
 
         {/* Manual Autoplay / Unmute Overlay */}
         {hasAutoplayError && (
