@@ -5213,15 +5213,13 @@ html, body {
 
 /* ==========================================================================
    EXCLUSIVE APPLE TV+ AESTHETIC SUBTITLES (Zero Ugly Full-Width Banners)
+   Supports both Text Subtitles (WebVTT/TTML) & SMPTE-TT Bitmap Subtitles (Astro Linear)
    ========================================================================== */
 
 /* 1. Root Subtitle Viewport: Floating over bottom-third of video */
 .shaka-text-container {
   position: absolute !important;
-  left: 0 !important;
-  right: 0 !important;
-  top: 0 !important;
-  bottom: 0 !important;
+  inset: 0 !important;
   width: 100% !important;
   height: 100% !important;
   pointer-events: none !important;
@@ -5230,10 +5228,10 @@ html, body {
   flex-direction: column !important;
   align-items: center !important;
   justify-content: flex-end !important;
-  padding-bottom: 58px !important;
   background: transparent !important;
   background-color: transparent !important;
   text-align: center !important;
+  overflow: hidden !important;
 }
 
 /* 2. Strip all backgrounds and borders from region containers and outer divs */
@@ -5252,6 +5250,7 @@ html, body {
 
 /* 3. Ensure regions flex-center their content cleanly */
 .shaka-text-container .shaka-text-region {
+  position: absolute !important;
   display: flex !important;
   flex-direction: column !important;
   align-items: center !important;
@@ -5259,6 +5258,7 @@ html, body {
   left: 0 !important;
   right: 0 !important;
   width: 100% !important;
+  pointer-events: none !important;
 }
 
 .shaka-text-container [id^="shaka-text-cue"],
@@ -5271,12 +5271,12 @@ html, body {
   background-color: transparent !important;
 }
 
-/* 4. The Innermost Text Payload: Luxury Apple TV Frosted Capsule */
-.shaka-text-container .shaka-text-wrapper,
+/* 4. The Innermost Text Payload: Luxury Apple TV Frosted Capsule (TEXT ONLY) */
+.shaka-text-container:not(:has([style*="background-image"])) .shaka-text-wrapper,
 .shaka-text-container span[translate="no"],
-.shaka-text-container p span,
+.shaka-text-container p span:not(:has([style*="background-image"])),
 .shaka-text-container .shaka-cue-text,
-.shaka-text-container [id^="shaka-text-cue"] > span {
+.shaka-text-container [id^="shaka-text-cue"] > span:not([style*="background-image"]) {
   /* Apple Pro Typography */
   font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Outfit", "Inter", sans-serif !important;
   font-size: clamp(1.22rem, 2.4vw, 1.68rem) !important;
@@ -5291,7 +5291,7 @@ html, body {
   width: auto !important;
   max-width: 82% !important;
   padding: 6px 18px !important;
-  margin: 2px auto !important;
+  margin: 2px auto 58px auto !important;
   border-radius: 9px !important;
   background: rgba(10, 14, 22, 0.74) !important;
   backdrop-filter: blur(16px) saturate(180%) !important;
@@ -5309,8 +5309,8 @@ html, body {
 
 /* 5. Prevent nested child spans from creating duplicate background capsules */
 .shaka-text-container span[translate="no"] span,
-.shaka-text-container .shaka-text-wrapper span,
-.shaka-text-container p span span {
+.shaka-text-container .shaka-text-wrapper span:not([style*="background-image"]),
+.shaka-text-container p span span:not([style*="background-image"]) {
   background: transparent !important;
   background-color: transparent !important;
   border: none !important;
@@ -5323,27 +5323,54 @@ html, body {
   display: inline !important;
 }
 
-/* 6. Bitmap/Image Subtitles (e.g. Astro Linear channels) */
+/* 6. Bitmap/Image Subtitles (SMPTE-TT in Astro channels like HBO, HBO HITS, TV3, etc.) */
+.shaka-text-container .shaka-text-wrapper:has([style*="background-image"]),
+.shaka-text-container:has([style*="background-image"]) .shaka-text-wrapper,
+.shaka-text-container:has([style*="background-image"]) > div {
+  background: transparent !important;
+  background-color: transparent !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  display: block !important;
+  width: 100% !important;
+  height: 100% !important;
+  position: absolute !important;
+  inset: 0 !important;
+}
+
 .shaka-text-container img,
-.shaka-text-container [style*="background-image"] {
-  max-width: 85% !important;
+.shaka-text-container span[style*="background-image"],
+.shaka-text-container div[style*="background-image"] {
+  display: block !important;
+  width: 100% !important;
+  height: 100% !important;
+  min-height: 48px !important;
+  max-width: 92% !important;
   object-fit: contain !important;
+  background-size: contain !important;
+  background-repeat: no-repeat !important;
+  background-position: center bottom !important;
   margin: 0 auto !important;
-  filter: drop-shadow(0 4px 14px rgba(0, 0, 0, 0.85)) !important;
+  filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.95)) drop-shadow(0 0 2px rgba(0, 0, 0, 1)) !important;
 }
 
 /* 7. Fullscreen Cinema Scaling */
 :fullscreen .shaka-text-container,
 :-webkit-full-screen .shaka-text-container {
-  padding-bottom: 74px !important;
+  padding-bottom: 0 !important;
 }
 
 :fullscreen .shaka-text-container span[translate="no"],
-:fullscreen .shaka-text-container .shaka-text-wrapper,
+:fullscreen .shaka-text-container:not(:has([style*="background-image"])) .shaka-text-wrapper,
 :-webkit-full-screen .shaka-text-container span[translate="no"],
-:-webkit-full-screen .shaka-text-container .shaka-text-wrapper {
+:-webkit-full-screen .shaka-text-container:not(:has([style*="background-image"])) .shaka-text-wrapper {
   font-size: clamp(1.4rem, 2.8vw, 2.2rem) !important;
   padding: 8px 24px !important;
+  margin-bottom: 74px !important;
   border-radius: 12px !important;
 }
 

@@ -457,6 +457,9 @@ export const Player: React.FC<PlayerProps> = ({ channel, hideOverlay = false }) 
             // Helper to get Shaka's internal UITextDisplayer regardless of minification
             const getShakaTextDisplayer = () => {
               if (!player) return null;
+              if ((player as any).F && typeof (player as any).F.setTextVisibility === 'function') {
+                return (player as any).F;
+              }
               if (typeof (player as any).getTextDisplayer === 'function') {
                 const td = (player as any).getTextDisplayer();
                 if (td) return td;
