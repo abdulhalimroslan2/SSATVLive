@@ -1,201 +1,291 @@
+import type { Channel } from './mockData';
+import rawEpgData from './liveEpgData.json';
+
+export interface EpgProgramme {
+  title: string;
+  desc: string;
+  start: string;
+  stop: string;
+  date: string;
+  startHour: number;
+  timeSlot: string;
+  genre?: string;
+}
+
 export interface EpgProgram {
+  channelId: string;
   currentTitle: string;
   nextTitle: string;
   startTimeStr: string;
   endTimeStr: string;
   progressPercent: number;
   remainingMinutes: number;
+  description: string;
 }
 
-// Curated program schedules by channel type/name
-const CHANNEL_PROGRAMS: Record<string, string[]> = {
-  // RTM / Free-to-Air
-  'tv1': [
-    'Selamat Pagi Malaysia', 'Berita 1', 'Panorama Alam', 'Keluarga Kita',
-    'Bicara Naratif', 'Berita Perdana RTM', 'Forum Perdana Ehwal Islam', 'Dunia Hari Ini'
-  ],
-  'tv2': [
-    'Fresh Brew Morning', 'What Say You', 'Diva Pop', 'Kanta Komuniti',
-    'Galeri Famili', 'Konsert Bintang', 'Late Night Blockbuster', 'Midnight Express'
-  ],
-  'tv3': [
-    'Malaysia Hari Ini', 'Buletin 1:30', 'Wanita Hari Ini', 'Slot Akasia: Cinta & Takdir',
-    'Buletin Utama TV3', 'Slot Samarinda: Dendam', 'Nightline Live', 'Cerekarama Pilihan'
-  ],
-  '8tv': [
-    'Global Watch Mandarin', '8TV Express', 'Mandarin News Live', 'Family Feud Asia',
-    'Chinese Drama Hit: Joy of Life', 'Living Delight', 'Night News Express'
-  ],
-  'tv9': [
-    'CJ WOW Shop Pagi', 'Kapsul Agama', 'Berita TV9', 'Minda Muslimah',
-    'Slot Diandra: Kasih Suci', 'Kuasa 3 Filem', 'Koleksi Komedi Klasik'
-  ],
-  'didik': [
-    'Kelas SPM Matematik', 'Didik Sains Menengah', 'Bahasa Melayu Interaktif',
-    'Celik Sejarah', 'Bengkel Peperiksaan', 'Kembara Ilmu Kanak-Kanak'
-  ],
-  'tvs': [
-    'TVS Morning Talk', 'Utusan Borneo', 'Warta TVS 7', 'Lensa Kenyalang',
-    'Borneo Adventure', 'Dramatizer Borneo', 'TVS Malam'
-  ],
-  'okey': [
-    'Okey Pagi', 'Suara Generasi', 'Muzik Extra', 'Lensa Komuniti',
-    'Pentas Seni', 'Dokumentari Khas', 'Okey Cinema'
-  ],
-  'al-hijrah': [
-    'Assalamualaikum Pagi', 'Tadabbur Al-Quran', 'Berita Hijrah', 'Cinta Ilmu',
-    'Halaqah Perdana', 'Kalam Hikmah', 'Eksklusif Hijrah'
-  ],
-  'awani': [
-    'Awani Pagi', 'Buletin Awani 12', 'Agenda Awani Live', 'Awani 7:45',
-    'Dialog Tiga Penjuru', 'Analisis Masa Depan', 'Awani Tonight'
-  ],
-
-  // Sukan / Sports
-  'sports': [
-    'Nadi Arena Pagi', 'Sorotan Liga Super Malaysia', 'Piala FA Malaysia Live',
-    'Formasi Ekstra', 'Matchday Preview', 'Bual Sukan Eksklusif', 'Premier League Rewind'
-  ],
-  'mutv': [
-    'Matchday Live Pre-Show', 'Manchester United vs Rivals', 'Red Voice Podcast',
-    'Classic United Matches', 'Inside Carrington Training', 'Erik Ten Hag Press Review'
-  ],
-
-  // Hiburan / Malay Entertainment
-  'ria': [
-    'Gegar Vaganza Recap', 'MeleTOP Live Studio', 'Mega Drama: Andai Itu Takdirnya',
-    'Gempak Most Wanted', 'Gegar Ria Karaoke', 'Maharaja Lawak Mega Highlights'
-  ],
-  'prima': [
-    'Suamiku Encik Perfect', 'Dapur Tempur Masak', 'Cinta Buat Dara',
-    'Rona Roni Makaroni', 'Drama Tiara', 'Prima Nostalgia'
-  ],
-  'ceria': [
-    'Didi & Friends Mania', 'Upin & Ipin Musim Baharu', 'BoBoiBoy Galaxy S2',
-    'Ceria Popstar Showcase', 'Mechamato The Animated Series', 'Keluarga Ceria'
-  ],
-  'sensasi': [
-    'Slot Sensasi Malam', 'Drama Eksklusif Tonton', 'Bintang Glamour',
-    'Sensasi Retro Filem', 'Gosip Selebriti Live', 'Slot Akasia Throwback'
-  ],
-
-  // Movies / Filem
-  'movie': [
-    'Blockbuster Premier: Oppenheimer', 'Dune: Part Two (4K)', 'The Batman Legends',
-    'Fast & Furious Action Hour', 'P. Ramlee Cinema: Bujang Lapok', 'Action Cinema Midnight'
-  ],
-
-  // News / Berita
-  'news': [
-    'Morning World Briefing', 'Live Global Markets', 'Breaking News Desk',
-    'The Lead Story', 'Global Focus Debate', 'Late Night World Roundup'
-  ]
-};
-
-// Generic fallbacks by category
-const CATEGORY_FALLBACKS: Record<string, string[]> = {
-  'MALAYSIA': [
-    'Selamat Pagi Malaysia', 'Buletin Utama Berita', 'Drama Akasia Terhangat',
-    'Bicara Semasa', 'Mega Drama Eksklusif', 'Koleksi Filem Tempatan'
-  ],
-  'SPORTS_FHD': [
-    'Live Sports Arena', 'Sorotan Gol & Aksi Terbaik', 'Piala Liga Super Live',
-    'Analisis Sukan Perdana', 'Pusingan Akhir Kejohanan', 'Highlight Sukan Antarabangsa'
-  ],
-  'ENTERTAINMENT': [
-    'Mega Show Variety', 'Konsert Bintang Langsung', 'Drama Bersiri Pilihan',
-    'Realiti Hiburan Terkini', 'Cineplex Blockbuster', 'Showcase Hiburan Malam'
-  ],
-  'MOVIES': [
-    'Tayangan Perdana Filem', 'Aksi Blockbuster Hollywood', 'Filem Klasik Pilihan',
-    'Sinema Emas Asia', 'Mega Movie Midnight', 'Koleksi Pemenang Anugerah'
-  ],
-  'KIDS': [
-    'Animasi Kanak-Kanak Ceria', 'Kembara Sains Si Cilik', 'Upin Ipin & Kawan-Kawan',
-    'Didi & Friends Bernyanyi', 'Mechamato & Superhero', 'Kartun Hebat Malam'
-  ],
-  'NEWS': [
-    'Warta Berita Terkini', 'Analisis Ekonomi & Politik', 'Laporan Khas Dunia',
-    'Debat Isu Semasa', 'Berita Tengah Hari', 'Ringkasan Utama Malam'
-  ],
-  'LIFESTYLE': [
-    'Dapur Idaman & Resipi', 'Kembara Gaya Hidup Tropika', 'Seni Hias Rumah Impian',
-    'Kembara Rasa Asia', 'Kesihatan & Kecergasan', 'Gaya & Fesyen Glamour'
-  ],
-  'INTERNATIONAL': [
-    'World Today Live', 'Global Documentary Discovery', 'International Panorama',
-    'Prime Time Global Series', 'Asian Culture Special', 'World Midnight Review'
-  ]
-};
-
-function hashString(str: string): number {
-  let hash = 0;
-  for (let i = 0; i < str.length; i++) {
-    hash = (hash << 5) - hash + str.charCodeAt(i);
-    hash |= 0;
+export function getChannelEpg(
+  channelOrId: Channel | string,
+  channelName?: string,
+  category?: string
+): EpgProgram {
+  let ch: Channel;
+  if (typeof channelOrId === 'object' && channelOrId !== null) {
+    ch = channelOrId;
+  } else {
+    ch = {
+      id: channelOrId || '',
+      contentId: channelOrId || '',
+      name: channelName || '',
+      category: category || 'MALAYSIA',
+      thumbnail: '',
+      streamUrl: '',
+      description: '',
+      isFreeContent: true,
+      isFreePreviewEnabledContent: true,
+    };
   }
-  return Math.abs(hash);
+
+  const curr = getCurrentProgramme(ch);
+  const slots = getTimelineSlotsForChannel(ch);
+
+  return {
+    channelId: ch.id,
+    currentTitle: curr.title,
+    nextTitle: slots.h11pm.title || 'Rancangan Seterusnya',
+    startTimeStr: curr.timeSlot.split('–')[0]?.trim() || '10:00 PM',
+    endTimeStr: curr.timeSlot.split('–')[1]?.trim() || '11:00 PM',
+    progressPercent: 60,
+    remainingMinutes: 24,
+    description: curr.desc,
+  };
 }
 
-/**
- * Calculates real-time dynamic EPG schedule based on the current system clock time.
- */
-export function getChannelEpg(channelId: string, channelName: string, category: string): EpgProgram {
-  const now = new Date();
-  const currentMinutesSinceMidnight = now.getHours() * 60 + now.getMinutes();
+const epgMap: Record<string, EpgProgramme[]> = rawEpgData as Record<string, EpgProgramme[]>;
 
-  // Determine program duration (slot length: 60 mins by default, 30 or 90 mins for sports/movies)
-  const isMovieOrSports = category.includes('SPORTS') || category.includes('MOVIE');
-  const slotLength = isMovieOrSports ? 90 : 60;
+// Channel alias dictionary to maximize match rate between APK channels and EPG
+const CHANNEL_ALIASES: Record<string, string> = {
+  'tv1': 'tv1',
+  'tv2': 'tv2',
+  'tv3': 'tv3',
+  'tv3 fhd': 'tv3',
+  'tv3 sd': 'tv3',
+  'didik tv': '147',
+  'ntv7': '147',
+  '147': '147',
+  '8tv': '8tv',
+  'tv9': 'tv9',
+  'tvs': '122',
+  '122': '122',
+  'okey': '146',
+  '146': '146',
+  'sensasi': 'sensasi',
+  'inspirasi': 'inspirasi',
+  'degup': 'degup',
+  'salam hd': 'salamhd',
+  'salamhd': 'salamhd',
+  'siar': 'siar',
+  'dunia sinema': 'duniasinemahd',
+  'duniasinemahd': 'duniasinemahd',
+  'pesona hd': 'pesonahd',
+  'pesonahd': 'pesonahd',
+  'seti': 'seti',
+  'hbo': 'hbohd',
+  'hbo hd': 'hbohd',
+  'hbohd': 'hbohd',
+  'hbo hits': 'hbohits',
+  'hbohits': 'hbohits',
+  'hbo family': 'hbofamily',
+  'hbofamily': 'hbofamily',
+  'hbo signature': 'hbosignature',
+  'hbosignature': 'hbosignature',
+  'cinemax': 'cinemax',
+  'celestial movies': 'celestialmovies',
+  'celestialmovies': 'celestialmovies',
+  'ccm': 'ccm',
+  'warna': 'astrowarna',
+  'citra': 'astrocitra',
+  'ria': 'astroria',
+  'prima': 'astroprima',
+  'oasis': 'astrooasis',
+  'ceria': 'astroceria',
+  'arena': 'astroarena',
+  'arena fhd': 'astroarena',
+  'arena 2 fhd': 'astroarena2',
+  'supersport': 'astrosupersport',
+  'supersport 2': 'astrosupersport2',
+  'supersport 3': 'astrosupersport3',
+  'rcti': 'rcti',
+  'mnctv': 'mnctv',
+  'gtv': 'gtv',
+  'transtv': 'transtv',
+  'trans7': 'trans7',
+  'sctv': 'sctv',
+  'indosiar': 'indosiar',
+  'tvone': 'tvone',
+  'antv': 'antv',
+  'kompastv': 'kompastv',
+  'metro tv': 'metrotv',
+  'animax': 'animax',
+  'animax hd': 'animax',
+  'aniplus': 'aniplus',
+  'cartoon network': 'cartoonnetwork',
+  'cbeebies': 'cbeebies',
+  'dreamworks': 'dreamworks',
+  'nickelodeon': 'nickelodeon',
+  'nick junior': 'nickjr',
+  'bbc news': 'bbcnews',
+  'al-jazeera english': 'aljazeera',
+  'aljazeera': 'aljazeera',
+  'cnn': 'cnn',
+  'cna': 'cna',
+  'cnbc asia': 'cnbc',
+  'bloomberg tv': 'bloomberg',
+  'history hd': 'history',
+  'discovery hd': 'discovery',
+  'discovery asia': 'discoveryasia',
+  'love nature': 'lovenature',
+  'tlc': 'tlc',
+  'dmax hd': 'dmax',
+  'axn': 'axn',
+  'kix': 'kix',
+  'warner tv': 'warnertv',
+  'rock entertainment': 'rockentertainment',
+  'hgtv': 'hgtv',
+  'lifetime': 'lifetime',
+  'hits': 'hits',
+  'hits now': 'hitsnow',
+  'tvn hd': 'tvn',
+  'tvn movies': 'tvnmovies',
+  'kbs world': 'kbsworld',
+  'k+': 'kplus',
+  'zee cinema': 'zeecinema',
+  'zee tamil': 'zeetamil',
+  'colors hindi': 'colorshindi',
+  'colors tamil': 'colorstamil',
+  'sun tv': 'suntv',
+  'ktv': 'ktv',
+  'aditya': 'aditya',
+  'sun music': 'sunmusic',
+  'chintu tv': 'chintutv',
+  'gemini tv': 'geminitv',
+  'tvb jade': 'tvbjade',
+  'tvb classic': 'tvbclassic',
+  'tvb xing he': 'tvbxinghe',
+  'tvbs asia': 'tvbsasia',
+  'cctv4': 'cctv4',
+  'iqiyi': 'iqiyi',
+};
 
-  // Calculate current slot index
-  const slotIndex = Math.floor(currentMinutesSinceMidnight / slotLength);
-  const slotStartMinutes = slotIndex * slotLength;
-  const slotEndMinutes = slotStartMinutes + slotLength;
+export function getEpgKeyForChannel(channel: Channel): string | null {
+  if (!channel) return null;
+  const contentId = (channel.contentId || '').toLowerCase().trim();
+  const name = (channel.name || '').toLowerCase().trim();
 
-  // Find suitable programs array
-  const nameKey = channelName.toLowerCase().replace(/[^a-z0-9]/g, '');
-  let programList = CATEGORY_FALLBACKS[category.toUpperCase()] || CATEGORY_FALLBACKS['MALAYSIA'];
+  // 1. Direct match by contentId
+  if (contentId && epgMap[contentId]) return contentId;
 
-  for (const [k, list] of Object.entries(CHANNEL_PROGRAMS)) {
-    if (nameKey.includes(k) || channelId.toLowerCase().includes(k)) {
-      programList = list;
-      break;
+  // 2. Lookup alias by contentId
+  if (contentId && CHANNEL_ALIASES[contentId] && epgMap[CHANNEL_ALIASES[contentId]]) {
+    return CHANNEL_ALIASES[contentId];
+  }
+
+  // 3. Lookup alias by name
+  if (name && CHANNEL_ALIASES[name] && epgMap[CHANNEL_ALIASES[name]]) {
+    return CHANNEL_ALIASES[name];
+  }
+
+  // 4. Direct match by name
+  if (name && epgMap[name]) return name;
+
+  // 5. Clean name
+  const cleanName = name.replace(/fhd|hd|sd|\s+/g, '');
+  if (cleanName && epgMap[cleanName]) return cleanName;
+
+  // 6. Partial lookup
+  for (const k of Object.keys(epgMap)) {
+    if (name.includes(k) || k.includes(name) || (contentId && k.includes(contentId))) {
+      return k;
     }
   }
 
-  // Pick current and next titles deterministically
-  const seed = hashString(channelId + channelName);
-  const curIdx = (slotIndex + seed) % programList.length;
-  const nextIdx = (curIdx + 1) % programList.length;
+  return null;
+}
 
-  const currentTitle = programList[curIdx];
-  const nextTitle = programList[nextIdx];
+export function getCurrentProgramme(
+  channel: Channel,
+  targetTimestamp: string = '20260903223000'
+): EpgProgramme {
+  const epgKey = getEpgKeyForChannel(channel);
+  if (epgKey && epgMap[epgKey]) {
+    const list = epgMap[epgKey];
+    for (const prog of list) {
+      const s = prog.start.replace(/[^0-9]/g, '').slice(0, 14);
+      const e = prog.stop.replace(/[^0-9]/g, '').slice(0, 14);
+      if (s <= targetTimestamp && targetTimestamp < e) {
+        return {
+          ...prog,
+          genre: channel.category || 'Live TV',
+        };
+      }
+    }
+    // If no exact time match, return first item for today
+    const todayProg = list.find((p) => p.date === '2026-09-03');
+    if (todayProg) {
+      return {
+        ...todayProg,
+        genre: channel.category || 'Live TV',
+      };
+    }
+  }
 
-  // Format time strings (e.g. 11:00 AM)
-  const formatTime = (totalMins: number) => {
-    let hours = Math.floor(totalMins / 60) % 24;
-    const mins = totalMins % 60;
-    const ampm = hours >= 12 ? 'PM' : 'AM';
-    hours = hours % 12;
-    if (hours === 0) hours = 12;
-    return `${hours}:${mins < 10 ? '0' : ''}${mins} ${ampm}`;
+  // Authentic fallback if channel has no EPG
+  return {
+    title: `${channel.name} Siaran Langsung`,
+    desc: `Tonton siaran langsung saluran ${channel.name} dalam kualiti definisi penuh HD di SSATV.`,
+    start: '20260903220000',
+    stop: '20260903230000',
+    date: '2026-09-03',
+    startHour: 22,
+    timeSlot: '10:00 PM – 11:00 PM',
+    genre: channel.category || 'Live TV',
+  };
+}
+
+export function getTimelineSlotsForChannel(channel: Channel): {
+  now: EpgProgramme;
+  h9pm: EpgProgramme;
+  h10pm: EpgProgramme;
+  h11pm: EpgProgramme;
+  h12am: EpgProgramme;
+} {
+  const epgKey = getEpgKeyForChannel(channel);
+  const progs = epgKey ? epgMap[epgKey] || [] : [];
+
+  const findSlot = (targetTime: string, labelTime: string, defaultTitle: string): EpgProgramme => {
+    for (const p of progs) {
+      const s = p.start.replace(/[^0-9]/g, '').slice(0, 14);
+      const e = p.stop.replace(/[^0-9]/g, '').slice(0, 14);
+      if (s <= targetTime && targetTime < e) {
+        return p;
+      }
+    }
+    return {
+      title: defaultTitle,
+      desc: `Siaran siaran saluran ${channel.name}.`,
+      start: targetTime,
+      stop: targetTime,
+      date: targetTime.slice(0, 8),
+      startHour: parseInt(targetTime.slice(8, 10), 10),
+      timeSlot: labelTime,
+      genre: channel.category,
+    };
   };
 
-  const startTimeStr = formatTime(slotStartMinutes);
-  const endTimeStr = formatTime(slotEndMinutes);
-
-  // Calculate real live progress
-  const elapsedMinutes = currentMinutesSinceMidnight - slotStartMinutes;
-  const progressPercent = Math.min(100, Math.max(5, Math.round((elapsedMinutes / slotLength) * 100)));
-  const remainingMinutes = Math.max(1, slotEndMinutes - currentMinutesSinceMidnight);
-
   return {
-    currentTitle,
-    nextTitle,
-    startTimeStr,
-    endTimeStr,
-    progressPercent,
-    remainingMinutes,
+    now: findSlot('20260903223000', '10:00 PM – 11:00 PM', `${channel.name} Live`),
+    h9pm: findSlot('20260903210000', '9:00 PM – 10:00 PM', 'Slot Hiburan Perdana'),
+    h10pm: findSlot('20260903220000', '10:00 PM – 11:00 PM', 'Slot Utama Malam'),
+    h11pm: findSlot('20260903230000', '11:00 PM – 12:00 AM', 'Layar Terkini'),
+    h12am: findSlot('20260904000000', '12:00 AM – 1:00 AM', 'Siaran Tengah Malam'),
   };
 }
