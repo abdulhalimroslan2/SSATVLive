@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useEffect } from 'react';
+import React, { useState, useMemo, useEffect, useRef } from 'react';
 import {
   Play,
   Plus,
@@ -61,6 +61,16 @@ export const LiveTvView: React.FC<LiveTvViewProps> = ({
   const [isSubtitleVisible, setIsSubtitleVisible] = useState<boolean>(false);
   const [activeSubtitleId, setActiveSubtitleId] = useState<number | string | null>('off');
   const [activeAudioId, setActiveAudioId] = useState<number | string | null>(null);
+  const [subtitleToast, setSubtitleToast] = useState<string | null>(null);
+  const toastTimerRef = useRef<any>(null);
+
+  const triggerSubtitleToast = (msg: string) => {
+    if (toastTimerRef.current) clearTimeout(toastTimerRef.current);
+    setSubtitleToast(msg);
+    toastTimerRef.current = setTimeout(() => {
+      setSubtitleToast(null);
+    }, 2800);
+  };
 
   // Sync subtitle and audio tracks from Shaka Player
   useEffect(() => {
@@ -205,8 +215,8 @@ export const LiveTvView: React.FC<LiveTvViewProps> = ({
     handleSelectChannel(currentChannel);
 
     const container =
-      (document.querySelector('.video-player-container') as HTMLElement) ||
       (document.querySelector('.ssatv-live-viewport') as HTMLElement) ||
+      (document.querySelector('.video-player-container') as HTMLElement) ||
       (document.querySelector('video') as HTMLElement);
 
     const video = document.querySelector('video') as HTMLVideoElement | null;
@@ -259,6 +269,14 @@ export const LiveTvView: React.FC<LiveTvViewProps> = ({
               <span className="ssatv-live-pulse-dot" />
               LIVE
             </div>
+
+            {/* Apple TV On-Screen Subtitle / Audio Feedback Pill */}
+            {subtitleToast && (
+              <div className="ssatv-subtitle-toast-pill">
+                <Subtitles size={16} />
+                <span>{subtitleToast}</span>
+              </div>
+            )}
 
             {/* Custom Apple TV Bottom Control HUD */}
             <div className="ssatv-live-hud-bar">
@@ -355,6 +373,7 @@ export const LiveTvView: React.FC<LiveTvViewProps> = ({
                               (window as any).__ssatv_player_controller?.selectSubtitle('off');
                               setActiveSubtitleId('off');
                               setIsSubtitleVisible(false);
+                              triggerSubtitleToast('Sarikata Dimatikan (Off)');
                             }}
                           >
                             <div className="ssatv-track-item-left">
@@ -370,6 +389,7 @@ export const LiveTvView: React.FC<LiveTvViewProps> = ({
                           {subtitleTracks.length > 0 ? (
                             subtitleTracks.map((track) => {
                               const isSelected = isSubtitleVisible && (activeSubtitleId === track.id || track.active);
+                              const trackLabel = formatTrackLanguage(track.language, track.label);
                               return (
                                 <button
                                   key={track.id}
@@ -378,6 +398,7 @@ export const LiveTvView: React.FC<LiveTvViewProps> = ({
                                     (window as any).__ssatv_player_controller?.selectSubtitle(track.id);
                                     setActiveSubtitleId(track.id);
                                     setIsSubtitleVisible(true);
+                                    triggerSubtitleToast(`Sarikata: ${trackLabel}`);
                                   }}
                                 >
                                   <div className="ssatv-track-item-left">
@@ -385,7 +406,7 @@ export const LiveTvView: React.FC<LiveTvViewProps> = ({
                                       {formatLanguageBadge(track.language)}
                                     </span>
                                     <span className="ssatv-track-name">
-                                      {formatTrackLanguage(track.language, track.label)}
+                                      {trackLabel}
                                     </span>
                                   </div>
                                   {isSelected && <Check size={16} className="ssatv-track-check" />}
@@ -408,6 +429,7 @@ export const LiveTvView: React.FC<LiveTvViewProps> = ({
                             Array.from(new Set(audioTracks.map((t: any) => t.language || 'original'))).map((lang: any) => {
                               const matchingTrack = audioTracks.find((t: any) => (t.language || 'original') === lang);
                               const isSelected = activeAudioId === matchingTrack?.id || matchingTrack?.active;
+                              const audioLabel = formatTrackLanguage(lang);
                               return (
                                 <button
                                   key={lang}
@@ -416,12 +438,13 @@ export const LiveTvView: React.FC<LiveTvViewProps> = ({
                                     if (matchingTrack) {
                                       (window as any).__ssatv_player_controller?.selectAudio(matchingTrack.id);
                                       setActiveAudioId(matchingTrack.id);
+                                      triggerSubtitleToast(`Audio: ${audioLabel}`);
                                     }
                                   }}
                                 >
                                   <div className="ssatv-track-item-left">
                                     <span className="ssatv-track-badge">{formatLanguageBadge(lang)}</span>
-                                    <span className="ssatv-track-name">{formatTrackLanguage(lang)}</span>
+                                    <span className="ssatv-track-name">{audioLabel}</span>
                                   </div>
                                   {isSelected && <Check size={16} className="ssatv-track-check" />}
                                 </button>

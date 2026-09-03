@@ -222,6 +222,9 @@ export const Player: React.FC<PlayerProps> = ({ channel, hideOverlay = false }) 
           playerRef.current = player;
           (window as any).__shakaPlayer = player;
 
+          // Always set the video container so Shaka constructs UITextDisplayer HTML DOM overlays for TTML/VTT subtitles
+          player.setVideoContainer(container);
+
           await player.attach(video);
           if (isCancelled) return false;
 
@@ -451,6 +454,22 @@ export const Player: React.FC<PlayerProps> = ({ channel, hideOverlay = false }) 
 
             await startPlay(video);
 
+            // Helper to get Shaka's internal UITextDisplayer regardless of minification
+            const getShakaTextDisplayer = () => {
+              if (!player) return null;
+              if (typeof (player as any).getTextDisplayer === 'function') {
+                const td = (player as any).getTextDisplayer();
+                if (td) return td;
+              }
+              for (const k of Object.getOwnPropertyNames(player)) {
+                const val = (player as any)[k];
+                if (val && typeof val === 'object' && typeof val.setTextVisibility === 'function') {
+                  return val;
+                }
+              }
+              return null;
+            };
+
             // Hook track change listeners & publish initial track state
             const syncTracks = () => {
               if (!player) return;
@@ -458,7 +477,11 @@ export const Player: React.FC<PlayerProps> = ({ channel, hideOverlay = false }) 
                 const textTracks = player.getTextTracks();
                 const audioTracks = player.getAudioTracks ? player.getAudioTracks() : [];
                 const variants = player.getVariantTracks ? player.getVariantTracks() : [];
-                const isVisible = (player as any).isTextTrackVisible ? (player as any).isTextTrackVisible() : false;
+                const activeText = textTracks.find((t: any) => t.active);
+                const td = getShakaTextDisplayer();
+                const isVisible = td && typeof td.isTextVisible === 'function'
+                  ? td.isTextVisible()
+                  : Boolean(activeText);
 
                 window.dispatchEvent(new CustomEvent('ssatv-tracks-updated', {
                   detail: {
@@ -480,14 +503,20 @@ export const Player: React.FC<PlayerProps> = ({ channel, hideOverlay = false }) 
             (window as any).__ssatv_player_controller = {
               selectSubtitle: (trackId: number | string | null) => {
                 try {
+                  const td = getShakaTextDisplayer();
                   if (trackId === null || trackId === 'off' || trackId === -1) {
-                    if ((player as any).setTextTrackVisibility) (player as any).setTextTrackVisibility(false);
+                    player.selectTextTrack(null as any);
+                    if (td && typeof td.setTextVisibility === 'function') {
+                      td.setTextVisibility(false);
+                    }
                   } else {
                     const tracks = player.getTextTracks();
                     const match = tracks.find((t: any) => t.id === trackId || String(t.id) === String(trackId));
                     if (match) {
                       player.selectTextTrack(match);
-                      if ((player as any).setTextTrackVisibility) (player as any).setTextTrackVisibility(true);
+                      if (td && typeof td.setTextVisibility === 'function') {
+                        td.setTextVisibility(true);
+                      }
                     }
                   }
                   syncTracks();
@@ -511,11 +540,17 @@ export const Player: React.FC<PlayerProps> = ({ channel, hideOverlay = false }) 
               },
               getTracks: () => {
                 try {
+                  const textTracks = player.getTextTracks();
+                  const activeText = textTracks.find((t: any) => t.active);
+                  const td = getShakaTextDisplayer();
+                  const isVisible = td && typeof td.isTextVisible === 'function'
+                    ? td.isTextVisible()
+                    : Boolean(activeText);
                   return {
-                    subtitles: player.getTextTracks(),
+                    subtitles: textTracks,
                     audio: player.getAudioTracks ? player.getAudioTracks() : [],
                     variants: player.getVariantTracks ? player.getVariantTracks() : [],
-                    isSubtitleVisible: (player as any).isTextTrackVisible ? (player as any).isTextTrackVisible() : false,
+                    isSubtitleVisible: isVisible,
                   };
                 } catch (_e) {
                   return { subtitles: [], audio: [], variants: [], isSubtitleVisible: false };
