@@ -354,99 +354,113 @@ export const Player: React.FC<PlayerProps> = ({ channel, hideOverlay = false }) 
             }
           }
 
-          // Configure Shaka Player DRM & Streaming for Zero-Buffer Playback
+          // Configure Shaka Player DRM & Streaming for Zero-Buffer & Mobile Stability
           player.configure({
             drm: drmConfig,
             streaming: {
               lowLatencyMode: false,
               inaccurateManifestTolerance: 2,
-              bufferingGoal: IS_IOS ? 8 : 20,
-              rebufferingGoal: IS_IOS ? 2 : 2.5,
-              bufferBehind: IS_IOS ? 5 : 15,
+              bufferingGoal: 20, // Keep healthy 20s buffer cushion on all platforms
+              rebufferingGoal: 4, // Buffer at least 1 full segment (4s) before resuming
+              bufferBehind: 15,
               stallEnabled: true,
-              stallThreshold: 0.8,
-              stallSkip: 0.3,
-              safeSeekOffset: 2,
+              stallThreshold: 4.0, // Don't panic on mobile network jitter
+              stallSkip: 0.5,
+              safeSeekOffset: 8, // Stay 8-10 seconds behind live edge so segments are published on CDN!
+              jumpLargeGaps: true, // Seamlessly jump timestamp discontinuities
+              smallGapLimit: 1.5,
               retryParameters: {
-                maxAttempts: 6,
-                baseDelay: 200,
+                maxAttempts: 10,
+                baseDelay: 300,
                 backoffFactor: 1.3,
                 fuzzFactor: 0.2,
-                timeout: 12000,
+                timeout: 15000,
               }
             },
-              manifest: {
-                dash: {
-                  ignoreMinBufferTime: true,
-                  autoCorrectDrift: true,
-                  initialSegmentLimit: 2,
-                },
-                availabilityWindowOverride: 60,
-                retryParameters: {
-                  maxAttempts: 6,
-                  baseDelay: 200,
-                  backoffFactor: 1.3,
-                  fuzzFactor: 0.2,
-                  timeout: 12000,
-                }
+            manifest: {
+              dash: {
+                ignoreMinBufferTime: false,
+                autoCorrectDrift: true,
+                initialSegmentLimit: 4, // Preload 4 segments
               },
-              abr: {
-                enabled: true,
-                defaultBandwidthEstimate: 3500000,
-                switchInterval: 2,
-                bandwidthUpgradeTarget: 0.85,
-                bandwidthDowngradeTarget: 0.95,
-                restrictions: IS_IOS ? {
-                  maxHeight: 720,
-                  maxBandwidth: 2500000
-                } : {}
+              availabilityWindowOverride: 120, // 2 minutes window so live streams don't clip
+              retryParameters: {
+                maxAttempts: 10,
+                baseDelay: 300,
+                backoffFactor: 1.3,
+                fuzzFactor: 0.2,
+                timeout: 15000,
               }
-            });
+            },
+            abr: {
+              enabled: true,
+              defaultBandwidthEstimate: 3000000,
+              switchInterval: 4,
+              bandwidthUpgradeTarget: 0.85,
+              bandwidthDowngradeTarget: 0.95,
+              restrictions: {} // No artificial bandwidth or height restrictions
+            }
+          });
 
-            player.addEventListener('error', (event: any) => {
-              const detail = event?.detail;
-              console.warn('[Player] Shaka error event:', detail?.code, detail?.message, detail);
-              
-              // Restrictions cannot be met (e.g. 4K UHD format)
-              if (detail?.code === 6001) {
-                console.log('[Player] Code 6001: Clearing ABR restrictions and retrying...');
-                try {
-                  player.configure({ abr: { restrictions: {} } });
-                  player.retryStreaming();
-                } catch (_e) {}
-                return;
-              }
+          player.addEventListener('error', (event: any) => {
+            const detail = event?.detail;
+            console.warn('[Player] Shaka error event:', detail?.code, detail?.message, detail);
+            
+            // Restrictions cannot be met (e.g. 4K UHD format)
+            if (detail?.code === 6001) {
+              console.log('[Player] Code 6001: Clearing ABR restrictions and retrying...');
+              try {
+                player.configure({ abr: { restrictions: {} } });
+                player.retryStreaming();
+              } catch (_e) {}
+              return;
+            }
 
-              // QuotaExceededError or BUFFER_APPEND_ERROR on iOS
-              if (detail?.code === 3017 || detail?.code === 3015) {
-                console.log('[Player] Buffer quota exceeded, seeking to live edge...');
-                try {
-                  if (player.isLive()) {
-                    video.currentTime = player.seekRange().end - 3;
+            // QuotaExceededError or BUFFER_APPEND_ERROR on iOS
+            if (detail?.code === 3017 || detail?.code === 3015) {
+              console.log('[Player] Buffer append issue, clearing buffer behind...');
+              try {
+                player.configure({ streaming: { bufferBehind: 5, bufferingGoal: 10 } });
+                if (player.isLive()) {
+                  const range = player.seekRange();
+                  if (range && range.end) {
+                    video.currentTime = Math.max(range.start, range.end - 8);
                   }
-                  player.retryStreaming();
-                } catch (_e) {}
-                return;
-              }
-              
-              if (detail?.isRecoverable || detail?.severity === shaka.util.Error.Severity.RECOVERABLE) {
-                try {
-                  player.retryStreaming();
-                } catch (_e) {}
-              }
-            });
+                }
+                player.retryStreaming();
+              } catch (_e) {}
+              return;
+            }
+            
+            if (detail?.isRecoverable || detail?.severity === shaka.util.Error.Severity.RECOVERABLE) {
+              try {
+                player.retryStreaming();
+              } catch (_e) {}
+            }
+          });
 
-            player.addEventListener('stalldetected', () => {
-              console.log('[Player] Shaka stall detected, auto-recovering...');
-              if (video.duration && video.currentTime >= video.duration - 2) {
-                video.currentTime = 0;
-                video.play().catch(() => {});
-              } else {
-                try {
-                  player.retryStreaming();
-                } catch (_e) {}
+          player.addEventListener('stalldetected', () => {
+            console.log('[Player] Shaka stall detected, auto-recovering...');
+            if (!player.isLive() && video.duration && video.currentTime >= video.duration - 2) {
+              video.currentTime = 0;
+              video.play().catch(() => {});
+            } else if (player.isLive()) {
+              const range = player.seekRange();
+              if (range && range.end) {
+                // Only seek if we have fallen outside the seek range
+                if (video.currentTime < range.start || video.currentTime > range.end - 2) {
+                  video.currentTime = Math.max(range.start, range.end - 8);
+                }
               }
-            });
+              const playPromise = video.play();
+              if (playPromise) {
+                playPromise.catch(() => {
+                  video.muted = true;
+                  video.play().catch(() => {});
+                });
+              }
+            }
+          });
 
             console.log(`[Player] 🚀 Shaka loading ${cleanUrl}`);
             await player.load(cleanUrl);
@@ -656,9 +670,24 @@ export const Player: React.FC<PlayerProps> = ({ channel, hideOverlay = false }) 
       let success = false;
 
       const onEnded = () => {
-        console.log('[Player] Video ended, restarting stream seamlessly...');
-        video.currentTime = 0;
-        video.play().catch(() => {});
+        const player = playerRef.current;
+        if (!player || !player.isLive()) {
+          console.log('[Player] Video ended, restarting VOD stream...');
+          video.currentTime = 0;
+          video.play().catch(() => {});
+        } else {
+          console.log('[Player] Live stream reached segment boundary, seeking to live edge...');
+          try {
+            const range = player.seekRange();
+            if (range && range.end) {
+              video.currentTime = Math.max(range.start, range.end - 8);
+            }
+          } catch (_e) {}
+          video.play().catch(() => {
+            video.muted = true;
+            video.play().catch(() => {});
+          });
+        }
       };
       video.addEventListener('ended', onEnded);
 
@@ -689,7 +718,11 @@ export const Player: React.FC<PlayerProps> = ({ channel, hideOverlay = false }) 
     const startPlay = async (video: HTMLVideoElement) => {
       try {
         video.muted = true;
+        video.defaultMuted = true;
         video.playsInline = true;
+        video.setAttribute('playsinline', 'true');
+        video.setAttribute('webkit-playsinline', 'true');
+        video.setAttribute('x5-playsinline', 'true');
         await video.play();
         setHasAutoplayError(false);
       } catch (playErr: any) {
@@ -706,14 +739,17 @@ export const Player: React.FC<PlayerProps> = ({ channel, hideOverlay = false }) 
       const player = playerRef.current;
       if (!video) return;
 
-      // If video has ended or reached the end of available duration, loop back to start immediately
-      if (video.ended || (video.duration > 0 && video.duration < 120 && video.currentTime >= video.duration - 0.5)) {
-        console.log('[Player] Watchdog detected end of stream, auto-looping...');
+      const isLiveStream = player ? player.isLive() : channel.category !== 'VOD';
+
+      // 1. If non-live video has ended or reached the end of available duration, loop back
+      if (!isLiveStream && (video.ended || (video.duration > 0 && video.duration < 120 && video.currentTime >= video.duration - 0.5))) {
+        console.log('[Player] Watchdog detected end of short VOD stream, auto-looping...');
         video.currentTime = 0;
         video.play().catch(() => {});
         return;
       }
 
+      // If user paused or video is still connecting, reset stall count
       if (video.paused || video.readyState < 2) {
         stallCount = 0;
         return;
@@ -722,21 +758,40 @@ export const Player: React.FC<PlayerProps> = ({ channel, hideOverlay = false }) 
       const currentTime = video.currentTime;
       if (lastTime >= 0 && Math.abs(currentTime - lastTime) < 0.05) {
         stallCount++;
-        if (stallCount >= 2) {
-          console.log('[Player] Playback stall detected, auto-recovering...');
+        // Give 6 full seconds for mobile cellular buffering before initiating a soft nudge
+        if (stallCount >= 6) {
+          console.log('[Player] Playback stall confirmed (6s), auto-recovering...');
           try {
-            if (video.duration > 0 && video.duration < 120 && video.currentTime >= video.duration - 1.5) {
-              video.currentTime = 0;
+            if (!isLiveStream) {
+              if (video.duration > 0 && video.duration < 120 && video.currentTime >= video.duration - 1.5) {
+                video.currentTime = 0;
+              } else {
+                video.currentTime += 0.5;
+              }
             } else if (player && player.isLive()) {
               const seekRange = player.seekRange();
               if (seekRange && seekRange.end) {
-                video.currentTime = seekRange.end - 3;
+                // Seek to safe live edge (8 seconds behind)
+                const safeTarget = Math.max(seekRange.start, seekRange.end - 8);
+                if (Math.abs(video.currentTime - safeTarget) > 3) {
+                  video.currentTime = safeTarget;
+                }
               }
-              player.retryStreaming();
+              // Only retry streaming if video is completely unready
+              if (video.readyState < 2) {
+                player.retryStreaming();
+              }
             } else {
               video.currentTime += 0.5;
             }
-            video.play().catch(() => {});
+            
+            const p = video.play();
+            if (p) {
+              p.catch(() => {
+                video.muted = true;
+                video.play().catch(() => {});
+              });
+            }
           } catch (_e) {}
           stallCount = 0;
         }

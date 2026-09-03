@@ -3938,6 +3938,76 @@ html, body {
   box-shadow: 0 2px 10px var(--ssatv-red-glow);
 }
 
+/* Mobile / Touch Pause & Buffering Overlays */
+.ssatv-player-paused-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  z-index: 15;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.ssatv-player-paused-btn {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: var(--ssatv-red);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 24px var(--ssatv-red-glow), 0 4px 14px rgba(0, 0, 0, 0.6);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.ssatv-player-paused-btn:hover,
+.ssatv-player-paused-btn:active {
+  transform: scale(1.08);
+  box-shadow: 0 0 32px var(--ssatv-red-glow);
+}
+
+.ssatv-player-paused-label {
+  color: #ffffff;
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.8);
+}
+
+.ssatv-player-buffering-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  z-index: 14;
+}
+
+.ssatv-buffering-glow-spinner {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 3px solid rgba(255, 255, 255, 0.15);
+  border-top-color: var(--ssatv-red);
+  box-shadow: 0 0 16px var(--ssatv-red-glow);
+  animation: ssatv-spin 0.8s linear infinite;
+}
+
+@keyframes ssatv-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 /* Live HUD Controls - Clean & Transparent without dark shield/scrim */
 .ssatv-live-hud-bar {
   position: absolute;

@@ -103,16 +103,24 @@ export const LiveTvView: React.FC<LiveTvViewProps> = ({
     };
   }, []);
 
+  const [isVideoBuffering, setIsVideoBuffering] = useState<boolean>(false);
+  const [isVideoPaused, setIsVideoPaused] = useState<boolean>(false);
+
   // Controls for video playback & mute
   const togglePlay = () => {
     const video = document.querySelector('.ssatv-live-viewport video') as HTMLVideoElement;
     if (video) {
       if (video.paused) {
-        video.play().catch(() => {});
+        video.play().catch(() => {
+          video.muted = true;
+          video.play().catch(() => {});
+        });
         setIsPlaying(true);
+        setIsVideoPaused(false);
       } else {
         video.pause();
         setIsPlaying(false);
+        setIsVideoPaused(true);
       }
     } else {
       setIsPlaying(!isPlaying);
@@ -174,6 +182,57 @@ export const LiveTvView: React.FC<LiveTvViewProps> = ({
     );
     return defaultTv3 || channels[0] || ({} as Channel);
   }, [activeChannel, categoryChannels, channels]);
+
+  // Monitor the video element events directly
+  useEffect(() => {
+    let checkTimer: any = null;
+    const attachVideoListeners = () => {
+      const video = document.querySelector('.ssatv-live-viewport video') as HTMLVideoElement | null;
+      if (!video) return;
+
+      const onWaiting = () => setIsVideoBuffering(true);
+      const onPlaying = () => {
+        setIsVideoBuffering(false);
+        setIsVideoPaused(false);
+        setIsPlaying(true);
+      };
+      const onPause = () => {
+        setIsVideoPaused(true);
+        setIsPlaying(false);
+      };
+      const onTimeUpdate = () => {
+        if (!video.paused && video.readyState >= 2) {
+          setIsVideoBuffering(false);
+          setIsVideoPaused(false);
+        }
+      };
+
+      video.addEventListener('waiting', onWaiting);
+      video.addEventListener('playing', onPlaying);
+      video.addEventListener('pause', onPause);
+      video.addEventListener('timeupdate', onTimeUpdate);
+
+      return () => {
+        video.removeEventListener('waiting', onWaiting);
+        video.removeEventListener('playing', onPlaying);
+        video.removeEventListener('pause', onPause);
+        video.removeEventListener('timeupdate', onTimeUpdate);
+      };
+    };
+
+    const cleanup = attachVideoListeners();
+    checkTimer = setInterval(() => {
+      const video = document.querySelector('.ssatv-live-viewport video') as HTMLVideoElement | null;
+      if (video) {
+        setIsVideoPaused(video.paused);
+      }
+    }, 1500);
+
+    return () => {
+      if (cleanup) cleanup();
+      if (checkTimer) clearInterval(checkTimer);
+    };
+  }, [currentChannel]);
 
   // Real-time clock sync (ticks every 30s so EPG dynamically stays synchronized with device)
   const [clockNow, setClockNow] = useState(() => new Date());
@@ -270,7 +329,11 @@ export const LiveTvView: React.FC<LiveTvViewProps> = ({
       <section className="ssatv-live-hero-stage">
         {/* Left: Embedded 16:9 Live Video Player with Apple TV HUD */}
         <div className="ssatv-live-player-pane">
-          <div className="ssatv-live-viewport">
+          <div 
+            className="ssatv-live-viewport"
+            onClick={togglePlay}
+            style={{ cursor: 'pointer' }}
+          >
             {currentChannel && currentChannel.streamUrl ? (
               <Player key={currentChannel.id || 'live_hero'} channel={currentChannel} hideOverlay />
             ) : (
@@ -282,6 +345,29 @@ export const LiveTvView: React.FC<LiveTvViewProps> = ({
               <span className="ssatv-live-pulse-dot" />
               LIVE
             </div>
+
+            {/* Center Play Button Overlay if Paused on Mobile / Touch */}
+            {isVideoPaused && (
+              <div 
+                className="ssatv-player-paused-overlay animate-fade-in"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  togglePlay();
+                }}
+              >
+                <div className="ssatv-player-paused-btn">
+                  <Play size={28} fill="#ffffff" color="#ffffff" style={{ marginLeft: 3 }} />
+                </div>
+                <span className="ssatv-player-paused-label">Ketuk Untuk Sambung Tontonan</span>
+              </div>
+            )}
+
+            {/* Subtle Buffering Spinner */}
+            {isVideoBuffering && !isVideoPaused && (
+              <div className="ssatv-player-buffering-overlay animate-fade-in">
+                <div className="ssatv-buffering-glow-spinner" />
+              </div>
+            )}
 
             {/* Apple TV On-Screen Subtitle / Audio Feedback Pill */}
             {subtitleToast && (
