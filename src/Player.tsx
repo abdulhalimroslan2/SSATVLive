@@ -336,7 +336,8 @@ export const Player: React.FC<PlayerProps> = ({ channel, hideOverlay = false }) 
                   );
                 }
 
-                response.data = new TextEncoder().encode(rewritten);
+                const encoded = new TextEncoder().encode(rewritten);
+                response.data = encoded.buffer.slice(encoded.byteOffset, encoded.byteOffset + encoded.byteLength);
               });
             }
           }
@@ -399,9 +400,9 @@ export const Player: React.FC<PlayerProps> = ({ channel, hideOverlay = false }) 
             },
             manifest: {
               dash: {
-                ignoreMinBufferTime: false,
+                ignoreMinBufferTime: true,
                 autoCorrectDrift: true,
-                initialSegmentLimit: 4,
+                initialSegmentLimit: 6,
               },
               retryParameters: {
                 maxAttempts: 10,
@@ -428,37 +429,19 @@ export const Player: React.FC<PlayerProps> = ({ channel, hideOverlay = false }) 
             const detail = event?.detail;
             console.warn('[Player] Shaka error event:', detail?.code, detail?.message, detail);
             
-            // Restrictions cannot be met (e.g. 4K UHD format)
-            if (detail?.code === 6001) {
-              console.log('[Player] Code 6001: Clearing ABR restrictions and retrying...');
-              try {
+            // Universal automatic recovery for all live streaming hiccups
+            try {
+              if (detail?.code === 6001) {
                 player.configure({ abr: { restrictions: {} } });
-                player.retryStreaming();
-              } catch (_e) {}
-              return;
-            }
-
-            // QuotaExceededError or BUFFER_APPEND_ERROR on iOS
-            if (detail?.code === 3017 || detail?.code === 3015) {
-              console.log('[Player] Buffer append issue, clearing buffer behind...');
-              try {
-                player.configure({ streaming: { bufferBehind: 5, bufferingGoal: 10 } });
-                if (player.isLive()) {
-                  const range = player.seekRange();
-                  if (range && range.end) {
-                    video.currentTime = Math.max(range.start, range.end - 8);
-                  }
+              }
+              if (player.isLive()) {
+                const range = player.seekRange();
+                if (range && range.end) {
+                  video.currentTime = Math.max(range.start, range.end - 6);
                 }
-                player.retryStreaming();
-              } catch (_e) {}
-              return;
-            }
-            
-            if (detail?.isRecoverable || detail?.severity === shaka.util.Error.Severity.RECOVERABLE) {
-              try {
-                player.retryStreaming();
-              } catch (_e) {}
-            }
+              }
+              player.retryStreaming();
+            } catch (_e) {}
           });
 
           player.addEventListener('stalldetected', () => {
