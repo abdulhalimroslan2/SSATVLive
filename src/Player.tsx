@@ -16,6 +16,12 @@ const IS_IOS = typeof navigator !== 'undefined' && (
   (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)
 );
 
+// Detect all mobile devices (iOS, Android, small screens)
+const IS_MOBILE = typeof navigator !== 'undefined' && (
+  IS_IOS || /Android|webOS|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ||
+  (typeof window !== 'undefined' && window.innerWidth <= 768)
+);
+
 // Detect if running inside Capacitor Android native app or standalone APK
 const IS_NATIVE_APP = typeof window !== 'undefined' && (
   Boolean((window as any).Capacitor?.isNativePlatform?.()) ||
@@ -376,13 +382,13 @@ export const Player: React.FC<PlayerProps> = ({ channel, hideOverlay = false }) 
             streaming: {
               lowLatencyMode: false,
               inaccurateManifestTolerance: 2,
-              bufferingGoal: IS_IOS ? 12 : 20,
-              rebufferingGoal: IS_IOS ? 2 : 4,
-              bufferBehind: IS_IOS ? 4 : 15,
+              bufferingGoal: IS_MOBILE ? 10 : 20,
+              rebufferingGoal: IS_MOBILE ? 2 : 4,
+              bufferBehind: IS_MOBILE ? 4 : 15,
               stallEnabled: true,
-              stallThreshold: 4.0,
+              stallThreshold: 3.0,
               stallSkip: 0.5,
-              safeSeekOffset: 8,
+              safeSeekOffset: 6,
               retryParameters: {
                 maxAttempts: 10,
                 baseDelay: 300,
@@ -407,12 +413,13 @@ export const Player: React.FC<PlayerProps> = ({ channel, hideOverlay = false }) 
             },
             abr: {
               enabled: true,
-              defaultBandwidthEstimate: 2500000,
-              switchInterval: 2,
+              defaultBandwidthEstimate: IS_MOBILE ? 1200000 : 2500000,
+              switchInterval: IS_MOBILE ? 10 : 2,
               bandwidthUpgradeTarget: 0.85,
               bandwidthDowngradeTarget: 0.95,
               restrictions: {
-                maxHeight: IS_IOS ? 1080 : 2160,
+                maxHeight: IS_MOBILE ? 720 : 2160,
+                maxPixels: IS_MOBILE ? 1280 * 720 : 3840 * 2160,
               }
             }
           });
@@ -764,18 +771,16 @@ export const Player: React.FC<PlayerProps> = ({ channel, hideOverlay = false }) 
         return;
       }
 
-      // If user paused or video is still connecting, reset stall count
-      if (video.paused || video.readyState < 2) {
-        stallCount = 0;
-        return;
-      }
-
       const currentTime = video.currentTime;
-      if (lastTime >= 0 && Math.abs(currentTime - lastTime) < 0.05) {
+      // Detect if video playback is stuck (time not progressing or stuck buffering)
+      const isTimeStuck = lastTime >= 0 && Math.abs(currentTime - lastTime) < 0.05;
+      const isBufferStuck = video.readyState < 3;
+
+      if (!video.paused && (isTimeStuck || isBufferStuck)) {
         stallCount++;
-        // Give 6 full seconds for mobile cellular buffering before initiating a soft nudge
-        if (stallCount >= 6) {
-          console.log('[Player] Playback stall confirmed (6s), auto-recovering...');
+        // Give 4 seconds before initiating proactive recovery
+        if (stallCount >= 4) {
+          console.log('[Player] Playback stall confirmed (4s), auto-recovering...');
           try {
             if (!isLiveStream) {
               if (video.duration > 0 && video.duration < 120 && video.currentTime >= video.duration - 1.5) {
@@ -786,16 +791,14 @@ export const Player: React.FC<PlayerProps> = ({ channel, hideOverlay = false }) 
             } else if (player && player.isLive()) {
               const seekRange = player.seekRange();
               if (seekRange && seekRange.end) {
-                // Seek to safe live edge (8 seconds behind)
-                const safeTarget = Math.max(seekRange.start, seekRange.end - 8);
-                if (Math.abs(video.currentTime - safeTarget) > 3) {
+                // Seek to safe live edge (6 seconds behind)
+                const safeTarget = Math.max(seekRange.start, seekRange.end - 6);
+                if (Math.abs(video.currentTime - safeTarget) > 2) {
                   video.currentTime = safeTarget;
                 }
               }
-              // Only retry streaming if video is completely unready
-              if (video.readyState < 2) {
-                player.retryStreaming();
-              }
+              // Proactively retry streaming to refresh segment pipeline
+              player.retryStreaming();
             } else {
               video.currentTime += 0.5;
             }
@@ -810,7 +813,7 @@ export const Player: React.FC<PlayerProps> = ({ channel, hideOverlay = false }) 
           } catch (_e) {}
           stallCount = 0;
         }
-      } else {
+      } else if (!video.paused) {
         stallCount = 0;
       }
       lastTime = currentTime;

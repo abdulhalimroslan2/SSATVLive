@@ -364,7 +364,15 @@ export const LiveTvView: React.FC<LiveTvViewProps> = ({
 
             {/* Subtle Buffering Spinner */}
             {isVideoBuffering && !isVideoPaused && (
-              <div className="ssatv-player-buffering-overlay animate-fade-in">
+              <div 
+                className="ssatv-player-buffering-overlay animate-fade-in"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  togglePlay();
+                }}
+                style={{ cursor: 'pointer' }}
+                title="Ketuk untuk sambung tontonan"
+              >
                 <div className="ssatv-buffering-glow-spinner" />
               </div>
             )}
