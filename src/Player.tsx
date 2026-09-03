@@ -3,7 +3,7 @@ import type { Channel } from './mockData';
 import shaka from 'shaka-player/dist/shaka-player.ui.js';
 import 'shaka-player/dist/controls.css';
 import Hls from 'hls.js';
-import { Play, AlertCircle, RefreshCw, Maximize, Minimize, Volume2, VolumeX, Tv } from 'lucide-react';
+import { Play, AlertCircle, RefreshCw, Maximize, Minimize } from 'lucide-react';
 
 interface PlayerProps {
   channel: Channel;
@@ -36,7 +36,6 @@ export const Player: React.FC<PlayerProps> = ({ channel }) => {
   const [hasAutoplayError, setHasAutoplayError] = useState(false);
   const [engineError, setEngineError] = useState<string | null>(null);
   const [isFullscreen, setIsFullscreen] = useState(false);
-  const [isMuted, setIsMuted] = useState(true);
   const [showOverlayControls, setShowOverlayControls] = useState(true);
   const hideControlsTimerRef = useRef<any>(null);
 
@@ -69,7 +68,6 @@ export const Player: React.FC<PlayerProps> = ({ channel }) => {
   const toggleMute = () => {
     if (videoRef.current) {
       videoRef.current.muted = !videoRef.current.muted;
-      setIsMuted(videoRef.current.muted);
     }
   };
 
@@ -705,39 +703,10 @@ export const Player: React.FC<PlayerProps> = ({ channel }) => {
               </span>
             </div>
 
-            {/* Top Right: Dedicated Fullscreen Toggle Button */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', pointerEvents: 'auto' }}>
-              <button
-                className="player-tv-action-btn"
-                onClick={toggleMute}
-                title={isMuted ? 'Nyahbisu (M)' : 'Bisu (M)'}
-                aria-label={isMuted ? 'Nyahbisu' : 'Bisu'}
-              >
-                {isMuted ? <VolumeX size={20} color="#fff" /> : <Volume2 size={20} color="#fff" />}
-              </button>
-
-              <button
-                className="player-dedicated-fullscreen-btn"
-                onClick={toggleFullscreen}
-                title="Skrin Penuh (F / Remote OK)"
-                aria-label="Skrin Penuh"
-                autoFocus={false}
-              >
-                {isFullscreen ? <Minimize size={22} color="#fff" /> : <Maximize size={22} color="#fff" />}
-                <span className="fs-btn-label">
-                  {isFullscreen ? 'Keluar Penuh' : 'Skrin Penuh'}
-                </span>
-                <span className="fs-key-hint">F / OK</span>
-              </button>
-            </div>
           </div>
 
-          {/* Bottom Bar: Android TV Remote Helper Pill */}
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%' }}>
-            <div className="tv-remote-hint-badge">
-              <Tv size={15} style={{ marginRight: '6px' }} />
-              <span>Gunakan Remote [OK] / [F] untuk Skrin Penuh • [ESC/Back] untuk Keluar</span>
-            </div>
+          {/* Bottom Bar */}
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end', width: '100%' }}>
 
             {/* Quick Floating Fullscreen Icon on Bottom Right */}
             <button

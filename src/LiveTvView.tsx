@@ -108,6 +108,29 @@ export const LiveTvView: React.FC<LiveTvViewProps> = ({
     setIsPlaying(true);
   };
 
+  const handleWatchLive = () => {
+    handleSelectChannel(currentChannel);
+
+    const container =
+      (document.querySelector('.video-player-container') as HTMLElement) ||
+      (document.querySelector('.ssatv-live-viewport') as HTMLElement) ||
+      (document.querySelector('video') as HTMLElement);
+
+    const video = document.querySelector('video') as HTMLVideoElement | null;
+
+    if (container) {
+      if (container.requestFullscreen) {
+        container.requestFullscreen().catch(() => {});
+      } else if ((container as any).webkitRequestFullscreen) {
+        (container as any).webkitRequestFullscreen();
+      } else if ((container as any).mozRequestFullScreen) {
+        (container as any).mozRequestFullScreen();
+      } else if (video && (video as any).webkitEnterFullscreen) {
+        (video as any).webkitEnterFullscreen();
+      }
+    }
+  };
+
   const epgTimeline = ['NOW', '9 PM', '10 PM', '11 PM', '12 AM'];
 
   return (
@@ -254,7 +277,7 @@ export const LiveTvView: React.FC<LiveTvViewProps> = ({
 
           {/* Dual Action Buttons */}
           <div className="ssatv-live-actions">
-            <button className="ssatv-btn-watch" onClick={() => handleSelectChannel(currentChannel)}>
+            <button className="ssatv-btn-watch" onClick={handleWatchLive}>
               <Play size={18} fill="#000" color="#000" />
               <span>WATCH LIVE</span>
             </button>

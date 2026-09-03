@@ -2207,11 +2207,16 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* Fullscreen Mode Adjustments */
-.video-player-container.is-fullscreen {
+.video-player-container.is-fullscreen,
+.video-player-container:fullscreen,
+.video-player-container:-webkit-full-screen,
+.ssatv-live-viewport:fullscreen,
+.ssatv-live-viewport:-webkit-full-screen {
   width: 100vw !important;
   height: 100vh !important;
   aspect-ratio: unset !important;
   border-radius: 0 !important;
+  border: none !important;
   z-index: 999999 !important;
 }
 
