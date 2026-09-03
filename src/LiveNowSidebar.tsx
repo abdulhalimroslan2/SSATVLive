@@ -68,10 +68,13 @@ export const LiveNowSidebar: React.FC<LiveNowSidebarProps> = ({
             {/* Right Thumbnail */}
             <div className="ssatv-live-thumb-wrap">
               <img 
-                src={item.thumbnail} 
+                src={item.name.toLowerCase().includes('hbo') ? 'https://upload.wikimedia.org/wikipedia/commons/d/de/HBO_logo.svg' : item.thumbnail} 
                 alt={item.name} 
                 className="ssatv-live-thumb"
                 loading="lazy"
+                onError={(e) => {
+                  (e.target as HTMLImageElement).src = 'https://ptv2026.com/logo/tv1.png';
+                }}
               />
               <div className="ssatv-live-thumb-overlay">
                 <Radio size={14} className="ssatv-live-icon-subtle" />

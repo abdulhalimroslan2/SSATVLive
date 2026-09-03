@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import type { Channel } from './mockData';
 import { fetchChannels } from './mockData';
 import { VOD_CATALOG, type VodItem } from './vodData';
@@ -8,11 +8,11 @@ import { ContinueWatchingRow, type ContinueItem } from './ContinueWatchingRow';
 import { ShelfRow, type TrendingItem } from './TrendingGrid';
 import { LiveNowSidebar, type LiveRailItem } from './LiveNowSidebar';
 import {
-  SSATV_HERO_SLIDES,
-  SSATV_CONTINUE_WATCHING,
-  SSATV_TRENDING_NOW,
-  SSATV_NEW_RELEASES,
-  SSATV_LIVE_RAIL,
+  getRealHeroSlides,
+  getRealContinueWatching,
+  getRealTrendingNow,
+  getRealNewReleases,
+  getRealLiveRail,
 } from './ssatvHomeData';
 import { Player } from './Player';
 import { ChannelCard } from './ChannelCard';
@@ -110,46 +110,29 @@ function App() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+  // Dynamically compute real synchronized Home items from real catalog and channels
+  const heroSlides = useMemo(() => getRealHeroSlides(channels), [channels]);
+  const continueItems = useMemo(() => getRealContinueWatching(), []);
+  const trendingItems = useMemo(() => getRealTrendingNow(), []);
+  const newReleasesItems = useMemo(() => getRealNewReleases(), []);
+  const liveRailItems = useMemo(() => getRealLiveRail(channels), [channels]);
+
   // Hero "WATCH NOW" handler
   const handleHeroPlay = (slide: HeroSlide) => {
-    if (slide.id === 'hero_last_horizon') {
-      // Find Sci-Fi blockbuster (Movie 974 or Penunggu Istana)
-      const target =
-        VOD_CATALOG.find((v) => v.title.includes('974')) || VOD_CATALOG[0];
-      if (target) {
-        handlePlayVodItem(target);
-        return;
-      }
-    } else if (slide.id === 'hero_bulan_henti') {
-      const target = VOD_CATALOG.find((v) =>
-        v.title.toLowerCase().includes('bulan henti')
+    if (slide.vodItem) {
+      handlePlayVodItem(slide.vodItem);
+      return;
+    }
+    if (slide.channelId) {
+      const chId = slide.channelId.toLowerCase();
+      const targetCh = channels.find(
+        (c) =>
+          c.id.toLowerCase() === chId ||
+          c.ch_number?.toLowerCase() === chId ||
+          c.name.toLowerCase().includes(chId)
       );
-      if (target) {
-        handlePlayVodItem(target);
-        return;
-      }
-    } else if (slide.id === 'hero_penunggu_istana') {
-      const target = VOD_CATALOG.find((v) =>
-        v.title.toLowerCase().includes('penunggu')
-      );
-      if (target) {
-        handlePlayVodItem(target);
-        return;
-      }
-    } else if (slide.id === 'hero_astro_arena') {
-      const arena = channels.find((c) =>
-        c.name.toLowerCase().includes('arena')
-      );
-      if (arena) {
-        handleChannelSelect(arena);
-        return;
-      }
-    } else if (slide.id === 'hero_kolong') {
-      const kolong = VOD_CATALOG.find((v) =>
-        v.title.toLowerCase().includes('kolong')
-      );
-      if (kolong) {
-        handlePlayVodItem(kolong);
+      if (targetCh) {
+        handleChannelSelect(targetCh);
         return;
       }
     }
@@ -164,12 +147,10 @@ function App() {
 
   // Continue Watching selection handler
   const handleContinueItemSelect = (item: ContinueItem) => {
-    if (item.title === 'The Last Horizon') {
-      const target =
-        VOD_CATALOG.find((v) => v.title.includes('974')) || VOD_CATALOG[0];
-      if (target) return handlePlayVodItem(target);
+    if (item.vodItem) {
+      handlePlayVodItem(item.vodItem, item.episodeNumber || 1);
+      return;
     }
-    // Match against catalog by title
     const matched = VOD_CATALOG.find((v) =>
       v.title.toLowerCase().includes(item.title.toLowerCase())
     );
@@ -182,6 +163,10 @@ function App() {
 
   // Shelf card selection handler
   const handleTrendingSelect = (item: TrendingItem) => {
+    if (item.vodItem) {
+      handlePlayVodItem(item.vodItem);
+      return;
+    }
     const matched = VOD_CATALOG.find(
       (v) =>
         v.title.toLowerCase().includes(item.title.toLowerCase()) ||
@@ -196,35 +181,16 @@ function App() {
 
   // Right Rail Live selection handler
   const handleLiveRailSelect = (item: LiveRailItem) => {
-    let targetCh: Channel | undefined;
-    if (item.name.includes('NEWS')) {
-      targetCh = channels.find(
-        (c) =>
-          c.name.toLowerCase().includes('awani') ||
-          c.name.toLowerCase().includes('berita') ||
-          c.name.toLowerCase().includes('news')
-      );
-    } else if (item.name.includes('SPORT')) {
-      targetCh = channels.find(
-        (c) =>
-          c.name.toLowerCase().includes('arena') ||
-          c.category.toLowerCase().includes('sport')
-      );
-    } else if (item.name.includes('CINE')) {
-      targetCh = channels.find(
-        (c) =>
-          c.name.toLowerCase().includes('premier') ||
-          c.name.toLowerCase().includes('hbo') ||
-          c.category === 'MOVIES'
-      );
-    } else if (item.name.includes('WILD')) {
-      targetCh = channels.find(
-        (c) =>
-          c.name.toLowerCase().includes('discovery') ||
-          c.name.toLowerCase().includes('animal') ||
-          c.name.toLowerCase().includes('nat geo')
-      );
+    if (item.channel) {
+      handleChannelSelect(item.channel);
+      return;
     }
+    const targetCh = channels.find(
+      (c) =>
+        c.name.toLowerCase().includes(item.name.toLowerCase()) ||
+        c.id === item.id ||
+        (item.name.includes('HBO') && (c.id === 'hbo' || c.ch_number === '411'))
+    );
 
     if (targetCh) {
       handleChannelSelect(targetCh);
@@ -234,11 +200,11 @@ function App() {
   };
 
   // Recommended For You items mapped from catalog
-  const recommendedItems: TrendingItem[] = VOD_CATALOG.slice(10, 16).map(
+  const recommendedItems: TrendingItem[] = VOD_CATALOG.slice(18, 26).map(
     (v, idx) => ({
       id: `rec_${idx}`,
-      title: v.title.replace(/^\d+\s*/, ''),
-      genre: v.genre?.[0] || 'Drama',
+      title: v.title.replace(/^\d+\s*/, '').toUpperCase(),
+      genre: v.genre?.[0] ? `${v.genre[0]} Movie` : 'Pilihan Astro',
       poster: v.poster,
       vodItem: v,
     })
@@ -373,9 +339,9 @@ function App() {
             {/* TAB 1: HOME (MATCHING UPLOADED PHOTO 1:1) */}
             {activeTab === 'home' && (
               <>
-                {/* A. Hero Experience (The Last Horizon + Blockbusters) */}
+                {/* A. Hero Experience (Synchronized with Real VOD & Live TV) */}
                 <HeroExperience
-                  slides={SSATV_HERO_SLIDES}
+                  slides={heroSlides}
                   onPlay={handleHeroPlay}
                 />
 
@@ -383,25 +349,25 @@ function App() {
                 <div className="ssatv-home-layout">
                   {/* Left Column: Shelves */}
                   <div className="ssatv-main-shelves">
-                    {/* 1. Continue Watching */}
+                    {/* 1. Continue Watching (Real Catalog Items) */}
                     <ContinueWatchingRow
-                      items={SSATV_CONTINUE_WATCHING}
+                      items={continueItems}
                       onSelect={handleContinueItemSelect}
                     />
 
-                    {/* 2. Trending Now (Stylized Titles on Poster) */}
+                    {/* 2. Trending Now (Real Movies from Catalog) */}
                     <ShelfRow
                       title="Trending Now"
-                      items={SSATV_TRENDING_NOW}
+                      items={trendingItems}
                       variant="stylized-title"
                       onSelect={handleTrendingSelect}
                       onViewAll={() => setActiveTab('movies')}
                     />
 
-                    {/* 3. New Releases (Red NEW Badge + Meta Below) */}
+                    {/* 3. New Releases (Real Catalog Releases) */}
                     <ShelfRow
                       title="New Releases"
-                      items={SSATV_NEW_RELEASES}
+                      items={newReleasesItems}
                       variant="below-title"
                       onSelect={handleTrendingSelect}
                       onViewAll={() => setActiveTab('movies')}
@@ -417,9 +383,9 @@ function App() {
                     />
                   </div>
 
-                  {/* Right Column: Live Now Rail */}
+                  {/* Right Column: Live Now Rail (Real Live TV Channels) */}
                   <LiveNowSidebar
-                    items={SSATV_LIVE_RAIL}
+                    items={liveRailItems}
                     onSelect={handleLiveRailSelect}
                     onViewAll={() => setActiveTab('live')}
                   />
