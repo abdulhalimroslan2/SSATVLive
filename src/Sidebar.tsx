@@ -1,17 +1,15 @@
 import React from 'react';
 import { 
+  Search,
   Home, 
   Tv, 
+  Shield,
+  ShoppingBag,
+  Clock,
   Film, 
-  Video, 
-  Trophy, 
-  Smile, 
-  Plus, 
-  History as HistoryIcon, 
-  Settings, 
-  Search,
-  Sparkles,
-  ChevronDown
+  Monitor,
+  Users, 
+  User
 } from 'lucide-react';
 
 interface SidebarProps {
@@ -20,70 +18,79 @@ interface SidebarProps {
 }
 
 export const Sidebar: React.FC<SidebarProps> = ({ activeTab, setActiveTab }) => {
-  const navItems = [
-    { id: 'search', label: 'Carian', icon: Search, shortcut: '/' },
-    { id: 'home', label: 'Utama', icon: Home },
-    { id: 'livetv', label: 'Live TV', icon: Tv },
-    { id: 'vod', label: 'VOD On Demand', icon: Sparkles, badge: 'HOT', isHighlight: true },
-    { id: 'movies', label: 'Filem', icon: Film },
-    { id: 'series', label: 'Siri Drama', icon: Video },
-    { id: 'sports', label: 'Sukan', icon: Trophy },
-    { id: 'kids', label: 'Kanak-Kanak', icon: Smile },
-    { id: 'mylist', label: 'Senarai Saya', icon: Plus },
-    { id: 'history', label: 'Sejarah', icon: HistoryIcon },
-    { id: 'settings', label: 'Tetapan', icon: Settings },
+  const mainNav = [
+    { id: 'search', label: 'Search', icon: Search },
+    { id: 'home', label: 'Home', icon: Home },
+    { id: 'appletv', label: 'Apple TV', icon: Tv },
+    { id: 'sports', label: 'MLS', icon: Shield },
+    { id: 'store', label: 'Store', icon: ShoppingBag },
+  ];
+
+  const libraryNav = [
+    { id: 'recent', label: 'Recently Added', icon: Clock },
+    { id: 'movies', label: 'Movies', icon: Film },
+    { id: 'series', label: 'TV Shows', icon: Monitor },
+    { id: 'family', label: 'Family Sharing', icon: Users },
   ];
 
   return (
     <aside className="sidebar">
-      <div>
-        {/* Brand Logo */}
-        <div 
-          className="sidebar-brand" 
-          onClick={() => setActiveTab('home')}
-          style={{ cursor: 'pointer' }}
-        >
-          <Tv color="#e50914" size={32} />
-          <div>
-            <div className="brand-logo-text">LIVE TV</div>
-            <div className="brand-logo-sub">STREAMING & VOD</div>
-          </div>
+      <div className="apple-sidebar-top">
+        {/* macOS Window Traffic Lights */}
+        <div className="macos-traffic-lights">
+          <span className="traffic-dot dot-close" title="Close"></span>
+          <span className="traffic-dot dot-minimize" title="Minimize"></span>
+          <span className="traffic-dot dot-maximize" title="Zoom"></span>
         </div>
 
-        {/* Navigation Items */}
-        <nav className="sidebar-nav">
-          {navItems.map((item) => {
+        {/* Primary Navigation */}
+        <nav className="sidebar-nav" style={{ gap: '0.25rem' }}>
+          {mainNav.map((item) => {
             const Icon = item.icon;
             const isActive = activeTab === item.id;
             return (
               <button
                 key={item.id}
-                className={`nav-item ${isActive ? 'active' : ''} ${item.isHighlight ? 'highlight-nav-item' : ''}`}
+                className={`nav-item ${isActive ? 'apple-active' : ''}`}
                 onClick={() => setActiveTab(item.id)}
               >
-                <Icon size={20} className={item.isHighlight ? 'nav-icon-sparkle' : ''} />
-                <span style={{ flex: 1, textAlign: 'left' }}>{item.label}</span>
-                {item.badge && (
-                  <span className="nav-badge-hot">{item.badge}</span>
-                )}
+                <Icon size={18} strokeWidth={isActive ? 2.4 : 1.8} />
+                <span>{item.label}</span>
+              </button>
+            );
+          })}
+        </nav>
+
+        {/* Library Section */}
+        <div className="sidebar-section-header">Library</div>
+        <nav className="sidebar-nav" style={{ gap: '0.25rem' }}>
+          {libraryNav.map((item) => {
+            const Icon = item.icon;
+            const isActive = activeTab === item.id;
+            return (
+              <button
+                key={item.id}
+                className={`nav-item ${isActive ? 'apple-active' : ''}`}
+                onClick={() => setActiveTab(item.id)}
+              >
+                <Icon size={18} strokeWidth={isActive ? 2.4 : 1.8} />
+                <span>{item.label}</span>
               </button>
             );
           })}
         </nav>
       </div>
 
-      {/* User Profile */}
-      <div className="user-profile">
-        <img 
-          src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=150" 
-          alt="Abdul Halim" 
-          className="user-avatar"
-        />
-        <div className="user-info" style={{ flex: 1 }}>
-          <div className="user-name">Abdul Halim</div>
-          <div className="user-status">VIP Premium</div>
+      {/* Apple TV User Profile at Bottom */}
+      <div 
+        className="apple-user-profile"
+        onClick={() => setActiveTab('home')}
+        title="Akaun Halim Roslan"
+      >
+        <div className="apple-avatar">
+          <User size={18} />
         </div>
-        <ChevronDown size={16} color="var(--text-secondary)" />
+        <span className="apple-username">Halim Roslan</span>
       </div>
     </aside>
   );
