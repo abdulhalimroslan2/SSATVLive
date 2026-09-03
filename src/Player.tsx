@@ -179,8 +179,6 @@ export const Player: React.FC<PlayerProps> = ({ channel }) => {
         ['https://d84q7nw4qf3j3.cloudfront.net/', '/cf-d84q/'],
         ['https://d3b0v7fggu5zwm.cloudfront.net/', '/cf-d3b0/'],
         ['https://slive.mana2.my/', '/mana2/'],
-        ['http://ngtv-live-cbj.gcdn.co/', '/gcdn/'],
-        ['https://ngtv-live-cbj.gcdn.co/', '/gcdn-s/'],
         ['https://vd466.okcdn.ru/', '/okcdn/'],
       ];
 
@@ -297,8 +295,9 @@ export const Player: React.FC<PlayerProps> = ({ channel }) => {
                 // 2. Remove Widevine PSSH boxes so CDM uses default_KID directly
                 rewritten = rewritten.replace(/<(?:cenc:)?pssh[^>]*>[\s\S]*?<\/(?:cenc:)?pssh>/gi, '');
 
-                // 3. Fix Mixed Content (HTTP -> HTTPS) for BaseURL
+                // 3. Fix Mixed Content (HTTP -> HTTPS) for BaseURL and Location
                 rewritten = rewritten.replaceAll('<BaseURL>http://', '<BaseURL>https://');
+                rewritten = rewritten.replaceAll('<Location>http://', '<Location>https://');
 
                 // 4. Inject ClearKey ContentProtection node safely if still not present
                 if (!rewritten.includes(clearKeyUuid)) {
