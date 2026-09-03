@@ -7,7 +7,7 @@ import type { Channel } from './mockData';
 import { getCurrentProgramme } from './epgService';
 
 // Helper to format Quickplay 16:9 widescreen backdrop
-const getWidescreenBackdrop = (url: string, width = 1920): string => {
+export const getWidescreenBackdrop = (url: string, width = 1920): string => {
   if (!url) return '';
   if (url.includes('image-resizer-cloud-cdn.api.tmcms.quickplay.com')) {
     return url.replace('0-2x3.jpg', '0-16x9.jpg').replace(/width=\d+/, `width=${width}`);

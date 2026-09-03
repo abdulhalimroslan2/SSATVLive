@@ -49,7 +49,7 @@ export const HeroExperience: React.FC<HeroExperienceProps> = ({
           <div
             key={slide.id}
             className={`ssatv-hero-bg-slide ${idx === currentIdx ? 'active' : ''}`}
-            style={{ backgroundImage: `url(${slide.backdrop})` }}
+            style={{ backgroundImage: `url("${slide.backdrop}")` }}
           />
         ))}
 
