@@ -173,10 +173,6 @@ export const Player: React.FC<PlayerProps> = ({ channel, hideOverlay = false }) 
         ['http://ptv2026.com/', '/ptv2026/'],
         ['https://load.ptv2026.com/', '/load-ptv/'],
         ['https://depanptv.com/', '/depan-ptv/'],
-        ['https://ngtv-live-cbj.gcdn.co/', '/gcdn-s/'],
-        ['http://ngtv-live-cbj.gcdn.co/', '/gcdn-s/'],
-        ['https://ngtv-live.gcdn.co/', '/gcdn-live/'],
-        ['http://ngtv-live.gcdn.co/', '/gcdn-live/'],
         ['https://df14pcdp16s98.cloudfront.net/', '/cf-df14/'],
         ['https://d25tgymtnqzu8s.cloudfront.net/', '/rtm-stream/'],
         ['https://d2xz2v5wuvgur6.cloudfront.net/', '/cf-d2xz/'],
@@ -308,11 +304,9 @@ export const Player: React.FC<PlayerProps> = ({ channel, hideOverlay = false }) 
                 // 1. STRIP <Location> tags completely so Shaka NEVER redirects manifest refreshes to foreign CDNs that drop KIDs
                 let rewritten = mpd.replace(/<Location>[\s\S]*?<\/Location>/gi, '');
 
-                // 2. Rewrite BaseURL to use our accelerated proxy
-                const pBase = getProxyBaseUrl();
-                rewritten = rewritten.replace(/<BaseURL>https?:\/\/ngtv-live-cbj\.gcdn\.co\//gi, `<BaseURL>${pBase}/gcdn-s/`);
-                rewritten = rewritten.replace(/<BaseURL>https?:\/\/ngtv-live\.gcdn\.co\//gi, `<BaseURL>${pBase}/gcdn-live/`);
-                // Only fix mixed content on external domains, NEVER for localhost dev server
+                // 2. Upgrade BaseURL to HTTPS so direct CDN chunks are secure and avoid mixed content (GCDN supports CORS natively)
+                rewritten = rewritten.replace(/<BaseURL>http:\/\/ngtv-live-cbj\.gcdn\.co\//gi, '<BaseURL>https://ngtv-live-cbj.gcdn.co/');
+                rewritten = rewritten.replace(/<BaseURL>http:\/\/ngtv-live\.gcdn\.co\//gi, '<BaseURL>https://ngtv-live.gcdn.co/');
                 rewritten = rewritten.replace(/<BaseURL>http:\/\/(?!localhost|127\.0\.0\.1)/gi, '<BaseURL>https://');
 
                 // 3. Remove Widevine & PlayReady ContentProtection tags so CDM binds directly to ClearKey

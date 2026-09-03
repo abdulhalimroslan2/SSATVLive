@@ -254,13 +254,12 @@ export default async function handler(request) {
       }
     }
 
-    // DASH MPD processing: strip <Location> to ensure player keeps polling original URL with KIDs, and route BaseURL through proxy
+    // DASH MPD processing: strip <Location> to ensure player keeps polling original URL with KIDs, and upgrade BaseURL to HTTPS
     if (path.includes('.mpd')) {
       let text = await response.text();
       text = text.replace(/<Location>[\s\S]*?<\/Location>/gi, '');
-      text = text.replace(/<BaseURL>https?:\/\/ngtv-live-cbj\.gcdn\.co\//gi, '<BaseURL>/gcdn-s/');
-      text = text.replace(/<BaseURL>http:\/\/ngtv-live-cbj\.gcdn\.co\//gi, '<BaseURL>/gcdn-s/');
-      text = text.replace(/<BaseURL>https?:\/\/ngtv-live\.gcdn\.co\//gi, '<BaseURL>/gcdn-live/');
+      text = text.replace(/<BaseURL>http:\/\/ngtv-live-cbj\.gcdn\.co\//gi, '<BaseURL>https://ngtv-live-cbj.gcdn.co/');
+      text = text.replace(/<BaseURL>http:\/\/ngtv-live\.gcdn\.co\//gi, '<BaseURL>https://ngtv-live.gcdn.co/');
       responseHeaders.set('Content-Type', 'application/dash+xml');
       responseHeaders.set('Cache-Control', 'no-cache, no-store, must-revalidate');
       return new Response(text, {
