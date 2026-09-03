@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import {
   Play,
   Plus,
@@ -11,6 +11,8 @@ import {
   Settings,
   Subtitles,
   Pause,
+  X,
+  AlertCircle,
 } from 'lucide-react';
 import type { Channel } from './mockData';
 import { Player } from './Player';
@@ -52,6 +54,97 @@ export const LiveTvView: React.FC<LiveTvViewProps> = ({
   const [isMuted, setIsMuted] = useState<boolean>(false);
   const [inList, setInList] = useState<boolean>(false);
   const [selectedDay, setSelectedDay] = useState<'TODAY' | 'TOMORROW'>('TODAY');
+  const [showTrackModal, setShowTrackModal] = useState<boolean>(false);
+  const [activeTrackTab, setActiveTrackTab] = useState<'subtitles' | 'audio'>('subtitles');
+  const [subtitleTracks, setSubtitleTracks] = useState<any[]>([]);
+  const [audioTracks, setAudioTracks] = useState<any[]>([]);
+  const [isSubtitleVisible, setIsSubtitleVisible] = useState<boolean>(false);
+  const [activeSubtitleId, setActiveSubtitleId] = useState<number | string | null>('off');
+  const [activeAudioId, setActiveAudioId] = useState<number | string | null>(null);
+
+  // Sync subtitle and audio tracks from Shaka Player
+  useEffect(() => {
+    const handleTracksUpdated = (e: any) => {
+      const detail = e.detail;
+      if (!detail) return;
+      const subs = detail.subtitles || [];
+      const auds = detail.variants || detail.audio || [];
+      setSubtitleTracks(subs);
+      setAudioTracks(auds);
+      setIsSubtitleVisible(detail.isSubtitleVisible || false);
+
+      const activeSub = subs.find((s: any) => s.active);
+      if (activeSub && detail.isSubtitleVisible) {
+        setActiveSubtitleId(activeSub.id);
+      } else if (!detail.isSubtitleVisible) {
+        setActiveSubtitleId('off');
+      }
+
+      const activeAud = auds.find((a: any) => a.active);
+      if (activeAud) {
+        setActiveAudioId(activeAud.id);
+      }
+    };
+
+    window.addEventListener('ssatv-tracks-updated', handleTracksUpdated);
+    return () => {
+      window.removeEventListener('ssatv-tracks-updated', handleTracksUpdated);
+    };
+  }, []);
+
+  // Controls for video playback & mute
+  const togglePlay = () => {
+    const video = document.querySelector('.ssatv-live-viewport video') as HTMLVideoElement;
+    if (video) {
+      if (video.paused) {
+        video.play().catch(() => {});
+        setIsPlaying(true);
+      } else {
+        video.pause();
+        setIsPlaying(false);
+      }
+    } else {
+      setIsPlaying(!isPlaying);
+    }
+  };
+
+  const toggleMute = () => {
+    const video = document.querySelector('.ssatv-live-viewport video') as HTMLVideoElement;
+    if (video) {
+      video.muted = !video.muted;
+      setIsMuted(video.muted);
+    } else {
+      setIsMuted(!isMuted);
+    }
+  };
+
+  const formatTrackLanguage = (lang: string, label?: string | null): string => {
+    if (label && label.trim() && label !== lang) return label;
+    const l = (lang || '').toLowerCase().trim();
+    if (l.startsWith('may') || l.startsWith('ms') || l.startsWith('zlm')) return 'Bahasa Melayu';
+    if (l.startsWith('eng') || l.startsWith('en')) return 'English';
+    if (l.startsWith('chi') || l.startsWith('zh') || l.startsWith('zho')) return 'Bahasa Cina (中文)';
+    if (l.startsWith('tam') || l.startsWith('ta')) return 'Bahasa Tamil (தமிழ்)';
+    if (l.startsWith('ind') || l.startsWith('id')) return 'Bahasa Indonesia';
+    if (l.startsWith('kor') || l.startsWith('ko')) return 'Bahasa Korea (한국어)';
+    if (l.startsWith('jpn') || l.startsWith('ja')) return 'Bahasa Jepun (日本語)';
+    if (l.startsWith('tha') || l.startsWith('th')) return 'Bahasa Thai (ไทย)';
+    if (l.startsWith('hin') || l.startsWith('hi')) return 'Bahasa Hindi (हिन्दी)';
+    if (l.startsWith('ara') || l.startsWith('ar')) return 'Bahasa Arab (العربية)';
+    return lang ? lang.toUpperCase() : 'Standard';
+  };
+
+  const formatLanguageBadge = (lang: string): string => {
+    const l = (lang || '').toLowerCase().trim();
+    if (l.startsWith('may') || l.startsWith('ms')) return 'BM';
+    if (l.startsWith('eng') || l.startsWith('en')) return 'ENG';
+    if (l.startsWith('chi') || l.startsWith('zh')) return 'CN';
+    if (l.startsWith('tam') || l.startsWith('ta')) return 'TAM';
+    if (l.startsWith('ind') || l.startsWith('id')) return 'ID';
+    if (l.startsWith('kor') || l.startsWith('ko')) return 'KR';
+    if (l.startsWith('jpn') || l.startsWith('ja')) return 'JP';
+    return (lang || 'CC').slice(0, 3).toUpperCase();
+  };
 
   // Filter channels based on selected APK category
   const categoryChannels = useMemo(() => {
@@ -172,7 +265,7 @@ export const LiveTvView: React.FC<LiveTvViewProps> = ({
               <div className="ssatv-hud-left">
                 <button
                   className="ssatv-hud-btn"
-                  onClick={() => setIsPlaying(!isPlaying)}
+                  onClick={togglePlay}
                   title={isPlaying ? 'Pause' : 'Play'}
                 >
                   {isPlaying ? <Pause size={17} /> : <Play size={17} />}
@@ -180,7 +273,7 @@ export const LiveTvView: React.FC<LiveTvViewProps> = ({
 
                 <button
                   className="ssatv-hud-btn"
-                  onClick={() => setIsMuted(!isMuted)}
+                  onClick={toggleMute}
                   title={isMuted ? 'Unmute' : 'Mute'}
                 >
                   {isMuted ? <VolumeX size={17} /> : <Volume2 size={17} />}
@@ -202,9 +295,148 @@ export const LiveTvView: React.FC<LiveTvViewProps> = ({
               </div>
 
               <div className="ssatv-hud-right">
-                <button className="ssatv-hud-btn" title="Subtitles / Audio">
-                  <Subtitles size={17} />
-                </button>
+                <div style={{ position: 'relative' }}>
+                  <button
+                    className={`ssatv-hud-btn ${isSubtitleVisible ? 'ssatv-hud-btn-active' : ''}`}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setShowTrackModal(!showTrackModal);
+                    }}
+                    title="Pilih Sarikata & Audio (Subtitles)"
+                  >
+                    <Subtitles size={17} />
+                    {isSubtitleVisible && <span className="ssatv-sub-active-badge">ON</span>}
+                  </button>
+
+                  {/* Apple TV Track Selector Popover */}
+                  {showTrackModal && (
+                    <div
+                      className="ssatv-track-popover animate-fade-in"
+                      onClick={(e) => e.stopPropagation()}
+                    >
+                      {/* Header */}
+                      <div className="ssatv-track-header">
+                        <div className="ssatv-track-header-left">
+                          <Subtitles size={16} style={{ color: 'var(--ssatv-red)' }} />
+                          <span className="ssatv-track-title">Pilihan Sarikata & Audio</span>
+                        </div>
+                        <button
+                          className="ssatv-track-close"
+                          onClick={() => setShowTrackModal(false)}
+                          title="Tutup"
+                        >
+                          <X size={14} />
+                        </button>
+                      </div>
+
+                      {/* Tabs */}
+                      <div className="ssatv-track-tabs">
+                        <button
+                          className={`ssatv-track-tab ${activeTrackTab === 'subtitles' ? 'active' : ''}`}
+                          onClick={() => setActiveTrackTab('subtitles')}
+                        >
+                          Sarikata {subtitleTracks.length > 0 ? `(${subtitleTracks.length})` : ''}
+                        </button>
+                        <button
+                          className={`ssatv-track-tab ${activeTrackTab === 'audio' ? 'active' : ''}`}
+                          onClick={() => setActiveTrackTab('audio')}
+                        >
+                          Audio {audioTracks.length > 0 ? `(${audioTracks.length})` : ''}
+                        </button>
+                      </div>
+
+                      {/* Tab Content: Subtitles */}
+                      {activeTrackTab === 'subtitles' && (
+                        <div className="ssatv-track-list">
+                          {/* Option: Turn Off Subtitles */}
+                          <button
+                            className={`ssatv-track-item ${!isSubtitleVisible || activeSubtitleId === 'off' ? 'selected' : ''}`}
+                            onClick={() => {
+                              (window as any).__ssatv_player_controller?.selectSubtitle('off');
+                              setActiveSubtitleId('off');
+                              setIsSubtitleVisible(false);
+                            }}
+                          >
+                            <div className="ssatv-track-item-left">
+                              <span className="ssatv-track-badge">OFF</span>
+                              <span className="ssatv-track-name">Matikan Sarikata (Off)</span>
+                            </div>
+                            {(!isSubtitleVisible || activeSubtitleId === 'off') && (
+                              <Check size={16} className="ssatv-track-check" />
+                            )}
+                          </button>
+
+                          {/* Dynamic Stream Subtitles */}
+                          {subtitleTracks.length > 0 ? (
+                            subtitleTracks.map((track) => {
+                              const isSelected = isSubtitleVisible && (activeSubtitleId === track.id || track.active);
+                              return (
+                                <button
+                                  key={track.id}
+                                  className={`ssatv-track-item ${isSelected ? 'selected' : ''}`}
+                                  onClick={() => {
+                                    (window as any).__ssatv_player_controller?.selectSubtitle(track.id);
+                                    setActiveSubtitleId(track.id);
+                                    setIsSubtitleVisible(true);
+                                  }}
+                                >
+                                  <div className="ssatv-track-item-left">
+                                    <span className="ssatv-track-badge">
+                                      {formatLanguageBadge(track.language)}
+                                    </span>
+                                    <span className="ssatv-track-name">
+                                      {formatTrackLanguage(track.language, track.label)}
+                                    </span>
+                                  </div>
+                                  {isSelected && <Check size={16} className="ssatv-track-check" />}
+                                </button>
+                              );
+                            })
+                          ) : (
+                            <div className="ssatv-track-empty-note">
+                              <AlertCircle size={14} style={{ flexShrink: 0, color: 'rgba(255,255,255,0.6)' }} />
+                              <span>Tiada sarikata digital tertanam (Embedded Subtitles) dalam suapan saluran ini.</span>
+                            </div>
+                          )}
+                        </div>
+                      )}
+
+                      {/* Tab Content: Audio Languages */}
+                      {activeTrackTab === 'audio' && (
+                        <div className="ssatv-track-list">
+                          {audioTracks.length > 0 ? (
+                            Array.from(new Set(audioTracks.map((t: any) => t.language || 'original'))).map((lang: any) => {
+                              const matchingTrack = audioTracks.find((t: any) => (t.language || 'original') === lang);
+                              const isSelected = activeAudioId === matchingTrack?.id || matchingTrack?.active;
+                              return (
+                                <button
+                                  key={lang}
+                                  className={`ssatv-track-item ${isSelected ? 'selected' : ''}`}
+                                  onClick={() => {
+                                    if (matchingTrack) {
+                                      (window as any).__ssatv_player_controller?.selectAudio(matchingTrack.id);
+                                      setActiveAudioId(matchingTrack.id);
+                                    }
+                                  }}
+                                >
+                                  <div className="ssatv-track-item-left">
+                                    <span className="ssatv-track-badge">{formatLanguageBadge(lang)}</span>
+                                    <span className="ssatv-track-name">{formatTrackLanguage(lang)}</span>
+                                  </div>
+                                  {isSelected && <Check size={16} className="ssatv-track-check" />}
+                                </button>
+                              );
+                            })
+                          ) : (
+                            <div className="ssatv-track-empty-note">
+                              <span>Hanya 1 aliran audio utama aktif (Default).</span>
+                            </div>
+                          )}
+                        </div>
+                      )}
+                    </div>
+                  )}
+                </div>
                 <button className="ssatv-hud-btn" title="Settings / Quality">
                   <Settings size={17} />
                 </button>

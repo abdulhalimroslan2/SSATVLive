@@ -220,6 +220,7 @@ export const Player: React.FC<PlayerProps> = ({ channel, hideOverlay = false }) 
 
           const player = new shaka.Player();
           playerRef.current = player;
+          (window as any).__shakaPlayer = player;
 
           await player.attach(video);
           if (isCancelled) return false;
@@ -449,6 +450,79 @@ export const Player: React.FC<PlayerProps> = ({ channel, hideOverlay = false }) 
             if (isCancelled) return false;
 
             await startPlay(video);
+
+            // Hook track change listeners & publish initial track state
+            const syncTracks = () => {
+              if (!player) return;
+              try {
+                const textTracks = player.getTextTracks();
+                const audioTracks = player.getAudioTracks ? player.getAudioTracks() : [];
+                const variants = player.getVariantTracks ? player.getVariantTracks() : [];
+                const isVisible = (player as any).isTextTrackVisible ? (player as any).isTextTrackVisible() : false;
+
+                window.dispatchEvent(new CustomEvent('ssatv-tracks-updated', {
+                  detail: {
+                    subtitles: textTracks,
+                    audio: audioTracks,
+                    variants: variants,
+                    isSubtitleVisible: isVisible,
+                  }
+                }));
+              } catch (_err) {}
+            };
+
+            player.addEventListener('trackschanged', syncTracks);
+            player.addEventListener('adaptation', syncTracks);
+            player.addEventListener('texttrackvisibility', syncTracks);
+            syncTracks();
+
+            // Set up global player controller for subtitles & audio switching
+            (window as any).__ssatv_player_controller = {
+              selectSubtitle: (trackId: number | string | null) => {
+                try {
+                  if (trackId === null || trackId === 'off' || trackId === -1) {
+                    if ((player as any).setTextTrackVisibility) (player as any).setTextTrackVisibility(false);
+                  } else {
+                    const tracks = player.getTextTracks();
+                    const match = tracks.find((t: any) => t.id === trackId || String(t.id) === String(trackId));
+                    if (match) {
+                      player.selectTextTrack(match);
+                      if ((player as any).setTextTrackVisibility) (player as any).setTextTrackVisibility(true);
+                    }
+                  }
+                  syncTracks();
+                } catch (e) {
+                  console.warn('[Player] Subtitle selection error:', e);
+                }
+              },
+              selectAudio: (audioId: number | string) => {
+                try {
+                  const variants = player.getVariantTracks ? player.getVariantTracks() : [];
+                  const match = variants.find((v: any) => v.id === audioId || String(v.id) === String(audioId));
+                  if (match) {
+                    player.selectVariantTrack(match, true);
+                  } else if (typeof audioId === 'string' && (player as any).selectAudioLanguage) {
+                    (player as any).selectAudioLanguage(audioId);
+                  }
+                  syncTracks();
+                } catch (e) {
+                  console.warn('[Player] Audio selection error:', e);
+                }
+              },
+              getTracks: () => {
+                try {
+                  return {
+                    subtitles: player.getTextTracks(),
+                    audio: player.getAudioTracks ? player.getAudioTracks() : [],
+                    variants: player.getVariantTracks ? player.getVariantTracks() : [],
+                    isSubtitleVisible: (player as any).isTextTrackVisible ? (player as any).isTextTrackVisible() : false,
+                  };
+                } catch (_e) {
+                  return { subtitles: [], audio: [], variants: [], isSubtitleVisible: false };
+                }
+              }
+            };
+
             return true;
           } catch (err: any) {
             console.error(`[Player] ❌ Shaka failed for ${channel.name}:`, err?.message || err, err);
