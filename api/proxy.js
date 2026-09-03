@@ -46,13 +46,21 @@ export default async function handler(request) {
     targetUrl = path.replace('/astro-vod/', 'https://vodejitp-asset-playback-b.astro.com.my/');
   }
   else if (path.startsWith('/iris-synamedia/')) {
-    targetUrl = path.replace('/iris-synamedia/', 'https://vod-dai-ott-ap.ssai.iris.synamedia.com/');
+    const sub = path.replace('/iris-synamedia/', '');
+    if (sub.startsWith('tenant/astroprd/vodejitp-asset-playback-b.astro.com.my/')) {
+      targetUrl = 'https://vodejitp-asset-playback-b.astro.com.my/' + sub.replace('tenant/astroprd/vodejitp-asset-playback-b.astro.com.my/', '');
+    } else {
+      targetUrl = 'https://vod-dai-ott-ap.ssai.iris.synamedia.com/' + sub;
+    }
   }
   else if (path.startsWith('/ngtv-vod/')) {
     targetUrl = path.replace('/ngtv-vod/', 'https://ngtv-vod.gcdn.co/');
   }
   else if (path.startsWith('/viu-vod/')) {
     targetUrl = path.replace('/viu-vod/', 'https://dms-api.viu.com/');
+  }
+  else if (path.startsWith('/okcdn/')) {
+    targetUrl = path.replace('/okcdn/', 'https://vd466.okcdn.ru/');
   }
   // RTM Stream
   else if (path.startsWith('/rtm-stream/')) {
@@ -113,6 +121,12 @@ export default async function handler(request) {
     };
 
     if (request.method === 'POST') {
+      const incomingContentType = request.headers.get('content-type');
+      if (incomingContentType) {
+        headers.set('Content-Type', incomingContentType);
+      } else {
+        headers.set('Content-Type', 'application/octet-stream');
+      }
       fetchOptions.body = await request.arrayBuffer();
     }
 
@@ -126,9 +140,34 @@ export default async function handler(request) {
     // Strip any upstream tracking cookies
     responseHeaders.delete('set-cookie');
 
-    // If it's okayru MPD/M3U8, rewrite relative paths
+    // If it's okayru MPD/M3U8, rewrite relative paths and handle HTML redirect
     if (path.includes('okayru')) {
       let text = await response.text();
+
+      // Check for HTML redirect page
+      if (text.includes('Redirecting') || text.includes('href="')) {
+        const match = text.match(/href="([^"]+)"/i);
+        if (match) {
+          const redirTarget = match[1].replace(/&amp;/g, '&');
+          const redirRes = await fetch(redirTarget, { headers });
+          text = await redirRes.text();
+          const okcdnOrigin = redirTarget.match(/https?:\/\/[^/]+/)?.[0] || 'https://vd466.okcdn.ru';
+          const basePath = redirTarget.substring(okcdnOrigin.length, redirTarget.lastIndexOf('/') + 1);
+          const rewritten = text.split('\n').map(line => {
+            const l = line.trim();
+            if (l && !l.startsWith('#')) {
+              if (l.startsWith('http')) {
+                return l.replace(/https?:\/\/vd\d*\.okcdn\.ru\//, '/okcdn/');
+              }
+              return '/okcdn' + basePath + l;
+            }
+            return line;
+          }).join('\n');
+          responseHeaders.set('Content-Type', 'application/vnd.apple.mpegurl');
+          return new Response(rewritten, { status: 200, headers: responseHeaders });
+        }
+      }
+
       const finalUrl = response.url || targetUrl;
       let host = 'https://ptv2026.com';
       try {
@@ -153,6 +192,15 @@ export default async function handler(request) {
         status: response.status,
         headers: responseHeaders,
       });
+    }
+
+    // Rewrite Viu sub-playlists to use proxy
+    if (path.includes('get_viu.m3u8')) {
+      let text = await response.text();
+      text = text.replaceAll('https://dms-api.viu.com/', '/viu-vod/');
+      text = text.replaceAll('https://get.perfecttv.net/', '/perfecttv/');
+      responseHeaders.set('Content-Type', 'application/vnd.apple.mpegurl');
+      return new Response(text, { status: response.status, headers: responseHeaders });
     }
 
     // If it's load-ptv rwt.m3u8, convert static loops into continuous infinite live sliding windows

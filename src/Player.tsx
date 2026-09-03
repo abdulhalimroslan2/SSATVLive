@@ -183,12 +183,17 @@ export const Player: React.FC<PlayerProps> = ({ channel }) => {
         ['https://slive.mana2.my/', '/mana2/'],
         ['http://ngtv-live-cbj.gcdn.co/', '/gcdn/'],
         ['https://ngtv-live-cbj.gcdn.co/', '/gcdn-s/'],
+        ['https://vd466.okcdn.ru/', '/okcdn/'],
       ];
 
       const proxyBase = getProxyBaseUrl();
 
       // Clean up URL and route through proxy if needed
       let cleanUrl = channel.streamUrl ? channel.streamUrl.split('|')[0].trim() : '';
+
+      // Normalize Astro VOD direct origin (bypasses broken iris-synamedia redirector)
+      cleanUrl = cleanUrl.replace(/https?:\/\/vod-dai-ott-ap\.ssai\.iris\.synamedia\.com\/tenant\/astroprd\/vodejitp-asset-playback-b\.astro\.com\.my\//, 'https://vodejitp-asset-playback-b.astro.com.my/');
+
       for (const [from, to] of PROXY_MAP) {
         if (cleanUrl.startsWith(from)) {
           cleanUrl = proxyBase + cleanUrl.replace(from, to);
@@ -231,7 +236,8 @@ export const Player: React.FC<PlayerProps> = ({ channel }) => {
             channel.clearKey && (
               channel.clearKey.startsWith('http://') ||
               channel.clearKey.startsWith('https://') ||
-              channel.clearKey.includes('/wvmax')
+              channel.clearKey.includes('/wvmax') ||
+              channel.clearKey.includes('/wvtonton')
             )
           );
           const isClearKeyHex = Boolean(
@@ -245,6 +251,7 @@ export const Player: React.FC<PlayerProps> = ({ channel }) => {
               const pBase = getProxyBaseUrl();
               let url = request.uris[0];
 
+              // Direct rewrite for relative paths
               if (url.startsWith('/')) {
                 request.uris[0] = pBase + url;
                 return;
@@ -258,6 +265,11 @@ export const Player: React.FC<PlayerProps> = ({ channel }) => {
                 request.uris[0] = url;
               }
 
+              // Direct rewrite for iris-synamedia asset URLs
+              if (url.includes('vod-dai-ott-ap.ssai.iris.synamedia.com/tenant/astroprd/vodejitp-asset-playback-b.astro.com.my/')) {
+                url = url.replace(/https?:\/\/vod-dai-ott-ap\.ssai\.iris\.synamedia\.com\/tenant\/astroprd\/vodejitp-asset-playback-b\.astro\.com\.my\//, 'https://vodejitp-asset-playback-b.astro.com.my/');
+              }
+
               for (const [from, to] of PROXY_MAP) {
                 if (url.startsWith(from)) {
                   request.uris[0] = pBase + url.replace(from, to);
@@ -266,7 +278,7 @@ export const Player: React.FC<PlayerProps> = ({ channel }) => {
               }
             });
 
-            // RESPONSE FILTER: ONLY rewrite MPD for ClearKey DRM (NOT for Widevine license server)
+            // RESPONSE FILTER: Rewrite MPD for ClearKey DRM (Case-insensitive & XML-safe)
             if (isDash && isClearKeyHex) {
               networkEngine.registerResponseFilter((type: any, response: any) => {
                 // Only process MANIFEST responses
@@ -279,23 +291,22 @@ export const Player: React.FC<PlayerProps> = ({ channel }) => {
 
                 if (!mpd.includes('<MPD') && !mpd.includes('<mpd')) return;
 
-                const widevineUuid = 'urn:uuid:edef8ba9-79d6-4ace-a3c8-27dcd51d21ed';
                 const clearKeyUuid = 'urn:uuid:1077efec-c0b2-4d02-ace3-3c1e52e2fb4b';
 
-                // 1. Replace Widevine UUID with ClearKey UUID
-                let rewritten = mpd.replaceAll(widevineUuid, clearKeyUuid);
+                // 1. Replace Widevine UUID with ClearKey UUID case-insensitively (handles uppercase & lowercase UUIDs)
+                let rewritten = mpd.replace(/urn:uuid:edef8ba9-79d6-4ace-a3c8-27dcd51d21ed/gi, clearKeyUuid);
 
-                // 2. Remove Widevine PSSH boxes from ClearKey ContentProtection so CDM uses default_KID directly
-                rewritten = rewritten.replace(/<cenc:pssh>[^<]*<\/cenc:pssh>/g, '');
+                // 2. Remove Widevine PSSH boxes so CDM uses default_KID directly
+                rewritten = rewritten.replace(/<cenc:pssh>[^<]*<\/cenc:pssh>/gi, '');
 
                 // 3. Fix Mixed Content (HTTP -> HTTPS) for BaseURL
                 rewritten = rewritten.replaceAll('<BaseURL>http://', '<BaseURL>https://');
 
-                // 4. Inject ClearKey ContentProtection node preserving all KID attributes
+                // 4. Inject ClearKey ContentProtection node safely if still not present
                 if (!rewritten.includes(clearKeyUuid)) {
                   rewritten = rewritten.replace(
-                    /<ContentProtection\s+([^>]*?)schemeIdUri="urn:mpeg:dash:mp4protection:2011"([^>]*?)(\/?>)/gi,
-                    (match, p1, p2, p3) => `${match}\n      <ContentProtection schemeIdUri="${clearKeyUuid}"${p1}${p2}${p3}`
+                    /<ContentProtection\s+[^>]*?schemeIdUri="urn:mpeg:dash:mp4protection:2011"[^>]*?cenc:default_KID="([^"]+)"[^>]*?>/gi,
+                    (match, kid) => `${match}\n      <ContentProtection schemeIdUri="${clearKeyUuid}" value="cenc" cenc:default_KID="${kid}" />`
                   );
                 }
 
@@ -307,60 +318,59 @@ export const Player: React.FC<PlayerProps> = ({ channel }) => {
           // In Shaka Player: Configure DRM appropriately
           const drmConfig: any = {};
 
-            if (isLicenseUrl) {
-              let licenseUrl = channel.clearKey!.trim();
-              for (const [from, to] of PROXY_MAP) {
-                if (licenseUrl.startsWith(from)) {
-                  licenseUrl = getProxyBaseUrl() + licenseUrl.replace(from, to);
-                  break;
-                }
-              }
-              drmConfig.servers = {
-                'com.widevine.alpha': licenseUrl,
-                'com.microsoft.playready': licenseUrl,
-              };
-              drmConfig.advanced = {
-                'com.widevine.alpha': {
-                  videoRobustness: 'SW_SECURE_CRYPTO',
-                  audioRobustness: 'SW_SECURE_CRYPTO',
-                },
-              };
-              console.log(`[Player] Using Widevine license server: ${licenseUrl}`);
-            } else if (isClearKeyHex) {
-              const [rawKeyId, rawKey] = channel.clearKey!.split(':');
-              const normalizeHex = (s: string) => s.replace(/[^0-9a-fA-F]/g, '').toLowerCase().trim();
-              const keyIdHex = normalizeHex(rawKeyId);
-              const keyValueHex = normalizeHex(rawKey);
-
-              if (keyIdHex.length > 0 && keyIdHex.length % 2 === 0 && keyValueHex.length > 0 && keyValueHex.length % 2 === 0) {
-                drmConfig.clearKeys = {
-                  [keyIdHex]: keyValueHex,
-                };
+          if (isLicenseUrl) {
+            let licenseUrl = channel.clearKey!.trim();
+            for (const [from, to] of PROXY_MAP) {
+              if (licenseUrl.startsWith(from)) {
+                licenseUrl = getProxyBaseUrl() + licenseUrl.replace(from, to);
+                break;
               }
             }
-
-            // Configure Shaka Player DRM & Streaming for Zero-Buffer Playback
-            player.configure({
-              drm: drmConfig,
-              streaming: {
-                lowLatencyMode: false,
-                inaccurateManifestTolerance: 2,
-                bufferingGoal: IS_IOS ? 8 : 20,
-                rebufferingGoal: IS_IOS ? 2 : 2.5,
-                bufferBehind: IS_IOS ? 5 : 15,
-                stallEnabled: true,
-                stallThreshold: 0.8,
-                stallSkip: 0.3,
-                safeSeekOffset: 2,
-                alwaysStreamAudio: true,
-                retryParameters: {
-                  maxAttempts: 6,
-                  baseDelay: 200,
-                  backoffFactor: 1.3,
-                  fuzzFactor: 0.2,
-                  timeout: 12000,
-                }
+            drmConfig.servers = {
+              'com.widevine.alpha': licenseUrl,
+              'com.microsoft.playready': licenseUrl,
+            };
+            drmConfig.advanced = {
+              'com.widevine.alpha': {
+                videoRobustness: '',
+                audioRobustness: '',
               },
+            };
+            console.log(`[Player] Using Widevine license server: ${licenseUrl}`);
+          } else if (isClearKeyHex) {
+            const [rawKeyId, rawKey] = channel.clearKey!.split(':');
+            const normalizeHex = (s: string) => s.replace(/[^0-9a-fA-F]/g, '').toLowerCase().trim();
+            const keyIdHex = normalizeHex(rawKeyId);
+            const keyValueHex = normalizeHex(rawKey);
+
+            if (keyIdHex.length > 0 && keyIdHex.length % 2 === 0 && keyValueHex.length > 0 && keyValueHex.length % 2 === 0) {
+              drmConfig.clearKeys = {
+                [keyIdHex]: keyValueHex,
+              };
+            }
+          }
+
+          // Configure Shaka Player DRM & Streaming for Zero-Buffer Playback
+          player.configure({
+            drm: drmConfig,
+            streaming: {
+              lowLatencyMode: false,
+              inaccurateManifestTolerance: 2,
+              bufferingGoal: IS_IOS ? 8 : 20,
+              rebufferingGoal: IS_IOS ? 2 : 2.5,
+              bufferBehind: IS_IOS ? 5 : 15,
+              stallEnabled: true,
+              stallThreshold: 0.8,
+              stallSkip: 0.3,
+              safeSeekOffset: 2,
+              retryParameters: {
+                maxAttempts: 6,
+                baseDelay: 200,
+                backoffFactor: 1.3,
+                fuzzFactor: 0.2,
+                timeout: 12000,
+              }
+            },
               manifest: {
                 dash: {
                   ignoreMinBufferTime: true,

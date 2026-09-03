@@ -77,12 +77,12 @@ function App() {
     let title = item.title;
     let desc = item.synopsis;
 
-    if (episodeNumber && item.episodes && item.episodes.length > 0) {
-      const ep = item.episodes.find(e => e.episodeNumber === episodeNumber) || item.episodes[0];
+    if (item.type === 'series' && item.episodes && item.episodes.length > 0) {
+      const ep = (episodeNumber && item.episodes.find(e => e.episodeNumber === episodeNumber)) || item.episodes[0];
       if (ep) {
         playStreamUrl = ep.streamUrl;
         playClearKey = ep.clearKey || item.clearKey;
-        title = `${item.title} - ${ep.title}`;
+        title = `${item.title} - Episod ${ep.episodeNumber}: ${ep.title}`;
         desc = ep.synopsis || item.synopsis;
       }
     }

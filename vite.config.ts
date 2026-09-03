@@ -32,7 +32,36 @@ function proxyPlugin() {
           curl.on('close', () => {
             const parts = body.split('\nEFFECTIVE_URL:')
             let content = parts[0]
-            const effectiveUrl = parts[1] ? parts[1].trim() : ''
+            let effectiveUrl = parts[1] ? parts[1].trim() : ''
+
+            // If the response is an HTML redirect page, follow the redirect destination
+            if (content.includes('Redirecting') || content.includes('href="')) {
+              const match = content.match(/href="([^"]+)"/i)
+              if (match) {
+                const redirTarget = match[1].replace(/&amp;/g, '&')
+                const curl2 = spawn('curl', ['-s', '-L', redirTarget])
+                let body2 = ''
+                curl2.stdout.on('data', (d) => { body2 += d.toString() })
+                curl2.on('close', () => {
+                  res.setHeader('Content-Type', 'application/vnd.apple.mpegurl')
+                  const okcdnOrigin = redirTarget.match(/https?:\/\/[^/]+/)?.[0] || 'https://vd466.okcdn.ru'
+                  const basePath = redirTarget.substring(okcdnOrigin.length, redirTarget.lastIndexOf('/') + 1)
+                  const rewritten = body2.split('\n').map(line => {
+                    const l = line.trim()
+                    if (l && !l.startsWith('#')) {
+                      if (l.startsWith('http')) {
+                        return l.replace(/https?:\/\/vd\d*\.okcdn\.ru\//, '/okcdn/')
+                      }
+                      return '/okcdn' + basePath + l
+                    }
+                    return line
+                  }).join('\n')
+                  res.end(rewritten)
+                })
+                return
+              }
+            }
+
             let host = 'https://ptv2026.com'
             try {
               if (effectiveUrl) {
@@ -45,16 +74,81 @@ function proxyPlugin() {
               content = content.replace(/<BaseURL>\?/g, `<BaseURL>${host}/?`)
             } else if (url.includes('.m3u8')) {
               res.setHeader('Content-Type', 'application/vnd.apple.mpegurl')
-              const baseUrl = effectiveUrl.substring(0, effectiveUrl.lastIndexOf('/') + 1)
+              let proxyBase = ''
+              if (effectiveUrl.includes('okcdn.ru')) {
+                const originMatch = effectiveUrl.match(/https?:\/\/[^/]+/)
+                const origin = originMatch ? originMatch[0] : 'https://vd466.okcdn.ru'
+                const basePath = effectiveUrl.substring(origin.length, effectiveUrl.lastIndexOf('/') + 1)
+                proxyBase = '/okcdn' + basePath
+              } else {
+                proxyBase = effectiveUrl.substring(0, effectiveUrl.lastIndexOf('/') + 1)
+              }
               content = content.split('\n').map(line => {
-                if (line.trim() && !line.startsWith('#') && !line.startsWith('http')) {
-                  return baseUrl + line.trim()
+                const l = line.trim()
+                if (l && !l.startsWith('#')) {
+                  if (l.startsWith('http')) {
+                    return l.replace(/https?:\/\/[^/]*okcdn\.ru\//, '/okcdn/')
+                  }
+                  return proxyBase + l
                 }
                 return line
               }).join('\n')
             }
             res.end(content)
           })
+          return
+        }
+
+        // Special handler for okcdn.ru (must NOT send ASTRO_UA because URLs are signed)
+        if (url.startsWith('/okcdn/')) {
+          setCors()
+          const sub = url.replace('/okcdn/', '')
+          const targetUrl = 'https://vd466.okcdn.ru/' + sub
+
+          if (url.includes('.m3u8')) res.setHeader('Content-Type', 'application/vnd.apple.mpegurl')
+          else if (url.includes('.ts')) res.setHeader('Content-Type', 'video/mp2t')
+          else if (/\.(m4f|m4s|m4v|m4a|mp4)/.test(url)) res.setHeader('Content-Type', 'video/mp4')
+
+          const curl = spawn('curl', ['-s', '-L', targetUrl])
+          curl.stdout.pipe(res)
+          curl.on('error', () => { if (!res.headersSent) { res.writeHead(500); res.end() } })
+          return
+        }
+
+        // Special handler for get_viu.m3u8 (rewrites internal sub-playlists to use proxy)
+        if (url.includes('get_viu.m3u8')) {
+          setCors()
+          const targetUrl = url.replace('/ptv2026/', 'https://ptv2026.com/')
+          const curl = spawn('curl', ['-s', '-L', targetUrl])
+          let body = ''
+          curl.stdout.on('data', (d) => { body += d.toString() })
+          curl.on('close', () => {
+            res.setHeader('Content-Type', 'application/vnd.apple.mpegurl')
+            let content = body.replaceAll('https://dms-api.viu.com/', '/viu-vod/')
+            content = content.replaceAll('https://get.perfecttv.net/', '/perfecttv/')
+            res.end(content)
+          })
+          return
+        }
+
+        // Special handler for iris-synamedia (redirects asset segments directly to vodejitp-asset-playback-b)
+        if (url.startsWith('/iris-synamedia/')) {
+          setCors()
+          const sub = url.replace('/iris-synamedia/', '')
+          let targetUrl = ''
+          if (sub.startsWith('tenant/astroprd/vodejitp-asset-playback-b.astro.com.my/')) {
+            targetUrl = 'https://vodejitp-asset-playback-b.astro.com.my/' + sub.replace('tenant/astroprd/vodejitp-asset-playback-b.astro.com.my/', '')
+          } else {
+            targetUrl = 'https://vod-dai-ott-ap.ssai.iris.synamedia.com/' + sub
+          }
+
+          if (url.includes('.mpd')) res.setHeader('Content-Type', 'application/dash+xml')
+          else if (url.includes('.m3u8')) res.setHeader('Content-Type', 'application/vnd.apple.mpegurl')
+          else if (/\.(m4f|m4s|m4v|m4a|mp4)/.test(url)) res.setHeader('Content-Type', 'video/mp4')
+
+          const curl = spawn('curl', ['-s', '-L', '-H', `User-Agent: ${ASTRO_UA}`, targetUrl])
+          curl.stdout.pipe(res)
+          curl.on('error', () => { if (!res.headersSent) { res.writeHead(500); res.end() } })
           return
         }
 
@@ -136,7 +230,7 @@ function proxyPlugin() {
           { prefix: '/load-ptv/', target: 'https://load.ptv2026.com/' },
           { prefix: '/gcdn-s/', target: 'https://ngtv-live-cbj.gcdn.co/' },
           { prefix: '/gcdn/', target: 'http://ngtv-live-cbj.gcdn.co/' },
-          { prefix: '/gcdn-live/', target: 'https://ngtv-live.gcdn.co/' },
+          { prefix: '/okcdn/', target: 'https://vd466.okcdn.ru/' },
           { prefix: '/rtm-stream/', target: 'https://d25tgymtnqzu8s.cloudfront.net/', args: [
             '-H', 'Origin: https://rtmklik.rtm.gov.my', '-H', 'Referer: https://rtmklik.rtm.gov.my/'
           ]},
