@@ -368,7 +368,7 @@ export function getProgrammeAtHour(
 
   return {
     title: `${channel.name} Siaran ${formatEpgTime(slotStart)}`,
-    desc: `Tonton siaran langsung saluran ${channel.name} dalam kualiti definisi tinggi di SSATV.`,
+    desc: '',
     start: formatDateToTimestamp(slotStart),
     stop: formatDateToTimestamp(slotEnd),
     date: `${slotStart.getFullYear()}-${String(slotStart.getMonth() + 1).padStart(2, '0')}-${String(slotStart.getDate()).padStart(2, '0')}`,

@@ -553,7 +553,7 @@ export const LiveTvView: React.FC<LiveTvViewProps> = ({
     if (!currentChannel || !currentChannel.name) {
       return {
         title: 'Siaran Langsung',
-        desc: 'Tonton siaran langsung saluran definisi tinggi di SSATV.',
+        desc: '',
         start: '',
         stop: '',
         date: '',
@@ -810,9 +810,8 @@ export const LiveTvView: React.FC<LiveTvViewProps> = ({
 
                                   <div className="ssatv-ch-item-right">
                                     {isCurrent && (
-                                      <span className="ssatv-ch-playing-badge">
+                                      <span className="ssatv-ch-playing-badge" title="Sedang Dimainkan">
                                         <Check size={14} />
-                                        LIVE
                                       </span>
                                     )}
                                   </div>
@@ -840,7 +839,7 @@ export const LiveTvView: React.FC<LiveTvViewProps> = ({
                 <div className="ssatv-fs-top-right">
                   <span className="ssatv-fs-live-indicator">
                     <span className="ssatv-fs-live-dot" />
-                    LIVE HD
+                    HD
                   </span>
                   <button 
                     className="apple-tv-pill-icon-btn ssatv-fs-minimize-btn" 
@@ -1107,9 +1106,6 @@ export const LiveTvView: React.FC<LiveTvViewProps> = ({
 
         {/* Right: Live Editorial Showcase */}
         <div className="ssatv-live-editorial-pane">
-          {/* Tag */}
-          <div className="ssatv-live-now-tag">LIVE NOW</div>
-
           {/* Real Channel Brand with Logo / Number */}
           <div className="ssatv-live-channel-brand" style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
             {currentChannel.thumbnail && (
@@ -1141,15 +1137,6 @@ export const LiveTvView: React.FC<LiveTvViewProps> = ({
               FHD 1080p
             </span>
           </div>
-
-          {/* Crimson Divider Line */}
-          <div className="ssatv-live-divider-line" />
-
-          {/* Real Synopsis from EPG */}
-          <p className="ssatv-live-prog-synopsis">
-            {currentProgram.desc ||
-              `Tonton siaran langsung saluran ${currentChannel.name}. Menampilkan rancangan hiburan, berita dan siaran eksklusif berkualiti tinggi.`}
-          </p>
 
           {/* Dual Action Buttons */}
           <div className="ssatv-live-actions">
@@ -1298,10 +1285,6 @@ export const LiveTvView: React.FC<LiveTvViewProps> = ({
                   </div>
 
                   <div className="ssatv-grid-bottom-info">
-                    <div className="ssatv-grid-live-indicator">
-                      <span className="ssatv-live-pulse-dot" />
-                      LIVE
-                    </div>
                     <div className="ssatv-grid-title" title={prog.title}>
                       {prog.title}
                     </div>

@@ -25,7 +25,7 @@ export const ChannelCard: React.FC<ChannelCardProps> = ({ channel, isActive, onS
     return () => clearInterval(interval);
   }, [channel.id, channel.name, channel.category]);
 
-  const categoryLabel = channel.category ? channel.category.replace('_', ' ') : 'LIVE';
+  const categoryLabel = channel.category && channel.category !== 'LIVE' ? channel.category.replace('_', ' ') : '';
 
   return (
     <div 
@@ -44,12 +44,11 @@ export const ChannelCard: React.FC<ChannelCardProps> = ({ channel, isActive, onS
       {/* 16:9 Visual Thumbnail & Logo Container */}
       <div className="channel-card-banner">
         {/* Top Badges */}
-        <div className="channel-badges-row">
-          <span className="channel-badge-live">
-            <span className="channel-live-dot" /> LIVE
-          </span>
-          <span className="channel-badge-cat">{categoryLabel}</span>
-        </div>
+        {categoryLabel ? (
+          <div className="channel-badges-row">
+            <span className="channel-badge-cat">{categoryLabel}</span>
+          </div>
+        ) : null}
 
         {/* Channel Logo or Styled Fallback */}
         <div className="channel-logo-container">
@@ -117,7 +116,7 @@ export const ChannelCard: React.FC<ChannelCardProps> = ({ channel, isActive, onS
         {/* Live Progress Info & Remaining Time */}
         <div className="channel-card-footer">
           <div className="channel-epg-timing">
-            <span className="channel-live-indicator-text">🔴 LIVE</span>
+
             <span className="channel-epg-remaining">
               Baki {epg.remainingMinutes} min ({epg.progressPercent}%)
             </span>
