@@ -21,6 +21,14 @@
       "destination": "/api/proxy?path=/viu-vod/:match*"
     },
     {
+      "source": "/viu-key/:match*",
+      "destination": "/api/proxy?path=/viu-key/:match*"
+    },
+    {
+      "source": "/okcdn/:match*",
+      "destination": "/api/proxy?path=/okcdn/:match*"
+    },
+    {
       "source": "/rtm-stream/:match*",
       "destination": "/api/proxy?path=/rtm-stream/:match*"
     },

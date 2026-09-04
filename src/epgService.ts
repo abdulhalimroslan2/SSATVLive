@@ -159,28 +159,13 @@ const CHANNEL_ALIASES: Record<string, string> = {
   '146': '146',
   'sensasi': 'sensasi',
   'inspirasi': 'inspirasi',
-  'degup': 'degup',
   'salam hd': 'salamhd',
   'salamhd': 'salamhd',
-  'siar': 'siar',
-  'dunia sinema': 'duniasinemahd',
-  'duniasinemahd': 'duniasinemahd',
   'pesona hd': 'pesonahd',
   'pesonahd': 'pesonahd',
   'seti': 'seti',
-  'hbo': 'hbohd',
-  'hbo hd': 'hbohd',
-  'hbohd': 'hbohd',
-  'hbo hits': 'hbohits',
-  'hbohits': 'hbohits',
-  'hbo family': 'hbofamily',
-  'hbofamily': 'hbofamily',
   'hbo signature': 'hbosignature',
   'hbosignature': 'hbosignature',
-  'cinemax': 'cinemax',
-  'celestial movies': 'celestialmovies',
-  'celestialmovies': 'celestialmovies',
-  'ccm': 'ccm',
   'warna': 'astrowarna',
   'citra': 'astrocitra',
   'ria': 'astroria',
@@ -234,7 +219,6 @@ const CHANNEL_ALIASES: Record<string, string> = {
   'hits': 'hits',
   'hits now': 'hitsnow',
   'tvn hd': 'tvn',
-  'tvn movies': 'tvnmovies',
   'kbs world': 'kbsworld',
   'k+': 'kplus',
   'zee cinema': 'zeecinema',
@@ -253,12 +237,98 @@ const CHANNEL_ALIASES: Record<string, string> = {
   'tvbs asia': 'tvbsasia',
   'cctv4': 'cctv4',
   'iqiyi': 'iqiyi',
+
+  // All 28 Movie Channels & Channel Numbers
+  'ccm': 'celestialclassicmovies',
+  '100': 'celestialclassicmovies',
+  'celestial-movies': 'celestialmovies',
+  'celestial movies': 'celestialmovies',
+  '506': 'celestialmovies',
+  'boo': '401',
+  '401': '401',
+  'fam-time': 'famtime',
+  'fam time': 'famtime',
+  'famtime': 'famtime',
+  '402': 'famtime',
+  'showtime': 'showtime',
+  '403': 'showtime',
+  'showcase-movies': '404',
+  'showcase movies': '404',
+  '404': '404',
+  'rock-action': 'rockaction',
+  'rock action': 'rockaction',
+  'rockaction': 'rockaction',
+  '405': 'rockaction',
+  'rock-xstream': 'rockxstream',
+  'rock xstream': 'rockxstream',
+  'rockxstream': 'rockxstream',
+  '406': 'rockxstream',
+  'tvn-movies': 'tvnmovieshd',
+  'tvn movies': 'tvnmovieshd',
+  'tvnmovies': 'tvnmovieshd',
+  'tvnmovieshd': 'tvnmovieshd',
+  '407': 'tvnmovieshd',
+  'dunia-sinema': 'duniasinemahd',
+  'dunia sinema': 'duniasinemahd',
+  'duniasinemahd': 'duniasinemahd',
+  '408': 'duniasinemahd',
+  'siar': 'siar',
+  '409': 'siar',
+  'degup': 'degup',
+  '410': 'degup',
+  'hbo': 'hbohd',
+  'hbo hd': 'hbohd',
+  'hbohd': 'hbohd',
+  '411': 'hbohd',
+  'hbo-hits': 'hbohits',
+  'hbo hits': 'hbohits',
+  'hbohits': 'hbohits',
+  '412': 'hbohits',
+  'hbo-family': 'hbofamily',
+  'hbo family': 'hbofamily',
+  'hbofamily': 'hbofamily',
+  '413': 'hbofamily',
+  'cinemax': 'cinemax',
+  '414': 'cinemax',
+  'hits-movies': '415',
+  'hits movies': '415',
+  'hitsmovies': '415',
+  '415': '415',
+  'galaxy': 'galaxy',
+  '148': 'galaxy',
+  'thrill': 'thrill',
+  '149': 'thrill',
+  'imc': 'imcindonesiamoviechannel',
+  '150': 'imcindonesiamoviechannel',
+  'cineedge': 'cineedge',
+  '160': 'cineedge',
+  'superrix': 'superrix',
+  '161': 'superrix',
+  'uniques': 'uniques',
+  '162': 'uniques',
+  'movies-now': 'moviesnow',
+  'movies now': 'moviesnow',
+  'moviesnow': 'moviesnow',
+  '163': 'moviesnow',
+  'mnx-hd': 'mnx',
+  'mnx': 'mnx',
+  '164': 'mnx',
+  'mn-plus': 'mnplus',
+  'mn plus': 'mnplus',
+  'mnplus': 'mnplus',
+  '165': 'mnplus',
+  'moviesphere-fhd': 'moviesphere',
+  'moviesphere': 'moviesphere',
+  '166': 'moviesphere',
+  'outersphere': 'outersphere',
+  '167': 'outersphere',
 };
 
 export function getEpgKeyForChannel(channel: Channel): string | null {
   if (!channel) return null;
   const contentId = (channel.contentId || '').toLowerCase().trim();
   const name = (channel.name || '').toLowerCase().trim();
+  const chNum = (channel.ch_number || '').trim();
 
   // 1. Direct match by contentId
   if (contentId && epgMap[contentId]) return contentId;
@@ -268,19 +338,30 @@ export function getEpgKeyForChannel(channel: Channel): string | null {
     return CHANNEL_ALIASES[contentId];
   }
 
-  // 3. Lookup alias by name
+  // 3. Lookup alias or direct match by ch_number
+  if (chNum) {
+    if (CHANNEL_ALIASES[chNum] && epgMap[CHANNEL_ALIASES[chNum]]) {
+      return CHANNEL_ALIASES[chNum];
+    }
+    if (epgMap[chNum]) return chNum;
+  }
+
+  // 4. Lookup alias by name
   if (name && CHANNEL_ALIASES[name] && epgMap[CHANNEL_ALIASES[name]]) {
     return CHANNEL_ALIASES[name];
   }
 
-  // 4. Direct match by name
+  // 5. Direct match by name
   if (name && epgMap[name]) return name;
 
-  // 5. Clean name
+  // 6. Clean name
   const cleanName = name.replace(/fhd|hd|sd|\s+/g, '');
+  if (cleanName && CHANNEL_ALIASES[cleanName] && epgMap[CHANNEL_ALIASES[cleanName]]) {
+    return CHANNEL_ALIASES[cleanName];
+  }
   if (cleanName && epgMap[cleanName]) return cleanName;
 
-  // 6. Partial lookup
+  // 7. Partial lookup
   for (const k of Object.keys(epgMap)) {
     if (name.includes(k) || k.includes(name) || (contentId && k.includes(contentId))) {
       return k;
@@ -321,11 +402,12 @@ export function getProgrammeAtHour(
   const epgKey = getEpgKeyForChannel(channel);
   const targetTimestamp = formatDateToTimestamp(targetDate);
   const targetHour = targetDate.getHours();
+  const targetMin = targetDate.getMinutes();
 
-  if (epgKey && epgMap[epgKey]) {
+  if (epgKey && epgMap[epgKey] && epgMap[epgKey].length > 0) {
     const list = epgMap[epgKey];
 
-    // 1. Direct timestamp match
+    // 1. Direct timestamp match (exact date + hour + minute range)
     for (const prog of list) {
       const s = prog.start.replace(/[^0-9]/g, '').slice(0, 14);
       const e = prog.stop.replace(/[^0-9]/g, '').slice(0, 14);
@@ -337,7 +419,54 @@ export function getProgrammeAtHour(
       }
     }
 
-    // 2. Start hour match in list
+    // Helper: parse time interval from "12:00 AM – 2:30 AM" or similar
+    const parseTimeSlot = (slot: string) => {
+      if (!slot) return null;
+      const parts = slot.split(/[–-]/);
+      if (parts.length < 2) return null;
+      const parsePart = (str: string) => {
+        const m = str.trim().match(/(\d{1,2}):(\d{2})\s*(AM|PM)/i);
+        if (!m) return null;
+        let h = parseInt(m[1], 10);
+        const min = parseInt(m[2], 10);
+        const ampm = m[3].toUpperCase();
+        if (ampm === 'PM' && h < 12) h += 12;
+        if (ampm === 'AM' && h === 12) h = 0;
+        return h * 60 + min;
+      };
+      const s = parsePart(parts[0]);
+      const e = parsePart(parts[1]);
+      if (s === null || e === null) return null;
+      return { startMin: s, stopMin: e };
+    };
+
+    const targetMinuteOfDay = targetHour * 60 + targetMin;
+
+    // 2. Exact time-of-day interval match (spans across hours and handles midnight crossing)
+    for (const prog of list) {
+      const parsed = parseTimeSlot(prog.timeSlot);
+      if (parsed) {
+        const { startMin, stopMin } = parsed;
+        if (startMin <= stopMin) {
+          if (targetMinuteOfDay >= startMin && targetMinuteOfDay < stopMin) {
+            return {
+              ...prog,
+              genre: channel.category || 'Live TV',
+            };
+          }
+        } else {
+          // Crosses midnight (e.g. 11:30 PM – 2:00 AM)
+          if (targetMinuteOfDay >= startMin || targetMinuteOfDay < stopMin) {
+            return {
+              ...prog,
+              genre: channel.category || 'Live TV',
+            };
+          }
+        }
+      }
+    }
+
+    // 3. Match by start hour
     const hourMatch = list.find((p) => p.startHour === targetHour);
     if (hourMatch) {
       return {
@@ -346,15 +475,23 @@ export function getProgrammeAtHour(
       };
     }
 
-    // 3. Match by formatted time slot
-    const targetSlotStr = `${targetHour % 12 === 0 ? 12 : targetHour % 12}:`;
-    const ampmStr = targetHour >= 12 ? 'PM' : 'AM';
-    const slotMatch = list.find(
-      (p) => p.timeSlot?.includes(targetSlotStr) && p.timeSlot?.includes(ampmStr)
-    );
-    if (slotMatch) {
+    // 4. Closest start time prior to target hour
+    let bestProg = list[0];
+    let minDiff = 999999;
+    for (const prog of list) {
+      const parsed = parseTimeSlot(prog.timeSlot);
+      if (parsed) {
+        let diff = targetMinuteOfDay - parsed.startMin;
+        if (diff < 0) diff += 1440;
+        if (diff < minDiff) {
+          minDiff = diff;
+          bestProg = prog;
+        }
+      }
+    }
+    if (bestProg) {
       return {
-        ...slotMatch,
+        ...bestProg,
         genre: channel.category || 'Live TV',
       };
     }

@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { ChevronRight, ChevronLeft, Play } from 'lucide-react';
+import { ChevronRight, ChevronLeft, Play, MoreHorizontal } from 'lucide-react';
 import { type VodItem } from './vodData';
 
 export interface ContinueItem {
@@ -31,7 +31,7 @@ export const ContinueWatchingRow: React.FC<ContinueWatchingRowProps> = ({
   };
 
   return (
-    <section className="ssatv-row-section">
+    <section className="ssatv-row-section apple-tv-continue-section">
       {/* Section Header */}
       <div className="ssatv-row-header">
         <h2 className="ssatv-row-title">
@@ -39,8 +39,8 @@ export const ContinueWatchingRow: React.FC<ContinueWatchingRowProps> = ({
           <ChevronRight size={18} className="ssatv-row-chevron" />
         </h2>
 
-        {/* Scroll Controls */}
-        <div className="ssatv-row-controls">
+        {/* Scroll Controls (Desktop Only) */}
+        <div className="ssatv-row-controls ssatv-desktop-only">
           <button 
             className="ssatv-scroll-btn" 
             onClick={() => handleScroll('left')}
@@ -63,7 +63,7 @@ export const ContinueWatchingRow: React.FC<ContinueWatchingRowProps> = ({
         {items.map((item) => (
           <div
             key={item.id}
-            className="ssatv-continue-card"
+            className="ssatv-continue-card apple-tv-continue-card"
             onClick={() => onSelect(item)}
           >
             <div className="ssatv-continue-thumb-wrap">
@@ -73,6 +73,9 @@ export const ContinueWatchingRow: React.FC<ContinueWatchingRowProps> = ({
                 className="ssatv-continue-img"
                 loading="lazy"
               />
+
+              {/* Apple TV Watermark Top-Right (Matching IMG_5147) */}
+              <div className="apple-tv-card-badge-logo">tv</div>
 
               {/* Hover Play Icon Overlay */}
               <div className="ssatv-card-hover-play">
@@ -84,18 +87,34 @@ export const ContinueWatchingRow: React.FC<ContinueWatchingRowProps> = ({
               {/* Dark Gradient Overlay for Text */}
               <div className="ssatv-continue-gradient" />
 
-              {/* Text Info */}
-              <div className="ssatv-continue-info">
-                <div className="ssatv-continue-title">{item.title}</div>
-                <div className="ssatv-continue-sub">{item.sub}</div>
-              </div>
+              {/* Minimalist Bottom Bar (Matching Apple TV IMG_5147) */}
+              <div className="apple-tv-continue-bottom-bar">
+                <div className="apple-tv-continue-play-icon">
+                  <Play size={10} fill="#ffffff" color="#ffffff" />
+                </div>
 
-              {/* Red Progress Bar */}
-              <div className="ssatv-progress-track">
-                <div 
-                  className="ssatv-progress-fill" 
-                  style={{ width: `${Math.min(100, Math.max(5, item.progressPercent))}%` }} 
-                />
+                {/* Clean White Apple TV Progress Bar */}
+                <div className="apple-tv-continue-progress-track">
+                  <div 
+                    className="apple-tv-continue-progress-fill" 
+                    style={{ width: `${Math.min(100, Math.max(10, item.progressPercent))}%` }} 
+                  />
+                </div>
+
+                <div className="apple-tv-continue-tag">
+                  {item.sub || 'S1, E1 · 33m'}
+                </div>
+
+                <button 
+                  className="apple-tv-continue-more-btn"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                  }}
+                  title="Pilihan"
+                  type="button"
+                >
+                  <MoreHorizontal size={14} />
+                </button>
               </div>
             </div>
           </div>

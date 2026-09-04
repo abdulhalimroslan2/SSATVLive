@@ -29,10 +29,11 @@ const getItemById = (id: string): VodItem | undefined => {
   return VOD_CATALOG.find((v) => v.id === id);
 };
 
-const penungguIstana = getItemById('vod_m_348') || VOD_CATALOG[0];
-const jpbc = getItemById('vod_m_355') || VOD_CATALOG[1];
-const nightOwl = getItemById('vod_m_350') || VOD_CATALOG[2];
-const saranjana = getItemById('vod_m_361') || VOD_CATALOG[3];
+// Top verified non-horror titles
+const klSpecialForce = getItemById('vod_m_382') || VOD_CATALOG.find(v => v.title.includes('KL Special Force')) || VOD_CATALOG[0];
+const nightOwl = getItemById('vod_m_350') || VOD_CATALOG[1];
+const oppenheimer = getItemById('vod_m_317') || VOD_CATALOG.find(v => v.title.includes('Oppenheimer')) || VOD_CATALOG[2];
+const dune = getItemById('vod_m_092') || VOD_CATALOG.find(v => v.title.includes('Dune')) || VOD_CATALOG[3];
 const bulanHenti = getItemById('vod_s_001') || VOD_CATALOG.find(v => v.type === 'series') || VOD_CATALOG[4];
 
 // 1. REAL HERO SLIDES (Synchronized with real VOD & Live TV streams)
@@ -43,22 +44,13 @@ export const getRealHeroSlides = (channels: Channel[] = []): HeroSlide[] => {
 
   return [
     {
-      id: penungguIstana.id,
-      badge: 'FILEM BLOKBUSTER UTAMA',
-      titleLines: ['PENUNGGU', 'ISTANA'],
-      meta: `${penungguIstana.year}  •  ${penungguIstana.duration}  •  ${penungguIstana.genre.join(' / ')}  •  ${penungguIstana.rating}`,
-      synopsis: penungguIstana.synopsis,
-      backdrop: getWidescreenBackdrop(penungguIstana.backdrop, 1920),
-      vodItem: penungguIstana,
-    },
-    {
-      id: jpbc.id,
-      badge: 'KOMEDI SERAM POPULAR',
-      titleLines: ['JANGAN PANDANG', 'BELAKANG CONGKAK'],
-      meta: `${jpbc.year}  •  ${jpbc.duration}  •  ${jpbc.genre.join(' / ')}  •  ${jpbc.rating}`,
-      synopsis: jpbc.synopsis,
-      backdrop: getWidescreenBackdrop(jpbc.backdrop, 1920),
-      vodItem: jpbc,
+      id: klSpecialForce.id,
+      badge: 'AKSI BLOKBUSTER UTAMA',
+      titleLines: ['KL SPECIAL', 'FORCE'],
+      meta: `${klSpecialForce.year}  •  ${klSpecialForce.duration}  •  ${klSpecialForce.genre.join(' / ')}  •  ${klSpecialForce.rating}`,
+      synopsis: klSpecialForce.synopsis,
+      backdrop: getWidescreenBackdrop(klSpecialForce.backdrop || klSpecialForce.poster, 1920),
+      vodItem: klSpecialForce,
     },
     {
       id: 'hero_live_hbo',
@@ -66,25 +58,34 @@ export const getRealHeroSlides = (channels: Channel[] = []): HeroSlide[] => {
       titleLines: ['HBO', 'HD 411'],
       meta: 'Saluran 411  •  1080p FHD  •  Hollywood Premiere & Series',
       synopsis: hboChannel?.description || 'Siaran langsung HBO HD. Menyiarkan filem-filem pecah panggung Hollywood terbaik dan siri eksklusif sepanjang 24 jam.',
-      backdrop: getWidescreenBackdrop(nightOwl.backdrop, 1920),
+      backdrop: getWidescreenBackdrop(nightOwl.backdrop || nightOwl.poster, 1920),
       channelId: 'hbo',
     },
     {
-      id: saranjana.id,
-      badge: 'SERAM NUSANTARA',
-      titleLines: ['SARANJANA', 'KOTA GHAIB'],
-      meta: `${saranjana.year}  •  ${saranjana.duration}  •  ${saranjana.genre.join(' / ')}  •  ${saranjana.rating}`,
-      synopsis: saranjana.synopsis,
-      backdrop: getWidescreenBackdrop(saranjana.backdrop, 1920),
-      vodItem: saranjana,
+      id: nightOwl.id,
+      badge: 'THRILLER MISTERI TERBAIK',
+      titleLines: ['THE NIGHT', 'OWL'],
+      meta: `${nightOwl.year}  •  ${nightOwl.duration}  •  ${nightOwl.genre.join(' / ')}  •  ${nightOwl.rating}`,
+      synopsis: nightOwl.synopsis,
+      backdrop: getWidescreenBackdrop(nightOwl.backdrop || nightOwl.poster, 1920),
+      vodItem: nightOwl,
+    },
+    {
+      id: dune.id,
+      badge: 'KARYA AGUNG SCI-FI',
+      titleLines: ['DUNE:', 'PART TWO'],
+      meta: `${dune.year}  •  ${dune.duration}  •  ${dune.genre.join(' / ')}  •  ${dune.rating}`,
+      synopsis: dune.synopsis,
+      backdrop: getWidescreenBackdrop(dune.backdrop || dune.poster, 1920),
+      vodItem: dune,
     },
     {
       id: bulanHenti.id,
-      badge: 'SIRI DRAMA ASTRO',
+      badge: 'SIRI DRAMA MELETOP',
       titleLines: ['BULAN HENTI', 'BICARA'],
       meta: `${bulanHenti.year}  •  ${bulanHenti.episodes?.length || 11} Episod  •  Drama Melayu  •  Episod Penuh`,
       synopsis: bulanHenti.synopsis,
-      backdrop: getWidescreenBackdrop(getItemById('vod_m_349')?.backdrop || penungguIstana.backdrop, 1920),
+      backdrop: getWidescreenBackdrop(bulanHenti.backdrop || bulanHenti.poster, 1920),
       vodItem: bulanHenti,
     },
   ];
@@ -92,14 +93,14 @@ export const getRealHeroSlides = (channels: Channel[] = []): HeroSlide[] => {
 
 export const SSATV_HERO_SLIDES: HeroSlide[] = getRealHeroSlides();
 
-// 2. REAL CONTINUE WATCHING ROW (Synced with real VOD items)
+// 2. REAL CONTINUE WATCHING ROW (Synced with real non-horror VOD items)
 export const getRealContinueWatching = (): ContinueItem[] => {
   const items = [
-    { item: penungguIstana, sub: 'Filem • 1j 35m • Baki 35 minit', progress: 65 },
-    { item: jpbc, sub: 'Filem • 1j 40m • Baki 50 minit', progress: 42 },
+    { item: klSpecialForce, sub: 'Filem • 1j 46m • Baki 35 minit', progress: 65 },
     { item: nightOwl, sub: 'Filem • 1j 58m • Baki 20 minit', progress: 80 },
-    { item: saranjana, sub: 'Filem • 1j 45m • Baki 60 minit', progress: 28 },
-    { item: getItemById('vod_m_362') || VOD_CATALOG[5], sub: 'Filem • 1j 35m • Baki 40 minit', progress: 50 },
+    { item: oppenheimer, sub: 'Filem • 3j 00m • Baki 75 minit', progress: 45 },
+    { item: dune, sub: 'Filem • 2j 46m • Baki 50 minit', progress: 30 },
+    { item: bulanHenti, sub: 'Siri Episod 1 • 45m • Baki 15 minit', progress: 70 },
   ];
 
   return items.map((entry, idx) => ({

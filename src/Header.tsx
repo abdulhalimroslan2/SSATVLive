@@ -68,6 +68,19 @@ export const Header: React.FC<HeaderProps> = ({
 
       {/* Desktop Right Utilities */}
       <div className="ssatv-header-right ssatv-desktop-only">
+        {/* Apple TV Icon */}
+        <div 
+          className="ssatv-header-appletv-icon" 
+          style={{ display: 'flex', alignItems: 'center', marginRight: '8px' }}
+          title="Apple TV"
+        >
+          <img 
+            src="/appletv-header-logo.png" 
+            alt="Apple TV" 
+            style={{ height: '19px', width: 'auto', objectFit: 'contain', display: 'block' }} 
+          />
+        </div>
+
         {/* Search */}
         <button 
           className="ssatv-icon-btn" 

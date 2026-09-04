@@ -575,9 +575,9 @@ export const LiveTvView: React.FC<LiveTvViewProps> = ({
     return categoryChannels.length > 0 ? categoryChannels : channels.slice(0, 18);
   }, [categoryChannels, channels]);
 
-  // Top channels for EPG Guide table (top 6 in active category)
+  // Channels for EPG Guide table (all available channels in active category)
   const guideChannels = useMemo(() => {
-    return categoryChannels.length >= 4 ? categoryChannels.slice(0, 6) : channels.slice(0, 6);
+    return categoryChannels.length > 0 ? categoryChannels : channels;
   }, [categoryChannels, channels]);
 
   const handleSelectChannel = (ch: Channel) => {

@@ -1,38 +1,56 @@
-import React, { useState } from 'react';
-import { ChevronRight } from 'lucide-react';
+import React, { useState, useMemo } from 'react';
+import { ChevronRight, Search, Layers } from 'lucide-react';
 import type { VodItem } from './vodData';
 import { VOD_CATALOG } from './vodData';
 import { HeroExperience, type HeroSlide } from './HeroExperience';
+import { getWidescreenBackdrop } from './ssatvHomeData';
 
 interface SeriesViewProps {
   onPlayEpisode: (item: VodItem, episodeNumber?: number) => void;
   onNavigateTab?: (tab: string) => void;
 }
 
+// Exact Series Categories from SSATVLive_Plus_v6 (1).apk
+export const APK_SERIES_CATEGORIES = [
+  { id: 'SEMUA', label: 'Semua Siri' },
+  { id: 'MALAY SERIES', label: 'MALAY SERIES', desc: 'Drama & Siri Tempatan Pilihan Paling Hangat' },
+  { id: 'TONTON SERIES', label: 'TONTON SERIES', desc: 'Koleksi Siri Eksklusif Tonton & TV3' },
+  { id: 'VIU MALAY', label: 'VIU MALAY', desc: 'Drama Premium Viu Malaysia' },
+  { id: 'VIU KOREA', label: 'VIU KOREA', desc: 'K-Drama Hit & Siri Korea Pilihan Viu' },
+  { id: 'MALAY VARIETY', label: 'MALAY VARIETY', desc: 'Rancangan Hiburan, Realiti & Komedi' },
+  { id: 'OTHERS SERIES', label: 'OTHERS SERIES', desc: 'Siri Fenomena Antarabangsa' },
+];
+
 export const SeriesView: React.FC<SeriesViewProps> = ({ onPlayEpisode }) => {
-  const [activeGenre, setActiveGenre] = useState('ALL');
+  const [activeCategory, setActiveCategory] = useState('SEMUA');
+  const [categorySearchQuery, setCategorySearchQuery] = useState('');
 
-  // 1. Filter ALL real TV series from VOD_CATALOG
-  const realSeries = VOD_CATALOG.filter((v) => v.type === 'series');
+  // 1. Filter ALL real TV series from clean VOD_CATALOG
+  const allSeries = useMemo(
+    () => VOD_CATALOG.filter((v) => v.type === 'series'),
+    []
+  );
 
-  // 2. Real Hero Featured Series matching real Astro / local series catalog
-  const heroSeriesList = [
-    realSeries.find((s) => s.id === 'vod_s_001') || realSeries[0], // Bulan Henti Bicara
-    realSeries.find((s) => s.id === 'vod_s_003') || realSeries[1], // Kasih Yang Terkorban
-    realSeries.find((s) => s.id === 'vod_s_004') || realSeries[2], // Wish List
-    realSeries.find((s) => s.id === 'vod_s_005') || realSeries[3], // Ikatan Terlarang
-    realSeries.find((s) => s.id === 'vod_s_009') || realSeries[4], // Dendam Seorang Mentua
-    realSeries.find((s) => s.id === 'vod_s_006') || realSeries[5], // Jutawan Express 2
-  ].filter(Boolean) as VodItem[];
+  // 2. Real Hero Featured Series (Top non-horror series)
+  const heroSeriesList = useMemo(() => {
+    return [
+      allSeries.find((s) => s.title.includes('Bulan Henti Bicara')) || allSeries[0],
+      allSeries.find((s) => s.title.includes('Dia Imamku')) || allSeries[1],
+      allSeries.find((s) => s.title.includes('One Cent Thief')) || allSeries[2],
+      allSeries.find((s) => s.title.includes('Taxi Driver')) || allSeries[3],
+      allSeries.find((s) => s.title.includes('Aku Bukan Ustazah')) || allSeries[4],
+      allSeries.find((s) => s.title.includes('Gegar Vaganza 12')) || allSeries[5],
+    ].filter(Boolean) as VodItem[];
+  }, [allSeries]);
 
   const seriesHeroSlides: HeroSlide[] = heroSeriesList.map((item, idx) => {
     const badges = [
-      'SIRI DRAMA POPULAR',
-      'SIRI MELETOP ASTRO',
-      'SIRI KOMEDI ROMANTIK',
-      'SIRI DRAMA SUSPEN',
-      'SIRI THRILLER KELUARGA',
-      'SIRI AKSI KOMEDI',
+      'SIRI DRAMA ASTRO MELETOP',
+      'SIRI FENOMENA MELAYU',
+      'SIRI HEIST PREMIUM ASTRO',
+      'K-DRAMA AKSI POPULAR',
+      'DRAMA RATING TERTINGGI TONTON',
+      'PENTAS HIBURAN MEGA',
     ];
 
     const titleWords = item.title.toUpperCase().split(' ');
@@ -53,57 +71,39 @@ export const SeriesView: React.FC<SeriesViewProps> = ({ onPlayEpisode }) => {
       synopsis:
         item.synopsis ||
         'Kisah suka duka, pengorbanan dan konflik percintaan yang mendalam lakonan bintang-bintang terkemuka tanah air.',
-      backdrop: item.backdrop || item.poster,
+      backdrop: getWidescreenBackdrop(item.backdrop || item.poster, 1920),
       vodItem: item,
     };
   });
 
-  // 3. Real Category / Genre Filter Pills
-  const genres = [
-    'ALL',
-    'DRAMA',
-    'ROMANCE',
-    'THRILLER',
-    'KOMEDI',
-    'MISTERI',
-    'FAMILY',
-  ];
+  // Group series by exact APK Category
+  const seriesByCategory = useMemo(() => {
+    const map: Record<string, VodItem[]> = {};
+    APK_SERIES_CATEGORIES.filter((c) => c.id !== 'SEMUA').forEach((cat) => {
+      map[cat.id] = allSeries.filter((s) => s.apkCategory === cat.id);
+    });
+    return map;
+  }, [allSeries]);
 
-  // Filtered series if user selects a specific genre pill
-  const filteredSeries =
-    activeGenre === 'ALL'
-      ? []
-      : realSeries.filter((s) => {
-          const gLow = activeGenre.toLowerCase();
-          if (gLow === 'komedi')
-            return (
-              s.genre.some((g) => g.toLowerCase().includes('comed') || g.toLowerCase().includes('komedi')) ||
-              s.title.toLowerCase().includes('express')
-            );
-          if (gLow === 'thriller')
-            return (
-              s.genre.some((g) => g.toLowerCase().includes('thrill') || g.toLowerCase().includes('misteri')) ||
-              s.title.toLowerCase().includes('dendam') ||
-              s.title.toLowerCase().includes('terlarang')
-            );
-          return s.genre.some((g) => g.toLowerCase().includes(gLow));
-        });
+  // Filtered series when a specific category is active
+  const activeCategoryList = useMemo(() => {
+    if (activeCategory === 'SEMUA') return [];
+    let list = seriesByCategory[activeCategory] || [];
+    if (categorySearchQuery.trim()) {
+      const q = categorySearchQuery.toLowerCase();
+      list = list.filter(
+        (s) =>
+          s.title.toLowerCase().includes(q) ||
+          s.genre.some((g) => g.toLowerCase().includes(q)) ||
+          s.year.toString().includes(q)
+      );
+    }
+    return list;
+  }, [activeCategory, seriesByCategory, categorySearchQuery]);
 
-  // 4. Real Rows (100% Real VOD Catalog items)
-  const continueWatchingItems = realSeries.slice(0, 6).map((item, idx) => ({
-    id: item.id,
-    vod: item,
-    code: `S01 E0${idx + 1}`,
-    title: item.title,
-    duration: item.duration || '45 min',
-    progress: [68, 42, 85, 50, 90, 35][idx],
-    poster: item.poster,
-  }));
-
-  const newSeries = realSeries.slice(6, 18);
-  const popularSeries = realSeries.slice(18, 30);
-  const trendingSeries = realSeries.slice(30, 42);
-  const featuredDrama = realSeries.slice(42, 54);
+  const getCardImage = (item: VodItem) => {
+    return getWidescreenBackdrop(item.backdrop, 800) || item.poster;
+  };
 
   return (
     <div className="ssatv-series-view">
@@ -117,280 +117,196 @@ export const SeriesView: React.FC<SeriesViewProps> = ({ onPlayEpisode }) => {
         }}
       />
 
-      {/* 2. DYNAMIC CONTENT: EITHER GENRE FILTER GRID OR MULTI-ROW CATALOG */}
-      <div className="ssatv-shelves-container" style={{ padding: '0 48px', paddingBottom: '64px' }}>
-        {activeGenre !== 'ALL' ? (
-          /* Filtered Genre Grid */
-          <section className="ssatv-shelf-row-wrap" style={{ marginTop: '20px' }}>
-            <div className="ssatv-row-header">
-              <h2 className="ssatv-row-title">
-                <span>Koleksi Siri {activeGenre} ({filteredSeries.length})</span>
-              </h2>
-            </div>
-            <div
-              style={{
-                display: 'grid',
-                gridTemplateColumns: 'repeat(auto-fill, minmax(240px, 1fr))',
-                gap: '20px',
-                marginTop: '16px',
-              }}
-            >
-              {filteredSeries.map((item) => (
-                <div
-                  key={item.id}
-                  className="ssatv-movie-card"
-                  onClick={() => onPlayEpisode(item)}
+      {/* 2. CATEGORY PILLS BAR (Matching SSATVLive_Plus_v6 (1).apk 1:1) */}
+      <section className="ssatv-genre-browse-bar">
+        <div className="ssatv-genre-browse-title">Kategori Siri Drama (APK)</div>
+        <div className="ssatv-genre-pills-scroll">
+          {APK_SERIES_CATEGORIES.map((cat) => {
+            const count =
+              cat.id === 'SEMUA'
+                ? allSeries.length
+                : (seriesByCategory[cat.id] || []).length;
+            return (
+              <button
+                key={cat.id}
+                className={`ssatv-genre-text-pill ${
+                  activeCategory === cat.id ? 'active' : ''
+                }`}
+                onClick={() => {
+                  setActiveCategory(cat.id);
+                  setCategorySearchQuery('');
+                }}
+              >
+                {cat.label} ({count})
+              </button>
+            );
+          })}
+        </div>
+      </section>
+
+      {/* 3. DYNAMIC CONTENT: SPECIFIC CATEGORY GRID OR ALL CATEGORY ROWS */}
+      <div className="ssatv-shelves-container">
+        {activeCategory !== 'SEMUA' ? (
+          /* SPECIFIC APK CATEGORY GRID VIEW */
+          <section className="ssatv-shelf-row-wrap" style={{ marginTop: '24px' }}>
+            <div className="ssatv-row-header ssatv-cat-header-wrap">
+              <div>
+                <h2 className="ssatv-row-title" style={{ margin: 0 }}>
+                  <span>
+                    {activeCategory} ({activeCategoryList.length} Siri)
+                  </span>
+                </h2>
+                <p
+                  style={{
+                    color: 'var(--text-secondary)',
+                    fontSize: '0.9rem',
+                    margin: '4px 0 0 0',
+                  }}
                 >
-                  <div className="ssatv-card-poster-wrap">
-                    <img
-                      src={item.poster || item.backdrop}
-                      alt={item.title}
-                      className="ssatv-card-img"
-                      loading="lazy"
-                      onError={(e) => {
-                        (e.target as HTMLImageElement).src =
-                          'https://vod-poster.astro.com.my/prod/IVP(STB_OTT_STV)_KWOLD_series_p_IVP_PORT_390x585_94EA0_2026724_16538.jpg';
-                      }}
-                    />
-                    <div className="ssatv-card-gradient" />
-                    <div className="ssatv-card-overlaid-meta">
-                      <div className="ssatv-card-overlaid-title">{item.title}</div>
-                      <div className="ssatv-card-overlaid-sub">
-                        {item.year} • {item.episodes?.length || 20} Episod • {item.rating}
+                  {
+                    APK_SERIES_CATEGORIES.find((c) => c.id === activeCategory)
+                      ?.desc
+                  }
+                </p>
+              </div>
+
+              {/* In-category search */}
+              <div className="ssatv-category-search-box">
+                <Search size={16} color="var(--text-secondary)" style={{ marginRight: '8px', flexShrink: 0 }} />
+                <input
+                  type="text"
+                  placeholder={`Cari dalam ${activeCategory}...`}
+                  value={categorySearchQuery}
+                  onChange={(e) => setCategorySearchQuery(e.target.value)}
+                  className="ssatv-category-search-input"
+                />
+              </div>
+            </div>
+
+            {activeCategoryList.length === 0 ? (
+              <div
+                style={{
+                  textAlign: 'center',
+                  padding: '60px 20px',
+                  color: 'var(--text-secondary)',
+                }}
+              >
+                <Layers size={48} style={{ opacity: 0.3, marginBottom: '12px' }} />
+                <p>Tiada siri dijumpai untuk carian &quot;{categorySearchQuery}&quot;.</p>
+              </div>
+            ) : (
+              <div className="ssatv-vod-grid">
+                {activeCategoryList.map((item) => (
+                  <div
+                    key={item.id}
+                    className="ssatv-series-card"
+                    onClick={() => onPlayEpisode(item)}
+                    style={{ cursor: 'pointer' }}
+                  >
+                    <div className="ssatv-card-poster-wrap">
+                      <div className="ssatv-badge-episode">
+                        {item.episodes?.length || 20} EPISOD
+                      </div>
+                      <img
+                        src={getCardImage(item)}
+                        alt={item.title}
+                        className="ssatv-card-img"
+                        loading="lazy"
+                        onError={(e) => {
+                          (e.target as HTMLImageElement).src = item.poster;
+                        }}
+                      />
+                      <div className="ssatv-card-gradient" />
+                      <div className="ssatv-card-overlaid-meta">
+                        <div className="ssatv-card-overlaid-title">
+                          {item.title}
+                        </div>
+                        <div className="ssatv-card-overlaid-sub">
+                          {item.year} • {item.episodes?.length || 20} Ep • {item.rating}
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              ))}
-            </div>
+                ))}
+              </div>
+            )}
           </section>
         ) : (
-          /* Default Full Rows (100% Real VOD Catalog) */
+          /* ALL CATEGORIES IN APK ORDER */
           <>
-            {/* ROW 1: CONTINUE WATCHING (SAMBUNG MENONTON DENGAN RED PROGRESS BAR) */}
-            <section className="ssatv-shelf-row-wrap" style={{ marginTop: '24px' }}>
-              <div className="ssatv-row-header">
-                <h2 className="ssatv-row-title">
-                  <span>Sambung Menonton</span>
-                  <ChevronRight size={18} className="ssatv-row-chevron" />
-                </h2>
-              </div>
+            {APK_SERIES_CATEGORIES.filter((c) => c.id !== 'SEMUA').map((cat) => {
+              const catSeries = seriesByCategory[cat.id] || [];
+              if (catSeries.length === 0) return null;
 
-              <div className="ssatv-cards-track">
-                {continueWatchingItems.map((item) => (
-                  <div
-                    key={item.id}
-                    className="ssatv-continue-card"
-                    onClick={() => onPlayEpisode(item.vod)}
-                  >
-                    <div className="ssatv-continue-thumb-wrap">
-                      <img
-                        src={item.poster}
-                        alt={item.title}
-                        className="ssatv-continue-img"
-                        loading="lazy"
-                        onError={(e) => {
-                          (e.target as HTMLImageElement).src =
-                            'https://vod-poster.astro.com.my/prod/IVP(STB_OTT_STV)_KWOLD_series_p_IVP_PORT_390x585_94EA0_2026724_16538.jpg';
-                        }}
-                      />
-                      <div className="ssatv-continue-gradient" />
-                      <div className="ssatv-continue-info">
-                        <div className="ssatv-continue-title">{item.title}</div>
-                        <div className="ssatv-continue-sub">
-                          {item.code} • {item.duration}
+              return (
+                <section key={cat.id} className="ssatv-shelf-row-wrap">
+                  <div className="ssatv-row-header">
+                    <h2
+                      className="ssatv-row-title"
+                      onClick={() => setActiveCategory(cat.id)}
+                      style={{ cursor: 'pointer' }}
+                      title={`Buka semua siri dalam ${cat.label}`}
+                    >
+                      <span>
+                        {cat.label}{' '}
+                        <span
+                          style={{
+                            fontSize: '0.85rem',
+                            fontWeight: 500,
+                            color: 'var(--text-secondary)',
+                            marginLeft: '8px',
+                          }}
+                        >
+                          ({catSeries.length} Siri)
+                        </span>
+                      </span>
+                      <ChevronRight size={18} className="ssatv-row-chevron" />
+                    </h2>
+                    <button
+                      className="ssatv-see-all-btn"
+                      onClick={() => setActiveCategory(cat.id)}
+                    >
+                      Lihat Semua ({catSeries.length})
+                    </button>
+                  </div>
+
+                  <div className="ssatv-cards-track">
+                    {catSeries.slice(0, 14).map((item) => (
+                      <div
+                        key={item.id}
+                        className="ssatv-series-card"
+                        onClick={() => onPlayEpisode(item)}
+                      >
+                        <div className="ssatv-card-poster-wrap">
+                          <div className="ssatv-badge-episode">
+                            {item.episodes?.length || 20} EPISOD
+                          </div>
+                          <img
+                            src={getCardImage(item)}
+                            alt={item.title}
+                            className="ssatv-card-img"
+                            loading="lazy"
+                            onError={(e) => {
+                              (e.target as HTMLImageElement).src = item.poster;
+                            }}
+                          />
+                          <div className="ssatv-card-gradient" />
+                          <div className="ssatv-card-overlaid-meta">
+                            <div className="ssatv-card-overlaid-title">
+                              {item.title}
+                            </div>
+                            <div className="ssatv-card-overlaid-sub">
+                              {item.year} • {item.genre[0] || 'Drama'} •{' '}
+                              {item.rating}
+                            </div>
+                          </div>
                         </div>
                       </div>
-                      <div className="ssatv-progress-track">
-                        <div
-                          className="ssatv-progress-fill"
-                          style={{ width: `${item.progress}%` }}
-                        />
-                      </div>
-                    </div>
+                    ))}
                   </div>
-                ))}
-              </div>
-            </section>
-
-            {/* ROW 2: NEW RELEASES (SIRI BAHARU DENGAN BADGE NEW) */}
-            <section className="ssatv-shelf-row-wrap" style={{ marginTop: '36px' }}>
-              <div className="ssatv-row-header">
-                <h2 className="ssatv-row-title">
-                  <span>Siri Baharu & Hangat</span>
-                  <ChevronRight size={18} className="ssatv-row-chevron" />
-                </h2>
-              </div>
-
-              <div className="ssatv-cards-track">
-                {newSeries.map((item) => (
-                  <div
-                    key={item.id}
-                    className="ssatv-movie-card"
-                    onClick={() => onPlayEpisode(item)}
-                  >
-                    <div className="ssatv-card-poster-wrap">
-                      <span className="ssatv-badge-new">NEW</span>
-                      <img
-                        src={item.poster || item.backdrop}
-                        alt={item.title}
-                        className="ssatv-card-img"
-                        loading="lazy"
-                        onError={(e) => {
-                          (e.target as HTMLImageElement).src =
-                            'https://vod-poster.astro.com.my/prod/IVP(STB_OTT_STV)_KWOLD_series_p_IVP_PORT_390x585_94EA0_2026724_16538.jpg';
-                        }}
-                      />
-                      <div className="ssatv-card-gradient" />
-                      <div className="ssatv-card-overlaid-meta">
-                        <div className="ssatv-card-overlaid-title">{item.title}</div>
-                        <div className="ssatv-card-overlaid-sub">
-                          {item.year} • {item.episodes?.length || 20} Episod • {item.rating}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </section>
-
-            {/* ROW 3: POPULAR SERIES (SIRI PALING POPULAR) */}
-            <section className="ssatv-shelf-row-wrap" style={{ marginTop: '36px' }}>
-              <div className="ssatv-row-header">
-                <h2 className="ssatv-row-title">
-                  <span>Siri Paling Popular</span>
-                  <ChevronRight size={18} className="ssatv-row-chevron" />
-                </h2>
-              </div>
-
-              <div className="ssatv-cards-track">
-                {popularSeries.map((item) => (
-                  <div
-                    key={item.id}
-                    className="ssatv-movie-card"
-                    onClick={() => onPlayEpisode(item)}
-                  >
-                    <div className="ssatv-card-poster-wrap">
-                      <img
-                        src={item.poster || item.backdrop}
-                        alt={item.title}
-                        className="ssatv-card-img"
-                        loading="lazy"
-                        onError={(e) => {
-                          (e.target as HTMLImageElement).src =
-                            'https://vod-poster.astro.com.my/prod/IVP(STB_OTT_STV)_KWOLD_series_p_IVP_PORT_390x585_94EA0_2026724_16538.jpg';
-                        }}
-                      />
-                      <div className="ssatv-card-gradient" />
-                      <div className="ssatv-card-overlaid-meta">
-                        <div className="ssatv-card-overlaid-title">{item.title}</div>
-                        <div className="ssatv-card-overlaid-sub">
-                          {item.year} • {item.episodes?.length || 20} Episod • {item.rating}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </section>
-
-            {/* ROW 4: TRENDING NOW (SEDANG TRENDING) */}
-            <section className="ssatv-shelf-row-wrap" style={{ marginTop: '36px' }}>
-              <div className="ssatv-row-header">
-                <h2 className="ssatv-row-title">
-                  <span>Sedang Trending</span>
-                  <ChevronRight size={18} className="ssatv-row-chevron" />
-                </h2>
-              </div>
-
-              <div className="ssatv-cards-track">
-                {trendingSeries.map((item) => (
-                  <div
-                    key={item.id}
-                    className="ssatv-movie-card"
-                    onClick={() => onPlayEpisode(item)}
-                  >
-                    <div className="ssatv-card-poster-wrap">
-                      <img
-                        src={item.poster || item.backdrop}
-                        alt={item.title}
-                        className="ssatv-card-img"
-                        loading="lazy"
-                        onError={(e) => {
-                          (e.target as HTMLImageElement).src =
-                            'https://vod-poster.astro.com.my/prod/IVP(STB_OTT_STV)_KWOLD_series_p_IVP_PORT_390x585_94EA0_2026724_16538.jpg';
-                        }}
-                      />
-                      <div className="ssatv-card-gradient" />
-                      <div className="ssatv-card-overlaid-meta">
-                        <div className="ssatv-card-overlaid-title">{item.title}</div>
-                        <div className="ssatv-card-overlaid-sub">
-                          {item.year} • {item.episodes?.length || 20} Episod • {item.rating}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </section>
-
-            {/* BROWSE BY GENRE BAR */}
-            <section className="ssatv-genre-browse-bar" style={{ marginTop: '40px', padding: 0 }}>
-              <div className="ssatv-genre-browse-title">Browse by Genre</div>
-              <div className="ssatv-genre-pills-scroll">
-                {genres.map((g) => (
-                  <button
-                    key={g}
-                    className={`ssatv-genre-text-pill ${
-                      activeGenre === g ? 'active' : ''
-                    }`}
-                    onClick={() => setActiveGenre(g)}
-                  >
-                    {g}
-                  </button>
-                ))}
-              </div>
-            </section>
-
-            {/* ROW 5: KOLEKSI DRAMA TERHEBAT */}
-            <section className="ssatv-shelf-row-wrap" style={{ marginTop: '28px' }}>
-              <div className="ssatv-row-header">
-                <h2 className="ssatv-row-title">
-                  <span>Koleksi Drama Pilihan</span>
-                  <ChevronRight size={18} className="ssatv-row-chevron" />
-                </h2>
-              </div>
-
-              <div className="ssatv-cards-track">
-                {featuredDrama.map((item) => (
-                  <div
-                    key={item.id}
-                    className="ssatv-movie-card"
-                    onClick={() => onPlayEpisode(item)}
-                  >
-                    <div className="ssatv-card-poster-wrap">
-                      <img
-                        src={item.poster || item.backdrop}
-                        alt={item.title}
-                        className="ssatv-card-img"
-                        loading="lazy"
-                        onError={(e) => {
-                          (e.target as HTMLImageElement).src =
-                            'https://vod-poster.astro.com.my/prod/IVP(STB_OTT_STV)_KWOLD_series_p_IVP_PORT_390x585_94EA0_2026724_16538.jpg';
-                        }}
-                      />
-                      <div className="ssatv-card-gradient" />
-                      <div className="ssatv-card-overlaid-meta">
-                        <div className="ssatv-card-overlaid-title">{item.title}</div>
-                        <div className="ssatv-card-overlaid-sub">
-                          {item.year} • {item.episodes?.length || 20} Episod • {item.rating}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </section>
+                </section>
+              );
+            })}
           </>
         )}
       </div>

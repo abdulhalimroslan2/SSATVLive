@@ -1,9 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
 import type { Channel } from './mockData';
 import shaka from 'shaka-player/dist/shaka-player.ui.js';
-import 'shaka-player/dist/controls.css';
 import Hls from 'hls.js';
-import { Play, AlertCircle, RefreshCw } from 'lucide-react';
+import { Maximize, Minimize, Volume2, VolumeX, Check, AlertCircle, RefreshCw } from 'lucide-react';
 
 interface PlayerProps {
   channel: Channel;
@@ -40,14 +39,28 @@ export const getProxyBaseUrl = (): string => {
 export const Player: React.FC<PlayerProps> = ({ channel, hideOverlay = false }) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const videoContainerRef = useRef<HTMLDivElement>(null);
-  const [hasAutoplayError, setHasAutoplayError] = useState(false);
   const [engineError, setEngineError] = useState<string | null>(null);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [showOverlayControls, setShowOverlayControls] = useState(true);
   const hideControlsTimerRef = useRef<any>(null);
 
+  // Apple TV Player State (Gambar 2)
+  const [isPlaying, setIsPlaying] = useState(true);
+  const [currentTime, setCurrentTime] = useState(0);
+  const [duration, setDuration] = useState(0);
+  const [volume, setVolume] = useState(1);
+  const [isMuted, setIsMuted] = useState(false);
+  const [showSubtitlesModal, setShowSubtitlesModal] = useState(false);
+  const [subtitlesTab, setSubtitlesTab] = useState<'subtitles' | 'audio'>('subtitles');
+  const [availableTextTracks, setAvailableTextTracks] = useState<any[]>([]);
+  const [availableAudioTracks, setAvailableAudioTracks] = useState<any[]>([]);
+  const [activeTextTrackId, setActiveTextTrackId] = useState<number | null>(null);
+  const [activeAudioTrackId, setActiveAudioTrackId] = useState<number | null>(null);
+  const [toastMessage, setToastMessage] = useState<string | null>(null);
+
+  const isVodStream = channel.category === 'VOD' || channel.category === 'MOVIES' || channel.category === 'SERIES';
+
   const playerRef = useRef<shaka.Player | null>(null);
-  const uiRef = useRef<shaka.ui.Overlay | null>(null);
   const hlsRef = useRef<Hls | null>(null);
 
   const toggleFullscreen = () => {
@@ -64,10 +77,14 @@ export const Player: React.FC<PlayerProps> = ({ channel, hideOverlay = false }) 
         (video as any).webkitEnterFullscreen();
       }
     } else {
-      if (document.exitFullscreen) {
-        document.exitFullscreen().catch(() => {});
-      } else if ((document as any).webkitExitFullscreen) {
-        (document as any).webkitExitFullscreen();
+      try {
+        if (document.fullscreenElement && document.exitFullscreen) {
+          document.exitFullscreen().catch(() => {});
+        } else if ((document as any).webkitFullscreenElement && (document as any).webkitExitFullscreen) {
+          (document as any).webkitExitFullscreen();
+        }
+      } catch (err) {
+        console.warn('Player exitFullscreen error:', err);
       }
     }
   };
@@ -81,14 +98,53 @@ export const Player: React.FC<PlayerProps> = ({ channel, hideOverlay = false }) 
   const resetHideTimer = () => {
     setShowOverlayControls(true);
     if (hideControlsTimerRef.current) clearTimeout(hideControlsTimerRef.current);
-    hideControlsTimerRef.current = setTimeout(() => {
-      setShowOverlayControls(false);
-    }, 3500);
+    // Only auto-hide if subtitles/audio modal is NOT open
+    if (!showSubtitlesModal) {
+      hideControlsTimerRef.current = setTimeout(() => {
+        setShowOverlayControls(false);
+      }, 3500);
+    }
   };
 
+  // Keep controls persistently visible when subtitles modal is open
   useEffect(() => {
+    if (showSubtitlesModal) {
+      setShowOverlayControls(true);
+      if (hideControlsTimerRef.current) clearTimeout(hideControlsTimerRef.current);
+    } else {
+      resetHideTimer();
+    }
+  }, [showSubtitlesModal]);
+
+  // Global pointer activity tracking during fullscreen
+  useEffect(() => {
+    if (!isFullscreen) return;
+
+    const handlePointerActivity = () => {
+      resetHideTimer();
+    };
+
+    window.addEventListener('mousemove', handlePointerActivity, { passive: true });
+    window.addEventListener('touchstart', handlePointerActivity, { passive: true });
+    window.addEventListener('pointermove', handlePointerActivity, { passive: true });
+
+    return () => {
+      window.removeEventListener('mousemove', handlePointerActivity);
+      window.removeEventListener('touchstart', handlePointerActivity);
+      window.removeEventListener('pointermove', handlePointerActivity);
+    };
+  }, [isFullscreen, showSubtitlesModal]);
+
+  useEffect(() => {
+    if (hideOverlay) {
+      setIsFullscreen(false);
+      return;
+    }
     const handleFsChange = () => {
-      setIsFullscreen(Boolean(document.fullscreenElement || (document as any).webkitFullscreenElement));
+      const fsEl = document.fullscreenElement || (document as any).webkitFullscreenElement;
+      const isTarget = fsEl && (fsEl === videoContainerRef.current || videoContainerRef.current?.contains(fsEl));
+      setIsFullscreen(Boolean(isTarget));
+      resetHideTimer();
     };
     document.addEventListener('fullscreenchange', handleFsChange);
     document.addEventListener('webkitfullscreenchange', handleFsChange);
@@ -96,9 +152,10 @@ export const Player: React.FC<PlayerProps> = ({ channel, hideOverlay = false }) 
       document.removeEventListener('fullscreenchange', handleFsChange);
       document.removeEventListener('webkitfullscreenchange', handleFsChange);
     };
-  }, []);
+  }, [hideOverlay]);
 
   useEffect(() => {
+    if (hideOverlay) return; // Embedded view handles its own keyboard navigation and shortcuts
     const handleKeyDown = (e: KeyboardEvent) => {
       if (['input', 'textarea', 'select'].includes((e.target as HTMLElement)?.tagName?.toLowerCase())) return;
 
@@ -137,14 +194,189 @@ export const Player: React.FC<PlayerProps> = ({ channel, hideOverlay = false }) 
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, []);
 
+  // Listen to video element playback events for real-time Apple TV UI updates
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    const onPlay = () => setIsPlaying(true);
+    const onPause = () => setIsPlaying(false);
+    const onTimeUpdate = () => {
+      setCurrentTime(video.currentTime || 0);
+      if (video.duration && isFinite(video.duration)) {
+        setDuration(video.duration);
+      }
+    };
+    const onVolumeChange = () => {
+      setVolume(video.volume);
+      setIsMuted(video.muted);
+    };
+
+    video.addEventListener('play', onPlay);
+    video.addEventListener('pause', onPause);
+    video.addEventListener('timeupdate', onTimeUpdate);
+    video.addEventListener('volumechange', onVolumeChange);
+
+    return () => {
+      video.removeEventListener('play', onPlay);
+      video.removeEventListener('pause', onPause);
+      video.removeEventListener('timeupdate', onTimeUpdate);
+      video.removeEventListener('volumechange', onVolumeChange);
+    };
+  }, []);
+
+  const refreshTracks = () => {
+    const p = playerRef.current;
+    if (!p) return;
+    try {
+      const textTracks = (p as any).getTextTracks ? (p as any).getTextTracks() : [];
+      setAvailableTextTracks(textTracks);
+      const isVisible = typeof (p as any).isTextTrackVisible === 'function' ? (p as any).isTextTrackVisible() : false;
+      if (!isVisible) {
+        setActiveTextTrackId(null);
+      } else {
+        const active = textTracks.find((t: any) => t.active);
+        setActiveTextTrackId(active ? active.id : null);
+      }
+
+      const audioTracks = (p.getVariantTracks() || []).filter((v: any) => v.type === 'variant');
+      setAvailableAudioTracks(audioTracks);
+      const activeAudio = audioTracks.find((a: any) => a.active);
+      setActiveAudioTrackId(activeAudio ? activeAudio.id : null);
+    } catch {}
+  };
+
+  const handleTogglePlay = () => {
+    const video = videoRef.current;
+    if (!video) return;
+    if (video.paused) {
+      video.play().catch(() => {});
+      setIsPlaying(true);
+    } else {
+      video.pause();
+      setIsPlaying(false);
+    }
+    resetHideTimer();
+  };
+
+  const handleRewind10 = () => {
+    const video = videoRef.current;
+    if (!video) return;
+    video.currentTime = Math.max(0, (video.currentTime || 0) - 10);
+    resetHideTimer();
+  };
+
+  const handleForward10 = () => {
+    const video = videoRef.current;
+    if (!video) return;
+    const maxTime = video.duration && isFinite(video.duration) ? video.duration : (video.currentTime || 0) + 10;
+    video.currentTime = Math.min(maxTime, (video.currentTime || 0) + 10);
+    resetHideTimer();
+  };
+
+  const handleSeek = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const video = videoRef.current;
+    if (!video) return;
+    const target = parseFloat(e.target.value);
+    video.currentTime = target;
+    setCurrentTime(target);
+    resetHideTimer();
+  };
+
+  const handleTogglePip = async () => {
+    const video = videoRef.current;
+    if (!video) return;
+    try {
+      if (document.pictureInPictureElement) {
+        await document.exitPictureInPicture();
+      } else if (video.requestPictureInPicture) {
+        await video.requestPictureInPicture();
+      }
+    } catch {}
+    resetHideTimer();
+  };
+
+  const handleToggleAirplay = () => {
+    const video = videoRef.current as any;
+    if (video && video.webkitShowPlaybackTargetPicker) {
+      video.webkitShowPlaybackTargetPicker();
+    }
+    resetHideTimer();
+  };
+
+  const handleShare = () => {
+    if (navigator.share) {
+      navigator.share({ title: channel.name, url: window.location.href }).catch(() => {});
+    } else {
+      navigator.clipboard.writeText(window.location.href);
+      setToastMessage('Pautan telah disalin ke papan keratan');
+      setTimeout(() => setToastMessage(null), 2500);
+    }
+    resetHideTimer();
+  };
+
+  const handleVolumeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const video = videoRef.current;
+    if (!video) return;
+    const val = parseFloat(e.target.value);
+    video.volume = val;
+    video.muted = val === 0;
+    setVolume(val);
+    setIsMuted(val === 0);
+    resetHideTimer();
+  };
+
+  const handleSelectSubtitle = (trackId: number | 'off') => {
+    const p = playerRef.current;
+    if (!p) return;
+    if (trackId === 'off') {
+      if (typeof (p as any).setTextTrackVisibility === 'function') {
+        (p as any).setTextTrackVisibility(false);
+      }
+      setActiveTextTrackId(null);
+    } else {
+      const track = availableTextTracks.find((t) => t.id === trackId);
+      if (track) {
+        p.selectTextTrack(track);
+        if (typeof (p as any).setTextTrackVisibility === 'function') {
+          (p as any).setTextTrackVisibility(true);
+        }
+        setActiveTextTrackId(track.id);
+      }
+    }
+  };
+
+  const handleSelectAudio = (variantId: number) => {
+    const p = playerRef.current;
+    if (!p) return;
+    const track = availableAudioTracks.find((a) => a.id === variantId);
+    if (track) {
+      p.selectVariantTrack(track, true);
+      setActiveAudioTrackId(track.id);
+    }
+  };
+
+  const formatTime = (secs: number) => {
+    if (!secs || isNaN(secs) || !isFinite(secs)) return '0:00';
+    const h = Math.floor(secs / 3600);
+    const m = Math.floor((secs % 3600) / 60);
+    const s = Math.floor(secs % 60);
+    if (h > 0) {
+      return `${h}:${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+    }
+    return `${m}:${s.toString().padStart(2, '0')}`;
+  };
+
+  const formatRemaining = (cur: number, dur: number) => {
+    if (!dur || isNaN(dur) || !isFinite(dur)) return '';
+    const rem = Math.max(0, dur - cur);
+    return `-${formatTime(rem)}`;
+  };
+
   const cleanupPlayers = async () => {
     if (hlsRef.current) {
       hlsRef.current.destroy();
       hlsRef.current = null;
-    }
-    if (uiRef.current) {
-      uiRef.current.destroy();
-      uiRef.current = null;
     }
     if (playerRef.current) {
       await playerRef.current.destroy();
@@ -155,8 +387,8 @@ export const Player: React.FC<PlayerProps> = ({ channel, hideOverlay = false }) 
   useEffect(() => {
     let isCancelled = false;
     let stallCheckInterval: any = null;
+    let currentCleanUrl = '';
     setEngineError(null);
-    setHasAutoplayError(false);
 
     const initStream = async () => {
       if (!videoRef.current || !videoContainerRef.current) return;
@@ -172,8 +404,8 @@ export const Player: React.FC<PlayerProps> = ({ channel, hideOverlay = false }) 
         ['https://vodejitp-asset-playback-b.astro.com.my/', '/astro-vod/'],
         ['http://vodejitp-asset-playback-b.astro.com.my/', '/astro-vod/'],
         ['https://vod-dai-ott-ap.ssai.iris.synamedia.com/', '/iris-synamedia/'],
-        ['https://ngtv-vod.gcdn.co/', '/ngtv-vod/'],
         ['https://dms-api.viu.com/', '/viu-vod/'],
+        ['https://prod-in.viu.com/', '/viu-key/'],
         ['https://get.perfecttv.net/', '/perfecttv/'],
         ['https://ptv2026.com/', '/ptv2026/'],
         ['http://ptv2026.com/', '/ptv2026/'],
@@ -206,6 +438,7 @@ export const Player: React.FC<PlayerProps> = ({ channel, hideOverlay = false }) 
       if (cleanUrl.startsWith('/')) {
         cleanUrl = proxyBase + cleanUrl;
       }
+      currentCleanUrl = cleanUrl;
 
       if (!cleanUrl) {
         setEngineError('No stream URL available');
@@ -233,12 +466,6 @@ export const Player: React.FC<PlayerProps> = ({ channel, hideOverlay = false }) 
 
           await player.attach(video);
           if (isCancelled) return false;
-
-          if (!hideOverlay) {
-            const ui = new shaka.ui.Overlay(player, container, video);
-            uiRef.current = ui;
-            ui.getControls();
-          }
 
           // Determine DRM Mode
           const isLicenseUrl = Boolean(
@@ -279,6 +506,14 @@ export const Player: React.FC<PlayerProps> = ({ channel, hideOverlay = false }) 
                 url = url.replace(/https?:\/\/vod-dai-ott-ap\.ssai\.iris\.synamedia\.com\/tenant\/astroprd\/vodejitp-asset-playback-b\.astro\.com\.my\//, 'https://vodejitp-asset-playback-b.astro.com.my/');
               }
 
+              // Direct bypass for GCDN (Global CDN) - already natively supports CORS and blocks server proxy IPs
+              if (url.includes('gcdn.co')) {
+                if (url.startsWith('http://')) {
+                  request.uris[0] = url.replace('http://', 'https://');
+                }
+                return;
+              }
+
               for (const [from, to] of PROXY_MAP) {
                 if (url.startsWith(from)) {
                   request.uris[0] = pBase + url.replace(from, to);
@@ -315,26 +550,19 @@ export const Player: React.FC<PlayerProps> = ({ channel, hideOverlay = false }) 
                 rewritten = rewritten.replace(/<BaseURL>http:\/\/ngtv-live\.gcdn\.co\//gi, '<BaseURL>https://ngtv-live.gcdn.co/');
                 rewritten = rewritten.replace(/<BaseURL>http:\/\/(?!localhost|127\.0\.0\.1)/gi, '<BaseURL>https://');
 
-                // 3. Remove Widevine & PlayReady ContentProtection tags so CDM binds directly to ClearKey
-                rewritten = rewritten.replace(/<ContentProtection[^>]*?urn:uuid:9a04f079-9840-4286-ab92-e65be0885f95[^>]*>[\s\S]*?<\/ContentProtection>/gi, '');
-                rewritten = rewritten.replace(/<ContentProtection[^>]*?urn:uuid:9a04f079-9840-4286-ab92-e65be0885f95[^>]*\/>/gi, '');
-                rewritten = rewritten.replace(/<ContentProtection[^>]*?urn:uuid:edef8ba9-79d6-4ace-a3c8-27dcd51d21ed[^>]*>[\s\S]*?<\/ContentProtection>/gi, '');
-                rewritten = rewritten.replace(/<ContentProtection[^>]*?urn:uuid:edef8ba9-79d6-4ace-a3c8-27dcd51d21ed[^>]*\/>/gi, '');
+                // Remove trickmode tracks safely without crossing </AdaptationSet>
+                rewritten = rewritten.replace(/<AdaptationSet(?:\s[^>]*)?>((?:(?!<\/AdaptationSet>)[\s\S])*?dashif\.org\/guidelines\/trickmode[\s\S]*?)<\/AdaptationSet>/gi, '');
+
+                // 3. Remove existing ContentProtection tags cleanly without crossing tag boundaries
+                rewritten = rewritten.replace(/<ContentProtection(?:\s[^>]*)?\/>/gi, '');
+                rewritten = rewritten.replace(/<ContentProtection(?:\s[^>]*)?>((?:(?!<\/ContentProtection>)[\s\S])*?)<\/ContentProtection>/gi, '');
                 rewritten = rewritten.replace(/<(?:cenc:)?pssh[^>]*>[\s\S]*?<\/(?:cenc:)?pssh>/gi, '');
 
-                // 4. Unconditionally inject ClearKey ContentProtection with kidUuid into EVERY AdaptationSet
-                if (!rewritten.includes(clearKeyUuid)) {
-                  rewritten = rewritten.replace(
-                    /<AdaptationSet([^>]*)>/gi,
-                    `<AdaptationSet$1>\n      <ContentProtection schemeIdUri="urn:mpeg:dash:mp4protection:2011" value="cenc" cenc:default_KID="${kidUuid}" />\n      <ContentProtection schemeIdUri="${clearKeyUuid}" value="cenc" cenc:default_KID="${kidUuid}" />`
-                  );
-                } else if (!rewritten.includes(`cenc:default_KID="${kidUuid}"`)) {
-                  // Ensure default_KID is attached to existing ClearKey tags
-                  rewritten = rewritten.replace(
-                    new RegExp(`(<ContentProtection[^>]*?${clearKeyUuid}[^>]*?)(/?>)`, 'gi'),
-                    `$1 cenc:default_KID="${kidUuid}"$2`
-                  );
-                }
+                // 4. Inject clean ClearKey ContentProtection with kidUuid into video & audio AdaptationSets
+                rewritten = rewritten.replace(
+                  /<AdaptationSet(?:\s[^>]*)?(contentType="(?:video|audio)"|mimeType="(?:video|audio)\/mp4")([^>]*)>/gi,
+                  (match) => match + `\n      <ContentProtection schemeIdUri="urn:mpeg:dash:mp4protection:2011" value="cenc" cenc:default_KID="${kidUuid}" />\n      <ContentProtection schemeIdUri="${clearKeyUuid}" value="cenc" cenc:default_KID="${kidUuid}" />`
+                );
 
                 const encoded = new TextEncoder().encode(rewritten);
                 response.data = encoded.buffer.slice(encoded.byteOffset, encoded.byteOffset + encoded.byteLength);
@@ -383,13 +611,13 @@ export const Player: React.FC<PlayerProps> = ({ channel, hideOverlay = false }) 
             streaming: {
               lowLatencyMode: false,
               inaccurateManifestTolerance: 2,
-              bufferingGoal: IS_MOBILE ? 10 : 20,
-              rebufferingGoal: IS_MOBILE ? 2 : 4,
-              bufferBehind: IS_MOBILE ? 4 : 15,
+              bufferingGoal: IS_MOBILE ? 24 : 20,
+              rebufferingGoal: IS_MOBILE ? 4 : 4,
+              bufferBehind: IS_MOBILE ? 12 : 15,
               stallEnabled: true,
-              stallThreshold: 3.0,
-              stallSkip: 0.5,
-              safeSeekOffset: 6,
+              stallThreshold: 4.0,
+              stallSkip: 0.1,
+              safeSeekOffset: 8,
               retryParameters: {
                 maxAttempts: 10,
                 baseDelay: 300,
@@ -401,7 +629,7 @@ export const Player: React.FC<PlayerProps> = ({ channel, hideOverlay = false }) 
             manifest: {
               dash: {
                 ignoreMinBufferTime: true,
-                autoCorrectDrift: true,
+                autoCorrectDrift: false,
                 initialSegmentLimit: 6,
               },
               retryParameters: {
@@ -415,7 +643,7 @@ export const Player: React.FC<PlayerProps> = ({ channel, hideOverlay = false }) 
             abr: {
               enabled: true,
               defaultBandwidthEstimate: IS_MOBILE ? 1200000 : 2500000,
-              switchInterval: IS_MOBILE ? 10 : 2,
+              switchInterval: IS_MOBILE ? 15 : 2,
               bandwidthUpgradeTarget: 0.85,
               bandwidthDowngradeTarget: 0.95,
               restrictions: {
@@ -434,12 +662,7 @@ export const Player: React.FC<PlayerProps> = ({ channel, hideOverlay = false }) 
               if (detail?.code === 6001) {
                 player.configure({ abr: { restrictions: {} } });
               }
-              if (player.isLive()) {
-                const range = player.seekRange();
-                if (range && range.end) {
-                  video.currentTime = Math.max(range.start, range.end - 6);
-                }
-              }
+              // Never mutate video.currentTime directly on live streams as it flushes WebKit buffers
               player.retryStreaming();
             } catch (_e) {}
           });
@@ -450,17 +673,13 @@ export const Player: React.FC<PlayerProps> = ({ channel, hideOverlay = false }) 
               video.currentTime = 0;
               video.play().catch(() => {});
             } else if (player.isLive()) {
-              const range = player.seekRange();
-              if (range && range.end) {
-                // Only seek if we have fallen outside the seek range
-                if (video.currentTime < range.start || video.currentTime > range.end - 2) {
-                  video.currentTime = Math.max(range.start, range.end - 8);
-                }
-              }
+              // Retry streaming smoothly without forcing destructive seeks in WebKit
+              try {
+                player.retryStreaming();
+              } catch (_e) {}
               const playPromise = video.play();
               if (playPromise) {
                 playPromise.catch(() => {
-                  video.muted = true;
                   video.play().catch(() => {});
                 });
               }
@@ -689,7 +908,6 @@ export const Player: React.FC<PlayerProps> = ({ channel, hideOverlay = false }) 
             }
           } catch (_e) {}
           video.play().catch(() => {
-            video.muted = true;
             video.play().catch(() => {});
           });
         }
@@ -721,18 +939,75 @@ export const Player: React.FC<PlayerProps> = ({ channel, hideOverlay = false }) 
     };
 
     const startPlay = async (video: HTMLVideoElement) => {
+      // Direct unmuted playback: never mute by default
+      video.muted = false;
+      video.defaultMuted = false;
+      video.volume = 1;
+      video.playsInline = true;
+      video.setAttribute('playsinline', 'true');
+      video.setAttribute('webkit-playsinline', 'true');
+      video.setAttribute('x5-playsinline', 'true');
+
+      // 1. Attempt direct unmuted playback
+      try {
+        await video.play();
+        setIsMuted(false);
+        setIsPlaying(true);
+        return;
+      } catch (playErr: any) {
+        console.warn('[Player] Initial unmuted play deferred, ensuring immediate stream play:', playErr);
+      }
+
+      // 2. If browser autoplay policy blocks unmuted audio on zero-click load:
+      // Play immediately (so live broadcast stream is moving and visible - zero black screen, zero blocking button!)
       try {
         video.muted = true;
-        video.defaultMuted = true;
-        video.playsInline = true;
-        video.setAttribute('playsinline', 'true');
-        video.setAttribute('webkit-playsinline', 'true');
-        video.setAttribute('x5-playsinline', 'true');
         await video.play();
-        setHasAutoplayError(false);
-      } catch (playErr: any) {
-        console.warn('Autoplay blocked or failed', playErr);
-        setHasAutoplayError(true);
+        setIsMuted(true);
+        setIsPlaying(true);
+
+        // Auto-unmute immediately on the first user interaction anywhere on the screen
+        const unmuteOnFirstGesture = async () => {
+          if (videoRef.current) {
+            try {
+              videoRef.current.muted = false;
+              videoRef.current.volume = 1;
+              setIsMuted(false);
+              await videoRef.current.play();
+            } catch (_e) {
+              console.warn('[Player] Unmute retry:', _e);
+            }
+          }
+          ['pointerdown', 'mousedown', 'keydown', 'touchstart', 'click', 'scroll', 'wheel'].forEach((evt) => {
+            window.removeEventListener(evt, unmuteOnFirstGesture, true);
+            document.removeEventListener(evt, unmuteOnFirstGesture, true);
+          });
+        };
+
+        ['pointerdown', 'mousedown', 'keydown', 'touchstart', 'click', 'scroll', 'wheel'].forEach((evt) => {
+          window.addEventListener(evt, unmuteOnFirstGesture, { once: true, capture: true });
+          document.addEventListener(evt, unmuteOnFirstGesture, { once: true, capture: true });
+        });
+      } catch (mutedErr) {
+        console.warn('[Player] Video element pending readyState, waiting for canplay:', mutedErr);
+        const onCanPlay = async () => {
+          video.removeEventListener('canplay', onCanPlay);
+          video.removeEventListener('loadeddata', onCanPlay);
+          try {
+            video.muted = false;
+            video.volume = 1;
+            await video.play();
+            setIsMuted(false);
+            setIsPlaying(true);
+          } catch (_e) {
+            video.muted = true;
+            await video.play().catch(() => {});
+            setIsMuted(true);
+            setIsPlaying(true);
+          }
+        };
+        video.addEventListener('canplay', onCanPlay, { once: true });
+        video.addEventListener('loadeddata', onCanPlay, { once: true });
       }
     };
 
@@ -744,7 +1019,7 @@ export const Player: React.FC<PlayerProps> = ({ channel, hideOverlay = false }) 
       const player = playerRef.current;
       if (!video) return;
 
-      const isLiveStream = player ? player.isLive() : channel.category !== 'VOD';
+      const isLiveStream = isVodStream ? false : (player ? player.isLive() : true);
 
       // 1. If non-live video has ended or reached the end of available duration, loop back
       if (!isLiveStream && (video.ended || (video.duration > 0 && video.duration < 120 && video.currentTime >= video.duration - 0.5))) {
@@ -755,43 +1030,36 @@ export const Player: React.FC<PlayerProps> = ({ channel, hideOverlay = false }) 
       }
 
       const currentTime = video.currentTime;
-      // Detect if video playback is stuck (time not progressing or stuck buffering)
+      // Detect if video playback is stuck (time not progressing while not paused)
       const isTimeStuck = lastTime >= 0 && Math.abs(currentTime - lastTime) < 0.05;
-      const isBufferStuck = video.readyState < 3;
 
-      if (!video.paused && (isTimeStuck || isBufferStuck)) {
+      if (!video.paused && isTimeStuck) {
         stallCount++;
-        // Give 4 seconds before initiating proactive recovery
-        if (stallCount >= 4) {
-          console.log('[Player] Playback stall confirmed (4s), auto-recovering...');
+        // On mobile WebKit, allow transient buffer delays before triggering gentle retry
+        if (stallCount === 6) {
+          console.log('[Player] Transient stall detected (6s), triggering stream retry...');
           try {
-            if (!isLiveStream) {
-              if (video.duration > 0 && video.duration < 120 && video.currentTime >= video.duration - 1.5) {
-                video.currentTime = 0;
-              } else {
-                video.currentTime += 0.5;
-              }
-            } else if (player && player.isLive()) {
-              const seekRange = player.seekRange();
-              if (seekRange && seekRange.end) {
-                // Seek to safe live edge (6 seconds behind)
-                const safeTarget = Math.max(seekRange.start, seekRange.end - 6);
-                if (Math.abs(video.currentTime - safeTarget) > 2) {
-                  video.currentTime = safeTarget;
-                }
-              }
-              // Proactively retry streaming to refresh segment pipeline
+            if (player && player.isLive()) {
               player.retryStreaming();
-            } else {
-              video.currentTime += 0.5;
             }
-            
             const p = video.play();
             if (p) {
               p.catch(() => {
-                video.muted = true;
                 video.play().catch(() => {});
               });
+            }
+          } catch (_e) {}
+        } else if (stallCount >= 16) {
+          // Prolonged stall (16s): Cleanly reload live stream pipeline without tearing down DOM
+          console.log('[Player] Prolonged stall (16s), reloading stream pipeline cleanly...');
+          try {
+            if (player && player.isLive() && currentCleanUrl) {
+              player.load(currentCleanUrl).then(() => {
+                video.play().catch(() => {});
+              }).catch(() => {});
+            } else if (!isLiveStream) {
+              video.currentTime = 0;
+              video.play().catch(() => {});
             }
           } catch (_e) {}
           stallCount = 0;
@@ -811,35 +1079,26 @@ export const Player: React.FC<PlayerProps> = ({ channel, hideOverlay = false }) 
     };
   }, [channel.id, channel.contentId, channel.streamUrl, channel.clearKey]);
 
-  const handleManualPlayUnmute = async () => {
-    if (videoRef.current) {
-      const video = videoRef.current;
-      try {
-        video.muted = false;
-        await video.play();
-        setHasAutoplayError(false);
-      } catch (err) {
-        console.warn('Direct unmuted play failed, playing muted first:', err);
-        try {
-          video.muted = true;
-          await video.play();
-          video.muted = false;
-          setHasAutoplayError(false);
-        } catch (_e2) {
-          console.error('All play attempts failed:', _e2);
-        }
-      }
-    }
-  };
 
   return (
     <div className="main-player-section">
       <div 
         ref={videoContainerRef} 
-        className={`video-player-container ${isFullscreen ? 'is-fullscreen' : ''}`}
-        style={{ position: 'relative', width: '100%', aspectRatio: '16/9', backgroundColor: '#000' }}
+        className={`video-player-container ${isFullscreen ? 'is-fullscreen' : ''} ${showOverlayControls ? 'controls-visible' : 'controls-hidden'}`}
+        style={{ 
+          position: 'relative', 
+          width: '100%', 
+          aspectRatio: '16/9', 
+          backgroundColor: '#000',
+          cursor: isFullscreen && !showOverlayControls ? 'none' : 'default'
+        }}
         onMouseMove={resetHideTimer}
         onTouchStart={resetHideTimer}
+        onClick={() => {
+          if (!showOverlayControls) {
+            resetHideTimer();
+          }
+        }}
         tabIndex={0}
       >
         <video
@@ -848,13 +1107,12 @@ export const Player: React.FC<PlayerProps> = ({ channel, hideOverlay = false }) 
           style={{ width: '100%', height: '100%', objectFit: 'contain' }}
           autoPlay
           playsInline
-          muted
         />
 
-        {/* Dedicated TV Remote & Full Screen Overlay Bar (hidden when hideOverlay is true) */}
+        {/* Apple TV Video Player UI Overlay (Gambar 2) */}
         {!hideOverlay && (
           <div 
-            className={`player-custom-overlay ${showOverlayControls ? 'visible' : 'hidden'}`}
+            className={`apple-tv-player-overlay ${showOverlayControls ? 'is-visible' : 'is-hidden'}`}
             style={{
               position: 'absolute',
               inset: 0,
@@ -862,74 +1120,276 @@ export const Player: React.FC<PlayerProps> = ({ channel, hideOverlay = false }) 
               display: 'flex',
               flexDirection: 'column',
               justifyContent: 'space-between',
-              padding: '1.25rem',
-              background: 'transparent',
-              transition: 'opacity 0.3s ease',
+              background: 'linear-gradient(180deg, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0) 25%, rgba(0,0,0,0) 70%, rgba(0,0,0,0.75) 100%)',
+              transition: 'opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1)',
               opacity: showOverlayControls ? 1 : 0,
               zIndex: 25,
             }}
           >
-            {/* Top Bar: Channel Details */}
+            {/* Top Bar: Picture-in-Picture, AirPlay, Share Pill & Volume Capsule */}
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-                <div className="live-pill" style={{ pointerEvents: 'auto' }}>
-                  <span className="live-dot" /> LIVE
+              {/* Top-Left Glass Pill (Gambar 2: PiP, AirPlay, Share) */}
+              <div className="apple-tv-glass-pill" style={{ pointerEvents: 'auto' }}>
+                <button 
+                  className="apple-tv-pill-icon-btn" 
+                  onClick={handleTogglePip} 
+                  title="Picture-in-Picture"
+                >
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <rect x="2" y="4" width="20" height="16" rx="3" />
+                    <rect x="12" y="11" width="8" height="7" rx="1.5" fill="currentColor" />
+                  </svg>
+                </button>
+                <button 
+                  className="apple-tv-pill-icon-btn" 
+                  onClick={handleToggleAirplay} 
+                  title="AirPlay"
+                >
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M5 17H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-1" />
+                    <polygon points="12 15 17 21 7 21 12 15" fill="currentColor" stroke="none" />
+                  </svg>
+                </button>
+                <button 
+                  className="apple-tv-pill-icon-btn" 
+                  onClick={handleShare} 
+                  title="Kongsi Pautan"
+                >
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8" />
+                    <polyline points="16 6 12 2 8 6" />
+                    <line x1="12" y1="2" x2="12" y2="15" />
+                  </svg>
+                </button>
+              </div>
+
+              {/* Toast Message Notification */}
+              {toastMessage && (
+                <div className="apple-tv-toast-pill" style={{ pointerEvents: 'auto' }}>
+                  {toastMessage}
                 </div>
-                <span style={{ color: '#fff', fontWeight: 700, fontSize: '1.1rem', textShadow: '0 2px 4px rgba(0,0,0,0.8)' }}>
-                  {channel.name}
+              )}
+
+              {/* Top-Right Glass Pill (Gambar 2: Horizontal Volume Slider & Speaker) */}
+              <div className="apple-tv-glass-pill apple-tv-volume-pill" style={{ pointerEvents: 'auto' }}>
+                <input
+                  type="range"
+                  min="0"
+                  max="1"
+                  step="0.02"
+                  value={isMuted ? 0 : volume}
+                  onChange={handleVolumeChange}
+                  className="apple-tv-volume-slider"
+                  title="Kekuatan Bunyi"
+                />
+                <button 
+                  className="apple-tv-pill-icon-btn" 
+                  onClick={toggleMute} 
+                  title={isMuted || volume === 0 ? "Buka Suara" : "Senyap"}
+                >
+                  {isMuted || volume === 0 ? <VolumeX size={18} /> : <Volume2 size={18} />}
+                </button>
+              </div>
+            </div>
+
+            {/* Center Triad (Gambar 2: Rewind 10, Play/Pause Hero, Forward 10) */}
+            <div 
+              className="apple-tv-center-triad" 
+              style={{ pointerEvents: 'auto' }}
+            >
+              {/* Rewind 10s */}
+              <button 
+                className="apple-tv-triad-btn apple-tv-step-btn" 
+                onClick={handleRewind10} 
+                title="Undur 10 Saat"
+              >
+                <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                  <circle cx="24" cy="24" r="23" fill="rgba(35, 38, 48, 0.72)" stroke="rgba(255, 255, 255, 0.15)" strokeWidth="1" />
+                  <path d="M15 21C16.5 16.5 21 14 26 14.5C31.5 15.2 35.5 20 35.5 25.5C35.5 31.5 30.5 36.5 24.5 36.5C19.5 36.5 15.5 33 14 28.5" stroke="#ffffff" strokeWidth="2.2" strokeLinecap="round" />
+                  <path d="M11 21H16V16" stroke="#ffffff" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
+                  <text x="24" y="27.5" fill="#ffffff" fontSize="10.5" fontWeight="700" fontFamily="-apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif" textAnchor="middle" dominantBaseline="middle">10</text>
+                </svg>
+              </button>
+
+              {/* Play / Pause Hero Button (Large circular frosted button) */}
+              <button 
+                className="apple-tv-triad-btn apple-tv-hero-play-btn" 
+                onClick={handleTogglePlay} 
+                title={isPlaying ? "Jeda" : "Main"}
+              >
+                {isPlaying ? (
+                  <svg width="22" height="26" viewBox="0 0 22 26" fill="#ffffff">
+                    <rect x="2" y="1" width="6.5" height="24" rx="2" />
+                    <rect x="13.5" y="1" width="6.5" height="24" rx="2" />
+                  </svg>
+                ) : (
+                  <svg width="24" height="26" viewBox="0 0 24 26" fill="#ffffff" style={{ marginLeft: '3px' }}>
+                    <path d="M3.5 2.5C3.5 1.3 4.8 0.5 5.8 1.15L22.2 11.65C23.2 12.3 23.2 13.7 22.2 14.35L5.8 24.85C4.8 25.5 3.5 24.7 3.5 23.5V2.5Z" />
+                  </svg>
+                )}
+              </button>
+
+              {/* Forward 10s */}
+              <button 
+                className="apple-tv-triad-btn apple-tv-step-btn" 
+                onClick={handleForward10} 
+                title="Maju 10 Saat"
+              >
+                <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                  <circle cx="24" cy="24" r="23" fill="rgba(35, 38, 48, 0.72)" stroke="rgba(255, 255, 255, 0.15)" strokeWidth="1" />
+                  <path d="M33 21C31.5 16.5 27 14 22 14.5C16.5 15.2 12.5 20 12.5 25.5C12.5 31.5 17.5 36.5 23.5 36.5C28.5 36.5 32.5 33 34 28.5" stroke="#ffffff" strokeWidth="2.2" strokeLinecap="round" />
+                  <path d="M37 21H32V16" stroke="#ffffff" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
+                  <text x="24" y="27.5" fill="#ffffff" fontSize="10.5" fontWeight="700" fontFamily="-apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif" textAnchor="middle" dominantBaseline="middle">10</text>
+                </svg>
+              </button>
+            </div>
+
+            {/* Bottom Section: Title, Subtitle, Timeline Scrub Bar, Subtitle & Fullscreen Toggles */}
+            <div style={{ width: '100%', display: 'flex', flexDirection: 'column', gap: '0.4rem', pointerEvents: 'auto' }}>
+              {/* Bottom Metadata (Gambar 2: S1, E1 · Pilot / Channel Name) */}
+              <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between' }}>
+                <div>
+                  <div className="apple-tv-player-submeta">
+                    {channel.category ? `${channel.category} • HD` : 'S1, E1 • Siaran Langsung'}
+                  </div>
+                  <div className="apple-tv-player-title">
+                    {channel.name}
+                  </div>
+                </div>
+
+                {/* Subtitles / Audio & Fullscreen Buttons */}
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', position: 'relative' }}>
+                  {/* Apple TV Speech Bubble Subtitles & Audio Button */}
+                  <button 
+                    className={`apple-tv-pill-icon-btn apple-tv-caption-btn ${showSubtitlesModal ? 'active' : ''}`}
+                    onClick={() => {
+                      setShowSubtitlesModal(!showSubtitlesModal);
+                      refreshTracks();
+                      resetHideTimer();
+                    }}
+                    title="Pilihan Sari Kata & Audio"
+                  >
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+                      <line x1="8" y1="9" x2="16" y2="9" strokeWidth="2" />
+                      <line x1="8" y1="13" x2="13" y2="13" strokeWidth="2" />
+                    </svg>
+                  </button>
+
+                  {/* Fullscreen Button */}
+                  <button 
+                    className="apple-tv-pill-icon-btn" 
+                    onClick={toggleFullscreen} 
+                    title={isFullscreen ? "Keluar Skrin Penuh" : "Skrin Penuh"}
+                  >
+                    {isFullscreen ? <Minimize size={18} /> : <Maximize size={18} />}
+                  </button>
+
+                  {/* Apple TV Frosted Glass Subtitles & Audio Popover */}
+                  {showSubtitlesModal && (
+                    <div className="apple-tv-subtitles-popover">
+                      <div className="apple-tv-popover-tabs">
+                        <button 
+                          className={`apple-tv-tab-btn ${subtitlesTab === 'subtitles' ? 'active' : ''}`}
+                          onClick={() => setSubtitlesTab('subtitles')}
+                        >
+                          Sari Kata
+                        </button>
+                        <button 
+                          className={`apple-tv-tab-btn ${subtitlesTab === 'audio' ? 'active' : ''}`}
+                          onClick={() => setSubtitlesTab('audio')}
+                        >
+                          Audio
+                        </button>
+                      </div>
+
+                      <div className="apple-tv-popover-content">
+                        {subtitlesTab === 'subtitles' ? (
+                          <div className="apple-tv-track-list">
+                            <button 
+                              className={`apple-tv-track-item ${activeTextTrackId === null ? 'selected' : ''}`}
+                              onClick={() => handleSelectSubtitle('off')}
+                            >
+                              <span>Mati (Off)</span>
+                              {activeTextTrackId === null && <Check size={16} />}
+                            </button>
+                            {availableTextTracks.length > 0 ? (
+                              availableTextTracks.map((track) => (
+                                <button
+                                  key={track.id}
+                                  className={`apple-tv-track-item ${activeTextTrackId === track.id ? 'selected' : ''}`}
+                                  onClick={() => handleSelectSubtitle(track.id)}
+                                >
+                                  <span>{track.label || track.language || `Trek ${track.id}`}</span>
+                                  {activeTextTrackId === track.id && <Check size={16} />}
+                                </button>
+                              ))
+                            ) : (
+                              <div className="apple-tv-empty-text">Tiada sari kata tambahan</div>
+                            )}
+                          </div>
+                        ) : (
+                          <div className="apple-tv-track-list">
+                            {availableAudioTracks.length > 0 ? (
+                              availableAudioTracks.map((audio) => (
+                                <button
+                                  key={audio.id}
+                                  className={`apple-tv-track-item ${activeAudioTrackId === audio.id ? 'selected' : ''}`}
+                                  onClick={() => handleSelectAudio(audio.id)}
+                                >
+                                  <span>{audio.label || audio.language || `Audio ${audio.id}`}</span>
+                                  {activeAudioTrackId === audio.id && <Check size={16} />}
+                                </button>
+                              ))
+                            ) : (
+                              <button className="apple-tv-track-item selected">
+                                <span>Audio Asal (Stereo)</span>
+                                <Check size={16} />
+                              </button>
+                            )}
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              {/* Bottom Scrubber Timeline Bar (Gambar 2: Elapsed, Scrub Bar, Remaining) */}
+              <div className="apple-tv-timeline-row">
+                <span className="apple-tv-time-text">
+                  {formatTime(currentTime)}
                 </span>
-                <span style={{ color: 'rgba(255,255,255,0.7)', fontSize: '0.85rem' }}>
-                  • {channel.category}
+
+                <div className="apple-tv-scrub-container">
+                  <input
+                    type="range"
+                    min="0"
+                    max={duration > 0 ? duration : 100}
+                    step="0.5"
+                    value={duration > 0 ? currentTime : 100}
+                    onChange={handleSeek}
+                    className="apple-tv-scrubber"
+                    title="Masa Mainan"
+                  />
+                </div>
+
+                <span className="apple-tv-time-text remaining">
+                  {duration > 0 ? formatRemaining(currentTime, duration) : (isVodStream ? '--:--' : '')}
                 </span>
               </div>
             </div>
           </div>
         )}
 
-        {/* Manual Autoplay / Unmute Overlay */}
-        {hasAutoplayError && (
-          <div 
-            onClick={handleManualPlayUnmute}
-            style={{
-              position: 'absolute',
-              inset: 0,
-              backgroundColor: 'rgba(0, 0, 0, 0.75)',
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              justifyContent: 'center',
-              cursor: 'pointer',
-              zIndex: 30
-            }}
-          >
-            <div style={{
-              width: '70px',
-              height: '70px',
-              borderRadius: '50%',
-              backgroundColor: 'var(--accent-red)',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              marginBottom: '1rem',
-              boxShadow: '0 0 30px rgba(229, 9, 20, 0.6)'
-            }}>
-              <Play size={32} fill="#ffffff" style={{ marginLeft: '4px' }} />
-            </div>
-            <div style={{ fontSize: '1.2rem', fontWeight: 700, color: '#fff', marginBottom: '0.25rem' }}>
-              Klik Untuk Mainkan Siaran
-            </div>
-            <div style={{ fontSize: '0.85rem', color: 'var(--text-secondary)' }}>
-              (Sila klik untuk memulakan audio & video)
-            </div>
-          </div>
-        )}
-
-        {/* Engine Failure Overlay */}
+        {/* Engine Failure Overlay (Apple TV Style, Zero Red!) */}
         {engineError && (
           <div style={{
             position: 'absolute',
             inset: 0,
             backgroundColor: 'rgba(15, 20, 30, 0.92)',
+            backdropFilter: 'blur(24px)',
+            WebkitBackdropFilter: 'blur(24px)',
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
@@ -938,13 +1398,13 @@ export const Player: React.FC<PlayerProps> = ({ channel, hideOverlay = false }) 
             textAlign: 'center',
             zIndex: 40
           }}>
-            <AlertCircle size={48} color="var(--accent-red)" style={{ marginBottom: '1rem' }} />
-            <h4 style={{ fontSize: '1.25rem', marginBottom: '0.5rem', color: '#fff' }}>Ralat Siaran</h4>
-            <p style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', maxWidth: '400px', marginBottom: '1.5rem' }}>
+            <AlertCircle size={44} color="#ffffff" style={{ marginBottom: '1rem', opacity: 0.85 }} />
+            <h4 style={{ fontSize: '1.25rem', fontWeight: 600, marginBottom: '0.5rem', color: '#fff' }}>Ralat Siaran</h4>
+            <p style={{ fontSize: '0.9rem', color: 'rgba(255, 255, 255, 0.7)', maxWidth: '400px', marginBottom: '1.5rem' }}>
               {engineError}
             </p>
             <button 
-              className="btn-red"
+              className="apple-tv-white-pill-btn"
               onClick={() => window.location.reload()}
             >
               <RefreshCw size={16} /> Muat Semula Halaman

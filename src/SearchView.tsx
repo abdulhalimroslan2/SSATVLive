@@ -170,7 +170,7 @@ export const SearchView: React.FC<SearchViewProps> = ({
           {/* Trending Searches */}
           <div className="suggestion-group">
             <div className="suggestion-title">
-              <TrendingUp size={18} color="var(--accent-red)" />
+              <TrendingUp size={18} color="#ffffff" />
               <span>Carian Popular & Trending</span>
             </div>
             <div className="suggestion-chips">
@@ -189,7 +189,7 @@ export const SearchView: React.FC<SearchViewProps> = ({
           {/* Quick Categories Discovery */}
           <div className="suggestion-group" style={{ marginTop: '2.5rem' }}>
             <div className="suggestion-title">
-              <Filter size={18} color="var(--accent-red)" />
+              <Filter size={18} color="#ffffff" />
               <span>Jelajah Mengikut Kategori</span>
             </div>
             <div className="suggestion-chips">
@@ -209,7 +209,7 @@ export const SearchView: React.FC<SearchViewProps> = ({
           <div style={{ marginTop: '3rem' }}>
             <div className="section-header">
               <h3 className="section-title">
-                <span style={{ color: 'var(--accent-red)' }}>•</span> Saluran TV Paling Banyak Ditonton
+                <span style={{ color: 'rgba(255,255,255,0.7)' }}>•</span> Saluran TV Paling Banyak Ditonton
               </h3>
             </div>
             <div className="channels-scroll">
@@ -251,7 +251,7 @@ export const SearchView: React.FC<SearchViewProps> = ({
                 <section className="search-results-group">
                   <div className="section-header">
                     <h3 className="section-title">
-                      <Tv size={20} color="var(--accent-red)" style={{ marginRight: '8px' }} />
+                      <Tv size={20} color="#ffffff" style={{ marginRight: '8px' }} />
                       Saluran Siaran Langsung ({matchingChannels.length})
                     </h3>
                   </div>
@@ -273,7 +273,7 @@ export const SearchView: React.FC<SearchViewProps> = ({
                 <section className="search-results-group" style={{ marginTop: '2.5rem' }}>
                   <div className="section-header">
                     <h3 className="section-title">
-                      <Film size={20} color="var(--accent-red)" style={{ marginRight: '8px' }} />
+                      <Film size={20} color="#ffffff" style={{ marginRight: '8px' }} />
                       Filem VOD ({matchingMovies.length})
                     </h3>
                   </div>
@@ -295,7 +295,7 @@ export const SearchView: React.FC<SearchViewProps> = ({
                 <section className="search-results-group" style={{ marginTop: '2.5rem' }}>
                   <div className="section-header">
                     <h3 className="section-title">
-                      <Video size={20} color="var(--accent-red)" style={{ marginRight: '8px' }} />
+                      <Video size={20} color="#ffffff" style={{ marginRight: '8px' }} />
                       Siri Drama & Animasi ({matchingSeries.length})
                     </h3>
                   </div>

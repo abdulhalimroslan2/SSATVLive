@@ -58,9 +58,23 @@ export default async function handler(request) {
   }
   else if (path.startsWith('/viu-vod/')) {
     targetUrl = path.replace('/viu-vod/', 'https://dms-api.viu.com/');
+    headers.set('Origin', 'https://www.viu.com');
+    headers.set('Referer', 'https://www.viu.com/');
+  }
+  else if (path.startsWith('/viu-key/')) {
+    targetUrl = path.replace('/viu-key/', 'https://prod-in.viu.com/');
+    headers.set('Origin', 'https://www.viu.com');
+    headers.set('Referer', 'https://www.viu.com/');
   }
   else if (path.startsWith('/okcdn/')) {
-    targetUrl = path.replace('/okcdn/', 'https://vd466.okcdn.ru/');
+    const match = path.match(/^\/okcdn\/(vd\d+\.okcdn\.ru)\/(.*)$/);
+    if (match) {
+      targetUrl = `https://${match[1]}/${match[2]}`;
+    } else {
+      targetUrl = path.replace('/okcdn/', 'https://vd466.okcdn.ru/');
+    }
+    headers.set('Origin', 'https://ok.ru');
+    headers.set('Referer', 'https://ok.ru/');
   }
   // RTM Stream
   else if (path.startsWith('/rtm-stream/')) {
@@ -151,15 +165,16 @@ export default async function handler(request) {
           const redirTarget = match[1].replace(/&amp;/g, '&');
           const redirRes = await fetch(redirTarget, { headers });
           text = await redirRes.text();
-          const okcdnOrigin = redirTarget.match(/https?:\/\/[^/]+/)?.[0] || 'https://vd466.okcdn.ru';
+          const okcdnHost = redirTarget.match(/https?:\/\/(vd\d+\.okcdn\.ru)/)?.[1] || 'vd466.okcdn.ru';
+          const okcdnOrigin = `https://${okcdnHost}`;
           const basePath = redirTarget.substring(okcdnOrigin.length, redirTarget.lastIndexOf('/') + 1);
           const rewritten = text.split('\n').map(line => {
             const l = line.trim();
             if (l && !l.startsWith('#')) {
               if (l.startsWith('http')) {
-                return l.replace(/https?:\/\/vd\d*\.okcdn\.ru\//, '/okcdn/');
+                return l.replace(/https?:\/\/(vd\d+\.okcdn\.ru)\//, '/okcdn/$1/');
               }
-              return '/okcdn' + basePath + l;
+              return `/okcdn/${okcdnHost}` + basePath + l;
             }
             return line;
           }).join('\n');

@@ -43,13 +43,6 @@ export const LiveNowSidebar: React.FC<LiveNowSidebarProps> = ({
           >
             {/* Left Content */}
             <div className="ssatv-live-info">
-              {/* Red LIVE Badge */}
-              <div className="ssatv-live-badge-wrap">
-                <span className="ssatv-live-pill">
-                  <span className="ssatv-live-pulse-dot" />
-                  LIVE
-                </span>
-              </div>
 
               {/* Channel Name */}
               <div className="ssatv-live-name" title={item.name}>

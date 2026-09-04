@@ -5,6 +5,8 @@ import { VOD_CATALOG, type VodItem } from './vodData';
 import { Header } from './Header';
 import { HeroExperience, type HeroSlide } from './HeroExperience';
 import { ContinueWatchingRow, type ContinueItem } from './ContinueWatchingRow';
+import { TopTenRow, type TopTenItem } from './TopTenRow';
+import { APPLE_TOP_TV_SHOWS, APPLE_TOP_MOVIES } from './appleTvData';
 import { ShelfRow, type TrendingItem } from './TrendingGrid';
 import { LiveNowSidebar, type LiveRailItem } from './LiveNowSidebar';
 import {
@@ -20,6 +22,7 @@ import { SearchView } from './SearchView';
 import { LiveTvView } from './LiveTvView';
 import { MoviesView } from './MoviesView';
 import { SeriesView } from './SeriesView';
+import { MobileBottomNav } from './MobileBottomNav';
 import { Sidebar } from './Sidebar';
 import { X, Tv } from 'lucide-react';
 
@@ -72,7 +75,16 @@ function App() {
 
   const handleChannelSelect = (channel: Channel) => {
     setActiveChannel(channel);
+    setActiveTab('live');
     window.scrollTo({ top: 0, behavior: 'smooth' });
+    setTimeout(() => {
+      const video = document.querySelector('video') as HTMLVideoElement;
+      if (video) {
+        video.muted = false;
+        video.volume = 1;
+        video.play().catch(() => {});
+      }
+    }, 100);
   };
 
   const handlePlayVodItem = (item: VodItem, episodeNumber?: number) => {
@@ -94,6 +106,7 @@ function App() {
       }
     }
 
+    const targetTab = item.type === 'movie' ? 'movies' : 'series';
     const vodChannel: Channel = {
       id: `vod_${item.id}_${episodeNumber || 1}_${Date.now()}`,
       contentId: item.id,
@@ -107,7 +120,16 @@ function App() {
       isFreePreviewEnabledContent: true,
     };
     setActiveChannel(vodChannel);
+    setActiveTab(targetTab);
     window.scrollTo({ top: 0, behavior: 'smooth' });
+    setTimeout(() => {
+      const video = document.querySelector('video') as HTMLVideoElement;
+      if (video) {
+        video.muted = false;
+        video.volume = 1;
+        video.play().catch(() => {});
+      }
+    }, 100);
   };
 
   // Dynamically compute real synchronized Home items from real catalog and channels
@@ -158,6 +180,36 @@ function App() {
       handlePlayVodItem(matched, item.episodeNumber || 1);
     } else if (VOD_CATALOG.length > 0) {
       handlePlayVodItem(VOD_CATALOG[0]);
+    }
+  };
+
+  // Top 10 card selection handler
+  const handleTopTenSelect = (item: TopTenItem) => {
+    const matched = VOD_CATALOG.find(
+      (v) =>
+        v.id === item.id ||
+        v.title.toLowerCase().includes(item.name.toLowerCase()) ||
+        item.name.toLowerCase().includes(v.title.toLowerCase())
+    );
+    if (matched) {
+      handlePlayVodItem(matched);
+    } else {
+      const isMovie = item.id.startsWith('mov_');
+      const vodChannel: Channel = {
+        id: `top10_${item.id}_${Date.now()}`,
+        contentId: item.id,
+        name: `${item.name} (${isMovie ? 'Filem' : 'Siri TV'})`,
+        description: `Top 10 ${isMovie ? 'Filem' : 'Siri TV'} di SSATV+`,
+        category: isMovie ? 'MOVIES' : 'SERIES',
+        thumbnail: item.poster,
+        streamUrl: 'https://linearjitp-playback.astro.com.my/dash-live/sladashenc/live_ch_031_0201.mpd',
+        clearKey: '37dc9fa47a61d1ea02ba691515efb1fa:6a35a6439eb4c489ab577b319163e77f',
+        isFreeContent: true,
+        isFreePreviewEnabledContent: true,
+      };
+      setActiveChannel(vodChannel);
+      setActiveTab(isMovie ? 'movies' : 'series');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   };
 
@@ -255,83 +307,27 @@ function App() {
           </div>
         ) : (
           <>
-            {/* Active Video Player Cinema View (Shown outside Live TV ONLY when user explicitly plays a VOD item) */}
-            {activeChannel && activeTab !== 'live' && activeChannel.id.startsWith('vod_') && (
-              <section
-                style={{
-                  padding: '24px 48px 12px 48px',
-                  background: 'rgba(7, 9, 14, 0.95)',
-                }}
-              >
-                <div
-                  style={{
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    alignItems: 'center',
-                    marginBottom: '1rem',
-                  }}
-                >
-                  <div
-                    style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: '0.85rem',
-                    }}
-                  >
-                    <div
-                      style={{
-                        width: '38px',
-                        height: '38px',
-                        borderRadius: '8px',
-                        background: 'var(--ssatv-red)',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        boxShadow: '0 4px 14px var(--ssatv-red-glow)',
-                      }}
-                    >
-                      <Tv size={22} color="#fff" />
+            {/* Active Video Player Cinema View (Shown ONLY in Movies & Series sections when user explicitly plays a VOD item) */}
+            {activeChannel && (activeTab === 'movies' || activeTab === 'series') && activeChannel.id.startsWith('vod_') && (
+              <section className="ssatv-active-cinema-section">
+                <div className="ssatv-active-cinema-header">
+                  <div className="ssatv-active-cinema-info">
+                    <div className="ssatv-active-cinema-badge">
+                      <Tv size={20} color="#fff" />
                     </div>
                     <div>
-                      <h2
-                        style={{
-                          fontSize: '1.45rem',
-                          fontWeight: 800,
-                          color: '#ffffff',
-                          letterSpacing: '-0.3px',
-                          margin: 0,
-                        }}
-                      >
+                      <h2 className="ssatv-active-cinema-title">
                         {activeChannel.name}
                       </h2>
-                      <span
-                        style={{
-                          fontSize: '0.86rem',
-                          color: 'var(--text-secondary)',
-                        }}
-                      >
+                      <span className="ssatv-active-cinema-desc">
                         {activeChannel.description}
                       </span>
                     </div>
                   </div>
 
-                  <div
-                    style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: '0.75rem',
-                    }}
-                  >
-                    <span
-                      className="ssatv-live-pill"
-                      style={{ padding: '6px 12px', fontSize: '0.75rem' }}
-                    >
-                      <span className="ssatv-live-pulse-dot" /> SEDANG
-                      DIMAINKAN
-                    </span>
+                  <div className="ssatv-active-cinema-actions">
                     <button
-                      className="ssatv-scroll-btn"
-                      style={{ width: '36px', height: '36px' }}
+                      className="ssatv-scroll-btn ssatv-active-cinema-close-btn"
                       onClick={() => setActiveChannel(null)}
                       title="Tutup Pemain Video"
                     >
@@ -360,6 +356,22 @@ function App() {
                     <ContinueWatchingRow
                       items={continueItems}
                       onSelect={handleContinueItemSelect}
+                    />
+
+                    {/* 2. Top 10 TV Shows (Apple TV Authentic IMG_5147) */}
+                    <TopTenRow
+                      title="Top 10 TV Shows"
+                      items={APPLE_TOP_TV_SHOWS}
+                      onSelect={handleTopTenSelect}
+                      onViewAll={() => setActiveTab('series')}
+                    />
+
+                    {/* 3. Top 10 Movies (Apple TV Authentic IMG_5147) */}
+                    <TopTenRow
+                      title="Top 10 Movies"
+                      items={APPLE_TOP_MOVIES}
+                      onSelect={handleTopTenSelect}
+                      onViewAll={() => setActiveTab('movies')}
                     />
 
                     {/* 2. Trending Now (Real Movies from Catalog) */}
@@ -406,6 +418,7 @@ function App() {
                 channels={channels}
                 activeChannel={activeChannel}
                 onSelectChannel={handleChannelSelect}
+                onBack={() => handleTabChange('home')}
               />
             )}
 
@@ -501,6 +514,15 @@ function App() {
         )}
       </main>
       </div>
+
+      {/* MOBILE BOTTOM NAVIGATION DOCK (Effortless Navigation on iPhone / Android) */}
+      <MobileBottomNav
+        activeTab={activeTab}
+        onTabChange={(tab) => {
+          setActiveTab(tab);
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }}
+      />
     </div>
   );
 }

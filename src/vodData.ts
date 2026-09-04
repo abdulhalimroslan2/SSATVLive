@@ -29,6 +29,7 @@ export interface VodItem {
   isTrending?: boolean;
   isPopular?: boolean;
   isNew?: boolean;
+  apkCategory?: string;
   episodes?: VodEpisode[];
 }
 
@@ -36,7 +37,6 @@ export const VOD_GENRES = [
   { id: 'all', label: 'Semua Genre' },
   { id: 'action', label: 'Aksi (Action)' },
   { id: 'drama', label: 'Drama' },
-  { id: 'horror', label: 'Seram (Horror)' },
   { id: 'comedy', label: 'Komedi' },
   { id: 'romance', label: 'Romantik' },
   { id: 'thriller', label: 'Thriller' },
@@ -44,60 +44,6 @@ export const VOD_GENRES = [
 ];
 
 export const VOD_CATALOG: VodItem[] = [
-  {
-    "id": "vod_m_348",
-    "title": "Penunggu Istana",
-    "type": "movie",
-    "genre": [
-      "Action",
-      "Thriller",
-      "Drama"
-    ],
-    "origin": "malay",
-    "poster": "https://image-resizer-cloud-cdn.api.tmcms.quickplay.com/image/567FFDC8-DDB8-4A4F-8569-4E12A8E8E572/0-2x3.jpg?width=300",
-    "backdrop": "https://image-resizer-cloud-cdn.api.tmcms.quickplay.com/image/567FFDC8-DDB8-4A4F-8569-4E12A8E8E572/0-2x3.jpg?width=300",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "4K UHD",
-    "ageRating": "P13",
-    "synopsis": "Filem Penunggu Istana (VOD UNIFI) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/unifi2.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&channel=945",
-    "clearKey": "567ffdc8ddb84a4f85694e12a8e8e572:9af9e12a20e83c22d7df776dc834c744",
-    "isTrending": true,
-    "isPopular": true,
-    "isNew": true
-  },
-  {
-    "id": "vod_m_349",
-    "title": "Sleep",
-    "type": "movie",
-    "genre": [
-      "Action",
-      "Thriller",
-      "Drama"
-    ],
-    "origin": "malay",
-    "poster": "https://image-resizer-cloud-cdn.api.tmcms.quickplay.com/image/43536DD7-D128-4276-9C07-D5EB72CB39B1/0-2x3.jpg?width=300",
-    "backdrop": "https://image-resizer-cloud-cdn.api.tmcms.quickplay.com/image/43536DD7-D128-4276-9C07-D5EB72CB39B1/0-2x3.jpg?width=300",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "4K UHD",
-    "ageRating": "P13",
-    "synopsis": "Filem Sleep (VOD UNIFI) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/unifi2.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&channel=944",
-    "clearKey": "43536dd7d12842769c07d5eb72cb39b1:81dbd8bcbfeae8fd91a7467954e355e7",
-    "isTrending": true,
-    "isPopular": true,
-    "isNew": true
-  },
   {
     "id": "vod_m_350",
     "title": "The Night Owl",
@@ -111,7 +57,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://image-resizer-cloud-cdn.api.tmcms.quickplay.com/image/EE5DE585-4936-4CE2-82E7-1C7F25260769/0-2x3.jpg?width=300",
     "backdrop": "https://image-resizer-cloud-cdn.api.tmcms.quickplay.com/image/EE5DE585-4936-4CE2-82E7-1C7F25260769/0-2x3.jpg?width=300",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -123,331 +69,8 @@ export const VOD_CATALOG: VodItem[] = [
     "clearKey": "ee5de58549364ce282e71c7f25260769:37afc3eb3ddd2aa4e988f95dac7ed4ad",
     "isTrending": true,
     "isPopular": true,
-    "isNew": true
-  },
-  {
-    "id": "vod_m_351",
-    "title": "Dabbe Cin Carpmasi",
-    "type": "movie",
-    "genre": [
-      "Action",
-      "Thriller",
-      "Drama"
-    ],
-    "origin": "malay",
-    "poster": "https://image-resizer-cloud-cdn.api.tmcms.quickplay.com/image/7EE93CCF-9EE9-4F67-8E9F-E347D131E83B/0-2x3.jpg?width=300",
-    "backdrop": "https://image-resizer-cloud-cdn.api.tmcms.quickplay.com/image/7EE93CCF-9EE9-4F67-8E9F-E347D131E83B/0-2x3.jpg?width=300",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "4K UHD",
-    "ageRating": "P13",
-    "synopsis": "Filem Dabbe Cin Carpmasi (VOD UNIFI) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/unifi2.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&channel=942",
-    "clearKey": "7ee93ccf9ee94f678e9fe347d131e83b:a797c879c46b134c01c6db6ecf6c705a",
-    "isTrending": true,
-    "isPopular": true,
-    "isNew": true
-  },
-  {
-    "id": "vod_m_352",
-    "title": "Dabbe Dabbe",
-    "type": "movie",
-    "genre": [
-      "Action",
-      "Thriller",
-      "Drama"
-    ],
-    "origin": "malay",
-    "poster": "https://image-resizer-cloud-cdn.api.tmcms.quickplay.com/image/B159054C-CE27-4886-8DC2-D07B01B30E3B/0-2x3.jpg?width=300",
-    "backdrop": "https://image-resizer-cloud-cdn.api.tmcms.quickplay.com/image/B159054C-CE27-4886-8DC2-D07B01B30E3B/0-2x3.jpg?width=300",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "4K UHD",
-    "ageRating": "P13",
-    "synopsis": "Filem Dabbe Dabbe (VOD UNIFI) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/unifi2.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&channel=941",
-    "clearKey": "b159054cce2748868dc2d07b01b30e3b:b359a722ded77763b0eb4e7b1df528cb",
-    "isTrending": true,
-    "isPopular": true,
-    "isNew": true
-  },
-  {
-    "id": "vod_m_353",
-    "title": "Dabbe Zehr-i Cin",
-    "type": "movie",
-    "genre": [
-      "Action",
-      "Thriller",
-      "Drama"
-    ],
-    "origin": "malay",
-    "poster": "https://image-resizer-cloud-cdn.api.tmcms.quickplay.com/image/F18E56BC-FE37-4767-9C47-F0C5A9ADB06E/0-2x3.jpg?width=300",
-    "backdrop": "https://image-resizer-cloud-cdn.api.tmcms.quickplay.com/image/F18E56BC-FE37-4767-9C47-F0C5A9ADB06E/0-2x3.jpg?width=300",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "4K UHD",
-    "ageRating": "P13",
-    "synopsis": "Filem Dabbe Zehr-i Cin (VOD UNIFI) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/unifi2.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&channel=940",
-    "clearKey": "f18e56bcfe3747679c47f0c5a9adb06e:5b022cc415980b108cb1ef35fc20211b",
-    "isTrending": true,
-    "isPopular": true,
-    "isNew": true
-  },
-  {
-    "id": "vod_m_354",
-    "title": "Blood Karma",
-    "type": "movie",
-    "genre": [
-      "Action",
-      "Thriller",
-      "Drama"
-    ],
-    "origin": "malay",
-    "poster": "https://image-resizer-cloud-cdn.api.tmcms.quickplay.com/image/17D2432D-D423-4CFF-A77A-E6FF48E2D318/0-2x3.jpg?width=300",
-    "backdrop": "https://image-resizer-cloud-cdn.api.tmcms.quickplay.com/image/17D2432D-D423-4CFF-A77A-E6FF48E2D318/0-2x3.jpg?width=300",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "4K UHD",
-    "ageRating": "P13",
-    "synopsis": "Filem Blood Karma (VOD UNIFI) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/unifi2.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&channel=970",
-    "clearKey": "17d2432dd4234cffa77ae6ff48e2d318:af416e3aba63b2054306621b3e542457",
-    "isTrending": true,
-    "isPopular": true,
-    "isNew": true
-  },
-  {
-    "id": "vod_m_355",
-    "title": "Jangan Pandang Belakang Congkak",
-    "type": "movie",
-    "genre": [
-      "Action",
-      "Thriller",
-      "Drama"
-    ],
-    "origin": "malay",
-    "poster": "https://image-resizer-cloud-cdn.api.tmcms.quickplay.com/image/EE4BA3C7-EE49-4522-8205-7978BB5B1CA7/0-2x3.jpg?width=300",
-    "backdrop": "https://image-resizer-cloud-cdn.api.tmcms.quickplay.com/image/EE4BA3C7-EE49-4522-8205-7978BB5B1CA7/0-2x3.jpg?width=300",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "4K UHD",
-    "ageRating": "P13",
-    "synopsis": "Filem Jangan Pandang Belakang Congkak (VOD UNIFI) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/unifi2.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&channel=969",
-    "clearKey": "ee4ba3c7ee49452282057978bb5b1ca7:bcf52ca5c5125a1bf8161c848767c32d",
-    "isTrending": true,
-    "isPopular": true,
-    "isNew": true
-  },
-  {
-    "id": "vod_m_356",
-    "title": "Jangan Pandang Belakang Congkak 2",
-    "type": "movie",
-    "genre": [
-      "Action",
-      "Thriller",
-      "Drama"
-    ],
-    "origin": "malay",
-    "poster": "https://image-resizer-cloud-cdn.api.tmcms.quickplay.com/image/E6BB693B-4FFB-409A-8093-010B3F196EF7/0-2x3.jpg?width=300",
-    "backdrop": "https://image-resizer-cloud-cdn.api.tmcms.quickplay.com/image/E6BB693B-4FFB-409A-8093-010B3F196EF7/0-2x3.jpg?width=300",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "4K UHD",
-    "ageRating": "P13",
-    "synopsis": "Filem Jangan Pandang Belakang Congkak 2 (VOD UNIFI) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/unifi2.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&channel=968",
-    "clearKey": "32724631ab89418288965ec42179e920:751df4f8e8d6d54078ed12bae6eecf39",
-    "isTrending": true,
-    "isPopular": true,
-    "isNew": true
-  },
-  {
-    "id": "vod_m_357",
-    "title": "Sunti @ Facebook",
-    "type": "movie",
-    "genre": [
-      "Action",
-      "Thriller",
-      "Drama"
-    ],
-    "origin": "malay",
-    "poster": "https://image-resizer-cloud-cdn.api.tmcms.quickplay.com/image/441740E1-C601-4605-9023-DCE168923717/0-2x3.jpg?width=300",
-    "backdrop": "https://image-resizer-cloud-cdn.api.tmcms.quickplay.com/image/441740E1-C601-4605-9023-DCE168923717/0-2x3.jpg?width=300",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "4K UHD",
-    "ageRating": "P13",
-    "synopsis": "Filem Sunti @ Facebook (VOD UNIFI) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/unifi2.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&channel=967",
-    "clearKey": "441740e1c60146059023dce168923717:c913c8e1b1da6cf8e33af308445cac63",
-    "isTrending": true,
-    "isPopular": true,
-    "isNew": true
-  },
-  {
-    "id": "vod_m_358",
-    "title": "Pengantin Malam",
-    "type": "movie",
-    "genre": [
-      "Action",
-      "Thriller",
-      "Drama"
-    ],
-    "origin": "malay",
-    "poster": "https://image-resizer-cloud-cdn.api.tmcms.quickplay.com/image/B0B5A1A8-5F98-4C46-A244-FE7FDB2149CB/0-2x3.jpg?width=300",
-    "backdrop": "https://image-resizer-cloud-cdn.api.tmcms.quickplay.com/image/B0B5A1A8-5F98-4C46-A244-FE7FDB2149CB/0-2x3.jpg?width=300",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "4K UHD",
-    "ageRating": "P13",
-    "synopsis": "Filem Pengantin Malam (VOD UNIFI) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/unifi2.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&channel=966",
-    "clearKey": "b0b5a1a85f984c46a244fe7fdb2149cb:a59ae06569f3e2e23f992b4073fce633",
-    "isTrending": true,
-    "isPopular": true,
-    "isNew": true
-  },
-  {
-    "id": "vod_m_359",
-    "title": "Jalan Puncak Alam",
-    "type": "movie",
-    "genre": [
-      "Action",
-      "Thriller",
-      "Drama"
-    ],
-    "origin": "malay",
-    "poster": "https://image-resizer-cloud-cdn.api.tmcms.quickplay.com/image/FFCCC3C1-9D48-4201-BE3C-ABFF89E21B9A/0-2x3.jpg?width=300",
-    "backdrop": "https://image-resizer-cloud-cdn.api.tmcms.quickplay.com/image/FFCCC3C1-9D48-4201-BE3C-ABFF89E21B9A/0-2x3.jpg?width=300",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "4K UHD",
-    "ageRating": "P13",
-    "synopsis": "Filem Jalan Puncak Alam (VOD UNIFI) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/unifi2.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&channel=965",
-    "clearKey": "ffccc3c19d484201be3cabff89e21b9a:c52a7638e9eb3d0f096f14bbfe441ee2",
-    "isTrending": true,
-    "isPopular": true,
-    "isNew": true
-  },
-  {
-    "id": "vod_m_360",
-    "title": "Pelepas Saka",
-    "type": "movie",
-    "genre": [
-      "Action",
-      "Thriller",
-      "Drama"
-    ],
-    "origin": "malay",
-    "poster": "https://image-resizer-cloud-cdn.api.tmcms.quickplay.com/image/7BACA6D7-9AA5-4118-8C0A-284EC80C166E/0-2x3.jpg?width=300",
-    "backdrop": "https://image-resizer-cloud-cdn.api.tmcms.quickplay.com/image/7BACA6D7-9AA5-4118-8C0A-284EC80C166E/0-2x3.jpg?width=300",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "4K UHD",
-    "ageRating": "P13",
-    "synopsis": "Filem Pelepas Saka (VOD UNIFI) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/unifi2.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&channel=964",
-    "clearKey": "7baca6d79aa541188c0a284ec80c166e:defdc3f0074c0dcf5ba7d8d66a5b87b8",
-    "isTrending": true,
-    "isPopular": true,
-    "isNew": true
-  },
-  {
-    "id": "vod_m_361",
-    "title": "Saranjana Kota Ghaib",
-    "type": "movie",
-    "genre": [
-      "Action",
-      "Thriller",
-      "Drama"
-    ],
-    "origin": "malay",
-    "poster": "https://image-resizer-cloud-cdn.api.tmcms.quickplay.com/image/9A569273-C421-4382-B366-6C67E3D27CAF/0-2x3.jpg?width=300",
-    "backdrop": "https://image-resizer-cloud-cdn.api.tmcms.quickplay.com/image/9A569273-C421-4382-B366-6C67E3D27CAF/0-2x3.jpg?width=300",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "4K UHD",
-    "ageRating": "P13",
-    "synopsis": "Filem Saranjana Kota Ghaib (VOD UNIFI) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/unifi2.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&channel=963",
-    "clearKey": "9a569273c4214382b3666c67e3d27caf:6ceaf3c9a034e9d1e99922412de8f771",
-    "isTrending": true,
-    "isPopular": true,
-    "isNew": true
-  },
-  {
-    "id": "vod_m_362",
-    "title": "Lampir",
-    "type": "movie",
-    "genre": [
-      "Action",
-      "Thriller",
-      "Drama"
-    ],
-    "origin": "malay",
-    "poster": "https://image-resizer-cloud-cdn.api.tmcms.quickplay.com/image/58E06A06-A5E7-4D76-92EF-F4CAAA98DB98/0-2x3.jpg?width=300",
-    "backdrop": "https://image-resizer-cloud-cdn.api.tmcms.quickplay.com/image/58E06A06-A5E7-4D76-92EF-F4CAAA98DB98/0-2x3.jpg?width=300",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "4K UHD",
-    "ageRating": "P13",
-    "synopsis": "Filem Lampir (VOD UNIFI) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/unifi2.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&channel=962",
-    "clearKey": "58e06a06a5e74d7692eff4caaa98db98:270461581d7b6a88223d81865b8b8b7e",
-    "isTrending": true,
-    "isPopular": true,
-    "isNew": true
+    "isNew": true,
+    "apkCategory": "VOD UNIFI"
   },
   {
     "id": "vod_m_363",
@@ -462,7 +85,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://image-resizer-cloud-cdn.api.tmcms.quickplay.com/image/B68693F9-ECBD-4825-AB6A-2B32B3CFD8D7/0-2x3.jpg?width=300",
     "backdrop": "https://image-resizer-cloud-cdn.api.tmcms.quickplay.com/image/B68693F9-ECBD-4825-AB6A-2B32B3CFD8D7/0-2x3.jpg?width=300",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -474,193 +97,8 @@ export const VOD_CATALOG: VodItem[] = [
     "clearKey": "b68693f9ecbd4825ab6a2b32b3cfd8d7:f54c3cf36882a549857906ec4152d429",
     "isTrending": true,
     "isPopular": true,
-    "isNew": true
-  },
-  {
-    "id": "vod_m_364",
-    "title": "Mashaarojinn",
-    "type": "movie",
-    "genre": [
-      "Action",
-      "Thriller",
-      "Drama"
-    ],
-    "origin": "malay",
-    "poster": "https://image-resizer-cloud-cdn.api.tmcms.quickplay.com/image/D7717328-1735-4C5B-8EEF-AA8B88BBB428/0-2x3.jpg?width=300",
-    "backdrop": "https://image-resizer-cloud-cdn.api.tmcms.quickplay.com/image/D7717328-1735-4C5B-8EEF-AA8B88BBB428/0-2x3.jpg?width=300",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "4K UHD",
-    "ageRating": "P13",
-    "synopsis": "Filem Mashaarojinn (VOD UNIFI) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/unifi2.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&channel=960",
-    "clearKey": "d771732817354c5b8eefaa8b88bbb428:c89df7e2e52d46126952b04a5bc7ca22",
-    "isTrending": true,
-    "isPopular": true,
-    "isNew": true
-  },
-  {
-    "id": "vod_m_365",
-    "title": "The House",
-    "type": "movie",
-    "genre": [
-      "Action",
-      "Thriller",
-      "Drama"
-    ],
-    "origin": "malay",
-    "poster": "https://image-resizer-cloud-cdn.api.tmcms.quickplay.com/image/EF4902E8-0067-480B-8C4A-FC1F900558F8/0-2x3.jpg?width=300",
-    "backdrop": "https://image-resizer-cloud-cdn.api.tmcms.quickplay.com/image/EF4902E8-0067-480B-8C4A-FC1F900558F8/0-2x3.jpg?width=300",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "4K UHD",
-    "ageRating": "P13",
-    "synopsis": "Filem The House (VOD UNIFI) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/unifi2.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&channel=959",
-    "clearKey": "ef4902e80067480b8c4afc1f900558f8:a2ab993a8de5a11ca5d5695d03829bd4",
-    "isTrending": true,
-    "isPopular": true,
-    "isNew": true
-  },
-  {
-    "id": "vod_m_366",
-    "title": "Cinderella's Curse",
-    "type": "movie",
-    "genre": [
-      "Action",
-      "Thriller",
-      "Drama"
-    ],
-    "origin": "malay",
-    "poster": "https://image-resizer-cloud-cdn.api.tmcms.quickplay.com/image/859ABBCA-B41E-429E-9BC3-8608C6ED6D44/0-2x3.jpg?width=300",
-    "backdrop": "https://image-resizer-cloud-cdn.api.tmcms.quickplay.com/image/859ABBCA-B41E-429E-9BC3-8608C6ED6D44/0-2x3.jpg?width=300",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "4K UHD",
-    "ageRating": "P13",
-    "synopsis": "Filem Cinderella's Curse (VOD UNIFI) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/unifi2.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&channel=958",
-    "clearKey": "859abbcab41e429e9bc38608c6ed6d44:db2d9b7080e81898eb83d1f653f071d2",
-    "isTrending": true,
-    "isPopular": true,
-    "isNew": true
-  },
-  {
-    "id": "vod_m_367",
-    "title": "The Ghost Game",
-    "type": "movie",
-    "genre": [
-      "Action",
-      "Thriller",
-      "Drama"
-    ],
-    "origin": "malay",
-    "poster": "https://image-resizer-cloud-cdn.api.tmcms.quickplay.com/image/3BD5F90F-504F-4476-A464-D50E27C01E9D/0-2x3.jpg?width=300",
-    "backdrop": "https://image-resizer-cloud-cdn.api.tmcms.quickplay.com/image/3BD5F90F-504F-4476-A464-D50E27C01E9D/0-2x3.jpg?width=300",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "4K UHD",
-    "ageRating": "P13",
-    "synopsis": "Filem The Ghost Game (VOD UNIFI) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/unifi2.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&channel=957",
-    "clearKey": "0067917d314f43638bc28668aafd95b2:0e4ddfe4d473b19ceeadeb5d23b6b1ac",
-    "isTrending": true,
-    "isPopular": true,
-    "isNew": true
-  },
-  {
-    "id": "vod_m_368",
-    "title": "Pontianak Harum Sundal Malam 2",
-    "type": "movie",
-    "genre": [
-      "Action",
-      "Thriller",
-      "Drama"
-    ],
-    "origin": "malay",
-    "poster": "https://image-resizer-cloud-cdn.api.tmcms.quickplay.com/image/5306954D-0560-4557-8B3E-ACA64CB19D64/0-2x3.jpg?width=300",
-    "backdrop": "https://image-resizer-cloud-cdn.api.tmcms.quickplay.com/image/5306954D-0560-4557-8B3E-ACA64CB19D64/0-2x3.jpg?width=300",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "4K UHD",
-    "ageRating": "P13",
-    "synopsis": "Filem Pontianak Harum Sundal Malam 2 (VOD UNIFI) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/unifi2.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&channel=956",
-    "clearKey": "5306954d056045578b3eaca64cb19d64:ce1dbc7bfe06e58ccaa59e71a3dfa702",
-    "isTrending": false,
-    "isPopular": true
-  },
-  {
-    "id": "vod_m_369",
-    "title": "Pontianak Harum Sundal Malam",
-    "type": "movie",
-    "genre": [
-      "Action",
-      "Thriller",
-      "Drama"
-    ],
-    "origin": "malay",
-    "poster": "https://image-resizer-cloud-cdn.api.tmcms.quickplay.com/image/55F193AF-E10A-4E5C-9315-9B52703E723D/0-2x3.jpg?width=300",
-    "backdrop": "https://image-resizer-cloud-cdn.api.tmcms.quickplay.com/image/55F193AF-E10A-4E5C-9315-9B52703E723D/0-2x3.jpg?width=300",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "4K UHD",
-    "ageRating": "P13",
-    "synopsis": "Filem Pontianak Harum Sundal Malam (VOD UNIFI) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/unifi2.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&channel=955",
-    "clearKey": "55f193afe10a4e5c93159b52703e723d:f357d423bafe6cb4792e9e85a691a999",
-    "isTrending": false,
-    "isPopular": true
-  },
-  {
-    "id": "vod_m_370",
-    "title": "Sembunyi: Amukan Azazil",
-    "type": "movie",
-    "genre": [
-      "Action",
-      "Thriller",
-      "Drama"
-    ],
-    "origin": "malay",
-    "poster": "https://image-resizer-cloud-cdn.api.tmcms.quickplay.com/image/34A06DC5-99BF-470E-A46D-0085C79A9800/0-2x3.jpg?width=300",
-    "backdrop": "https://image-resizer-cloud-cdn.api.tmcms.quickplay.com/image/34A06DC5-99BF-470E-A46D-0085C79A9800/0-2x3.jpg?width=300",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "4K UHD",
-    "ageRating": "P13",
-    "synopsis": "Filem Sembunyi: Amukan Azazil (VOD UNIFI) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/unifi2.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&channel=954",
-    "clearKey": "34a06dc599bf470ea46d0085c79a9800:bbfc4d5a12d3eabebb4eb752fb1f148d",
-    "isTrending": false,
-    "isPopular": true
+    "isNew": true,
+    "apkCategory": "VOD UNIFI"
   },
   {
     "id": "vod_m_371",
@@ -675,7 +113,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://image-resizer-cloud-cdn.api.tmcms.quickplay.com/image/F70D5261-5E6D-4D90-B477-1C130083C8B7/0-2x3.jpg?width=300",
     "backdrop": "https://image-resizer-cloud-cdn.api.tmcms.quickplay.com/image/F70D5261-5E6D-4D90-B477-1C130083C8B7/0-2x3.jpg?width=300",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -686,267 +124,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/unifi2.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&channel=953",
     "clearKey": "f70d52615e6d4d90b4771c130083c8b7:6e9c84543bd8d40ca9f827397489d1c1",
     "isTrending": false,
-    "isPopular": true
-  },
-  {
-    "id": "vod_m_372",
-    "title": "Heimsuchung aka Smother",
-    "type": "movie",
-    "genre": [
-      "Action",
-      "Thriller",
-      "Drama"
-    ],
-    "origin": "malay",
-    "poster": "https://image-resizer-cloud-cdn.api.tmcms.quickplay.com/image/7E639E15-AF1B-47A1-92AD-859B0028F81F/0-2x3.jpg?width=300",
-    "backdrop": "https://image-resizer-cloud-cdn.api.tmcms.quickplay.com/image/7E639E15-AF1B-47A1-92AD-859B0028F81F/0-2x3.jpg?width=300",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "4K UHD",
-    "ageRating": "P13",
-    "synopsis": "Filem Heimsuchung aka Smother (VOD UNIFI) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/unifi2.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&channel=952",
-    "clearKey": "7e639e15af1b47a192ad859b0028f81f:4dd005a92cb072540b46fe0c4ad584b5",
-    "isTrending": false,
-    "isPopular": true
-  },
-  {
-    "id": "vod_m_373",
-    "title": "Nightmare Side: Delusional",
-    "type": "movie",
-    "genre": [
-      "Action",
-      "Thriller",
-      "Drama"
-    ],
-    "origin": "malay",
-    "poster": "https://image-resizer-cloud-cdn.api.tmcms.quickplay.com/image/DCC76B9A-BCE0-49F5-9914-30BE08DCC5CD/0-2x3.jpg?width=300",
-    "backdrop": "https://image-resizer-cloud-cdn.api.tmcms.quickplay.com/image/DCC76B9A-BCE0-49F5-9914-30BE08DCC5CD/0-2x3.jpg?width=300",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "4K UHD",
-    "ageRating": "P13",
-    "synopsis": "Filem Nightmare Side: Delusional (VOD UNIFI) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/unifi2.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&channel=951",
-    "clearKey": "dcc76b9abce049f5991430be08dcc5cd:35f22751287d7566a39e36bb5a08c9e3",
-    "isTrending": false,
-    "isPopular": true
-  },
-  {
-    "id": "vod_m_374",
-    "title": "Limbungan",
-    "type": "movie",
-    "genre": [
-      "Action",
-      "Thriller",
-      "Drama"
-    ],
-    "origin": "malay",
-    "poster": "https://image-resizer-cloud-cdn.api.tmcms.quickplay.com/image/7B9FAF3E-532C-4F38-93A6-FBCB08E14888/0-2x3.jpg?width=300",
-    "backdrop": "https://image-resizer-cloud-cdn.api.tmcms.quickplay.com/image/7B9FAF3E-532C-4F38-93A6-FBCB08E14888/0-2x3.jpg?width=300",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "4K UHD",
-    "ageRating": "P13",
-    "synopsis": "Filem Limbungan (VOD UNIFI) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/unifi2.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&channel=950",
-    "clearKey": "828632c82f03422f93287c03787182c9:db9e34e71bf8e53cb9c38a9f868f551e",
-    "isTrending": false,
-    "isPopular": true
-  },
-  {
-    "id": "vod_m_375",
-    "title": "Citra Apartment",
-    "type": "movie",
-    "genre": [
-      "Action",
-      "Thriller",
-      "Drama"
-    ],
-    "origin": "malay",
-    "poster": "https://image-resizer-cloud-cdn.api.tmcms.quickplay.com/image/A2CEA45B-46CC-4F30-B348-8319BD94D4CA/0-2x3.jpg?width=300",
-    "backdrop": "https://image-resizer-cloud-cdn.api.tmcms.quickplay.com/image/A2CEA45B-46CC-4F30-B348-8319BD94D4CA/0-2x3.jpg?width=300",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "4K UHD",
-    "ageRating": "P13",
-    "synopsis": "Filem Citra Apartment (VOD UNIFI) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/unifi2.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&channel=949",
-    "clearKey": "a2cea45b46cc4f30b3488319bd94d4ca:c26ce95d5bf0408e8f76987bd587ebd5",
-    "isTrending": false,
-    "isPopular": true
-  },
-  {
-    "id": "vod_m_376",
-    "title": "Misteri Fraser 1910",
-    "type": "movie",
-    "genre": [
-      "Action",
-      "Thriller",
-      "Drama"
-    ],
-    "origin": "malay",
-    "poster": "https://image-resizer-cloud-cdn.api.tmcms.quickplay.com/image/F772E861-B9A0-411C-B261-C297815A453F/0-2x3.jpg?width=300",
-    "backdrop": "https://image-resizer-cloud-cdn.api.tmcms.quickplay.com/image/F772E861-B9A0-411C-B261-C297815A453F/0-2x3.jpg?width=300",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "4K UHD",
-    "ageRating": "P13",
-    "synopsis": "Filem Misteri Fraser 1910 (VOD UNIFI) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/unifi2.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&channel=948",
-    "clearKey": "f772e861b9a0411cb261c297815a453f:399d4363fc7da86b8214d4efdef2d74a",
-    "isTrending": false,
-    "isPopular": true
-  },
-  {
-    "id": "vod_m_377",
-    "title": "Dabbe Bir Cin Vakasi",
-    "type": "movie",
-    "genre": [
-      "Action",
-      "Thriller",
-      "Drama"
-    ],
-    "origin": "malay",
-    "poster": "https://image-resizer-cloud-cdn.api.tmcms.quickplay.com/image/76C72AAB-6479-48D2-8625-F4D71504BD75/0-2x3.jpg?width=300",
-    "backdrop": "https://image-resizer-cloud-cdn.api.tmcms.quickplay.com/image/76C72AAB-6479-48D2-8625-F4D71504BD75/0-2x3.jpg?width=300",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "4K UHD",
-    "ageRating": "P13",
-    "synopsis": "Filem Dabbe Bir Cin Vakasi (VOD UNIFI) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/unifi2.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&channel=947",
-    "clearKey": "76c72aab647948d28625f4d71504bd75:b58d7a0275f00872db0d273e811b3321",
-    "isTrending": false,
-    "isPopular": true
-  },
-  {
-    "id": "vod_m_378",
-    "title": "Tuyul",
-    "type": "movie",
-    "genre": [
-      "Action",
-      "Thriller",
-      "Drama"
-    ],
-    "origin": "malay",
-    "poster": "https://image-resizer-cloud-cdn.api.tmcms.quickplay.com/image/E133966C-ED4E-4D0F-865C-1CC0A8C2446D/0-2x3.jpg?width=300",
-    "backdrop": "https://image-resizer-cloud-cdn.api.tmcms.quickplay.com/image/E133966C-ED4E-4D0F-865C-1CC0A8C2446D/0-2x3.jpg?width=300",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "4K UHD",
-    "ageRating": "P13",
-    "synopsis": "Filem Tuyul (VOD UNIFI) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/unifi2.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&channel=946",
-    "clearKey": "e133966ced4e4d0f865c1cc0a8c2446d:fb91eff213fa1be295b95d34389444d5",
-    "isTrending": false,
-    "isPopular": true
-  },
-  {
-    "id": "vod_m_379",
-    "title": "971-Kutukan Peti Mati",
-    "type": "movie",
-    "genre": [
-      "Action",
-      "Thriller",
-      "Drama"
-    ],
-    "origin": "malay",
-    "poster": "https://image-resizer-cloud-cdn.api.tmcms.quickplay.com/image/9E45B0CB-1044-4994-9A57-2D21638F3319/0-2x3.jpg?width=300",
-    "backdrop": "https://image-resizer-cloud-cdn.api.tmcms.quickplay.com/image/9E45B0CB-1044-4994-9A57-2D21638F3319/0-2x3.jpg?width=300",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "4K UHD",
-    "ageRating": "P13",
-    "synopsis": "Filem 971-Kutukan Peti Mati (VOD UNIFI) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/unifi2.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&channel=971",
-    "clearKey": "9e45b0cb104449949a572d21638f3319:134afa6d987643a664f609c08d0bc5f2",
-    "isTrending": false,
-    "isPopular": true
-  },
-  {
-    "id": "vod_m_380",
-    "title": "972-Alena",
-    "type": "movie",
-    "genre": [
-      "Action",
-      "Thriller",
-      "Drama"
-    ],
-    "origin": "malay",
-    "poster": "https://image-resizer-cloud-cdn.api.tmcms.quickplay.com/image/7F4793D2-5CD2-4CA0-8DC6-3799D80EDC67/0-2x3.jpg?width=300",
-    "backdrop": "https://image-resizer-cloud-cdn.api.tmcms.quickplay.com/image/7F4793D2-5CD2-4CA0-8DC6-3799D80EDC67/0-2x3.jpg?width=300",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "4K UHD",
-    "ageRating": "P13",
-    "synopsis": "Filem 972-Alena (VOD UNIFI) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/unifi2.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&channel=972",
-    "clearKey": "7f4793d25cd24ca08dc63799d80edc67:21f565a70f8b367e4bd605cb62fbe78d",
-    "isTrending": false,
-    "isPopular": true
-  },
-  {
-    "id": "vod_m_381",
-    "title": "973-Kutuk",
-    "type": "movie",
-    "genre": [
-      "Action",
-      "Thriller",
-      "Drama"
-    ],
-    "origin": "malay",
-    "poster": "https://image-resizer-cloud-cdn.api.tmcms.quickplay.com/image/5C8714F2-7D67-461F-8E14-2563A8EE1057/0-2x3.jpg?width=300",
-    "backdrop": "https://image-resizer-cloud-cdn.api.tmcms.quickplay.com/image/5C8714F2-7D67-461F-8E14-2563A8EE1057/0-2x3.jpg?width=300",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "4K UHD",
-    "ageRating": "P13",
-    "synopsis": "Filem 973-Kutuk (VOD UNIFI) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/unifi2.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&channel=973",
-    "clearKey": "5c8714f27d67461f8e142563a8ee1057:724806d06ca32823ab0b6504c183018a",
-    "isTrending": false,
-    "isPopular": true
+    "isPopular": true,
+    "apkCategory": "VOD UNIFI"
   },
   {
     "id": "vod_m_382",
@@ -961,7 +140,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://image-resizer-cloud-cdn.api.tmcms.quickplay.com/image/E9A73B8B-23B4-471C-9022-2EE3DC112E3D/0-2x3.jpg?width=300",
     "backdrop": "https://image-resizer-cloud-cdn.api.tmcms.quickplay.com/image/E9A73B8B-23B4-471C-9022-2EE3DC112E3D/0-2x3.jpg?width=300",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -972,7 +151,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/unifi2.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&channel=999",
     "clearKey": "e9a73b8b23b4471c90222ee3dc112e3d:6ca2f74bbfa528592e48ef3c9cdad74a",
     "isTrending": false,
-    "isPopular": true
+    "isPopular": true,
+    "apkCategory": "VOD UNIFI"
   },
   {
     "id": "vod_m_383",
@@ -987,7 +167,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://image-resizer-cloud-cdn.api.tmcms.quickplay.com/image/DFFD9762-7B3D-4844-BA57-54779A5FA5BB/0-2x3.jpg?width=300",
     "backdrop": "https://image-resizer-cloud-cdn.api.tmcms.quickplay.com/image/DFFD9762-7B3D-4844-BA57-54779A5FA5BB/0-2x3.jpg?width=300",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -998,7 +178,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/unifi2.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&channel=998",
     "clearKey": "dffd97627b3d4844ba5754779a5fa5bb:4077a4ef829304db5356fd01d184f3ff",
     "isTrending": false,
-    "isPopular": true
+    "isPopular": true,
+    "apkCategory": "VOD UNIFI"
   },
   {
     "id": "vod_m_384",
@@ -1013,7 +194,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://image-resizer-cloud-cdn.api.tmcms.quickplay.com/image/8D4C1E10-5A8A-4C61-9440-E570D43B426B/0-2x3.jpg?width=300",
     "backdrop": "https://image-resizer-cloud-cdn.api.tmcms.quickplay.com/image/8D4C1E10-5A8A-4C61-9440-E570D43B426B/0-2x3.jpg?width=300",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -1024,7 +205,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/unifi2.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&channel=997",
     "clearKey": "21caf1ab60aa4516963bf5f5ac8a076f:c979dedb0e0aeefd604b1637bf783d6e",
     "isTrending": false,
-    "isPopular": true
+    "isPopular": true,
+    "apkCategory": "VOD UNIFI"
   },
   {
     "id": "vod_m_385",
@@ -1039,7 +221,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://image-resizer-cloud-cdn.api.tmcms.quickplay.com/image/8B5B51F5-3FFA-4C7D-BC7D-E225B4B68EF8/0-2x3.jpg?width=300",
     "backdrop": "https://image-resizer-cloud-cdn.api.tmcms.quickplay.com/image/8B5B51F5-3FFA-4C7D-BC7D-E225B4B68EF8/0-2x3.jpg?width=300",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -1050,7 +232,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/unifi2.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&channel=996",
     "clearKey": "8b5b51f53ffa4c7dbc7de225b4b68ef8:2b55ee0d1190a75eb19fcdfc2bc4fea4",
     "isTrending": false,
-    "isPopular": true
+    "isPopular": true,
+    "apkCategory": "VOD UNIFI"
   },
   {
     "id": "vod_m_386",
@@ -1065,7 +248,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://image-resizer-cloud-cdn.api.tmcms.quickplay.com/image/625F6ACD-91E2-4914-B228-E4E23F11EB2B/0-2x3.jpg?width=300",
     "backdrop": "https://image-resizer-cloud-cdn.api.tmcms.quickplay.com/image/625F6ACD-91E2-4914-B228-E4E23F11EB2B/0-2x3.jpg?width=300",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -1076,241 +259,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/unifi2.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&channel=995",
     "clearKey": "625f6acd91e24914b228e4e23f11eb2b:58db6dcf53bee21c9441d832c265d600",
     "isTrending": false,
-    "isPopular": true
-  },
-  {
-    "id": "vod_m_387",
-    "title": "979-Jailankung Sendekala",
-    "type": "movie",
-    "genre": [
-      "Action",
-      "Thriller",
-      "Drama"
-    ],
-    "origin": "malay",
-    "poster": "https://image-resizer-cloud-cdn.api.tmcms.quickplay.com/image/0266C474-4625-4179-BF05-E0ACB05AE44C/0-2x3.jpg?width=300",
-    "backdrop": "https://image-resizer-cloud-cdn.api.tmcms.quickplay.com/image/0266C474-4625-4179-BF05-E0ACB05AE44C/0-2x3.jpg?width=300",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "4K UHD",
-    "ageRating": "P13",
-    "synopsis": "Filem 979-Jailankung Sendekala (VOD UNIFI) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/unifi2.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&channel=994",
-    "clearKey": "0266c47446254179bf05e0acb05ae44c:a33bdb96036ef7bea74373d09e30a830",
-    "isTrending": false,
-    "isPopular": true
-  },
-  {
-    "id": "vod_m_388",
-    "title": "980-Dorm Melati",
-    "type": "movie",
-    "genre": [
-      "Action",
-      "Thriller",
-      "Drama"
-    ],
-    "origin": "malay",
-    "poster": "https://image-resizer-cloud-cdn.api.tmcms.quickplay.com/image/BA2E387F-F81D-4FBF-87D5-B6C611471E7A/0-2x3.jpg?width=300",
-    "backdrop": "https://image-resizer-cloud-cdn.api.tmcms.quickplay.com/image/BA2E387F-F81D-4FBF-87D5-B6C611471E7A/0-2x3.jpg?width=300",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "4K UHD",
-    "ageRating": "P13",
-    "synopsis": "Filem 980-Dorm Melati (VOD UNIFI) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/unifi2.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&channel=993",
-    "clearKey": "ba2e387ff81d4fbf87d5b6c611471e7a:edfca2a00c1024c6b7043238b4a08956",
-    "isTrending": false,
-    "isPopular": true
-  },
-  {
-    "id": "vod_m_389",
-    "title": "981-Paku",
-    "type": "movie",
-    "genre": [
-      "Action",
-      "Thriller",
-      "Drama"
-    ],
-    "origin": "malay",
-    "poster": "https://image-resizer-cloud-cdn.api.tmcms.quickplay.com/image/248AB958-B478-4CAF-B875-B6D56D2F2589/0-2x3.jpg?width=300",
-    "backdrop": "https://image-resizer-cloud-cdn.api.tmcms.quickplay.com/image/248AB958-B478-4CAF-B875-B6D56D2F2589/0-2x3.jpg?width=300",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "4K UHD",
-    "ageRating": "P13",
-    "synopsis": "Filem 981-Paku (VOD UNIFI) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/unifi2.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&channel=992",
-    "clearKey": "248ab958b4784cafb875b6d56d2f2589:0d82b95a5b41f67fdb32c03e898135e5",
-    "isTrending": false,
-    "isPopular": true
-  },
-  {
-    "id": "vod_m_390",
-    "title": "982-Highland Tower",
-    "type": "movie",
-    "genre": [
-      "Action",
-      "Thriller",
-      "Drama"
-    ],
-    "origin": "malay",
-    "poster": "https://image-resizer-cloud-cdn.api.tmcms.quickplay.com/image/56708EBD-BDF4-4098-B2EB-4D441DDDE8CA/0-2x3.jpg?width=300",
-    "backdrop": "https://image-resizer-cloud-cdn.api.tmcms.quickplay.com/image/56708EBD-BDF4-4098-B2EB-4D441DDDE8CA/0-2x3.jpg?width=300",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "4K UHD",
-    "ageRating": "P13",
-    "synopsis": "Filem 982-Highland Tower (VOD UNIFI) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/unifi2.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&channel=991",
-    "clearKey": "56708ebdbdf44098b2eb4d441ddde8ca:9ab1e54bf6fed32f491da529382b91eb",
-    "isTrending": false,
-    "isPopular": true
-  },
-  {
-    "id": "vod_m_391",
-    "title": "983-Ia Wujud",
-    "type": "movie",
-    "genre": [
-      "Action",
-      "Thriller",
-      "Drama"
-    ],
-    "origin": "malay",
-    "poster": "https://image-resizer-cloud-cdn.api.tmcms.quickplay.com/image/4CD255E3-216F-45DE-BD46-E215B5B30CAC/0-2x3.jpg?width=300",
-    "backdrop": "https://image-resizer-cloud-cdn.api.tmcms.quickplay.com/image/4CD255E3-216F-45DE-BD46-E215B5B30CAC/0-2x3.jpg?width=300",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "4K UHD",
-    "ageRating": "P13",
-    "synopsis": "Filem 983-Ia Wujud (VOD UNIFI) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/unifi2.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&channel=990",
-    "clearKey": "4cd255e3216f45debd46e215b5b30cac:4cf5596cb42245b5fdc2b32186693e79",
-    "isTrending": false,
-    "isPopular": true
-  },
-  {
-    "id": "vod_m_392",
-    "title": "984-Budak Pendamping",
-    "type": "movie",
-    "genre": [
-      "Action",
-      "Thriller",
-      "Drama"
-    ],
-    "origin": "malay",
-    "poster": "https://image-resizer-cloud-cdn.api.tmcms.quickplay.com/image/A33CCB85-3587-4ACE-8577-BB73C9269FA4/0-2x3.jpg?width=300",
-    "backdrop": "https://image-resizer-cloud-cdn.api.tmcms.quickplay.com/image/A33CCB85-3587-4ACE-8577-BB73C9269FA4/0-2x3.jpg?width=300",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "4K UHD",
-    "ageRating": "P13",
-    "synopsis": "Filem 984-Budak Pendamping (VOD UNIFI) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/unifi2.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&channel=898",
-    "clearKey": "a33ccb8535874ace8577bb73c9269fa4:a918839045e9fe121a209141c865c82c",
-    "isTrending": false,
-    "isPopular": true
-  },
-  {
-    "id": "vod_m_393",
-    "title": "985-Wangi",
-    "type": "movie",
-    "genre": [
-      "Action",
-      "Thriller",
-      "Drama"
-    ],
-    "origin": "malay",
-    "poster": "https://image-resizer-cloud-cdn.api.tmcms.quickplay.com/image/7C04A261-B5A4-4277-8BB8-88A22B8DD746/0-2x3.jpg?width=300",
-    "backdrop": "https://image-resizer-cloud-cdn.api.tmcms.quickplay.com/image/7C04A261-B5A4-4277-8BB8-88A22B8DD746/0-2x3.jpg?width=300",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "4K UHD",
-    "ageRating": "P13",
-    "synopsis": "Filem 985-Wangi (VOD UNIFI) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/unifi2.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&channel=897",
-    "clearKey": "7c04a261b5a442778bb888a22b8dd746:63a1a052d2878ab0e3fde385338a419b",
-    "isTrending": false,
-    "isPopular": true
-  },
-  {
-    "id": "vod_m_394",
-    "title": "986-Paku Pontianak",
-    "type": "movie",
-    "genre": [
-      "Action",
-      "Thriller",
-      "Drama"
-    ],
-    "origin": "malay",
-    "poster": "https://image-resizer-cloud-cdn.api.tmcms.quickplay.com/image/E067B637-FE49-4BA4-BDFC-B60D67CA5B86/0-2x3.jpg?width=300",
-    "backdrop": "https://image-resizer-cloud-cdn.api.tmcms.quickplay.com/image/E067B637-FE49-4BA4-BDFC-B60D67CA5B86/0-2x3.jpg?width=300",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "4K UHD",
-    "ageRating": "P13",
-    "synopsis": "Filem 986-Paku Pontianak (VOD UNIFI) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/unifi2.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&channel=896",
-    "clearKey": "e067b637fe494ba4bdfcb60d67ca5b86:0b2c6377e642508070b6113e4a42a534",
-    "isTrending": false,
-    "isPopular": true
-  },
-  {
-    "id": "vod_m_395",
-    "title": "987-Dark Castle",
-    "type": "movie",
-    "genre": [
-      "Action",
-      "Thriller",
-      "Drama"
-    ],
-    "origin": "malay",
-    "poster": "https://image-resizer-cloud-cdn.api.tmcms.quickplay.com/image/7010D489-030F-4CFD-9810-FA7465FDFC1E/0-2x3.jpg?width=300",
-    "backdrop": "https://image-resizer-cloud-cdn.api.tmcms.quickplay.com/image/7010D489-030F-4CFD-9810-FA7465FDFC1E/0-2x3.jpg?width=300",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "4K UHD",
-    "ageRating": "P13",
-    "synopsis": "Filem 987-Dark Castle (VOD UNIFI) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/unifi2.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&channel=895",
-    "clearKey": "7010d489030f4cfd9810fa7465fdfc1e:401b18f5bff81355511a6daa64427a11",
-    "isTrending": false,
-    "isPopular": true
+    "isPopular": true,
+    "apkCategory": "VOD UNIFI"
   },
   {
     "id": "vod_m_396",
@@ -1325,7 +275,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://image-resizer-cloud-cdn.api.tmcms.quickplay.com/image/A748F6CF-E2A4-4D56-8737-EA2DFB158E02/0-2x3.jpg?width=300",
     "backdrop": "https://image-resizer-cloud-cdn.api.tmcms.quickplay.com/image/A748F6CF-E2A4-4D56-8737-EA2DFB158E02/0-2x3.jpg?width=300",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -1336,33 +286,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/unifi2.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&channel=894",
     "clearKey": "a748f6cfe2a44d568737ea2dfb158e02:7ad1bc0059b513741ca0369183214351",
     "isTrending": false,
-    "isPopular": true
-  },
-  {
-    "id": "vod_m_397",
-    "title": "989-KL Vampires",
-    "type": "movie",
-    "genre": [
-      "Action",
-      "Thriller",
-      "Drama"
-    ],
-    "origin": "malay",
-    "poster": "https://image-resizer-cloud-cdn.api.tmcms.quickplay.com/image/FB3E86FD-EB60-4ABC-81E6-3B8D3DA6C0D5/0-2x3.jpg?width=300",
-    "backdrop": "https://image-resizer-cloud-cdn.api.tmcms.quickplay.com/image/FB3E86FD-EB60-4ABC-81E6-3B8D3DA6C0D5/0-2x3.jpg?width=300",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "4K UHD",
-    "ageRating": "P13",
-    "synopsis": "Filem 989-KL Vampires (VOD UNIFI) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/unifi2.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&channel=893",
-    "clearKey": "fb3e86fdeb604abc81e63b8d3da6c0d5:67235b9a975e5c094deaf7358126cffd",
-    "isTrending": false,
-    "isPopular": true
+    "isPopular": true,
+    "apkCategory": "VOD UNIFI"
   },
   {
     "id": "vod_m_398",
@@ -1377,7 +302,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://image-resizer-cloud-cdn.api.tmcms.quickplay.com/image/8D1018BA-1302-41FA-A438-2685802AD3F1/0-2x3.jpg?width=300",
     "backdrop": "https://image-resizer-cloud-cdn.api.tmcms.quickplay.com/image/8D1018BA-1302-41FA-A438-2685802AD3F1/0-2x3.jpg?width=300",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -1388,7 +313,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/unifi2.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&channel=892",
     "clearKey": "8d1018ba130241faa4382685802ad3f1:6647af88be451f690950f15c76606730",
     "isTrending": false,
-    "isPopular": true
+    "isPopular": true,
+    "apkCategory": "VOD UNIFI"
   },
   {
     "id": "vod_m_399",
@@ -1403,7 +329,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://image-resizer-cloud-cdn.api.tmcms.quickplay.com/image/B58840DB-8002-49F1-8229-964491D5C863/0-2x3.jpg?width=300",
     "backdrop": "https://image-resizer-cloud-cdn.api.tmcms.quickplay.com/image/B58840DB-8002-49F1-8229-964491D5C863/0-2x3.jpg?width=300",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -1414,7 +340,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/unifi2.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&channel=891",
     "clearKey": "b58840db800249f18229964491d5c863:4ffa260f0c9a9f7fd44ca06be533e703",
     "isTrending": false,
-    "isPopular": true
+    "isPopular": true,
+    "apkCategory": "VOD UNIFI"
   },
   {
     "id": "vod_m_400",
@@ -1429,7 +356,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://image-resizer-cloud-cdn.api.tmcms.quickplay.com/image/8109E1DD-D541-42F1-8DD5-4C89232F7D0B/0-2x3.jpg?width=300",
     "backdrop": "https://image-resizer-cloud-cdn.api.tmcms.quickplay.com/image/8109E1DD-D541-42F1-8DD5-4C89232F7D0B/0-2x3.jpg?width=300",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -1440,7 +367,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/unifi2.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&channel=890",
     "clearKey": "8109e1ddd54142f18dd54c89232f7d0b:1f4ac160acba217006067dc5c7b83e7b",
     "isTrending": false,
-    "isPopular": true
+    "isPopular": true,
+    "apkCategory": "VOD UNIFI"
   },
   {
     "id": "vod_m_401",
@@ -1455,7 +383,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://image-resizer-cloud-cdn.api.tmcms.quickplay.com/image/E6F55E16-C054-4A5A-A9E4-996BC5302EB0/0-2x3.jpg?width=300",
     "backdrop": "https://image-resizer-cloud-cdn.api.tmcms.quickplay.com/image/E6F55E16-C054-4A5A-A9E4-996BC5302EB0/0-2x3.jpg?width=300",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -1466,888 +394,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/unifi2.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&channel=889",
     "clearKey": "e6f55e16c0544a5aa9e4996bc5302eb0:562c6b840e0ba3f9dd239b73448eaf2e",
     "isTrending": false,
-    "isPopular": true
-  },
-  {
-    "id": "vod_m_402",
-    "title": "994-Elevator Game",
-    "type": "movie",
-    "genre": [
-      "Action",
-      "Thriller",
-      "Drama"
-    ],
-    "origin": "malay",
-    "poster": "https://image-resizer-cloud-cdn.api.tmcms.quickplay.com/image/5B343D4E-B23E-44B0-89DE-BB290AD74729/0-2x3.jpg?width=300",
-    "backdrop": "https://image-resizer-cloud-cdn.api.tmcms.quickplay.com/image/5B343D4E-B23E-44B0-89DE-BB290AD74729/0-2x3.jpg?width=300",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "4K UHD",
-    "ageRating": "P13",
-    "synopsis": "Filem 994-Elevator Game (VOD UNIFI) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/unifi2.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&channel=888",
-    "clearKey": "5b343d4eb23e44b089debb290ad74729:9cf5205bb300ed4e0fa6d3a0004bd48a",
-    "isTrending": false,
-    "isPopular": true
-  },
-  {
-    "id": "vod_m_403",
-    "title": "995-Sosok Ketiga",
-    "type": "movie",
-    "genre": [
-      "Action",
-      "Thriller",
-      "Drama"
-    ],
-    "origin": "malay",
-    "poster": "https://image-resizer-cloud-cdn.api.tmcms.quickplay.com/image/5C2DFB35-84E8-4DC9-8B28-1D5DACDD724C/0-2x3.jpg?width=300",
-    "backdrop": "https://image-resizer-cloud-cdn.api.tmcms.quickplay.com/image/5C2DFB35-84E8-4DC9-8B28-1D5DACDD724C/0-2x3.jpg?width=300",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "4K UHD",
-    "ageRating": "P13",
-    "synopsis": "Filem 995-Sosok Ketiga (VOD UNIFI) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/unifi2.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&channel=887",
-    "clearKey": "5c2dfb3584e84dc98b281d5dacdd724c:f1d75c483c644c74f2b19496a9a8443b",
-    "isTrending": false,
-    "isPopular": true
-  },
-  {
-    "id": "vod_m_404",
-    "title": "996-Ceroboh",
-    "type": "movie",
-    "genre": [
-      "Action",
-      "Thriller",
-      "Drama"
-    ],
-    "origin": "malay",
-    "poster": "https://image-resizer-cloud-cdn.api.tmcms.quickplay.com/image/2D377B28-E987-4A97-A92A-CEF909A355FE/0-2x3.jpg?width=300",
-    "backdrop": "https://image-resizer-cloud-cdn.api.tmcms.quickplay.com/image/2D377B28-E987-4A97-A92A-CEF909A355FE/0-2x3.jpg?width=300",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "4K UHD",
-    "ageRating": "P13",
-    "synopsis": "Filem 996-Ceroboh (VOD UNIFI) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/unifi2.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&channel=885",
-    "clearKey": "2d377b28e9874a97a92acef909a355fe:d75583d0994a0280f03ad3dc3db4b6b5",
-    "isTrending": false,
-    "isPopular": true
-  },
-  {
-    "id": "vod_m_405",
-    "title": "997-Janin Iblis Neraka",
-    "type": "movie",
-    "genre": [
-      "Action",
-      "Thriller",
-      "Drama"
-    ],
-    "origin": "malay",
-    "poster": "https://image-resizer-cloud-cdn.api.tmcms.quickplay.com/image/897911A1-4F4E-48D9-A2C3-42F2AFDB80B7/0-2x3.jpg?width=300",
-    "backdrop": "https://image-resizer-cloud-cdn.api.tmcms.quickplay.com/image/897911A1-4F4E-48D9-A2C3-42F2AFDB80B7/0-2x3.jpg?width=300",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "4K UHD",
-    "ageRating": "P13",
-    "synopsis": "Filem 997-Janin Iblis Neraka (VOD UNIFI) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/unifi2.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&channel=886",
-    "clearKey": "897911a14f4e48d9a2c342f2afdb80b7:fc3dfb72869dcbfcd5798997bee3242d",
-    "isTrending": false,
-    "isPopular": true
-  },
-  {
-    "id": "vod_m_406",
-    "title": "998-Ghost Ship",
-    "type": "movie",
-    "genre": [
-      "Action",
-      "Thriller",
-      "Drama"
-    ],
-    "origin": "malay",
-    "poster": "https://image-resizer-cloud-cdn.api.tmcms.quickplay.com/image/D5B9F70E-2842-4F96-94A1-B0C4324C6EEE/0-2x3.jpg?width=300",
-    "backdrop": "https://image-resizer-cloud-cdn.api.tmcms.quickplay.com/image/D5B9F70E-2842-4F96-94A1-B0C4324C6EEE/0-2x3.jpg?width=300",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "4K UHD",
-    "ageRating": "P13",
-    "synopsis": "Filem 998-Ghost Ship (VOD UNIFI) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/unifi2.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&channel=884",
-    "clearKey": "d5b9f70e28424f9694a1b0c4324c6eee:985a45dd53b235e7c6e31adfea2f65e3",
-    "isTrending": false,
-    "isPopular": true
-  },
-  {
-    "id": "vod_m_407",
-    "title": "999-Jin Qorin",
-    "type": "movie",
-    "genre": [
-      "Action",
-      "Thriller",
-      "Drama"
-    ],
-    "origin": "malay",
-    "poster": "https://image-resizer-cloud-cdn.api.tmcms.quickplay.com/image/36DAD8E6-9028-4079-BC41-86C2955BD52A/0-2x3.jpg?width=300",
-    "backdrop": "https://image-resizer-cloud-cdn.api.tmcms.quickplay.com/image/36DAD8E6-9028-4079-BC41-86C2955BD52A/0-2x3.jpg?width=300",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "4K UHD",
-    "ageRating": "P13",
-    "synopsis": "Filem 999-Jin Qorin (VOD UNIFI) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/unifi2.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&channel=883",
-    "clearKey": "36dad8e690284079bc4186c2955bd52a:8d7ecd76fca4ac4a90c7528fc64503bb",
-    "isTrending": false,
-    "isPopular": true
-  },
-  {
-    "id": "vod_m_408",
-    "title": "600 Kolong",
-    "type": "movie",
-    "genre": [
-      "Horror",
-      "Thriller"
-    ],
-    "origin": "malay",
-    "poster": "https://vod-poster.astro.com.my/prod/IVP(STB_OTT_STV)_IZPSD_p_IVP_PORT_390x585_42FC3_2025113_144751.jpg",
-    "backdrop": "https://vod-poster.astro.com.my/prod/IVP(STB_OTT_STV)_IZPSD_p_IVP_PORT_390x585_42FC3_2025113_144751.jpg",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "4K UHD",
-    "ageRating": "18",
-    "synopsis": "Filem 600 Kolong (VOD BOO) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/xtro_vod2.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&channel=600",
-    "clearKey": "f02efbc21343d8bf1291d1a07fa60210:d892084c385b5b05cf34e25345e99bcf",
-    "isTrending": false,
-    "isPopular": false
-  },
-  {
-    "id": "vod_m_409",
-    "title": "599 Cerana Biduk Bu Merah",
-    "type": "movie",
-    "genre": [
-      "Horror",
-      "Thriller"
-    ],
-    "origin": "malay",
-    "poster": "https://vod-poster.astro.com.my/prod/IVP(STB_OTT_STV)_KMCWF_P_IVP_PORT_390x585_7A637_2025426_232437.jpg",
-    "backdrop": "https://vod-poster.astro.com.my/prod/IVP(STB_OTT_STV)_KMCWF_P_IVP_PORT_390x585_7A637_2025426_232437.jpg",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "4K UHD",
-    "ageRating": "18",
-    "synopsis": "Filem 599 Cerana Biduk Bu Merah (VOD BOO) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/xtro_vod2.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&channel=599",
-    "clearKey": "851dc33caf5e24ebfbd7ac7b63753e10:0f240535b04b2e783c82a239016df3f7",
-    "isTrending": false,
-    "isPopular": false
-  },
-  {
-    "id": "vod_m_410",
-    "title": "598 Pulau",
-    "type": "movie",
-    "genre": [
-      "Horror",
-      "Thriller"
-    ],
-    "origin": "malay",
-    "poster": "https://vod-poster.astro.com.my/prod/IVP(STB_OTT_STV)_KHWYS_p_IVP_PORT_390x585_74124_2025426_03846.jpg",
-    "backdrop": "https://vod-poster.astro.com.my/prod/IVP(STB_OTT_STV)_KHWYS_p_IVP_PORT_390x585_74124_2025426_03846.jpg",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "4K UHD",
-    "ageRating": "18",
-    "synopsis": "Filem 598 Pulau (VOD BOO) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/xtro_vod2.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&channel=598",
-    "clearKey": "998b7d2c8a67a42a725bb0d29db26810:cb024c2b72159a300c841aba8470d5aa",
-    "isTrending": false,
-    "isPopular": false
-  },
-  {
-    "id": "vod_m_411",
-    "title": "597 Hantu Dalam Botol Kicap",
-    "type": "movie",
-    "genre": [
-      "Horror",
-      "Thriller"
-    ],
-    "origin": "malay",
-    "poster": "https://vod-poster.astro.com.my/prod/IVP(STB_OTT_STV)_FWNVR_p_IVP_PORT_390x585_CE0_2025426_23244.jpg",
-    "backdrop": "https://vod-poster.astro.com.my/prod/IVP(STB_OTT_STV)_FWNVR_p_IVP_PORT_390x585_CE0_2025426_23244.jpg",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "4K UHD",
-    "ageRating": "18",
-    "synopsis": "Filem 597 Hantu Dalam Botol Kicap (VOD BOO) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/xtro_vod2.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&channel=597",
-    "clearKey": "dc81bffd76cb250208cd770e31fe0a10:b031c6e8fca0798998e901adbbfd8561",
-    "isTrending": false,
-    "isPopular": false
-  },
-  {
-    "id": "vod_m_412",
-    "title": "596 Nongkrong",
-    "type": "movie",
-    "genre": [
-      "Horror",
-      "Thriller"
-    ],
-    "origin": "malay",
-    "poster": "https://vod-poster.astro.com.my/prod/IVP(STB_OTT_STV)_FXICU_p_IVP_PORT_390x585_53E16_2025113_144819.jpg",
-    "backdrop": "https://vod-poster.astro.com.my/prod/IVP(STB_OTT_STV)_FXICU_p_IVP_PORT_390x585_53E16_2025113_144819.jpg",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "4K UHD",
-    "ageRating": "18",
-    "synopsis": "Filem 596 Nongkrong (VOD BOO) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/xtro_vod2.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&channel=596",
-    "clearKey": "76c6474b9632b263535b8a0391090510:11dfc15ef4346c670d5fedd78287f0ce",
-    "isTrending": false,
-    "isPopular": false
-  },
-  {
-    "id": "vod_m_413",
-    "title": "595 Musyrik",
-    "type": "movie",
-    "genre": [
-      "Horror",
-      "Thriller"
-    ],
-    "origin": "malay",
-    "poster": "https://vod-poster.astro.com.my/prod/IVP(STB_OTT_STV)_KCTGP_p_IVP_PORT_390x585_6A9BE_2024313_183952.jpg",
-    "backdrop": "https://vod-poster.astro.com.my/prod/IVP(STB_OTT_STV)_KCTGP_p_IVP_PORT_390x585_6A9BE_2024313_183952.jpg",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "4K UHD",
-    "ageRating": "18",
-    "synopsis": "Filem 595 Musyrik (VOD BOO) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/xtro_vod2.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&channel=595",
-    "clearKey": "10bad26070781f88f2adfbe2ff8bbe10:f4a7c468b80e6f3c687c6f8bd5d09d57",
-    "isTrending": false,
-    "isPopular": false
-  },
-  {
-    "id": "vod_m_414",
-    "title": "594 Rumah the Movie",
-    "type": "movie",
-    "genre": [
-      "Horror",
-      "Thriller"
-    ],
-    "origin": "malay",
-    "poster": "https://vod-poster.astro.com.my/prod/IVP(STB_OTT_STV)_JZMGM_p_IVP_PORT_390x585_6A9C1_2024313_183952.jpg",
-    "backdrop": "https://vod-poster.astro.com.my/prod/IVP(STB_OTT_STV)_JZMGM_p_IVP_PORT_390x585_6A9C1_2024313_183952.jpg",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "4K UHD",
-    "ageRating": "18",
-    "synopsis": "Filem 594 Rumah the Movie (VOD BOO) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/xtro_vod2.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&channel=594",
-    "clearKey": "72a077aeb0884deedaff51453af24310:7939fad0bc15e5557b91c51757b74f21",
-    "isTrending": false,
-    "isPopular": false
-  },
-  {
-    "id": "vod_m_415",
-    "title": "593 Banglo Berkunci",
-    "type": "movie",
-    "genre": [
-      "Horror",
-      "Thriller"
-    ],
-    "origin": "malay",
-    "poster": "https://vod-poster.astro.com.my/prod/IVP(STB_OTT_STV)_IDUGT_p_IVP_PORT_390x585_549F5_2024313_175957.jpg",
-    "backdrop": "https://vod-poster.astro.com.my/prod/IVP(STB_OTT_STV)_IDUGT_p_IVP_PORT_390x585_549F5_2024313_175957.jpg",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "4K UHD",
-    "ageRating": "18",
-    "synopsis": "Filem 593 Banglo Berkunci (VOD BOO) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/xtro_vod2.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&channel=593",
-    "clearKey": "44a29a52078ed076447a65ff971a2410:f0335276adb517fc91cdeac97c4f3235",
-    "isTrending": false,
-    "isPopular": false
-  },
-  {
-    "id": "vod_m_416",
-    "title": "592 Hantu Bukit Cina",
-    "type": "movie",
-    "genre": [
-      "Horror",
-      "Thriller"
-    ],
-    "origin": "malay",
-    "poster": "https://vod-poster.astro.com.my/prod/IVP(STB_OTT_STV)_HCQSC_p_IVP_PORT_390x585_26FE9_2025210_184424.jpg",
-    "backdrop": "https://vod-poster.astro.com.my/prod/IVP(STB_OTT_STV)_HCQSC_p_IVP_PORT_390x585_26FE9_2025210_184424.jpg",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "4K UHD",
-    "ageRating": "18",
-    "synopsis": "Filem 592 Hantu Bukit Cina (VOD BOO) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/xtro_vod2.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&channel=592",
-    "clearKey": "554f7310af65b7f4c94dae89a203d910:9291a4747c65bff4b33f6106a75f27c9",
-    "isTrending": false,
-    "isPopular": false
-  },
-  {
-    "id": "vod_m_417",
-    "title": "591 Damping Malam",
-    "type": "movie",
-    "genre": [
-      "Horror",
-      "Thriller"
-    ],
-    "origin": "malay",
-    "poster": "https://vod-poster.astro.com.my/prod/IVP(STB_OTT_STV)_FTLEY_p_IVP_PORT_390x585_55A2C_2024313_18132.jpg",
-    "backdrop": "https://vod-poster.astro.com.my/prod/IVP(STB_OTT_STV)_FTLEY_p_IVP_PORT_390x585_55A2C_2024313_18132.jpg",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "4K UHD",
-    "ageRating": "18",
-    "synopsis": "Filem 591 Damping Malam (VOD BOO) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/xtro_vod2.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&channel=591",
-    "clearKey": "3df46595f6f7c228b6ac7a830a523010:daa4f3ce4fe4b852f1bf0af8558068be",
-    "isTrending": false,
-    "isPopular": false
-  },
-  {
-    "id": "vod_m_418",
-    "title": "590 Minyak Dagu",
-    "type": "movie",
-    "genre": [
-      "Horror",
-      "Thriller"
-    ],
-    "origin": "malay",
-    "poster": "https://vod-poster.astro.com.my/prod/IVP(STB_OTT_STV)_GIFAS_P_IVP_PORT_390x585_53E17_2025113_144757.jpg",
-    "backdrop": "https://vod-poster.astro.com.my/prod/IVP(STB_OTT_STV)_GIFAS_P_IVP_PORT_390x585_53E17_2025113_144757.jpg",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "4K UHD",
-    "ageRating": "18",
-    "synopsis": "Filem 590 Minyak Dagu (VOD BOO) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/xtro_vod2.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&channel=590",
-    "clearKey": "5afc37cd53acb9badf8b059c27870b10:ac8a709b084c6818a6d31b8b694ef988",
-    "isTrending": false,
-    "isPopular": false
-  },
-  {
-    "id": "vod_m_419",
-    "title": "589 Ular",
-    "type": "movie",
-    "genre": [
-      "Horror",
-      "Thriller"
-    ],
-    "origin": "malay",
-    "poster": "https://vod-poster.astro.com.my/prod/IVP(STB_OTT_STV)_GQMED_series_p_IVP_PORT_390x585_80A38_2025214_184755.jpg",
-    "backdrop": "https://vod-poster.astro.com.my/prod/IVP(STB_OTT_STV)_GQMED_series_p_IVP_PORT_390x585_80A38_2025214_184755.jpg",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "4K UHD",
-    "ageRating": "18",
-    "synopsis": "Filem 589 Ular (VOD BOO) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/xtro_vod2.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&channel=589",
-    "clearKey": "d284440235939957089f000ed0ffd410:107803f7e933313e2cac557e0042223f",
-    "isTrending": false,
-    "isPopular": false
-  },
-  {
-    "id": "vod_m_420",
-    "title": "588 Dendam Orang Mati",
-    "type": "movie",
-    "genre": [
-      "Horror",
-      "Thriller"
-    ],
-    "origin": "malay",
-    "poster": "https://vod-poster.astro.com.my/prod/IVP(STB_OTT_STV)_HWEHA_P_IVP_PORT_390x585_19A39_2024313_164454.jpg",
-    "backdrop": "https://vod-poster.astro.com.my/prod/IVP(STB_OTT_STV)_HWEHA_P_IVP_PORT_390x585_19A39_2024313_164454.jpg",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "4K UHD",
-    "ageRating": "18",
-    "synopsis": "Filem 588 Dendam Orang Mati (VOD BOO) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/xtro_vod2.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&channel=588",
-    "clearKey": "4ad5a5382a5b32b191213ed2c8585d10:795681b78037b716571a7380f22e5ebd",
-    "isTrending": false,
-    "isPopular": false
-  },
-  {
-    "id": "vod_m_421",
-    "title": "587 Gudang Kubur",
-    "type": "movie",
-    "genre": [
-      "Horror",
-      "Thriller"
-    ],
-    "origin": "malay",
-    "poster": "https://vod-poster.astro.com.my/prod/IVP(STB_OTT_STV)_HYZTD_p_IVP_PORT_390x585_18D31_2024313_164455.jpg",
-    "backdrop": "https://vod-poster.astro.com.my/prod/IVP(STB_OTT_STV)_HYZTD_p_IVP_PORT_390x585_18D31_2024313_164455.jpg",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "4K UHD",
-    "ageRating": "18",
-    "synopsis": "Filem 587 Gudang Kubur (VOD BOO) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/xtro_vod2.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&channel=587",
-    "clearKey": "3b37e7df2bdfd5f1b300981a6548f310:6742ddce2c32c4a410a9c541e3dd955c",
-    "isTrending": false,
-    "isPopular": false
-  },
-  {
-    "id": "vod_m_422",
-    "title": "586 Kelibat",
-    "type": "movie",
-    "genre": [
-      "Horror",
-      "Thriller"
-    ],
-    "origin": "malay",
-    "poster": "https://vod-poster.astro.com.my/prod/IVP(STB_OTT_STV)_GXLLJ_P_IVP_PORT_390x585_A62E_2024313_154718.jpg",
-    "backdrop": "https://vod-poster.astro.com.my/prod/IVP(STB_OTT_STV)_GXLLJ_P_IVP_PORT_390x585_A62E_2024313_154718.jpg",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "4K UHD",
-    "ageRating": "18",
-    "synopsis": "Filem 586 Kelibat (VOD BOO) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/xtro_vod2.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&channel=586",
-    "clearKey": "2f9aeb2c7da1e11a305230aa039a0510:85b3daad54cc1bc9ae9aeed7215a92a6",
-    "isTrending": false,
-    "isPopular": false
-  },
-  {
-    "id": "vod_m_423",
-    "title": "585 Keranda Tok Wan Terbang",
-    "type": "movie",
-    "genre": [
-      "Horror",
-      "Thriller"
-    ],
-    "origin": "malay",
-    "poster": "https://vod-poster.astro.com.my/prod/IVP(STB_OTT_STV)_HWMTW_p_IVP_PORT_390x585_116E8_2024313_15488.jpg",
-    "backdrop": "https://vod-poster.astro.com.my/prod/IVP(STB_OTT_STV)_HWMTW_p_IVP_PORT_390x585_116E8_2024313_15488.jpg",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "4K UHD",
-    "ageRating": "18",
-    "synopsis": "Filem 585 Keranda Tok Wan Terbang (VOD BOO) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/xtro_vod2.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&channel=585",
-    "clearKey": "29cc95c78e496abfb9c1c40a27c14e10:45153ca237d8d6b82bde4c9e08becbaf",
-    "isTrending": false,
-    "isPopular": false
-  },
-  {
-    "id": "vod_m_424",
-    "title": "584 Memburu",
-    "type": "movie",
-    "genre": [
-      "Horror",
-      "Thriller"
-    ],
-    "origin": "malay",
-    "poster": "https://vod-poster.astro.com.my/prod/IVP(STB_OTT_STV)_KHHOZ_P_IVP_PORT_390x585_202475_93711.jpg",
-    "backdrop": "https://vod-poster.astro.com.my/prod/IVP(STB_OTT_STV)_KHHOZ_P_IVP_PORT_390x585_202475_93711.jpg",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "4K UHD",
-    "ageRating": "18",
-    "synopsis": "Filem 584 Memburu (VOD BOO) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/xtro_vod2.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&channel=584",
-    "clearKey": "e1ae2ad367525b727300217e16ba6810:99cdd84ff187bda06c501fb6bafe6d38",
-    "isTrending": false,
-    "isPopular": false
-  },
-  {
-    "id": "vod_m_425",
-    "title": "583 Sumpahan Kum Kum",
-    "type": "movie",
-    "genre": [
-      "Horror",
-      "Thriller"
-    ],
-    "origin": "malay",
-    "poster": "https://vod-poster.astro.com.my/prod/IVP(STB_OTT_STV)_HHDNK_p_IVP_PORT_390x585_C97_2024313_154453.jpg",
-    "backdrop": "https://vod-poster.astro.com.my/prod/IVP(STB_OTT_STV)_HHDNK_p_IVP_PORT_390x585_C97_2024313_154453.jpg",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "4K UHD",
-    "ageRating": "18",
-    "synopsis": "Filem 583 Sumpahan Kum Kum (VOD BOO) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/xtro_vod2.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&channel=583",
-    "clearKey": "1e5ef3ea09ffb4831ec615a83bb44b10:a9ce2b98e690cb354668482da46d3616",
-    "isTrending": false,
-    "isPopular": false
-  },
-  {
-    "id": "vod_m_426",
-    "title": "582 Kampung Latah\u2026The Mummy",
-    "type": "movie",
-    "genre": [
-      "Horror",
-      "Thriller"
-    ],
-    "origin": "malay",
-    "poster": "https://vod-poster.astro.com.my/prod/IVP(STB_OTT_STV)_KCTGQ_p_IVP_PORT_390x585_693A5_2024313_18344.jpg",
-    "backdrop": "https://vod-poster.astro.com.my/prod/IVP(STB_OTT_STV)_KCTGQ_p_IVP_PORT_390x585_693A5_2024313_18344.jpg",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "4K UHD",
-    "ageRating": "18",
-    "synopsis": "Filem 582 Kampung Latah\u2026The Mummy (VOD BOO) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/xtro_vod2.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&channel=582",
-    "clearKey": "85d2c0a95781d0f147593be5a2dc2e10:784001c860b8c24dacffdaed29b64e66",
-    "isTrending": false,
-    "isPopular": false
-  },
-  {
-    "id": "vod_m_427",
-    "title": "581 It Crawl Beneath",
-    "type": "movie",
-    "genre": [
-      "Horror",
-      "Thriller"
-    ],
-    "origin": "malay",
-    "poster": "https://vod-poster.astro.com.my/prod/IVP(STB_OTT_STV)_KPHVP_p_IVP_PORT_390x585_829BF_2025224_10189.jpg",
-    "backdrop": "https://vod-poster.astro.com.my/prod/IVP(STB_OTT_STV)_KPHVP_p_IVP_PORT_390x585_829BF_2025224_10189.jpg",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "4K UHD",
-    "ageRating": "18",
-    "synopsis": "Filem 581 It Crawl Beneath (VOD BOO) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/xtro_vod2.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&channel=581",
-    "clearKey": "844f34c7ef46ab57198e58ca1e9d1b10:4528e69f58c9cd10c81a4e84aba2dba8",
-    "isTrending": false,
-    "isPopular": false
-  },
-  {
-    "id": "vod_m_428",
-    "title": "580 The Red Tide Massacre",
-    "type": "movie",
-    "genre": [
-      "Horror",
-      "Thriller"
-    ],
-    "origin": "malay",
-    "poster": "https://vod-poster.astro.com.my/prod/IVP(STB_OTT_STV)_KLVPG_p_IVP_PORT_390x585_202436_205728.jpg",
-    "backdrop": "https://vod-poster.astro.com.my/prod/IVP(STB_OTT_STV)_KLVPG_p_IVP_PORT_390x585_202436_205728.jpg",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "4K UHD",
-    "ageRating": "18",
-    "synopsis": "Filem 580 The Red Tide Massacre (VOD BOO) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/xtro_vod2.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&channel=580",
-    "clearKey": "2572dfa4c53eb6382463fc1da707e410:7b0b473064e0bf5279c643dca3cf4e95",
-    "isTrending": false,
-    "isPopular": false
-  },
-  {
-    "id": "vod_m_429",
-    "title": "579 Escaping Paradise",
-    "type": "movie",
-    "genre": [
-      "Horror",
-      "Thriller"
-    ],
-    "origin": "malay",
-    "poster": "https://vod-poster.astro.com.my/prod/IVP(STB_OTT_STV)_KKXNO_p_IVP_PORT_390x585_2024111_125042.jpg",
-    "backdrop": "https://vod-poster.astro.com.my/prod/IVP(STB_OTT_STV)_KKXNO_p_IVP_PORT_390x585_2024111_125042.jpg",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "4K UHD",
-    "ageRating": "18",
-    "synopsis": "Filem 579 Escaping Paradise (VOD BOO) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/xtro_vod2.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&channel=579",
-    "clearKey": "8ab2f03e425f88986c5352065593bb10:724af3ff5dcfd9cbe2208e9e00eeeaa6",
-    "isTrending": false,
-    "isPopular": false
-  },
-  {
-    "id": "vod_m_430",
-    "title": "578 Monster Of Man",
-    "type": "movie",
-    "genre": [
-      "Horror",
-      "Thriller"
-    ],
-    "origin": "malay",
-    "poster": "https://vod-poster.astro.com.my/prod/IVP(STB_OTT_STV)_KEOVD_P_IVP_PORT_390x585_681E9_2024313_182951.jpg",
-    "backdrop": "https://vod-poster.astro.com.my/prod/IVP(STB_OTT_STV)_KEOVD_P_IVP_PORT_390x585_681E9_2024313_182951.jpg",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "4K UHD",
-    "ageRating": "18",
-    "synopsis": "Filem 578 Monster Of Man (VOD BOO) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/xtro_vod2.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&channel=578",
-    "clearKey": "649dbafb5787855865281b7012ceaf10:f82b1a5c11f7895d2ce5cf1e541cc5d6",
-    "isTrending": false,
-    "isPopular": false
-  },
-  {
-    "id": "vod_m_431",
-    "title": "577 Jurassic Games",
-    "type": "movie",
-    "genre": [
-      "Horror",
-      "Thriller"
-    ],
-    "origin": "malay",
-    "poster": "https://vod-poster.astro.com.my/prod/IVP(STB_OTT_STV)_KGRLT_p_IVP_PORT_390x585_2024524_53015.jpg",
-    "backdrop": "https://vod-poster.astro.com.my/prod/IVP(STB_OTT_STV)_KGRLT_p_IVP_PORT_390x585_2024524_53015.jpg",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "4K UHD",
-    "ageRating": "18",
-    "synopsis": "Filem 577 Jurassic Games (VOD BOO) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/xtro_vod2.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&channel=577",
-    "clearKey": "1001cefd68888946fd5840394fb25510:4bf9d83d8a24b45bc01958f237db3e72",
-    "isTrending": false,
-    "isPopular": false
-  },
-  {
-    "id": "vod_m_432",
-    "title": "576 Dont Talk To Strangers",
-    "type": "movie",
-    "genre": [
-      "Horror",
-      "Thriller"
-    ],
-    "origin": "malay",
-    "poster": "https://vod-poster.astro.com.my/prod/IVP(STB_OTT_STV)_KLVPF_p_IVP_PORT_390x585_2024228_231025.jpg",
-    "backdrop": "https://vod-poster.astro.com.my/prod/IVP(STB_OTT_STV)_KLVPF_p_IVP_PORT_390x585_2024228_231025.jpg",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "4K UHD",
-    "ageRating": "18",
-    "synopsis": "Filem 576 Dont Talk To Strangers (VOD BOO) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/xtro_vod2.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&channel=576",
-    "clearKey": "9c9ff0cbb681a2437eeadec955b6de10:7e9342e3ae1c961140f88cd927c49b49",
-    "isTrending": false,
-    "isPopular": false
-  },
-  {
-    "id": "vod_m_433",
-    "title": "575 Seance",
-    "type": "movie",
-    "genre": [
-      "Horror",
-      "Thriller"
-    ],
-    "origin": "malay",
-    "poster": "https://vod-poster.astro.com.my/prod/IVP(STB_OTT_STV)_KINHR_p_IVP_PORT_390x585_71984_2024313_191723.jpg",
-    "backdrop": "https://vod-poster.astro.com.my/prod/IVP(STB_OTT_STV)_KINHR_p_IVP_PORT_390x585_71984_2024313_191723.jpg",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "4K UHD",
-    "ageRating": "18",
-    "synopsis": "Filem 575 Seance (VOD BOO) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/xtro_vod2.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&channel=575",
-    "clearKey": "7751c54a8629913f51d4a93f52568f10:6ab1e703ea2762410eda006043a71895",
-    "isTrending": false,
-    "isPopular": false
-  },
-  {
-    "id": "vod_m_434",
-    "title": "574 Sleeping Beauties",
-    "type": "movie",
-    "genre": [
-      "Horror",
-      "Thriller"
-    ],
-    "origin": "malay",
-    "poster": "https://vod-poster.astro.com.my/prod/IVP(STB_OTT_STV)_KKHLL_P_IVP_PORT_390x585_2024621_62131.jpg",
-    "backdrop": "https://vod-poster.astro.com.my/prod/IVP(STB_OTT_STV)_KKHLL_P_IVP_PORT_390x585_2024621_62131.jpg",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "4K UHD",
-    "ageRating": "18",
-    "synopsis": "Filem 574 Sleeping Beauties (VOD BOO) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/xtro_vod2.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&channel=574",
-    "clearKey": "30d33ecdec2587b356a2d9891ce7cd10:9b6f84abe6ff0104ffa98db5dad36c41",
-    "isTrending": false,
-    "isPopular": false
-  },
-  {
-    "id": "vod_m_435",
-    "title": "573 Tuju Tuju",
-    "type": "movie",
-    "genre": [
-      "Horror",
-      "Thriller"
-    ],
-    "origin": "malay",
-    "poster": "https://vod-poster.astro.com.my/prod/IVP(STB_OTT_STV)_JOLWG_P_IVP_PORT_390x585_63BB2_2024313_18191.jpg",
-    "backdrop": "https://vod-poster.astro.com.my/prod/IVP(STB_OTT_STV)_JOLWG_P_IVP_PORT_390x585_63BB2_2024313_18191.jpg",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "4K UHD",
-    "ageRating": "18",
-    "synopsis": "Filem 573 Tuju Tuju (VOD BOO) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/xtro_vod2.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&channel=573",
-    "clearKey": "5ccaad5d5e8c586a86ec3bdfe0b90c10:c27dbfea656acef969008a54958df679",
-    "isTrending": false,
-    "isPopular": false
-  },
-  {
-    "id": "vod_m_436",
-    "title": "572 Jeritan Jin",
-    "type": "movie",
-    "genre": [
-      "Horror",
-      "Thriller"
-    ],
-    "origin": "malay",
-    "poster": "https://vod-poster.astro.com.my/prod/IVP(STB_OTT_STV)_JWKUE_p_IVP_PORT_390x585_6929F_2024313_183312.jpg",
-    "backdrop": "https://vod-poster.astro.com.my/prod/IVP(STB_OTT_STV)_JWKUE_p_IVP_PORT_390x585_6929F_2024313_183312.jpg",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "4K UHD",
-    "ageRating": "18",
-    "synopsis": "Filem 572 Jeritan Jin (VOD BOO) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/xtro_vod2.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&channel=572",
-    "clearKey": "8ac78a38597888eede20d6545b2b5e10:29bee75b0808aeed12914582df760eb0",
-    "isTrending": false,
-    "isPopular": false
+    "isPopular": true,
+    "apkCategory": "VOD UNIFI"
   },
   {
     "id": "vod_s_001",
@@ -2360,7 +408,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://vod-poster.astro.com.my/prod/IVP(STB_OTT_STV)_KWOLD_series_p_IVP_PORT_390x585_94EA0_2026724_16538.jpg",
     "backdrop": "https://vod-poster.astro.com.my/prod/IVP(STB_OTT_STV)_KWOLD_series_p_IVP_PORT_390x585_94EA0_2026724_16538.jpg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "quality": "4K UHD",
     "ageRating": "P13",
     "synopsis": "Siri drama popular Bulan Henti Bicara (Malay Series | Bulan Henti Bicara) dengan episod penuh dan kualiti penstriman pantas.",
@@ -2470,7 +518,8 @@ export const VOD_CATALOG: VodItem[] = [
         "synopsis": "Bulan Henti Bicara - Bulan Henti Bicara Ep12"
       }
     ],
-    "duration": "11 Episod"
+    "duration": "11 Episod",
+    "apkCategory": "MALAY SERIES"
   },
   {
     "id": "vod_s_002",
@@ -2483,7 +532,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://vod-poster.astro.com.my/prod/IVP(STB_OTT_STV)_KWOLD_series_p_IVP_PORT_390x585_94EA0_2026724_16538.jpg",
     "backdrop": "https://vod-poster.astro.com.my/prod/IVP(STB_OTT_STV)_KWOLD_series_p_IVP_PORT_390x585_94EA0_2026724_16538.jpg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "quality": "4K UHD",
     "ageRating": "P13",
     "synopsis": "Siri drama popular Bulan Henti BIcara (Malay Series | Bulan Henti BIcara) dengan episod penuh dan kualiti penstriman pantas.",
@@ -2503,7 +552,8 @@ export const VOD_CATALOG: VodItem[] = [
         "synopsis": "Bulan Henti BIcara - Bulan Henti Bicara Ep06"
       }
     ],
-    "duration": "1 Episod"
+    "duration": "1 Episod",
+    "apkCategory": "MALAY SERIES"
   },
   {
     "id": "vod_s_003",
@@ -2517,7 +567,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://vod-poster.astro.com.my/prod/IVP(STB_OTT_STV)_KXWRR_series_p_IVP_PORT_390x585_94963_2026713_131245.jpg",
     "backdrop": "https://vod-poster.astro.com.my/prod/IVP(STB_OTT_STV)_KXWRR_series_p_IVP_PORT_390x585_94963_2026713_131245.jpg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "quality": "4K UHD",
     "ageRating": "P13",
     "synopsis": "Siri drama popular Kasih Yang Terkorban (Malay Series | Kasih Yang Terkorban) dengan episod penuh dan kualiti penstriman pantas.",
@@ -2753,7 +803,8 @@ export const VOD_CATALOG: VodItem[] = [
         "synopsis": "Kasih Yang Terkorban - Kasih Yang Terkorban Ep25"
       }
     ],
-    "duration": "25 Episod"
+    "duration": "25 Episod",
+    "apkCategory": "MALAY SERIES"
   },
   {
     "id": "vod_s_004",
@@ -2766,7 +817,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://vod-poster.astro.com.my/prod/IVP(STB_OTT_STV)_KWSAW_series_p_IVP_PORT_390x585_93E6D_2026716_111027.jpg",
     "backdrop": "https://vod-poster.astro.com.my/prod/IVP(STB_OTT_STV)_KWSAW_series_p_IVP_PORT_390x585_93E6D_2026716_111027.jpg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "quality": "4K UHD",
     "ageRating": "P13",
     "synopsis": "Siri drama popular Wish List (Malay Series | Wish List) dengan episod penuh dan kualiti penstriman pantas.",
@@ -2921,7 +972,8 @@ export const VOD_CATALOG: VodItem[] = [
         "synopsis": "Wish List - Wish List Ep16"
       }
     ],
-    "duration": "16 Episod"
+    "duration": "16 Episod",
+    "apkCategory": "MALAY SERIES"
   },
   {
     "id": "vod_s_005",
@@ -2934,7 +986,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://vod-poster.astro.com.my/prod/IVP(STB_OTT_STV)_KWXTV_series_p_IVP_PORT_390x585_93884_202664_172435.jpg",
     "backdrop": "https://vod-poster.astro.com.my/prod/IVP(STB_OTT_STV)_KWXTV_series_p_IVP_PORT_390x585_93884_202664_172435.jpg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "quality": "4K UHD",
     "ageRating": "P13",
     "synopsis": "Siri drama popular Ikatan Terlarang (Malay Series | Ikatan Terlarang) dengan episod penuh dan kualiti penstriman pantas.",
@@ -3197,7 +1249,8 @@ export const VOD_CATALOG: VodItem[] = [
         "synopsis": "Ikatan Terlarang - Ikatan Terlarang Ep28"
       }
     ],
-    "duration": "28 Episod"
+    "duration": "28 Episod",
+    "apkCategory": "MALAY SERIES"
   },
   {
     "id": "vod_s_006",
@@ -3210,7 +1263,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhPNt5KlPUVwHu6FU8_dzXIU7MCuJBf-tnfW3T-GEhF1Ny76xx_dfhDIrRh1wiE4JA_mAFJQAfDx0C7QApZc_PCS9uLDYg02RQQvUlIL9lzJkBJa9-QMkPi82PjBVtSZ9MHyHCzordR8wCWUeWkmfGHi2PW0tDmmF_6o0EB2eqrscs_82JQjMzN4gPGiAix/s1600/Jutawan%20Ekspres%202.jpg",
     "backdrop": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhPNt5KlPUVwHu6FU8_dzXIU7MCuJBf-tnfW3T-GEhF1Ny76xx_dfhDIrRh1wiE4JA_mAFJQAfDx0C7QApZc_PCS9uLDYg02RQQvUlIL9lzJkBJa9-QMkPi82PjBVtSZ9MHyHCzordR8wCWUeWkmfGHi2PW0tDmmF_6o0EB2eqrscs_82JQjMzN4gPGiAix/s1600/Jutawan%20Ekspres%202.jpg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "quality": "4K UHD",
     "ageRating": "P13",
     "synopsis": "Siri drama popular Jutawan Express 2 (Malay Series | Jutawan Express 2) dengan episod penuh dan kualiti penstriman pantas.",
@@ -3257,7 +1310,8 @@ export const VOD_CATALOG: VodItem[] = [
         "synopsis": "Jutawan Express 2 - Jutawan Ekspres 2 Ep04"
       }
     ],
-    "duration": "4 Episod"
+    "duration": "4 Episod",
+    "apkCategory": "MALAY SERIES"
   },
   {
     "id": "vod_s_007",
@@ -3270,7 +1324,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://vod-poster.astro.com.my/prod/IVP(STB_OTT_STV)_KWGPI_series_p_IVP_PORT_390x585_9205F_202653_1367.jpg",
     "backdrop": "https://vod-poster.astro.com.my/prod/IVP(STB_OTT_STV)_KWGPI_series_p_IVP_PORT_390x585_9205F_202653_1367.jpg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "quality": "4K UHD",
     "ageRating": "P13",
     "synopsis": "Siri drama popular Good Boys Go To Heaven (Malay Series | Good Boys Go To Heaven) dengan episod penuh dan kualiti penstriman pantas.",
@@ -3371,7 +1425,8 @@ export const VOD_CATALOG: VodItem[] = [
         "synopsis": "Good Boys Go To Heaven - Good Boys Go To Heaven Ep10"
       }
     ],
-    "duration": "10 Episod"
+    "duration": "10 Episod",
+    "apkCategory": "MALAY SERIES"
   },
   {
     "id": "vod_s_008",
@@ -3384,7 +1439,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://vod-poster.astro.com.my/prod/IVP(STB_OTT_STV)_KWOMF_series_p_IVP_PORT_390x585_92008_2026513_143754.jpg",
     "backdrop": "https://vod-poster.astro.com.my/prod/IVP(STB_OTT_STV)_KWOMF_series_p_IVP_PORT_390x585_92008_2026513_143754.jpg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "quality": "4K UHD",
     "ageRating": "P13",
     "synopsis": "Siri drama popular Bapa Mentuaku Mafia (Malay Series | Bapa Mentuaku Mafia) dengan episod penuh dan kualiti penstriman pantas.",
@@ -3503,7 +1558,8 @@ export const VOD_CATALOG: VodItem[] = [
         "synopsis": "Bapa Mentuaku Mafia - Bapa Mentuaku Mafia Ep12"
       }
     ],
-    "duration": "12 Episod"
+    "duration": "12 Episod",
+    "apkCategory": "MALAY SERIES"
   },
   {
     "id": "vod_s_009",
@@ -3518,7 +1574,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://vod-poster.astro.com.my/prod/IVP(STB_OTT_STV)_KWYYQ_series_p_IVP_PORT_390x585_91C89_2026430_173226.jpg",
     "backdrop": "https://vod-poster.astro.com.my/prod/IVP(STB_OTT_STV)_KWYYQ_series_p_IVP_PORT_390x585_91C89_2026430_173226.jpg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "quality": "4K UHD",
     "ageRating": "P13",
     "synopsis": "Siri drama popular Dendam Seorang Mentua (Malay Series | Dendam Seorang Mentua) dengan episod penuh dan kualiti penstriman pantas.",
@@ -3979,7 +2035,8 @@ export const VOD_CATALOG: VodItem[] = [
         "synopsis": "Dendam Seorang Mentua - Dendam Seorang Mentua Ep50"
       }
     ],
-    "duration": "50 Episod"
+    "duration": "50 Episod",
+    "apkCategory": "MALAY SERIES"
   },
   {
     "id": "vod_s_010",
@@ -3993,7 +2050,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://vod-poster.astro.com.my/prod/IVP(STB_OTT_STV)_KWQPN_SERIES_p_IVP_PORT_390x585_91AF6_2026420_10362.jpg",
     "backdrop": "https://vod-poster.astro.com.my/prod/IVP(STB_OTT_STV)_KWQPN_SERIES_p_IVP_PORT_390x585_91AF6_2026420_10362.jpg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "quality": "4K UHD",
     "ageRating": "P13",
     "synopsis": "Siri drama popular Isteri Rahsia Ungku Jabbar (Malay Series | Isteri Rahsia Ungku Jabbar) dengan episod penuh dan kualiti penstriman pantas.",
@@ -4256,7 +2313,8 @@ export const VOD_CATALOG: VodItem[] = [
         "synopsis": "Isteri Rahsia Ungku Jabbar - Isteri Rahsia Ungku Jabbar Ep28"
       }
     ],
-    "duration": "28 Episod"
+    "duration": "28 Episod",
+    "apkCategory": "MALAY SERIES"
   },
   {
     "id": "vod_s_011",
@@ -4270,7 +2328,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://vod-poster.astro.com.my/prod/IVP(STB_OTT_STV)_KVUAK_series_p_IVP_PORT_390x585_8ED34_202626_164158.jpg",
     "backdrop": "https://vod-poster.astro.com.my/prod/IVP(STB_OTT_STV)_KVUAK_series_p_IVP_PORT_390x585_8ED34_202626_164158.jpg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "quality": "4K UHD",
     "ageRating": "P13",
     "synopsis": "Siri drama popular Mencari Isteri Sempurna (Malay Series | Mencari Isteri Sempurna) dengan episod penuh dan kualiti penstriman pantas.",
@@ -4821,7 +2879,8 @@ export const VOD_CATALOG: VodItem[] = [
         "synopsis": "Mencari Isteri Sempurna - Mencari Isteri Sempurna Ep60"
       }
     ],
-    "duration": "60 Episod"
+    "duration": "60 Episod",
+    "apkCategory": "MALAY SERIES"
   },
   {
     "id": "vod_s_012",
@@ -4834,7 +2893,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://vod-poster.astro.com.my/prod/IVP(STB_OTT_STV)_KVTZW_series_p_IVP_PORT_390x585_8E753_2026130_194538.jpg",
     "backdrop": "https://vod-poster.astro.com.my/prod/IVP(STB_OTT_STV)_KVTZW_series_p_IVP_PORT_390x585_8E753_2026130_194538.jpg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "quality": "4K UHD",
     "ageRating": "P13",
     "synopsis": "Siri drama popular Sujud Terakhir Encik Norman (Malay Series | Sujud Terakhir Encik Norman) dengan episod penuh dan kualiti penstriman pantas.",
@@ -5097,7 +3156,8 @@ export const VOD_CATALOG: VodItem[] = [
         "synopsis": "Sujud Terakhir Encik Norman - Sujud Terakhir Encik Norman Ep28"
       }
     ],
-    "duration": "28 Episod"
+    "duration": "28 Episod",
+    "apkCategory": "MALAY SERIES"
   },
   {
     "id": "vod_s_013",
@@ -5110,7 +3170,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://vod-poster.astro.com.my/prod/IVP(STB_OTT_STV)_KVNVP_series_p_IVP_PORT_390x585_8E775_202629_17929.jpg",
     "backdrop": "https://vod-poster.astro.com.my/prod/IVP(STB_OTT_STV)_KVNVP_series_p_IVP_PORT_390x585_8E775_202629_17929.jpg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "quality": "4K UHD",
     "ageRating": "P13",
     "synopsis": "Siri drama popular S2 Andai Itu Takdirnya (Malay Series | S2 Andai Itu Takdirnya) dengan episod penuh dan kualiti penstriman pantas.",
@@ -5481,7 +3541,8 @@ export const VOD_CATALOG: VodItem[] = [
         "synopsis": "S2 Andai Itu Takdirnya - Andai Itu Takdirnya 2 Ep40"
       }
     ],
-    "duration": "40 Episod"
+    "duration": "40 Episod",
+    "apkCategory": "MALAY SERIES"
   },
   {
     "id": "vod_s_014",
@@ -5494,7 +3555,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://vod-poster.astro.com.my/prod/IVP(STB_OTT_STV)_KUDWB_series_p_IVP_PORT_390x585_8A048_2025930_112444.jpg",
     "backdrop": "https://vod-poster.astro.com.my/prod/IVP(STB_OTT_STV)_KUDWB_series_p_IVP_PORT_390x585_8A048_2025930_112444.jpg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "quality": "4K UHD",
     "ageRating": "P13",
     "synopsis": "Siri drama popular Mutiara Dalam Debuan Kabus (Malay Series | Mutiara Dalam Debuan Kabus) dengan episod penuh dan kualiti penstriman pantas.",
@@ -5721,7 +3782,8 @@ export const VOD_CATALOG: VodItem[] = [
         "synopsis": "Mutiara Dalam Debuan Kabus - Mutiara Dalam Debuan Kabus Ep24"
       }
     ],
-    "duration": "24 Episod"
+    "duration": "24 Episod",
+    "apkCategory": "MALAY SERIES"
   },
   {
     "id": "vod_s_015",
@@ -5734,7 +3796,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://vod-poster.astro.com.my/prod/IVP(STB_OTT_STV)_KTJGB_series_p_IVP_PORT_390x585_88F05_202592_94431.jpg",
     "backdrop": "https://vod-poster.astro.com.my/prod/IVP(STB_OTT_STV)_KTJGB_series_p_IVP_PORT_390x585_88F05_202592_94431.jpg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "quality": "4K UHD",
     "ageRating": "P13",
     "synopsis": "Siri drama popular Rumah Tanpa Luka (Malay Series | Rumah Tanpa Luka) dengan episod penuh dan kualiti penstriman pantas.",
@@ -5925,7 +3987,8 @@ export const VOD_CATALOG: VodItem[] = [
         "synopsis": "Rumah Tanpa Luka - Rumah Tanpa Luka Ep20"
       }
     ],
-    "duration": "20 Episod"
+    "duration": "20 Episod",
+    "apkCategory": "MALAY SERIES"
   },
   {
     "id": "vod_s_016",
@@ -5938,7 +4001,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://vod-poster.astro.com.my/prod/IVP(STB_OTT_STV)_KTPSR_series_p_IVP_PORT_390x585_8859D_202588_184756.jpg",
     "backdrop": "https://vod-poster.astro.com.my/prod/IVP(STB_OTT_STV)_KTPSR_series_p_IVP_PORT_390x585_8859D_202588_184756.jpg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "quality": "4K UHD",
     "ageRating": "P13",
     "synopsis": "Siri drama popular Kerana Seorang Lelaki (Malay Series | Kerana Seorang Lelaki) dengan episod penuh dan kualiti penstriman pantas.",
@@ -6309,7 +4372,8 @@ export const VOD_CATALOG: VodItem[] = [
         "synopsis": "Kerana Seorang Lelaki - Kerana Seorang Lelaki S01 E40"
       }
     ],
-    "duration": "40 Episod"
+    "duration": "40 Episod",
+    "apkCategory": "MALAY SERIES"
   },
   {
     "id": "vod_s_017",
@@ -6322,7 +4386,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://vod-poster.astro.com.my/prod/IVP(STB_OTT_STV)_KSVHR_series_p_IVP_PORT_390x585_879CB_2025724_123745.jpg",
     "backdrop": "https://vod-poster.astro.com.my/prod/IVP(STB_OTT_STV)_KSVHR_series_p_IVP_PORT_390x585_879CB_2025724_123745.jpg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "quality": "4K UHD",
     "ageRating": "P13",
     "synopsis": "Siri drama popular Thariq Ridzuwan His Treasure (Malay Series | Thariq Ridzuwan His Treasure) dengan episod penuh dan kualiti penstriman pantas.",
@@ -6477,7 +4541,8 @@ export const VOD_CATALOG: VodItem[] = [
         "synopsis": "Thariq Ridzuwan His Treasure - Thariq Ridzuwan His Treasure S01 E16"
       }
     ],
-    "duration": "16 Episod"
+    "duration": "16 Episod",
+    "apkCategory": "MALAY SERIES"
   },
   {
     "id": "vod_s_018",
@@ -6490,7 +4555,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://vod-poster.astro.com.my/prod/IVP(STB_OTT_STV)_KSVGP_series_p_IVP_PORT_390x585_876EF_2025713_113848.jpg",
     "backdrop": "https://vod-poster.astro.com.my/prod/IVP(STB_OTT_STV)_KSVGP_series_p_IVP_PORT_390x585_876EF_2025713_113848.jpg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "quality": "4K UHD",
     "ageRating": "P13",
     "synopsis": "Siri drama popular Mandul Bukan Pilihan (Malay Series | Mandul Bukan Pilihan) dengan episod penuh dan kualiti penstriman pantas.",
@@ -6753,7 +4818,8 @@ export const VOD_CATALOG: VodItem[] = [
         "synopsis": "Mandul Bukan Pilihan - Mandul Bukan Pilihan S01E28"
       }
     ],
-    "duration": "28 Episod"
+    "duration": "28 Episod",
+    "apkCategory": "MALAY SERIES"
   },
   {
     "id": "vod_s_019",
@@ -6766,7 +4832,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://vod-poster.astro.com.my/prod/IVP(STB_OTT_STV)_KSWGQ_series_p_IVP_PORT_390x585_86C80_2025630_162922.jpg",
     "backdrop": "https://vod-poster.astro.com.my/prod/IVP(STB_OTT_STV)_KSWGQ_series_p_IVP_PORT_390x585_86C80_2025630_162922.jpg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "quality": "4K UHD",
     "ageRating": "P13",
     "synopsis": "Siri drama popular Di Sebalik Reda (Malay Series | Di Sebalik Reda) dengan episod penuh dan kualiti penstriman pantas.",
@@ -7047,7 +5113,8 @@ export const VOD_CATALOG: VodItem[] = [
         "synopsis": "Di Sebalik Reda - Di Sebalik Reda S01E30"
       }
     ],
-    "duration": "30 Episod"
+    "duration": "30 Episod",
+    "apkCategory": "MALAY SERIES"
   },
   {
     "id": "vod_s_020",
@@ -7060,7 +5127,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://vod-poster.astro.com.my/prod/IVP(STB_OTT_STV)_KSIUC_series_p_IVP_PORT_390x585_86852_2025618_10309.jpg",
     "backdrop": "https://vod-poster.astro.com.my/prod/IVP(STB_OTT_STV)_KSIUC_series_p_IVP_PORT_390x585_86852_2025618_10309.jpg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "quality": "4K UHD",
     "ageRating": "P13",
     "synopsis": "Siri drama popular Honey Trap (Malay Series | Honey Trap) dengan episod penuh dan kualiti penstriman pantas.",
@@ -7161,7 +5228,8 @@ export const VOD_CATALOG: VodItem[] = [
         "synopsis": "Honey Trap - Honey Trap S01 E10"
       }
     ],
-    "duration": "10 Episod"
+    "duration": "10 Episod",
+    "apkCategory": "MALAY SERIES"
   },
   {
     "id": "vod_s_021",
@@ -7174,7 +5242,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://vod-poster.astro.com.my/prod/IVP(STB_OTT_STV)_KSEJE_series_p_IVP_PORT_390x585_85F18_2025528_103325.jpg",
     "backdrop": "https://vod-poster.astro.com.my/prod/IVP(STB_OTT_STV)_KSEJE_series_p_IVP_PORT_390x585_85F18_2025528_103325.jpg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "quality": "4K UHD",
     "ageRating": "P13",
     "synopsis": "Siri drama popular Si Bakhil Dengan Bunganya (Malay Series | Si Bakhil Dengan Bunganya) dengan episod penuh dan kualiti penstriman pantas.",
@@ -7329,7 +5397,8 @@ export const VOD_CATALOG: VodItem[] = [
         "synopsis": "Si Bakhil Dengan Bunganya - Si Bakhil Dengan Bunganya S01 E16"
       }
     ],
-    "duration": "16 Episod"
+    "duration": "16 Episod",
+    "apkCategory": "MALAY SERIES"
   },
   {
     "id": "vod_s_022",
@@ -7342,7 +5411,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://vod-poster.astro.com.my/prod/IVP(STB_OTT_STV)_KSEHN_series_p_IVP_PORT_390x585_85AB3_2025528_112150.jpg",
     "backdrop": "https://vod-poster.astro.com.my/prod/IVP(STB_OTT_STV)_KSEHN_series_p_IVP_PORT_390x585_85AB3_2025528_112150.jpg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "quality": "4K UHD",
     "ageRating": "P13",
     "synopsis": "Siri drama popular Dia Bukan Syurga (Malay Series | Dia Bukan Syurga) dengan episod penuh dan kualiti penstriman pantas.",
@@ -7641,7 +5710,8 @@ export const VOD_CATALOG: VodItem[] = [
         "synopsis": "Dia Bukan Syurga - Dia Bukan Syurga S01 E32"
       }
     ],
-    "duration": "32 Episod"
+    "duration": "32 Episod",
+    "apkCategory": "MALAY SERIES"
   },
   {
     "id": "vod_s_023",
@@ -7654,7 +5724,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://vod-poster.astro.com.my/prod/IVP(STB_OTT_STV)_KQCDX_series_p_IVP_PORT_390x585_85B3C_2025519_154351.jpg",
     "backdrop": "https://vod-poster.astro.com.my/prod/IVP(STB_OTT_STV)_KQCDX_series_p_IVP_PORT_390x585_85B3C_2025519_154351.jpg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "quality": "4K UHD",
     "ageRating": "P13",
     "synopsis": "Siri drama popular Dzikir (Malay Series | Dzikir) dengan episod penuh dan kualiti penstriman pantas.",
@@ -7935,7 +6005,8 @@ export const VOD_CATALOG: VodItem[] = [
         "synopsis": "Dzikir - Dzikir S01 E30"
       }
     ],
-    "duration": "30 Episod"
+    "duration": "30 Episod",
+    "apkCategory": "MALAY SERIES"
   },
   {
     "id": "vod_s_024",
@@ -7948,7 +6019,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://vod-poster.astro.com.my/prod/IVP(STB_OTT_STV)_KQNST_series_p_IVP_PORT_390x585_829D5_202553_133458.jpg",
     "backdrop": "https://vod-poster.astro.com.my/prod/IVP(STB_OTT_STV)_KQNST_series_p_IVP_PORT_390x585_829D5_202553_133458.jpg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "quality": "4K UHD",
     "ageRating": "P13",
     "synopsis": "Siri drama popular Dia Imamku (Malay Series | Dia Imamku) dengan episod penuh dan kualiti penstriman pantas.",
@@ -8436,7 +6507,8 @@ export const VOD_CATALOG: VodItem[] = [
         "synopsis": "Dia Imamku - Dia Imamku S01 E53"
       }
     ],
-    "duration": "53 Episod"
+    "duration": "53 Episod",
+    "apkCategory": "MALAY SERIES"
   },
   {
     "id": "vod_s_025",
@@ -8449,7 +6521,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://vod-poster.astro.com.my/prod/IVP(STB_OTT_STV)_KPVTI_series_p_IVP_PORT_390x585_84A8D_2025411_93952.jpg",
     "backdrop": "https://vod-poster.astro.com.my/prod/IVP(STB_OTT_STV)_KPVTI_series_p_IVP_PORT_390x585_84A8D_2025411_93952.jpg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "quality": "4K UHD",
     "ageRating": "P13",
     "synopsis": "Siri drama popular First Wives (Malay Series | First Wives) dengan episod penuh dan kualiti penstriman pantas.",
@@ -8532,7 +6604,8 @@ export const VOD_CATALOG: VodItem[] = [
         "synopsis": "First Wives - First Wives S01 E8"
       }
     ],
-    "duration": "8 Episod"
+    "duration": "8 Episod",
+    "apkCategory": "MALAY SERIES"
   },
   {
     "id": "vod_s_026",
@@ -8545,7 +6618,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://vod-poster.astro.com.my/prod/IVP(STB_OTT_STV)_KQSNX_series_p_IVP_PORT_390x585_83210_2025317_13936.jpg",
     "backdrop": "https://vod-poster.astro.com.my/prod/IVP(STB_OTT_STV)_KQSNX_series_p_IVP_PORT_390x585_83210_2025317_13936.jpg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "quality": "4K UHD",
     "ageRating": "P13",
     "synopsis": "Siri drama popular Seribu Tahun (Malay Series | Seribu Tahun) dengan episod penuh dan kualiti penstriman pantas.",
@@ -8772,7 +6845,8 @@ export const VOD_CATALOG: VodItem[] = [
         "synopsis": "Seribu Tahun - Seribu Tahun S01E24"
       }
     ],
-    "duration": "24 Episod"
+    "duration": "24 Episod",
+    "apkCategory": "MALAY SERIES"
   },
   {
     "id": "vod_s_027",
@@ -8787,7 +6861,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://vod-poster.astro.com.my/prod/IVP(STB_OTT_STV)_KRDTL_series_p_IVP_PORT_390x585_8321B_2025228_17951.jpg",
     "backdrop": "https://vod-poster.astro.com.my/prod/IVP(STB_OTT_STV)_KRDTL_series_p_IVP_PORT_390x585_8321B_2025228_17951.jpg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "quality": "4K UHD",
     "ageRating": "P13",
     "synopsis": "Siri drama popular Dendam Seorang Madu (Malay Series | Dendam Seorang Madu) dengan episod penuh dan kualiti penstriman pantas.",
@@ -9293,7 +7367,8 @@ export const VOD_CATALOG: VodItem[] = [
         "synopsis": "Dendam Seorang Madu - Dendam Seorang Madu S01E55"
       }
     ],
-    "duration": "55 Episod"
+    "duration": "55 Episod",
+    "apkCategory": "MALAY SERIES"
   },
   {
     "id": "vod_s_028",
@@ -9306,7 +7381,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://vod-poster.astro.com.my/prod/IVP(STB_OTT_STV)_KVNUD_series_p_IVP_PORT_390x585_8D980_202616_101720.jpg",
     "backdrop": "https://vod-poster.astro.com.my/prod/IVP(STB_OTT_STV)_KVNUD_series_p_IVP_PORT_390x585_8D980_202616_101720.jpg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "quality": "4K UHD",
     "ageRating": "P13",
     "synopsis": "Siri drama popular Pak Su Ammara (Malay Series | Pak Su Ammara) dengan episod penuh dan kualiti penstriman pantas.",
@@ -9497,7 +7572,8 @@ export const VOD_CATALOG: VodItem[] = [
         "synopsis": "Pak Su Ammara - Pak Su Ammara E20"
       }
     ],
-    "duration": "20 Episod"
+    "duration": "20 Episod",
+    "apkCategory": "MALAY SERIES"
   },
   {
     "id": "vod_s_029",
@@ -9510,7 +7586,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://vod-poster.astro.com.my/prod/IVP(STB_OTT_STV)_KVETT_series_p_IVP_PORT_390x585_8CAA6_20251212_174635.jpg",
     "backdrop": "https://vod-poster.astro.com.my/prod/IVP(STB_OTT_STV)_KVETT_series_p_IVP_PORT_390x585_8CAA6_20251212_174635.jpg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "quality": "4K UHD",
     "ageRating": "P13",
     "synopsis": "Siri drama popular Setiaku Berdiri (Malay Series | Setiaku Berdiri) dengan episod penuh dan kualiti penstriman pantas.",
@@ -9881,7 +7957,8 @@ export const VOD_CATALOG: VodItem[] = [
         "synopsis": "Setiaku Berdiri - Setiaku Berdiri E40"
       }
     ],
-    "duration": "40 Episod"
+    "duration": "40 Episod",
+    "apkCategory": "MALAY SERIES"
   },
   {
     "id": "vod_s_030",
@@ -9896,7 +7973,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://vod-poster.astro.com.my/prod/IVP(STB_OTT_STV)_KUMUC_series_p_IVP_PORT_390x585_8BA0C_20251111_1299.jpg",
     "backdrop": "https://vod-poster.astro.com.my/prod/IVP(STB_OTT_STV)_KUMUC_series_p_IVP_PORT_390x585_8BA0C_20251111_1299.jpg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "quality": "4K UHD",
     "ageRating": "P13",
     "synopsis": "Siri drama popular Impiana Karma (Malay Series | Impiana Karma) dengan episod penuh dan kualiti penstriman pantas.",
@@ -10105,7 +8182,8 @@ export const VOD_CATALOG: VodItem[] = [
         "synopsis": "Impiana Karma - Impiana: Karma Ep22"
       }
     ],
-    "duration": "22 Episod"
+    "duration": "22 Episod",
+    "apkCategory": "MALAY SERIES"
   },
   {
     "id": "vod_s_031",
@@ -10118,7 +8196,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://vod-poster.astro.com.my/prod/IVP(STB_OTT_STV)_KUQFE_series_p_IVP_PORT_390x585_8BB4A_20251114_14838.jpg",
     "backdrop": "https://vod-poster.astro.com.my/prod/IVP(STB_OTT_STV)_KUQFE_series_p_IVP_PORT_390x585_8BB4A_20251114_14838.jpg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "quality": "4K UHD",
     "ageRating": "P13",
     "synopsis": "Siri drama popular Bahagia Yang Tertangguh (Malay Series | Bahagia Yang Tertangguh) dengan episod penuh dan kualiti penstriman pantas.",
@@ -10381,7 +8459,8 @@ export const VOD_CATALOG: VodItem[] = [
         "synopsis": "Bahagia Yang Tertangguh - Bahagia Yang Tertangguh Ep28"
       }
     ],
-    "duration": "28 Episod"
+    "duration": "28 Episod",
+    "apkCategory": "MALAY SERIES"
   },
   {
     "id": "vod_s_032",
@@ -10395,7 +8474,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://vod-poster.astro.com.my/prod/IVP(STB_OTT_STV)_KUHXK_series_p_IVP_PORT_390x585_8A640_2025107_14440.jpg",
     "backdrop": "https://vod-poster.astro.com.my/prod/IVP(STB_OTT_STV)_KUHXK_series_p_IVP_PORT_390x585_8A640_2025107_14440.jpg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "quality": "4K UHD",
     "ageRating": "P13",
     "synopsis": "Siri drama popular Jika Cinta Itu Buta (Malay Series | Jika Cinta Itu Buta) dengan episod penuh dan kualiti penstriman pantas.",
@@ -10856,123 +8935,8 @@ export const VOD_CATALOG: VodItem[] = [
         "synopsis": "Jika Cinta Itu Buta - Jika Cinta Itu Buta Ep50"
       }
     ],
-    "duration": "50 Episod"
-  },
-  {
-    "id": "vod_s_033",
-    "title": "Ifrit",
-    "type": "series",
-    "genre": [
-      "Drama",
-      "Thriller",
-      "Mystery"
-    ],
-    "origin": "malay",
-    "poster": "https://vod-poster.astro.com.my/prod/IVP(STB_OTT_STV)_KTKRK_series_p_IVP_PORT_390x585_89952_2025917_223843.jpg",
-    "backdrop": "https://vod-poster.astro.com.my/prod/IVP(STB_OTT_STV)_KTKRK_series_p_IVP_PORT_390x585_89952_2025917_223843.jpg",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "quality": "4K UHD",
-    "ageRating": "P13",
-    "synopsis": "Siri drama popular Ifrit (Malay Series | Ifrit) dengan episod penuh dan kualiti penstriman pantas.",
-    "cast": [
-      "Pelakon Utama"
-    ],
-    "streamUrl": "https://vod-dai-ott-ap.ssai.iris.synamedia.com/tenant/astroprd/vodejitp-asset-playback-b.astro.com.my/v6/default/cmaf-dash-wv/vode/60ad0cb1-73b8-5ce4-9dc1-83bc34261df1/default_ott.mpd",
-    "clearKey": "c8ec08958f381dec3eb27c60c3ae5010:211dc732c49cf27ddb9cde8b5e8b4574",
-    "episodes": [
-      {
-        "episodeNumber": 1,
-        "title": "Ifrit Ep01",
-        "duration": "45m",
-        "thumbnail": "https://vod-poster.astro.com.my/prod/IVP(STB_OTT_STV)_KTKRK_series_p_IVP_PORT_390x585_89952_2025917_223843.jpg",
-        "streamUrl": "https://vod-dai-ott-ap.ssai.iris.synamedia.com/tenant/astroprd/vodejitp-asset-playback-b.astro.com.my/v6/default/cmaf-dash-wv/vode/60ad0cb1-73b8-5ce4-9dc1-83bc34261df1/default_ott.mpd",
-        "clearKey": "c8ec08958f381dec3eb27c60c3ae5010:211dc732c49cf27ddb9cde8b5e8b4574",
-        "synopsis": "Ifrit - Ifrit Ep01"
-      },
-      {
-        "episodeNumber": 2,
-        "title": "Ifrit Ep02",
-        "duration": "45m",
-        "thumbnail": "https://vod-poster.astro.com.my/prod/IVP(STB_OTT_STV)_KTKRK_series_p_IVP_PORT_390x585_89952_2025917_223843.jpg",
-        "streamUrl": "https://vod-dai-ott-ap.ssai.iris.synamedia.com/tenant/astroprd/vodejitp-asset-playback-b.astro.com.my/v6/default/cmaf-dash-wv/vode/4b1b9784-893a-5c5c-947b-6e15c0bef353/default_ott.mpd",
-        "clearKey": "1c3afa26965d1a7ad5167d5bf6122310:f3bdf1465443c2d30e08a68602ea8b1f",
-        "synopsis": "Ifrit - Ifrit Ep02"
-      },
-      {
-        "episodeNumber": 3,
-        "title": "Ifrit Ep03",
-        "duration": "45m",
-        "thumbnail": "https://vod-poster.astro.com.my/prod/IVP(STB_OTT_STV)_KTKRK_series_p_IVP_PORT_390x585_89952_2025917_223843.jpg",
-        "streamUrl": "https://vod-dai-ott-ap.ssai.iris.synamedia.com/tenant/astroprd/vodejitp-asset-playback-b.astro.com.my/v6/default/cmaf-dash-wv/vode/7dbbb18b-43c5-5aa9-bf7c-efb03d9df7be/default_ott.mpd",
-        "clearKey": "5b6fa532fe07bbad2d41aa0881816310:dabb548037e1a444b44f0dc82d275c91",
-        "synopsis": "Ifrit - Ifrit Ep03"
-      },
-      {
-        "episodeNumber": 4,
-        "title": "Ifrit Ep04",
-        "duration": "45m",
-        "thumbnail": "https://vod-poster.astro.com.my/prod/IVP(STB_OTT_STV)_KTKRK_series_p_IVP_PORT_390x585_89952_2025917_223843.jpg",
-        "streamUrl": "https://vod-dai-ott-ap.ssai.iris.synamedia.com/tenant/astroprd/vodejitp-asset-playback-b.astro.com.my/v6/default/cmaf-dash-wv/vode/936d70ce-f758-5f76-9b36-4920e81bcf87/default_ott.mpd",
-        "clearKey": "4a522c5ca30b9ee4525ec5dc5f8f4110:0df87fe5bf87ce1d233d035e9f388e02",
-        "synopsis": "Ifrit - Ifrit Ep04"
-      },
-      {
-        "episodeNumber": 5,
-        "title": "Ifrit Ep05",
-        "duration": "45m",
-        "thumbnail": "https://vod-poster.astro.com.my/prod/IVP(STB_OTT_STV)_KTKRK_series_p_IVP_PORT_390x585_89952_2025917_223843.jpg",
-        "streamUrl": "https://vod-dai-ott-ap.ssai.iris.synamedia.com/tenant/astroprd/vodejitp-asset-playback-b.astro.com.my/v6/default/cmaf-dash-wv/vode/b59a5f77-fb47-5668-8ff4-b86b977bac29/default_ott.mpd",
-        "clearKey": "3c840118b4b49d1ce59d206368647910:52d4a0e5b50da659f66f2d5560a4f1c7",
-        "synopsis": "Ifrit - Ifrit Ep05"
-      },
-      {
-        "episodeNumber": 6,
-        "title": "Ifrit Ep06",
-        "duration": "45m",
-        "thumbnail": "https://vod-poster.astro.com.my/prod/IVP(STB_OTT_STV)_KTKRK_series_p_IVP_PORT_390x585_89952_2025917_223843.jpg",
-        "streamUrl": "https://vod-dai-ott-ap.ssai.iris.synamedia.com/tenant/astroprd/vodejitp-asset-playback-b.astro.com.my/v6/default/cmaf-dash-wv/vode/7dd6c134-524b-5c3f-bca0-631f0dbc4cc8/default_ott.mpd",
-        "clearKey": "e15c223ed0a2428e947f91779de82c10:90e06c9b42a0806796ff8e965dedc2f9",
-        "synopsis": "Ifrit - Ifrit Ep06"
-      },
-      {
-        "episodeNumber": 7,
-        "title": "Ifrit Ep07",
-        "duration": "45m",
-        "thumbnail": "https://vod-poster.astro.com.my/prod/IVP(STB_OTT_STV)_KTKRK_series_p_IVP_PORT_390x585_89952_2025917_223843.jpg",
-        "streamUrl": "https://vod-dai-ott-ap.ssai.iris.synamedia.com/tenant/astroprd/vodejitp-asset-playback-b.astro.com.my/v6/default/cmaf-dash-wv/vode/aec6dd60-77a2-5925-8df7-914e26443f4f/default_ott.mpd",
-        "clearKey": "98cda464e7b2740fd1747c8b11749710:0263d37876fa0c433e6f00eadf21e8cf",
-        "synopsis": "Ifrit - Ifrit Ep07"
-      },
-      {
-        "episodeNumber": 8,
-        "title": "Ifrit Ep08",
-        "duration": "45m",
-        "thumbnail": "https://vod-poster.astro.com.my/prod/IVP(STB_OTT_STV)_KTKRK_series_p_IVP_PORT_390x585_89952_2025917_223843.jpg",
-        "streamUrl": "https://vod-dai-ott-ap.ssai.iris.synamedia.com/tenant/astroprd/vodejitp-asset-playback-b.astro.com.my/v6/default/cmaf-dash-wv/vode/037988ba-8f7f-579c-83c0-fba29e616464/default_ott.mpd",
-        "clearKey": "93efa071bbe27c4fc8dcdfbef08c1610:e16eae7fa34cef59daca4078c4339653",
-        "synopsis": "Ifrit - Ifrit Ep08"
-      },
-      {
-        "episodeNumber": 9,
-        "title": "Ifrit Ep09",
-        "duration": "45m",
-        "thumbnail": "https://vod-poster.astro.com.my/prod/IVP(STB_OTT_STV)_KTKRK_series_p_IVP_PORT_390x585_89952_2025917_223843.jpg",
-        "streamUrl": "https://vod-dai-ott-ap.ssai.iris.synamedia.com/tenant/astroprd/vodejitp-asset-playback-b.astro.com.my/v6/default/cmaf-dash-wv/vode/6cd6a143-5f66-5c6e-9105-efc6f1b6df61/default_ott.mpd",
-        "clearKey": "7353e162a7c17f58269d40b2b49abe10:26aac8835be678e64efa278b1fc1f49a",
-        "synopsis": "Ifrit - Ifrit Ep09"
-      },
-      {
-        "episodeNumber": 10,
-        "title": "Ifrit Ep10",
-        "duration": "45m",
-        "thumbnail": "https://vod-poster.astro.com.my/prod/IVP(STB_OTT_STV)_KTKRK_series_p_IVP_PORT_390x585_89952_2025917_223843.jpg",
-        "streamUrl": "https://vod-dai-ott-ap.ssai.iris.synamedia.com/tenant/astroprd/vodejitp-asset-playback-b.astro.com.my/v6/default/cmaf-dash-wv/vode/e8cbf053-f374-5abd-bd25-88c12531c720/default_ott.mpd",
-        "clearKey": "a5ff4cb5a74ec7c0d055152eb852c510:e117a124e9eb9b4753b871545c1f9f55",
-        "synopsis": "Ifrit - Ifrit Ep10"
-      }
-    ],
-    "duration": "10 Episod"
+    "duration": "50 Episod",
+    "apkCategory": "MALAY SERIES"
   },
   {
     "id": "vod_s_034",
@@ -10985,7 +8949,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://vod-poster.astro.com.my/prod/IVP(STB_OTT_STV)_KTPEQ_series_p_IVP_PORT_390x585_898BB_2025918_172257.jpg",
     "backdrop": "https://vod-poster.astro.com.my/prod/IVP(STB_OTT_STV)_KTPEQ_series_p_IVP_PORT_390x585_898BB_2025918_172257.jpg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "quality": "4K UHD",
     "ageRating": "P13",
     "synopsis": "Siri drama popular Perfect 10 (Malay Series | Perfect 10) dengan episod penuh dan kualiti penstriman pantas.",
@@ -11077,7 +9041,8 @@ export const VOD_CATALOG: VodItem[] = [
         "synopsis": "Perfect 10 - Generasi: Perfect 10 Ep09"
       }
     ],
-    "duration": "9 Episod"
+    "duration": "9 Episod",
+    "apkCategory": "MALAY SERIES"
   },
   {
     "id": "vod_s_035",
@@ -11090,7 +9055,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://media.themoviedb.org/t/p/w600_and_h900_face/cSShaB0XXSfIHJ8mxXS3nGA5tiE.jpg",
     "backdrop": "https://media.themoviedb.org/t/p/w600_and_h900_face/cSShaB0XXSfIHJ8mxXS3nGA5tiE.jpg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "quality": "4K UHD",
     "ageRating": "P13",
     "synopsis": "Siri drama popular S1 Andai Itu Takdirnya (Malay Series | S1 Andai Itu Takdirnya) dengan episod penuh dan kualiti penstriman pantas.",
@@ -11677,7 +9642,8 @@ export const VOD_CATALOG: VodItem[] = [
         "synopsis": "S1 Andai Itu Takdirnya - Andai Itu Takdirnya Ep64"
       }
     ],
-    "duration": "64 Episod"
+    "duration": "64 Episod",
+    "apkCategory": "MALAY SERIES"
   },
   {
     "id": "vod_s_036",
@@ -11690,7 +9656,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://ptv2026.com/logo/onecents1e1.png",
     "backdrop": "https://ptv2026.com/logo/onecents1e1.png",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "quality": "4K UHD",
     "ageRating": "P13",
     "synopsis": "Siri drama popular One Cent Thief (Malay Series | One Cent Thief) dengan episod penuh dan kualiti penstriman pantas.",
@@ -11854,7 +9820,8 @@ export const VOD_CATALOG: VodItem[] = [
         "synopsis": "One Cent Thief - One Cent Thief S2 Ep09"
       }
     ],
-    "duration": "17 Episod"
+    "duration": "17 Episod",
+    "apkCategory": "MALAY SERIES"
   },
   {
     "id": "vod_s_037",
@@ -11867,7 +9834,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://ptv2026.com/logo/ctn_port3.jpg",
     "backdrop": "https://ptv2026.com/logo/ctn_port3.jpg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "quality": "4K UHD",
     "ageRating": "P13",
     "synopsis": "Siri drama popular Curang Tanpa Niat (Malay Series | Curang Tanpa Niat) dengan episod penuh dan kualiti penstriman pantas.",
@@ -12166,7 +10133,8 @@ export const VOD_CATALOG: VodItem[] = [
         "synopsis": "Curang Tanpa Niat - Curang Tanpa Niat Ep32"
       }
     ],
-    "duration": "32 Episod"
+    "duration": "32 Episod",
+    "apkCategory": "MALAY SERIES"
   },
   {
     "id": "vod_s_038",
@@ -12180,7 +10148,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://ptv2026.com/logo/bbs_port2.jpg",
     "backdrop": "https://ptv2026.com/logo/bbs_port2.jpg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "quality": "4K UHD",
     "ageRating": "P13",
     "synopsis": "Siri drama popular Berbahagi Suami (Malay Series | Berbahagi Suami) dengan episod penuh dan kualiti penstriman pantas.",
@@ -12776,7 +10744,8 @@ export const VOD_CATALOG: VodItem[] = [
         "synopsis": "Berbahagi Suami - Berbahagi Suami Ep65"
       }
     ],
-    "duration": "65 Episod"
+    "duration": "65 Episod",
+    "apkCategory": "MALAY SERIES"
   },
   {
     "id": "vod_s_039",
@@ -12791,7 +10760,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://vod-poster.astro.com.my/prod/IVP(STB_OTT_STV)_KXSNR_SERIES_P_IVP_PORT_390x585_93F4F_2026723_85250.jpg",
     "backdrop": "https://vod-poster.astro.com.my/prod/IVP(STB_OTT_STV)_KXSNR_SERIES_P_IVP_PORT_390x585_93F4F_2026723_85250.jpg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "quality": "4K UHD",
     "ageRating": "P13",
     "synopsis": "Siri drama popular Big Stage Rocketfuel (Malay Variety | Big Stage Rocketfuel) dengan episod penuh dan kualiti penstriman pantas.",
@@ -12865,7 +10834,8 @@ export const VOD_CATALOG: VodItem[] = [
         "synopsis": "Big Stage Rocketfuel - Big Stage Rocketfuel Ep07"
       }
     ],
-    "duration": "7 Episod"
+    "duration": "7 Episod",
+    "apkCategory": "MALAY VARIETY"
   },
   {
     "id": "vod_s_040",
@@ -12880,7 +10850,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://vod-poster.astro.com.my/prod/IVP(STB_OTT_STV)_KVXIM_series_p_IVP_PORT_390x585_8F369_2026218_165648.jpg",
     "backdrop": "https://vod-poster.astro.com.my/prod/IVP(STB_OTT_STV)_KVXIM_series_p_IVP_PORT_390x585_8F369_2026218_165648.jpg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "quality": "4K UHD",
     "ageRating": "P13",
     "synopsis": "Siri drama popular Dapur Goodday (Malay Variety | Dapur Goodday) dengan episod penuh dan kualiti penstriman pantas.",
@@ -13152,7 +11122,8 @@ export const VOD_CATALOG: VodItem[] = [
         "synopsis": "Dapur Goodday - Dapur Goodday: Misi Sarimah & Tuyah Vs Che Ton Ep29"
       }
     ],
-    "duration": "29 Episod"
+    "duration": "29 Episod",
+    "apkCategory": "MALAY VARIETY"
   },
   {
     "id": "vod_s_041",
@@ -13167,7 +11138,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://vod-poster.astro.com.my/prod/IVP(STB_OTT_STV)_KWODL_series_IVP_LAND_586x330_917AD_2026417_17230.jpg",
     "backdrop": "https://vod-poster.astro.com.my/prod/IVP(STB_OTT_STV)_KWODL_series_IVP_LAND_586x330_917AD_2026417_17230.jpg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "quality": "4K UHD",
     "ageRating": "P13",
     "synopsis": "Siri drama popular Talk To My Manager (Malay Variety | Talk To My Manager) dengan episod penuh dan kualiti penstriman pantas.",
@@ -13259,7 +11230,8 @@ export const VOD_CATALOG: VodItem[] = [
         "synopsis": "Talk To My Manager - E09"
       }
     ],
-    "duration": "9 Episod"
+    "duration": "9 Episod",
+    "apkCategory": "MALAY VARIETY"
   },
   {
     "id": "vod_s_042",
@@ -13274,7 +11246,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://vod-poster.astro.com.my/prod/IVP(STB_OTT_STV)_KWCUF_series_p_IVP_PORT_390x585_8F577_2026218_14185.jpg",
     "backdrop": "https://vod-poster.astro.com.my/prod/IVP(STB_OTT_STV)_KWCUF_series_p_IVP_PORT_390x585_8F577_2026218_14185.jpg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "quality": "4K UHD",
     "ageRating": "P13",
     "synopsis": "Siri drama popular Dapur Bapak Bapak (Malay Variety | Dapur Bapak Bapak) dengan episod penuh dan kualiti penstriman pantas.",
@@ -13357,7 +11329,8 @@ export const VOD_CATALOG: VodItem[] = [
         "synopsis": "Dapur Bapak Bapak - Dapur Bapak Bapak Ep08"
       }
     ],
-    "duration": "8 Episod"
+    "duration": "8 Episod",
+    "apkCategory": "MALAY VARIETY"
   },
   {
     "id": "vod_s_043",
@@ -13372,7 +11345,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://vod-poster.astro.com.my/prod/IVP(STB_OTT_STV)_KUHQN_series_p_IVP_PORT_390x585_8A69B_2025106_15314.jpg",
     "backdrop": "https://vod-poster.astro.com.my/prod/IVP(STB_OTT_STV)_KUHQN_series_p_IVP_PORT_390x585_8A69B_2025106_15314.jpg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "quality": "4K UHD",
     "ageRating": "P13",
     "synopsis": "Siri drama popular ML Superstar (Malay Variety | ML Superstar) dengan episod penuh dan kualiti penstriman pantas.",
@@ -13455,7 +11428,8 @@ export const VOD_CATALOG: VodItem[] = [
         "synopsis": "ML Superstar - S5E08  (Pilih resolution 720p kalau lag)"
       }
     ],
-    "duration": "8 Episod"
+    "duration": "8 Episod",
+    "apkCategory": "MALAY VARIETY"
   },
   {
     "id": "vod_s_044",
@@ -13470,7 +11444,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://vod-poster.astro.com.my/prod/IVP(STB_OTT_STV)_KRFUW_series_IVP_LAND_586x330_72130_2025310_105835.jpg",
     "backdrop": "https://vod-poster.astro.com.my/prod/IVP(STB_OTT_STV)_KRFUW_series_IVP_LAND_586x330_72130_2025310_105835.jpg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "quality": "4K UHD",
     "ageRating": "P13",
     "synopsis": "Siri drama popular Projek Bapak-Bapak (Malay Variety | Projek Bapak-Bapak) dengan episod penuh dan kualiti penstriman pantas.",
@@ -13589,7 +11563,8 @@ export const VOD_CATALOG: VodItem[] = [
         "synopsis": "Projek Bapak-Bapak - S4E12"
       }
     ],
-    "duration": "12 Episod"
+    "duration": "12 Episod",
+    "apkCategory": "MALAY VARIETY"
   },
   {
     "id": "vod_s_045",
@@ -13604,7 +11579,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://datastore.vr.ctrp.sooka.my/content/images/4fa938KQVTV.jpg",
     "backdrop": "https://datastore.vr.ctrp.sooka.my/content/images/4fa938KQVTV.jpg",
     "year": 2024,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "quality": "4K UHD",
     "ageRating": "P13",
     "synopsis": "Siri drama popular Sepahtu 2025 (Malay Variety | Sepahtu 2025) dengan episod penuh dan kualiti penstriman pantas.",
@@ -13858,7 +11833,8 @@ export const VOD_CATALOG: VodItem[] = [
         "synopsis": "Sepahtu 2025 - 98-Sepahtu Live E10"
       }
     ],
-    "duration": "27 Episod"
+    "duration": "27 Episod",
+    "apkCategory": "MALAY VARIETY"
   },
   {
     "id": "vod_s_046",
@@ -13873,7 +11849,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://vod-poster.astro.com.my/prod/IVP(STB_OTT_STV)_KTHPL_series_p_IVP_PORT_390x585_8859F_2025814_153833.jpg",
     "backdrop": "https://vod-poster.astro.com.my/prod/IVP(STB_OTT_STV)_KTHPL_series_p_IVP_PORT_390x585_8859F_2025814_153833.jpg",
     "year": 2024,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "quality": "4K UHD",
     "ageRating": "P13",
     "synopsis": "Siri drama popular Kilauan Emas 2025 (Malay Variety | Kilauan Emas 2025) dengan episod penuh dan kualiti penstriman pantas.",
@@ -13956,7 +11932,8 @@ export const VOD_CATALOG: VodItem[] = [
         "synopsis": "Kilauan Emas 2025 - 99-Kilauan Emas E08"
       }
     ],
-    "duration": "8 Episod"
+    "duration": "8 Episod",
+    "apkCategory": "MALAY VARIETY"
   },
   {
     "id": "vod_s_047",
@@ -13971,7 +11948,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://vod-poster.astro.com.my/prod/IVP(STB_OTT_STV)_KUMVC_series_p_IVP_PORT_390x585_8ACBF_20251029_15926.jpg",
     "backdrop": "https://vod-poster.astro.com.my/prod/IVP(STB_OTT_STV)_KUMVC_series_p_IVP_PORT_390x585_8ACBF_20251029_15926.jpg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "quality": "4K UHD",
     "ageRating": "P13",
     "synopsis": "Siri drama popular Gegar Vaganza 12 (Malay Variety | Gegar Vaganza 12) dengan episod penuh dan kualiti penstriman pantas.",
@@ -14090,139 +12067,8 @@ export const VOD_CATALOG: VodItem[] = [
         "synopsis": "Gegar Vaganza 12 - Gegar Vaganza S12 E01"
       }
     ],
-    "duration": "12 Episod"
-  },
-  {
-    "id": "vod_s_048",
-    "title": "The Scarecrow",
-    "type": "series",
-    "genre": [
-      "Drama"
-    ],
-    "origin": "korean",
-    "poster": "https://prod-images.viu.com/1438589006/11359ae701ec11c895b0fa8c93229a3311afa02c",
-    "backdrop": "https://prod-images.viu.com/1438589006/11359ae701ec11c895b0fa8c93229a3311afa02c",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "quality": "FHD 1080p",
-    "ageRating": "P13",
-    "synopsis": "Siri drama popular The Scarecrow (VIU Korea| The Scarecrow) dengan episod penuh dan kualiti penstriman pantas.",
-    "cast": [
-      "Pelakon Utama"
-    ],
-    "streamUrl": "https://ptv2026.com/get_viu.m3u8?username=vip_gzidmjzr&password=Uk7WNjrs&video_id=1166301475&quality=s240p&product_id=3049788&lang=Malay&flag_id=7&ut=2",
-    "clearKey": "",
-    "episodes": [
-      {
-        "episodeNumber": 1,
-        "title": "Ep01",
-        "duration": "45m",
-        "thumbnail": "https://prod-images.viu.com/1438589006/11359ae701ec11c895b0fa8c93229a3311afa02c",
-        "streamUrl": "https://ptv2026.com/get_viu.m3u8?username=vip_gzidmjzr&password=Uk7WNjrs&video_id=1166301475&quality=s240p&product_id=3049788&lang=Malay&flag_id=7&ut=2",
-        "clearKey": "",
-        "synopsis": "The Scarecrow - Ep01"
-      },
-      {
-        "episodeNumber": 2,
-        "title": "Ep02",
-        "duration": "45m",
-        "thumbnail": "https://prod-images.viu.com/1438589006/11359ae701ec11c895b0fa8c93229a3311afa02c",
-        "streamUrl": "https://ptv2026.com/get_viu.m3u8?username=vip_gzidmjzr&password=Uk7WNjrs&video_id=1166301474&quality=s240p&product_id=3049775&lang=Malay&flag_id=7&ut=2",
-        "clearKey": "",
-        "synopsis": "The Scarecrow - Ep02"
-      },
-      {
-        "episodeNumber": 3,
-        "title": "Ep03",
-        "duration": "45m",
-        "thumbnail": "https://prod-images.viu.com/1438589006/11359ae701ec11c895b0fa8c93229a3311afa02c",
-        "streamUrl": "https://ptv2026.com/get_viu.m3u8?username=vip_gzidmjzr&password=Uk7WNjrs&video_id=1166302061&quality=s240p&product_id=3061152&lang=Malay&flag_id=7&ut=2",
-        "clearKey": "",
-        "synopsis": "The Scarecrow - Ep03"
-      },
-      {
-        "episodeNumber": 4,
-        "title": "Ep04",
-        "duration": "45m",
-        "thumbnail": "https://prod-images.viu.com/1438589006/11359ae701ec11c895b0fa8c93229a3311afa02c",
-        "streamUrl": "https://ptv2026.com/get_viu.m3u8?username=vip_gzidmjzr&password=Uk7WNjrs&video_id=1166302069&quality=s240p&product_id=3061193&lang=Malay&flag_id=7&ut=2",
-        "clearKey": "",
-        "synopsis": "The Scarecrow - Ep04"
-      },
-      {
-        "episodeNumber": 5,
-        "title": "Ep05",
-        "duration": "45m",
-        "thumbnail": "https://prod-images.viu.com/1438589006/11359ae701ec11c895b0fa8c93229a3311afa02c",
-        "streamUrl": "https://ptv2026.com/get_viu.m3u8?username=vip_gzidmjzr&password=Uk7WNjrs&video_id=1166302558&quality=s240p&product_id=3069749&lang=Malay&flag_id=7&ut=2",
-        "clearKey": "",
-        "synopsis": "The Scarecrow - Ep05"
-      },
-      {
-        "episodeNumber": 6,
-        "title": "Ep06",
-        "duration": "45m",
-        "thumbnail": "https://prod-images.viu.com/1438589006/11359ae701ec11c895b0fa8c93229a3311afa02c",
-        "streamUrl": "https://ptv2026.com/get_viu.m3u8?username=vip_gzidmjzr&password=Uk7WNjrs&video_id=1166302559&quality=s240p&product_id=3069762&lang=Malay&flag_id=7&ut=2",
-        "clearKey": "",
-        "synopsis": "The Scarecrow - Ep06"
-      },
-      {
-        "episodeNumber": 7,
-        "title": "Ep07",
-        "duration": "45m",
-        "thumbnail": "https://prod-images.viu.com/1438589006/11359ae701ec11c895b0fa8c93229a3311afa02c",
-        "streamUrl": "https://ptv2026.com/get_viu.m3u8?username=vip_gzidmjzr&password=Uk7WNjrs&video_id=1166303281&quality=s240p&product_id=3095695&lang=Malay&flag_id=7&ut=2",
-        "clearKey": "",
-        "synopsis": "The Scarecrow - Ep07"
-      },
-      {
-        "episodeNumber": 8,
-        "title": "Ep08",
-        "duration": "45m",
-        "thumbnail": "https://prod-images.viu.com/1438589006/11359ae701ec11c895b0fa8c93229a3311afa02c",
-        "streamUrl": "https://ptv2026.com/get_viu.m3u8?username=vip_gzidmjzr&password=Uk7WNjrs&video_id=1166303322&quality=s240p&product_id=3095919&lang=Malay&flag_id=7&ut=2",
-        "clearKey": "",
-        "synopsis": "The Scarecrow - Ep08"
-      },
-      {
-        "episodeNumber": 9,
-        "title": "Ep09",
-        "duration": "45m",
-        "thumbnail": "https://prod-images.viu.com/1438589006/11359ae701ec11c895b0fa8c93229a3311afa02c",
-        "streamUrl": "https://ptv2026.com/get_viu.m3u8?username=vip_gzidmjzr&password=Uk7WNjrs&video_id=1166303842&quality=s240p&product_id=3100953&lang=Malay&flag_id=7&ut=2",
-        "clearKey": "",
-        "synopsis": "The Scarecrow - Ep09"
-      },
-      {
-        "episodeNumber": 10,
-        "title": "Ep10",
-        "duration": "45m",
-        "thumbnail": "https://prod-images.viu.com/1438589006/11359ae701ec11c895b0fa8c93229a3311afa02c",
-        "streamUrl": "https://ptv2026.com/get_viu.m3u8?username=vip_gzidmjzr&password=Uk7WNjrs&video_id=1166303956&quality=s240p&product_id=3106407&lang=Malay&flag_id=7&ut=2",
-        "clearKey": "",
-        "synopsis": "The Scarecrow - Ep10"
-      },
-      {
-        "episodeNumber": 11,
-        "title": "Ep11",
-        "duration": "45m",
-        "thumbnail": "https://prod-images.viu.com/1438589006/11359ae701ec11c895b0fa8c93229a3311afa02c",
-        "streamUrl": "https://ptv2026.com/get_viu.m3u8?username=vip_gzidmjzr&password=Uk7WNjrs&video_id=1166304479&quality=s240p&product_id=3132734&lang=Malay&flag_id=7&ut=2",
-        "clearKey": "",
-        "synopsis": "The Scarecrow - Ep11"
-      },
-      {
-        "episodeNumber": 12,
-        "title": "Ep12",
-        "duration": "45m",
-        "thumbnail": "https://prod-images.viu.com/1438589006/11359ae701ec11c895b0fa8c93229a3311afa02c",
-        "streamUrl": "https://ptv2026.com/get_viu.m3u8?username=vip_gzidmjzr&password=Uk7WNjrs&video_id=1166304523&quality=s240p&product_id=3132991&lang=Malay&flag_id=7&ut=2",
-        "clearKey": "",
-        "synopsis": "The Scarecrow - Ep12"
-      }
-    ],
-    "duration": "12 Episod"
+    "duration": "12 Episod",
+    "apkCategory": "MALAY VARIETY"
   },
   {
     "id": "vod_s_049",
@@ -14235,7 +12081,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://prod-images.viu.com/3484512230/57ca030effedc07f5cad64f9fbc68b7133b1c470",
     "backdrop": "https://prod-images.viu.com/3484512230/57ca030effedc07f5cad64f9fbc68b7133b1c470",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "quality": "FHD 1080p",
     "ageRating": "P13",
     "synopsis": "Siri drama popular Phantom Lawyer (VIU Korea| Phantom Lawyer) dengan episod penuh dan kualiti penstriman pantas.",
@@ -14390,7 +12236,8 @@ export const VOD_CATALOG: VodItem[] = [
         "synopsis": "Phantom Lawyer - Ep16"
       }
     ],
-    "duration": "16 Episod"
+    "duration": "16 Episod",
+    "apkCategory": "VIU KOREA"
   },
   {
     "id": "vod_s_050",
@@ -14405,7 +12252,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://prod-images.viu.com/3910309256/671975d7891f1ba71f7af5bbbeb05b89c206627d",
     "backdrop": "https://prod-images.viu.com/3910309256/671975d7891f1ba71f7af5bbbeb05b89c206627d",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "quality": "FHD 1080p",
     "ageRating": "P13",
     "synopsis": "Siri drama popular Running Man 2026 (VIU Korea| Running Man 2026) dengan episod penuh dan kualiti penstriman pantas.",
@@ -14695,7 +12542,8 @@ export const VOD_CATALOG: VodItem[] = [
         "synopsis": "Running Man 2026 - Ep814"
       }
     ],
-    "duration": "31 Episod"
+    "duration": "31 Episod",
+    "apkCategory": "VIU KOREA"
   },
   {
     "id": "vod_s_051",
@@ -14710,7 +12558,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://prod-images.viu.com/2046128108/52511d036547da39ea3bfe20a6ee1fa3768f9a91",
     "backdrop": "https://prod-images.viu.com/2046128108/52511d036547da39ea3bfe20a6ee1fa3768f9a91",
     "year": 2024,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "quality": "FHD 1080p",
     "ageRating": "P13",
     "synopsis": "Siri drama popular Running Man 2025 (VIU Korea| Running Man 2025) dengan episod penuh dan kualiti penstriman pantas.",
@@ -15171,7 +13019,8 @@ export const VOD_CATALOG: VodItem[] = [
         "synopsis": "Running Man 2025 - Ep783"
       }
     ],
-    "duration": "50 Episod"
+    "duration": "50 Episod",
+    "apkCategory": "VIU KOREA"
   },
   {
     "id": "vod_s_052",
@@ -15184,7 +13033,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://prod-images.viu.com/clip_asset_v6/1165816244/1165835168/d3bcb7ea3508d620d7e703630afc300c274d5666",
     "backdrop": "https://prod-images.viu.com/clip_asset_v6/1165816244/1165835168/d3bcb7ea3508d620d7e703630afc300c274d5666",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "quality": "FHD 1080p",
     "ageRating": "P13",
     "synopsis": "Siri drama popular Tale Of The Nine Tailed (VIU Korea| Tale Of The Nine Tailed) dengan episod penuh dan kualiti penstriman pantas.",
@@ -15339,7 +13188,8 @@ export const VOD_CATALOG: VodItem[] = [
         "synopsis": "Tale Of The Nine Tailed - Ep16"
       }
     ],
-    "duration": "16 Episod"
+    "duration": "16 Episod",
+    "apkCategory": "VIU KOREA"
   },
   {
     "id": "vod_s_053",
@@ -15352,7 +13202,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://prod-images.viu.com/clip_asset_v6/1166120894/1166108158/cdce461edf335426d7293b7020cb0c117a3d6359",
     "backdrop": "https://prod-images.viu.com/clip_asset_v6/1166120894/1166108158/cdce461edf335426d7293b7020cb0c117a3d6359",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "quality": "FHD 1080p",
     "ageRating": "P13",
     "synopsis": "Siri drama popular Joseon Attorney (VIU Korea| Joseon Attorney) dengan episod penuh dan kualiti penstriman pantas.",
@@ -15507,175 +13357,8 @@ export const VOD_CATALOG: VodItem[] = [
         "synopsis": "Joseon Attorney - Ep16"
       }
     ],
-    "duration": "16 Episod"
-  },
-  {
-    "id": "vod_s_054",
-    "title": "The Haunted Palace",
-    "type": "series",
-    "genre": [
-      "Drama"
-    ],
-    "origin": "korean",
-    "poster": "https://prod-images.viu.com/401327731/d630ec6937ca8da3e902a68c0c8f6fd973cae0c2",
-    "backdrop": "https://prod-images.viu.com/401327731/d630ec6937ca8da3e902a68c0c8f6fd973cae0c2",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "quality": "FHD 1080p",
-    "ageRating": "P13",
-    "synopsis": "Siri drama popular The Haunted Palace (VIU Korea| The Haunted Palace) dengan episod penuh dan kualiti penstriman pantas.",
-    "cast": [
-      "Pelakon Utama"
-    ],
-    "streamUrl": "https://ptv2026.com/get_viu.m3u8?username=vip_gzidmjzr&password=Uk7WNjrs&video_id=1166242714&quality=s240p&product_id=2607831&lang=Malay&flag_id=7&ut=0",
-    "clearKey": "",
-    "episodes": [
-      {
-        "episodeNumber": 1,
-        "title": "Ep01",
-        "duration": "45m",
-        "thumbnail": "https://prod-images.viu.com/401327731/d630ec6937ca8da3e902a68c0c8f6fd973cae0c2",
-        "streamUrl": "https://ptv2026.com/get_viu.m3u8?username=vip_gzidmjzr&password=Uk7WNjrs&video_id=1166242714&quality=s240p&product_id=2607831&lang=Malay&flag_id=7&ut=0",
-        "clearKey": "",
-        "synopsis": "The Haunted Palace - Ep01"
-      },
-      {
-        "episodeNumber": 2,
-        "title": "Ep02",
-        "duration": "45m",
-        "thumbnail": "https://prod-images.viu.com/401327731/d630ec6937ca8da3e902a68c0c8f6fd973cae0c2",
-        "streamUrl": "https://ptv2026.com/get_viu.m3u8?username=vip_gzidmjzr&password=Uk7WNjrs&video_id=1166242713&quality=s240p&product_id=2607825&lang=Malay&flag_id=7&ut=0",
-        "clearKey": "",
-        "synopsis": "The Haunted Palace - Ep02"
-      },
-      {
-        "episodeNumber": 3,
-        "title": "Ep03",
-        "duration": "45m",
-        "thumbnail": "https://prod-images.viu.com/401327731/d630ec6937ca8da3e902a68c0c8f6fd973cae0c2",
-        "streamUrl": "https://ptv2026.com/get_viu.m3u8?username=vip_gzidmjzr&password=Uk7WNjrs&video_id=1166243303&quality=s240p&product_id=2609586&lang=Malay&flag_id=7&ut=0",
-        "clearKey": "",
-        "synopsis": "The Haunted Palace - Ep03"
-      },
-      {
-        "episodeNumber": 4,
-        "title": "Ep04",
-        "duration": "45m",
-        "thumbnail": "https://prod-images.viu.com/401327731/d630ec6937ca8da3e902a68c0c8f6fd973cae0c2",
-        "streamUrl": "https://ptv2026.com/get_viu.m3u8?username=vip_gzidmjzr&password=Uk7WNjrs&video_id=1166243302&quality=s240p&product_id=2609581&lang=Malay&flag_id=7&ut=0",
-        "clearKey": "",
-        "synopsis": "The Haunted Palace - Ep04"
-      },
-      {
-        "episodeNumber": 5,
-        "title": "Ep05",
-        "duration": "45m",
-        "thumbnail": "https://prod-images.viu.com/401327731/d630ec6937ca8da3e902a68c0c8f6fd973cae0c2",
-        "streamUrl": "https://ptv2026.com/get_viu.m3u8?username=vip_gzidmjzr&password=Uk7WNjrs&video_id=1166243981&quality=s240p&product_id=2613298&lang=Malay&flag_id=7&ut=0",
-        "clearKey": "",
-        "synopsis": "The Haunted Palace - Ep05"
-      },
-      {
-        "episodeNumber": 6,
-        "title": "Ep06",
-        "duration": "45m",
-        "thumbnail": "https://prod-images.viu.com/401327731/d630ec6937ca8da3e902a68c0c8f6fd973cae0c2",
-        "streamUrl": "https://ptv2026.com/get_viu.m3u8?username=vip_gzidmjzr&password=Uk7WNjrs&video_id=1166244187&quality=s240p&product_id=2614064&lang=Malay&flag_id=7&ut=0",
-        "clearKey": "",
-        "synopsis": "The Haunted Palace - Ep06"
-      },
-      {
-        "episodeNumber": 7,
-        "title": "Ep07",
-        "duration": "45m",
-        "thumbnail": "https://prod-images.viu.com/401327731/d630ec6937ca8da3e902a68c0c8f6fd973cae0c2",
-        "streamUrl": "https://ptv2026.com/get_viu.m3u8?username=vip_gzidmjzr&password=Uk7WNjrs&video_id=1166244649&quality=s240p&product_id=2615804&lang=Malay&flag_id=7&ut=0",
-        "clearKey": "",
-        "synopsis": "The Haunted Palace - Ep07"
-      },
-      {
-        "episodeNumber": 8,
-        "title": "Ep08",
-        "duration": "45m",
-        "thumbnail": "https://prod-images.viu.com/401327731/d630ec6937ca8da3e902a68c0c8f6fd973cae0c2",
-        "streamUrl": "https://ptv2026.com/get_viu.m3u8?username=vip_gzidmjzr&password=Uk7WNjrs&video_id=1166244650&quality=s240p&product_id=2615806&lang=Malay&flag_id=7&ut=0",
-        "clearKey": "",
-        "synopsis": "The Haunted Palace - Ep08"
-      },
-      {
-        "episodeNumber": 9,
-        "title": "Ep09",
-        "duration": "45m",
-        "thumbnail": "https://prod-images.viu.com/401327731/d630ec6937ca8da3e902a68c0c8f6fd973cae0c2",
-        "streamUrl": "https://ptv2026.com/get_viu.m3u8?username=vip_gzidmjzr&password=Uk7WNjrs&video_id=1166245160&quality=s240p&product_id=2617642&lang=Malay&flag_id=7&ut=0",
-        "clearKey": "",
-        "synopsis": "The Haunted Palace - Ep09"
-      },
-      {
-        "episodeNumber": 10,
-        "title": "Ep10",
-        "duration": "45m",
-        "thumbnail": "https://prod-images.viu.com/401327731/d630ec6937ca8da3e902a68c0c8f6fd973cae0c2",
-        "streamUrl": "https://ptv2026.com/get_viu.m3u8?username=vip_gzidmjzr&password=Uk7WNjrs&video_id=1166245247&quality=s240p&product_id=2617725&lang=Malay&flag_id=7&ut=0",
-        "clearKey": "",
-        "synopsis": "The Haunted Palace - Ep10"
-      },
-      {
-        "episodeNumber": 11,
-        "title": "Ep11",
-        "duration": "45m",
-        "thumbnail": "https://prod-images.viu.com/401327731/d630ec6937ca8da3e902a68c0c8f6fd973cae0c2",
-        "streamUrl": "https://ptv2026.com/get_viu.m3u8?username=vip_gzidmjzr&password=Uk7WNjrs&video_id=1166246042&quality=s240p&product_id=2620556&lang=Malay&flag_id=7&ut=0",
-        "clearKey": "",
-        "synopsis": "The Haunted Palace - Ep11"
-      },
-      {
-        "episodeNumber": 12,
-        "title": "Ep12",
-        "duration": "45m",
-        "thumbnail": "https://prod-images.viu.com/401327731/d630ec6937ca8da3e902a68c0c8f6fd973cae0c2",
-        "streamUrl": "https://ptv2026.com/get_viu.m3u8?username=vip_gzidmjzr&password=Uk7WNjrs&video_id=1166246041&quality=s240p&product_id=2620539&lang=Malay&flag_id=7&ut=0",
-        "clearKey": "",
-        "synopsis": "The Haunted Palace - Ep12"
-      },
-      {
-        "episodeNumber": 13,
-        "title": "Ep13",
-        "duration": "45m",
-        "thumbnail": "https://prod-images.viu.com/401327731/d630ec6937ca8da3e902a68c0c8f6fd973cae0c2",
-        "streamUrl": "https://ptv2026.com/get_viu.m3u8?username=vip_gzidmjzr&password=Uk7WNjrs&video_id=1166246739&quality=s240p&product_id=2622687&lang=Malay&flag_id=7&ut=0",
-        "clearKey": "",
-        "synopsis": "The Haunted Palace - Ep13"
-      },
-      {
-        "episodeNumber": 14,
-        "title": "Ep14",
-        "duration": "45m",
-        "thumbnail": "https://prod-images.viu.com/401327731/d630ec6937ca8da3e902a68c0c8f6fd973cae0c2",
-        "streamUrl": "https://ptv2026.com/get_viu.m3u8?username=vip_gzidmjzr&password=Uk7WNjrs&video_id=1166246997&quality=s240p&product_id=2623426&lang=Malay&flag_id=7&ut=0",
-        "clearKey": "",
-        "synopsis": "The Haunted Palace - Ep14"
-      },
-      {
-        "episodeNumber": 15,
-        "title": "Ep15",
-        "duration": "45m",
-        "thumbnail": "https://prod-images.viu.com/401327731/d630ec6937ca8da3e902a68c0c8f6fd973cae0c2",
-        "streamUrl": "https://ptv2026.com/get_viu.m3u8?username=vip_gzidmjzr&password=Uk7WNjrs&video_id=1166247813&quality=s240p&product_id=2626347&lang=Malay&flag_id=7&ut=0",
-        "clearKey": "",
-        "synopsis": "The Haunted Palace - Ep15"
-      },
-      {
-        "episodeNumber": 16,
-        "title": "Ep16",
-        "duration": "45m",
-        "thumbnail": "https://prod-images.viu.com/401327731/d630ec6937ca8da3e902a68c0c8f6fd973cae0c2",
-        "streamUrl": "https://ptv2026.com/get_viu.m3u8?username=vip_gzidmjzr&password=Uk7WNjrs&video_id=1166247968&quality=s240p&product_id=2627191&lang=Malay&flag_id=7&ut=0",
-        "clearKey": "",
-        "synopsis": "The Haunted Palace - Ep16"
-      }
-    ],
-    "duration": "16 Episod"
+    "duration": "16 Episod",
+    "apkCategory": "VIU KOREA"
   },
   {
     "id": "vod_s_055",
@@ -15688,7 +13371,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://prod-images.viu.com/1903973361/e3e824e159925632e70e2d5cc6b79bc9742d16a1",
     "backdrop": "https://prod-images.viu.com/1903973361/e3e824e159925632e70e2d5cc6b79bc9742d16a1",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "quality": "FHD 1080p",
     "ageRating": "P13",
     "synopsis": "Siri drama popular Moon River (VIU Korea| Moon River) dengan episod penuh dan kualiti penstriman pantas.",
@@ -15825,7 +13508,8 @@ export const VOD_CATALOG: VodItem[] = [
         "synopsis": "Moon River - Ep14"
       }
     ],
-    "duration": "14 Episod"
+    "duration": "14 Episod",
+    "apkCategory": "VIU KOREA"
   },
   {
     "id": "vod_s_056",
@@ -15838,7 +13522,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://prod-images.viu.com/1844578892/7128113299c08ce7d4b156a33699b953318d7489",
     "backdrop": "https://prod-images.viu.com/1844578892/7128113299c08ce7d4b156a33699b953318d7489",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "quality": "FHD 1080p",
     "ageRating": "P13",
     "synopsis": "Siri drama popular IDOL-I (VIU Korea| IDOL-I) dengan episod penuh dan kualiti penstriman pantas.",
@@ -15957,7 +13641,8 @@ export const VOD_CATALOG: VodItem[] = [
         "synopsis": "IDOL-I - Ep12"
       }
     ],
-    "duration": "12 Episod"
+    "duration": "12 Episod",
+    "apkCategory": "VIU KOREA"
   },
   {
     "id": "vod_s_057",
@@ -15970,7 +13655,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://prod-images.viu.com/3454107799/3442bd5f70be19132cb9ce8d3cafa18e7ff5f5aa",
     "backdrop": "https://prod-images.viu.com/3454107799/3442bd5f70be19132cb9ce8d3cafa18e7ff5f5aa",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "quality": "FHD 1080p",
     "ageRating": "P13",
     "synopsis": "Siri drama popular S Line (VIU Korea| S Line) dengan episod penuh dan kualiti penstriman pantas.",
@@ -16035,7 +13720,8 @@ export const VOD_CATALOG: VodItem[] = [
         "synopsis": "S Line - Ep06"
       }
     ],
-    "duration": "6 Episod"
+    "duration": "6 Episod",
+    "apkCategory": "VIU KOREA"
   },
   {
     "id": "vod_s_058",
@@ -16048,7 +13734,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://prod-images.viu.com/2778239836/07034ffdf353900151eb48bbd3c419f680b203a4",
     "backdrop": "https://prod-images.viu.com/2778239836/07034ffdf353900151eb48bbd3c419f680b203a4",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "quality": "FHD 1080p",
     "ageRating": "P13",
     "synopsis": "Siri drama popular Bidadari Tanpa Syurga (VIU Malay| Bidadari Tanpa Syurga) dengan episod penuh dan kualiti penstriman pantas.",
@@ -16167,7 +13853,8 @@ export const VOD_CATALOG: VodItem[] = [
         "synopsis": "Bidadari Tanpa Syurga - Ep12"
       }
     ],
-    "duration": "12 Episod"
+    "duration": "12 Episod",
+    "apkCategory": "VIU MALAY"
   },
   {
     "id": "vod_s_059",
@@ -16180,7 +13867,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRN527C3pjfiJ56rRuw6jCu1atcoDlPjnt2RP_SUpNyiQ&s=10",
     "backdrop": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRN527C3pjfiJ56rRuw6jCu1atcoDlPjnt2RP_SUpNyiQ&s=10",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "quality": "FHD 1080p",
     "ageRating": "P13",
     "synopsis": "Siri drama popular Ate Kome, I Love You (VIU Malay| Ate Kome, I Love You) dengan episod penuh dan kualiti penstriman pantas.",
@@ -16299,7 +13986,8 @@ export const VOD_CATALOG: VodItem[] = [
         "synopsis": "Ate Kome, I Love You - I Love You\", Ep12"
       }
     ],
-    "duration": "12 Episod"
+    "duration": "12 Episod",
+    "apkCategory": "VIU MALAY"
   },
   {
     "id": "vod_s_060",
@@ -16313,7 +14001,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQwNJPXu0aN4t7j31567-vMfEkN2V1HfNDUQkq3NX4Biw&s=10",
     "backdrop": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQwNJPXu0aN4t7j31567-vMfEkN2V1HfNDUQkq3NX4Biw&s=10",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "quality": "FHD 1080p",
     "ageRating": "P13",
     "synopsis": "Siri drama popular Cinta Dalam Sekam (VIU Malay| Cinta Dalam Sekam) dengan episod penuh dan kualiti penstriman pantas.",
@@ -16396,7 +14084,8 @@ export const VOD_CATALOG: VodItem[] = [
         "synopsis": "Cinta Dalam Sekam - Ep08"
       }
     ],
-    "duration": "8 Episod"
+    "duration": "8 Episod",
+    "apkCategory": "VIU MALAY"
   },
   {
     "id": "vod_s_061",
@@ -16409,7 +14098,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://prod-images.viu.com/1856485111/09272073000b96c599c750b1a115c3ecd821e3e6",
     "backdrop": "https://prod-images.viu.com/1856485111/09272073000b96c599c750b1a115c3ecd821e3e6",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "quality": "4K UHD",
     "ageRating": "P13",
     "synopsis": "Siri drama popular Aku Pilih Pelangi (VIU Malay| Aku Pilih Pelangi) dengan episod penuh dan kualiti penstriman pantas.",
@@ -16492,7 +14181,8 @@ export const VOD_CATALOG: VodItem[] = [
         "synopsis": "Aku Pilih Pelangi - Ep08"
       }
     ],
-    "duration": "8 Episod"
+    "duration": "8 Episod",
+    "apkCategory": "VIU MALAY"
   },
   {
     "id": "vod_s_062",
@@ -16506,7 +14196,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPEmc7WJBGl1F282itkc6He3GPfpeJyTaA-9oIi-v0BA&s=10",
     "backdrop": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPEmc7WJBGl1F282itkc6He3GPfpeJyTaA-9oIi-v0BA&s=10",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "quality": "FHD 1080p",
     "ageRating": "P13",
     "synopsis": "Siri drama popular Hening Cinta (VIU Malay| Hening Cinta) dengan episod penuh dan kualiti penstriman pantas.",
@@ -16625,7 +14315,8 @@ export const VOD_CATALOG: VodItem[] = [
         "synopsis": "Hening Cinta - Ep12"
       }
     ],
-    "duration": "12 Episod"
+    "duration": "12 Episod",
+    "apkCategory": "VIU MALAY"
   },
   {
     "id": "vod_s_063",
@@ -16638,7 +14329,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRxnob_7pO4vKXYaBgteyCxwhP7VWN6wgBBdqW2BHDmhg&s=10",
     "backdrop": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRxnob_7pO4vKXYaBgteyCxwhP7VWN6wgBBdqW2BHDmhg&s=10",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "quality": "4K UHD",
     "ageRating": "P13",
     "synopsis": "Siri drama popular Walid (VIU Malay| Walid) dengan episod penuh dan kualiti penstriman pantas.",
@@ -16757,7 +14448,8 @@ export const VOD_CATALOG: VodItem[] = [
         "synopsis": "Walid - Ep12"
       }
     ],
-    "duration": "12 Episod"
+    "duration": "12 Episod",
+    "apkCategory": "VIU MALAY"
   },
   {
     "id": "vod_s_064",
@@ -16771,7 +14463,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://prod-images.viu.com/3962890379/865fec3288c6c172e6884d4c485b9bb8c2c854be",
     "backdrop": "https://prod-images.viu.com/3962890379/865fec3288c6c172e6884d4c485b9bb8c2c854be",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "quality": "FHD 1080p",
     "ageRating": "P13",
     "synopsis": "Siri drama popular Kasih Keringkam (VIU Malay| Kasih Keringkam) dengan episod penuh dan kualiti penstriman pantas.",
@@ -16899,7 +14591,8 @@ export const VOD_CATALOG: VodItem[] = [
         "synopsis": "Kasih Keringkam - Ep13"
       }
     ],
-    "duration": "13 Episod"
+    "duration": "13 Episod",
+    "apkCategory": "VIU MALAY"
   },
   {
     "id": "vod_s_065",
@@ -16912,7 +14605,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://prod-images.viu.com/3189074212/0fc06e321d851369114ce242099c8dfe2b70de16",
     "backdrop": "https://prod-images.viu.com/3189074212/0fc06e321d851369114ce242099c8dfe2b70de16",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "quality": "FHD 1080p",
     "ageRating": "P13",
     "synopsis": "Siri drama popular Abang Imam Minah Skuter (VIU Malay| Abang Imam Minah Skuter) dengan episod penuh dan kualiti penstriman pantas.",
@@ -17103,7 +14796,8 @@ export const VOD_CATALOG: VodItem[] = [
         "synopsis": "Abang Imam Minah Skuter - Ep20"
       }
     ],
-    "duration": "20 Episod"
+    "duration": "20 Episod",
+    "apkCategory": "VIU MALAY"
   },
   {
     "id": "vod_s_066",
@@ -17116,7 +14810,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://prod-images.viu.com/88336737/a4d2054217f142d792d381485ab89605d74bc7d1",
     "backdrop": "https://prod-images.viu.com/88336737/a4d2054217f142d792d381485ab89605d74bc7d1",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "quality": "FHD 1080p",
     "ageRating": "P13",
     "synopsis": "Siri drama popular Jendela Hati (VIU Malay| Jendela Hati) dengan episod penuh dan kualiti penstriman pantas.",
@@ -17262,7 +14956,8 @@ export const VOD_CATALOG: VodItem[] = [
         "synopsis": "Jendela Hati - Ep15"
       }
     ],
-    "duration": "15 Episod"
+    "duration": "15 Episod",
+    "apkCategory": "VIU MALAY"
   },
   {
     "id": "vod_s_067",
@@ -17275,7 +14970,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://prod-images.viu.com/clip_asset_v6/1165927322/1165927387/0dcd59d470d0f8316849574673c188d34722b24c",
     "backdrop": "https://prod-images.viu.com/clip_asset_v6/1165927322/1165927387/0dcd59d470d0f8316849574673c188d34722b24c",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "quality": "FHD 1080p",
     "ageRating": "P13",
     "synopsis": "Siri drama popular Ganjil (VIU Malay| Ganjil) dengan episod penuh dan kualiti penstriman pantas.",
@@ -17376,121 +15071,8 @@ export const VOD_CATALOG: VodItem[] = [
         "synopsis": "Ganjil - Ep10"
       }
     ],
-    "duration": "10 Episod"
-  },
-  {
-    "id": "vod_s_068",
-    "title": "Nenek Bongkok Tiga",
-    "type": "series",
-    "genre": [
-      "Drama"
-    ],
-    "origin": "malay",
-    "poster": "https://prod-images.viu.com/clip_asset_v6/1166110331/1166094776/26daf3af45f1bb123c9f14d331cf976a6069efef",
-    "backdrop": "https://prod-images.viu.com/clip_asset_v6/1166110331/1166094776/26daf3af45f1bb123c9f14d331cf976a6069efef",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "quality": "FHD 1080p",
-    "ageRating": "P13",
-    "synopsis": "Siri drama popular Nenek Bongkok Tiga (VIU Malay| Nenek Bongkok Tiga) dengan episod penuh dan kualiti penstriman pantas.",
-    "cast": [
-      "Pelakon Utama"
-    ],
-    "streamUrl": "https://ptv2026.com/get_viu.m3u8?username=vip_gzidmjzr&password=Uk7WNjrs&video_id=1166091441&quality=s240p&product_id=2062956&lang=Malay&flag_id=7&ut=2",
-    "clearKey": "",
-    "episodes": [
-      {
-        "episodeNumber": 1,
-        "title": "Ep01",
-        "duration": "45m",
-        "thumbnail": "https://prod-images.viu.com/clip_asset_v6/1166110331/1166094776/26daf3af45f1bb123c9f14d331cf976a6069efef",
-        "streamUrl": "https://ptv2026.com/get_viu.m3u8?username=vip_gzidmjzr&password=Uk7WNjrs&video_id=1166091441&quality=s240p&product_id=2062956&lang=Malay&flag_id=7&ut=2",
-        "clearKey": "",
-        "synopsis": "Nenek Bongkok Tiga - Ep01"
-      },
-      {
-        "episodeNumber": 2,
-        "title": "Ep02",
-        "duration": "45m",
-        "thumbnail": "https://prod-images.viu.com/clip_asset_v6/1166110331/1166094776/26daf3af45f1bb123c9f14d331cf976a6069efef",
-        "streamUrl": "https://ptv2026.com/get_viu.m3u8?username=vip_gzidmjzr&password=Uk7WNjrs&video_id=1166091368&quality=s240p&product_id=2062816&lang=Malay&flag_id=7&ut=2",
-        "clearKey": "",
-        "synopsis": "Nenek Bongkok Tiga - Ep02"
-      },
-      {
-        "episodeNumber": 3,
-        "title": "Ep03",
-        "duration": "45m",
-        "thumbnail": "https://prod-images.viu.com/clip_asset_v6/1166110331/1166094776/26daf3af45f1bb123c9f14d331cf976a6069efef",
-        "streamUrl": "https://ptv2026.com/get_viu.m3u8?username=vip_gzidmjzr&password=Uk7WNjrs&video_id=1166093554&quality=s240p&product_id=2071572&lang=Malay&flag_id=7&ut=2",
-        "clearKey": "",
-        "synopsis": "Nenek Bongkok Tiga - Ep03"
-      },
-      {
-        "episodeNumber": 4,
-        "title": "Ep04",
-        "duration": "45m",
-        "thumbnail": "https://prod-images.viu.com/clip_asset_v6/1166110331/1166094776/26daf3af45f1bb123c9f14d331cf976a6069efef",
-        "streamUrl": "https://ptv2026.com/get_viu.m3u8?username=vip_gzidmjzr&password=Uk7WNjrs&video_id=1166097787&quality=s240p&product_id=2080205&lang=Malay&flag_id=7&ut=2",
-        "clearKey": "",
-        "synopsis": "Nenek Bongkok Tiga - Ep04"
-      },
-      {
-        "episodeNumber": 5,
-        "title": "Ep05",
-        "duration": "45m",
-        "thumbnail": "https://prod-images.viu.com/clip_asset_v6/1166110331/1166094776/26daf3af45f1bb123c9f14d331cf976a6069efef",
-        "streamUrl": "https://ptv2026.com/get_viu.m3u8?username=vip_gzidmjzr&password=Uk7WNjrs&video_id=1166098573&quality=s240p&product_id=2081189&lang=Malay&flag_id=7&ut=2",
-        "clearKey": "",
-        "synopsis": "Nenek Bongkok Tiga - Ep05"
-      },
-      {
-        "episodeNumber": 6,
-        "title": "Ep06",
-        "duration": "45m",
-        "thumbnail": "https://prod-images.viu.com/clip_asset_v6/1166110331/1166094776/26daf3af45f1bb123c9f14d331cf976a6069efef",
-        "streamUrl": "https://ptv2026.com/get_viu.m3u8?username=vip_gzidmjzr&password=Uk7WNjrs&video_id=1166101450&quality=s240p&product_id=2088334&lang=Malay&flag_id=7&ut=2",
-        "clearKey": "",
-        "synopsis": "Nenek Bongkok Tiga - Ep06"
-      },
-      {
-        "episodeNumber": 7,
-        "title": "Ep07",
-        "duration": "45m",
-        "thumbnail": "https://prod-images.viu.com/clip_asset_v6/1166110331/1166094776/26daf3af45f1bb123c9f14d331cf976a6069efef",
-        "streamUrl": "https://ptv2026.com/get_viu.m3u8?username=vip_gzidmjzr&password=Uk7WNjrs&video_id=1166102504&quality=s240p&product_id=2091451&lang=Malay&flag_id=7&ut=2",
-        "clearKey": "",
-        "synopsis": "Nenek Bongkok Tiga - Ep07"
-      },
-      {
-        "episodeNumber": 8,
-        "title": "Ep08",
-        "duration": "45m",
-        "thumbnail": "https://prod-images.viu.com/clip_asset_v6/1166110331/1166094776/26daf3af45f1bb123c9f14d331cf976a6069efef",
-        "streamUrl": "https://ptv2026.com/get_viu.m3u8?username=vip_gzidmjzr&password=Uk7WNjrs&video_id=1166110331&quality=s240p&product_id=2116491&lang=Malay&flag_id=7&ut=2",
-        "clearKey": "",
-        "synopsis": "Nenek Bongkok Tiga - Ep08"
-      },
-      {
-        "episodeNumber": 9,
-        "title": "Ep09",
-        "duration": "45m",
-        "thumbnail": "https://prod-images.viu.com/clip_asset_v6/1166110331/1166094776/26daf3af45f1bb123c9f14d331cf976a6069efef",
-        "streamUrl": "https://ptv2026.com/get_viu.m3u8?username=vip_gzidmjzr&password=Uk7WNjrs&video_id=1166107988&quality=s240p&product_id=2111769&lang=Malay&flag_id=7&ut=2",
-        "clearKey": "",
-        "synopsis": "Nenek Bongkok Tiga - Ep09"
-      },
-      {
-        "episodeNumber": 10,
-        "title": "Ep10",
-        "duration": "45m",
-        "thumbnail": "https://prod-images.viu.com/clip_asset_v6/1166110331/1166094776/26daf3af45f1bb123c9f14d331cf976a6069efef",
-        "streamUrl": "https://ptv2026.com/get_viu.m3u8?username=vip_gzidmjzr&password=Uk7WNjrs&video_id=1166107843&quality=s240p&product_id=2111592&lang=Malay&flag_id=7&ut=2",
-        "clearKey": "",
-        "synopsis": "Nenek Bongkok Tiga - Ep10"
-      }
-    ],
-    "duration": "10 Episod"
+    "duration": "10 Episod",
+    "apkCategory": "VIU MALAY"
   },
   {
     "id": "vod_s_069",
@@ -17505,7 +15087,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://prod-images.viu.com/3108616578/679069b984293f3c80e0f46cfb12014b62bfb94d",
     "backdrop": "https://prod-images.viu.com/3108616578/679069b984293f3c80e0f46cfb12014b62bfb94d",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "quality": "FHD 1080p",
     "ageRating": "P13",
     "synopsis": "Siri drama popular Taxi Driver 3 (VIU Korea| Taxi Driver 3) dengan episod penuh dan kualiti penstriman pantas.",
@@ -17660,7 +15242,8 @@ export const VOD_CATALOG: VodItem[] = [
         "synopsis": "Taxi Driver 3 - Ep16"
       }
     ],
-    "duration": "16 Episod"
+    "duration": "16 Episod",
+    "apkCategory": "VIU KOREA"
   },
   {
     "id": "vod_s_070",
@@ -17675,7 +15258,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://prod-images.viu.com/clip_asset_v6/1166112020/1166111684/d27cfe98dab1282b769052ce82c5fdd8a5f33d42",
     "backdrop": "https://prod-images.viu.com/clip_asset_v6/1166112020/1166111684/d27cfe98dab1282b769052ce82c5fdd8a5f33d42",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "quality": "FHD 1080p",
     "ageRating": "P13",
     "synopsis": "Siri drama popular Taxi Driver 2 (VIU Korea| Taxi Driver 2) dengan episod penuh dan kualiti penstriman pantas.",
@@ -17830,7 +15413,8 @@ export const VOD_CATALOG: VodItem[] = [
         "synopsis": "Taxi Driver 2 - Ep16"
       }
     ],
-    "duration": "16 Episod"
+    "duration": "16 Episod",
+    "apkCategory": "VIU KOREA"
   },
   {
     "id": "vod_s_071",
@@ -17845,7 +15429,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://prod-images.viu.com/clip_asset_v6/1165868174/1165873439/f4bad18b4a93656102d8f1db1bd7513faa3dae76",
     "backdrop": "https://prod-images.viu.com/clip_asset_v6/1165868174/1165873439/f4bad18b4a93656102d8f1db1bd7513faa3dae76",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "quality": "FHD 1080p",
     "ageRating": "P13",
     "synopsis": "Siri drama popular Taxi Driver (VIU Korea| Taxi Driver) dengan episod penuh dan kualiti penstriman pantas.",
@@ -18144,7 +15728,8 @@ export const VOD_CATALOG: VodItem[] = [
         "synopsis": "Taxi Driver - Ep32"
       }
     ],
-    "duration": "32 Episod"
+    "duration": "32 Episod",
+    "apkCategory": "VIU KOREA"
   },
   {
     "id": "vod_s_072",
@@ -18157,7 +15742,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://prod-images.viu.com/661990972/9738e36d8c54895423f581c872c15b5eaaa482e6",
     "backdrop": "https://prod-images.viu.com/661990972/9738e36d8c54895423f581c872c15b5eaaa482e6",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "quality": "FHD 1080p",
     "ageRating": "P13",
     "synopsis": "Siri drama popular Kelas Belakang (VIU Malay| Kelas Belakang) dengan episod penuh dan kualiti penstriman pantas.",
@@ -18357,7 +15942,8 @@ export const VOD_CATALOG: VodItem[] = [
         "synopsis": "Kelas Belakang - Ep21"
       }
     ],
-    "duration": "21 Episod"
+    "duration": "21 Episod",
+    "apkCategory": "VIU MALAY"
   },
   {
     "id": "vod_s_073",
@@ -18370,7 +15956,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://prod-images.viu.com/4024256496/4b637962e2eb490d8d0e76b8e8966553a7b5bcc4",
     "backdrop": "https://prod-images.viu.com/4024256496/4b637962e2eb490d8d0e76b8e8966553a7b5bcc4",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "quality": "FHD 1080p",
     "ageRating": "P13",
     "synopsis": "Siri drama popular Sesaat Lebih (VIU Malay | Sesaat Lebih) dengan episod penuh dan kualiti penstriman pantas.",
@@ -18534,7 +16120,8 @@ export const VOD_CATALOG: VodItem[] = [
         "synopsis": "Sesaat Lebih - Ep17"
       }
     ],
-    "duration": "17 Episod"
+    "duration": "17 Episod",
+    "apkCategory": "VIU MALAY"
   },
   {
     "id": "vod_s_074",
@@ -18547,7 +16134,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://prod-images.viu.com/clip_asset_v6/1166005053/1166002398/ba09190d3c42cc1474f84f7ac2e40e335391c533",
     "backdrop": "https://prod-images.viu.com/clip_asset_v6/1166005053/1166002398/ba09190d3c42cc1474f84f7ac2e40e335391c533",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "quality": "FHD 1080p",
     "ageRating": "P13",
     "synopsis": "Siri drama popular Seribu Nina (VIU Malay| Seribu Nina) dengan episod penuh dan kualiti penstriman pantas.",
@@ -18648,7 +16235,8 @@ export const VOD_CATALOG: VodItem[] = [
         "synopsis": "Seribu Nina - Ep10"
       }
     ],
-    "duration": "10 Episod"
+    "duration": "10 Episod",
+    "apkCategory": "VIU MALAY"
   },
   {
     "id": "vod_s_075",
@@ -18662,7 +16250,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://prod-images.viu.com/clip_asset_v6/1166186661/1166183792/fb41993fc81ae7e10f8a33d11afcf77c7c19f5e5",
     "backdrop": "https://prod-images.viu.com/clip_asset_v6/1166186661/1166183792/fb41993fc81ae7e10f8a33d11afcf77c7c19f5e5",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "quality": "FHD 1080p",
     "ageRating": "P13",
     "synopsis": "Siri drama popular Terlanjur Cinta (VIU Malay| Terlanjur Cinta) dengan episod penuh dan kualiti penstriman pantas.",
@@ -18781,7 +16369,8 @@ export const VOD_CATALOG: VodItem[] = [
         "synopsis": "Terlanjur Cinta - Ep12"
       }
     ],
-    "duration": "12 Episod"
+    "duration": "12 Episod",
+    "apkCategory": "VIU MALAY"
   },
   {
     "id": "vod_s_076",
@@ -18794,7 +16383,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://prod-images.viu.com/602610669/c8e237c9d72416b3f2a30c8c9fe6eaf2d3309085",
     "backdrop": "https://prod-images.viu.com/602610669/c8e237c9d72416b3f2a30c8c9fe6eaf2d3309085",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "quality": "FHD 1080p",
     "ageRating": "P13",
     "synopsis": "Siri drama popular Gadis Masa (VIU Malay| Gadis Masa) dengan episod penuh dan kualiti penstriman pantas.",
@@ -18877,7 +16466,8 @@ export const VOD_CATALOG: VodItem[] = [
         "synopsis": "Gadis Masa - Ep08 Gadis Masa"
       }
     ],
-    "duration": "8 Episod"
+    "duration": "8 Episod",
+    "apkCategory": "VIU MALAY"
   },
   {
     "id": "vod_s_077",
@@ -18890,7 +16480,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://prod-images.viu.com/1014091949/77dc82308e5961a0985089b9bde285a2b8881023",
     "backdrop": "https://prod-images.viu.com/1014091949/77dc82308e5961a0985089b9bde285a2b8881023",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "quality": "FHD 1080p",
     "ageRating": "P13",
     "synopsis": "Siri drama popular Saat Aku Tahu (VIU Malay| Saat Aku Tahu) dengan episod penuh dan kualiti penstriman pantas.",
@@ -19036,7 +16626,8 @@ export const VOD_CATALOG: VodItem[] = [
         "synopsis": "Saat Aku Tahu - -Ep15 Saat Aku Tahu"
       }
     ],
-    "duration": "15 Episod"
+    "duration": "15 Episod",
+    "apkCategory": "VIU MALAY"
   },
   {
     "id": "vod_s_078",
@@ -19049,7 +16640,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://prod-images.viu.com/2183223473/10e1692c308264d179c4100a739c7e805830c6f8",
     "backdrop": "https://prod-images.viu.com/2183223473/10e1692c308264d179c4100a739c7e805830c6f8",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "quality": "FHD 1080p",
     "ageRating": "P13",
     "synopsis": "Siri drama popular Seadanya Kita (VIU Malay| Seadanya Kita) dengan episod penuh dan kualiti penstriman pantas.",
@@ -19195,7 +16786,8 @@ export const VOD_CATALOG: VodItem[] = [
         "synopsis": "Seadanya Kita - -Ep15 Seadanya Kita"
       }
     ],
-    "duration": "15 Episod"
+    "duration": "15 Episod",
+    "apkCategory": "VIU MALAY"
   },
   {
     "id": "vod_s_079",
@@ -19209,7 +16801,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://prod-images.viu.com/3598655073/ade878bb13485e09eef10dc2daf9d7fa43ead382",
     "backdrop": "https://prod-images.viu.com/3598655073/ade878bb13485e09eef10dc2daf9d7fa43ead382",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "quality": "FHD 1080p",
     "ageRating": "P13",
     "synopsis": "Siri drama popular Mitos Cinta Akira (VIU Malay| Mitos Cinta Akira) dengan episod penuh dan kualiti penstriman pantas.",
@@ -19355,7 +16947,8 @@ export const VOD_CATALOG: VodItem[] = [
         "synopsis": "Mitos Cinta Akira - -Ep15 Mitos Cinta Akira"
       }
     ],
-    "duration": "15 Episod"
+    "duration": "15 Episod",
+    "apkCategory": "VIU MALAY"
   },
   {
     "id": "vod_s_080",
@@ -19368,7 +16961,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://prod-images.viu.com/3131299150/17a022a5178bae4e0c23e4ae7b1b5e855bb6b74c",
     "backdrop": "https://prod-images.viu.com/3131299150/17a022a5178bae4e0c23e4ae7b1b5e855bb6b74c",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "quality": "FHD 1080p",
     "ageRating": "P13",
     "synopsis": "Siri drama popular Lambaian Huda (VIU Malay| Lambaian Huda) dengan episod penuh dan kualiti penstriman pantas.",
@@ -19514,7 +17107,8 @@ export const VOD_CATALOG: VodItem[] = [
         "synopsis": "Lambaian Huda - -Ep15 Lambaian Huda"
       }
     ],
-    "duration": "15 Episod"
+    "duration": "15 Episod",
+    "apkCategory": "VIU MALAY"
   },
   {
     "id": "vod_s_081",
@@ -19527,7 +17121,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://prod-images.viu.com/1103285787/e482ace534c360689ca474b988487428e5b17aea",
     "backdrop": "https://prod-images.viu.com/1103285787/e482ace534c360689ca474b988487428e5b17aea",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "quality": "FHD 1080p",
     "ageRating": "P13",
     "synopsis": "Siri drama popular Bidaah (VIU Malay| Bidaah) dengan episod penuh dan kualiti penstriman pantas.",
@@ -19682,7 +17276,8 @@ export const VOD_CATALOG: VodItem[] = [
         "synopsis": "Bidaah - -Ep15 Bidaah (Alternate Ending)"
       }
     ],
-    "duration": "16 Episod"
+    "duration": "16 Episod",
+    "apkCategory": "VIU MALAY"
   },
   {
     "id": "vod_s_097",
@@ -19695,7 +17290,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://headend-api.tonton.com.my/v300/imageHelper.php?id=6550967%3A377%3ASTILL%3APORTRAIT&iq=Wifi.1&plt=andr_tablet&appID=TONTON&w=906",
     "backdrop": "https://headend-api.tonton.com.my/v300/imageHelper.php?id=6550967%3A377%3ASTILL%3APORTRAIT&iq=Wifi.1&plt=andr_tablet&appID=TONTON&w=906",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "quality": "FHD 1080p",
     "ageRating": "P13",
     "synopsis": "Siri drama popular Hilang Dalam Rindu (TONTON SERIES | Hilang Dalam Rindu) dengan episod penuh dan kualiti penstriman pantas.",
@@ -19886,7 +17481,8 @@ export const VOD_CATALOG: VodItem[] = [
         "synopsis": "Hilang Dalam Rindu - 90-S1E20 Hilang Dalam Rindu"
       }
     ],
-    "duration": "20 Episod"
+    "duration": "20 Episod",
+    "apkCategory": "TONTON SERIES"
   },
   {
     "id": "vod_s_098",
@@ -19900,7 +17496,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://headend-api.tonton.com.my/v210/imageHelper.php?id=6552412%3A380%3ASTILL%3APORTRAIT&iq=Wifi.1&plt=andr_tablet&appID=TONTON&w=906",
     "backdrop": "https://headend-api.tonton.com.my/v210/imageHelper.php?id=6552412%3A380%3ASTILL%3APORTRAIT&iq=Wifi.1&plt=andr_tablet&appID=TONTON&w=906",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "quality": "FHD 1080p",
     "ageRating": "P13",
     "synopsis": "Siri drama popular Seindah Hujan Cinta (TONTON SERIES | Seindah Hujan Cinta) dengan episod penuh dan kualiti penstriman pantas.",
@@ -20163,7 +17759,8 @@ export const VOD_CATALOG: VodItem[] = [
         "synopsis": "Seindah Hujan Cinta - 91-S1E28 Seindah Hujan Cinta"
       }
     ],
-    "duration": "28 Episod"
+    "duration": "28 Episod",
+    "apkCategory": "TONTON SERIES"
   },
   {
     "id": "vod_s_099",
@@ -20176,7 +17773,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://ptv2026.com/logo/akubukanustazah2.jpg",
     "backdrop": "https://ptv2026.com/logo/akubukanustazah2.jpg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "quality": "FHD 1080p",
     "ageRating": "P13",
     "synopsis": "Siri drama popular Aku Bukan Ustazah (TONTON SERIES | Aku Bukan Ustazah) dengan episod penuh dan kualiti penstriman pantas.",
@@ -20754,7 +18351,8 @@ export const VOD_CATALOG: VodItem[] = [
         "synopsis": "Aku Bukan Ustazah - 93-S2E35 Aku Bukan Ustazah 2"
       }
     ],
-    "duration": "63 Episod"
+    "duration": "63 Episod",
+    "apkCategory": "TONTON SERIES"
   },
   {
     "id": "vod_s_100",
@@ -20767,7 +18365,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://storage.googleapis.com/smedia-tonton-com-my/2025/05/Nikmat-Hanya-Sesaat_PORTRAIT-min.jpg",
     "backdrop": "https://storage.googleapis.com/smedia-tonton-com-my/2025/05/Nikmat-Hanya-Sesaat_PORTRAIT-min.jpg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "quality": "FHD 1080p",
     "ageRating": "P13",
     "synopsis": "Siri drama popular Nikmat Hanya Sesaat (TONTON SERIES | Nikmat Hanya Sesaat) dengan episod penuh dan kualiti penstriman pantas.",
@@ -20958,7 +18556,8 @@ export const VOD_CATALOG: VodItem[] = [
         "synopsis": "Nikmat Hanya Sesaat - 94-S1E20 Nikmat Hanya Sesaat"
       }
     ],
-    "duration": "20 Episod"
+    "duration": "20 Episod",
+    "apkCategory": "TONTON SERIES"
   },
   {
     "id": "vod_s_102",
@@ -20971,7 +18570,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://storage.googleapis.com/smedia-tonton-com-my/2025/02/KELUARGA-ITU_PORTRAIT-min.jpg",
     "backdrop": "https://storage.googleapis.com/smedia-tonton-com-my/2025/02/KELUARGA-ITU_PORTRAIT-min.jpg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "quality": "FHD 1080p",
     "ageRating": "P13",
     "synopsis": "Siri drama popular Keluarga Itu (TONTON SERIES | Keluarga Itu) dengan episod penuh dan kualiti penstriman pantas.",
@@ -21261,7 +18860,8 @@ export const VOD_CATALOG: VodItem[] = [
         "synopsis": "Keluarga Itu - 96-S1E31 Keluarga Itu"
       }
     ],
-    "duration": "31 Episod"
+    "duration": "31 Episod",
+    "apkCategory": "TONTON SERIES"
   },
   {
     "id": "vod_s_103",
@@ -21275,7 +18875,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://storage.googleapis.com/smedia-tonton-com-my/2025/02/TKS_Tonton_Vertical_960w_x_1440h_copy-min.jpg",
     "backdrop": "https://storage.googleapis.com/smedia-tonton-com-my/2025/02/TKS_Tonton_Vertical_960w_x_1440h_copy-min.jpg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "quality": "FHD 1080p",
     "ageRating": "P13",
     "synopsis": "Siri drama popular Teratak Kasih Salina (TONTON SERIES | Teratak Kasih Salina) dengan episod penuh dan kualiti penstriman pantas.",
@@ -21421,7 +19021,8 @@ export const VOD_CATALOG: VodItem[] = [
         "synopsis": "Teratak Kasih Salina - 97-S1E15 Teratak Kasih Salina"
       }
     ],
-    "duration": "15 Episod"
+    "duration": "15 Episod",
+    "apkCategory": "TONTON SERIES"
   },
   {
     "id": "vod_s_104",
@@ -21434,7 +19035,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://storage.googleapis.com/smedia-tonton-com-my/2025/01/TT_LK7_Banner_960x1440-1-min.jpg",
     "backdrop": "https://storage.googleapis.com/smedia-tonton-com-my/2025/01/TT_LK7_Banner_960x1440-1-min.jpg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "quality": "FHD 1080p",
     "ageRating": "P13",
     "synopsis": "Siri drama popular Langit Ke Tujuh (TONTON SERIES | Langit Ke Tujuh) dengan episod penuh dan kualiti penstriman pantas.",
@@ -21517,7 +19118,8 @@ export const VOD_CATALOG: VodItem[] = [
         "synopsis": "Langit Ke Tujuh - 98-Langit Ke Tujuh Ep08"
       }
     ],
-    "duration": "8 Episod"
+    "duration": "8 Episod",
+    "apkCategory": "TONTON SERIES"
   },
   {
     "id": "vod_s_105",
@@ -21531,7 +19133,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://headend-api.tonton.com.my/v210/imageHelper.php?id=6529564%3A377%3ASTILL%3APORTRAIT&iq=Wifi.1&plt=andr_tablet&appID=TONTON&w=960",
     "backdrop": "https://headend-api.tonton.com.my/v210/imageHelper.php?id=6529564%3A377%3ASTILL%3APORTRAIT&iq=Wifi.1&plt=andr_tablet&appID=TONTON&w=960",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "quality": "FHD 1080p",
     "ageRating": "P13",
     "synopsis": "Siri drama popular Lara Kasih (TONTON SERIES | Lara Kasih) dengan episod penuh dan kualiti penstriman pantas.",
@@ -21677,7 +19279,8 @@ export const VOD_CATALOG: VodItem[] = [
         "synopsis": "Lara Kasih - Lara Kasih S01 E01"
       }
     ],
-    "duration": "15 Episod"
+    "duration": "15 Episod",
+    "apkCategory": "TONTON SERIES"
   },
   {
     "id": "vod_s_106",
@@ -21692,7 +19295,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://ptv2026.com/logo/season1e1.jpg",
     "backdrop": "https://ptv2026.com/logo/season1e1.jpg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "quality": "FHD 1080p",
     "ageRating": "P13",
     "synopsis": "Siri drama popular Squid Games S1 (Others Series | Squid Games S1) dengan episod penuh dan kualiti penstriman pantas.",
@@ -21784,7 +19387,8 @@ export const VOD_CATALOG: VodItem[] = [
         "synopsis": "Squid Games S1 - Squid Game S01 E09"
       }
     ],
-    "duration": "9 Episod"
+    "duration": "9 Episod",
+    "apkCategory": "OTHERS SERIES"
   },
   {
     "id": "vod_s_107",
@@ -21799,7 +19403,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://ptv2026.com/logo/season2e1.jpg",
     "backdrop": "https://ptv2026.com/logo/season2e1.jpg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "quality": "FHD 1080p",
     "ageRating": "P13",
     "synopsis": "Siri drama popular Squid Games S2 (Others Series | Squid Games S2) dengan episod penuh dan kualiti penstriman pantas.",
@@ -21873,7 +19477,8 @@ export const VOD_CATALOG: VodItem[] = [
         "synopsis": "Squid Games S2 - Squid Game S02 E07"
       }
     ],
-    "duration": "7 Episod"
+    "duration": "7 Episod",
+    "apkCategory": "OTHERS SERIES"
   },
   {
     "id": "vod_s_108",
@@ -21888,7 +19493,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://ptv2026.com/logo/season3e1.jpg",
     "backdrop": "https://ptv2026.com/logo/season3e1.jpg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "quality": "FHD 1080p",
     "ageRating": "P13",
     "synopsis": "Siri drama popular Squid Games S3 (Others Series | Squid Games S3) dengan episod penuh dan kualiti penstriman pantas.",
@@ -21953,7 +19558,8 @@ export const VOD_CATALOG: VodItem[] = [
         "synopsis": "Squid Games S3 - Squid Game S03 E06"
       }
     ],
-    "duration": "6 Episod"
+    "duration": "6 Episod",
+    "apkCategory": "OTHERS SERIES"
   },
   {
     "id": "vod_m_517",
@@ -21966,7 +19572,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://prod-images.viu.com/204393941/eb24bf06559f6833b9d6e413b49abedb94993779",
     "backdrop": "https://prod-images.viu.com/204393941/eb24bf06559f6833b9d6e413b49abedb94993779",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "FHD 1080p",
     "ageRating": "P13",
@@ -21977,7 +19583,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_viu.m3u8?username=vip_gzidmjzr&password=Uk7WNjrs&video_id=1166234513&quality=s240p&product_id=2576995&lang=Malay",
     "clearKey": "",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD VIU"
   },
   {
     "id": "vod_m_518",
@@ -21990,7 +19597,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://prod-images.viu.com/clip_asset_v6/1166234510/1166235143/e995772c3f8cac3c4df6be1805caeb638817c94f",
     "backdrop": "https://prod-images.viu.com/clip_asset_v6/1166234510/1166235143/e995772c3f8cac3c4df6be1805caeb638817c94f",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "FHD 1080p",
     "ageRating": "P13",
@@ -22001,7 +19608,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_viu.m3u8?username=vip_gzidmjzr&password=Uk7WNjrs&video_id=1166234510&quality=s240p&product_id=2576989&lang=Malay",
     "clearKey": "",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD VIU"
   },
   {
     "id": "vod_m_519",
@@ -22014,7 +19622,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://prod-images.viu.com/1897725856/6741b96ea87dc591f28eabf7a401fb1e2624b8d4",
     "backdrop": "https://prod-images.viu.com/1897725856/6741b96ea87dc591f28eabf7a401fb1e2624b8d4",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "FHD 1080p",
     "ageRating": "P13",
@@ -22025,7 +19633,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_viu.m3u8?username=vip_gzidmjzr&password=Uk7WNjrs&video_id=1166212435&quality=s240p&product_id=2407924&lang=Malay",
     "clearKey": "",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD VIU"
   },
   {
     "id": "vod_m_520",
@@ -22038,7 +19647,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://prod-images.viu.com/984906000/9ab905ec94abe2ac16dbd53d77537b5da57dee65",
     "backdrop": "https://prod-images.viu.com/984906000/9ab905ec94abe2ac16dbd53d77537b5da57dee65",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "FHD 1080p",
     "ageRating": "P13",
@@ -22049,7 +19658,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_viu.m3u8?username=vip_gzidmjzr&password=Uk7WNjrs&video_id=1166234512&quality=s240p&product_id=2576998&lang=Malay",
     "clearKey": "",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD VIU"
   },
   {
     "id": "vod_m_521",
@@ -22062,7 +19672,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://prod-images.viu.com/4226015141/a0938bdeb7edd6922ebb54757a9508948d215092",
     "backdrop": "https://prod-images.viu.com/4226015141/a0938bdeb7edd6922ebb54757a9508948d215092",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "FHD 1080p",
     "ageRating": "P13",
@@ -22073,7 +19683,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_viu.m3u8?username=vip_gzidmjzr&password=Uk7WNjrs&video_id=1166234511&quality=s240p&product_id=2576992&lang=Malay",
     "clearKey": "",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD VIU"
   },
   {
     "id": "vod_m_522",
@@ -22086,7 +19697,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://prod-images.viu.com/1581662655/7ad1153fd4be35ce66ea1e8b60a9ca235e2660da",
     "backdrop": "https://prod-images.viu.com/1581662655/7ad1153fd4be35ce66ea1e8b60a9ca235e2660da",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "FHD 1080p",
     "ageRating": "P13",
@@ -22097,7 +19708,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_viu.m3u8?username=vip_gzidmjzr&password=Uk7WNjrs&video_id=1166233531&quality=s240p&product_id=2572262&lang=Malay",
     "clearKey": "",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD VIU"
   },
   {
     "id": "vod_m_523",
@@ -22110,7 +19722,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://prod-images.viu.com/2737472757/a704e2a592f9bda3a330f00a8946efff6ea90355",
     "backdrop": "https://prod-images.viu.com/2737472757/a704e2a592f9bda3a330f00a8946efff6ea90355",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "FHD 1080p",
     "ageRating": "P13",
@@ -22121,7 +19733,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_viu.m3u8?username=vip_gzidmjzr&password=Uk7WNjrs&video_id=1166233533&quality=s240p&product_id=2572259&lang=Malay",
     "clearKey": "",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD VIU"
   },
   {
     "id": "vod_m_524",
@@ -22134,7 +19747,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://prod-images.viu.com/clip_asset_v6/1166229450/1166232271/32993e5e0d48adda873a0cf530b678afcb51c45d",
     "backdrop": "https://prod-images.viu.com/clip_asset_v6/1166229450/1166232271/32993e5e0d48adda873a0cf530b678afcb51c45d",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "FHD 1080p",
     "ageRating": "P13",
@@ -22145,7 +19758,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_viu.m3u8?username=vip_gzidmjzr&password=Uk7WNjrs&video_id=1166229450&quality=s240p&product_id=2553320&lang=Malay",
     "clearKey": "",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD VIU"
   },
   {
     "id": "vod_m_525",
@@ -22158,7 +19772,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://prod-images.viu.com/clip_asset_v6/1166229449/1166231018/26fa853a47d5df6d8c80f295942cf871d7d5c82e",
     "backdrop": "https://prod-images.viu.com/clip_asset_v6/1166229449/1166231018/26fa853a47d5df6d8c80f295942cf871d7d5c82e",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "FHD 1080p",
     "ageRating": "P13",
@@ -22169,31 +19783,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_viu.m3u8?username=vip_gzidmjzr&password=Uk7WNjrs&video_id=1166229449&quality=s240p&product_id=2553315&lang=Malay",
     "clearKey": "",
     "isTrending": false,
-    "isPopular": false
-  },
-  {
-    "id": "vod_m_526",
-    "title": "Mama",
-    "type": "movie",
-    "genre": [
-      "Filem"
-    ],
-    "origin": "malay",
-    "poster": "https://prod-images.viu.com/376549311/9f78e3c48be663d470e17fb20b3d158ae4ddda8c",
-    "backdrop": "https://prod-images.viu.com/376549311/9f78e3c48be663d470e17fb20b3d158ae4ddda8c",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "FHD 1080p",
-    "ageRating": "P13",
-    "synopsis": "Filem Mama (VOD VIU) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/get_viu.m3u8?username=vip_gzidmjzr&password=Uk7WNjrs&video_id=1166229731&quality=s240p&product_id=2554208&lang=Malay",
-    "clearKey": "",
-    "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD VIU"
   },
   {
     "id": "vod_m_527",
@@ -22206,7 +19797,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://prod-images.viu.com/clip_asset_v6/1166229451/1166230225/05d5f707191e89125ccb051834d47807742ebf45",
     "backdrop": "https://prod-images.viu.com/clip_asset_v6/1166229451/1166230225/05d5f707191e89125ccb051834d47807742ebf45",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "FHD 1080p",
     "ageRating": "P13",
@@ -22217,7 +19808,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_viu.m3u8?username=vip_gzidmjzr&password=Uk7WNjrs&video_id=1166229451&quality=s240p&product_id=2553324&lang=Malay",
     "clearKey": "",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD VIU"
   },
   {
     "id": "vod_m_528",
@@ -22230,7 +19822,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://prod-images.viu.com/clip_asset_v6/1166223065/1166227485/eb97758b5775a8d0624ecab119f98b6e80b8f24e",
     "backdrop": "https://prod-images.viu.com/clip_asset_v6/1166223065/1166227485/eb97758b5775a8d0624ecab119f98b6e80b8f24e",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "FHD 1080p",
     "ageRating": "P13",
@@ -22241,7 +19833,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_viu.m3u8?username=vip_gzidmjzr&password=Uk7WNjrs&video_id=1166223065&quality=s240p&product_id=2525584&lang=Malay",
     "clearKey": "",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD VIU"
   },
   {
     "id": "vod_m_529",
@@ -22254,7 +19847,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://prod-images.viu.com/clip_asset_v6/1166223070/1166227481/e60c3621b4d03109954dfc231180d750235360e7",
     "backdrop": "https://prod-images.viu.com/clip_asset_v6/1166223070/1166227481/e60c3621b4d03109954dfc231180d750235360e7",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "FHD 1080p",
     "ageRating": "P13",
@@ -22265,7 +19858,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_viu.m3u8?username=vip_gzidmjzr&password=Uk7WNjrs&video_id=1166223070&quality=s240p&product_id=2526145&lang=Malay",
     "clearKey": "",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD VIU"
   },
   {
     "id": "vod_m_530",
@@ -22278,7 +19872,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://prod-images.viu.com/clip_asset_v6/1166223109/1166225328/8ee3b6df5632d06e3794d972351ea2e16c50d2ad",
     "backdrop": "https://prod-images.viu.com/clip_asset_v6/1166223109/1166225328/8ee3b6df5632d06e3794d972351ea2e16c50d2ad",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "FHD 1080p",
     "ageRating": "P13",
@@ -22289,7 +19883,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_viu.m3u8?username=vip_gzidmjzr&password=Uk7WNjrs&video_id=1166223109&quality=s240p&product_id=2526150&lang=Malay",
     "clearKey": "",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD VIU"
   },
   {
     "id": "vod_m_531",
@@ -22302,7 +19897,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://prod-images.viu.com/2283186222/472f5890b5db6efea3812a37142d098c10f8606a",
     "backdrop": "https://prod-images.viu.com/2283186222/472f5890b5db6efea3812a37142d098c10f8606a",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "FHD 1080p",
     "ageRating": "P13",
@@ -22313,7 +19908,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_viu.m3u8?username=vip_gzidmjzr&password=Uk7WNjrs&video_id=1166221340&quality=s240p&product_id=2518886&lang=Malay",
     "clearKey": "",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD VIU"
   },
   {
     "id": "vod_m_532",
@@ -22326,7 +19922,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://prod-images.viu.com/779028039/84919400e95ab0837e96732520bd23908c30f1c0",
     "backdrop": "https://prod-images.viu.com/779028039/84919400e95ab0837e96732520bd23908c30f1c0",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "FHD 1080p",
     "ageRating": "P13",
@@ -22337,7 +19933,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_viu.m3u8?username=vip_gzidmjzr&password=Uk7WNjrs&video_id=1166221235&quality=s240p&product_id=2517942&lang=Malay",
     "clearKey": "",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD VIU"
   },
   {
     "id": "vod_m_533",
@@ -22350,7 +19947,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://prod-images.viu.com/3805937862/625067b8c115fc60bda4951e80b39233dbcdaccb",
     "backdrop": "https://prod-images.viu.com/3805937862/625067b8c115fc60bda4951e80b39233dbcdaccb",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "FHD 1080p",
     "ageRating": "P13",
@@ -22361,7 +19958,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_viu.m3u8?username=vip_gzidmjzr&password=Uk7WNjrs&video_id=1166221234&quality=s240p&product_id=2518857&lang=Malay",
     "clearKey": "",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD VIU"
   },
   {
     "id": "vod_m_534",
@@ -22374,7 +19972,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://prod-images.viu.com/991436112/5f67a48c01be456df0b5fc00e51326ba505605d2",
     "backdrop": "https://prod-images.viu.com/991436112/5f67a48c01be456df0b5fc00e51326ba505605d2",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "FHD 1080p",
     "ageRating": "P13",
@@ -22385,7 +19983,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_viu.m3u8?username=vip_gzidmjzr&password=Uk7WNjrs&video_id=1166221344&quality=s240p&product_id=2518456&lang=Malay",
     "clearKey": "",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD VIU"
   },
   {
     "id": "vod_m_535",
@@ -22398,7 +19997,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://prod-images.viu.com/clip_asset_v6/1165728491/1165751756/8754fb8a39e5ad36e1aea995e0f547d0ec775c3e",
     "backdrop": "https://prod-images.viu.com/clip_asset_v6/1165728491/1165751756/8754fb8a39e5ad36e1aea995e0f547d0ec775c3e",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "FHD 1080p",
     "ageRating": "P13",
@@ -22409,7 +20008,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_viu.m3u8?username=vip_gzidmjzr&password=Uk7WNjrs&video_id=1165728491&quality=s240p&product_id=1784830",
     "clearKey": "",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD VIU"
   },
   {
     "id": "vod_m_536",
@@ -22422,7 +20022,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://prod-images.viu.com/clip_asset_v6/1166199490/1166201126/4c12815df66aff1b6f04fd83c9db042e9c156702",
     "backdrop": "https://prod-images.viu.com/clip_asset_v6/1166199490/1166201126/4c12815df66aff1b6f04fd83c9db042e9c156702",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "FHD 1080p",
     "ageRating": "P13",
@@ -22433,31 +20033,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_viu.m3u8?username=vip_gzidmjzr&password=Uk7WNjrs&video_id=1166199490&quality=s240p&product_id=2359987&lang=Malay",
     "clearKey": "",
     "isTrending": false,
-    "isPopular": false
-  },
-  {
-    "id": "vod_m_537",
-    "title": "Exhuma",
-    "type": "movie",
-    "genre": [
-      "Filem"
-    ],
-    "origin": "malay",
-    "poster": "https://prod-images.viu.com/2163520633/14c43e9a2f71f80bb18fdc362738993dce899c63",
-    "backdrop": "https://prod-images.viu.com/2163520633/14c43e9a2f71f80bb18fdc362738993dce899c63",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "FHD 1080p",
-    "ageRating": "P13",
-    "synopsis": "Filem Exhuma (VOD VIU) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/get_viu.m3u8?username=vip_gzidmjzr&password=Uk7WNjrs&video_id=1166214923&quality=s240p&product_id=2428484&lang=Malay",
-    "clearKey": "",
-    "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD VIU"
   },
   {
     "id": "vod_m_538",
@@ -22470,7 +20047,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://prod-images.viu.com/clip_asset_v6/1166214921/1166220284/90958c6d62f43131c576917cbc3615bb52f7e1d2",
     "backdrop": "https://prod-images.viu.com/clip_asset_v6/1166214921/1166220284/90958c6d62f43131c576917cbc3615bb52f7e1d2",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "FHD 1080p",
     "ageRating": "P13",
@@ -22481,7 +20058,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_viu.m3u8?username=vip_gzidmjzr&password=Uk7WNjrs&video_id=1166214921&quality=s240p&product_id=2428476&lang=Malay",
     "clearKey": "",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD VIU"
   },
   {
     "id": "vod_m_539",
@@ -22494,7 +20072,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://prod-images.viu.com/1344725207/26aec5aebe944d3e4dbe64f6d182f181277e00cc",
     "backdrop": "https://prod-images.viu.com/1344725207/26aec5aebe944d3e4dbe64f6d182f181277e00cc",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "FHD 1080p",
     "ageRating": "P13",
@@ -22505,7 +20083,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_viu.m3u8?username=vip_gzidmjzr&password=Uk7WNjrs&video_id=1166212426&quality=s240p&product_id=2407570&lang=Malay",
     "clearKey": "",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD VIU"
   },
   {
     "id": "vod_m_540",
@@ -22518,7 +20097,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://prod-images.viu.com/2633366886/66bd18324296dc1a322e9158b0b2f200561d7121",
     "backdrop": "https://prod-images.viu.com/2633366886/66bd18324296dc1a322e9158b0b2f200561d7121",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "FHD 1080p",
     "ageRating": "P13",
@@ -22529,7 +20108,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_viu.m3u8?username=vip_gzidmjzr&password=Uk7WNjrs&video_id=1166212425&quality=s240p&product_id=2407562&lang=Malay",
     "clearKey": "",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD VIU"
   },
   {
     "id": "vod_m_541",
@@ -22542,7 +20122,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://prod-images.viu.com/1063284376/442962aef447f2f1013faf881a177ae849451a55",
     "backdrop": "https://prod-images.viu.com/1063284376/442962aef447f2f1013faf881a177ae849451a55",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "FHD 1080p",
     "ageRating": "P13",
@@ -22553,31 +20133,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_viu.m3u8?username=vip_gzidmjzr&password=Uk7WNjrs&video_id=1166212427&quality=s240p&product_id=2407566&lang=Malay",
     "clearKey": "",
     "isTrending": false,
-    "isPopular": false
-  },
-  {
-    "id": "vod_m_542",
-    "title": "Train to Busan",
-    "type": "movie",
-    "genre": [
-      "Filem"
-    ],
-    "origin": "malay",
-    "poster": "https://prod-images.viu.com/clip_asset_v6/1163684872/1163695360/f9f0c7dbcfef8f3b217215226f56995990994621",
-    "backdrop": "https://prod-images.viu.com/clip_asset_v6/1163684872/1163695360/f9f0c7dbcfef8f3b217215226f56995990994621",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "FHD 1080p",
-    "ageRating": "P13",
-    "synopsis": "Filem Train to Busan (VOD VIU) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/get_viu.m3u8?username=vip_gzidmjzr&password=Uk7WNjrs&video_id=1166212480&quality=s240p&product_id=2415348&lang=Malay",
-    "clearKey": "",
-    "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD VIU"
   },
   {
     "id": "vod_m_543",
@@ -22590,7 +20147,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://prod-images.viu.com/3902725545/9cd293959fe7b4b8131cfbe3868b4efddd27fda9",
     "backdrop": "https://prod-images.viu.com/3902725545/9cd293959fe7b4b8131cfbe3868b4efddd27fda9",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "FHD 1080p",
     "ageRating": "P13",
@@ -22601,7 +20158,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_viu.m3u8?username=vip_gzidmjzr&password=Uk7WNjrs&video_id=1166208391&quality=s240p&product_id=2399631&lang=Malay",
     "clearKey": "",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD VIU"
   },
   {
     "id": "vod_m_544",
@@ -22614,7 +20172,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://prod-images.viu.com/clip_asset_v6/1166208386/1166211088/8ebf888be17f49da9687d71b831f68ec1377c4a8",
     "backdrop": "https://prod-images.viu.com/clip_asset_v6/1166208386/1166211088/8ebf888be17f49da9687d71b831f68ec1377c4a8",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "FHD 1080p",
     "ageRating": "P13",
@@ -22625,7 +20183,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_viu.m3u8?username=vip_gzidmjzr&password=Uk7WNjrs&video_id=1166208386&quality=s240p&product_id=2396832&lang=Malay",
     "clearKey": "",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD VIU"
   },
   {
     "id": "vod_m_545",
@@ -22638,7 +20197,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://prod-images.viu.com/808273927/d5661f59f71ea18cd3cd34f5c292204f0d8fe3c8",
     "backdrop": "https://prod-images.viu.com/808273927/d5661f59f71ea18cd3cd34f5c292204f0d8fe3c8",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "FHD 1080p",
     "ageRating": "P13",
@@ -22649,7 +20208,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_viu.m3u8?username=vip_gzidmjzr&password=Uk7WNjrs&video_id=1166208390&quality=s240p&product_id=2399627&lang=Malay",
     "clearKey": "",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD VIU"
   },
   {
     "id": "vod_m_546",
@@ -22662,7 +20222,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://prod-images.viu.com/clip_asset_v6/1166203993/1166204197/467f682040390e9835f42ff983fec307f07c461e",
     "backdrop": "https://prod-images.viu.com/clip_asset_v6/1166203993/1166204197/467f682040390e9835f42ff983fec307f07c461e",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "FHD 1080p",
     "ageRating": "P13",
@@ -22673,7 +20233,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_viu.m3u8?username=vip_gzidmjzr&password=Uk7WNjrs&video_id=1166203993&quality=s240p&product_id=2379509&lang=Malay",
     "clearKey": "",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD VIU"
   },
   {
     "id": "vod_m_547",
@@ -22686,7 +20247,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://prod-images.viu.com/clip_asset_v6/1166203992/1166204194/5038bd4ffd4263802c7116d654106960c6dc1851",
     "backdrop": "https://prod-images.viu.com/clip_asset_v6/1166203992/1166204194/5038bd4ffd4263802c7116d654106960c6dc1851",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "FHD 1080p",
     "ageRating": "P13",
@@ -22697,7 +20258,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_viu.m3u8?username=vip_gzidmjzr&password=Uk7WNjrs&video_id=1166203992&quality=s240p&product_id=2379501&lang=Malay",
     "clearKey": "",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD VIU"
   },
   {
     "id": "vod_m_548",
@@ -22710,7 +20272,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://prod-images.viu.com/3766122105/a7e39d7c22c3c32b88e3c510604280306a0dfa24",
     "backdrop": "https://prod-images.viu.com/3766122105/a7e39d7c22c3c32b88e3c510604280306a0dfa24",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "FHD 1080p",
     "ageRating": "P13",
@@ -22721,7 +20283,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_viu.m3u8?username=vip_gzidmjzr&password=Uk7WNjrs&video_id=1166203994&quality=s240p&product_id=2379505&lang=Malay",
     "clearKey": "",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD VIU"
   },
   {
     "id": "vod_m_549",
@@ -22734,7 +20297,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://prod-images.viu.com/2995806963/9276a842cd333f4b4cbf79999202c56cbb89f150",
     "backdrop": "https://prod-images.viu.com/2995806963/9276a842cd333f4b4cbf79999202c56cbb89f150",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "FHD 1080p",
     "ageRating": "P13",
@@ -22745,7 +20308,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_viu.m3u8?username=vip_gzidmjzr&password=Uk7WNjrs&video_id=1166199489&quality=s240p&product_id=2359960&lang=Malay",
     "clearKey": "",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD VIU"
   },
   {
     "id": "vod_m_550",
@@ -22758,7 +20322,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://prod-images.viu.com/clip_asset_v6/1166199482/1166200175/402f1b546a8652b50f4c160d13eb2838aee9f4e2",
     "backdrop": "https://prod-images.viu.com/clip_asset_v6/1166199482/1166200175/402f1b546a8652b50f4c160d13eb2838aee9f4e2",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "FHD 1080p",
     "ageRating": "P13",
@@ -22769,7 +20333,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_viu.m3u8?username=vip_gzidmjzr&password=Uk7WNjrs&video_id=1166199482&quality=s240p&product_id=2359966&lang=Malay",
     "clearKey": "",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD VIU"
   },
   {
     "id": "vod_m_551",
@@ -22782,7 +20347,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://prod-images.viu.com/1161063199/60ffa39cb9fa55fc649b34c9fb13e8265e1cb7d9",
     "backdrop": "https://prod-images.viu.com/1161063199/60ffa39cb9fa55fc649b34c9fb13e8265e1cb7d9",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "FHD 1080p",
     "ageRating": "P13",
@@ -22793,7 +20358,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_viu.m3u8?username=vip_gzidmjzr&password=Uk7WNjrs&video_id=1166198215&quality=s240p&product_id=2357347&lang=Malay",
     "clearKey": "",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD VIU"
   },
   {
     "id": "vod_m_552",
@@ -22806,7 +20372,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://prod-images.viu.com/4207491442/b8db2224a01c941a46814354397fbfae7b333cd0",
     "backdrop": "https://prod-images.viu.com/4207491442/b8db2224a01c941a46814354397fbfae7b333cd0",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "FHD 1080p",
     "ageRating": "P13",
@@ -22817,31 +20383,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_viu.m3u8?username=vip_gzidmjzr&password=Uk7WNjrs&video_id=1166195908&quality=s240p&product_id=2352580&lang=Malay",
     "clearKey": "",
     "isTrending": false,
-    "isPopular": false
-  },
-  {
-    "id": "vod_m_553",
-    "title": "Dr. Cheon and the Lost Talisman",
-    "type": "movie",
-    "genre": [
-      "Filem"
-    ],
-    "origin": "malay",
-    "poster": "https://prod-images.viu.com/clip_asset_v6/1166191383/1166192281/14a79d08e1c4c1e6c66cb6f53c8d8a460dae7295",
-    "backdrop": "https://prod-images.viu.com/clip_asset_v6/1166191383/1166192281/14a79d08e1c4c1e6c66cb6f53c8d8a460dae7295",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "FHD 1080p",
-    "ageRating": "P13",
-    "synopsis": "Filem Dr. Cheon and the Lost Talisman (VOD VIU) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/get_viu.m3u8?username=vip_gzidmjzr&password=Uk7WNjrs&video_id=1166191383&quality=s240p&product_id=2337738&lang=Malay",
-    "clearKey": "",
-    "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD VIU"
   },
   {
     "id": "vod_m_554",
@@ -22854,7 +20397,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://prod-images.viu.com/3744962170/e4d890af5b258c61f705295efdbcc1d270284f80",
     "backdrop": "https://prod-images.viu.com/3744962170/e4d890af5b258c61f705295efdbcc1d270284f80",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "FHD 1080p",
     "ageRating": "P13",
@@ -22865,7 +20408,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_viu.m3u8?username=vip_gzidmjzr&password=Uk7WNjrs&video_id=1166184171&quality=s240p&product_id=2315450&lang=Malay",
     "clearKey": "",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD VIU"
   },
   {
     "id": "vod_m_555",
@@ -22878,7 +20422,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://prod-images.viu.com/1145155086/604699929d366d4cddf58a7ed87a212ca2907f77",
     "backdrop": "https://prod-images.viu.com/1145155086/604699929d366d4cddf58a7ed87a212ca2907f77",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "FHD 1080p",
     "ageRating": "P13",
@@ -22889,31 +20433,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_viu.m3u8?username=vip_gzidmjzr&password=Uk7WNjrs&video_id=1166179209&quality=s240p&product_id=2302064&lang=Malay",
     "clearKey": "",
     "isTrending": false,
-    "isPopular": false
-  },
-  {
-    "id": "vod_m_556",
-    "title": "Sleep",
-    "type": "movie",
-    "genre": [
-      "Filem"
-    ],
-    "origin": "malay",
-    "poster": "https://prod-images.viu.com/2019087394/8d8f4645a4e577f43e9bb5f07658b1cf4248b4a7",
-    "backdrop": "https://prod-images.viu.com/2019087394/8d8f4645a4e577f43e9bb5f07658b1cf4248b4a7",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "FHD 1080p",
-    "ageRating": "P13",
-    "synopsis": "Filem Sleep (VOD VIU) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/get_viu.m3u8?username=vip_gzidmjzr&password=Uk7WNjrs&video_id=1166171734&quality=s240p&product_id=2282679&lang=Malay",
-    "clearKey": "",
-    "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD VIU"
   },
   {
     "id": "vod_m_557",
@@ -22926,7 +20447,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://prod-images.viu.com/1197163074/012900255d6f88a9cedfac004a05b454dc0b3722",
     "backdrop": "https://prod-images.viu.com/1197163074/012900255d6f88a9cedfac004a05b454dc0b3722",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "FHD 1080p",
     "ageRating": "P13",
@@ -22937,7 +20458,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_viu.m3u8?username=vip_gzidmjzr&password=Uk7WNjrs&video_id=1166166392&quality=s240p&product_id=2269474&lang=Malay",
     "clearKey": "",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD VIU"
   },
   {
     "id": "vod_m_558",
@@ -22950,7 +20472,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://prod-images.viu.com/31109125/352f83ce82c33904373fcd58fae1da5c0b7c8cd4",
     "backdrop": "https://prod-images.viu.com/31109125/352f83ce82c33904373fcd58fae1da5c0b7c8cd4",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "FHD 1080p",
     "ageRating": "P13",
@@ -22961,7 +20483,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_viu.m3u8?username=vip_gzidmjzr&password=Uk7WNjrs&video_id=1166157653&quality=s240p&product_id=2253006&lang=Malay",
     "clearKey": "",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD VIU"
   },
   {
     "id": "vod_m_559",
@@ -22974,7 +20497,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://prod-images.viu.com/clip_asset_v6/1166124325/1166132617/f8f40333b4d5ef1352de7bc01d918f80dbb60de3",
     "backdrop": "https://prod-images.viu.com/clip_asset_v6/1166124325/1166132617/f8f40333b4d5ef1352de7bc01d918f80dbb60de3",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "FHD 1080p",
     "ageRating": "P13",
@@ -22985,7 +20508,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_viu.m3u8?username=vip_gzidmjzr&password=Uk7WNjrs&video_id=1166124325&quality=s240p&product_id=2170913&lang=Malay",
     "clearKey": "",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD VIU"
   },
   {
     "id": "vod_m_560",
@@ -22998,7 +20522,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://prod-images.viu.com/clip_asset_v6/1166124042/1166125532/4d820737f7560b2118a3a8bc94430d0a20f42543",
     "backdrop": "https://prod-images.viu.com/clip_asset_v6/1166124042/1166125532/4d820737f7560b2118a3a8bc94430d0a20f42543",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "FHD 1080p",
     "ageRating": "P13",
@@ -23009,7 +20533,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_viu.m3u8?username=vip_gzidmjzr&password=Uk7WNjrs&video_id=1166124042&quality=s240p&product_id=2169576&lang=Malay",
     "clearKey": "",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD VIU"
   },
   {
     "id": "vod_m_561",
@@ -23022,7 +20547,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://prod-images.viu.com/clip_asset_v6/1166107893/1166114409/765924c03b8dfd1a1efc1a4e735db6f0948f4423",
     "backdrop": "https://prod-images.viu.com/clip_asset_v6/1166107893/1166114409/765924c03b8dfd1a1efc1a4e735db6f0948f4423",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "FHD 1080p",
     "ageRating": "P13",
@@ -23033,7 +20558,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_viu.m3u8?username=vip_gzidmjzr&password=Uk7WNjrs&video_id=1166107893&quality=s240p&product_id=2125495&lang=Malay",
     "clearKey": "",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD VIU"
   },
   {
     "id": "vod_m_562",
@@ -23046,7 +20572,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://prod-images.viu.com/clip_asset_v6/1166083010/1166086656/8ce5815cde94000dd6e38b44fb78ec313baa3751",
     "backdrop": "https://prod-images.viu.com/clip_asset_v6/1166083010/1166086656/8ce5815cde94000dd6e38b44fb78ec313baa3751",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "FHD 1080p",
     "ageRating": "P13",
@@ -23057,7 +20583,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_viu.m3u8?username=vip_gzidmjzr&password=Uk7WNjrs&video_id=1166083010&quality=s240p&product_id=2058857&lang=Malay",
     "clearKey": "",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD VIU"
   },
   {
     "id": "vod_m_563",
@@ -23070,7 +20597,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://prod-images.viu.com/clip_asset_v6/1166083013/1166088674/67c87a788165cd3f6f9bce2cdf1695d43e5d1408",
     "backdrop": "https://prod-images.viu.com/clip_asset_v6/1166083013/1166088674/67c87a788165cd3f6f9bce2cdf1695d43e5d1408",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "FHD 1080p",
     "ageRating": "P13",
@@ -23081,7 +20608,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_viu.m3u8?username=vip_gzidmjzr&password=Uk7WNjrs&video_id=1166083013&quality=s240p&product_id=2058779&lang=Malay",
     "clearKey": "",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD VIU"
   },
   {
     "id": "vod_m_564",
@@ -23094,7 +20622,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://prod-images.viu.com/clip_asset_v6/1164061646/1164077208/e3b4a064ee9622f09d45ff8c308709e22521ae22",
     "backdrop": "https://prod-images.viu.com/clip_asset_v6/1164061646/1164077208/e3b4a064ee9622f09d45ff8c308709e22521ae22",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "FHD 1080p",
     "ageRating": "P13",
@@ -23105,55 +20633,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_viu.m3u8?username=vip_gzidmjzr&password=Uk7WNjrs&video_id=1164061646&quality=s240p&product_id=1785031&lang=Malay",
     "clearKey": "",
     "isTrending": false,
-    "isPopular": false
-  },
-  {
-    "id": "vod_m_565",
-    "title": "Mourning Grave",
-    "type": "movie",
-    "genre": [
-      "Filem"
-    ],
-    "origin": "malay",
-    "poster": "https://prod-images.viu.com/clip_asset_v6/1166055956/1166067763/f82d1176991267d4d6b293c936cb395928178fd4",
-    "backdrop": "https://prod-images.viu.com/clip_asset_v6/1166055956/1166067763/f82d1176991267d4d6b293c936cb395928178fd4",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "FHD 1080p",
-    "ageRating": "P13",
-    "synopsis": "Filem Mourning Grave (VOD VIU) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/get_viu.m3u8?username=vip_gzidmjzr&password=Uk7WNjrs&video_id=1166055956&quality=s240p&product_id=1784504&lang=Malay",
-    "clearKey": "",
-    "isTrending": false,
-    "isPopular": false
-  },
-  {
-    "id": "vod_m_566",
-    "title": "The Witch: Part 2. The Other One",
-    "type": "movie",
-    "genre": [
-      "Filem"
-    ],
-    "origin": "malay",
-    "poster": "https://prod-images.viu.com/clip_asset_v6/1166073881/1166082022/aa9232507b54d9f9c2f7ebac1712082f6a9705e1",
-    "backdrop": "https://prod-images.viu.com/clip_asset_v6/1166073881/1166082022/aa9232507b54d9f9c2f7ebac1712082f6a9705e1",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "FHD 1080p",
-    "ageRating": "P13",
-    "synopsis": "Filem The Witch: Part 2. The Other One (VOD VIU) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/get_viu.m3u8?username=vip_gzidmjzr&password=Uk7WNjrs&video_id=1166073881&quality=s240p&product_id=1784476&lang=Malay",
-    "clearKey": "",
-    "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD VIU"
   },
   {
     "id": "vod_m_001",
@@ -23166,7 +20647,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://m.media-amazon.com/images/M/MV5BM2ZmMzY5NzUtYzIyZi00NWMxLWJjNDItY2JkM2VhNzk3NDFiXkEyXkFqcGc@._V1_.jpg",
     "backdrop": "https://m.media-amazon.com/images/M/MV5BM2ZmMzY5NzUtYzIyZi00NWMxLWJjNDItY2JkM2VhNzk3NDFiXkEyXkFqcGc@._V1_.jpg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "FHD 1080p",
     "ageRating": "P13",
@@ -23177,7 +20658,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/okayru.m3u8?id=10644211567311",
     "clearKey": "",
     "isTrending": true,
-    "isPopular": true
+    "isPopular": true,
+    "apkCategory": "OLD CHINESE"
   },
   {
     "id": "vod_m_002",
@@ -23190,7 +20672,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQCz2CkRRMUKBQHF7-vaXZUtHcKOItDnGCc84IRzT4KPnm5xvep3Rx3cAnL&s=10",
     "backdrop": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQCz2CkRRMUKBQHF7-vaXZUtHcKOItDnGCc84IRzT4KPnm5xvep3Rx3cAnL&s=10",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "FHD 1080p",
     "ageRating": "P13",
@@ -23201,7 +20683,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/okayru.m3u8?id=10630544755407",
     "clearKey": "",
     "isTrending": true,
-    "isPopular": true
+    "isPopular": true,
+    "apkCategory": "OLD CHINESE"
   },
   {
     "id": "vod_m_334",
@@ -23216,7 +20699,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://image.tmdb.org/t/p/w600_and_h900_bestv2/6cTjPb44nyDKYFMl7TFLbnpbAlm.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w600_and_h900_bestv2/6cTjPb44nyDKYFMl7TFLbnpbAlm.jpg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "FHD 1080p",
     "ageRating": "P13",
@@ -23227,7 +20710,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/okayru.m3u8?id=16030627859151",
     "clearKey": "",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD MALAY"
   },
   {
     "id": "vod_m_335",
@@ -23242,7 +20726,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://image.tmdb.org/t/p/w600_and_h900_bestv2/gqJTbAJqtmnlhH8567YhTd0LUIF.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w600_and_h900_bestv2/gqJTbAJqtmnlhH8567YhTd0LUIF.jpg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "FHD 1080p",
     "ageRating": "P13",
@@ -23253,7 +20737,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/okayru.m3u8?id=16032044288719",
     "clearKey": "",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD MALAY"
   },
   {
     "id": "vod_m_336",
@@ -23268,7 +20753,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://image.tmdb.org/t/p/w600_and_h900_bestv2/daTkRaoH91H6ZX8KZgM2SqpXPjK.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w600_and_h900_bestv2/daTkRaoH91H6ZX8KZgM2SqpXPjK.jpg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "FHD 1080p",
     "ageRating": "P13",
@@ -23279,7 +20764,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/okayru.m3u8?id=16032072403663",
     "clearKey": "",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD MALAY"
   },
   {
     "id": "vod_m_337",
@@ -23294,7 +20780,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://image.tmdb.org/t/p/w600_and_h900_bestv2/ovGn3yvSDqSEXWldCXj9WAgxcCv.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w600_and_h900_bestv2/ovGn3yvSDqSEXWldCXj9WAgxcCv.jpg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "FHD 1080p",
     "ageRating": "P13",
@@ -23305,7 +20791,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/okayru.m3u8?id=12962737294031",
     "clearKey": "",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD MALAY"
   },
   {
     "id": "vod_m_338",
@@ -23320,7 +20807,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://image.tmdb.org/t/p/w600_and_h900_bestv2/sdx4Iohs6RvKfOY0x1lSeRs6CHZ.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w600_and_h900_bestv2/sdx4Iohs6RvKfOY0x1lSeRs6CHZ.jpg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "FHD 1080p",
     "ageRating": "P13",
@@ -23331,7 +20818,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/okayru.m3u8?id=12934451759823",
     "clearKey": "",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD MALAY"
   },
   {
     "id": "vod_m_339",
@@ -23346,7 +20834,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://image.tmdb.org/t/p/w600_and_h900_bestv2/cCsjDo3GMw0VZYQPBnRfIMXyDfC.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w600_and_h900_bestv2/cCsjDo3GMw0VZYQPBnRfIMXyDfC.jpg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "FHD 1080p",
     "ageRating": "P13",
@@ -23357,7 +20845,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/okayru.m3u8?id=12934462573263",
     "clearKey": "",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD MALAY"
   },
   {
     "id": "vod_m_340",
@@ -23372,7 +20861,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://image.tmdb.org/t/p/w600_and_h900_bestv2/pPSZCJr2Hom3DRVCuto1rVrh2h.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w600_and_h900_bestv2/pPSZCJr2Hom3DRVCuto1rVrh2h.jpg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "FHD 1080p",
     "ageRating": "P13",
@@ -23383,7 +20872,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/okayru.m3u8?id=12934469126863",
     "clearKey": "",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD MALAY"
   },
   {
     "id": "vod_m_341",
@@ -23398,7 +20888,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://image.tmdb.org/t/p/w600_and_h900_bestv2/eGFhFOYZrDz6tFFOhVTzLuzVYY5.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w600_and_h900_bestv2/eGFhFOYZrDz6tFFOhVTzLuzVYY5.jpg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "FHD 1080p",
     "ageRating": "P13",
@@ -23409,7 +20899,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/okayru.m3u8?id=12897753041615",
     "clearKey": "",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD MALAY"
   },
   {
     "id": "vod_m_342",
@@ -23424,7 +20915,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://image.tmdb.org/t/p/w600_and_h900_bestv2/k6afLHbcLl92Ml8QDdQnX5Vz7lU.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w600_and_h900_bestv2/k6afLHbcLl92Ml8QDdQnX5Vz7lU.jpg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "FHD 1080p",
     "ageRating": "P13",
@@ -23435,7 +20926,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/okayru.m3u8?id=12159895734991",
     "clearKey": "",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD MALAY"
   },
   {
     "id": "vod_m_343",
@@ -23450,7 +20942,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://image.tmdb.org/t/p/w600_and_h900_bestv2/5P8mDRh7IV4b10QBa1jasg3g3FA.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w600_and_h900_bestv2/5P8mDRh7IV4b10QBa1jasg3g3FA.jpg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "FHD 1080p",
     "ageRating": "P13",
@@ -23461,7 +20953,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/okayru.m3u8?id=12897875790543",
     "clearKey": "",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD MALAY"
   },
   {
     "id": "vod_m_344",
@@ -23476,7 +20969,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://image.tmdb.org/t/p/w600_and_h900_bestv2/e0RU6KpdnrqFxDKlI3NOqN8nHL6.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w600_and_h900_bestv2/e0RU6KpdnrqFxDKlI3NOqN8nHL6.jpg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "FHD 1080p",
     "ageRating": "P13",
@@ -23487,7 +20980,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/okayru.m3u8?id=11667021564623",
     "clearKey": "",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD MALAY"
   },
   {
     "id": "vod_m_345",
@@ -23502,7 +20996,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://image.tmdb.org/t/p/w600_and_h900_bestv2/xQC04vkAEkqzITmoa9DmIJwSCi7.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w600_and_h900_bestv2/xQC04vkAEkqzITmoa9DmIJwSCi7.jpg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "FHD 1080p",
     "ageRating": "P13",
@@ -23513,7 +21007,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/okayru.m3u8?id=11667504368335",
     "clearKey": "",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD MALAY"
   },
   {
     "id": "vod_m_346",
@@ -23528,7 +21023,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://image.tmdb.org/t/p/w600_and_h900_bestv2/ywBX54q4tRch4xuzekRVSv7tj8q.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w600_and_h900_bestv2/ywBX54q4tRch4xuzekRVSv7tj8q.jpg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "FHD 1080p",
     "ageRating": "P13",
@@ -23539,7 +21034,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/okayru.m3u8?id=10632443005647",
     "clearKey": "",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD MALAY"
   },
   {
     "id": "vod_m_347",
@@ -23554,7 +21050,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://image.tmdb.org/t/p/w600_and_h900_bestv2/pKqKm3ZiY9kPlv2l8kXG2XtFErz.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w600_and_h900_bestv2/pKqKm3ZiY9kPlv2l8kXG2XtFErz.jpg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "FHD 1080p",
     "ageRating": "P13",
@@ -23565,59 +21061,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/okayru.m3u8?id=10632357874383",
     "clearKey": "",
     "isTrending": false,
-    "isPopular": false
-  },
-  {
-    "id": "vod_m_569",
-    "title": "30-Resort Berhantu",
-    "type": "movie",
-    "genre": [
-      "Drama",
-      "Melayu",
-      "Tempatan"
-    ],
-    "origin": "malay",
-    "poster": "https://headend-api.tonton.com.my/v300/imageHelper.php?id=6459233%3A377%3ASTILL%3APORTRAIT&iq=Wifi.1&plt=andr_tablet&appID=TONTON&w=906",
-    "backdrop": "https://headend-api.tonton.com.my/v300/imageHelper.php?id=6459233%3A377%3ASTILL%3APORTRAIT&iq=Wifi.1&plt=andr_tablet&appID=TONTON&w=906",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "FHD 1080p",
-    "ageRating": "P13",
-    "synopsis": "Filem 30-Resort Berhantu (VOD TONTON) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/okayru.m3u8?id=10629688658639",
-    "clearKey": "",
-    "isTrending": false,
-    "isPopular": false
-  },
-  {
-    "id": "vod_m_584",
-    "title": "45-Malay-7ujuh",
-    "type": "movie",
-    "genre": [
-      "Drama",
-      "Melayu",
-      "Tempatan"
-    ],
-    "origin": "malay",
-    "poster": "https://headend-api.tonton.com.my/v210/imageHelper.php?id=6450961%3A377%3ASTILL%3APORTRAIT&iq=Wifi.1&plt=andr_tablet&appID=TONTON&w=960",
-    "backdrop": "https://headend-api.tonton.com.my/v210/imageHelper.php?id=6450961%3A377%3ASTILL%3APORTRAIT&iq=Wifi.1&plt=andr_tablet&appID=TONTON&w=960",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "FHD 1080p",
-    "ageRating": "P13",
-    "synopsis": "Filem 45-Malay-7ujuh (VOD TONTON) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/okayru.m3u8?id=10629628693199",
-    "clearKey": "",
-    "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD MALAY"
   },
   {
     "id": "vod_m_587",
@@ -23632,7 +21077,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://headend-api.tonton.com.my/v210/imageHelper.php?id=6450971%3A377%3ASTILL%3APORTRAIT&iq=Wifi.1&plt=andr_tablet&appID=TONTON&w=960",
     "backdrop": "https://headend-api.tonton.com.my/v210/imageHelper.php?id=6450971%3A377%3ASTILL%3APORTRAIT&iq=Wifi.1&plt=andr_tablet&appID=TONTON&w=960",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "FHD 1080p",
     "ageRating": "P13",
@@ -23643,7 +21088,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/okayru.m3u8?id=10629638195919",
     "clearKey": "",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD TONTON"
   },
   {
     "id": "vod_m_588",
@@ -23658,7 +21104,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://headend-api.tonton.com.my/v210/imageHelper.php?id=6450679%3A377%3ASTILL%3APORTRAIT&iq=Wifi.1&plt=andr_tablet&appID=TONTON&w=960",
     "backdrop": "https://headend-api.tonton.com.my/v210/imageHelper.php?id=6450679%3A377%3ASTILL%3APORTRAIT&iq=Wifi.1&plt=andr_tablet&appID=TONTON&w=960",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "FHD 1080p",
     "ageRating": "P13",
@@ -23669,7 +21115,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/okayru.m3u8?id=10629648026319",
     "clearKey": "",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD TONTON"
   },
   {
     "id": "vod_m_589",
@@ -23684,7 +21131,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://headend-api.tonton.com.my/v210/imageHelper.php?id=6450963%3A377%3ASTILL%3APORTRAIT&iq=Wifi.1&plt=andr_tablet&appID=TONTON&w=960",
     "backdrop": "https://headend-api.tonton.com.my/v210/imageHelper.php?id=6450963%3A377%3ASTILL%3APORTRAIT&iq=Wifi.1&plt=andr_tablet&appID=TONTON&w=960",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "FHD 1080p",
     "ageRating": "P13",
@@ -23695,33 +21142,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/okayru.m3u8?id=10629652941519",
     "clearKey": "",
     "isTrending": false,
-    "isPopular": false
-  },
-  {
-    "id": "vod_m_590",
-    "title": "51-Malay-Lebuhrya Ke Neraka",
-    "type": "movie",
-    "genre": [
-      "Drama",
-      "Melayu",
-      "Tempatan"
-    ],
-    "origin": "malay",
-    "poster": "https://headend-api.tonton.com.my/v210/imageHelper.php?id=6450675%3A377%3ASTILL%3APORTRAIT&iq=Wifi.1&plt=andr_tablet&appID=TONTON&w=960",
-    "backdrop": "https://headend-api.tonton.com.my/v210/imageHelper.php?id=6450675%3A377%3ASTILL%3APORTRAIT&iq=Wifi.1&plt=andr_tablet&appID=TONTON&w=960",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "FHD 1080p",
-    "ageRating": "P13",
-    "synopsis": "Filem 51-Malay-Lebuhrya Ke Neraka (VOD TONTON) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/okayru.m3u8?id=10629654842063",
-    "clearKey": "",
-    "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD TONTON"
   },
   {
     "id": "vod_m_591",
@@ -23736,7 +21158,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://headend-api.tonton.com.my/v210/imageHelper.php?id=6449463%3A377%3ASTILL%3APORTRAIT&iq=Wifi.1&plt=andr_tablet&appID=TONTON&w=960",
     "backdrop": "https://headend-api.tonton.com.my/v210/imageHelper.php?id=6449463%3A377%3ASTILL%3APORTRAIT&iq=Wifi.1&plt=andr_tablet&appID=TONTON&w=960",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "FHD 1080p",
     "ageRating": "P13",
@@ -23747,33 +21169,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/okayru.m3u8?id=10629658053327",
     "clearKey": "",
     "isTrending": false,
-    "isPopular": false
-  },
-  {
-    "id": "vod_m_592",
-    "title": "53-Malay-Skrip 707",
-    "type": "movie",
-    "genre": [
-      "Drama",
-      "Melayu",
-      "Tempatan"
-    ],
-    "origin": "malay",
-    "poster": "https://headend-api.tonton.com.my/v210/imageHelper.php?id=6450827%3A377%3ASTILL%3APORTRAIT&iq=Wifi.1&plt=andr_tablet&appID=TONTON&w=960",
-    "backdrop": "https://headend-api.tonton.com.my/v210/imageHelper.php?id=6450827%3A377%3ASTILL%3APORTRAIT&iq=Wifi.1&plt=andr_tablet&appID=TONTON&w=960",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "FHD 1080p",
-    "ageRating": "P13",
-    "synopsis": "Filem 53-Malay-Skrip 707 (VOD TONTON) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/okayru.m3u8?id=10629660412623",
-    "clearKey": "",
-    "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD TONTON"
   },
   {
     "id": "vod_m_593",
@@ -23788,7 +21185,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://headend-api.tonton.com.my/v210/imageHelper.php?id=6450966%3A377%3ASTILL%3APORTRAIT&iq=Wifi.1&plt=andr_tablet&appID=TONTON&w=960",
     "backdrop": "https://headend-api.tonton.com.my/v210/imageHelper.php?id=6450966%3A377%3ASTILL%3APORTRAIT&iq=Wifi.1&plt=andr_tablet&appID=TONTON&w=960",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "FHD 1080p",
     "ageRating": "P13",
@@ -23799,33 +21196,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/okayru.m3u8?id=10629672995535",
     "clearKey": "",
     "isTrending": false,
-    "isPopular": false
-  },
-  {
-    "id": "vod_m_594",
-    "title": "55-Malay-KL Zombi",
-    "type": "movie",
-    "genre": [
-      "Drama",
-      "Melayu",
-      "Tempatan"
-    ],
-    "origin": "malay",
-    "poster": "https://headend-api.tonton.com.my/v210/imageHelper.php?id=6450820%3A377%3ASTILL%3APORTRAIT&iq=Wifi.1&plt=andr_tablet&appID=TONTON&w=960",
-    "backdrop": "https://headend-api.tonton.com.my/v210/imageHelper.php?id=6450820%3A377%3ASTILL%3APORTRAIT&iq=Wifi.1&plt=andr_tablet&appID=TONTON&w=960",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "FHD 1080p",
-    "ageRating": "P13",
-    "synopsis": "Filem 55-Malay-KL Zombi (VOD TONTON) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/okayru.m3u8?id=10629702748879",
-    "clearKey": "",
-    "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD TONTON"
   },
   {
     "id": "vod_m_437",
@@ -23838,7 +21210,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://akamaividz2.zee5.com/image/upload/w_336,h_504,c_scale,f_webp,q_auto:eco/resources/0-0-1z5959528/portrait/1920x7703dd1548307df4d8a9027e86bfe9f58dd545cd7159b9b4f8ab9e69f41b4b486c2.jpg",
     "backdrop": "https://akamaividz2.zee5.com/image/upload/w_336,h_504,c_scale,f_webp,q_auto:eco/resources/0-0-1z5959528/portrait/1920x7703dd1548307df4d8a9027e86bfe9f58dd545cd7159b9b4f8ab9e69f41b4b486c2.jpg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -23849,7 +21221,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/zee.mpd?content_id=0-0-1z5959528",
     "clearKey": "7d2e48fa28ad4f62935b7588229f1e67:a0f39119ddbc14af18ffad266a5ad1d2",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD ZEE5"
   },
   {
     "id": "vod_m_438",
@@ -23862,7 +21235,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://akamaividz2.zee5.com/image/upload/w_756,h_1134,c_scale,f_avif,q_auto:eco/resources/0-0-1z5999151/portrait/1920x770bba0342185cd4161a2875b044e9dbff6419a4c685aee485bb5c3fcb68e5e7aaa.jpg",
     "backdrop": "https://akamaividz2.zee5.com/image/upload/w_756,h_1134,c_scale,f_avif,q_auto:eco/resources/0-0-1z5999151/portrait/1920x770bba0342185cd4161a2875b044e9dbff6419a4c685aee485bb5c3fcb68e5e7aaa.jpg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -23873,7 +21246,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/zee.mpd?content_id=0-0-1z5999151",
     "clearKey": "76823ac27a5a4af99beb14c91483775e:94b18df7689621fd3733a39fbdb919d2",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD ZEE5"
   },
   {
     "id": "vod_m_439",
@@ -23886,7 +21260,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://akamaividz2.zee5.com/image/upload/w_756,h_1134,c_scale,f_webp,q_auto:eco/resources/0-0-1z5878572/portrait/1920x770176bba890c7e4487af2097aa08b8c849.jpg",
     "backdrop": "https://akamaividz2.zee5.com/image/upload/w_756,h_1134,c_scale,f_webp,q_auto:eco/resources/0-0-1z5878572/portrait/1920x770176bba890c7e4487af2097aa08b8c849.jpg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -23897,7 +21271,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/zee.mpd?content_id=0-0-1z5878572",
     "clearKey": "cc1edf092f0d3d46898bfac563f1229f:9981f76ea8f694c4c525069d21690f43",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD ZEE5"
   },
   {
     "id": "vod_m_440",
@@ -23910,7 +21285,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://akamaividz2.zee5.com/image/upload/w_756,h_1134,c_scale,f_webp,q_auto:eco/resources/0-0-1z5874367/portrait/1920x7708764a314d1204bab8a3e786efcf5aad5c4b37ae8bcde4d10823f33d71f013704.jpg",
     "backdrop": "https://akamaividz2.zee5.com/image/upload/w_756,h_1134,c_scale,f_webp,q_auto:eco/resources/0-0-1z5874367/portrait/1920x7708764a314d1204bab8a3e786efcf5aad5c4b37ae8bcde4d10823f33d71f013704.jpg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -23921,7 +21296,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/zee.mpd?content_id=0-0-1z5874367",
     "clearKey": "677564080fff33599c10204aa6ab9842:b95a70d8f10819d985df9bdfdcee4319",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD ZEE5"
   },
   {
     "id": "vod_m_441",
@@ -23934,7 +21310,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://akamaividz2.zee5.com/image/upload/w_336,h_504,c_scale,f_webp,q_auto:eco/resources/0-0-1z5895270/portrait/1920x770b41916abd0834abd8fd9633a4fbb649a3022ec9361f043abbc97b086031d5faa1b132d27fb3a4d609c8559a2fc562712.jpg",
     "backdrop": "https://akamaividz2.zee5.com/image/upload/w_336,h_504,c_scale,f_webp,q_auto:eco/resources/0-0-1z5895270/portrait/1920x770b41916abd0834abd8fd9633a4fbb649a3022ec9361f043abbc97b086031d5faa1b132d27fb3a4d609c8559a2fc562712.jpg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -23945,7 +21321,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/zee.mpd?content_id=0-0-1z5895270",
     "clearKey": "d36466342961413c8815fc95b4f994ac:89ce6c7fb9939d104af67e622c7ed966",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD ZEE5"
   },
   {
     "id": "vod_m_442",
@@ -23958,7 +21335,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://akamaividz2.zee5.com/image/upload/w_336,h_504,c_scale,f_webp,q_auto:eco/resources/0-0-1z5905730/portrait/1920x77097adbf8259b1433f817afe4c80b22648e2335985629b4ab2a3ff61b67eaa9741.jpg",
     "backdrop": "https://akamaividz2.zee5.com/image/upload/w_336,h_504,c_scale,f_webp,q_auto:eco/resources/0-0-1z5905730/portrait/1920x77097adbf8259b1433f817afe4c80b22648e2335985629b4ab2a3ff61b67eaa9741.jpg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -23969,7 +21346,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/zee.mpd?content_id=0-0-1z5905730",
     "clearKey": "9577aca90ce64db6861f44b775a44123:ea218550adc394c82d8a84d2bec82af2",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD ZEE5"
   },
   {
     "id": "vod_m_443",
@@ -23982,7 +21360,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://akamaividz2.zee5.com/image/upload/w_336,h_504,c_scale,f_webp,q_auto:eco/resources/0-0-1z5882692/portrait/1920x770d7e1a8feed894b1cbc2e98fa9406307ee1ad9290f3874d44a78b1786e0ed910c5f71de80892e4c07bc753478d39ea4f2.jpg",
     "backdrop": "https://akamaividz2.zee5.com/image/upload/w_336,h_504,c_scale,f_webp,q_auto:eco/resources/0-0-1z5882692/portrait/1920x770d7e1a8feed894b1cbc2e98fa9406307ee1ad9290f3874d44a78b1786e0ed910c5f71de80892e4c07bc753478d39ea4f2.jpg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -23993,7 +21371,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/zee.mpd?content_id=0-0-1z5882692",
     "clearKey": "65fbecaa561a3d7ea83b1342678ae967:286a37f14fd2eb784ec391135693a0ae",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD ZEE5"
   },
   {
     "id": "vod_m_444",
@@ -24006,7 +21385,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://akamaividz2.zee5.com/image/upload/w_336,h_504,c_scale,f_webp,q_auto:eco/resources/0-0-1z5895203/portrait/1920x77015d1c22aeb3b4bb1aa95c99b4cef478b3b792a1ed4234f6d97dc0c6fb948908cd3cb6f5c71ba4818a6326571d58c9041.jpg",
     "backdrop": "https://akamaividz2.zee5.com/image/upload/w_336,h_504,c_scale,f_webp,q_auto:eco/resources/0-0-1z5895203/portrait/1920x77015d1c22aeb3b4bb1aa95c99b4cef478b3b792a1ed4234f6d97dc0c6fb948908cd3cb6f5c71ba4818a6326571d58c9041.jpg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -24017,7 +21396,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/zee.mpd?content_id=0-0-1z5895203",
     "clearKey": "58e0c29294f24400b515a94482df3938:48b9f3e6d2161eccb2a7260a8e6e470e",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD ZEE5"
   },
   {
     "id": "vod_m_445",
@@ -24030,7 +21410,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://akamaividz2.zee5.com/image/upload/w_336,h_504,c_scale,f_webp,q_auto:eco/resources/0-0-1z5797649/portrait/1920x7705d268d6804c4443a94858e74d4cf4dd8386872cb61bf4894bbb27ea074b2ff7f4d0a020d59894737b2d4c0b72e876eba.jpg",
     "backdrop": "https://akamaividz2.zee5.com/image/upload/w_336,h_504,c_scale,f_webp,q_auto:eco/resources/0-0-1z5797649/portrait/1920x7705d268d6804c4443a94858e74d4cf4dd8386872cb61bf4894bbb27ea074b2ff7f4d0a020d59894737b2d4c0b72e876eba.jpg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -24041,7 +21421,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/zee.mpd?content_id=0-0-1z5797649",
     "clearKey": "313e5ef93f6531b0b0fe0b6b1536e0e9:22b222059f28c92e697073fe0ac81e1e",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD ZEE5"
   },
   {
     "id": "vod_m_446",
@@ -24054,7 +21435,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://akamaividz2.zee5.com/image/upload/w_336,h_504,c_scale,f_webp,q_auto:eco/resources/0-0-1z5273917/portrait/1920x770db214448a75841f3bb7605ee59a9940f446f132925cb4e6e8e597d19f9de2922.jpg",
     "backdrop": "https://akamaividz2.zee5.com/image/upload/w_336,h_504,c_scale,f_webp,q_auto:eco/resources/0-0-1z5273917/portrait/1920x770db214448a75841f3bb7605ee59a9940f446f132925cb4e6e8e597d19f9de2922.jpg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -24065,7 +21446,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/zee.mpd?content_id=0-0-1z5273917",
     "clearKey": "8bdb3d0d7216438a8f0f02d7e896e5c7:e31218164ff59530b4e96dae18150627",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD ZEE5"
   },
   {
     "id": "vod_m_447",
@@ -24078,7 +21460,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://akamaividz2.zee5.com/image/upload/w_336,h_504,c_scale,f_webp,q_auto:eco/resources/0-0-1z5785936/portrait/1920x7709a9f760777eb4b7594898fdf55fac6503963bda937524bb4a0718b819501b987.jpg",
     "backdrop": "https://akamaividz2.zee5.com/image/upload/w_336,h_504,c_scale,f_webp,q_auto:eco/resources/0-0-1z5785936/portrait/1920x7709a9f760777eb4b7594898fdf55fac6503963bda937524bb4a0718b819501b987.jpg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -24089,7 +21471,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/zee.mpd?content_id=0-0-1z5785936",
     "clearKey": "d0b3f923cd3936b4b2fb8907f5f8b678:b957555d0ef32a9f78ddb56c213a0612",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD ZEE5"
   },
   {
     "id": "vod_m_448",
@@ -24102,7 +21485,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://akamaividz2.zee5.com/image/upload/w_336,h_504,c_scale,f_webp,q_auto:eco/resources/0-0-1z5730838/portrait/1920x7707ed2acffc4824858b46d5a740fb0725000443e6eace5487f8b68c2fc86c38466.jpg",
     "backdrop": "https://akamaividz2.zee5.com/image/upload/w_336,h_504,c_scale,f_webp,q_auto:eco/resources/0-0-1z5730838/portrait/1920x7707ed2acffc4824858b46d5a740fb0725000443e6eace5487f8b68c2fc86c38466.jpg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -24113,7 +21496,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/zee.mpd?content_id=0-0-1z5730838",
     "clearKey": "f12f0827a0d9398fbd4c13363b9be6a7:7a39400fef84817e38af7297d9e5616e",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD ZEE5"
   },
   {
     "id": "vod_m_449",
@@ -24126,7 +21510,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://akamaividz2.zee5.com/image/upload/w_336,h_504,c_scale,f_webp,q_auto:eco/resources/0-0-1z5746396/portrait/1920x77054f61c987bec45d7a1341cff1449d80e6808f3c92c6e429ba2e74aa55e1716c1dfb708ea80b14976980add88db1b51d5.jpg",
     "backdrop": "https://akamaividz2.zee5.com/image/upload/w_336,h_504,c_scale,f_webp,q_auto:eco/resources/0-0-1z5746396/portrait/1920x77054f61c987bec45d7a1341cff1449d80e6808f3c92c6e429ba2e74aa55e1716c1dfb708ea80b14976980add88db1b51d5.jpg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -24137,7 +21521,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/zee.mpd?content_id=0-0-1z5746396",
     "clearKey": "e53d3649549032229ee0535718e44540:d02ca7ac29274f61216b0e02e59c0e1d",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD ZEE5"
   },
   {
     "id": "vod_m_450",
@@ -24150,7 +21535,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://akamaividz2.zee5.com/image/upload/w_336,h_504,c_scale,f_webp,q_auto:eco/resources/0-0-1z5711602/portrait/1920x770f89e144e47944f09a3fb5f418146a3815d150ca208c940f2989295367778c9f7.jpg",
     "backdrop": "https://akamaividz2.zee5.com/image/upload/w_336,h_504,c_scale,f_webp,q_auto:eco/resources/0-0-1z5711602/portrait/1920x770f89e144e47944f09a3fb5f418146a3815d150ca208c940f2989295367778c9f7.jpg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -24161,7 +21546,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/zee.mpd?content_id=0-0-1z5711602",
     "clearKey": "66ea1bf4756932d0a976b304eac09550:4f33eef247a89b196d7e9e7a6b9fe85d",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD ZEE5"
   },
   {
     "id": "vod_m_451",
@@ -24174,7 +21560,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://akamaividz.zee5.com/image/upload/w_336,h_504,c_scale,f_webp,q_auto:eco/resources/0-0-1z5535878/portrait/1920x7701fd093d1b0b94fe2be3d46e8ff008f8be33c38c3c18c47cd84985863b44f0296.jpg",
     "backdrop": "https://akamaividz.zee5.com/image/upload/w_336,h_504,c_scale,f_webp,q_auto:eco/resources/0-0-1z5535878/portrait/1920x7701fd093d1b0b94fe2be3d46e8ff008f8be33c38c3c18c47cd84985863b44f0296.jpg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -24185,7 +21571,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/zee.mpd?content_id=0-0-1z5535878",
     "clearKey": "fdd47b236ddc30f0a8f3de146d2ce29b:2ca17434e180ae8cda1ac7f023d3c5b1",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD ZEE5"
   },
   {
     "id": "vod_m_452",
@@ -24198,7 +21585,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://akamaividz.zee5.com/image/upload/w_336,h_504,c_scale,f_webp,q_auto:eco/resources/0-0-1z5489618/portrait/1920x7706d131bcebf304ad7b6332f105020eec2742207eab07a44cb9ca27a6bc911e4c277fbd65ab4a94a70924149cd2abb634f.jpg",
     "backdrop": "https://akamaividz.zee5.com/image/upload/w_336,h_504,c_scale,f_webp,q_auto:eco/resources/0-0-1z5489618/portrait/1920x7706d131bcebf304ad7b6332f105020eec2742207eab07a44cb9ca27a6bc911e4c277fbd65ab4a94a70924149cd2abb634f.jpg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -24209,7 +21596,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/zee.mpd?content_id=0-0-1z5489618",
     "clearKey": "4181bb20bb253d3d86d0105abfee6985:47f679216d2d33e27767fef26d4feb4e",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD ZEE5"
   },
   {
     "id": "vod_m_453",
@@ -24222,7 +21610,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://akamaividz2.zee5.com/image/upload/w_336,h_504,c_scale,f_webp,q_auto:eco/resources/0-0-1z5379692/portrait/1920x7709e0236e298654e1e9a04da705f0482473419ef0350d64a769aa79a31b5fc588b.jpg",
     "backdrop": "https://akamaividz2.zee5.com/image/upload/w_336,h_504,c_scale,f_webp,q_auto:eco/resources/0-0-1z5379692/portrait/1920x7709e0236e298654e1e9a04da705f0482473419ef0350d64a769aa79a31b5fc588b.jpg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -24233,7 +21621,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/zee.mpd?content_id=0-0-1z5379692",
     "clearKey": "33ab292d23974e20b18814dd19b821ef:fe90e1df4bc30320da01c0cef67e1688",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD ZEE5"
   },
   {
     "id": "vod_m_454",
@@ -24246,7 +21635,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://akamaividz2.zee5.com/image/upload/w_336,h_504,c_scale,f_webp,q_auto:eco/resources/0-0-1z5437988/portrait/1920x77081e7c3745a454a7abb902aee403be0cc7493d090b093437b882068aedf4c9b44.jpg",
     "backdrop": "https://akamaividz2.zee5.com/image/upload/w_336,h_504,c_scale,f_webp,q_auto:eco/resources/0-0-1z5437988/portrait/1920x77081e7c3745a454a7abb902aee403be0cc7493d090b093437b882068aedf4c9b44.jpg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -24257,7 +21646,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/zee.mpd?content_id=0-0-1z5437988",
     "clearKey": "29ecbefd8e9d4fcfa09878f74d5eb2b9:e9b3117837b8974aa1a9160697c0e46c",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD ZEE5"
   },
   {
     "id": "vod_m_455",
@@ -24270,7 +21660,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://akamaividz2.zee5.com/image/upload/w_336,h_504,c_scale,f_webp,q_auto:eco/resources/0-0-1z5117562/portrait/1920x7708826e4650ee8426e8d40b59bc29fe71a111c7b6d58614d8cb6223b130b44a498.jpg",
     "backdrop": "https://akamaividz2.zee5.com/image/upload/w_336,h_504,c_scale,f_webp,q_auto:eco/resources/0-0-1z5117562/portrait/1920x7708826e4650ee8426e8d40b59bc29fe71a111c7b6d58614d8cb6223b130b44a498.jpg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -24281,7 +21671,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/zee.mpd?content_id=0-0-1z5117562",
     "clearKey": "0287f496188e40cca3cb203ad0bba464:56ffcd58aaced61d77b0c9bc9c6c664f",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD ZEE5"
   },
   {
     "id": "vod_m_456",
@@ -24294,7 +21685,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://akamaividz2.zee5.com/image/upload/w_336,h_504,c_scale,f_webp,q_auto:eco/resources/0-0-1z5148987/portrait/1920x7709e71a0e093e949a6869e3baa560b5db9b9b372d41d404b139b5004e1885f2e32.jpg",
     "backdrop": "https://akamaividz2.zee5.com/image/upload/w_336,h_504,c_scale,f_webp,q_auto:eco/resources/0-0-1z5148987/portrait/1920x7709e71a0e093e949a6869e3baa560b5db9b9b372d41d404b139b5004e1885f2e32.jpg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -24305,7 +21696,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/zee.mpd?content_id=0-0-1z5148988",
     "clearKey": "710aefcdab944291abe8a552a98fad72:17ce0ce778dcc9fd9d2a493e0ef2b30d",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD ZEE5"
   },
   {
     "id": "vod_m_457",
@@ -24318,7 +21710,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://akamaividz.zee5.com/image/upload/w_336,h_504,c_scale,f_webp,q_auto:eco/resources/0-0-1z5206274/portrait/1920x770192a79cb947f40b5a19e9f4e3f2e15c6.jpg",
     "backdrop": "https://akamaividz.zee5.com/image/upload/w_336,h_504,c_scale,f_webp,q_auto:eco/resources/0-0-1z5206274/portrait/1920x770192a79cb947f40b5a19e9f4e3f2e15c6.jpg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -24329,7 +21721,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/zee.mpd?content_id=0-0-1z5206274",
     "clearKey": "c811dc1f26aa3b3bae7ad335dcf59c6f:4800e7e8ca427d16fb6b77310533e885",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD ZEE5"
   },
   {
     "id": "vod_m_458",
@@ -24342,7 +21735,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://akamaividz.zee5.com/image/upload/w_336,h_504,c_scale,f_webp,q_auto:eco/resources/0-0-1z5228525/portrait/1920x770d40be52fee38464ea5d389f46e08f4c3.jpg",
     "backdrop": "https://akamaividz.zee5.com/image/upload/w_336,h_504,c_scale,f_webp,q_auto:eco/resources/0-0-1z5228525/portrait/1920x770d40be52fee38464ea5d389f46e08f4c3.jpg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -24353,7 +21746,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/zee.mpd?content_id=0-0-1z5228525",
     "clearKey": "1d319030dc68475e972d458c923eaddf:6d59b1c30a0264491fe6c7b6e5cef0b0",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD ZEE5"
   },
   {
     "id": "vod_m_459",
@@ -24366,7 +21760,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://akamaividz2.zee5.com/image/upload/w_336,h_504,c_scale,f_webp,q_auto:eco/resources/0-0-1z562203/portrait/1920x77052b9f008ece24cbb866a1102875acd63e364c9a50b6f46babc83c85b43a0c22a.jpg",
     "backdrop": "https://akamaividz2.zee5.com/image/upload/w_336,h_504,c_scale,f_webp,q_auto:eco/resources/0-0-1z562203/portrait/1920x77052b9f008ece24cbb866a1102875acd63e364c9a50b6f46babc83c85b43a0c22a.jpg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -24377,7 +21771,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/zee.mpd?content_id=0-0-1z562203",
     "clearKey": "d0128d66093144dfa7b529ede7c11810:eaacc2ca6c77298106f9062ecb97c8a0",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD ZEE5"
   },
   {
     "id": "vod_m_460",
@@ -24390,7 +21785,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "http://akamaividz.zee5.com/image/upload/w_336,h_504,c_scale,f_webp,q_auto:eco/resources/0-0-399328/portrait/1920x7709033fadc6ce34d1889ba269c8ceb9ac2.jpg",
     "backdrop": "http://akamaividz.zee5.com/image/upload/w_336,h_504,c_scale,f_webp,q_auto:eco/resources/0-0-399328/portrait/1920x7709033fadc6ce34d1889ba269c8ceb9ac2.jpg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -24401,7 +21796,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/zee.mpd?content_id=0-0-399328",
     "clearKey": "17cd10f25e1e3a0ea9266c3e0dca0767:71284817877187d7f8298d07d64f9556",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD ZEE5"
   },
   {
     "id": "vod_m_461",
@@ -24414,7 +21810,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://akamaividz.zee5.com/image/upload/w_336,h_504,c_scale,f_webp,q_auto:eco/resources/0-0-369273/portrait/1920x770pg3da76baf5c934f039fedb3c764027e8939b917c3d69a4f1aa250541ee517618d.jpg",
     "backdrop": "https://akamaividz.zee5.com/image/upload/w_336,h_504,c_scale,f_webp,q_auto:eco/resources/0-0-369273/portrait/1920x770pg3da76baf5c934f039fedb3c764027e8939b917c3d69a4f1aa250541ee517618d.jpg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -24425,7 +21821,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/zee.mpd?content_id=0-0-369273",
     "clearKey": "6326bcf03ece4270a75bdc9e188deaf0:b7e7992edeee6cc8111dd8b155d5e539",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD ZEE5"
   },
   {
     "id": "vod_m_462",
@@ -24438,7 +21835,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://akamaividz.zee5.com/image/upload/w_336,h_504,c_scale,f_webp,q_auto:eco/resources/0-0-1z51248/portrait/1920x770b4bda81746aa4230a9525ac25305c7e62d9759c955f34a88a28ab8b15cab8185.jpg",
     "backdrop": "https://akamaividz.zee5.com/image/upload/w_336,h_504,c_scale,f_webp,q_auto:eco/resources/0-0-1z51248/portrait/1920x770b4bda81746aa4230a9525ac25305c7e62d9759c955f34a88a28ab8b15cab8185.jpg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -24449,7 +21846,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/zee.mpd?content_id=0-0-1z51248",
     "clearKey": "37ae0f7828aa3e92a8607bcbec816daa:c92d8d2973bdd8c13547e3989af7c4c8",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD ZEE5"
   },
   {
     "id": "vod_m_463",
@@ -24462,7 +21860,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://akamaividz2.zee5.com/image/upload/w_336,h_504,c_scale,f_webp,q_auto:eco/resources/0-0-360780/portrait/00360780cover171284178717128f365dd6475854641b2ef6953c35d1b8c.jpg",
     "backdrop": "https://akamaividz2.zee5.com/image/upload/w_336,h_504,c_scale,f_webp,q_auto:eco/resources/0-0-360780/portrait/00360780cover171284178717128f365dd6475854641b2ef6953c35d1b8c.jpg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -24473,7 +21871,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/zee.mpd?content_id=0-0-360780",
     "clearKey": "b448776f47074cc4875a8670041e139f:f54a5f1d4402c617e1f60fae062eaef9",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD ZEE5"
   },
   {
     "id": "vod_m_464",
@@ -24486,7 +21885,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://akamaividz2.zee5.com/image/upload/w_336,h_504,c_scale,f_webp,q_auto:eco/resources/0-0-75423/portrait/sbag_3_19th_1920x770.jpg",
     "backdrop": "https://akamaividz2.zee5.com/image/upload/w_336,h_504,c_scale,f_webp,q_auto:eco/resources/0-0-75423/portrait/sbag_3_19th_1920x770.jpg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -24497,7 +21896,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/zee.mpd?content_id=0-0-75423",
     "clearKey": "eb914881d23746c6b5d0f664235f2d48:132a946332c5c6c1f79ee0a7fb764d9b",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD ZEE5"
   },
   {
     "id": "vod_m_465",
@@ -24510,7 +21910,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://akamaividz2.zee5.com/image/upload/w_336,h_504,c_scale,f_webp,q_auto:eco/resources/0-0-75513/portrait/holidaymalay1920x770.jpg",
     "backdrop": "https://akamaividz2.zee5.com/image/upload/w_336,h_504,c_scale,f_webp,q_auto:eco/resources/0-0-75513/portrait/holidaymalay1920x770.jpg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -24521,7 +21921,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/zee.mpd?content_id=0-0-75513",
     "clearKey": "eb914881d23746c6b5d0f664235f2d48:132a946332c5c6c1f79ee0a7fb764d9b",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD ZEE5"
   },
   {
     "id": "vod_m_466",
@@ -24534,7 +21935,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://akamaividz2.zee5.com/image/upload/w_336,h_504,c_scale,f_webp,q_auto:eco/resources/0-0-76092/portrait/theshaukeensms1920x770.jpg",
     "backdrop": "https://akamaividz2.zee5.com/image/upload/w_336,h_504,c_scale,f_webp,q_auto:eco/resources/0-0-76092/portrait/theshaukeensms1920x770.jpg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -24545,7 +21946,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/zee.mpd?content_id=0-0-76092",
     "clearKey": "eb914881d23746c6b5d0f664235f2d48:132a946332c5c6c1f79ee0a7fb764d9b",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD ZEE5"
   },
   {
     "id": "vod_m_467",
@@ -24558,7 +21960,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://akamaividz2.zee5.com/image/upload/w_336,h_504,c_scale,f_webp,q_auto:eco/resources/0-0-76106/portrait/zanjeer2013ms1920x770.jpg",
     "backdrop": "https://akamaividz2.zee5.com/image/upload/w_336,h_504,c_scale,f_webp,q_auto:eco/resources/0-0-76106/portrait/zanjeer2013ms1920x770.jpg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -24569,7 +21971,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/zee.mpd?content_id=0-0-76106",
     "clearKey": "eb914881d23746c6b5d0f664235f2d48:132a946332c5c6c1f79ee0a7fb764d9b",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD ZEE5"
   },
   {
     "id": "vod_m_468",
@@ -24582,7 +21985,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://akamaividz2.zee5.com/image/upload/w_336,h_504,c_scale,f_webp,q_auto:eco/resources/0-0-76100/portrait/wantedms1920x770.jpg",
     "backdrop": "https://akamaividz2.zee5.com/image/upload/w_336,h_504,c_scale,f_webp,q_auto:eco/resources/0-0-76100/portrait/wantedms1920x770.jpg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -24593,7 +21996,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/zee.mpd?content_id=0-0-76100",
     "clearKey": "eb914881d23746c6b5d0f664235f2d48:132a946332c5c6c1f79ee0a7fb764d9b",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD ZEE5"
   },
   {
     "id": "vod_m_469",
@@ -24606,7 +22010,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://akamaividz2.zee5.com/image/upload/w_336,h_504,c_scale,f_webp,q_auto:eco/resources/0-0-75335/portrait/noproblemms1920x770.jpg",
     "backdrop": "https://akamaividz2.zee5.com/image/upload/w_336,h_504,c_scale,f_webp,q_auto:eco/resources/0-0-75335/portrait/noproblemms1920x770.jpg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -24617,7 +22021,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/zee.mpd?content_id=0-0-75335",
     "clearKey": "eb914881d23746c6b5d0f664235f2d48:132a946332c5c6c1f79ee0a7fb764d9b",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD ZEE5"
   },
   {
     "id": "vod_m_470",
@@ -24630,7 +22035,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://akamaividz2.zee5.com/image/upload/w_336,h_504,c_scale,f_webp,q_auto:eco/resources/0-0-movie_1803765767/portrait/TimeStory1920x7702e3b15ada92d419d95ef0d15a7919a63.jpg",
     "backdrop": "https://akamaividz2.zee5.com/image/upload/w_336,h_504,c_scale,f_webp,q_auto:eco/resources/0-0-movie_1803765767/portrait/TimeStory1920x7702e3b15ada92d419d95ef0d15a7919a63.jpg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -24641,7 +22046,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/zee.mpd?content_id=0-0-movie_1803765767",
     "clearKey": "eb914881d23746c6b5d0f664235f2d48:132a946332c5c6c1f79ee0a7fb764d9b",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD ZEE5"
   },
   {
     "id": "vod_m_471",
@@ -24654,7 +22060,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://akamaividz2.zee5.com/image/upload/w_336,h_504,c_scale,f_webp,q_auto:eco/resources/0-0-gadarekpremkatha/portrait/1920x7705c04ad289f4b421c82e4b963c0f3023a92d70d3a98d94df6bae13eb1354ebed1.jpg",
     "backdrop": "https://akamaividz2.zee5.com/image/upload/w_336,h_504,c_scale,f_webp,q_auto:eco/resources/0-0-gadarekpremkatha/portrait/1920x7705c04ad289f4b421c82e4b963c0f3023a92d70d3a98d94df6bae13eb1354ebed1.jpg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -24665,7 +22071,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/zee.mpd?content_id=0-0-gadarekpremkatha",
     "clearKey": "9908bd2b24f14a23be78485f50c1e0d5:15115e4625c141b42a51a57821cb9077",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD ZEE5"
   },
   {
     "id": "vod_m_472",
@@ -24678,7 +22085,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://akamaividz.zee5.com/image/upload/w_336,h_504,c_scale,f_webp,q_auto:eco/resources/0-0-movie_1968889812/portrait/parmanu1920x7713299746381329e2a83e087fec42bb8ac77b44e3553b88.jpg",
     "backdrop": "https://akamaividz.zee5.com/image/upload/w_336,h_504,c_scale,f_webp,q_auto:eco/resources/0-0-movie_1968889812/portrait/parmanu1920x7713299746381329e2a83e087fec42bb8ac77b44e3553b88.jpg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -24689,7 +22096,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/zee.mpd?content_id=0-0-movie_1968889812",
     "clearKey": "5410fb4b52153cbcb582d36ae02c3206:4adae9d84e70cc6ee0dff4eb8a763df6",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD ZEE5"
   },
   {
     "id": "vod_m_473",
@@ -24702,7 +22110,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://akamaividz2.zee5.com/image/upload/w_336,h_504,c_scale,f_webp,q_auto:eco/resources/0-0-33204/portrait/1920x7702d80a677f77344018de1aee544a1ebc06de1cecda4914edcba121d7d20095255.jpg",
     "backdrop": "https://akamaividz2.zee5.com/image/upload/w_336,h_504,c_scale,f_webp,q_auto:eco/resources/0-0-33204/portrait/1920x7702d80a677f77344018de1aee544a1ebc06de1cecda4914edcba121d7d20095255.jpg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -24713,7 +22121,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/zee.mpd?content_id=0-0-33204",
     "clearKey": "29e36b4ea9233111bae841feed8ab309:a887017aeb89f1caf6cfad43fb1b4a4e",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD ZEE5"
   },
   {
     "id": "vod_m_474",
@@ -24726,7 +22135,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://akamaividz.zee5.com/image/upload/w_336,h_504,c_scale,f_webp,q_auto:eco/resources/0-0-131607/portrait/commando31920x549652121549a090707caf344028adf800c0ca2868bd.jpg",
     "backdrop": "https://akamaividz.zee5.com/image/upload/w_336,h_504,c_scale,f_webp,q_auto:eco/resources/0-0-131607/portrait/commando31920x549652121549a090707caf344028adf800c0ca2868bd.jpg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -24737,7 +22146,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/zee.mpd?content_id=0-0-131607",
     "clearKey": "573329b9a5aa33558448ef00b75f1a72:21c27675aba7d3005c768c58f2629ccd",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD ZEE5"
   },
   {
     "id": "vod_m_475",
@@ -24750,7 +22160,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://akamaividz2.zee5.com/image/upload/w_336,h_504,c_scale,f_webp,q_auto:eco/resources/0-0-2348/portrait/shaktithepower1920x770.jpg",
     "backdrop": "https://akamaividz2.zee5.com/image/upload/w_336,h_504,c_scale,f_webp,q_auto:eco/resources/0-0-2348/portrait/shaktithepower1920x770.jpg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -24761,7 +22171,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/zee.mpd?content_id=0-0-2348",
     "clearKey": "72403831c5ef4802a0aee84f4f0a5e30:8d039e975b530b97c283f0e6e3b0a0f8",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD ZEE5"
   },
   {
     "id": "vod_m_476",
@@ -24774,7 +22185,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://akamaividz.zee5.com/image/upload/w_336,h_504,c_scale,f_webp,q_auto:eco/resources/0-0-movie_2077184162/portrait/1920x770377254293ab14ae08ceeecf9b172d629303371a236784cbfa0d1009c64ac2144.jpg",
     "backdrop": "https://akamaividz.zee5.com/image/upload/w_336,h_504,c_scale,f_webp,q_auto:eco/resources/0-0-movie_2077184162/portrait/1920x770377254293ab14ae08ceeecf9b172d629303371a236784cbfa0d1009c64ac2144.jpg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -24785,7 +22196,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/zee.mpd?content_id=0-0-movie_2077184162",
     "clearKey": "3d21bce077683b238187ca277017f3d0:4885a1c5a11187b0ebc3c0d33edf4451",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD ZEE5"
   },
   {
     "id": "vod_m_477",
@@ -24798,7 +22210,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://akamaividz.zee5.com/image/upload/w_336,h_504,c_scale,f_webp,q_auto:eco/resources/0-0-toiletekpremkatha/portrait/1920x7701497425846.jpg",
     "backdrop": "https://akamaividz.zee5.com/image/upload/w_336,h_504,c_scale,f_webp,q_auto:eco/resources/0-0-toiletekpremkatha/portrait/1920x7701497425846.jpg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -24809,7 +22221,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/zee.mpd?content_id=0-0-toiletekpremkatha",
     "clearKey": "6309f3bc55a7367784a7651e697fb7af:00deba05bcae1cb72c3a0f28c1782b38",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD ZEE5"
   },
   {
     "id": "vod_m_478",
@@ -24822,7 +22235,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://akamaividz2.zee5.com/image/upload/w_336,h_504,c_scale,f_webp,q_auto:eco/resources/0-0-68177/portrait/simmbams17th1920x770.jpg",
     "backdrop": "https://akamaividz2.zee5.com/image/upload/w_336,h_504,c_scale,f_webp,q_auto:eco/resources/0-0-68177/portrait/simmbams17th1920x770.jpg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -24833,7 +22246,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/zee.mpd?content_id=0-0-36802",
     "clearKey": "eb914881d23746c6b5d0f664235f2d48:132a946332c5c6c1f79ee0a7fb764d9b",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD ZEE5"
   },
   {
     "id": "vod_m_479",
@@ -24846,7 +22260,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://akamaividz.zee5.com/image/upload/w_336,h_504,c_scale,f_webp,q_auto:eco/resources/0-0-movie_2116148677/portrait/1920x7701953436430.jpg",
     "backdrop": "https://akamaividz.zee5.com/image/upload/w_336,h_504,c_scale,f_webp,q_auto:eco/resources/0-0-movie_2116148677/portrait/1920x7701953436430.jpg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -24857,7 +22271,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/zee.mpd?content_id=0-0-movie_2116148677",
     "clearKey": "05cab5e349d5439e9c998ee73c9325f9:1300db727c18e85480952f890485e1bd",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD ZEE5"
   },
   {
     "id": "vod_m_480",
@@ -24870,7 +22285,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://akamaividz.zee5.com/image/upload/w_336,h_504,c_scale,f_webp,q_auto:eco/resources/0-0-2488/portrait/002488cover.jpg",
     "backdrop": "https://akamaividz.zee5.com/image/upload/w_336,h_504,c_scale,f_webp,q_auto:eco/resources/0-0-2488/portrait/002488cover.jpg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -24881,7 +22296,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/zee.mpd?content_id=0-0-2488",
     "clearKey": "eb914881d23746c6b5d0f664235f2d48:132a946332c5c6c1f79ee0a7fb764d9b",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD ZEE5"
   },
   {
     "id": "vod_m_003",
@@ -24894,7 +22310,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://m.media-amazon.com/images/M/MV5BMTExMmQwZmQtZGM4My00MTRiLThiNWEtMjc4ZGFhN2NmOTlkXkEyXkFqcGc@._V1_.jpg",
     "backdrop": "https://m.media-amazon.com/images/M/MV5BMTExMmQwZmQtZGM4My00MTRiLThiNWEtMjc4ZGFhN2NmOTlkXkEyXkFqcGc@._V1_.jpg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "FHD 1080p",
     "ageRating": "P13",
@@ -24905,7 +22321,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/okayru.mpd?id=10623791860431",
     "clearKey": "",
     "isTrending": true,
-    "isPopular": true
+    "isPopular": true,
+    "apkCategory": "OLD CHINESE"
   },
   {
     "id": "vod_m_004",
@@ -24918,7 +22335,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://m.media-amazon.com/images/M/MV5BODQ3NTE1MGQtZmRlZi00M2M4LWFjMTktOWU2Zjk3ZGUzZGFmXkEyXkFqcGc@._V1_.jpg",
     "backdrop": "https://m.media-amazon.com/images/M/MV5BODQ3NTE1MGQtZmRlZi00M2M4LWFjMTktOWU2Zjk3ZGUzZGFmXkEyXkFqcGc@._V1_.jpg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "FHD 1080p",
     "ageRating": "P13",
@@ -24929,7 +22346,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/okayru.mpd?id=10623133092559",
     "clearKey": "",
     "isTrending": true,
-    "isPopular": true
+    "isPopular": true,
+    "apkCategory": "OLD CHINESE"
   },
   {
     "id": "vod_m_005",
@@ -24942,7 +22360,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://resizing.flixster.com/-XZAfHZM39UwaGJIFWKAE8fS0ak=/v3/t/assets/p119754_p_v8_aa.jpg",
     "backdrop": "https://resizing.flixster.com/-XZAfHZM39UwaGJIFWKAE8fS0ak=/v3/t/assets/p119754_p_v8_aa.jpg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "FHD 1080p",
     "ageRating": "P13",
@@ -24953,7 +22371,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/okayru.mpd?id=10622779787983",
     "clearKey": "",
     "isTrending": true,
-    "isPopular": true
+    "isPopular": true,
+    "apkCategory": "OLD CHINESE"
   },
   {
     "id": "vod_m_006",
@@ -24966,7 +22385,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://m.media-amazon.com/images/M/MV5BZDM5OGNhZjYtMzU2ZC00MjYwLWI4YTgtMjk2MDRiN2UzZjg0XkEyXkFqcGc@._V1_.jpg",
     "backdrop": "https://m.media-amazon.com/images/M/MV5BZDM5OGNhZjYtMzU2ZC00MjYwLWI4YTgtMjk2MDRiN2UzZjg0XkEyXkFqcGc@._V1_.jpg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "FHD 1080p",
     "ageRating": "P13",
@@ -24977,7 +22396,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/okayru.mpd?id=10622763338447",
     "clearKey": "",
     "isTrending": true,
-    "isPopular": true
+    "isPopular": true,
+    "apkCategory": "OLD CHINESE"
   },
   {
     "id": "vod_m_007",
@@ -24990,7 +22410,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://i.pinimg.com/564x/80/10/30/801030917293917bcd6f0046eee494c3.jpg",
     "backdrop": "https://i.pinimg.com/564x/80/10/30/801030917293917bcd6f0046eee494c3.jpg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "FHD 1080p",
     "ageRating": "P13",
@@ -25001,7 +22421,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/okayru.mpd?id=10623365221071",
     "clearKey": "",
     "isTrending": true,
-    "isPopular": true
+    "isPopular": true,
+    "apkCategory": "OLD CHINESE"
   },
   {
     "id": "vod_m_008",
@@ -25014,7 +22435,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://m.media-amazon.com/images/M/MV5BMTIyMjk5NjAxOV5BMl5BanBnXkFtZTYwMDg0NjU5._V1_.jpg",
     "backdrop": "https://m.media-amazon.com/images/M/MV5BMTIyMjk5NjAxOV5BMl5BanBnXkFtZTYwMDg0NjU5._V1_.jpg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "FHD 1080p",
     "ageRating": "P13",
@@ -25025,7 +22446,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/okayru.mpd?id=10618021939919",
     "clearKey": "",
     "isTrending": true,
-    "isPopular": true
+    "isPopular": true,
+    "apkCategory": "OLD CHINESE"
   },
   {
     "id": "vod_m_009",
@@ -25038,7 +22460,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://webservice.mymovies.dk/Posters/a1aae9ac-ebea-41d1-b57c-0668c7fc0100.jpg",
     "backdrop": "https://webservice.mymovies.dk/Posters/a1aae9ac-ebea-41d1-b57c-0668c7fc0100.jpg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "FHD 1080p",
     "ageRating": "P13",
@@ -25049,7 +22471,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/okayru.mpd?id=10617949326031",
     "clearKey": "",
     "isTrending": false,
-    "isPopular": true
+    "isPopular": true,
+    "apkCategory": "OLD CHINESE"
   },
   {
     "id": "vod_m_010",
@@ -25062,7 +22485,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://img.rgstatic.com/content/movie/41918f14-8443-4e07-9499-11e00a0d1236/poster-342.jpg",
     "backdrop": "https://img.rgstatic.com/content/movie/41918f14-8443-4e07-9499-11e00a0d1236/poster-342.jpg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "FHD 1080p",
     "ageRating": "P13",
@@ -25073,7 +22496,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/okayru.mpd?id=10615848635087",
     "clearKey": "",
     "isTrending": false,
-    "isPopular": true
+    "isPopular": true,
+    "apkCategory": "OLD CHINESE"
   },
   {
     "id": "vod_m_011",
@@ -25086,7 +22510,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://m.media-amazon.com/images/M/MV5BZmIzNTdmODYtZDA5Ny00OWIxLWI3MjItN2JiZDZhZTQ4NTEyXkEyXkFqcGc@._V1_.jpg",
     "backdrop": "https://m.media-amazon.com/images/M/MV5BZmIzNTdmODYtZDA5Ny00OWIxLWI3MjItN2JiZDZhZTQ4NTEyXkEyXkFqcGc@._V1_.jpg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "FHD 1080p",
     "ageRating": "P13",
@@ -25097,7 +22521,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/okayru.mpd?id=10615844113103",
     "clearKey": "",
     "isTrending": false,
-    "isPopular": true
+    "isPopular": true,
+    "apkCategory": "OLD CHINESE"
   },
   {
     "id": "vod_m_012",
@@ -25110,7 +22535,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://m.media-amazon.com/images/M/MV5BNDg3YmQ2NjctNzhiMi00ZmRlLTlhNDAtZGUxMTljNDBkZWNjXkEyXkFqcGc@._V1_.jpg",
     "backdrop": "https://m.media-amazon.com/images/M/MV5BNDg3YmQ2NjctNzhiMi00ZmRlLTlhNDAtZGUxMTljNDBkZWNjXkEyXkFqcGc@._V1_.jpg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "FHD 1080p",
     "ageRating": "P13",
@@ -25121,7 +22546,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/okayru.mpd?id=10615838083791",
     "clearKey": "",
     "isTrending": false,
-    "isPopular": true
+    "isPopular": true,
+    "apkCategory": "OLD CHINESE"
   },
   {
     "id": "vod_m_013",
@@ -25134,7 +22560,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://m.media-amazon.com/images/M/MV5BNDVhM2ZjMmMtOTYxYy00NjgzLWI1OTQtNzE3YjVhN2UwOWEzXkEyXkFqcGc@._V1_.jpg",
     "backdrop": "https://m.media-amazon.com/images/M/MV5BNDVhM2ZjMmMtOTYxYy00NjgzLWI1OTQtNzE3YjVhN2UwOWEzXkEyXkFqcGc@._V1_.jpg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "FHD 1080p",
     "ageRating": "P13",
@@ -25145,7 +22571,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/okayru.mpd?id=10615828318927",
     "clearKey": "",
     "isTrending": false,
-    "isPopular": true
+    "isPopular": true,
+    "apkCategory": "OLD CHINESE"
   },
   {
     "id": "vod_m_014",
@@ -25158,7 +22585,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://m.media-amazon.com/images/M/MV5BMDM0ODA2ZTQtMjA0MS00MjliLWE4ODItMzhlMjgzZWY2Y2JjXkEyXkFqcGc@._V1_.jpg",
     "backdrop": "https://m.media-amazon.com/images/M/MV5BMDM0ODA2ZTQtMjA0MS00MjliLWE4ODItMzhlMjgzZWY2Y2JjXkEyXkFqcGc@._V1_.jpg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "FHD 1080p",
     "ageRating": "P13",
@@ -25169,7 +22596,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/okayru.mpd?id=10615825042127",
     "clearKey": "",
     "isTrending": false,
-    "isPopular": true
+    "isPopular": true,
+    "apkCategory": "OLD CHINESE"
   },
   {
     "id": "vod_m_015",
@@ -25182,7 +22610,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://miro.medium.com/v2/resize:fit:1000/1*t0CKG5X5ILJP64VDtvy4lQ.jpeg",
     "backdrop": "https://miro.medium.com/v2/resize:fit:1000/1*t0CKG5X5ILJP64VDtvy4lQ.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "FHD 1080p",
     "ageRating": "P13",
@@ -25193,7 +22621,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/okayru.mpd?id=10615820520143",
     "clearKey": "",
     "isTrending": false,
-    "isPopular": true
+    "isPopular": true,
+    "apkCategory": "OLD CHINESE"
   },
   {
     "id": "vod_m_016",
@@ -25206,7 +22635,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://m.media-amazon.com/images/M/MV5BYTg4Y2I1MmItYzgxOC00M2I2LTk0MTEtODQxMzAwMTM5YWFjXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg",
     "backdrop": "https://m.media-amazon.com/images/M/MV5BYTg4Y2I1MmItYzgxOC00M2I2LTk0MTEtODQxMzAwMTM5YWFjXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "FHD 1080p",
     "ageRating": "P13",
@@ -25217,7 +22646,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/okayru.mpd?id=10615814621903",
     "clearKey": "",
     "isTrending": false,
-    "isPopular": true
+    "isPopular": true,
+    "apkCategory": "OLD CHINESE"
   },
   {
     "id": "vod_m_017",
@@ -25230,7 +22660,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://www.miramax.com/assets/mv5bzthhzjzmmjktowvkmc00owm3ltkxmtutmgnimze0mjg3otkzxkeyxkfqcgdeqxvymzaxnjg3mjq%40._v1_sy1000_cr0%2C0%2C666%2C1000_al_.jpg",
     "backdrop": "https://www.miramax.com/assets/mv5bzthhzjzmmjktowvkmc00owm3ltkxmtutmgnimze0mjg3otkzxkeyxkfqcgdeqxvymzaxnjg3mjq%40._v1_sy1000_cr0%2C0%2C666%2C1000_al_.jpg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "FHD 1080p",
     "ageRating": "P13",
@@ -25241,7 +22671,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/okayru.mpd?id=10615621356239",
     "clearKey": "",
     "isTrending": false,
-    "isPopular": true
+    "isPopular": true,
+    "apkCategory": "OLD CHINESE"
   },
   {
     "id": "vod_m_018",
@@ -25254,7 +22685,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://resizing.flixster.com/-XZAfHZM39UwaGJIFWKAE8fS0ak=/v3/t/assets/p35470_p_v8_aj.jpg",
     "backdrop": "https://resizing.flixster.com/-XZAfHZM39UwaGJIFWKAE8fS0ak=/v3/t/assets/p35470_p_v8_aj.jpg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "FHD 1080p",
     "ageRating": "P13",
@@ -25265,7 +22696,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/vodyse.mp4?channel=991",
     "clearKey": "",
     "isTrending": false,
-    "isPopular": true
+    "isPopular": true,
+    "apkCategory": "OLD CHINESE"
   },
   {
     "id": "vod_m_019",
@@ -25278,7 +22710,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://m.media-amazon.com/images/M/MV5BNmVhNmZiYWUtNDg2Mi00OTdlLWE2YjUtNTQyODdjZWYzYzMxXkEyXkFqcGc@._V1_.jpg",
     "backdrop": "https://m.media-amazon.com/images/M/MV5BNmVhNmZiYWUtNDg2Mi00OTdlLWE2YjUtNTQyODdjZWYzYzMxXkEyXkFqcGc@._V1_.jpg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "FHD 1080p",
     "ageRating": "P13",
@@ -25289,7 +22721,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/okayru.mpd?id=10615610084047",
     "clearKey": "",
     "isTrending": false,
-    "isPopular": true
+    "isPopular": true,
+    "apkCategory": "OLD CHINESE"
   },
   {
     "id": "vod_m_020",
@@ -25302,7 +22735,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://m.media-amazon.com/images/M/MV5BM2JhYTkzYmUtYjY1Mi00OWNjLTk4N2ItNDRkZTIyMzgyMjMyXkEyXkFqcGc@._V1_.jpg",
     "backdrop": "https://m.media-amazon.com/images/M/MV5BM2JhYTkzYmUtYjY1Mi00OWNjLTk4N2ItNDRkZTIyMzgyMjMyXkEyXkFqcGc@._V1_.jpg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "FHD 1080p",
     "ageRating": "P13",
@@ -25313,7 +22746,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/okayru.mpd?id=10615604185807",
     "clearKey": "",
     "isTrending": false,
-    "isPopular": true
+    "isPopular": true,
+    "apkCategory": "OLD CHINESE"
   },
   {
     "id": "vod_m_021",
@@ -25326,7 +22760,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://m.media-amazon.com/images/M/MV5BNDM0YzJhOTUtMjZlMy00ZTBkLTljNzEtY2U0ODllYTk1OTEzXkEyXkFqcGc@._V1_.jpg",
     "backdrop": "https://m.media-amazon.com/images/M/MV5BNDM0YzJhOTUtMjZlMy00ZTBkLTljNzEtY2U0ODllYTk1OTEzXkEyXkFqcGc@._V1_.jpg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "FHD 1080p",
     "ageRating": "P13",
@@ -25337,7 +22771,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/okayru.mpd?id=10615598549711",
     "clearKey": "",
     "isTrending": false,
-    "isPopular": true
+    "isPopular": true,
+    "apkCategory": "OLD CHINESE"
   },
   {
     "id": "vod_m_022",
@@ -25350,7 +22785,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://www.fareastfilms.com/wp-content/uploads/2015/05/Royal-Tramp.jpg",
     "backdrop": "https://www.fareastfilms.com/wp-content/uploads/2015/05/Royal-Tramp.jpg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "FHD 1080p",
     "ageRating": "P13",
@@ -25361,7 +22796,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/okayru.mpd?id=10615590816463",
     "clearKey": "",
     "isTrending": false,
-    "isPopular": true
+    "isPopular": true,
+    "apkCategory": "OLD CHINESE"
   },
   {
     "id": "vod_m_023",
@@ -25374,7 +22810,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://m.media-amazon.com/images/M/MV5BMTc1NjYxMTExNl5BMl5BanBnXkFtZTYwNTU2NTI5._V1_.jpg",
     "backdrop": "https://m.media-amazon.com/images/M/MV5BMTc1NjYxMTExNl5BMl5BanBnXkFtZTYwNTU2NTI5._V1_.jpg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "FHD 1080p",
     "ageRating": "P13",
@@ -25385,7 +22821,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ia800903.us.archive.org/2/items/996_20250626/996.ia.mp4",
     "clearKey": "",
     "isTrending": false,
-    "isPopular": true
+    "isPopular": true,
+    "apkCategory": "OLD CHINESE"
   },
   {
     "id": "vod_m_024",
@@ -25398,7 +22835,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://m.media-amazon.com/images/M/MV5BOWU4NzkxNGYtYmU4NS00MDVkLWIxNmItNDBmODE1OThjNjM3XkEyXkFqcGc@._V1_.jpg",
     "backdrop": "https://m.media-amazon.com/images/M/MV5BOWU4NzkxNGYtYmU4NS00MDVkLWIxNmItNDBmODE1OThjNjM3XkEyXkFqcGc@._V1_.jpg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "FHD 1080p",
     "ageRating": "P13",
@@ -25409,7 +22846,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/okayru.mpd?id=10615569910479",
     "clearKey": "",
     "isTrending": false,
-    "isPopular": true
+    "isPopular": true,
+    "apkCategory": "OLD CHINESE"
   },
   {
     "id": "vod_m_025",
@@ -25422,7 +22860,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://m.media-amazon.com/images/M/MV5BMDU0YzhiZjMtZDE5OS00ZWNhLTkyNTMtNjc0NTk1ZjA4ODMxXkEyXkFqcGc@._V1_.jpg",
     "backdrop": "https://m.media-amazon.com/images/M/MV5BMDU0YzhiZjMtZDE5OS00ZWNhLTkyNTMtNjc0NTk1ZjA4ODMxXkEyXkFqcGc@._V1_.jpg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "FHD 1080p",
     "ageRating": "P13",
@@ -25433,7 +22871,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/okayru.mpd?id=10615434447567",
     "clearKey": "",
     "isTrending": false,
-    "isPopular": true
+    "isPopular": true,
+    "apkCategory": "OLD CHINESE"
   },
   {
     "id": "vod_m_026",
@@ -25446,7 +22885,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcQIdhqW0fEzYPCMr3hI3oexIuHGUtSTVqYuqEGFoA03pR-tCqI_H4ioDRCbZ2fzHNq91dcXvA",
     "backdrop": "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcQIdhqW0fEzYPCMr3hI3oexIuHGUtSTVqYuqEGFoA03pR-tCqI_H4ioDRCbZ2fzHNq91dcXvA",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "FHD 1080p",
     "ageRating": "P13",
@@ -25457,7 +22896,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/okayru.mpd?id=10614812314319",
     "clearKey": "",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "OLD CHINESE"
   },
   {
     "id": "vod_m_333",
@@ -25472,7 +22912,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://image.tmdb.org/t/p/w600_and_h900_bestv2/5fCCZlanV8DMGhz9vGKIqYVPHaG.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w600_and_h900_bestv2/5fCCZlanV8DMGhz9vGKIqYVPHaG.jpg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "FHD 1080p",
     "ageRating": "P13",
@@ -25483,7 +22923,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/okayru.mpd?id=16030351887055",
     "clearKey": "",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD MALAY"
   },
   {
     "id": "vod_m_481",
@@ -25496,7 +22937,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://www.visionplus.id/images/repository/970/255970-POSTER-m.jpg",
     "backdrop": "https://www.visionplus.id/images/repository/970/255970-POSTER-m.jpg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -25507,7 +22948,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/bolly.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&channel=b999",
     "clearKey": "e07bca31619e4355a1dec229a9f2711c:f25789d46e3936327f76e18df60b42dc",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD BOLLYWOOD"
   },
   {
     "id": "vod_m_482",
@@ -25520,7 +22962,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://www.visionplus.id/images/repository/435/161435-POSTER-m.jpg",
     "backdrop": "https://www.visionplus.id/images/repository/435/161435-POSTER-m.jpg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -25531,7 +22973,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/bolly.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&channel=b998",
     "clearKey": "046a0c7d95204b56a8dc8cd236fab9f0:fd275c43202c7e3cfac7e806961f84b3",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD BOLLYWOOD"
   },
   {
     "id": "vod_m_483",
@@ -25544,7 +22987,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://www.visionplus.id/images/repository/591/138591-POSTER-m.jpg",
     "backdrop": "https://www.visionplus.id/images/repository/591/138591-POSTER-m.jpg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -25555,7 +22998,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/bolly.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&channel=b997",
     "clearKey": "6d9be137d0fc4debbf1316267e948491:8e75713ba936a1a30d4deafe6a18fd73",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD BOLLYWOOD"
   },
   {
     "id": "vod_m_484",
@@ -25568,7 +23012,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://www.visionplus.id/images/repository/592/73592-POSTER-m.jpg",
     "backdrop": "https://www.visionplus.id/images/repository/592/73592-POSTER-m.jpg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -25579,7 +23023,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/bolly.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&channel=b996",
     "clearKey": "c2ade4c76a6e4d4dadfb2fc35d0c4d48:0dde71ac7ab29bf7408f5a68d258a7b9",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD BOLLYWOOD"
   },
   {
     "id": "vod_m_485",
@@ -25592,7 +23037,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://www.visionplus.id/images/repository/046/73046-POSTER-m.jpg",
     "backdrop": "https://www.visionplus.id/images/repository/046/73046-POSTER-m.jpg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -25603,7 +23048,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/bolly.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&channel=b995",
     "clearKey": "5d209f10b16c4f81909184ad32c27e86:1b0175b690f6a2b0ab46f65ef3f4825a",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD BOLLYWOOD"
   },
   {
     "id": "vod_m_486",
@@ -25616,7 +23062,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://www.visionplus.id/images/repository/310/89310-POSTER-m.jpg",
     "backdrop": "https://www.visionplus.id/images/repository/310/89310-POSTER-m.jpg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -25627,7 +23073,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/bolly.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&channel=b994",
     "clearKey": "c5b6fd31617c45cf9ce9b621c6de22c0:d32de109774ccd07def7ef0d74f2be3f",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD BOLLYWOOD"
   },
   {
     "id": "vod_m_487",
@@ -25640,7 +23087,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://www.visionplus.id/images/repository/580/73580-POSTER-m.jpg",
     "backdrop": "https://www.visionplus.id/images/repository/580/73580-POSTER-m.jpg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -25651,7 +23098,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/bolly.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&channel=b993",
     "clearKey": "dbe6158ce8a94da79cf2808fab747db2:148cce78eb806f7647766898af5107f0",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD BOLLYWOOD"
   },
   {
     "id": "vod_m_488",
@@ -25664,7 +23112,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://www.visionplus.id/images/repository/524/109524-POSTER-m.jpg",
     "backdrop": "https://www.visionplus.id/images/repository/524/109524-POSTER-m.jpg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -25675,7 +23123,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/bolly.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&channel=b992",
     "clearKey": "9c6193a47f974dd992f7f84699d3dd60:8fd15770501e24f237dc797af2376318",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD BOLLYWOOD"
   },
   {
     "id": "vod_m_489",
@@ -25688,7 +23137,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://www.visionplus.id/images/repository/944/95944-POSTER-m.jpg",
     "backdrop": "https://www.visionplus.id/images/repository/944/95944-POSTER-m.jpg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -25699,7 +23148,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/bolly.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&channel=b991",
     "clearKey": "988898321442483887e8cce691756b45:736e3ed6d09897df1773aa500c2f4d90",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD BOLLYWOOD"
   },
   {
     "id": "vod_m_490",
@@ -25712,7 +23162,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://www.visionplus.id/images/repository/257/101257-POSTER-m.jpg",
     "backdrop": "https://www.visionplus.id/images/repository/257/101257-POSTER-m.jpg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -25723,7 +23173,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/bolly.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&channel=b990",
     "clearKey": "0e95175ed20047a8bef1d6eb2b46b225:71c9bfd1d5a18804b1af63fd9c0a4c50",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD BOLLYWOOD"
   },
   {
     "id": "vod_m_491",
@@ -25736,7 +23187,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://www.visionplus.id/images/repository/436/109436-POSTER-m.jpg",
     "backdrop": "https://www.visionplus.id/images/repository/436/109436-POSTER-m.jpg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -25747,7 +23198,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/bolly.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&channel=b989",
     "clearKey": "660abb9011f94605a5d0184d8d9d136a:bc6ee91ef3e20a6fdba472008ca06a02",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD BOLLYWOOD"
   },
   {
     "id": "vod_m_492",
@@ -25760,7 +23212,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://www.visionplus.id/images/repository/352/112352-POSTER-m.jpg",
     "backdrop": "https://www.visionplus.id/images/repository/352/112352-POSTER-m.jpg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -25771,7 +23223,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/bolly.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&channel=b988",
     "clearKey": "345ed3259d2d41e0bad7f096a446a73a:5525f452f8515cf68c01f66d2144bbfd",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD BOLLYWOOD"
   },
   {
     "id": "vod_m_493",
@@ -25784,7 +23237,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://www.visionplus.id/images/repository/875/114875-POSTER-m.jpg",
     "backdrop": "https://www.visionplus.id/images/repository/875/114875-POSTER-m.jpg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -25795,7 +23248,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/bolly.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&channel=b987",
     "clearKey": "5f5ed123379f496f995139ec07baca0d:2ae9b5bb168ced8b112bbda9a5f4d3e9",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD BOLLYWOOD"
   },
   {
     "id": "vod_m_494",
@@ -25808,7 +23262,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://www.visionplus.id/images/repository/751/89751-POSTER-m.jpg",
     "backdrop": "https://www.visionplus.id/images/repository/751/89751-POSTER-m.jpg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -25819,7 +23273,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/bolly.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&channel=b986",
     "clearKey": "4f61dd493a564654976577644e1010b2:0e0545adfffcbea9b82c79b6e1bfe18e",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD BOLLYWOOD"
   },
   {
     "id": "vod_m_495",
@@ -25832,7 +23287,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://www.visionplus.id/images/repository/982/90982-POSTER-m.jpg",
     "backdrop": "https://www.visionplus.id/images/repository/982/90982-POSTER-m.jpg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -25843,7 +23298,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/bolly.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&channel=b985",
     "clearKey": "79b74100c17e4a9e8ce295eadcbcda9f:27f358fbe39a80553224826a9e1a22ef",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD BOLLYWOOD"
   },
   {
     "id": "vod_m_496",
@@ -25856,7 +23312,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://www.visionplus.id/images/repository/393/92393-POSTER-m.jpg",
     "backdrop": "https://www.visionplus.id/images/repository/393/92393-POSTER-m.jpg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -25867,7 +23323,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/bolly.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&channel=b984",
     "clearKey": "5f83701251054f6497acc4e7d9f1a541:a3886cf1dcf2e794561e528fa6fcb721",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD BOLLYWOOD"
   },
   {
     "id": "vod_m_497",
@@ -25880,7 +23337,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://www.visionplus.id/images/repository/906/228906-POSTER-m.jpg",
     "backdrop": "https://www.visionplus.id/images/repository/906/228906-POSTER-m.jpg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -25891,7 +23348,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/bolly.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&channel=b983",
     "clearKey": "1a74ba5914d44c0898a574cf08545b82:35920192a840563ed8966f1087cf79ec",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD BOLLYWOOD"
   },
   {
     "id": "vod_m_498",
@@ -25904,7 +23362,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://www.visionplus.id/images/repository/274/76274-POSTER-m.jpg",
     "backdrop": "https://www.visionplus.id/images/repository/274/76274-POSTER-m.jpg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -25915,7 +23373,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/bolly.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&channel=b982",
     "clearKey": "0c3d61bfaab64963a2258a3abfb16e7b:469bb1cfb32d55b3e2f10bccdc8fcf2f",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD BOLLYWOOD"
   },
   {
     "id": "vod_m_499",
@@ -25928,7 +23387,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://www.visionplus.id/images/repository/621/253621-POSTER-m.jpg",
     "backdrop": "https://www.visionplus.id/images/repository/621/253621-POSTER-m.jpg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -25939,7 +23398,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/bolly.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&channel=b981",
     "clearKey": "a2cfdcec9a8d4ca0bd8140275ffddfbc:e879def0a9b117f4b7d6cdf7b10b5fba",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD BOLLYWOOD"
   },
   {
     "id": "vod_m_500",
@@ -25952,7 +23412,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://www.visionplus.id/images/repository/587/253587-POSTER-m.jpg",
     "backdrop": "https://www.visionplus.id/images/repository/587/253587-POSTER-m.jpg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -25963,7 +23423,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/bolly.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&channel=b980",
     "clearKey": "ac8fe43785434fdcb4be14417bb8a77a:ce880ea7a0de15fbda7befbeb61684b6",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD BOLLYWOOD"
   },
   {
     "id": "vod_m_501",
@@ -25976,7 +23437,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://www.visionplus.id/images/repository/153/254153-POSTER-m.jpg",
     "backdrop": "https://www.visionplus.id/images/repository/153/254153-POSTER-m.jpg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -25987,7 +23448,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/bolly.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&channel=b979",
     "clearKey": "f2efa4a7eef1475bb9be78b242840136:1ff1ca7fbfd7b8fa2fdefa1c11f0199f",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD BOLLYWOOD"
   },
   {
     "id": "vod_m_502",
@@ -26000,7 +23462,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://www.visionplus.id/images/repository/596/156596-POSTER-m.jpg",
     "backdrop": "https://www.visionplus.id/images/repository/596/156596-POSTER-m.jpg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -26011,7 +23473,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/bolly.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&channel=b978",
     "clearKey": "9b3741ca6ac14a6aa83700c656a60f85:c9525ec5cc6232310200f9ee6746609f",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD BOLLYWOOD"
   },
   {
     "id": "vod_m_503",
@@ -26024,7 +23487,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://www.visionplus.id/images/repository/484/161484-POSTER-m.jpg",
     "backdrop": "https://www.visionplus.id/images/repository/484/161484-POSTER-m.jpg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -26035,7 +23498,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/bolly.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&channel=b977",
     "clearKey": "49af29eff7fc48f1a199a449cb4b03bc:5f3ef111c7622017208d5433ad625074",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD BOLLYWOOD"
   },
   {
     "id": "vod_m_504",
@@ -26048,7 +23512,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://www.visionplus.id/images/repository/594/142594-POSTER-m.jpg",
     "backdrop": "https://www.visionplus.id/images/repository/594/142594-POSTER-m.jpg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -26059,7 +23523,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/bolly.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&channel=b976",
     "clearKey": "3505a70afc5149b5b50b337892e2f3eb:4f1e30c997f107dc34d3a0d8815eb346",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD BOLLYWOOD"
   },
   {
     "id": "vod_m_505",
@@ -26072,7 +23537,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://www.visionplus.id/images/repository/604/149604-POSTER-m.jpg",
     "backdrop": "https://www.visionplus.id/images/repository/604/149604-POSTER-m.jpg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -26083,7 +23548,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/bolly.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&channel=b975",
     "clearKey": "c1bdf88bf31c43f98517fb016e909ee1:dccaf9d05ab8956b862428bc5996be95",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD BOLLYWOOD"
   },
   {
     "id": "vod_m_506",
@@ -26096,7 +23562,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://www.visionplus.id/images/repository/563/142563-POSTER-m.jpg",
     "backdrop": "https://www.visionplus.id/images/repository/563/142563-POSTER-m.jpg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -26107,7 +23573,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/bolly.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&channel=b974",
     "clearKey": "c754f36b794e4e0e9c0c86bdb36ce860:1bb6144dc291813c333f7acb7acb3be0",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD BOLLYWOOD"
   },
   {
     "id": "vod_m_507",
@@ -26120,7 +23587,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://www.visionplus.id/images/repository/177/166177-POSTER-m.jpg",
     "backdrop": "https://www.visionplus.id/images/repository/177/166177-POSTER-m.jpg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -26131,7 +23598,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/bolly.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&channel=b973",
     "clearKey": "ecb852d057124dc0a15faa3fc4932431:47d73096ae800649bae174f8f3b98713",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD BOLLYWOOD"
   },
   {
     "id": "vod_m_508",
@@ -26144,7 +23612,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://www.visionplus.id/images/repository/766/73766-POSTER-m.jpg",
     "backdrop": "https://www.visionplus.id/images/repository/766/73766-POSTER-m.jpg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -26155,7 +23623,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/bolly.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&channel=b972",
     "clearKey": "6ab14b7f2d6e46399536cdd2e2127990:bf5d8aad62bb12b701db0d979173a57e",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD BOLLYWOOD"
   },
   {
     "id": "vod_m_509",
@@ -26168,7 +23637,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://www.visionplus.id/images/repository/452/161452-POSTER-m.jpg",
     "backdrop": "https://www.visionplus.id/images/repository/452/161452-POSTER-m.jpg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -26179,7 +23648,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/bolly.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&channel=b971",
     "clearKey": "2e3a6c7735b64e508961da592f49b27d:12b8b5deeee223d49fe47451006aaca4",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD BOLLYWOOD"
   },
   {
     "id": "vod_m_510",
@@ -26192,7 +23662,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://www.visionplus.id/images/repository/143/147143-POSTER-m.jpg",
     "backdrop": "https://www.visionplus.id/images/repository/143/147143-POSTER-m.jpg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -26203,7 +23673,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/bolly.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&channel=b970",
     "clearKey": "db302c1052714f7eaa440d226b2a2d44:19ee30f58afd04461c6c847d591c2682",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD BOLLYWOOD"
   },
   {
     "id": "vod_m_511",
@@ -26216,7 +23687,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://www.visionplus.id/images/repository/436/89436-POSTER-m.jpg",
     "backdrop": "https://www.visionplus.id/images/repository/436/89436-POSTER-m.jpg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -26227,7 +23698,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/bolly.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&channel=b969",
     "clearKey": "3dfbe255e54d46bc9db9e58a466d02a7:f35c1f027ad5027742b8a0ac4567f579",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD BOLLYWOOD"
   },
   {
     "id": "vod_m_512",
@@ -26240,7 +23712,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://www.visionplus.id/images/repository/312/93312-POSTER-m.jpg",
     "backdrop": "https://www.visionplus.id/images/repository/312/93312-POSTER-m.jpg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -26251,7 +23723,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/bolly.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&channel=b968",
     "clearKey": "3f04d514b1ca426095d0e50bde0f266c:a6ef89afc69a9cf5a08611638b6cb333",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD BOLLYWOOD"
   },
   {
     "id": "vod_m_513",
@@ -26264,7 +23737,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://www.visionplus.id/images/repository/935/95935-POSTER-m.jpg",
     "backdrop": "https://www.visionplus.id/images/repository/935/95935-POSTER-m.jpg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -26275,7 +23748,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/bolly.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&channel=b967",
     "clearKey": "9eed766160e54c52814c4cb7773f73f7:4a6c2cc7479a878db1177c01d40bf1a3",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD BOLLYWOOD"
   },
   {
     "id": "vod_m_514",
@@ -26288,7 +23762,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://www.visionplus.id/images/repository/765/89765-POSTER-m.jpg",
     "backdrop": "https://www.visionplus.id/images/repository/765/89765-POSTER-m.jpg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -26299,7 +23773,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/bolly.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&channel=b966",
     "clearKey": "1dc471a8a5f7420496956f3e5a551e98:24c4c750e4258b20af67f614fc508af8",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD BOLLYWOOD"
   },
   {
     "id": "vod_m_515",
@@ -26312,7 +23787,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://www.visionplus.id/images/repository/381/93381-POSTER-m.jpg",
     "backdrop": "https://www.visionplus.id/images/repository/381/93381-POSTER-m.jpg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -26323,7 +23798,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/bolly.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&channel=b965",
     "clearKey": "d277f824f3b64ad6a8d26bee80f894db:f5d6671c705eb326cbb28184b745d9a7",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD BOLLYWOOD"
   },
   {
     "id": "vod_m_516",
@@ -26336,7 +23812,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://www.visionplus.id/images/repository/252/93252-POSTER-m.jpg",
     "backdrop": "https://www.visionplus.id/images/repository/252/93252-POSTER-m.jpg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -26347,7 +23823,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/bolly.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&channel=b964",
     "clearKey": "3638803092fa4a678db9e9281d29b3fb:124f602681e7b8b55494a538aee51035",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD BOLLYWOOD"
   },
   {
     "id": "vod_m_570",
@@ -26362,7 +23839,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://headend-api.tonton.com.my/v210/imageHelper.php?id=6456590%3A377%3ASTILL%3APORTRAIT&iq=Wifi.1&plt=andr_tablet&appID=TONTON&w=906",
     "backdrop": "https://headend-api.tonton.com.my/v210/imageHelper.php?id=6456590%3A377%3ASTILL%3APORTRAIT&iq=Wifi.1&plt=andr_tablet&appID=TONTON&w=906",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "FHD 1080p",
     "ageRating": "P13",
@@ -26373,59 +23850,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/okayru.mpd?id=10625941113551",
     "clearKey": "",
     "isTrending": false,
-    "isPopular": false
-  },
-  {
-    "id": "vod_m_571",
-    "title": "32-Pemburu Saka",
-    "type": "movie",
-    "genre": [
-      "Drama",
-      "Melayu",
-      "Tempatan"
-    ],
-    "origin": "malay",
-    "poster": "https://headend-api.tonton.com.my/v210/imageHelper.php?id=6499742%3A377%3ASTILL%3APORTRAIT&iq=Wifi.1&plt=andr_tablet&appID=TONTON&w=906",
-    "backdrop": "https://headend-api.tonton.com.my/v210/imageHelper.php?id=6499742%3A377%3ASTILL%3APORTRAIT&iq=Wifi.1&plt=andr_tablet&appID=TONTON&w=906",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "FHD 1080p",
-    "ageRating": "P13",
-    "synopsis": "Filem 32-Pemburu Saka (VOD TONTON) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/okayru.mpd?id=10626452490959",
-    "clearKey": "",
-    "isTrending": false,
-    "isPopular": false
-  },
-  {
-    "id": "vod_m_572",
-    "title": "33-Bisikan Setan",
-    "type": "movie",
-    "genre": [
-      "Drama",
-      "Melayu",
-      "Tempatan"
-    ],
-    "origin": "malay",
-    "poster": "https://headend-api.tonton.com.my/v210/imageHelper.php?id=6503594%3A377%3ASTILL%3APORTRAIT&iq=Wifi.1&plt=andr_tablet&appID=TONTON&w=906",
-    "backdrop": "https://headend-api.tonton.com.my/v210/imageHelper.php?id=6503594%3A377%3ASTILL%3APORTRAIT&iq=Wifi.1&plt=andr_tablet&appID=TONTON&w=906",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "FHD 1080p",
-    "ageRating": "P13",
-    "synopsis": "Filem 33-Bisikan Setan (VOD TONTON) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/okayru.mpd?id=10626454719183",
-    "clearKey": "",
-    "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD TONTON"
   },
   {
     "id": "vod_m_573",
@@ -26440,7 +23866,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://headend-api.tonton.com.my/v210/imageHelper.php?id=6542101%3A380%3ASTILL%3APORTRAIT&iq=Wifi.1&plt=andr_tablet&appID=TONTON&w=906",
     "backdrop": "https://headend-api.tonton.com.my/v210/imageHelper.php?id=6542101%3A380%3ASTILL%3APORTRAIT&iq=Wifi.1&plt=andr_tablet&appID=TONTON&w=906",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "FHD 1080p",
     "ageRating": "P13",
@@ -26451,7 +23877,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/okayru.mpd?id=10626462911183",
     "clearKey": "",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD TONTON"
   },
   {
     "id": "vod_m_574",
@@ -26466,7 +23893,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://headend-api.tonton.com.my/v210/imageHelper.php?id=6541505%3A380%3ASTILL%3APORTRAIT&iq=Wifi.1&plt=andr_tablet&appID=TONTON&w=906",
     "backdrop": "https://headend-api.tonton.com.my/v210/imageHelper.php?id=6541505%3A380%3ASTILL%3APORTRAIT&iq=Wifi.1&plt=andr_tablet&appID=TONTON&w=906",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "FHD 1080p",
     "ageRating": "P13",
@@ -26477,7 +23904,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/okayru.mpd?id=10626467760847",
     "clearKey": "",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD TONTON"
   },
   {
     "id": "vod_m_575",
@@ -26492,7 +23920,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://headend-api.tonton.com.my/v210/imageHelper.php?id=6542072%3A380%3ASTILL%3APORTRAIT&iq=Wifi.1&plt=andr_tablet&appID=TONTON&w=906",
     "backdrop": "https://headend-api.tonton.com.my/v210/imageHelper.php?id=6542072%3A380%3ASTILL%3APORTRAIT&iq=Wifi.1&plt=andr_tablet&appID=TONTON&w=906",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "FHD 1080p",
     "ageRating": "P13",
@@ -26503,7 +23931,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/okayru.mpd?id=10626671512271",
     "clearKey": "",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD TONTON"
   },
   {
     "id": "vod_m_576",
@@ -26518,7 +23947,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://headend-api.tonton.com.my/v210/imageHelper.php?id=6542074%3A380%3ASTILL%3APORTRAIT&iq=Wifi.1&plt=andr_tablet&appID=TONTON&w=906",
     "backdrop": "https://headend-api.tonton.com.my/v210/imageHelper.php?id=6542074%3A380%3ASTILL%3APORTRAIT&iq=Wifi.1&plt=andr_tablet&appID=TONTON&w=906",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "FHD 1080p",
     "ageRating": "P13",
@@ -26529,7 +23958,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/okayru.mpd?id=10626616658639",
     "clearKey": "",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD TONTON"
   },
   {
     "id": "vod_m_577",
@@ -26544,7 +23974,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://headend-api.tonton.com.my/v210/imageHelper.php?id=6535002%3A377%3ASTILL%3APORTRAIT&iq=Wifi.1&plt=andr_tablet&appID=TONTON&w=960",
     "backdrop": "https://headend-api.tonton.com.my/v210/imageHelper.php?id=6535002%3A377%3ASTILL%3APORTRAIT&iq=Wifi.1&plt=andr_tablet&appID=TONTON&w=960",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "FHD 1080p",
     "ageRating": "P13",
@@ -26555,85 +23985,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/okayru.mpd?id=10626679704271",
     "clearKey": "",
     "isTrending": false,
-    "isPopular": false
-  },
-  {
-    "id": "vod_m_578",
-    "title": "39-Malay-Saka Perawan",
-    "type": "movie",
-    "genre": [
-      "Drama",
-      "Melayu",
-      "Tempatan"
-    ],
-    "origin": "malay",
-    "poster": "https://headend-api.tonton.com.my/v210/imageHelper.php?id=6518925%3A377%3ASTILL%3APORTRAIT&iq=Wifi.1&plt=andr_tablet&appID=TONTON&w=960",
-    "backdrop": "https://headend-api.tonton.com.my/v210/imageHelper.php?id=6518925%3A377%3ASTILL%3APORTRAIT&iq=Wifi.1&plt=andr_tablet&appID=TONTON&w=960",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "FHD 1080p",
-    "ageRating": "P13",
-    "synopsis": "Filem 39-Malay-Saka Perawan (VOD TONTON) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/okayru.mpd?id=10627021998799",
-    "clearKey": "",
-    "isTrending": false,
-    "isPopular": false
-  },
-  {
-    "id": "vod_m_579",
-    "title": "40-Malay-Anak Perjanjian Syaitan 2",
-    "type": "movie",
-    "genre": [
-      "Drama",
-      "Melayu",
-      "Tempatan"
-    ],
-    "origin": "malay",
-    "poster": "https://headend-api.tonton.com.my/v210/imageHelper.php?id=6500849%3A377%3ASTILL%3APORTRAIT&iq=Wifi.1&plt=andr_tablet&appID=TONTON&w=960",
-    "backdrop": "https://headend-api.tonton.com.my/v210/imageHelper.php?id=6500849%3A377%3ASTILL%3APORTRAIT&iq=Wifi.1&plt=andr_tablet&appID=TONTON&w=960",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "FHD 1080p",
-    "ageRating": "P13",
-    "synopsis": "Filem 40-Malay-Anak Perjanjian Syaitan 2 (VOD TONTON) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/okayru.mpd?id=10627035630287",
-    "clearKey": "",
-    "isTrending": false,
-    "isPopular": false
-  },
-  {
-    "id": "vod_m_580",
-    "title": "41-Malay-Anak Perjanjian Syaitan",
-    "type": "movie",
-    "genre": [
-      "Drama",
-      "Melayu",
-      "Tempatan"
-    ],
-    "origin": "malay",
-    "poster": "https://headend-api.tonton.com.my/v210/imageHelper.php?id=6493246%3A377%3ASTILL%3APORTRAIT&iq=Wifi.1&plt=andr_tablet&appID=TONTON&w=960",
-    "backdrop": "https://headend-api.tonton.com.my/v210/imageHelper.php?id=6493246%3A377%3ASTILL%3APORTRAIT&iq=Wifi.1&plt=andr_tablet&appID=TONTON&w=960",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "FHD 1080p",
-    "ageRating": "P13",
-    "synopsis": "Filem 41-Malay-Anak Perjanjian Syaitan (VOD TONTON) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/okayru.mpd?id=10627050834639",
-    "clearKey": "",
-    "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD TONTON"
   },
   {
     "id": "vod_m_581",
@@ -26648,7 +24001,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://headend-api.tonton.com.my/v210/imageHelper.php?id=6451029%3A377%3ASTILL%3APORTRAIT&iq=Wifi.1&plt=andr_tablet&appID=TONTON&w=960",
     "backdrop": "https://headend-api.tonton.com.my/v210/imageHelper.php?id=6451029%3A377%3ASTILL%3APORTRAIT&iq=Wifi.1&plt=andr_tablet&appID=TONTON&w=960",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "FHD 1080p",
     "ageRating": "P13",
@@ -26659,7 +24012,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/okayru.mpd?id=10627056077519",
     "clearKey": "",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD TONTON"
   },
   {
     "id": "vod_m_582",
@@ -26674,7 +24028,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://headend-api.tonton.com.my/v210/imageHelper.php?id=6450974%3A377%3ASTILL%3APORTRAIT&iq=Wifi.1&plt=andr_tablet&appID=TONTON&w=960",
     "backdrop": "https://headend-api.tonton.com.my/v210/imageHelper.php?id=6450974%3A377%3ASTILL%3APORTRAIT&iq=Wifi.1&plt=andr_tablet&appID=TONTON&w=960",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "FHD 1080p",
     "ageRating": "P13",
@@ -26685,7 +24039,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/okayru.mpd?id=10627095333583",
     "clearKey": "",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD TONTON"
   },
   {
     "id": "vod_m_583",
@@ -26700,7 +24055,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://headend-api.tonton.com.my/v210/imageHelper.php?id=6450962%3A377%3ASTILL%3APORTRAIT&iq=Wifi.1&plt=andr_tablet&appID=TONTON&w=960",
     "backdrop": "https://headend-api.tonton.com.my/v210/imageHelper.php?id=6450962%3A377%3ASTILL%3APORTRAIT&iq=Wifi.1&plt=andr_tablet&appID=TONTON&w=960",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "FHD 1080p",
     "ageRating": "P13",
@@ -26711,7 +24066,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/okayru.mpd?id=10627101035215",
     "clearKey": "",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD TONTON"
   },
   {
     "id": "vod_m_585",
@@ -26726,7 +24082,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://headend-api.tonton.com.my/v210/imageHelper.php?id=6450821%3A377%3ASTILL%3APORTRAIT&iq=Wifi.1&plt=andr_tablet&appID=TONTON&w=960",
     "backdrop": "https://headend-api.tonton.com.my/v210/imageHelper.php?id=6450821%3A377%3ASTILL%3APORTRAIT&iq=Wifi.1&plt=andr_tablet&appID=TONTON&w=960",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "FHD 1080p",
     "ageRating": "P13",
@@ -26737,7 +24093,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/okayru.mpd?id=10629630724815",
     "clearKey": "",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD TONTON"
   },
   {
     "id": "vod_m_586",
@@ -26752,7 +24109,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://headend-api.tonton.com.my/v210/imageHelper.php?id=6450674%3A377%3ASTILL%3APORTRAIT&iq=Wifi.1&plt=andr_tablet&appID=TONTON&w=960",
     "backdrop": "https://headend-api.tonton.com.my/v210/imageHelper.php?id=6450674%3A377%3ASTILL%3APORTRAIT&iq=Wifi.1&plt=andr_tablet&appID=TONTON&w=960",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "FHD 1080p",
     "ageRating": "P13",
@@ -26763,103 +24120,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/okayru.mpd?id=10629634788047",
     "clearKey": "",
     "isTrending": false,
-    "isPopular": false
-  },
-  {
-    "id": "vod_m_616",
-    "title": "974-Mr Vampire Saga 4 (1988)",
-    "type": "movie",
-    "genre": [
-      "Filem"
-    ],
-    "origin": "malay",
-    "poster": "http://pic0.iqiyipic.com/image/20200908/44/a7/v_143053444_m_601_zh-CN_m1_720_405.jpg",
-    "backdrop": "http://pic0.iqiyipic.com/image/20200908/44/a7/v_143053444_m_601_zh-CN_m1_720_405.jpg",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "FHD 1080p",
-    "ageRating": "P13",
-    "synopsis": "Filem 974-Mr Vampire Saga 4 (1988) (VOD iQiyi) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com:443/movie/vip_3klp0es8/wg3piwEs/2645.mkv",
-    "clearKey": "",
-    "isTrending": false,
-    "isPopular": false
-  },
-  {
-    "id": "vod_m_617",
-    "title": "973-Mr. Vampire (1985)",
-    "type": "movie",
-    "genre": [
-      "Filem"
-    ],
-    "origin": "malay",
-    "poster": "http://pic4.iqiyipic.com/image/20200908/f5/7c/v_140319420_m_601_zh-CN_m1_720_405.jpg",
-    "backdrop": "http://pic4.iqiyipic.com/image/20200908/f5/7c/v_140319420_m_601_zh-CN_m1_720_405.jpg",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "FHD 1080p",
-    "ageRating": "P13",
-    "synopsis": "Filem 973-Mr. Vampire (1985) (VOD iQiyi) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "http://103.107.198.46:8080/movie/vip_3klp0es8/wg3piwEs/2646.mp4",
-    "clearKey": "",
-    "isTrending": false,
-    "isPopular": false
-  },
-  {
-    "id": "vod_m_618",
-    "title": "970-Encounters of the Spooky Kind (1980)",
-    "type": "movie",
-    "genre": [
-      "Filem"
-    ],
-    "origin": "malay",
-    "poster": "http://pic0.iqiyipic.com/image/20200917/12/fa/v_143668989_m_601_zh-CN_m1_720_405.jpg",
-    "backdrop": "http://pic0.iqiyipic.com/image/20200917/12/fa/v_143668989_m_601_zh-CN_m1_720_405.jpg",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "FHD 1080p",
-    "ageRating": "P13",
-    "synopsis": "Filem 970-Encounters of the Spooky Kind (1980) (VOD iQiyi) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com:443/movie/vip_3klp0es8/wg3piwEs/2647.mkv",
-    "clearKey": "",
-    "isTrending": false,
-    "isPopular": false
-  },
-  {
-    "id": "vod_m_619",
-    "title": "973- Mr. Vampire III (1987)",
-    "type": "movie",
-    "genre": [
-      "Filem"
-    ],
-    "origin": "malay",
-    "poster": "http://pic4.iqiyipic.com/image/20200918/44/c0/v_143055776_m_601_zh-CN_m2_720_405.jpg",
-    "backdrop": "http://pic4.iqiyipic.com/image/20200918/44/c0/v_143055776_m_601_zh-CN_m2_720_405.jpg",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "FHD 1080p",
-    "ageRating": "P13",
-    "synopsis": "Filem 973- Mr. Vampire III (1987) (VOD iQiyi) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com:443/movie/vip_3klp0es8/wg3piwEs/2648.mkv",
-    "clearKey": "",
-    "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD TONTON"
   },
   {
     "id": "vod_m_620",
@@ -26874,7 +24136,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://image.tmdb.org/t/p/w600_and_h900_bestv2/cbTPVx1TtYpSGkaMBa5fnQC3utV.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w600_and_h900_bestv2/cbTPVx1TtYpSGkaMBa5fnQC3utV.jpg",
     "year": 2024,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "FHD 1080p",
     "ageRating": "P13",
@@ -26885,59 +24147,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/okayru.mpd?id=11161037441743",
     "clearKey": "",
     "isTrending": false,
-    "isPopular": false
-  },
-  {
-    "id": "vod_m_621",
-    "title": "892-Telaga Suriram (2025)",
-    "type": "movie",
-    "genre": [
-      "Drama",
-      "Melayu",
-      "Tempatan"
-    ],
-    "origin": "malay",
-    "poster": "https://image.tmdb.org/t/p/w600_and_h900_bestv2/yEJuc55kaaWjj3tABr6i78kM1Oz.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w600_and_h900_bestv2/yEJuc55kaaWjj3tABr6i78kM1Oz.jpg",
-    "year": 2024,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "FHD 1080p",
-    "ageRating": "P13",
-    "synopsis": "Filem 892-Telaga Suriram (2025) (VOD MALAY) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/okayru.mpd?id=11100097284815",
-    "clearKey": "",
-    "isTrending": false,
-    "isPopular": false
-  },
-  {
-    "id": "vod_m_622",
-    "title": "893-Indera (2025)",
-    "type": "movie",
-    "genre": [
-      "Drama",
-      "Melayu",
-      "Tempatan"
-    ],
-    "origin": "malay",
-    "poster": "https://image.tmdb.org/t/p/w600_and_h900_bestv2/thOWbqcgP7Z8YQWY98PtCbZkBgz.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w600_and_h900_bestv2/thOWbqcgP7Z8YQWY98PtCbZkBgz.jpg",
-    "year": 2024,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "FHD 1080p",
-    "ageRating": "P13",
-    "synopsis": "Filem 893-Indera (2025) (VOD MALAY) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/okayru.mpd?id=11100009204431",
-    "clearKey": "",
-    "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD MALAY"
   },
   {
     "id": "vod_m_623",
@@ -26952,7 +24163,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://image.tmdb.org/t/p/w600_and_h900_bestv2/sjJejZTEp6Qat5AxIBIG3Hdjl2d.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w600_and_h900_bestv2/sjJejZTEp6Qat5AxIBIG3Hdjl2d.jpg",
     "year": 2024,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "FHD 1080p",
     "ageRating": "P13",
@@ -26963,7 +24174,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/okayru.mpd?id=11094934751951",
     "clearKey": "",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD MALAY"
   },
   {
     "id": "vod_m_624",
@@ -26978,7 +24190,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://image.tmdb.org/t/p/w600_and_h900_bestv2/qgrRrDelt5BRYfNi454rbRK8wsP.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w600_and_h900_bestv2/qgrRrDelt5BRYfNi454rbRK8wsP.jpg",
     "year": 2024,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "FHD 1080p",
     "ageRating": "P13",
@@ -26989,7 +24201,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/okayru.mpd?id=10773849574095",
     "clearKey": "",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD MALAY"
   },
   {
     "id": "vod_m_625",
@@ -27004,7 +24217,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://image.tmdb.org/t/p/w600_and_h900_bestv2/uR6IwU2ZfVuzg3mzh06XwlsDiCR.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w600_and_h900_bestv2/uR6IwU2ZfVuzg3mzh06XwlsDiCR.jpg",
     "year": 2024,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "FHD 1080p",
     "ageRating": "P13",
@@ -27015,85 +24228,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/okayru.mpd?id=10770460904143",
     "clearKey": "",
     "isTrending": false,
-    "isPopular": false
-  },
-  {
-    "id": "vod_m_027",
-    "title": "960-Arcadian",
-    "type": "movie",
-    "genre": [
-      "Action",
-      "Blockbuster",
-      "Drama"
-    ],
-    "origin": "hollywood",
-    "poster": "https://images.cdn.prd.api.discomax.com/3Zbkk/yQLf4ZJzGs737HkGg.jpeg",
-    "backdrop": "https://images.cdn.prd.api.discomax.com/3Zbkk/yQLf4ZJzGs737HkGg.jpeg",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "4K UHD",
-    "ageRating": "P13",
-    "synopsis": "Filem 960-Arcadian (HBO MAX) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=6b840026-3081-413e-80b4-e05754da4387&sub=t2",
-    "clearKey": "https://ptv2026.com/wvmax?editId=6b840026-3081-413e-80b4-e05754da4387",
-    "isTrending": false,
-    "isPopular": false
-  },
-  {
-    "id": "vod_m_028",
-    "title": "961-The Curse of the Necklace",
-    "type": "movie",
-    "genre": [
-      "Action",
-      "Blockbuster",
-      "Drama"
-    ],
-    "origin": "hollywood",
-    "poster": "https://images.cdn.prd.api.discomax.com/U4Vst/Uk5VrlanYZmPtQkKw.jpeg",
-    "backdrop": "https://images.cdn.prd.api.discomax.com/U4Vst/Uk5VrlanYZmPtQkKw.jpeg",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "4K UHD",
-    "ageRating": "P13",
-    "synopsis": "Filem 961-The Curse of the Necklace (HBO MAX) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=481e1222-f18d-4ad1-a5b2-9a32143cb69b&sub=t2",
-    "clearKey": "https://ptv2026.com/wvmax?editId=481e1222-f18d-4ad1-a5b2-9a32143cb69b",
-    "isTrending": false,
-    "isPopular": false
-  },
-  {
-    "id": "vod_m_029",
-    "title": "962-The Mummy",
-    "type": "movie",
-    "genre": [
-      "Action",
-      "Blockbuster",
-      "Drama"
-    ],
-    "origin": "hollywood",
-    "poster": "https://images.cdn.prd.api.discomax.com/5gasc/BE-v2TUcvkaNkCLyg.jpeg",
-    "backdrop": "https://images.cdn.prd.api.discomax.com/5gasc/BE-v2TUcvkaNkCLyg.jpeg",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "4K UHD",
-    "ageRating": "P13",
-    "synopsis": "Filem 962-The Mummy (HBO MAX) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=16b71b9c-286a-4295-ab9d-66a661c75dc5&sub=t2",
-    "clearKey": "https://ptv2026.com/wvmax?editId=16b71b9c-286a-4295-ab9d-66a661c75dc5",
-    "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD MALAY"
   },
   {
     "id": "vod_m_030",
@@ -27108,7 +24244,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/hLbNR/v8T7BGtb9cfuMjciA.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/hLbNR/v8T7BGtb9cfuMjciA.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -27119,7 +24255,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=42c0529a-59cd-4b24-bb90-059adf3aa7fa&sub=t2",
     "clearKey": "https://ptv2026.com/wvmax?editId=42c0529a-59cd-4b24-bb90-059adf3aa7fa",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_031",
@@ -27134,7 +24271,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/klXGB/jLomKkUWP5bYBORew.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/klXGB/jLomKkUWP5bYBORew.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -27145,7 +24282,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=5faf46f5-cbc5-4e22-8652-f00100725bd4&sub=t2",
     "clearKey": "https://ptv2026.com/wvmax?editId=5faf46f5-cbc5-4e22-8652-f00100725bd4",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_032",
@@ -27160,7 +24298,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2mib4/hzjs5KUOr6EptwVXQ.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2mib4/hzjs5KUOr6EptwVXQ.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -27171,7 +24309,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=7a115b64-7559-4cec-9368-99f23ad5fba0&sub=t2",
     "clearKey": "https://ptv2026.com/wvmax?editId=7a115b64-7559-4cec-9368-99f23ad5fba0",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_033",
@@ -27186,7 +24325,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/DPgVR/hUFWcLLY1wezg3aHg.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/DPgVR/hUFWcLLY1wezg3aHg.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -27197,7 +24336,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=a3840ec0-fbb1-4cb0-ad24-7950df238b51&sub=t2",
     "clearKey": "https://ptv2026.com/wvmax?editId=a3840ec0-fbb1-4cb0-ad24-7950df238b51",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_034",
@@ -27212,7 +24352,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/vTLY_/i-4YT-tFgOrnTB9Ug.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/vTLY_/i-4YT-tFgOrnTB9Ug.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -27223,7 +24363,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=42575e63-59e3-497e-9d12-0085625630e9&sub=t2",
     "clearKey": "https://ptv2026.com/wvmax?editId=42575e63-59e3-497e-9d12-0085625630e9",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_035",
@@ -27238,7 +24379,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/s_1PL/z6AsZJovtjc23oLHw.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/s_1PL/z6AsZJovtjc23oLHw.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -27249,7 +24390,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=84cefa38-5c39-46ea-9e93-a6f5a808f577&sub=t2",
     "clearKey": "https://ptv2026.com/wvmax?editId=84cefa38-5c39-46ea-9e93-a6f5a808f577",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_036",
@@ -27264,7 +24406,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/dKMrE/DrObqi_64O3S9tT0w.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/dKMrE/DrObqi_64O3S9tT0w.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -27275,7 +24417,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=47430e8d-b3c6-4d9a-8686-0590ca03af2f&sub=t2",
     "clearKey": "https://ptv2026.com/wvmax?editId=47430e8d-b3c6-4d9a-8686-0590ca03af2f",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_037",
@@ -27290,7 +24433,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/9k9K3/lc8UQGaCPFAoZN0Kw.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/9k9K3/lc8UQGaCPFAoZN0Kw.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -27301,7 +24444,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=4124dc59-db3f-442f-8c22-916d2fdbd2cd&sub=t2",
     "clearKey": "https://ptv2026.com/wvmax?editId=4124dc59-db3f-442f-8c22-916d2fdbd2cd",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_038",
@@ -27316,7 +24460,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/5UhWZ/AiA6Htw2LCLJThMjQ.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/5UhWZ/AiA6Htw2LCLJThMjQ.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -27327,7 +24471,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=293bdb14-c219-4618-94f4-73899a975cae&sub=t2",
     "clearKey": "https://ptv2026.com/wvmax?editId=293bdb14-c219-4618-94f4-73899a975cae",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_039",
@@ -27342,7 +24487,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/NafWC/EuYts7SIhBuw8ElGg.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/NafWC/EuYts7SIhBuw8ElGg.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -27353,7 +24498,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=376e5af2-5587-41a3-9918-c9ff68c14f08&sub=t2",
     "clearKey": "https://ptv2026.com/wvmax?editId=376e5af2-5587-41a3-9918-c9ff68c14f08",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_040",
@@ -27368,7 +24514,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/xqlaT/m7PcoIbrnDq1vSmYg.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/xqlaT/m7PcoIbrnDq1vSmYg.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -27379,7 +24525,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=4f4bdd06-4360-4cb5-aa4c-5a347e3257ad&sub=t2",
     "clearKey": "https://ptv2026.com/wvmax?editId=4f4bdd06-4360-4cb5-aa4c-5a347e3257ad",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_041",
@@ -27394,7 +24541,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/RVKN0/o2J3cqT6_uB1NK35Q.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/RVKN0/o2J3cqT6_uB1NK35Q.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -27405,7 +24552,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=55989072-08cb-4d9a-8fbf-0f3ae6ffcfbe&sub=t2",
     "clearKey": "https://ptv2026.com/wvmax?editId=55989072-08cb-4d9a-8fbf-0f3ae6ffcfbe",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_042",
@@ -27420,7 +24568,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/sot8g/lSoNm8mSA4q5l14fQ.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/sot8g/lSoNm8mSA4q5l14fQ.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -27431,7 +24579,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=8e59605c-9093-4b0f-a379-161a08d53705&sub=t2",
     "clearKey": "https://ptv2026.com/wvmax?editId=8e59605c-9093-4b0f-a379-161a08d53705",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_043",
@@ -27446,7 +24595,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/ikLLD/zAkEk0H7YUOcUZCiA.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/ikLLD/zAkEk0H7YUOcUZCiA.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -27457,7 +24606,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=6e1ec859-d738-4691-8ce7-e1dab2da4dde&sub=t2",
     "clearKey": "https://ptv2026.com/wvmax?editId=6e1ec859-d738-4691-8ce7-e1dab2da4dde",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_044",
@@ -27472,7 +24622,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/qvpLC/NgY36zYQxW2LOeEvQ.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/qvpLC/NgY36zYQxW2LOeEvQ.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -27483,33 +24633,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=2f153371-fbcf-43f9-b4d1-2621049230e6&sub=t2",
     "clearKey": "https://ptv2026.com/wvmax?editId=2f153371-fbcf-43f9-b4d1-2621049230e6",
     "isTrending": false,
-    "isPopular": false
-  },
-  {
-    "id": "vod_m_045",
-    "title": "977-M3GAN 2.0",
-    "type": "movie",
-    "genre": [
-      "Action",
-      "Blockbuster",
-      "Drama"
-    ],
-    "origin": "hollywood",
-    "poster": "https://images.cdn.prd.api.discomax.com/yT9ao/UiMgQvxtPpzJSb__w.jpeg",
-    "backdrop": "https://images.cdn.prd.api.discomax.com/yT9ao/UiMgQvxtPpzJSb__w.jpeg",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "4K UHD",
-    "ageRating": "P13",
-    "synopsis": "Filem 977-M3GAN 2.0 (HBO MAX) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=2addc96b-2fb5-44d1-9521-a7922103980a&sub=t2",
-    "clearKey": "https://ptv2026.com/wvmax?editId=2addc96b-2fb5-44d1-9521-a7922103980a",
-    "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_046",
@@ -27524,7 +24649,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/nplXV/oQT0AxPjCG31mSOSQ.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/nplXV/oQT0AxPjCG31mSOSQ.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -27535,33 +24660,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=ce79d007-6a30-4c82-8c09-cbee79db30b7&sub=t2",
     "clearKey": "https://ptv2026.com/wvmax?editId=ce79d007-6a30-4c82-8c09-cbee79db30b7",
     "isTrending": false,
-    "isPopular": false
-  },
-  {
-    "id": "vod_m_047",
-    "title": "979-The Ruins",
-    "type": "movie",
-    "genre": [
-      "Action",
-      "Blockbuster",
-      "Drama"
-    ],
-    "origin": "hollywood",
-    "poster": "https://images.cdn.prd.api.discomax.com/GH8oq/PIqXoJAclZ62I-Nlg.jpeg",
-    "backdrop": "https://images.cdn.prd.api.discomax.com/GH8oq/PIqXoJAclZ62I-Nlg.jpeg",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "4K UHD",
-    "ageRating": "P13",
-    "synopsis": "Filem 979-The Ruins (HBO MAX) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=d19a2275-12b2-4423-8a3f-2a0ae7cb73bd&sub=t2",
-    "clearKey": "https://ptv2026.com/wvmax?editId=d19a2275-12b2-4423-8a3f-2a0ae7cb73bd",
-    "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_048",
@@ -27576,7 +24676,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/JXGRQ/dk4o1lIexGEVK6Bgw.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/JXGRQ/dk4o1lIexGEVK6Bgw.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -27587,7 +24687,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=96292bec-4fb5-4a35-b1da-6b9e7f83cf99&sub=t2",
     "clearKey": "https://ptv2026.com/wvmax?editId=96292bec-4fb5-4a35-b1da-6b9e7f83cf99",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_049",
@@ -27602,7 +24703,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/wgRHw/rt8wCR3hTxufNjHmg.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/wgRHw/rt8wCR3hTxufNjHmg.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -27613,7 +24714,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=8eaae56e-21ad-4e26-be8e-d0539fadce0d&sub=t2",
     "clearKey": "https://ptv2026.com/wvmax?editId=8eaae56e-21ad-4e26-be8e-d0539fadce0d",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_050",
@@ -27628,7 +24730,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/w_vpi/jWTT7ZRYS7Uod2njQ.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/w_vpi/jWTT7ZRYS7Uod2njQ.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -27639,7 +24741,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=1c54dc08-89e1-4fe3-8f8f-47f0479cd8de&sub=t2",
     "clearKey": "https://ptv2026.com/wvmax?editId=1c54dc08-89e1-4fe3-8f8f-47f0479cd8de",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_051",
@@ -27654,7 +24757,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/qNcHZ/mbamdblyXAqMY8sxw.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/qNcHZ/mbamdblyXAqMY8sxw.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -27665,33 +24768,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=165ba6b1-56dd-4132-9971-d60cd98956d8&sub=t2",
     "clearKey": "https://ptv2026.com/wvmax?editId=165ba6b1-56dd-4132-9971-d60cd98956d8",
     "isTrending": false,
-    "isPopular": false
-  },
-  {
-    "id": "vod_m_052",
-    "title": "984-All the Devils Are Here",
-    "type": "movie",
-    "genre": [
-      "Action",
-      "Blockbuster",
-      "Drama"
-    ],
-    "origin": "hollywood",
-    "poster": "https://images.cdn.prd.api.discomax.com/EhPyG/4QRi74ApnJTTMaAYg.jpeg",
-    "backdrop": "https://images.cdn.prd.api.discomax.com/EhPyG/4QRi74ApnJTTMaAYg.jpeg",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "4K UHD",
-    "ageRating": "P13",
-    "synopsis": "Filem 984-All the Devils Are Here (HBO MAX) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=6e1e75a1-8603-4efb-910d-5abf71964383&sub=t2",
-    "clearKey": "https://ptv2026.com/wvmax?editId=6e1e75a1-8603-4efb-910d-5abf71964383",
-    "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_053",
@@ -27706,7 +24784,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/5_T56/gTbHn2cdKgRLyjOWQ.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/5_T56/gTbHn2cdKgRLyjOWQ.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -27717,7 +24795,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=8678d4da-8626-489b-855e-c337c2bdf14b&sub=t2",
     "clearKey": "https://ptv2026.com/wvmax?editId=8678d4da-8626-489b-855e-c337c2bdf14b",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_054",
@@ -27732,7 +24811,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/aHazH/e5oSksWOkWk04mLDA.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/aHazH/e5oSksWOkWk04mLDA.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -27743,7 +24822,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=8eeac6d3-83ad-4fc3-bdcd-c31861a630da&sub=t2",
     "clearKey": "https://ptv2026.com/wvmax?editId=8eeac6d3-83ad-4fc3-bdcd-c31861a630da",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_055",
@@ -27758,7 +24838,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/3WUQz/mqYnUd5s8cjZY1p7g.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/3WUQz/mqYnUd5s8cjZY1p7g.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -27769,7 +24849,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=bcecca31-e728-4439-86db-94a478409d97&sub=t2",
     "clearKey": "https://ptv2026.com/wvmax?editId=bcecca31-e728-4439-86db-94a478409d97",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_056",
@@ -27784,7 +24865,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/NGpMD/TH2F0AoNdq6X1tbGA.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/NGpMD/TH2F0AoNdq6X1tbGA.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -27795,7 +24876,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=87360973-c358-4b4f-862f-afd03ad38f17&sub=t2",
     "clearKey": "https://ptv2026.com/wvmax?editId=87360973-c358-4b4f-862f-afd03ad38f17",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_057",
@@ -27810,7 +24892,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/0eE8w/slfDVfG2YIHC8ZM4Q.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/0eE8w/slfDVfG2YIHC8ZM4Q.jpeg",
     "year": 2024,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -27821,7 +24903,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=207069a1-3057-46d0-b6ae-c2e3b3567df3&sub=t2",
     "clearKey": "https://ptv2026.com/wvmax?editId=207069a1-3057-46d0-b6ae-c2e3b3567df3",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_058",
@@ -27836,7 +24919,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/C2CBP/d8wO4JtSs6zSwe1iA.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/C2CBP/d8wO4JtSs6zSwe1iA.jpeg",
     "year": 2024,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -27847,267 +24930,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=81da3b31-654b-4119-a12a-57b185f77f93&sub=t2",
     "clearKey": "https://ptv2026.com/wvmax?editId=81da3b31-654b-4119-a12a-57b185f77f93",
     "isTrending": false,
-    "isPopular": false
-  },
-  {
-    "id": "vod_m_059",
-    "title": "991-Spell 2020 (Horror)",
-    "type": "movie",
-    "genre": [
-      "Action",
-      "Blockbuster",
-      "Drama"
-    ],
-    "origin": "hollywood",
-    "poster": "https://images.cdn.prd.api.discomax.com/kkwuP/Uvcc6nsPDNbsx87YQ.jpeg",
-    "backdrop": "https://images.cdn.prd.api.discomax.com/kkwuP/Uvcc6nsPDNbsx87YQ.jpeg",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "4K UHD",
-    "ageRating": "P13",
-    "synopsis": "Filem 991-Spell 2020 (Horror) (HBO MAX) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=37a7bd63-e753-4c76-acd7-14df2dfdd081&sub=t2",
-    "clearKey": "https://ptv2026.com/wvmax?editId=37a7bd63-e753-4c76-acd7-14df2dfdd081",
-    "isTrending": false,
-    "isPopular": false
-  },
-  {
-    "id": "vod_m_060",
-    "title": "992-Spin The Bottle 2024 (Horror)",
-    "type": "movie",
-    "genre": [
-      "Action",
-      "Blockbuster",
-      "Drama"
-    ],
-    "origin": "hollywood",
-    "poster": "https://images.cdn.prd.api.discomax.com/YeXyG/zjRz8pTokvC1My4Bg.jpeg",
-    "backdrop": "https://images.cdn.prd.api.discomax.com/YeXyG/zjRz8pTokvC1My4Bg.jpeg",
-    "year": 2024,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "4K UHD",
-    "ageRating": "P13",
-    "synopsis": "Filem 992-Spin The Bottle 2024 (Horror) (HBO MAX) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=f75b4af4-36f6-4050-b244-7c77ce6c96b5&sub=t2",
-    "clearKey": "https://ptv2026.com/wvmax?editId=f75b4af4-36f6-4050-b244-7c77ce6c96b5",
-    "isTrending": false,
-    "isPopular": false
-  },
-  {
-    "id": "vod_m_061",
-    "title": "993-The Woman in the Yard 2025 (Horror)",
-    "type": "movie",
-    "genre": [
-      "Action",
-      "Blockbuster",
-      "Drama"
-    ],
-    "origin": "hollywood",
-    "poster": "https://images.cdn.prd.api.discomax.com/ZGwdF/sU6miaR_Rzw1L3AzA.jpeg",
-    "backdrop": "https://images.cdn.prd.api.discomax.com/ZGwdF/sU6miaR_Rzw1L3AzA.jpeg",
-    "year": 2024,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "4K UHD",
-    "ageRating": "P13",
-    "synopsis": "Filem 993-The Woman in the Yard 2025 (Horror) (HBO MAX) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=b6874bb6-d4b8-497c-8b57-b02e2c534b99&sub=t2",
-    "clearKey": "https://ptv2026.com/wvmax?editId=b6874bb6-d4b8-497c-8b57-b02e2c534b99",
-    "isTrending": false,
-    "isPopular": false
-  },
-  {
-    "id": "vod_m_062",
-    "title": "994-Final Destination 1 2000 (Horror)",
-    "type": "movie",
-    "genre": [
-      "Action",
-      "Blockbuster",
-      "Drama"
-    ],
-    "origin": "hollywood",
-    "poster": "https://images.cdn.prd.api.discomax.com/tpOml/fGJ7iSi4sChFrWcNw.jpeg",
-    "backdrop": "https://images.cdn.prd.api.discomax.com/tpOml/fGJ7iSi4sChFrWcNw.jpeg",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "4K UHD",
-    "ageRating": "P13",
-    "synopsis": "Filem 994-Final Destination 1 2000 (Horror) (HBO MAX) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=8903cf57-b222-4b9b-b58b-2a5a6cc1588f&sub=t2",
-    "clearKey": "https://ptv2026.com/wvmax?editId=8903cf57-b222-4b9b-b58b-2a5a6cc1588f",
-    "isTrending": false,
-    "isPopular": false
-  },
-  {
-    "id": "vod_m_063",
-    "title": "995-Final Destination 2 2003 (Horror)",
-    "type": "movie",
-    "genre": [
-      "Action",
-      "Blockbuster",
-      "Drama"
-    ],
-    "origin": "hollywood",
-    "poster": "https://images.cdn.prd.api.discomax.com/NQ0Jv/THeFjcbPX3dduOeTw.jpeg",
-    "backdrop": "https://images.cdn.prd.api.discomax.com/NQ0Jv/THeFjcbPX3dduOeTw.jpeg",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "4K UHD",
-    "ageRating": "P13",
-    "synopsis": "Filem 995-Final Destination 2 2003 (Horror) (HBO MAX) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=787f950b-0fe3-4a95-911d-2553f3db9a77&sub=t2",
-    "clearKey": "https://ptv2026.com/wvmax?editId=787f950b-0fe3-4a95-911d-2553f3db9a77",
-    "isTrending": false,
-    "isPopular": false
-  },
-  {
-    "id": "vod_m_064",
-    "title": "996-Final Destination 3 2006 (Horror)",
-    "type": "movie",
-    "genre": [
-      "Action",
-      "Blockbuster",
-      "Drama"
-    ],
-    "origin": "hollywood",
-    "poster": "https://images.cdn.prd.api.discomax.com/es5BO/5ITFvTRpP4BmeRIwg.jpeg",
-    "backdrop": "https://images.cdn.prd.api.discomax.com/es5BO/5ITFvTRpP4BmeRIwg.jpeg",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "4K UHD",
-    "ageRating": "P13",
-    "synopsis": "Filem 996-Final Destination 3 2006 (Horror) (HBO MAX) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=29056e15-a4c2-42aa-9241-a032fde4451c&sub=t2",
-    "clearKey": "https://ptv2026.com/wvmax?editId=29056e15-a4c2-42aa-9241-a032fde4451c",
-    "isTrending": false,
-    "isPopular": false
-  },
-  {
-    "id": "vod_m_065",
-    "title": "997-Final Destination 4 2009 (Horror)",
-    "type": "movie",
-    "genre": [
-      "Action",
-      "Blockbuster",
-      "Drama"
-    ],
-    "origin": "hollywood",
-    "poster": "https://images.cdn.prd.api.discomax.com/cvgJ_/CrPc27DkyfSR7vUZg.jpeg",
-    "backdrop": "https://images.cdn.prd.api.discomax.com/cvgJ_/CrPc27DkyfSR7vUZg.jpeg",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "4K UHD",
-    "ageRating": "P13",
-    "synopsis": "Filem 997-Final Destination 4 2009 (Horror) (HBO MAX) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=fb0ead35-932f-490a-85a3-c88140152a33&sub=t2",
-    "clearKey": "https://ptv2026.com/wvmax?editId=fb0ead35-932f-490a-85a3-c88140152a33",
-    "isTrending": false,
-    "isPopular": false
-  },
-  {
-    "id": "vod_m_066",
-    "title": "998-Final Destination 5 2011 (Horror)",
-    "type": "movie",
-    "genre": [
-      "Action",
-      "Blockbuster",
-      "Drama"
-    ],
-    "origin": "hollywood",
-    "poster": "https://images.cdn.prd.api.discomax.com/hrsCl/h8XSQMa-ZO_W9rzmQ.jpeg",
-    "backdrop": "https://images.cdn.prd.api.discomax.com/hrsCl/h8XSQMa-ZO_W9rzmQ.jpeg",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "4K UHD",
-    "ageRating": "P13",
-    "synopsis": "Filem 998-Final Destination 5 2011 (Horror) (HBO MAX) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=47667ba9-6ded-44b9-8514-66c3637621cf&sub=t2",
-    "clearKey": "https://ptv2026.com/wvmax?editId=47667ba9-6ded-44b9-8514-66c3637621cf",
-    "isTrending": false,
-    "isPopular": false
-  },
-  {
-    "id": "vod_m_067",
-    "title": "999-Final Destination Bloodlines 2025 (Horror)",
-    "type": "movie",
-    "genre": [
-      "Action",
-      "Blockbuster",
-      "Drama"
-    ],
-    "origin": "hollywood",
-    "poster": "https://images.cdn.prd.api.discomax.com/Q9Q7y/3Wzf_acNoeRMjHZJQ.jpeg",
-    "backdrop": "https://images.cdn.prd.api.discomax.com/Q9Q7y/3Wzf_acNoeRMjHZJQ.jpeg",
-    "year": 2024,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "4K UHD",
-    "ageRating": "P13",
-    "synopsis": "Filem 999-Final Destination Bloodlines 2025 (Horror) (HBO MAX) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=18b140b1-220c-4a45-b784-ffffa0293ff8&sub=t2",
-    "clearKey": "https://ptv2026.com/wvmax?editId=18b140b1-220c-4a45-b784-ffffa0293ff8",
-    "isTrending": false,
-    "isPopular": false
-  },
-  {
-    "id": "vod_m_068",
-    "title": "999-Companion (Horror)",
-    "type": "movie",
-    "genre": [
-      "Action",
-      "Blockbuster",
-      "Drama"
-    ],
-    "origin": "hollywood",
-    "poster": "https://images.cdn.prd.api.discomax.com/2025/05/01/92e065ab-9885-3516-b18e-df7d7ab68ec9.jpeg",
-    "backdrop": "https://images.cdn.prd.api.discomax.com/2025/05/01/92e065ab-9885-3516-b18e-df7d7ab68ec9.jpeg",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "4K UHD",
-    "ageRating": "P13",
-    "synopsis": "Filem 999-Companion (Horror) (HBO MAX) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=40d869a9-7622-400d-a069-4e79d10540eb&sub=t2",
-    "clearKey": "https://ptv2026.com/wvmax?editId=40d869a9-7622-400d-a069-4e79d10540eb",
-    "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_069",
@@ -28122,7 +24946,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2024/11/14/6a62b914-35f2-3750-90aa-258f578f4243.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2024/11/14/6a62b914-35f2-3750-90aa-258f578f4243.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -28133,7 +24957,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=b997fe1d-3218-44cd-bdbb-2661f279afde&sub=t6",
     "clearKey": "https://ptv2026.com/wvmax?editId=b997fe1d-3218-44cd-bdbb-2661f279afde",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_070",
@@ -28148,7 +24973,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2025/04/23/8b32cd28-b53b-3c67-98a1-a6aff753c2cd.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2025/04/23/8b32cd28-b53b-3c67-98a1-a6aff753c2cd.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -28159,7 +24984,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=c5c76757-7f59-4878-9e97-73722da7c099&sub=t7",
     "clearKey": "https://ptv2026.com/wvmax?editId=c5c76757-7f59-4878-9e97-73722da7c099",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_071",
@@ -28174,7 +25000,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2024/08/30/963a84cd-e35a-3e34-87bc-a64ede11c701.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2024/08/30/963a84cd-e35a-3e34-87bc-a64ede11c701.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -28185,7 +25011,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=16e04231-69f4-4865-8538-69407a3b7711&sub=t12",
     "clearKey": "https://ptv2026.com/wvmax?editId=16e04231-69f4-4865-8538-69407a3b7711",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_072",
@@ -28200,7 +25027,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2024/08/27/43681996-e918-3bd8-bbaf-d32c83369dd8.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2024/08/27/43681996-e918-3bd8-bbaf-d32c83369dd8.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -28211,7 +25038,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=2c3a13a2-7b9e-4e98-9db5-26d7e727ec18&sub=t42",
     "clearKey": "https://ptv2026.com/wvmax?editId=2c3a13a2-7b9e-4e98-9db5-26d7e727ec18",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_073",
@@ -28226,7 +25054,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2024/08/27/0145115c-4c19-3869-bcf4-1c43e41921a9.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2024/08/27/0145115c-4c19-3869-bcf4-1c43e41921a9.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -28237,7 +25065,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=22dcb0f6-3351-4e1b-aced-9b8cb0b569b2&sub=t0",
     "clearKey": "https://ptv2026.com/wvmax?editId=22dcb0f6-3351-4e1b-aced-9b8cb0b569b2",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_074",
@@ -28252,7 +25081,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2024/08/27/7a541bd5-64e2-3188-8d66-067f330ad814.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2024/08/27/7a541bd5-64e2-3188-8d66-067f330ad814.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -28263,7 +25092,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=f0c79c62-0e8a-420a-bbab-35ad3587b683&sub=t32",
     "clearKey": "https://ptv2026.com/wvmax?editId=f0c79c62-0e8a-420a-bbab-35ad3587b683",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_075",
@@ -28278,7 +25108,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2024/08/27/e7ba3b8d-0149-3c34-8d8e-f11c22dcbadd.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2024/08/27/e7ba3b8d-0149-3c34-8d8e-f11c22dcbadd.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -28289,7 +25119,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=03a29f9d-b292-4ef8-861d-c911c0398447&sub=t30",
     "clearKey": "https://ptv2026.com/wvmax?editId=03a29f9d-b292-4ef8-861d-c911c0398447",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_076",
@@ -28304,7 +25135,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2024/08/27/8a999684-46a5-3cf9-a13d-ea2d1bb10162.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2024/08/27/8a999684-46a5-3cf9-a13d-ea2d1bb10162.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -28315,7 +25146,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=97214560-494d-4180-887d-cdd66664bc9e&sub=t44",
     "clearKey": "https://ptv2026.com/wvmax?editId=97214560-494d-4180-887d-cdd66664bc9e",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_077",
@@ -28330,7 +25162,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2024/08/27/782993c8-4a2c-392b-a271-dafbb8457be2.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2024/08/27/782993c8-4a2c-392b-a271-dafbb8457be2.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -28341,7 +25173,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=69c502cb-f393-47b3-96e5-bfe2c4cf3b65&sub=t4",
     "clearKey": "https://ptv2026.com/wvmax?editId=69c502cb-f393-47b3-96e5-bfe2c4cf3b65",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_078",
@@ -28356,7 +25189,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2024/08/27/568e644a-eb9b-380c-bad9-367ff862fea1.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2024/08/27/568e644a-eb9b-380c-bad9-367ff862fea1.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -28367,7 +25200,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=9b9d9055-3638-468b-9889-096b22566f7b&sub=t32",
     "clearKey": "https://ptv2026.com/wvmax?editId=9b9d9055-3638-468b-9889-096b22566f7b",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_079",
@@ -28382,7 +25216,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2023/09/14/9fda2c4f-674f-31c7-906e-7bd8b83c2ace.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2023/09/14/9fda2c4f-674f-31c7-906e-7bd8b83c2ace.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -28393,7 +25227,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=08adb58b-b75a-42fe-bccb-41c27f622686&sub=t6",
     "clearKey": "https://ptv2026.com/wvmax?editId=08adb58b-b75a-42fe-bccb-41c27f622686",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_080",
@@ -28408,7 +25243,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2024/11/07/de37e8f8-be3f-392f-8135-341ded592c4e.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2024/11/07/de37e8f8-be3f-392f-8135-341ded592c4e.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -28419,7 +25254,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=3cd8bb4c-a585-4661-bde7-e312cb938008&sub=t0",
     "clearKey": "https://ptv2026.com/wvmax?editId=3cd8bb4c-a585-4661-bde7-e312cb938008",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_081",
@@ -28434,7 +25270,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2025/02/21/d8511edb-7e97-3aa8-b2f5-3919cce9602b.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2025/02/21/d8511edb-7e97-3aa8-b2f5-3919cce9602b.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -28445,7 +25281,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=ef20e448-43cf-4da2-8730-671a933f3216&sub=t5",
     "clearKey": "https://ptv2026.com/wvmax?editId=ef20e448-43cf-4da2-8730-671a933f3216",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_082",
@@ -28460,7 +25297,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2024/03/09/fe9822ff-7a12-3dd8-8370-a28cd9afaf3b.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2024/03/09/fe9822ff-7a12-3dd8-8370-a28cd9afaf3b.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -28471,7 +25308,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=aca5ada1-4417-4019-97f7-018d6954c6c0&sub=t10",
     "clearKey": "https://ptv2026.com/wvmax?editId=aca5ada1-4417-4019-97f7-018d6954c6c0",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_083",
@@ -28486,7 +25324,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2025/03/04/c3cc9752-e248-3db6-ba74-27ffec00f7ff.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2025/03/04/c3cc9752-e248-3db6-ba74-27ffec00f7ff.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -28497,7 +25335,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=1ea3e757-0445-4966-9cc3-5ce9e1714b09&sub=t12",
     "clearKey": "https://ptv2026.com/wvmax?editId=1ea3e757-0445-4966-9cc3-5ce9e1714b09",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_084",
@@ -28512,7 +25351,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2023/10/10/a3315a5f-8312-37e0-bb94-f06a407b3a09.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2023/10/10/a3315a5f-8312-37e0-bb94-f06a407b3a09.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -28523,7 +25362,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=bd0a8a14-4c41-4aa9-a80e-3f60353756ef&sub=t6",
     "clearKey": "https://ptv2026.com/wvmax?editId=bd0a8a14-4c41-4aa9-a80e-3f60353756ef",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_085",
@@ -28538,7 +25378,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2025/01/24/014a7b9f-80a3-3120-828e-926dc1d60834.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2025/01/24/014a7b9f-80a3-3120-828e-926dc1d60834.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -28549,7 +25389,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=01e9a174-615d-48a9-93f5-d6c337c70ccc&sub=t3",
     "clearKey": "https://ptv2026.com/wvmax?editId=01e9a174-615d-48a9-93f5-d6c337c70ccc",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_086",
@@ -28564,7 +25405,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2023/12/13/7dd0e35f-faff-33f4-9530-82b2280431b9.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2023/12/13/7dd0e35f-faff-33f4-9530-82b2280431b9.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -28575,7 +25416,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=cf40b9a3-23b2-49b6-a6ea-7c6870226907&sub=t6",
     "clearKey": "https://ptv2026.com/wvmax?editId=cf40b9a3-23b2-49b6-a6ea-7c6870226907",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_087",
@@ -28590,7 +25432,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2024/07/13/a5f86bc4-d7f7-336e-9b86-5c8a1386286b.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2024/07/13/a5f86bc4-d7f7-336e-9b86-5c8a1386286b.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -28601,7 +25443,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=bd0a8a14-4c41-4aa9-a80e-3f60353756ef&sub=t6",
     "clearKey": "https://ptv2026.com/wvmax?editId=bd0a8a14-4c41-4aa9-a80e-3f60353756ef",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_088",
@@ -28616,7 +25459,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2023/09/14/6d0ea04e-bf27-3be3-879e-3a270db7dc1d.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2023/09/14/6d0ea04e-bf27-3be3-879e-3a270db7dc1d.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -28627,7 +25470,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=c99d6146-ac31-4dc9-9957-bd99e95a48d8&sub=t3",
     "clearKey": "https://ptv2026.com/wvmax?editId=c99d6146-ac31-4dc9-9957-bd99e95a48d8",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_089",
@@ -28642,7 +25486,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2025/01/20/ded7d306-cd12-3c66-bfdf-53722674cffd.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2025/01/20/ded7d306-cd12-3c66-bfdf-53722674cffd.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -28653,7 +25497,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=c85774c4-ae06-45e3-b2d3-0854ee02591d&sub=t4",
     "clearKey": "https://ptv2026.com/wvmax?editId=c85774c4-ae06-45e3-b2d3-0854ee02591d",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_090",
@@ -28668,7 +25513,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2024/10/18/5140028c-f901-35e6-acdd-b007f76be417.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2024/10/18/5140028c-f901-35e6-acdd-b007f76be417.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -28679,7 +25524,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=de1a2f04-6b7b-446a-b567-f9b96ce4064f&sub=t2",
     "clearKey": "https://ptv2026.com/wvmax?editId=de1a2f04-6b7b-446a-b567-f9b96ce4064f",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_091",
@@ -28694,7 +25540,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2024/07/12/e14de6d3-16c9-3286-9c2a-d205814d42b8.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2024/07/12/e14de6d3-16c9-3286-9c2a-d205814d42b8.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -28705,7 +25551,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=3424844c-05db-4cab-9bed-2825e231de94&sub=t36",
     "clearKey": "https://ptv2026.com/wvmax?editId=3424844c-05db-4cab-9bed-2825e231de94",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_092",
@@ -28720,7 +25567,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2025/03/03/541961bb-908d-3ca8-a6ba-73d498569d82.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2025/03/03/541961bb-908d-3ca8-a6ba-73d498569d82.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -28731,7 +25578,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=3c3df515-93b8-4410-b10a-414079529821&sub=t3",
     "clearKey": "https://ptv2026.com/wvmax?editId=3c3df515-93b8-4410-b10a-414079529821",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_093",
@@ -28746,7 +25594,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2023/09/11/9f04a469-d509-3971-9f86-970c246a79f8.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2023/09/11/9f04a469-d509-3971-9f86-970c246a79f8.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -28757,7 +25605,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=c13817b1-eac1-47bb-a445-1bf94cc8540b&sub=t3",
     "clearKey": "https://ptv2026.com/wvmax?editId=c13817b1-eac1-47bb-a445-1bf94cc8540b",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_094",
@@ -28772,7 +25621,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2024/06/07/54356892-a726-3138-869a-528278f57fa3.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2024/06/07/54356892-a726-3138-869a-528278f57fa3.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -28783,7 +25632,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=7f513698-8643-4e7c-9797-4939e17660cb&sub=t12",
     "clearKey": "https://ptv2026.com/wvmax?editId=7f513698-8643-4e7c-9797-4939e17660cb",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_095",
@@ -28798,7 +25648,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2023/09/14/f0ee321d-ab75-34b4-af64-2cf040e21e0a.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2023/09/14/f0ee321d-ab75-34b4-af64-2cf040e21e0a.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -28809,7 +25659,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=90265e94-8a28-46d5-8437-07031debbd78&sub=t9",
     "clearKey": "https://ptv2026.com/wvmax?editId=90265e94-8a28-46d5-8437-07031debbd78",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_096",
@@ -28824,7 +25675,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2023/12/20/0858b004-6542-379f-a979-293f769fc66b.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2023/12/20/0858b004-6542-379f-a979-293f769fc66b.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -28835,7 +25686,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=f3bc5bd3-9c92-4fca-a952-d2182f51c02d&sub=t6",
     "clearKey": "https://ptv2026.com/wvmax?editId=f3bc5bd3-9c92-4fca-a952-d2182f51c02d",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_097",
@@ -28850,7 +25702,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2024/11/26/ab0e03b8-bbac-3cd9-b6a7-931c909d1403.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2024/11/26/ab0e03b8-bbac-3cd9-b6a7-931c909d1403.jpeg",
     "year": 2024,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -28861,7 +25713,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=02f8940b-60b1-4271-8858-7ab6408a2cda&sub=t4",
     "clearKey": "https://ptv2026.com/wvmax?editId=02f8940b-60b1-4271-8858-7ab6408a2cda",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_098",
@@ -28876,7 +25729,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2024/02/13/c7bae01b-ffa1-3870-9542-de3712f05b0e.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2024/02/13/c7bae01b-ffa1-3870-9542-de3712f05b0e.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -28887,7 +25740,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=e15abb07-171c-4361-b6ed-f8cbab4b5634&sub=t2",
     "clearKey": "https://ptv2026.com/wvmax?editId=e15abb07-171c-4361-b6ed-f8cbab4b5634",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_099",
@@ -28902,7 +25756,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2024/05/14/4dbd21b2-ffa0-3729-8a00-e9a7178323fd.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2024/05/14/4dbd21b2-ffa0-3729-8a00-e9a7178323fd.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -28913,7 +25767,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=c6a7381a-c57a-4b56-982d-bf89c5fde065&sub=t7",
     "clearKey": "https://ptv2026.com/wvmax?editId=c6a7381a-c57a-4b56-982d-bf89c5fde065",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_100",
@@ -28928,7 +25783,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2024/03/01/1f450a28-9911-39c2-925b-da0d16e20daf.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2024/03/01/1f450a28-9911-39c2-925b-da0d16e20daf.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -28939,7 +25794,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=44692baf-c276-4f3a-86a1-96884949846f&sub=t6",
     "clearKey": "https://ptv2026.com/wvmax?editId=44692baf-c276-4f3a-86a1-96884949846f",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_101",
@@ -28954,7 +25810,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2024/03/27/23a170b2-27ac-3bae-9a54-9dca3ef051db.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2024/03/27/23a170b2-27ac-3bae-9a54-9dca3ef051db.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -28965,7 +25821,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=2854e755-ee28-4b91-ad82-0384200b0c86&sub=t24",
     "clearKey": "https://ptv2026.com/wvmax?editId=2854e755-ee28-4b91-ad82-0384200b0c86",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_102",
@@ -28980,7 +25837,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2024/02/20/6d7eb835-3c96-35e4-bfb9-c53457f59864.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2024/02/20/6d7eb835-3c96-35e4-bfb9-c53457f59864.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -28991,7 +25848,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=d09acd40-f3e3-4c15-9561-4d5478595229&sub=t11",
     "clearKey": "https://ptv2026.com/wvmax?editId=d09acd40-f3e3-4c15-9561-4d5478595229",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_103",
@@ -29006,7 +25864,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2024/03/19/69a56770-aa24-300d-a331-d9408c19db9b.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2024/03/19/69a56770-aa24-300d-a331-d9408c19db9b.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -29017,7 +25875,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=96ef77bc-ac39-4eab-a5d1-ab99e350bb58&sub=t8",
     "clearKey": "https://ptv2026.com/wvmax?editId=96ef77bc-ac39-4eab-a5d1-ab99e350bb58",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_104",
@@ -29032,7 +25891,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2024/07/01/86836e48-d08c-39d0-9b53-dc4f6bd09e71.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2024/07/01/86836e48-d08c-39d0-9b53-dc4f6bd09e71.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -29043,7 +25902,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=843ee9fd-b65a-4bbb-b86b-030582062dff&sub=t18",
     "clearKey": "https://ptv2026.com/wvmax?editId=843ee9fd-b65a-4bbb-b86b-030582062dff",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_105",
@@ -29058,7 +25918,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2024/07/02/89dc1e89-5f01-33d1-8de2-027496277966.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2024/07/02/89dc1e89-5f01-33d1-8de2-027496277966.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -29069,7 +25929,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=ddb779e0-3f76-4033-b534-4e660f7bd904&sub=t9",
     "clearKey": "https://ptv2026.com/wvmax?editId=ddb779e0-3f76-4033-b534-4e660f7bd904",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_106",
@@ -29084,7 +25945,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2024/06/26/53edbc07-60c7-3159-aab5-6f8e9cf176c8.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2024/06/26/53edbc07-60c7-3159-aab5-6f8e9cf176c8.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -29095,7 +25956,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=614107f2-d504-48fe-a64b-e8986432ba32&sub=t8",
     "clearKey": "https://ptv2026.com/wvmax?editId=614107f2-d504-48fe-a64b-e8986432ba32",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_107",
@@ -29110,7 +25972,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2024/06/26/d387cc78-9470-3138-8658-0988966ec3f6.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2024/06/26/d387cc78-9470-3138-8658-0988966ec3f6.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -29121,7 +25983,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=db16133d-e355-4b2f-a3da-d34126dd8f89&sub=t14",
     "clearKey": "https://ptv2026.com/wvmax?editId=db16133d-e355-4b2f-a3da-d34126dd8f89",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_108",
@@ -29136,7 +25999,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2024/06/28/e05c336d-ba66-3d3f-827e-d42679dffd39.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2024/06/28/e05c336d-ba66-3d3f-827e-d42679dffd39.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -29147,7 +26010,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=ffb6310a-71fe-4015-9ffa-eed56f10eaca&sub=t10",
     "clearKey": "https://ptv2026.com/wvmax?editId=ffb6310a-71fe-4015-9ffa-eed56f10eaca",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_109",
@@ -29162,7 +26026,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2024/06/07/21e80593-362f-32b1-a188-f00fcadd79c6.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2024/06/07/21e80593-362f-32b1-a188-f00fcadd79c6.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -29173,7 +26037,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=97f8755b-cfbe-41f9-ac03-f952ab4ed89b&sub=t23",
     "clearKey": "https://ptv2026.com/wvmax?editId=97f8755b-cfbe-41f9-ac03-f952ab4ed89b",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_110",
@@ -29188,7 +26053,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2023/08/25/4fcb3721-f7f6-35e5-bc9e-572bc49064ce.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2023/08/25/4fcb3721-f7f6-35e5-bc9e-572bc49064ce.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -29199,7 +26064,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=ee5a5712-758a-4963-81d9-9eff8c7ca885&sub=t23",
     "clearKey": "https://ptv2026.com/wvmax?editId=ee5a5712-758a-4963-81d9-9eff8c7ca885",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_111",
@@ -29214,7 +26080,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2023/11/22/82108b80-3aea-3ac0-af25-e01b68f22122.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2023/11/22/82108b80-3aea-3ac0-af25-e01b68f22122.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -29225,7 +26091,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=94c552f0-9776-4c3e-8e8d-607d9164ad8a&sub=t2",
     "clearKey": "https://ptv2026.com/wvmax?editId=94c552f0-9776-4c3e-8e8d-607d9164ad8a",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_112",
@@ -29240,7 +26107,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2023/11/23/faa8bc71-3352-392b-9ee9-ddc52cc2a899.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2023/11/23/faa8bc71-3352-392b-9ee9-ddc52cc2a899.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -29251,7 +26118,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=549d7f5a-0d28-47c5-8275-5d51ffdd2706&sub=t4",
     "clearKey": "https://ptv2026.com/wvmax?editId=549d7f5a-0d28-47c5-8275-5d51ffdd2706",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_113",
@@ -29266,7 +26134,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2023/09/25/8dc83db9-2a97-3eb7-99ec-5329c970ab78.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2023/09/25/8dc83db9-2a97-3eb7-99ec-5329c970ab78.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -29277,7 +26145,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=ddd6fca9-04ea-4c96-b03e-b2468e89902b&sub=t1",
     "clearKey": "https://ptv2026.com/wvmax?editId=ddd6fca9-04ea-4c96-b03e-b2468e89902b",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_114",
@@ -29292,7 +26161,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2023/09/30/bee897a9-666b-3b60-99ca-2b2a395d878a.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2023/09/30/bee897a9-666b-3b60-99ca-2b2a395d878a.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -29303,7 +26172,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=2f42d592-b13f-4278-b5ac-2e1b5d1d515f&sub=t1",
     "clearKey": "https://ptv2026.com/wvmax?editId=2f42d592-b13f-4278-b5ac-2e1b5d1d515f",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_115",
@@ -29318,7 +26188,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2024/02/07/21fb11e2-b58c-369f-a897-2965741c0a9c.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2024/02/07/21fb11e2-b58c-369f-a897-2965741c0a9c.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -29329,7 +26199,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=02daf139-6148-4f02-b4cd-cd86755f8470&sub=t1",
     "clearKey": "https://ptv2026.com/wvmax?editId=02daf139-6148-4f02-b4cd-cd86755f8470",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_116",
@@ -29344,7 +26215,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2023/11/10/8a0d1df9-4468-3df4-b57a-c64c941d0850.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2023/11/10/8a0d1df9-4468-3df4-b57a-c64c941d0850.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -29355,7 +26226,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=ad8df3d4-ccc7-410b-90ad-2f94dea72351&sub=t17",
     "clearKey": "https://ptv2026.com/wvmax?editId=ad8df3d4-ccc7-410b-90ad-2f94dea72351",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_117",
@@ -29370,7 +26242,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2024/07/11/d02d3c37-5654-3eb5-8b8d-9dd163e6032c.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2024/07/11/d02d3c37-5654-3eb5-8b8d-9dd163e6032c.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -29381,7 +26253,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=38ede28d-eb3a-41bf-804d-842fd3b20f85&sub=t5",
     "clearKey": "https://ptv2026.com/wvmax?editId=38ede28d-eb3a-41bf-804d-842fd3b20f85",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_118",
@@ -29396,7 +26269,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2024/11/07/69e1d911-9a95-38b3-bb40-5f0017c14bd8.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2024/11/07/69e1d911-9a95-38b3-bb40-5f0017c14bd8.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -29407,7 +26280,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=808a3efd-fe73-4290-a9a9-40689761b6e9&sub=t0",
     "clearKey": "https://ptv2026.com/wvmax?editId=808a3efd-fe73-4290-a9a9-40689761b6e9",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_119",
@@ -29422,7 +26296,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2024/12/16/c0b03b3c-3a76-36c2-a5b1-97b31ce12f03.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2024/12/16/c0b03b3c-3a76-36c2-a5b1-97b31ce12f03.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -29433,7 +26307,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=c56a9f88-56e8-44df-aec1-02a713d92a20&sub=t0",
     "clearKey": "https://ptv2026.com/wvmax?editId=c56a9f88-56e8-44df-aec1-02a713d92a20",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_120",
@@ -29448,7 +26323,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2023/12/20/a81054cb-2ed9-392e-bd8a-04dd21476b64.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2023/12/20/a81054cb-2ed9-392e-bd8a-04dd21476b64.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -29459,7 +26334,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=a150ba86-1bad-481f-a5e6-af533c45e241&sub=t1",
     "clearKey": "https://ptv2026.com/wvmax?editId=a150ba86-1bad-481f-a5e6-af533c45e241",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_121",
@@ -29474,7 +26350,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2023/11/02/081e40f2-53cb-348c-b109-865ed36c4611.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2023/11/02/081e40f2-53cb-348c-b109-865ed36c4611.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -29485,7 +26361,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=00825ee0-99ed-4c08-802b-2912a0933df4&sub=t3",
     "clearKey": "https://ptv2026.com/wvmax?editId=00825ee0-99ed-4c08-802b-2912a0933df4",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_122",
@@ -29500,7 +26377,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2023/11/17/742eda46-04d4-3089-8a13-1267823c9d50.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2023/11/17/742eda46-04d4-3089-8a13-1267823c9d50.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -29511,7 +26388,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=ab8c590d-9df1-490d-825d-322d06e1819d&sub=t2",
     "clearKey": "https://ptv2026.com/wvmax?editId=ab8c590d-9df1-490d-825d-322d06e1819d",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_123",
@@ -29526,7 +26404,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2024/11/03/dfe43077-ed5a-3dd5-a891-29d45152cbcf.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2024/11/03/dfe43077-ed5a-3dd5-a891-29d45152cbcf.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -29537,7 +26415,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=687be511-e443-4f89-8f0d-58820c130bb4&sub=t3",
     "clearKey": "https://ptv2026.com/wvmax?editId=687be511-e443-4f89-8f0d-58820c130bb4",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_124",
@@ -29552,7 +26431,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2024/08/13/afef4cd0-5738-3cba-ad59-0dfc388f3dc0.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2024/08/13/afef4cd0-5738-3cba-ad59-0dfc388f3dc0.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -29563,7 +26442,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=24a3c0ad-05d9-49c5-83ea-8891476b587d&sub=t1",
     "clearKey": "https://ptv2026.com/wvmax?editId=24a3c0ad-05d9-49c5-83ea-8891476b587d",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_125",
@@ -29578,7 +26458,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2024/08/22/fb7d9914-fed8-3ce8-8220-8b7574be57f4.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2024/08/22/fb7d9914-fed8-3ce8-8220-8b7574be57f4.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -29589,7 +26469,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=80c8d109-e7bc-483a-bf46-4b8676beee95&sub=t4",
     "clearKey": "https://ptv2026.com/wvmax?editId=80c8d109-e7bc-483a-bf46-4b8676beee95",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_126",
@@ -29604,7 +26485,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2024/08/13/60a8d11a-e38a-3bf3-92fa-c8f725d8cf0e.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2024/08/13/60a8d11a-e38a-3bf3-92fa-c8f725d8cf0e.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -29615,7 +26496,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=db7fb3f0-5a4a-4135-90a7-4fc6135463b9&sub=t0",
     "clearKey": "https://ptv2026.com/wvmax?editId=db7fb3f0-5a4a-4135-90a7-4fc6135463b9",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_127",
@@ -29630,7 +26512,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2024/02/07/fe14295b-1efa-327a-a164-6176c2de4866.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2024/02/07/fe14295b-1efa-327a-a164-6176c2de4866.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -29641,7 +26523,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=04d06af1-56ca-4794-b773-c16e4f051617&sub=t2",
     "clearKey": "https://ptv2026.com/wvmax?editId=04d06af1-56ca-4794-b773-c16e4f051617",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_128",
@@ -29656,7 +26539,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2024/10/22/fa63cf42-bacc-3187-b143-5fea246e5ae4.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2024/10/22/fa63cf42-bacc-3187-b143-5fea246e5ae4.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -29667,7 +26550,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=2a136d92-4a85-4719-8a00-99e795a9db9a&sub=t11",
     "clearKey": "https://ptv2026.com/wvmax?editId=2a136d92-4a85-4719-8a00-99e795a9db9a",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_129",
@@ -29682,7 +26566,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2024/11/11/3d4b6b4c-3429-3101-8766-8700dd07572f.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2024/11/11/3d4b6b4c-3429-3101-8766-8700dd07572f.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -29693,59 +26577,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=e34c2a2f-acf2-4e94-877f-d903bedc42d3&sub=t5",
     "clearKey": "https://ptv2026.com/wvmax?editId=e34c2a2f-acf2-4e94-877f-d903bedc42d3",
     "isTrending": false,
-    "isPopular": false
-  },
-  {
-    "id": "vod_m_130",
-    "title": "Action-Constantine",
-    "type": "movie",
-    "genre": [
-      "Action",
-      "Blockbuster",
-      "Drama"
-    ],
-    "origin": "hollywood",
-    "poster": "https://images.cdn.prd.api.discomax.com/2023/09/14/f269cdbc-9509-3f07-9e36-4b4814e46b45.jpeg",
-    "backdrop": "https://images.cdn.prd.api.discomax.com/2023/09/14/f269cdbc-9509-3f07-9e36-4b4814e46b45.jpeg",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "4K UHD",
-    "ageRating": "P13",
-    "synopsis": "Filem Action-Constantine (HBO MAX) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=c6212da1-a5f5-4d1d-98da-459071244e65&sub=t7",
-    "clearKey": "https://ptv2026.com/wvmax?editId=c6212da1-a5f5-4d1d-98da-459071244e65",
-    "isTrending": false,
-    "isPopular": false
-  },
-  {
-    "id": "vod_m_131",
-    "title": "Action-Dead Mine",
-    "type": "movie",
-    "genre": [
-      "Action",
-      "Blockbuster",
-      "Drama"
-    ],
-    "origin": "hollywood",
-    "poster": "https://images.cdn.prd.api.discomax.com/2024/10/25/9e82eb2c-7978-3025-95bc-78375ddb2eb7.jpeg",
-    "backdrop": "https://images.cdn.prd.api.discomax.com/2024/10/25/9e82eb2c-7978-3025-95bc-78375ddb2eb7.jpeg",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "4K UHD",
-    "ageRating": "P13",
-    "synopsis": "Filem Action-Dead Mine (HBO MAX) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=6bf231ab-e569-4c69-b071-16d2270626dd&sub=t3",
-    "clearKey": "https://ptv2026.com/wvmax?editId=6bf231ab-e569-4c69-b071-16d2270626dd",
-    "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_132",
@@ -29760,7 +26593,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2023/10/24/bc061b25-144f-36e6-a6ee-100c56f4e01f.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2023/10/24/bc061b25-144f-36e6-a6ee-100c56f4e01f.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -29771,7 +26604,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=fc7262a5-a72b-4887-9f18-4b8723a43f67&sub=t24",
     "clearKey": "https://ptv2026.com/wvmax?editId=fc7262a5-a72b-4887-9f18-4b8723a43f67",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_133",
@@ -29786,7 +26620,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2023/12/18/52449d19-0739-31e8-af3c-db0fff1504a4.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2023/12/18/52449d19-0739-31e8-af3c-db0fff1504a4.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -29797,7 +26631,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=b01dd896-026e-4c67-975e-40281af7b62c&sub=t26",
     "clearKey": "https://ptv2026.com/wvmax?editId=b01dd896-026e-4c67-975e-40281af7b62c",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_134",
@@ -29812,7 +26647,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2025/02/14/cfb44c7c-59d6-357c-9952-228387076a12.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2025/02/14/cfb44c7c-59d6-357c-9952-228387076a12.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -29823,7 +26658,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=d5d5390c-9b3e-4d41-9792-bbe2a69bc15a&sub=t3",
     "clearKey": "https://ptv2026.com/wvmax?editId=d5d5390c-9b3e-4d41-9792-bbe2a69bc15a",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_135",
@@ -29838,7 +26674,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2024/11/18/3fac3fc4-e668-3b83-b8ba-e548f206a8fd.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2024/11/18/3fac3fc4-e668-3b83-b8ba-e548f206a8fd.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -29849,7 +26685,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=26775ffb-904d-4035-b846-eae5681feabb&sub=t8",
     "clearKey": "https://ptv2026.com/wvmax?editId=26775ffb-904d-4035-b846-eae5681feabb",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_136",
@@ -29864,7 +26701,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2024/11/06/5d7f6491-74e4-3ddd-80e3-e95bcda7b758.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2024/11/06/5d7f6491-74e4-3ddd-80e3-e95bcda7b758.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -29875,7 +26712,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=b3514d38-d9fe-4e54-b7b9-75cafa58aabc&sub=t1",
     "clearKey": "https://ptv2026.com/wvmax?editId=b3514d38-d9fe-4e54-b7b9-75cafa58aabc",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_137",
@@ -29890,7 +26728,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2024/04/04/5146eee0-92d5-3e75-81d9-4f92a896806f.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2024/04/04/5146eee0-92d5-3e75-81d9-4f92a896806f.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -29901,7 +26739,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=bacb14b5-0815-4d9f-a781-11c8ecf6dfff&sub=t18",
     "clearKey": "https://ptv2026.com/wvmax?editId=bacb14b5-0815-4d9f-a781-11c8ecf6dfff",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_138",
@@ -29916,7 +26755,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2024/04/05/417e8f3b-2cd5-3a7e-a3d5-a981c03e9f5a.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2024/04/05/417e8f3b-2cd5-3a7e-a3d5-a981c03e9f5a.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -29927,7 +26766,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=76a3cb10-3921-4864-a7db-c87b69f5c4ee&sub=t10",
     "clearKey": "https://ptv2026.com/wvmax?editId=76a3cb10-3921-4864-a7db-c87b69f5c4ee",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_139",
@@ -29942,7 +26782,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2024/06/17/3806bde4-2f8a-35f9-b4d7-99314806d2c9.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2024/06/17/3806bde4-2f8a-35f9-b4d7-99314806d2c9.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -29953,7 +26793,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=6a2c050c-4bcd-4e57-bb4e-25f940de688a&sub=t10",
     "clearKey": "https://ptv2026.com/wvmax?editId=6a2c050c-4bcd-4e57-bb4e-25f940de688a",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_140",
@@ -29968,7 +26809,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2024/10/25/661dfdae-bd03-33d5-87b0-505d6b6b9de6.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2024/10/25/661dfdae-bd03-33d5-87b0-505d6b6b9de6.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -29979,7 +26820,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=9dad03d0-0baa-473a-be5c-502691f5e1c9&sub=t6",
     "clearKey": "https://ptv2026.com/wvmax?editId=9dad03d0-0baa-473a-be5c-502691f5e1c9",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_141",
@@ -29994,7 +26836,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2024/08/02/7f4f2541-f82d-3c1c-8c35-649269dd6a78.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2024/08/02/7f4f2541-f82d-3c1c-8c35-649269dd6a78.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -30005,7 +26847,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=e75523fc-2ff8-44f4-925d-b412328371ef&sub=t5",
     "clearKey": "https://ptv2026.com/wvmax?editId=e75523fc-2ff8-44f4-925d-b412328371ef",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_142",
@@ -30020,7 +26863,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2023/11/26/c2ee88d0-6055-3c24-b236-58d36f108803.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2023/11/26/c2ee88d0-6055-3c24-b236-58d36f108803.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -30031,7 +26874,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=4ff96f87-4103-4fdc-89e6-d9877753e879&sub=t3",
     "clearKey": "https://ptv2026.com/wvmax?editId=4ff96f87-4103-4fdc-89e6-d9877753e879",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_143",
@@ -30046,7 +26890,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2023/10/19/f0d9ba1d-5bd6-3ba8-8fa6-5d3cae51e3df.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2023/10/19/f0d9ba1d-5bd6-3ba8-8fa6-5d3cae51e3df.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -30057,7 +26901,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=e37031db-640e-4c98-947e-573ee0ae02ed&sub=t2",
     "clearKey": "https://ptv2026.com/wvmax?editId=e37031db-640e-4c98-947e-573ee0ae02ed",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_144",
@@ -30072,7 +26917,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2023/11/25/9da960b3-1064-309f-84d4-15952470511e.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2023/11/25/9da960b3-1064-309f-84d4-15952470511e.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -30083,7 +26928,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=75ada09c-439f-4103-ba54-699c70ddf7f5&sub=t5",
     "clearKey": "https://ptv2026.com/wvmax?editId=75ada09c-439f-4103-ba54-699c70ddf7f5",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_145",
@@ -30098,7 +26944,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2024/10/28/95d94dde-9362-3625-89e9-1fe316355a1a.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2024/10/28/95d94dde-9362-3625-89e9-1fe316355a1a.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -30109,7 +26955,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=99b5c340-bf4f-4f6a-9bd5-a55f38542e33&sub=t5",
     "clearKey": "https://ptv2026.com/wvmax?editId=99b5c340-bf4f-4f6a-9bd5-a55f38542e33",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_146",
@@ -30124,7 +26971,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2023/10/31/a6ec2a75-d4df-372a-b3e1-49cd258ce344.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2023/10/31/a6ec2a75-d4df-372a-b3e1-49cd258ce344.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -30135,7 +26982,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=3b178798-d9b7-42ad-8f7a-a961b1b789f6&sub=t21",
     "clearKey": "https://ptv2026.com/wvmax?editId=3b178798-d9b7-42ad-8f7a-a961b1b789f6",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_147",
@@ -30150,7 +26998,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2024/11/20/2e6e7d32-a0ef-3f2e-84ee-ad1e0f1129f7.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2024/11/20/2e6e7d32-a0ef-3f2e-84ee-ad1e0f1129f7.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -30161,7 +27009,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=eb664895-939a-467f-ae7b-707ccab7c599&sub=t26",
     "clearKey": "https://ptv2026.com/wvmax?editId=eb664895-939a-467f-ae7b-707ccab7c599",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_148",
@@ -30176,7 +27025,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2024/06/25/a39f0808-30b5-3ee1-bf5e-f3a7b7749e58.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2024/06/25/a39f0808-30b5-3ee1-bf5e-f3a7b7749e58.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -30187,7 +27036,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=b325f888-b2d5-4662-802a-2ad829a7a5d6&sub=t38",
     "clearKey": "https://ptv2026.com/wvmax?editId=b325f888-b2d5-4662-802a-2ad829a7a5d6",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_149",
@@ -30202,7 +27052,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2024/06/12/0784fda4-1f54-3757-b1d0-b8da0fe8abb9.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2024/06/12/0784fda4-1f54-3757-b1d0-b8da0fe8abb9.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -30213,7 +27063,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=1c4a3ecf-86ab-4b9d-b464-dee69d2147cb&sub=t1",
     "clearKey": "https://ptv2026.com/wvmax?editId=1c4a3ecf-86ab-4b9d-b464-dee69d2147cb",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_150",
@@ -30228,7 +27079,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2024/11/27/666892c3-9eba-3015-b4ef-27f05dac1a4d.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2024/11/27/666892c3-9eba-3015-b4ef-27f05dac1a4d.jpeg",
     "year": 2024,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -30239,7 +27090,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=4379f4d4-4de9-4d0f-bca2-08d008dcaf1f&sub=t4",
     "clearKey": "https://ptv2026.com/wvmax?editId=4379f4d4-4de9-4d0f-bca2-08d008dcaf1f",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_151",
@@ -30254,7 +27106,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2024/04/25/2e81c1a3-9a3f-338f-b982-05bccc8d4695.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2024/04/25/2e81c1a3-9a3f-338f-b982-05bccc8d4695.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -30265,7 +27117,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=c2972955-194c-4542-9ebd-2d6fafeeb6da&sub=t32",
     "clearKey": "https://ptv2026.com/wvmax?editId=c2972955-194c-4542-9ebd-2d6fafeeb6da",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_152",
@@ -30280,7 +27133,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2024/12/18/41f96ecf-3903-317b-875b-f2d4d92b9b7c.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2024/12/18/41f96ecf-3903-317b-875b-f2d4d92b9b7c.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -30291,7 +27144,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=b99ed619-edb7-4eff-b52d-27a381ac2117&sub=t32",
     "clearKey": "https://ptv2026.com/wvmax?editId=b99ed619-edb7-4eff-b52d-27a381ac2117",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_153",
@@ -30306,7 +27160,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2024/04/25/c66e2c75-1c26-3bb5-ab9f-aef174a83e41.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2024/04/25/c66e2c75-1c26-3bb5-ab9f-aef174a83e41.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -30317,7 +27171,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=f9039564-a8f9-4739-af10-47870eb73d4a&sub=t3",
     "clearKey": "https://ptv2026.com/wvmax?editId=f9039564-a8f9-4739-af10-47870eb73d4a",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_154",
@@ -30332,7 +27187,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2023/09/14/e189d63e-67b8-3e65-87b3-81f5b5b29f18.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2023/09/14/e189d63e-67b8-3e65-87b3-81f5b5b29f18.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -30343,7 +27198,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=5f5080fe-e67e-4177-8d0c-87c84593e0d2&sub=t3",
     "clearKey": "https://ptv2026.com/wvmax?editId=5f5080fe-e67e-4177-8d0c-87c84593e0d2",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_155",
@@ -30358,7 +27214,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2025/01/20/ded7d306-cd12-3c66-bfdf-53722674cffd.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2025/01/20/ded7d306-cd12-3c66-bfdf-53722674cffd.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -30369,7 +27225,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=c85774c4-ae06-45e3-b2d3-0854ee02591d&sub=t4",
     "clearKey": "https://ptv2026.com/wvmax?editId=c85774c4-ae06-45e3-b2d3-0854ee02591d",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_156",
@@ -30384,7 +27241,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2024/03/28/a4b4b308-4d38-340b-a456-563efab44b68.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2024/03/28/a4b4b308-4d38-340b-a456-563efab44b68.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -30395,7 +27252,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=326a002c-d0fb-4499-95f0-41e5cf5189e7&sub=t16",
     "clearKey": "https://ptv2026.com/wvmax?editId=326a002c-d0fb-4499-95f0-41e5cf5189e7",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_157",
@@ -30410,7 +27268,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2024/11/11/d502cf2b-223f-32f2-8a5b-67c2ef448bfc.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2024/11/11/d502cf2b-223f-32f2-8a5b-67c2ef448bfc.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -30421,7 +27279,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=83f6923b-7552-4ded-8704-efca99f0b353&sub=t4",
     "clearKey": "https://ptv2026.com/wvmax?editId=83f6923b-7552-4ded-8704-efca99f0b353",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_158",
@@ -30436,7 +27295,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2023/09/14/1f946624-f6a3-3547-94d2-4bf6f86189fa.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2023/09/14/1f946624-f6a3-3547-94d2-4bf6f86189fa.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -30447,7 +27306,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=bec2a125-d98d-4dbd-927f-7ab2cfe0eb0a&sub=t2",
     "clearKey": "https://ptv2026.com/wvmax?editId=bec2a125-d98d-4dbd-927f-7ab2cfe0eb0a",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_159",
@@ -30462,7 +27322,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2024/05/18/b2310f2c-df72-3f30-8aa5-b5c5f2b0bc70.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2024/05/18/b2310f2c-df72-3f30-8aa5-b5c5f2b0bc70.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -30473,7 +27333,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=696c68b3-8403-4b32-8d66-f1a5cc6f12f8&sub=t21",
     "clearKey": "https://ptv2026.com/wvmax?editId=696c68b3-8403-4b32-8d66-f1a5cc6f12f8",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_160",
@@ -30488,7 +27349,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2024/11/13/5c988dc8-8bad-3b56-a81f-f0b467dd1c7f.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2024/11/13/5c988dc8-8bad-3b56-a81f-f0b467dd1c7f.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -30499,7 +27360,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=2c5c0d97-9645-4f40-b21e-e1000c9baa8f&sub=t1",
     "clearKey": "https://ptv2026.com/wvmax?editId=2c5c0d97-9645-4f40-b21e-e1000c9baa8f",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_161",
@@ -30514,7 +27376,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2024/11/11/3684d5f3-1dcb-333b-a918-b12ab223a7b6.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2024/11/11/3684d5f3-1dcb-333b-a918-b12ab223a7b6.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -30525,7 +27387,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=46405943-476b-4686-9681-e763ef6321a4&sub=t5",
     "clearKey": "https://ptv2026.com/wvmax?editId=46405943-476b-4686-9681-e763ef6321a4",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_162",
@@ -30540,7 +27403,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2024/03/06/729f786b-90c9-374c-b8cb-f711ba009a4c.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2024/03/06/729f786b-90c9-374c-b8cb-f711ba009a4c.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -30551,7 +27414,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=fba5c86f-e6b1-439f-9480-6ca19441ccf4&sub=t5",
     "clearKey": "https://ptv2026.com/wvmax?editId=fba5c86f-e6b1-439f-9480-6ca19441ccf4",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_163",
@@ -30566,7 +27430,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2024/10/16/2697defb-9ad8-37c4-9c18-34189f472b10.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2024/10/16/2697defb-9ad8-37c4-9c18-34189f472b10.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -30577,7 +27441,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=5f466bc9-f391-491d-8f4d-fc7807f234fc&sub=t7",
     "clearKey": "https://ptv2026.com/wvmax?editId=5f466bc9-f391-491d-8f4d-fc7807f234fc",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_164",
@@ -30592,7 +27457,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2023/08/30/61b0b811-2ec7-34bd-af89-7978705e1902.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2023/08/30/61b0b811-2ec7-34bd-af89-7978705e1902.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -30603,7 +27468,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=1ef50830-63cc-47c4-8393-624658fad805&sub=t3",
     "clearKey": "https://ptv2026.com/wvmax?editId=1ef50830-63cc-47c4-8393-624658fad805",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_165",
@@ -30618,7 +27484,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2024/11/11/f7b98051-c1c6-3567-aeaa-9b3efb0f2a8f.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2024/11/11/f7b98051-c1c6-3567-aeaa-9b3efb0f2a8f.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -30629,7 +27495,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=3820c501-a093-4247-bfe9-efd51d0daf3e&sub=t3",
     "clearKey": "https://ptv2026.com/wvmax?editId=3820c501-a093-4247-bfe9-efd51d0daf3e",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_166",
@@ -30644,7 +27511,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2023/09/22/c8e0fbcf-cc90-3d3b-9d21-e415257ead00.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2023/09/22/c8e0fbcf-cc90-3d3b-9d21-e415257ead00.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -30655,7 +27522,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=17aa1016-9609-4c0b-b7ed-1a687000e876&sub=t5",
     "clearKey": "https://ptv2026.com/wvmax?editId=17aa1016-9609-4c0b-b7ed-1a687000e876",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_167",
@@ -30670,7 +27538,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2024/06/21/a9e5eecc-bce0-3f08-92ef-240e94aaef97.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2024/06/21/a9e5eecc-bce0-3f08-92ef-240e94aaef97.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -30681,7 +27549,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=144be5db-47b9-490a-b1dd-309b8fc4db2f&sub=t17",
     "clearKey": "https://ptv2026.com/wvmax?editId=144be5db-47b9-490a-b1dd-309b8fc4db2f",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_168",
@@ -30696,7 +27565,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2024/11/11/fcdfecee-00ee-3c6d-807a-14fa91fb8051.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2024/11/11/fcdfecee-00ee-3c6d-807a-14fa91fb8051.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -30707,7 +27576,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=533834e5-2706-41cf-9f35-c251ca519ba5&sub=t1",
     "clearKey": "https://ptv2026.com/wvmax?editId=533834e5-2706-41cf-9f35-c251ca519ba5",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_169",
@@ -30722,7 +27592,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2024/11/08/a7a2c3a0-4da7-3347-8298-0f69b4b77ef4.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2024/11/08/a7a2c3a0-4da7-3347-8298-0f69b4b77ef4.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -30733,7 +27603,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=2e977119-2714-49cc-a63d-e38d65494f20&sub=t2",
     "clearKey": "https://ptv2026.com/wvmax?editId=2e977119-2714-49cc-a63d-e38d65494f20",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_170",
@@ -30748,7 +27619,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2024/07/12/5b28adff-889a-36e8-a753-948deaa548af.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2024/07/12/5b28adff-889a-36e8-a753-948deaa548af.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -30759,7 +27630,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=1967b0a5-3002-4bfb-86ce-ada958074d2e&sub=t1",
     "clearKey": "https://ptv2026.com/wvmax?editId=1967b0a5-3002-4bfb-86ce-ada958074d2e",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_171",
@@ -30774,7 +27646,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2023/11/23/f5e4329f-6fb2-3fa9-ad76-5940ce6ca611.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2023/11/23/f5e4329f-6fb2-3fa9-ad76-5940ce6ca611.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -30785,7 +27657,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=888393e5-d987-4941-b7c4-7dd122187481&sub=t3",
     "clearKey": "https://ptv2026.com/wvmax?editId=888393e5-d987-4941-b7c4-7dd122187481",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_172",
@@ -30800,7 +27673,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2024/11/26/bf02199d-d5a8-3af9-b2ef-9678e7506d25.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2024/11/26/bf02199d-d5a8-3af9-b2ef-9678e7506d25.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -30811,7 +27684,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=4d82f31a-ffac-49c9-bc5d-db32a97818d9&sub=t25",
     "clearKey": "https://ptv2026.com/wvmax?editId=4d82f31a-ffac-49c9-bc5d-db32a97818d9",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_173",
@@ -30826,7 +27700,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2024/06/26/8a89172a-25ef-38fc-8699-37e2c42ea145.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2024/06/26/8a89172a-25ef-38fc-8699-37e2c42ea145.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -30837,7 +27711,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=d9c78382-59bb-4f62-8750-00b4c1eaeac1&sub=t1",
     "clearKey": "https://ptv2026.com/wvmax?editId=d9c78382-59bb-4f62-8750-00b4c1eaeac1",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_174",
@@ -30852,7 +27727,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2023/09/30/2a322e53-5afb-31d1-86b9-c76d652a2e77.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2023/09/30/2a322e53-5afb-31d1-86b9-c76d652a2e77.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -30863,33 +27738,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=434fb2f8-c3c8-4c44-aed3-6492a9cd12ae&sub=t9",
     "clearKey": "https://ptv2026.com/wvmax?editId=434fb2f8-c3c8-4c44-aed3-6492a9cd12ae",
     "isTrending": false,
-    "isPopular": false
-  },
-  {
-    "id": "vod_m_175",
-    "title": "Action-2-Overlord",
-    "type": "movie",
-    "genre": [
-      "Action",
-      "Blockbuster",
-      "Drama"
-    ],
-    "origin": "hollywood",
-    "poster": "https://images.cdn.prd.api.discomax.com/2025/02/21/6e3f8303-983f-3338-9e5d-710d3ac75306.jpeg",
-    "backdrop": "https://images.cdn.prd.api.discomax.com/2025/02/21/6e3f8303-983f-3338-9e5d-710d3ac75306.jpeg",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "4K UHD",
-    "ageRating": "P13",
-    "synopsis": "Filem Action-2-Overlord (HBO MAX) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=0ea4fd07-f9a4-402a-be1f-ba1f22c359b0&sub=t2",
-    "clearKey": "https://ptv2026.com/wvmax?editId=0ea4fd07-f9a4-402a-be1f-ba1f22c359b0",
-    "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_176",
@@ -30904,7 +27754,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2023/12/13/7dd0e35f-faff-33f4-9530-82b2280431b9.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2023/12/13/7dd0e35f-faff-33f4-9530-82b2280431b9.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -30915,7 +27765,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=cf40b9a3-23b2-49b6-a6ea-7c6870226907&sub=t0",
     "clearKey": "https://ptv2026.com/wvmax?editId=cf40b9a3-23b2-49b6-a6ea-7c6870226907",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_177",
@@ -30930,7 +27781,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2024/10/17/bf9d13cd-858f-341f-b4c1-e569e8ddcafa.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2024/10/17/bf9d13cd-858f-341f-b4c1-e569e8ddcafa.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -30941,7 +27792,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=c1be7fec-9fdb-4f1b-82f6-97da86830046&sub=t13",
     "clearKey": "https://ptv2026.com/wvmax?editId=c1be7fec-9fdb-4f1b-82f6-97da86830046",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_178",
@@ -30956,7 +27808,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2024/11/07/d4d74377-f0ed-38cc-976e-e70d36cda58e.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2024/11/07/d4d74377-f0ed-38cc-976e-e70d36cda58e.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -30967,7 +27819,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=bc3203b6-6158-48e4-bb6b-9240654ec3bc&sub=t4",
     "clearKey": "https://ptv2026.com/wvmax?editId=bc3203b6-6158-48e4-bb6b-9240654ec3bc",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_179",
@@ -30982,7 +27835,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2023/09/30/3563a1e6-5cb3-3e8d-a0d5-40679088aaba.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2023/09/30/3563a1e6-5cb3-3e8d-a0d5-40679088aaba.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -30993,7 +27846,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=c3d5f89a-75cc-4b58-8cc9-f066b4df7633&sub=t11",
     "clearKey": "https://ptv2026.com/wvmax?editId=c3d5f89a-75cc-4b58-8cc9-f066b4df7633",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_180",
@@ -31008,7 +27862,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2023/09/13/cff5d6eb-ee88-394f-9a0d-8467ce60eb0f.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2023/09/13/cff5d6eb-ee88-394f-9a0d-8467ce60eb0f.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -31019,7 +27873,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=3234663a-6335-4c53-94b3-14201055afc8&sub=t1",
     "clearKey": "https://ptv2026.com/wvmax?editId=3234663a-6335-4c53-94b3-14201055afc8",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_181",
@@ -31034,7 +27889,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2024/11/13/775d9963-3267-33e5-af2d-2a53e482014d.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2024/11/13/775d9963-3267-33e5-af2d-2a53e482014d.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -31045,33 +27900,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=ccd21c4b-26d4-499c-88c0-178ffb043104&sub=t5",
     "clearKey": "https://ptv2026.com/wvmax?editId=ccd21c4b-26d4-499c-88c0-178ffb043104",
     "isTrending": false,
-    "isPopular": false
-  },
-  {
-    "id": "vod_m_182",
-    "title": "Action-1-Hellboy: The Crooked Man",
-    "type": "movie",
-    "genre": [
-      "Action",
-      "Blockbuster",
-      "Drama"
-    ],
-    "origin": "hollywood",
-    "poster": "https://images.cdn.prd.api.discomax.com/2025/01/06/25b3fac7-b0ed-3f59-aa26-4de81d6e64ce.jpeg",
-    "backdrop": "https://images.cdn.prd.api.discomax.com/2025/01/06/25b3fac7-b0ed-3f59-aa26-4de81d6e64ce.jpeg",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "4K UHD",
-    "ageRating": "P13",
-    "synopsis": "Filem Action-1-Hellboy: The Crooked Man (HBO MAX) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=107f601e-735b-427a-b009-e9f09d0d6068&sub=t5",
-    "clearKey": "https://ptv2026.com/wvmax?editId=107f601e-735b-427a-b009-e9f09d0d6068",
-    "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_183",
@@ -31086,7 +27916,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2023/10/17/48743921-39d6-3e46-a519-704c3613c1e4.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2023/10/17/48743921-39d6-3e46-a519-704c3613c1e4.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -31097,7 +27927,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=beedf959-65a5-4007-9c79-09bf9c0d14be&sub=t10",
     "clearKey": "https://ptv2026.com/wvmax?editId=beedf959-65a5-4007-9c79-09bf9c0d14be",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_184",
@@ -31112,7 +27943,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2024/01/31/3743ff9f-50f8-3195-9103-9b873ca82a43.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2024/01/31/3743ff9f-50f8-3195-9103-9b873ca82a43.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -31123,7 +27954,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=d1ac086f-2eba-461b-a9a1-2d2d2814cea9&sub=t7",
     "clearKey": "https://ptv2026.com/wvmax?editId=d1ac086f-2eba-461b-a9a1-2d2d2814cea9",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_185",
@@ -31138,7 +27970,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2023/11/25/d60539bd-6a18-3a1b-a569-36ac84a73d93.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2023/11/25/d60539bd-6a18-3a1b-a569-36ac84a73d93.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -31149,7 +27981,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=b581570c-ce82-468b-b961-636b5b537dfb&sub=t3",
     "clearKey": "https://ptv2026.com/wvmax?editId=b581570c-ce82-468b-b961-636b5b537dfb",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_186",
@@ -31164,7 +27997,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2025/01/13/e0505ef2-0933-3c30-83ed-999cee63ff45.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2025/01/13/e0505ef2-0933-3c30-83ed-999cee63ff45.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -31175,7 +28008,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=615e94a5-7085-44cd-80dc-58c42b8d78a3&sub=t2",
     "clearKey": "https://ptv2026.com/wvmax?editId=615e94a5-7085-44cd-80dc-58c42b8d78a3",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_187",
@@ -31190,7 +28024,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2024/03/28/48e7cc83-830e-3aed-8365-b56114afa101.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2024/03/28/48e7cc83-830e-3aed-8365-b56114afa101.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -31201,7 +28035,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=0eac76ad-e576-4123-b621-2a41771553ae&sub=t1",
     "clearKey": "https://ptv2026.com/wvmax?editId=0eac76ad-e576-4123-b621-2a41771553ae",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_188",
@@ -31216,7 +28051,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2023/09/29/3c23e5eb-7448-326d-95f1-0faa4b6f8fa8.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2023/09/29/3c23e5eb-7448-326d-95f1-0faa4b6f8fa8.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -31227,7 +28062,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=b4f32bde-d67d-4399-a495-28526b5bb441&sub=t15",
     "clearKey": "https://ptv2026.com/wvmax?editId=b4f32bde-d67d-4399-a495-28526b5bb441",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_189",
@@ -31242,7 +28078,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2024/11/11/ba5088aa-a6ef-32e1-85d8-843e5dcf3a85.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2024/11/11/ba5088aa-a6ef-32e1-85d8-843e5dcf3a85.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -31253,7 +28089,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=29724bac-b2fa-4fd9-b08c-2b8567129eeb&sub=t3",
     "clearKey": "https://ptv2026.com/wvmax?editId=29724bac-b2fa-4fd9-b08c-2b8567129eeb",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_190",
@@ -31268,7 +28105,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2023/11/22/d091a9f9-7a92-337f-beeb-d80e3498a287.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2023/11/22/d091a9f9-7a92-337f-beeb-d80e3498a287.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -31279,7 +28116,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=11846b61-8780-4652-87de-fd4a490071b1&sub=t1",
     "clearKey": "https://ptv2026.com/wvmax?editId=11846b61-8780-4652-87de-fd4a490071b1",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_191",
@@ -31294,7 +28132,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2023/11/25/7fc95ab9-23a2-3efa-94b8-498fb08ee876.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2023/11/25/7fc95ab9-23a2-3efa-94b8-498fb08ee876.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -31305,7 +28143,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=61d5e3d7-58c7-402d-9552-3d0c8aaafda3&sub=t8",
     "clearKey": "https://ptv2026.com/wvmax?editId=61d5e3d7-58c7-402d-9552-3d0c8aaafda3",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_192",
@@ -31320,7 +28159,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2024/04/05/f26dc9b7-aed6-3a07-aca1-97d540c49dc3.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2024/04/05/f26dc9b7-aed6-3a07-aca1-97d540c49dc3.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -31331,7 +28170,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=ed8ee561-0b79-47a1-8dc7-c42c48b27dd8&sub=t0",
     "clearKey": "https://ptv2026.com/wvmax?editId=ed8ee561-0b79-47a1-8dc7-c42c48b27dd8",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_193",
@@ -31346,7 +28186,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2025/03/10/1195171a-4287-324c-bb71-d75da83d9008.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2025/03/10/1195171a-4287-324c-bb71-d75da83d9008.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -31357,7 +28197,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=2846be55-242c-42bd-9819-fffb5edc1564&sub=t4",
     "clearKey": "https://ptv2026.com/wvmax?editId=2846be55-242c-42bd-9819-fffb5edc1564",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_194",
@@ -31372,7 +28213,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2024/11/10/cbf5b555-f73d-3af4-8043-1fb047f3ea77.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2024/11/10/cbf5b555-f73d-3af4-8043-1fb047f3ea77.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -31383,7 +28224,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=e95adaaa-8041-4441-806e-1ddff0337d93&sub=t4",
     "clearKey": "https://ptv2026.com/wvmax?editId=e95adaaa-8041-4441-806e-1ddff0337d93",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_195",
@@ -31398,7 +28240,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2023/09/30/e42504e1-0f62-3325-8130-baacfc438aef.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2023/09/30/e42504e1-0f62-3325-8130-baacfc438aef.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -31409,7 +28251,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=a9190bda-7079-4601-bec1-15f84215ef3d&sub=t2",
     "clearKey": "https://ptv2026.com/wvmax?editId=a9190bda-7079-4601-bec1-15f84215ef3d",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_196",
@@ -31424,7 +28267,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2023/09/14/7fb7602e-784b-3244-9ad1-2bdb8a479f2a.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2023/09/14/7fb7602e-784b-3244-9ad1-2bdb8a479f2a.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -31435,7 +28278,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=69a74f34-12ff-4d9d-89b8-885316401128&sub=t13",
     "clearKey": "https://ptv2026.com/wvmax?editId=69a74f34-12ff-4d9d-89b8-885316401128",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_197",
@@ -31450,7 +28294,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2024/06/12/2d077460-3a16-30eb-a911-f372f13e6604.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2024/06/12/2d077460-3a16-30eb-a911-f372f13e6604.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -31461,7 +28305,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=593f91d3-e760-49e2-874f-5be5161663d3&sub=t2",
     "clearKey": "https://ptv2026.com/wvmax?editId=593f91d3-e760-49e2-874f-5be5161663d3",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_198",
@@ -31476,7 +28321,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2023/09/14/20f16e07-7be7-3920-85b8-9354ffc8ee4a.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2023/09/14/20f16e07-7be7-3920-85b8-9354ffc8ee4a.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -31487,7 +28332,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=bbca0ad6-2362-45cd-8a99-55707afc20c4&sub=t2",
     "clearKey": "https://ptv2026.com/wvmax?editId=bbca0ad6-2362-45cd-8a99-55707afc20c4",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_199",
@@ -31502,7 +28348,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2024/03/27/fa444951-34a6-3b1d-a363-f2b7a1469238.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2024/03/27/fa444951-34a6-3b1d-a363-f2b7a1469238.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -31513,7 +28359,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=cd1f14fa-60f6-4f05-9259-09f11e671c79&sub=t6",
     "clearKey": "https://ptv2026.com/wvmax?editId=cd1f14fa-60f6-4f05-9259-09f11e671c79",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_200",
@@ -31528,7 +28375,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2024/10/16/938daf5e-4614-3d24-9b1d-53021ea5dd7a.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2024/10/16/938daf5e-4614-3d24-9b1d-53021ea5dd7a.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -31539,7 +28386,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=0159f4ae-bd10-4a23-aa45-a68a25e6a25c&sub=t19",
     "clearKey": "https://ptv2026.com/wvmax?editId=0159f4ae-bd10-4a23-aa45-a68a25e6a25c",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_201",
@@ -31554,7 +28402,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2024/08/30/039c2439-7480-3545-bb3d-31bfd17d4605.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2024/08/30/039c2439-7480-3545-bb3d-31bfd17d4605.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -31565,7 +28413,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=c463e2c8-e703-466a-bd3d-aa02668ff3cb&sub=t31",
     "clearKey": "https://ptv2026.com/wvmax?editId=c463e2c8-e703-466a-bd3d-aa02668ff3cb",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_202",
@@ -31580,7 +28429,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2024/11/05/ab365e5f-2090-3c89-a974-a6af782b21d7.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2024/11/05/ab365e5f-2090-3c89-a974-a6af782b21d7.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -31591,7 +28440,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=e6e095f0-f74c-4b22-b237-297e7305467d&sub=t2",
     "clearKey": "https://ptv2026.com/wvmax?editId=e6e095f0-f74c-4b22-b237-297e7305467d",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_203",
@@ -31606,7 +28456,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2024/02/08/0b74a011-31da-3fa7-9bb5-6e726ac9a4d2.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2024/02/08/0b74a011-31da-3fa7-9bb5-6e726ac9a4d2.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -31617,7 +28467,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=ac922e3c-3275-48a6-99e4-0fa2e9d4974a&sub=t1",
     "clearKey": "https://ptv2026.com/wvmax?editId=ac922e3c-3275-48a6-99e4-0fa2e9d4974a",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_204",
@@ -31632,7 +28483,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2025/01/31/6a8331b6-4214-30cc-b766-f5b235af817d.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2025/01/31/6a8331b6-4214-30cc-b766-f5b235af817d.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -31643,7 +28494,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=6b7c8109-23d7-487c-b554-ab8af8396f15&sub=t0",
     "clearKey": "https://ptv2026.com/wvmax?editId=6b7c8109-23d7-487c-b554-ab8af8396f15",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_205",
@@ -31658,7 +28510,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2024/06/26/c01f0dbd-2ffb-3cbf-abf0-aabd0cc63e93.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2024/06/26/c01f0dbd-2ffb-3cbf-abf0-aabd0cc63e93.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -31669,7 +28521,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=b6a82b24-bcfe-453d-9b9d-563a5ad02a99&sub=t6",
     "clearKey": "https://ptv2026.com/wvmax?editId=b6a82b24-bcfe-453d-9b9d-563a5ad02a99",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_206",
@@ -31684,7 +28537,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2024/06/26/bb442835-e8ce-3c4c-ba2c-82856133e6c6.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2024/06/26/bb442835-e8ce-3c4c-ba2c-82856133e6c6.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -31695,7 +28548,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=01844b86-4a19-4778-b4a9-110b00b85e03&sub=t19",
     "clearKey": "https://ptv2026.com/wvmax?editId=01844b86-4a19-4778-b4a9-110b00b85e03",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_207",
@@ -31710,7 +28564,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2023/08/18/02323d49-7704-35a7-8197-5cdfd2184815.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2023/08/18/02323d49-7704-35a7-8197-5cdfd2184815.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -31721,7 +28575,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=083ecdb9-1001-47fa-b295-b3e47038a0b9&sub=t1",
     "clearKey": "https://ptv2026.com/wvmax?editId=083ecdb9-1001-47fa-b295-b3e47038a0b9",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_208",
@@ -31736,7 +28591,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2023/12/12/57e2718c-430f-3c69-8a40-2c528d9ebab3.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2023/12/12/57e2718c-430f-3c69-8a40-2c528d9ebab3.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -31747,7 +28602,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=b387fc86-fdde-4c3a-b0bd-163ffb0c4a1f&sub=t1",
     "clearKey": "https://ptv2026.com/wvmax?editId=b387fc86-fdde-4c3a-b0bd-163ffb0c4a1f",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_209",
@@ -31762,7 +28618,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2023/11/25/31c9d781-f8e9-34cd-8087-a7d6d241ee8f.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2023/11/25/31c9d781-f8e9-34cd-8087-a7d6d241ee8f.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -31773,7 +28629,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=22429b4e-87d5-4781-8859-9d18c3bf23cb&sub=t2",
     "clearKey": "https://ptv2026.com/wvmax?editId=22429b4e-87d5-4781-8859-9d18c3bf23cb",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_210",
@@ -31788,7 +28645,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2024/02/08/a0d619e0-3d19-32f4-af6b-dee23376c941.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2024/02/08/a0d619e0-3d19-32f4-af6b-dee23376c941.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -31799,7 +28656,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=25b65a3d-1a0e-43a7-bbe4-91837c7187cd&sub=t2",
     "clearKey": "https://ptv2026.com/wvmax?editId=25b65a3d-1a0e-43a7-bbe4-91837c7187cd",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_211",
@@ -31814,7 +28672,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2024/11/07/a6063b01-59ae-3ce3-8428-a3ad20ccb30e.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2024/11/07/a6063b01-59ae-3ce3-8428-a3ad20ccb30e.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -31825,7 +28683,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=353d3511-f234-4c46-9889-5ba407f48718&sub=t1",
     "clearKey": "https://ptv2026.com/wvmax?editId=353d3511-f234-4c46-9889-5ba407f48718",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_212",
@@ -31840,7 +28699,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2024/08/23/1e10c237-0505-3df8-8789-c1a370aa2308.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2024/08/23/1e10c237-0505-3df8-8789-c1a370aa2308.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -31851,7 +28710,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=66342df6-6a95-4c71-a1c2-3b59afe7e9c5&sub=t2",
     "clearKey": "https://ptv2026.com/wvmax?editId=66342df6-6a95-4c71-a1c2-3b59afe7e9c5",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_213",
@@ -31866,7 +28726,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2024/11/07/f36a6c72-e72a-3335-a7c6-fcb29e0c6dc3.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2024/11/07/f36a6c72-e72a-3335-a7c6-fcb29e0c6dc3.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -31877,7 +28737,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=2c8b771c-fe1b-4f3f-8691-1526f4087160&sub=t3",
     "clearKey": "https://ptv2026.com/wvmax?editId=2c8b771c-fe1b-4f3f-8691-1526f4087160",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_214",
@@ -31892,7 +28753,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2023/10/10/ed642a38-9837-38a8-97ab-560dca98f479.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2023/10/10/ed642a38-9837-38a8-97ab-560dca98f479.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -31903,7 +28764,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=ca288f66-7c27-4ed2-9bd3-2a48f35766d60&sub=t5",
     "clearKey": "https://ptv2026.com/wvmax?editId=ca288f66-7c27-4ed2-9bd3-2a48f35766d6",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_215",
@@ -31918,7 +28780,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2023/10/12/28bf2ab5-13c9-3cec-a982-9fa363bb99c5.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2023/10/12/28bf2ab5-13c9-3cec-a982-9fa363bb99c5.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -31929,7 +28791,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=4e174e19-35f7-40d7-bb5b-ca2b157087a6&sub=t3",
     "clearKey": "https://ptv2026.com/wvmax?editId=4e174e19-35f7-40d7-bb5b-ca2b157087a6",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_216",
@@ -31944,7 +28807,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2024/12/10/46682fe1-362c-380e-a31f-a1857934683d.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2024/12/10/46682fe1-362c-380e-a31f-a1857934683d.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -31955,7 +28818,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=3c1dce6b-452d-45ef-b80b-476cf6ebc4c9&sub=t5",
     "clearKey": "https://ptv2026.com/wvmax?editId=3c1dce6b-452d-45ef-b80b-476cf6ebc4c9",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_217",
@@ -31970,7 +28834,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2024/11/05/d5a7d0a6-2e82-3c8a-935b-b59c73a7bb7b.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2024/11/05/d5a7d0a6-2e82-3c8a-935b-b59c73a7bb7b.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -31981,7 +28845,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=f9e22790-6c68-4921-ac4e-b85640a2706b&sub=t2",
     "clearKey": "https://ptv2026.com/wvmax?editId=f9e22790-6c68-4921-ac4e-b85640a2706b",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_218",
@@ -31996,7 +28861,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2024/03/15/f73c1cd3-18aa-35b3-807e-cf25d1895b7f.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2024/03/15/f73c1cd3-18aa-35b3-807e-cf25d1895b7f.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -32007,7 +28872,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=f41618d1-3ba2-49fc-878c-39604999dd34&sub=t5",
     "clearKey": "https://ptv2026.com/wvmax?editId=f41618d1-3ba2-49fc-878c-39604999dd34",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_219",
@@ -32022,7 +28888,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2024/03/12/9fbb5831-4c24-314c-8cb3-2b55b3f464a1.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2024/03/12/9fbb5831-4c24-314c-8cb3-2b55b3f464a1.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -32033,7 +28899,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=14bf56e5-916a-4c6f-911d-7a94596afc9f&sub=t2",
     "clearKey": "https://ptv2026.com/wvmax?editId=14bf56e5-916a-4c6f-911d-7a94596afc9f",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_220",
@@ -32048,7 +28915,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2023/09/30/9870e434-8cdd-3752-b51c-015af067d426.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2023/09/30/9870e434-8cdd-3752-b51c-015af067d426.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -32059,7 +28926,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=b1adae34-5f5e-41a6-b2f1-bbf51635d453&sub=t13",
     "clearKey": "https://ptv2026.com/wvmax?editId=b1adae34-5f5e-41a6-b2f1-bbf51635d453",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_221",
@@ -32074,7 +28942,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2024/03/12/d198521b-99be-3b55-b3de-6059cb6ce2d1.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2024/03/12/d198521b-99be-3b55-b3de-6059cb6ce2d1.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -32085,7 +28953,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=1b44e803-22a8-4b87-8217-37eef8c4c772&sub=t22",
     "clearKey": "https://ptv2026.com/wvmax?editId=1b44e803-22a8-4b87-8217-37eef8c4c772",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_222",
@@ -32100,7 +28969,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2024/12/02/ee78ee60-fde8-3d4a-ad24-fde9eb436151.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2024/12/02/ee78ee60-fde8-3d4a-ad24-fde9eb436151.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -32111,7 +28980,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=cf5130a6-1dee-4677-b0e1-03d4b4c57bca&sub=t24",
     "clearKey": "https://ptv2026.com/wvmax?editId=cf5130a6-1dee-4677-b0e1-03d4b4c57bca",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_223",
@@ -32126,7 +28996,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2023/09/14/6a85c2c3-9edb-324a-87fb-10943bb6bf24.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2023/09/14/6a85c2c3-9edb-324a-87fb-10943bb6bf24.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -32137,7 +29007,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=9307ba3b-d496-4cd5-83b5-5afa7b8fad76&sub=t5",
     "clearKey": "https://ptv2026.com/wvmax?editId=9307ba3b-d496-4cd5-83b5-5afa7b8fad76",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_224",
@@ -32152,7 +29023,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2024/11/11/9cbda7fe-453f-339e-803b-eb595de23872.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2024/11/11/9cbda7fe-453f-339e-803b-eb595de23872.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -32163,7 +29034,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=dfc78123-8355-4a4d-812c-369ded9349d9&sub=t6",
     "clearKey": "https://ptv2026.com/wvmax?editId=dfc78123-8355-4a4d-812c-369ded9349d9",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_225",
@@ -32178,7 +29050,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2023/09/14/9f250021-aa61-360b-9af3-76656acb6d38.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2023/09/14/9f250021-aa61-360b-9af3-76656acb6d38.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -32189,7 +29061,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=f93d3fdd-a525-418d-8d0a-1177b50c6225&sub=t23",
     "clearKey": "https://ptv2026.com/wvmax?editId=f93d3fdd-a525-418d-8d0a-1177b50c6225",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_226",
@@ -32204,7 +29077,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2024/03/09/cea31fbf-39a5-3f4b-a604-841155984b93.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2024/03/09/cea31fbf-39a5-3f4b-a604-841155984b93.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -32215,7 +29088,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=573bc847-a1e2-41ac-9395-3b00ed5cba10&sub=t37",
     "clearKey": "https://ptv2026.com/wvmax?editId=573bc847-a1e2-41ac-9395-3b00ed5cba10",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_227",
@@ -32230,7 +29104,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2024/11/18/02a546cd-ecd1-3c9f-bca0-4d35d0d50549.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2024/11/18/02a546cd-ecd1-3c9f-bca0-4d35d0d50549.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -32241,7 +29115,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=bf1249ae-bb04-4eea-a9f7-2b4a82e2f030&sub=t1",
     "clearKey": "https://ptv2026.com/wvmax?editId=bf1249ae-bb04-4eea-a9f7-2b4a82e2f030",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_228",
@@ -32256,7 +29131,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2024/11/17/c7048bb7-249f-37af-af28-67fe6f337165.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2024/11/17/c7048bb7-249f-37af-af28-67fe6f337165.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -32267,7 +29142,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=05ddb63e-e019-4f6a-ba79-c35502b341f5&sub=t4",
     "clearKey": "https://ptv2026.com/wvmax?editId=05ddb63e-e019-4f6a-ba79-c35502b341f5",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_229",
@@ -32282,7 +29158,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2023/12/21/55fe35b2-4362-3600-8efc-ec16c4693c54.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2023/12/21/55fe35b2-4362-3600-8efc-ec16c4693c54.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -32293,7 +29169,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=2c2c9910-dea1-435b-9d7c-87e7faa50e0f&sub=t6",
     "clearKey": "https://ptv2026.com/wvmax?editId=2c2c9910-dea1-435b-9d7c-87e7faa50e0f",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_230",
@@ -32308,7 +29185,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2024/07/23/8981a942-ba11-3bf8-afd9-a6ee9c2273f0.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2024/07/23/8981a942-ba11-3bf8-afd9-a6ee9c2273f0.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -32319,7 +29196,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=be96e40c-17c2-4470-bf29-45c3ffbaff7a&sub=t1",
     "clearKey": "https://ptv2026.com/wvmax?editId=be96e40c-17c2-4470-bf29-45c3ffbaff7a",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_231",
@@ -32334,7 +29212,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2024/10/23/50067201-bb2a-3cbd-85a0-351071bdcec7.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2024/10/23/50067201-bb2a-3cbd-85a0-351071bdcec7.jpeg",
     "year": 2024,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -32345,7 +29223,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=b704f6c2-4430-4243-8be3-94ed7f85c1b1&sub=t25",
     "clearKey": "https://ptv2026.com/wvmax?editId=b704f6c2-4430-4243-8be3-94ed7f85c1b1",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_232",
@@ -32360,7 +29239,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2023/09/14/4271eae4-6003-314a-8f60-2d3fcb870062.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2023/09/14/4271eae4-6003-314a-8f60-2d3fcb870062.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -32371,7 +29250,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=b4f0d758-9ab7-480f-bec5-824c30802392&sub=t0",
     "clearKey": "https://ptv2026.com/wvmax?editId=b4f0d758-9ab7-480f-bec5-824c30802392",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_233",
@@ -32386,7 +29266,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2024/04/05/5ba36db5-d504-3a38-8ee7-b667d56f2c34.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2024/04/05/5ba36db5-d504-3a38-8ee7-b667d56f2c34.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -32397,7 +29277,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=bd523451-6d0f-4964-b803-3a4aad4c225b&sub=t2",
     "clearKey": "https://ptv2026.com/wvmax?editId=bd523451-6d0f-4964-b803-3a4aad4c225b",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_234",
@@ -32412,7 +29293,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2023/11/14/468b3d7c-55ac-323b-a99c-3ef6e150c297.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2023/11/14/468b3d7c-55ac-323b-a99c-3ef6e150c297.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -32423,7 +29304,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=0a366930-d970-4358-9f87-eb71804c2851&sub=t1",
     "clearKey": "https://ptv2026.com/wvmax?editId=0a366930-d970-4358-9f87-eb71804c2851",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_235",
@@ -32438,7 +29320,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2023/09/14/2800fce5-5ee1-34ed-a3b3-cedc596755ef.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2023/09/14/2800fce5-5ee1-34ed-a3b3-cedc596755ef.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -32449,7 +29331,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=999b211b-e89d-40f4-a6e4-8ed45e21e8f7&sub=t2",
     "clearKey": "https://ptv2026.com/wvmax?editId=999b211b-e89d-40f4-a6e4-8ed45e21e8f7",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_236",
@@ -32464,7 +29347,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2024/03/29/f96107d5-3f55-30aa-a58d-7698ea05773f.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2024/03/29/f96107d5-3f55-30aa-a58d-7698ea05773f.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -32475,7 +29358,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=11a12198-7d19-4533-bd4e-c2823be3dba1&sub=t31",
     "clearKey": "https://ptv2026.com/wvmax?editId=11a12198-7d19-4533-bd4e-c2823be3dba1",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_237",
@@ -32490,7 +29374,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2024/08/07/ab90348d-31b0-307d-89d6-a69b15a4e4ab.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2024/08/07/ab90348d-31b0-307d-89d6-a69b15a4e4ab.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -32501,7 +29385,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=6cace446-849c-4267-9a36-f6d76e9e20bd&sub=t42",
     "clearKey": "https://ptv2026.com/wvmax?editId=6cace446-849c-4267-9a36-f6d76e9e20bd",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_238",
@@ -32516,7 +29401,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2024/08/23/2ccdc995-418a-3452-83f1-35c78799fcc0.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2024/08/23/2ccdc995-418a-3452-83f1-35c78799fcc0.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -32527,7 +29412,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=c6c97e65-a0ab-41ae-8edd-1b44557d1699&sub=t1",
     "clearKey": "https://ptv2026.com/wvmax?editId=c6c97e65-a0ab-41ae-8edd-1b44557d1699",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_239",
@@ -32542,7 +29428,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2024/11/05/1654c744-e0cc-39e8-8c7c-66f7c97f52f8.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2024/11/05/1654c744-e0cc-39e8-8c7c-66f7c97f52f8.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -32553,7 +29439,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=16c3204c-cbfb-40fd-adfa-3b8fafd74c82&sub=t0",
     "clearKey": "https://ptv2026.com/wvmax?editId=16c3204c-cbfb-40fd-adfa-3b8fafd74c82",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_240",
@@ -32568,7 +29455,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2023/09/14/c718c92a-11ce-391a-9235-1489f3e77ab0.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2023/09/14/c718c92a-11ce-391a-9235-1489f3e77ab0.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -32579,7 +29466,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=57423fab-d95a-4815-a1c2-2a4024a4f4d8&sub=t7",
     "clearKey": "https://ptv2026.com/wvmax?editId=57423fab-d95a-4815-a1c2-2a4024a4f4d8",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_241",
@@ -32594,7 +29482,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2025/02/21/c294e149-2905-3f7c-b34e-297da7b1b947.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2025/02/21/c294e149-2905-3f7c-b34e-297da7b1b947.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -32605,7 +29493,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=3049acd7-c02f-431d-b8ac-47b7099f1158&sub=t1",
     "clearKey": "https://ptv2026.com/wvmax?editId=3049acd7-c02f-431d-b8ac-47b7099f1158",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_242",
@@ -32620,7 +29509,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2024/11/06/632ccedb-07bd-3367-9f23-1434fb7e0840.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2024/11/06/632ccedb-07bd-3367-9f23-1434fb7e0840.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -32631,7 +29520,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=f488d297-6ec5-4578-9bd8-bb1c48fa64a1&sub=t2",
     "clearKey": "https://ptv2026.com/wvmax?editId=f488d297-6ec5-4578-9bd8-bb1c48fa64a1",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_243",
@@ -32646,7 +29536,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2024/04/16/e5b2345e-4c6d-303f-bd37-4d05dc48c934.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2024/04/16/e5b2345e-4c6d-303f-bd37-4d05dc48c934.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -32657,7 +29547,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=d6ca5fb5-ba5c-439f-a72a-9bc1f225e134&sub=t7",
     "clearKey": "https://ptv2026.com/wvmax?editId=d6ca5fb5-ba5c-439f-a72a-9bc1f225e134",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_244",
@@ -32672,7 +29563,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2023/09/13/ea263e95-5ea8-3d34-8d4c-e0586b4e813e.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2023/09/13/ea263e95-5ea8-3d34-8d4c-e0586b4e813e.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -32683,7 +29574,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=89f53fae-0da1-4f9c-9365-8135b3680c8c&sub=t40",
     "clearKey": "https://ptv2026.com/wvmax?editId=89f53fae-0da1-4f9c-9365-8135b3680c8c",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_245",
@@ -32698,7 +29590,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2024/11/07/d4d080e4-e022-3060-896e-94afe680bab5.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2024/11/07/d4d080e4-e022-3060-896e-94afe680bab5.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -32709,7 +29601,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=f6e7e626-2215-41d9-82d0-6dab49498e37&sub=t0",
     "clearKey": "https://ptv2026.com/wvmax?editId=f6e7e626-2215-41d9-82d0-6dab49498e37",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_246",
@@ -32724,7 +29617,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2024/11/05/f8eb0f24-a360-3d40-87df-3267352a25ff.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2024/11/05/f8eb0f24-a360-3d40-87df-3267352a25ff.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -32735,7 +29628,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=f00be1c7-0ed0-47cb-9b5a-4b37cd58fd27&sub=t2",
     "clearKey": "https://ptv2026.com/wvmax?editId=f00be1c7-0ed0-47cb-9b5a-4b37cd58fd27",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_247",
@@ -32750,7 +29644,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2024/11/07/0e1ef886-7528-32b4-b755-e288ade9503f.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2024/11/07/0e1ef886-7528-32b4-b755-e288ade9503f.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -32761,7 +29655,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=d9b233af-8bc2-4ecb-92e4-23584e98f569&sub=t2",
     "clearKey": "https://ptv2026.com/wvmax?editId=d9b233af-8bc2-4ecb-92e4-23584e98f569",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_248",
@@ -32776,7 +29671,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2023/11/25/6edc68d1-239f-37ab-af31-8932870c5ca3.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2023/11/25/6edc68d1-239f-37ab-af31-8932870c5ca3.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -32787,7 +29682,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=217c3d8f-e473-4e17-8880-818daad96dd1&sub=t6",
     "clearKey": "https://ptv2026.com/wvmax?editId=217c3d8f-e473-4e17-8880-818daad96dd1",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_249",
@@ -32802,7 +29698,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2024/11/11/4d1992f2-f268-3e4a-88b2-0189e9dc3141.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2024/11/11/4d1992f2-f268-3e4a-88b2-0189e9dc3141.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -32813,7 +29709,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=06d31938-6384-455e-9d1c-e866a0c6f183&sub=t0",
     "clearKey": "https://ptv2026.com/wvmax?editId=06d31938-6384-455e-9d1c-e866a0c6f183",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_250",
@@ -32828,7 +29725,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2024/11/07/88d25838-82e0-3935-9d3a-5750b607c601.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2024/11/07/88d25838-82e0-3935-9d3a-5750b607c601.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -32839,7 +29736,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=f41a1bb8-9033-4007-b783-72ec71bc3c93&sub=t0",
     "clearKey": "https://ptv2026.com/wvmax?editId=f41a1bb8-9033-4007-b783-72ec71bc3c93",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_251",
@@ -32854,7 +29752,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2024/12/19/e42454e8-50c3-3bb5-b079-97ef6bd1eb4c.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2024/12/19/e42454e8-50c3-3bb5-b079-97ef6bd1eb4c.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -32865,7 +29763,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=a3124af9-ea60-4f96-b9f4-a7d80d1b4e26&sub=t2",
     "clearKey": "https://ptv2026.com/wvmax?editId=a3124af9-ea60-4f96-b9f4-a7d80d1b4e26",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_252",
@@ -32880,7 +29779,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2023/09/14/dc8b8f9b-9d4d-3559-b397-3afc389238fb.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2023/09/14/dc8b8f9b-9d4d-3559-b397-3afc389238fb.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -32891,7 +29790,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=1ff36243-f8ab-4237-a2c2-82dab75ad289&sub=t11",
     "clearKey": "https://ptv2026.com/wvmax?editId=1ff36243-f8ab-4237-a2c2-82dab75ad289",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_253",
@@ -32906,7 +29806,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2024/06/11/7000fae3-d89e-3395-87fb-aacf2cdc70a5.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2024/06/11/7000fae3-d89e-3395-87fb-aacf2cdc70a5.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -32917,1463 +29817,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=676043fe-6b5e-4d96-a79c-a3fb95fb5061&sub=t4",
     "clearKey": "https://ptv2026.com/wvmax?editId=676043fe-6b5e-4d96-a79c-a3fb95fb5061",
     "isTrending": false,
-    "isPopular": false
-  },
-  {
-    "id": "vod_m_254",
-    "title": "Horror-10 Cloverfield Lane",
-    "type": "movie",
-    "genre": [
-      "Action",
-      "Blockbuster",
-      "Drama"
-    ],
-    "origin": "hollywood",
-    "poster": "https://images.cdn.prd.api.discomax.com/2024/07/10/c489d810-728d-3753-9381-a418fd302f11.jpeg",
-    "backdrop": "https://images.cdn.prd.api.discomax.com/2024/07/10/c489d810-728d-3753-9381-a418fd302f11.jpeg",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "4K UHD",
-    "ageRating": "P13",
-    "synopsis": "Filem Horror-10 Cloverfield Lane (HBO MAX) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=2d72707c-4016-4508-a86c-c35f5388e178&sub=t2",
-    "clearKey": "https://ptv2026.com/wvmax?editId=2d72707c-4016-4508-a86c-c35f5388e178",
-    "isTrending": false,
-    "isPopular": false
-  },
-  {
-    "id": "vod_m_255",
-    "title": "Horror-A Nightmare on Elm Street",
-    "type": "movie",
-    "genre": [
-      "Action",
-      "Blockbuster",
-      "Drama"
-    ],
-    "origin": "hollywood",
-    "poster": "https://images.cdn.prd.api.discomax.com/2024/03/20/ce4f2cf4-87fe-340e-a9f0-37ba4c876f13.jpeg",
-    "backdrop": "https://images.cdn.prd.api.discomax.com/2024/03/20/ce4f2cf4-87fe-340e-a9f0-37ba4c876f13.jpeg",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "4K UHD",
-    "ageRating": "P13",
-    "synopsis": "Filem Horror-A Nightmare on Elm Street (HBO MAX) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=c004c097-bff6-437c-abb1-6968f5774cae&sub=t9",
-    "clearKey": "https://ptv2026.com/wvmax?editId=c004c097-bff6-437c-abb1-6968f5774cae",
-    "isTrending": false,
-    "isPopular": false
-  },
-  {
-    "id": "vod_m_256",
-    "title": "Horror-1-A Quiet Place: Day One",
-    "type": "movie",
-    "genre": [
-      "Action",
-      "Blockbuster",
-      "Drama"
-    ],
-    "origin": "hollywood",
-    "poster": "https://images.cdn.prd.api.discomax.com/2025/01/07/39c8652d-0227-379f-9d3c-9f21f0d08899.jpeg",
-    "backdrop": "https://images.cdn.prd.api.discomax.com/2025/01/07/39c8652d-0227-379f-9d3c-9f21f0d08899.jpeg",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "4K UHD",
-    "ageRating": "P13",
-    "synopsis": "Filem Horror-1-A Quiet Place: Day One (HBO MAX) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=0605db0a-5458-406f-8315-43c2cc016130&sub=t4",
-    "clearKey": "https://ptv2026.com/wvmax?editId=0605db0a-5458-406f-8315-43c2cc016130",
-    "isTrending": false,
-    "isPopular": false
-  },
-  {
-    "id": "vod_m_257",
-    "title": "Horror-1-Abigail",
-    "type": "movie",
-    "genre": [
-      "Action",
-      "Blockbuster",
-      "Drama"
-    ],
-    "origin": "hollywood",
-    "poster": "https://images.cdn.prd.api.discomax.com/2024/11/25/c6557a2c-98ae-3b91-a968-376930d8fc69.jpeg",
-    "backdrop": "https://images.cdn.prd.api.discomax.com/2024/11/25/c6557a2c-98ae-3b91-a968-376930d8fc69.jpeg",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "4K UHD",
-    "ageRating": "P13",
-    "synopsis": "Filem Horror-1-Abigail (HBO MAX) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=83fe24d1-8753-47c3-ab17-1fd7d72cc5e4&sub=t5",
-    "clearKey": "https://ptv2026.com/wvmax?editId=83fe24d1-8753-47c3-ab17-1fd7d72cc5e4",
-    "isTrending": false,
-    "isPopular": false
-  },
-  {
-    "id": "vod_m_258",
-    "title": "Horror-Annabelle",
-    "type": "movie",
-    "genre": [
-      "Action",
-      "Blockbuster",
-      "Drama"
-    ],
-    "origin": "hollywood",
-    "poster": "https://images.cdn.prd.api.discomax.com/2023/08/25/dfd97773-22ba-3352-8240-d96eac6c7cef.jpeg",
-    "backdrop": "https://images.cdn.prd.api.discomax.com/2023/08/25/dfd97773-22ba-3352-8240-d96eac6c7cef.jpeg",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "4K UHD",
-    "ageRating": "P13",
-    "synopsis": "Filem Horror-Annabelle (HBO MAX) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=c3cebc48-2a4a-46e0-9697-c7eb135e74d7&sub=t24",
-    "clearKey": "https://ptv2026.com/wvmax?editId=c3cebc48-2a4a-46e0-9697-c7eb135e74d7",
-    "isTrending": false,
-    "isPopular": false
-  },
-  {
-    "id": "vod_m_259",
-    "title": "Horror-Annabelle Comes Home",
-    "type": "movie",
-    "genre": [
-      "Action",
-      "Blockbuster",
-      "Drama"
-    ],
-    "origin": "hollywood",
-    "poster": "https://images.cdn.prd.api.discomax.com/2024/09/25/4e0187b4-b8bb-3901-b477-3c79bd494315.jpeg",
-    "backdrop": "https://images.cdn.prd.api.discomax.com/2024/09/25/4e0187b4-b8bb-3901-b477-3c79bd494315.jpeg",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "4K UHD",
-    "ageRating": "P13",
-    "synopsis": "Filem Horror-Annabelle Comes Home (HBO MAX) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=4882b5b6-8f41-4d38-8606-945f46e22566&sub=t20",
-    "clearKey": "https://ptv2026.com/wvmax?editId=4882b5b6-8f41-4d38-8606-945f46e22566",
-    "isTrending": false,
-    "isPopular": false
-  },
-  {
-    "id": "vod_m_260",
-    "title": "Horror-Annabelle: Creation",
-    "type": "movie",
-    "genre": [
-      "Action",
-      "Blockbuster",
-      "Drama"
-    ],
-    "origin": "hollywood",
-    "poster": "https://images.cdn.prd.api.discomax.com/2024/12/10/fffdb3fb-1830-33a7-97b7-13b25ef6a643.jpeg",
-    "backdrop": "https://images.cdn.prd.api.discomax.com/2024/12/10/fffdb3fb-1830-33a7-97b7-13b25ef6a643.jpeg",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "4K UHD",
-    "ageRating": "P13",
-    "synopsis": "Filem Horror-Annabelle: Creation (HBO MAX) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=0acbe079-4f75-41d2-9d1e-747258f9f09f&sub=t17",
-    "clearKey": "https://ptv2026.com/wvmax?editId=0acbe079-4f75-41d2-9d1e-747258f9f09f",
-    "isTrending": false,
-    "isPopular": false
-  },
-  {
-    "id": "vod_m_261",
-    "title": "Horror-Beneath",
-    "type": "movie",
-    "genre": [
-      "Action",
-      "Blockbuster",
-      "Drama"
-    ],
-    "origin": "hollywood",
-    "poster": "https://images.cdn.prd.api.discomax.com/2024/11/11/0b4f139c-004a-3d94-8541-88ed3563a86f.jpeg",
-    "backdrop": "https://images.cdn.prd.api.discomax.com/2024/11/11/0b4f139c-004a-3d94-8541-88ed3563a86f.jpeg",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "4K UHD",
-    "ageRating": "P13",
-    "synopsis": "Filem Horror-Beneath (HBO MAX) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=25a7d67e-5b12-48fa-81bc-1d78a8568e3e&sub=t4",
-    "clearKey": "https://ptv2026.com/wvmax?editId=25a7d67e-5b12-48fa-81bc-1d78a8568e3e",
-    "isTrending": false,
-    "isPopular": false
-  },
-  {
-    "id": "vod_m_262",
-    "title": "Horror-Blumhouse is Truth or Dare",
-    "type": "movie",
-    "genre": [
-      "Action",
-      "Blockbuster",
-      "Drama"
-    ],
-    "origin": "hollywood",
-    "poster": "https://images.cdn.prd.api.discomax.com/2024/12/13/be929f24-e9b0-3c06-8e50-69c9c9832ff8.jpeg",
-    "backdrop": "https://images.cdn.prd.api.discomax.com/2024/12/13/be929f24-e9b0-3c06-8e50-69c9c9832ff8.jpeg",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "4K UHD",
-    "ageRating": "P13",
-    "synopsis": "Filem Horror-Blumhouse is Truth or Dare (HBO MAX) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=b79501d2-f196-494d-b8f6-cbc26ff4c31d&sub=t6",
-    "clearKey": "https://ptv2026.com/wvmax?editId=b79501d2-f196-494d-b8f6-cbc26ff4c31d",
-    "isTrending": false,
-    "isPopular": false
-  },
-  {
-    "id": "vod_m_263",
-    "title": "Horror-1-Caddo Lake",
-    "type": "movie",
-    "genre": [
-      "Action",
-      "Blockbuster",
-      "Drama"
-    ],
-    "origin": "hollywood",
-    "poster": "https://images.cdn.prd.api.discomax.com/2024/09/24/9ba22ef2-ebf1-3bbe-a23c-716ec0ee8a04.jpeg",
-    "backdrop": "https://images.cdn.prd.api.discomax.com/2024/09/24/9ba22ef2-ebf1-3bbe-a23c-716ec0ee8a04.jpeg",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "4K UHD",
-    "ageRating": "P13",
-    "synopsis": "Filem Horror-1-Caddo Lake (HBO MAX) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=b227209d-4b6f-469b-a853-c042af4e20ae&sub=t12",
-    "clearKey": "https://ptv2026.com/wvmax?editId=b227209d-4b6f-469b-a853-c042af4e20ae",
-    "isTrending": false,
-    "isPopular": false
-  },
-  {
-    "id": "vod_m_264",
-    "title": "Horror-Circle Of Eight",
-    "type": "movie",
-    "genre": [
-      "Action",
-      "Blockbuster",
-      "Drama"
-    ],
-    "origin": "hollywood",
-    "poster": "https://images.cdn.prd.api.discomax.com/2024/12/24/9b3306dc-fe1e-3014-ba65-27821a24622b.jpeg",
-    "backdrop": "https://images.cdn.prd.api.discomax.com/2024/12/24/9b3306dc-fe1e-3014-ba65-27821a24622b.jpeg",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "4K UHD",
-    "ageRating": "P13",
-    "synopsis": "Filem Horror-Circle Of Eight (HBO MAX) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=cbd398fa-49f1-4b40-819a-303cb7ed3d0c&sub=t0",
-    "clearKey": "https://ptv2026.com/wvmax?editId=cbd398fa-49f1-4b40-819a-303cb7ed3d0c",
-    "isTrending": false,
-    "isPopular": false
-  },
-  {
-    "id": "vod_m_265",
-    "title": "Horror-Cloverfield (2008)",
-    "type": "movie",
-    "genre": [
-      "Action",
-      "Blockbuster",
-      "Drama"
-    ],
-    "origin": "hollywood",
-    "poster": "https://images.cdn.prd.api.discomax.com/2024/08/29/39e1ee3f-6267-354a-bc70-c876bf6bf6e7.jpeg",
-    "backdrop": "https://images.cdn.prd.api.discomax.com/2024/08/29/39e1ee3f-6267-354a-bc70-c876bf6bf6e7.jpeg",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "4K UHD",
-    "ageRating": "P13",
-    "synopsis": "Filem Horror-Cloverfield (2008) (HBO MAX) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=7c2112a6-9fc2-4055-92ef-0e4a2cd70298&sub=t5",
-    "clearKey": "https://ptv2026.com/wvmax?editId=7c2112a6-9fc2-4055-92ef-0e4a2cd70298",
-    "isTrending": false,
-    "isPopular": false
-  },
-  {
-    "id": "vod_m_266",
-    "title": "Horror-1-Cuckoo",
-    "type": "movie",
-    "genre": [
-      "Action",
-      "Blockbuster",
-      "Drama"
-    ],
-    "origin": "hollywood",
-    "poster": "https://images.cdn.prd.api.discomax.com/2025/01/24/d3984816-81ac-3917-a598-59760acfcfb6.jpeg",
-    "backdrop": "https://images.cdn.prd.api.discomax.com/2025/01/24/d3984816-81ac-3917-a598-59760acfcfb6.jpeg",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "4K UHD",
-    "ageRating": "P13",
-    "synopsis": "Filem Horror-1-Cuckoo (HBO MAX) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=461d48e5-d08a-4577-a068-e4c3b7e5a721&sub=t5",
-    "clearKey": "https://ptv2026.com/wvmax?editId=461d48e5-d08a-4577-a068-e4c3b7e5a721",
-    "isTrending": false,
-    "isPopular": false
-  },
-  {
-    "id": "vod_m_267",
-    "title": "Horror-1-Detention",
-    "type": "movie",
-    "genre": [
-      "Action",
-      "Blockbuster",
-      "Drama"
-    ],
-    "origin": "hollywood",
-    "poster": "https://images.cdn.prd.api.discomax.com/2024/10/23/92b933d6-7d4d-30e1-937d-a551eab6439b.jpeg",
-    "backdrop": "https://images.cdn.prd.api.discomax.com/2024/10/23/92b933d6-7d4d-30e1-937d-a551eab6439b.jpeg",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "4K UHD",
-    "ageRating": "P13",
-    "synopsis": "Filem Horror-1-Detention (HBO MAX) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=f914eab6-2d00-41e5-a300-c6109bdfe56e&sub=t5",
-    "clearKey": "https://ptv2026.com/wvmax?editId=f914eab6-2d00-41e5-a300-c6109bdfe56e",
-    "isTrending": false,
-    "isPopular": false
-  },
-  {
-    "id": "vod_m_268",
-    "title": "Horror-1-Doctor Sleep",
-    "type": "movie",
-    "genre": [
-      "Action",
-      "Blockbuster",
-      "Drama"
-    ],
-    "origin": "hollywood",
-    "poster": "https://images.cdn.prd.api.discomax.com/2024/09/16/5a787ce5-4c71-31e2-a35c-58a9e8c9feef.jpeg",
-    "backdrop": "https://images.cdn.prd.api.discomax.com/2024/09/16/5a787ce5-4c71-31e2-a35c-58a9e8c9feef.jpeg",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "4K UHD",
-    "ageRating": "P13",
-    "synopsis": "Filem Horror-1-Doctor Sleep (HBO MAX) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=3e4389f8-05ce-4a6e-a03f-e3f491ea369f&sub=t12",
-    "clearKey": "https://ptv2026.com/wvmax?editId=3e4389f8-05ce-4a6e-a03f-e3f491ea369f",
-    "isTrending": false,
-    "isPopular": false
-  },
-  {
-    "id": "vod_m_269",
-    "title": "Horror-Event Horizon (1997)",
-    "type": "movie",
-    "genre": [
-      "Action",
-      "Blockbuster",
-      "Drama"
-    ],
-    "origin": "hollywood",
-    "poster": "https://images.cdn.prd.api.discomax.com/2024/11/11/ff661f8b-4ab0-332d-8c44-7bd0ab6e2697.jpeg",
-    "backdrop": "https://images.cdn.prd.api.discomax.com/2024/11/11/ff661f8b-4ab0-332d-8c44-7bd0ab6e2697.jpeg",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "4K UHD",
-    "ageRating": "P13",
-    "synopsis": "Filem Horror-Event Horizon (1997) (HBO MAX) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=694511fc-3eb1-4143-ac19-19cde8e5f230&sub=t5",
-    "clearKey": "https://ptv2026.com/wvmax?editId=694511fc-3eb1-4143-ac19-19cde8e5f230",
-    "isTrending": false,
-    "isPopular": false
-  },
-  {
-    "id": "vod_m_270",
-    "title": "Horror-1-Evil Dead Rise",
-    "type": "movie",
-    "genre": [
-      "Action",
-      "Blockbuster",
-      "Drama"
-    ],
-    "origin": "hollywood",
-    "poster": "https://images.cdn.prd.api.discomax.com/2023/09/29/94c80e9f-663e-31d5-add8-9a341133fa61.jpeg",
-    "backdrop": "https://images.cdn.prd.api.discomax.com/2023/09/29/94c80e9f-663e-31d5-add8-9a341133fa61.jpeg",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "4K UHD",
-    "ageRating": "P13",
-    "synopsis": "Filem Horror-1-Evil Dead Rise (HBO MAX) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=5d3b801d-2a4b-4463-969c-5a26be75f8a4&sub=t21",
-    "clearKey": "https://ptv2026.com/wvmax?editId=5d3b801d-2a4b-4463-969c-5a26be75f8a4",
-    "isTrending": false,
-    "isPopular": false
-  },
-  {
-    "id": "vod_m_271",
-    "title": "Horror-Finders Keepers",
-    "type": "movie",
-    "genre": [
-      "Action",
-      "Blockbuster",
-      "Drama"
-    ],
-    "origin": "hollywood",
-    "poster": "https://images.cdn.prd.api.discomax.com/2024/12/26/5f1f563c-8f5e-3b11-93fd-d28a43d748b6.jpeg",
-    "backdrop": "https://images.cdn.prd.api.discomax.com/2024/12/26/5f1f563c-8f5e-3b11-93fd-d28a43d748b6.jpeg",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "4K UHD",
-    "ageRating": "P13",
-    "synopsis": "Filem Horror-Finders Keepers (HBO MAX) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=8969a795-8b94-4f8a-bb33-4fcdac14f494&sub=t6",
-    "clearKey": "https://ptv2026.com/wvmax?editId=8969a795-8b94-4f8a-bb33-4fcdac14f494",
-    "isTrending": false,
-    "isPopular": false
-  },
-  {
-    "id": "vod_m_272",
-    "title": "Horror-1-Five Nights At Freddy",
-    "type": "movie",
-    "genre": [
-      "Action",
-      "Blockbuster",
-      "Drama"
-    ],
-    "origin": "hollywood",
-    "poster": "https://images.cdn.prd.api.discomax.com/2024/05/27/c867bff0-7c15-3d4d-a0f9-7bf266522b0b.jpeg",
-    "backdrop": "https://images.cdn.prd.api.discomax.com/2024/05/27/c867bff0-7c15-3d4d-a0f9-7bf266522b0b.jpeg",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "4K UHD",
-    "ageRating": "P13",
-    "synopsis": "Filem Horror-1-Five Nights At Freddy (HBO MAX) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=783cd37d-108f-475e-8c26-7df5cc990c4a&sub=t6",
-    "clearKey": "https://ptv2026.com/wvmax?editId=783cd37d-108f-475e-8c26-7df5cc990c4a",
-    "isTrending": false,
-    "isPopular": false
-  },
-  {
-    "id": "vod_m_273",
-    "title": "Horror-1-Get Out",
-    "type": "movie",
-    "genre": [
-      "Action",
-      "Blockbuster",
-      "Drama"
-    ],
-    "origin": "hollywood",
-    "poster": "https://images.cdn.prd.api.discomax.com/2025/01/24/e50a778b-d043-3839-ac2c-46155f59589d.jpeg",
-    "backdrop": "https://images.cdn.prd.api.discomax.com/2025/01/24/e50a778b-d043-3839-ac2c-46155f59589d.jpeg",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "4K UHD",
-    "ageRating": "P13",
-    "synopsis": "Filem Horror-1-Get Out (HBO MAX) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=08476ed8-4631-493c-982b-211fd919c243&sub=t1",
-    "clearKey": "https://ptv2026.com/wvmax?editId=08476ed8-4631-493c-982b-211fd919c243",
-    "isTrending": false,
-    "isPopular": false
-  },
-  {
-    "id": "vod_m_274",
-    "title": "Horror-Ghost Child",
-    "type": "movie",
-    "genre": [
-      "Action",
-      "Blockbuster",
-      "Drama"
-    ],
-    "origin": "hollywood",
-    "poster": "https://images.cdn.prd.api.discomax.com/2024/11/11/c738e078-ad25-373c-9f6c-47df2e6bdb74.jpeg",
-    "backdrop": "https://images.cdn.prd.api.discomax.com/2024/11/11/c738e078-ad25-373c-9f6c-47df2e6bdb74.jpeg",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "4K UHD",
-    "ageRating": "P13",
-    "synopsis": "Filem Horror-Ghost Child (HBO MAX) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=5235d48e-e237-4d62-b60d-ae1b2496b99e&sub=t3",
-    "clearKey": "https://ptv2026.com/wvmax?editId=5235d48e-e237-4d62-b60d-ae1b2496b99e",
-    "isTrending": false,
-    "isPopular": false
-  },
-  {
-    "id": "vod_m_275",
-    "title": "Horror-Interview with the Vampire",
-    "type": "movie",
-    "genre": [
-      "Action",
-      "Blockbuster",
-      "Drama"
-    ],
-    "origin": "hollywood",
-    "poster": "https://images.cdn.prd.api.discomax.com/2024/09/24/28eac860-ecd4-379f-8e5e-6b0addb6cb6b.jpeg",
-    "backdrop": "https://images.cdn.prd.api.discomax.com/2024/09/24/28eac860-ecd4-379f-8e5e-6b0addb6cb6b.jpeg",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "4K UHD",
-    "ageRating": "P13",
-    "synopsis": "Filem Horror-Interview with the Vampire (HBO MAX) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=f282693b-530b-4f85-b178-1e8e289ff5ba&sub=t11",
-    "clearKey": "https://ptv2026.com/wvmax?editId=f282693b-530b-4f85-b178-1e8e289ff5ba",
-    "isTrending": false,
-    "isPopular": false
-  },
-  {
-    "id": "vod_m_276",
-    "title": "Horror-IT",
-    "type": "movie",
-    "genre": [
-      "Action",
-      "Blockbuster",
-      "Drama"
-    ],
-    "origin": "hollywood",
-    "poster": "https://images.cdn.prd.api.discomax.com/2023/09/14/ad15f751-47af-3d34-800d-2835afaabed5.jpeg",
-    "backdrop": "https://images.cdn.prd.api.discomax.com/2023/09/14/ad15f751-47af-3d34-800d-2835afaabed5.jpeg",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "4K UHD",
-    "ageRating": "P13",
-    "synopsis": "Filem Horror-IT (HBO MAX) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=74e4633f-952e-4d1c-b4ad-e499dc14b6b7&sub=t8",
-    "clearKey": "https://ptv2026.com/wvmax?editId=74e4633f-952e-4d1c-b4ad-e499dc14b6b7",
-    "isTrending": false,
-    "isPopular": false
-  },
-  {
-    "id": "vod_m_277",
-    "title": "Horror-It Chapter Two",
-    "type": "movie",
-    "genre": [
-      "Action",
-      "Blockbuster",
-      "Drama"
-    ],
-    "origin": "hollywood",
-    "poster": "https://images.cdn.prd.api.discomax.com/2024/09/25/d4706760-972b-301e-8d17-d9e750aa8114.jpeg",
-    "backdrop": "https://images.cdn.prd.api.discomax.com/2024/09/25/d4706760-972b-301e-8d17-d9e750aa8114.jpeg",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "4K UHD",
-    "ageRating": "P13",
-    "synopsis": "Filem Horror-It Chapter Two (HBO MAX) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=f891d771-202d-4ae2-a4e1-371c6858d064&sub=t18",
-    "clearKey": "https://ptv2026.com/wvmax?editId=f891d771-202d-4ae2-a4e1-371c6858d064",
-    "isTrending": false,
-    "isPopular": false
-  },
-  {
-    "id": "vod_m_278",
-    "title": "Horror-1-Lisa Frankenstein",
-    "type": "movie",
-    "genre": [
-      "Action",
-      "Blockbuster",
-      "Drama"
-    ],
-    "origin": "hollywood",
-    "poster": "https://images.cdn.prd.api.discomax.com/2024/08/24/bb78ccd9-1f79-31f5-8d5b-80097a96abb6.jpeg",
-    "backdrop": "https://images.cdn.prd.api.discomax.com/2024/08/24/bb78ccd9-1f79-31f5-8d5b-80097a96abb6.jpeg",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "4K UHD",
-    "ageRating": "P13",
-    "synopsis": "Filem Horror-1-Lisa Frankenstein (HBO MAX) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=bb60b877-d931-4dc8-aab9-09c07266b76b&sub=t5",
-    "clearKey": "https://ptv2026.com/wvmax?editId=bb60b877-d931-4dc8-aab9-09c07266b76b",
-    "isTrending": false,
-    "isPopular": false
-  },
-  {
-    "id": "vod_m_279",
-    "title": "Horror-1-Malignant",
-    "type": "movie",
-    "genre": [
-      "Action",
-      "Blockbuster",
-      "Drama"
-    ],
-    "origin": "hollywood",
-    "poster": "https://images.cdn.prd.api.discomax.com/2023/09/30/9e07d6c2-29c7-3042-9353-7046d92637e8.jpeg",
-    "backdrop": "https://images.cdn.prd.api.discomax.com/2023/09/30/9e07d6c2-29c7-3042-9353-7046d92637e8.jpeg",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "4K UHD",
-    "ageRating": "P13",
-    "synopsis": "Filem Horror-1-Malignant (HBO MAX) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=777337c6-253f-4a3e-aa8b-1a5c636e68b5&sub=t25",
-    "clearKey": "https://ptv2026.com/wvmax?editId=777337c6-253f-4a3e-aa8b-1a5c636e68b5",
-    "isTrending": false,
-    "isPopular": false
-  },
-  {
-    "id": "vod_m_280",
-    "title": "Horror-1-Night Swim",
-    "type": "movie",
-    "genre": [
-      "Action",
-      "Blockbuster",
-      "Drama"
-    ],
-    "origin": "hollywood",
-    "poster": "https://images.cdn.prd.api.discomax.com/2024/08/07/15b27660-483b-339c-a8f7-36db1c59796c.jpeg",
-    "backdrop": "https://images.cdn.prd.api.discomax.com/2024/08/07/15b27660-483b-339c-a8f7-36db1c59796c.jpeg",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "4K UHD",
-    "ageRating": "P13",
-    "synopsis": "Filem Horror-1-Night Swim (HBO MAX) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=5e432e47-2faa-47fe-a3c9-bad679a8607f&sub=t0",
-    "clearKey": "https://ptv2026.com/wvmax?editId=5e432e47-2faa-47fe-a3c9-bad679a8607f",
-    "isTrending": false,
-    "isPopular": false
-  },
-  {
-    "id": "vod_m_281",
-    "title": "Horror-One Cut of the Dead",
-    "type": "movie",
-    "genre": [
-      "Action",
-      "Blockbuster",
-      "Drama"
-    ],
-    "origin": "hollywood",
-    "poster": "https://images.cdn.prd.api.discomax.com/2024/11/11/549604ac-afca-31ba-b9fb-bc369d9a9bd2.jpeg",
-    "backdrop": "https://images.cdn.prd.api.discomax.com/2024/11/11/549604ac-afca-31ba-b9fb-bc369d9a9bd2.jpeg",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "4K UHD",
-    "ageRating": "P13",
-    "synopsis": "Filem Horror-One Cut of the Dead (HBO MAX) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=06f3e463-1d52-4ae9-a8ec-b7ab68234e1c&sub=t2",
-    "clearKey": "https://ptv2026.com/wvmax?editId=06f3e463-1d52-4ae9-a8ec-b7ab68234e1c",
-    "isTrending": false,
-    "isPopular": false
-  },
-  {
-    "id": "vod_m_282",
-    "title": "Horror-Orphan",
-    "type": "movie",
-    "genre": [
-      "Action",
-      "Blockbuster",
-      "Drama"
-    ],
-    "origin": "hollywood",
-    "poster": "https://images.cdn.prd.api.discomax.com/2023/09/14/d7d79138-7710-30d3-901d-95692e7942e9.jpeg",
-    "backdrop": "https://images.cdn.prd.api.discomax.com/2023/09/14/d7d79138-7710-30d3-901d-95692e7942e9.jpeg",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "4K UHD",
-    "ageRating": "P13",
-    "synopsis": "Filem Horror-Orphan (HBO MAX) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=80a5f4a6-c5e1-4314-b22e-31b77da0d6e4&sub=t4",
-    "clearKey": "https://ptv2026.com/wvmax?editId=80a5f4a6-c5e1-4314-b22e-31b77da0d6e4",
-    "isTrending": false,
-    "isPopular": false
-  },
-  {
-    "id": "vod_m_283",
-    "title": "Horror-Sadako",
-    "type": "movie",
-    "genre": [
-      "Action",
-      "Blockbuster",
-      "Drama"
-    ],
-    "origin": "hollywood",
-    "poster": "https://images.cdn.prd.api.discomax.com/2024/11/08/71d2db26-4c7c-3a22-b03d-abd8b5264ca9.jpeg",
-    "backdrop": "https://images.cdn.prd.api.discomax.com/2024/11/08/71d2db26-4c7c-3a22-b03d-abd8b5264ca9.jpeg",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "4K UHD",
-    "ageRating": "P13",
-    "synopsis": "Filem Horror-Sadako (HBO MAX) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=3cbbdc4e-2dca-4090-934b-f0b151293c9e&sub=t1",
-    "clearKey": "https://ptv2026.com/wvmax?editId=3cbbdc4e-2dca-4090-934b-f0b151293c9e",
-    "isTrending": false,
-    "isPopular": false
-  },
-  {
-    "id": "vod_m_284",
-    "title": "Horror-1-Salem Lot (2024)",
-    "type": "movie",
-    "genre": [
-      "Action",
-      "Blockbuster",
-      "Drama"
-    ],
-    "origin": "hollywood",
-    "poster": "https://images.cdn.prd.api.discomax.com/2024/09/12/c2f2ad39-fb07-3bad-9ab8-75c13a0388d6.jpeg",
-    "backdrop": "https://images.cdn.prd.api.discomax.com/2024/09/12/c2f2ad39-fb07-3bad-9ab8-75c13a0388d6.jpeg",
-    "year": 2024,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "4K UHD",
-    "ageRating": "P13",
-    "synopsis": "Filem Horror-1-Salem Lot (2024) (HBO MAX) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=320880cf-f6b2-40b8-b039-953bacced3ad&sub=t35",
-    "clearKey": "https://ptv2026.com/wvmax?editId=320880cf-f6b2-40b8-b039-953bacced3ad",
-    "isTrending": false,
-    "isPopular": false
-  },
-  {
-    "id": "vod_m_285",
-    "title": "Horror-Scouts Guide to the Zombie Apocalypse",
-    "type": "movie",
-    "genre": [
-      "Action",
-      "Blockbuster",
-      "Drama"
-    ],
-    "origin": "hollywood",
-    "poster": "https://images.cdn.prd.api.discomax.com/2024/11/11/e5b7981b-ed16-3b4e-939b-09e09a9cfa3a.jpeg",
-    "backdrop": "https://images.cdn.prd.api.discomax.com/2024/11/11/e5b7981b-ed16-3b4e-939b-09e09a9cfa3a.jpeg",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "4K UHD",
-    "ageRating": "P13",
-    "synopsis": "Filem Horror-Scouts Guide to the Zombie Apocalypse (HBO MAX) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=b94f31eb-c787-4809-8822-fb126a1a0971&sub=t5",
-    "clearKey": "https://ptv2026.com/wvmax?editId=b94f31eb-c787-4809-8822-fb126a1a0971",
-    "isTrending": false,
-    "isPopular": false
-  },
-  {
-    "id": "vod_m_286",
-    "title": "Horror-Spawn",
-    "type": "movie",
-    "genre": [
-      "Action",
-      "Blockbuster",
-      "Drama"
-    ],
-    "origin": "hollywood",
-    "poster": "https://images.cdn.prd.api.discomax.com/2023/09/14/6de90173-29b6-3a0b-b25d-a6f64fd6ebea.jpeg",
-    "backdrop": "https://images.cdn.prd.api.discomax.com/2023/09/14/6de90173-29b6-3a0b-b25d-a6f64fd6ebea.jpeg",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "4K UHD",
-    "ageRating": "P13",
-    "synopsis": "Filem Horror-Spawn (HBO MAX) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=79f4d54a-045c-46a1-bea0-66bdf6db2e1a&sub=t6",
-    "clearKey": "https://ptv2026.com/wvmax?editId=79f4d54a-045c-46a1-bea0-66bdf6db2e1a",
-    "isTrending": false,
-    "isPopular": false
-  },
-  {
-    "id": "vod_m_287",
-    "title": "Horror-1-Tastes of Horror",
-    "type": "movie",
-    "genre": [
-      "Action",
-      "Blockbuster",
-      "Drama"
-    ],
-    "origin": "hollywood",
-    "poster": "https://images.cdn.prd.api.discomax.com/2025/01/14/efc75144-11b7-3a77-9f02-44bf6ca7eff8.jpeg",
-    "backdrop": "https://images.cdn.prd.api.discomax.com/2025/01/14/efc75144-11b7-3a77-9f02-44bf6ca7eff8.jpeg",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "4K UHD",
-    "ageRating": "P13",
-    "synopsis": "Filem Horror-1-Tastes of Horror (HBO MAX) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=cf75d576-6e0f-49a8-be6c-b014fc9adbc1&sub=t4",
-    "clearKey": "https://ptv2026.com/wvmax?editId=cf75d576-6e0f-49a8-be6c-b014fc9adbc1",
-    "isTrending": false,
-    "isPopular": false
-  },
-  {
-    "id": "vod_m_288",
-    "title": "Horror-1-The Blackening",
-    "type": "movie",
-    "genre": [
-      "Action",
-      "Blockbuster",
-      "Drama"
-    ],
-    "origin": "hollywood",
-    "poster": "https://images.cdn.prd.api.discomax.com/2024/03/20/8825cccf-7185-3caf-907e-75938526130e.jpeg",
-    "backdrop": "https://images.cdn.prd.api.discomax.com/2024/03/20/8825cccf-7185-3caf-907e-75938526130e.jpeg",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "4K UHD",
-    "ageRating": "P13",
-    "synopsis": "Filem Horror-1-The Blackening (HBO MAX) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=0d1b505a-c1e4-4053-84fe-6af694f5a356&sub=t0",
-    "clearKey": "https://ptv2026.com/wvmax?editId=0d1b505a-c1e4-4053-84fe-6af694f5a356",
-    "isTrending": false,
-    "isPopular": false
-  },
-  {
-    "id": "vod_m_289",
-    "title": "Horror-The Conjuring",
-    "type": "movie",
-    "genre": [
-      "Action",
-      "Blockbuster",
-      "Drama"
-    ],
-    "origin": "hollywood",
-    "poster": "https://images.cdn.prd.api.discomax.com/2024/09/25/af16111c-e98a-3dc3-aecb-05c6b6c76b14.jpeg",
-    "backdrop": "https://images.cdn.prd.api.discomax.com/2024/09/25/af16111c-e98a-3dc3-aecb-05c6b6c76b14.jpeg",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "4K UHD",
-    "ageRating": "P13",
-    "synopsis": "Filem Horror-The Conjuring (HBO MAX) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=b9182e6f-4c74-4120-9cf1-9a60aac5d6a9&sub=t19",
-    "clearKey": "https://ptv2026.com/wvmax?editId=b9182e6f-4c74-4120-9cf1-9a60aac5d6a9",
-    "isTrending": false,
-    "isPopular": false
-  },
-  {
-    "id": "vod_m_290",
-    "title": "Horror-The Conjuring 2",
-    "type": "movie",
-    "genre": [
-      "Action",
-      "Blockbuster",
-      "Drama"
-    ],
-    "origin": "hollywood",
-    "poster": "https://images.cdn.prd.api.discomax.com/2024/09/24/fc110ab8-518e-3bd2-a8cc-a00adf566912.jpeg",
-    "backdrop": "https://images.cdn.prd.api.discomax.com/2024/09/24/fc110ab8-518e-3bd2-a8cc-a00adf566912.jpeg",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "4K UHD",
-    "ageRating": "P13",
-    "synopsis": "Filem Horror-The Conjuring 2 (HBO MAX) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=935c7e79-a189-42a8-a8c0-77f51a45cdb8&sub=t11",
-    "clearKey": "https://ptv2026.com/wvmax?editId=935c7e79-a189-42a8-a8c0-77f51a45cdb8",
-    "isTrending": false,
-    "isPopular": false
-  },
-  {
-    "id": "vod_m_291",
-    "title": "Horror-The Conjuring: The Devil Made Me Do It",
-    "type": "movie",
-    "genre": [
-      "Action",
-      "Blockbuster",
-      "Drama"
-    ],
-    "origin": "hollywood",
-    "poster": "https://images.cdn.prd.api.discomax.com/2023/09/30/3097abf0-230e-3eee-8517-125c6291e8cf.jpeg",
-    "backdrop": "https://images.cdn.prd.api.discomax.com/2023/09/30/3097abf0-230e-3eee-8517-125c6291e8cf.jpeg",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "4K UHD",
-    "ageRating": "P13",
-    "synopsis": "Filem Horror-The Conjuring: The Devil Made Me Do It (HBO MAX) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=1437ff69-a419-474a-9716-337f79bc5247&sub=t10",
-    "clearKey": "https://ptv2026.com/wvmax?editId=1437ff69-a419-474a-9716-337f79bc5247",
-    "isTrending": false,
-    "isPopular": false
-  },
-  {
-    "id": "vod_m_292",
-    "title": "Horror-1-The Curse of La Llorona",
-    "type": "movie",
-    "genre": [
-      "Action",
-      "Blockbuster",
-      "Drama"
-    ],
-    "origin": "hollywood",
-    "poster": "https://images.cdn.prd.api.discomax.com/2023/09/30/c212712b-cdda-3758-b8f8-fbc5220517b1.jpeg",
-    "backdrop": "https://images.cdn.prd.api.discomax.com/2023/09/30/c212712b-cdda-3758-b8f8-fbc5220517b1.jpeg",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "4K UHD",
-    "ageRating": "P13",
-    "synopsis": "Filem Horror-1-The Curse of La Llorona (HBO MAX) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=caacde84-a64c-4334-9001-087766dd890b&sub=t0",
-    "clearKey": "https://ptv2026.com/wvmax?editId=caacde84-a64c-4334-9001-087766dd890b",
-    "isTrending": false,
-    "isPopular": false
-  },
-  {
-    "id": "vod_m_293",
-    "title": "Horror-1-The Exorcist: Believer (2023)",
-    "type": "movie",
-    "genre": [
-      "Action",
-      "Blockbuster",
-      "Drama"
-    ],
-    "origin": "hollywood",
-    "poster": "https://images.cdn.prd.api.discomax.com/2024/05/07/ff4f9212-c4e6-3dd7-ae8e-fa39cd9c742e.jpeg",
-    "backdrop": "https://images.cdn.prd.api.discomax.com/2024/05/07/ff4f9212-c4e6-3dd7-ae8e-fa39cd9c742e.jpeg",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "4K UHD",
-    "ageRating": "P13",
-    "synopsis": "Filem Horror-1-The Exorcist: Believer (2023) (HBO MAX) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=8cbb095f-3a4d-47e0-8c0d-5b5e9d1b0aa7&sub=t3",
-    "clearKey": "https://ptv2026.com/wvmax?editId=8cbb095f-3a4d-47e0-8c0d-5b5e9d1b0aa7",
-    "isTrending": false,
-    "isPopular": false
-  },
-  {
-    "id": "vod_m_294",
-    "title": "Horror-The Haunting",
-    "type": "movie",
-    "genre": [
-      "Action",
-      "Blockbuster",
-      "Drama"
-    ],
-    "origin": "hollywood",
-    "poster": "https://images.cdn.prd.api.discomax.com/2023/09/14/06a62e86-8550-3e65-93c5-288dc6d94804.jpeg",
-    "backdrop": "https://images.cdn.prd.api.discomax.com/2023/09/14/06a62e86-8550-3e65-93c5-288dc6d94804.jpeg",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "4K UHD",
-    "ageRating": "P13",
-    "synopsis": "Filem Horror-The Haunting (HBO MAX) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=d667c476-1b8a-4d08-9ba2-dc39a0de3433&sub=t3",
-    "clearKey": "https://ptv2026.com/wvmax?editId=d667c476-1b8a-4d08-9ba2-dc39a0de3433",
-    "isTrending": false,
-    "isPopular": false
-  },
-  {
-    "id": "vod_m_295",
-    "title": "Horror-1-The Last Voyage of the Demeter",
-    "type": "movie",
-    "genre": [
-      "Action",
-      "Blockbuster",
-      "Drama"
-    ],
-    "origin": "hollywood",
-    "poster": "https://images.cdn.prd.api.discomax.com/2024/03/31/f8028be4-a8b8-38f7-ac50-2ba50b2fd750.jpeg",
-    "backdrop": "https://images.cdn.prd.api.discomax.com/2024/03/31/f8028be4-a8b8-38f7-ac50-2ba50b2fd750.jpeg",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "4K UHD",
-    "ageRating": "P13",
-    "synopsis": "Filem Horror-1-The Last Voyage of the Demeter (HBO MAX) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=13e1787b-1f8d-455d-aa8d-994e03758672&sub=t4",
-    "clearKey": "https://ptv2026.com/wvmax?editId=13e1787b-1f8d-455d-aa8d-994e03758672",
-    "isTrending": false,
-    "isPopular": false
-  },
-  {
-    "id": "vod_m_296",
-    "title": "Horror-1-The Nun (2018)",
-    "type": "movie",
-    "genre": [
-      "Action",
-      "Blockbuster",
-      "Drama"
-    ],
-    "origin": "hollywood",
-    "poster": "https://images.cdn.prd.api.discomax.com/2024/09/20/c0627255-0936-3088-8b54-103cdcac0d15.jpeg",
-    "backdrop": "https://images.cdn.prd.api.discomax.com/2024/09/20/c0627255-0936-3088-8b54-103cdcac0d15.jpeg",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "4K UHD",
-    "ageRating": "P13",
-    "synopsis": "Filem Horror-1-The Nun (2018) (HBO MAX) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=782891ef-7f64-4014-841a-045dd307e2f7&sub=t9",
-    "clearKey": "https://ptv2026.com/wvmax?editId=782891ef-7f64-4014-841a-045dd307e2f7",
-    "isTrending": false,
-    "isPopular": false
-  },
-  {
-    "id": "vod_m_297",
-    "title": "Horror-1-The Nun II",
-    "type": "movie",
-    "genre": [
-      "Action",
-      "Blockbuster",
-      "Drama"
-    ],
-    "origin": "hollywood",
-    "poster": "https://images.cdn.prd.api.discomax.com/2023/10/20/b28a8de7-d73b-3ca0-8d05-a1f17e342956.jpeg",
-    "backdrop": "https://images.cdn.prd.api.discomax.com/2023/10/20/b28a8de7-d73b-3ca0-8d05-a1f17e342956.jpeg",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "4K UHD",
-    "ageRating": "P13",
-    "synopsis": "Filem Horror-1-The Nun II (HBO MAX) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=f388009d-e649-4fee-b6a5-1403426c8a63&sub=t14",
-    "clearKey": "https://ptv2026.com/wvmax?editId=f388009d-e649-4fee-b6a5-1403426c8a63",
-    "isTrending": false,
-    "isPopular": false
-  },
-  {
-    "id": "vod_m_298",
-    "title": "Horror-1-The Rite",
-    "type": "movie",
-    "genre": [
-      "Action",
-      "Blockbuster",
-      "Drama"
-    ],
-    "origin": "hollywood",
-    "poster": "https://images.cdn.prd.api.discomax.com/2024/05/15/c485a3b9-0366-337e-b8e9-3fad846edae1.jpeg",
-    "backdrop": "https://images.cdn.prd.api.discomax.com/2024/05/15/c485a3b9-0366-337e-b8e9-3fad846edae1.jpeg",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "4K UHD",
-    "ageRating": "P13",
-    "synopsis": "Filem Horror-1-The Rite (HBO MAX) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=c8548ae7-901c-49ea-b7d2-234f19f61cfb&sub=t5",
-    "clearKey": "https://ptv2026.com/wvmax?editId=c8548ae7-901c-49ea-b7d2-234f19f61cfb",
-    "isTrending": false,
-    "isPopular": false
-  },
-  {
-    "id": "vod_m_299",
-    "title": "Horror-The Uninvited",
-    "type": "movie",
-    "genre": [
-      "Action",
-      "Blockbuster",
-      "Drama"
-    ],
-    "origin": "hollywood",
-    "poster": "https://images.cdn.prd.api.discomax.com/2024/11/11/bf10f3e9-b783-3844-b188-26d94a0ce42b.jpeg",
-    "backdrop": "https://images.cdn.prd.api.discomax.com/2024/11/11/bf10f3e9-b783-3844-b188-26d94a0ce42b.jpeg",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "4K UHD",
-    "ageRating": "P13",
-    "synopsis": "Filem Horror-The Uninvited (HBO MAX) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=5d7718da-2d39-4f28-a299-f8e81faa4a4d&sub=t1",
-    "clearKey": "https://ptv2026.com/wvmax?editId=5d7718da-2d39-4f28-a299-f8e81faa4a4d",
-    "isTrending": false,
-    "isPopular": false
-  },
-  {
-    "id": "vod_m_300",
-    "title": "Horror-1-The Visitor",
-    "type": "movie",
-    "genre": [
-      "Action",
-      "Blockbuster",
-      "Drama"
-    ],
-    "origin": "hollywood",
-    "poster": "https://images.cdn.prd.api.discomax.com/2024/11/11/8db7fd5f-eb83-3b73-982b-8ce5c4aba660.jpeg",
-    "backdrop": "https://images.cdn.prd.api.discomax.com/2024/11/11/8db7fd5f-eb83-3b73-982b-8ce5c4aba660.jpeg",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "4K UHD",
-    "ageRating": "P13",
-    "synopsis": "Filem Horror-1-The Visitor (HBO MAX) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=8f38e2b7-79db-4ada-a2ce-5922fed42eba&sub=t4",
-    "clearKey": "https://ptv2026.com/wvmax?editId=8f38e2b7-79db-4ada-a2ce-5922fed42eba",
-    "isTrending": false,
-    "isPopular": false
-  },
-  {
-    "id": "vod_m_301",
-    "title": "Horror-1-The Watchers",
-    "type": "movie",
-    "genre": [
-      "Action",
-      "Blockbuster",
-      "Drama"
-    ],
-    "origin": "hollywood",
-    "poster": "https://images.cdn.prd.api.discomax.com/2024/08/21/0782fb7e-ca04-37ce-812f-55a1da2fcf05.jpeg",
-    "backdrop": "https://images.cdn.prd.api.discomax.com/2024/08/21/0782fb7e-ca04-37ce-812f-55a1da2fcf05.jpeg",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "4K UHD",
-    "ageRating": "P13",
-    "synopsis": "Filem Horror-1-The Watchers (HBO MAX) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=98614feb-9188-4b90-8cfe-0cba8c7db332&sub=t22",
-    "clearKey": "https://ptv2026.com/wvmax?editId=98614feb-9188-4b90-8cfe-0cba8c7db332",
-    "isTrending": false,
-    "isPopular": false
-  },
-  {
-    "id": "vod_m_302",
-    "title": "Horror-The Wolfman",
-    "type": "movie",
-    "genre": [
-      "Action",
-      "Blockbuster",
-      "Drama"
-    ],
-    "origin": "hollywood",
-    "poster": "https://images.cdn.prd.api.discomax.com/2024/10/28/587b331e-1ad4-343c-ac48-5a30dd9c2a8b.jpeg",
-    "backdrop": "https://images.cdn.prd.api.discomax.com/2024/10/28/587b331e-1ad4-343c-ac48-5a30dd9c2a8b.jpeg",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "4K UHD",
-    "ageRating": "P13",
-    "synopsis": "Filem Horror-The Wolfman (HBO MAX) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=37545c5f-0f3e-4d7d-8886-f623eca0a81f&sub=t1",
-    "clearKey": "https://ptv2026.com/wvmax?editId=37545c5f-0f3e-4d7d-8886-f623eca0a81f",
-    "isTrending": false,
-    "isPopular": false
-  },
-  {
-    "id": "vod_m_303",
-    "title": "Horror-1-There is Something Wrong With The Children",
-    "type": "movie",
-    "genre": [
-      "Action",
-      "Blockbuster",
-      "Drama"
-    ],
-    "origin": "hollywood",
-    "poster": "https://images.cdn.prd.api.discomax.com/2024/11/11/31ef9856-a173-3601-b2fa-f6f0730b1527.jpeg",
-    "backdrop": "https://images.cdn.prd.api.discomax.com/2024/11/11/31ef9856-a173-3601-b2fa-f6f0730b1527.jpeg",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "4K UHD",
-    "ageRating": "P13",
-    "synopsis": "Filem Horror-1-There is Something Wrong With The Children (HBO MAX) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=16d29300-94e4-420d-a1bd-e24f2f098fa7&sub=t4",
-    "clearKey": "https://ptv2026.com/wvmax?editId=16d29300-94e4-420d-a1bd-e24f2f098fa7",
-    "isTrending": false,
-    "isPopular": false
-  },
-  {
-    "id": "vod_m_304",
-    "title": "Horror-1-Torn Hearts",
-    "type": "movie",
-    "genre": [
-      "Action",
-      "Blockbuster",
-      "Drama"
-    ],
-    "origin": "hollywood",
-    "poster": "https://images.cdn.prd.api.discomax.com/2024/11/11/589e89c8-eceb-3baf-95f2-17a7b51a577f.jpeg",
-    "backdrop": "https://images.cdn.prd.api.discomax.com/2024/11/11/589e89c8-eceb-3baf-95f2-17a7b51a577f.jpeg",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "4K UHD",
-    "ageRating": "P13",
-    "synopsis": "Filem Horror-1-Torn Hearts (HBO MAX) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=4249dffb-9cbb-447f-925f-01c452f9c9da&sub=t6",
-    "clearKey": "https://ptv2026.com/wvmax?editId=4249dffb-9cbb-447f-925f-01c452f9c9da",
-    "isTrending": false,
-    "isPopular": false
-  },
-  {
-    "id": "vod_m_305",
-    "title": "Horror-1-Trap",
-    "type": "movie",
-    "genre": [
-      "Action",
-      "Blockbuster",
-      "Drama"
-    ],
-    "origin": "hollywood",
-    "poster": "https://images.cdn.prd.api.discomax.com/2024/10/16/c16e851d-d51c-3dc0-a9c3-f828a236f321.jpeg",
-    "backdrop": "https://images.cdn.prd.api.discomax.com/2024/10/16/c16e851d-d51c-3dc0-a9c3-f828a236f321.jpeg",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "4K UHD",
-    "ageRating": "P13",
-    "synopsis": "Filem Horror-1-Trap (HBO MAX) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=bae8a681-2943-4a89-bbdc-f0bd443c217d&sub=t13",
-    "clearKey": "https://ptv2026.com/wvmax?editId=bae8a681-2943-4a89-bbdc-f0bd443c217d",
-    "isTrending": false,
-    "isPopular": false
-  },
-  {
-    "id": "vod_m_306",
-    "title": "Horror-The Unborn",
-    "type": "movie",
-    "genre": [
-      "Action",
-      "Blockbuster",
-      "Drama"
-    ],
-    "origin": "hollywood",
-    "poster": "https://images.cdn.prd.api.discomax.com/2023/09/30/4b9309e3-2f05-3b81-8983-71f0764135a5.jpeg",
-    "backdrop": "https://images.cdn.prd.api.discomax.com/2023/09/30/4b9309e3-2f05-3b81-8983-71f0764135a5.jpeg",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "4K UHD",
-    "ageRating": "P13",
-    "synopsis": "Filem Horror-The Unborn (HBO MAX) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=04b0ea54-760a-4ca5-aaad-7cb068a9f541&sub=t0",
-    "clearKey": "https://ptv2026.com/wvmax?editId=04b0ea54-760a-4ca5-aaad-7cb068a9f541",
-    "isTrending": false,
-    "isPopular": false
-  },
-  {
-    "id": "vod_m_307",
-    "title": "Horror-1-Unhuman",
-    "type": "movie",
-    "genre": [
-      "Action",
-      "Blockbuster",
-      "Drama"
-    ],
-    "origin": "hollywood",
-    "poster": "https://images.cdn.prd.api.discomax.com/2024/11/11/f03ab1c0-ef3d-335e-80fc-80aa9fa1ab3c.jpeg",
-    "backdrop": "https://images.cdn.prd.api.discomax.com/2024/11/11/f03ab1c0-ef3d-335e-80fc-80aa9fa1ab3c.jpeg",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "4K UHD",
-    "ageRating": "P13",
-    "synopsis": "Filem Horror-1-Unhuman (HBO MAX) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=f742298b-f493-4fba-9647-897c8b40bdf2&sub=t4",
-    "clearKey": "https://ptv2026.com/wvmax?editId=f742298b-f493-4fba-9647-897c8b40bdf2",
-    "isTrending": false,
-    "isPopular": false
-  },
-  {
-    "id": "vod_m_308",
-    "title": "Horror-1-Unseen",
-    "type": "movie",
-    "genre": [
-      "Action",
-      "Blockbuster",
-      "Drama"
-    ],
-    "origin": "hollywood",
-    "poster": "https://images.cdn.prd.api.discomax.com/2024/11/11/f6c9c923-d115-3eea-ab7c-c796ea894bbb.jpeg",
-    "backdrop": "https://images.cdn.prd.api.discomax.com/2024/11/11/f6c9c923-d115-3eea-ab7c-c796ea894bbb.jpeg",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "4K UHD",
-    "ageRating": "P13",
-    "synopsis": "Filem Horror-1-Unseen (HBO MAX) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=570fccfb-2739-4810-bcb2-4ed12bae52e4&sub=t5",
-    "clearKey": "https://ptv2026.com/wvmax?editId=570fccfb-2739-4810-bcb2-4ed12bae52e4",
-    "isTrending": false,
-    "isPopular": false
-  },
-  {
-    "id": "vod_m_309",
-    "title": "Horror-1-Vindicta",
-    "type": "movie",
-    "genre": [
-      "Action",
-      "Blockbuster",
-      "Drama"
-    ],
-    "origin": "hollywood",
-    "poster": "https://images.cdn.prd.api.discomax.com/2024/11/08/86065552-b06d-3e53-8e90-ed3af5266256.jpeg",
-    "backdrop": "https://images.cdn.prd.api.discomax.com/2024/11/08/86065552-b06d-3e53-8e90-ed3af5266256.jpeg",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "4K UHD",
-    "ageRating": "P13",
-    "synopsis": "Filem Horror-1-Vindicta (HBO MAX) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=b0e46362-b9fa-4a30-a293-7c2990b3bc2d&sub=t4",
-    "clearKey": "https://ptv2026.com/wvmax?editId=b0e46362-b9fa-4a30-a293-7c2990b3bc2d",
-    "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_310",
@@ -34388,7 +29833,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2024/03/28/b1ed6d2f-3a60-38ba-b59e-3ea41e198ac7.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2024/03/28/b1ed6d2f-3a60-38ba-b59e-3ea41e198ac7.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -34399,7 +29844,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=d8eb74cb-58f5-4b5b-8c26-8b7ce4563daa&sub=t13",
     "clearKey": "https://ptv2026.com/wvmax?editId=d8eb74cb-58f5-4b5b-8c26-8b7ce4563daa",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_311",
@@ -34414,7 +29860,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2024/04/05/c6344dcc-6927-3288-83c0-ffc17a3d4b4d.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2024/04/05/c6344dcc-6927-3288-83c0-ffc17a3d4b4d.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -34425,7 +29871,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=f1b431b9-5f41-4f9a-9c9d-deaa117ba6d4&sub=t0",
     "clearKey": "https://ptv2026.com/wvmax?editId=f1b431b9-5f41-4f9a-9c9d-deaa117ba6d4",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_312",
@@ -34440,7 +29887,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2023/09/18/76479b5b-c3bc-3ee5-aea7-bc3a08c8bdfe.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2023/09/18/76479b5b-c3bc-3ee5-aea7-bc3a08c8bdfe.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -34451,7 +29898,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=5533c2d3-e174-41d9-85c8-54f18d663959&sub=t3",
     "clearKey": "https://ptv2026.com/wvmax?editId=5533c2d3-e174-41d9-85c8-54f18d663959",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_313",
@@ -34466,7 +29914,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2024/11/08/334c2a59-8ac7-3e85-8719-c4d56921b5f7.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2024/11/08/334c2a59-8ac7-3e85-8719-c4d56921b5f7.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -34477,7 +29925,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=42ab0e0f-eb57-412f-9428-d8dde0481b48&sub=t5",
     "clearKey": "https://ptv2026.com/wvmax?editId=42ab0e0f-eb57-412f-9428-d8dde0481b48",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_314",
@@ -34492,7 +29941,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2023/12/15/ad0c4e9a-ae99-3e40-a252-01c63c0bac9a.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2023/12/15/ad0c4e9a-ae99-3e40-a252-01c63c0bac9a.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -34503,33 +29952,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=e71a3bf6-d5c1-49e8-a0a6-9e2759c13cec&sub=t0",
     "clearKey": "https://ptv2026.com/wvmax?editId=e71a3bf6-d5c1-49e8-a0a6-9e2759c13cec",
     "isTrending": false,
-    "isPopular": false
-  },
-  {
-    "id": "vod_m_315",
-    "title": "Action-2-R.I.P.D. 2: Rise of the Damned",
-    "type": "movie",
-    "genre": [
-      "Action",
-      "Blockbuster",
-      "Drama"
-    ],
-    "origin": "hollywood",
-    "poster": "https://images.cdn.prd.api.discomax.com/2023/11/23/6ddc7e61-910a-3409-92d1-81110547934d.jpeg",
-    "backdrop": "https://images.cdn.prd.api.discomax.com/2023/11/23/6ddc7e61-910a-3409-92d1-81110547934d.jpeg",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "4K UHD",
-    "ageRating": "P13",
-    "synopsis": "Filem Action-2-R.I.P.D. 2: Rise of the Damned (HBO MAX) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=3ce6cbe5-6f6a-4fa2-b47b-f1767ea961dc&sub=t6",
-    "clearKey": "https://ptv2026.com/wvmax?editId=3ce6cbe5-6f6a-4fa2-b47b-f1767ea961dc",
-    "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_316",
@@ -34544,7 +29968,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2023/09/13/04a2363a-6512-3cea-8311-4cc52ab88cd6.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2023/09/13/04a2363a-6512-3cea-8311-4cc52ab88cd6.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -34555,7 +29979,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=c36c4f3f-0faf-4a70-805f-326435a7f3bd&sub=t2",
     "clearKey": "https://ptv2026.com/wvmax?editId=c36c4f3f-0faf-4a70-805f-326435a7f3bd",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_317",
@@ -34570,7 +29995,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2024/10/17/10d3cdaf-ba86-3c58-9d96-f941e19b84fc.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2024/10/17/10d3cdaf-ba86-3c58-9d96-f941e19b84fc.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -34581,7 +30006,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=dd44def9-a33d-4c8d-8edc-a76e331f33e7&sub=t7",
     "clearKey": "https://ptv2026.com/wvmax?editId=dd44def9-a33d-4c8d-8edc-a76e331f33e7",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_318",
@@ -34596,7 +30022,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2023/11/25/569ca38f-c39b-3e22-b5c1-1c667bcf5df5.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2023/11/25/569ca38f-c39b-3e22-b5c1-1c667bcf5df5.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -34607,7 +30033,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=5b100055-dd54-47b7-a965-f7e8a64d620d&sub=t11",
     "clearKey": "https://ptv2026.com/wvmax?editId=5b100055-dd54-47b7-a965-f7e8a64d620d",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_319",
@@ -34622,7 +30049,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2023/12/13/b2eb7cba-159b-3e8a-bc9c-0648a21b30e2.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2023/12/13/b2eb7cba-159b-3e8a-bc9c-0648a21b30e2.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -34633,7 +30060,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=a6bd1572-0fb1-435e-8ea2-8d37c6e1f356&sub=t2",
     "clearKey": "https://ptv2026.com/wvmax?editId=a6bd1572-0fb1-435e-8ea2-8d37c6e1f356",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_320",
@@ -34648,7 +30076,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2025/01/29/34b561f4-b438-31a8-9d38-d4760bb3ee6c.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2025/01/29/34b561f4-b438-31a8-9d38-d4760bb3ee6c.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -34659,7 +30087,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=82a2ffe0-3505-4c0a-9a79-67038a5bcc76&sub=t2",
     "clearKey": "https://ptv2026.com/wvmax?editId=82a2ffe0-3505-4c0a-9a79-67038a5bcc76",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_321",
@@ -34674,7 +30103,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2024/11/18/251f1e00-6ccd-3c5c-a356-f62074458f63.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2024/11/18/251f1e00-6ccd-3c5c-a356-f62074458f63.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -34685,7 +30114,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=39d969d1-2a0d-4662-b438-6f4bc8d69cf3&sub=t5",
     "clearKey": "https://ptv2026.com/wvmax?editId=39d969d1-2a0d-4662-b438-6f4bc8d69cf3",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_322",
@@ -34700,7 +30130,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2024/11/06/911d35f6-4d27-3e82-831e-24a66a34d3d0.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2024/11/06/911d35f6-4d27-3e82-831e-24a66a34d3d0.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -34711,7 +30141,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=d385a5d9-caa6-437b-935e-77e3a060da21&sub=t3",
     "clearKey": "https://ptv2026.com/wvmax?editId=d385a5d9-caa6-437b-935e-77e3a060da21",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_323",
@@ -34726,7 +30157,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2024/10/24/96ad829a-0fed-3acc-8429-2533a244268f.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2024/10/24/96ad829a-0fed-3acc-8429-2533a244268f.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -34737,7 +30168,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=b35c844a-77f4-4373-8b2a-03e3d2a9e3bb&sub=t1",
     "clearKey": "https://ptv2026.com/wvmax?editId=b35c844a-77f4-4373-8b2a-03e3d2a9e3bb",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_324",
@@ -34752,7 +30184,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2023/11/25/b5bb31fd-c41b-33db-bcc5-6f5167074fbf.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2023/11/25/b5bb31fd-c41b-33db-bcc5-6f5167074fbf.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -34763,7 +30195,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=fc18131f-0cf8-4a04-8da1-e4f0d6804c7d&sub=t19",
     "clearKey": "https://ptv2026.com/wvmax?editId=fc18131f-0cf8-4a04-8da1-e4f0d6804c7d",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_325",
@@ -34778,7 +30211,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2024/02/28/5874bd0d-99db-316a-8d5c-91d32ea82ced.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2024/02/28/5874bd0d-99db-316a-8d5c-91d32ea82ced.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -34789,7 +30222,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=f84c6558-15a3-4237-8608-95106d91bb4d&sub=t43",
     "clearKey": "https://ptv2026.com/wvmax?editId=f84c6558-15a3-4237-8608-95106d91bb4d",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_326",
@@ -34804,7 +30238,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2024/07/26/a658f8d6-068b-3a37-8007-9efa8cbdf200.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2024/07/26/a658f8d6-068b-3a37-8007-9efa8cbdf200.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -34815,7 +30249,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=c9807a3e-2fab-42dd-ae58-0817825754c2&sub=t6",
     "clearKey": "https://ptv2026.com/wvmax?editId=c9807a3e-2fab-42dd-ae58-0817825754c2",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_327",
@@ -34830,7 +30265,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2025/01/23/dd74c225-829d-3036-9fb6-41c5a573a60b.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2025/01/23/dd74c225-829d-3036-9fb6-41c5a573a60b.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -34841,7 +30276,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=7dfe16cd-96b3-4a1f-81e4-ef4214ec35fb&sub=t4",
     "clearKey": "https://ptv2026.com/wvmax?editId=7dfe16cd-96b3-4a1f-81e4-ef4214ec35fb",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_328",
@@ -34856,7 +30292,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2024/06/07/9383c6b2-caf1-3ee2-a2e2-80d0c74f3849.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2024/06/07/9383c6b2-caf1-3ee2-a2e2-80d0c74f3849.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -34867,7 +30303,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=2435805a-7f45-4326-8a73-e577f9cc94a7&sub=t2",
     "clearKey": "https://ptv2026.com/wvmax?editId=2435805a-7f45-4326-8a73-e577f9cc94a7",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_329",
@@ -34882,7 +30319,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2024/11/07/f5d22898-3c4d-3e21-a644-3a687bf5cb3e.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2024/11/07/f5d22898-3c4d-3e21-a644-3a687bf5cb3e.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -34893,7 +30330,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=3925f141-9e29-4952-b6a7-2ff4f57cf5f4&sub=t6",
     "clearKey": "https://ptv2026.com/wvmax?editId=3925f141-9e29-4952-b6a7-2ff4f57cf5f4",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_330",
@@ -34908,7 +30346,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2024/10/24/8c25e3a7-28ce-353b-bb7a-6d56fd39544a.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2024/10/24/8c25e3a7-28ce-353b-bb7a-6d56fd39544a.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -34919,7 +30357,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=1783ed5c-a800-4ae1-bbf0-df87efc6ee90&sub=t6",
     "clearKey": "https://ptv2026.com/wvmax?editId=1783ed5c-a800-4ae1-bbf0-df87efc6ee90",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_331",
@@ -34934,7 +30373,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2024/03/28/cd26f59d-9286-3d0f-9f8e-cdc2dace53ad.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2024/03/28/cd26f59d-9286-3d0f-9f8e-cdc2dace53ad.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -34945,7 +30384,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=c49e1750-9a5b-4af7-a84f-fcffa7d92d6f&sub=t56",
     "clearKey": "https://ptv2026.com/wvmax?editId=c49e1750-9a5b-4af7-a84f-fcffa7d92d6f",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_332",
@@ -34960,7 +30400,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://images.cdn.prd.api.discomax.com/2023/09/13/8ff9d556-078c-3ff2-9c4c-b0cd12f5d81b.jpeg",
     "backdrop": "https://images.cdn.prd.api.discomax.com/2023/09/13/8ff9d556-078c-3ff2-9c4c-b0cd12f5d81b.jpeg",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -34971,7 +30411,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_max.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&editId=5cf1039f-a16b-495b-a28d-f844126b4493&sub=t2",
     "clearKey": "https://ptv2026.com/wvmax?editId=5cf1039f-a16b-495b-a28d-f844126b4493",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "HBO MAX"
   },
   {
     "id": "vod_m_567",
@@ -34986,7 +30427,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://headend-api.tonton.com.my/v300/imageHelper.php?id=6576285%3A377%3ASTILL%3APORTRAIT&iq=Wifi.1&plt=andr_tablet&appID=TONTON&w=906",
     "backdrop": "https://headend-api.tonton.com.my/v300/imageHelper.php?id=6576285%3A377%3ASTILL%3APORTRAIT&iq=Wifi.1&plt=andr_tablet&appID=TONTON&w=906",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -34997,7 +30438,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_tonton.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&episode_id=6576285",
     "clearKey": "https://ptv2026.com/wvtonton/6576285",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD TONTON"
   },
   {
     "id": "vod_m_568",
@@ -35012,7 +30454,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://headend-api.tonton.com.my/v300/imageHelper.php?id=6553136%3A377%3ASTILL%3APORTRAIT&iq=Wifi.1&plt=andr_tablet&appID=TONTON&w=906",
     "backdrop": "https://headend-api.tonton.com.my/v300/imageHelper.php?id=6553136%3A377%3ASTILL%3APORTRAIT&iq=Wifi.1&plt=andr_tablet&appID=TONTON&w=906",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -35023,7 +30465,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_tonton.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&episode_id=6553136",
     "clearKey": "https://ptv2026.com/wvtonton/6553136",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD TONTON"
   },
   {
     "id": "vod_m_595",
@@ -35038,7 +30481,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://headend-api.tonton.com.my/v210/imageHelper.php?id=6450879%3A377%3ASTILL%3APORTRAIT&iq=Wifi.1&plt=andr_tablet&appID=TONTON&w=960",
     "backdrop": "https://headend-api.tonton.com.my/v210/imageHelper.php?id=6450879%3A377%3ASTILL%3APORTRAIT&iq=Wifi.1&plt=andr_tablet&appID=TONTON&w=960",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -35049,33 +30492,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_tonton2.m3u8?username=vip_gzidmjzr&password=Uk7WNjrs&episode_id=6450879",
     "clearKey": "https://ptv2026.com/wvtonton/6450879",
     "isTrending": false,
-    "isPopular": false
-  },
-  {
-    "id": "vod_m_596",
-    "title": "57-Malay-Karak",
-    "type": "movie",
-    "genre": [
-      "Drama",
-      "Melayu",
-      "Tempatan"
-    ],
-    "origin": "malay",
-    "poster": "https://headend-api.tonton.com.my/v210/imageHelper.php?id=6449221%3A377%3ASTILL%3APORTRAIT&iq=Wifi.1&plt=andr_tablet&appID=TONTON&w=960",
-    "backdrop": "https://headend-api.tonton.com.my/v210/imageHelper.php?id=6449221%3A377%3ASTILL%3APORTRAIT&iq=Wifi.1&plt=andr_tablet&appID=TONTON&w=960",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "4K UHD",
-    "ageRating": "P13",
-    "synopsis": "Filem 57-Malay-Karak (VOD TONTON) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/get_tonton2.m3u8?username=vip_gzidmjzr&password=Uk7WNjrs&episode_id=6449221",
-    "clearKey": "https://ptv2026.com/wvtonton/6449221",
-    "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD TONTON"
   },
   {
     "id": "vod_m_597",
@@ -35090,7 +30508,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://headend-api.tonton.com.my/v210/imageHelper.php?id=6450968%3A377%3ASTILL%3APORTRAIT&iq=Wifi.1&plt=andr_tablet&appID=TONTON&w=960",
     "backdrop": "https://headend-api.tonton.com.my/v210/imageHelper.php?id=6450968%3A377%3ASTILL%3APORTRAIT&iq=Wifi.1&plt=andr_tablet&appID=TONTON&w=960",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -35101,33 +30519,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_tonton2.m3u8?username=vip_gzidmjzr&password=Uk7WNjrs&episode_id=6450968",
     "clearKey": "https://ptv2026.com/wvtonton/6450968",
     "isTrending": false,
-    "isPopular": false
-  },
-  {
-    "id": "vod_m_598",
-    "title": "59-Malay-Rasukan Ablasa",
-    "type": "movie",
-    "genre": [
-      "Drama",
-      "Melayu",
-      "Tempatan"
-    ],
-    "origin": "malay",
-    "poster": "https://headend-api.tonton.com.my/v210/imageHelper.php?id=6450823%3A377%3ASTILL%3APORTRAIT&iq=Wifi.1&plt=andr_tablet&appID=TONTON&w=960",
-    "backdrop": "https://headend-api.tonton.com.my/v210/imageHelper.php?id=6450823%3A377%3ASTILL%3APORTRAIT&iq=Wifi.1&plt=andr_tablet&appID=TONTON&w=960",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "4K UHD",
-    "ageRating": "P13",
-    "synopsis": "Filem 59-Malay-Rasukan Ablasa (VOD TONTON) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/get_tonton2.m3u8?username=vip_gzidmjzr&password=Uk7WNjrs&episode_id=6450823",
-    "clearKey": "https://ptv2026.com/wvtonton/6450823",
-    "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD TONTON"
   },
   {
     "id": "vod_m_599",
@@ -35142,7 +30535,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://headend-api.tonton.com.my/v210/imageHelper.php?id=6450967%3A377%3ASTILL%3APORTRAIT&iq=Wifi.1&plt=andr_tablet&appID=TONTON&w=960",
     "backdrop": "https://headend-api.tonton.com.my/v210/imageHelper.php?id=6450967%3A377%3ASTILL%3APORTRAIT&iq=Wifi.1&plt=andr_tablet&appID=TONTON&w=960",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -35153,7 +30546,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_tonton2.m3u8?username=vip_gzidmjzr&password=Uk7WNjrs&episode_id=6450967",
     "clearKey": "https://ptv2026.com/wvtonton/6450967",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD TONTON"
   },
   {
     "id": "vod_m_600",
@@ -35168,7 +30562,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://headend-api.tonton.com.my/v210/imageHelper.php?id=6450818%3A377%3ASTILL%3APORTRAIT&iq=Wifi.1&plt=andr_tablet&appID=TONTON&w=960",
     "backdrop": "https://headend-api.tonton.com.my/v210/imageHelper.php?id=6450818%3A377%3ASTILL%3APORTRAIT&iq=Wifi.1&plt=andr_tablet&appID=TONTON&w=960",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -35179,7 +30573,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_tonton2.m3u8?username=vip_gzidmjzr&password=Uk7WNjrs&episode_id=6450818",
     "clearKey": "https://ptv2026.com/wvtonton/6450818",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD TONTON"
   },
   {
     "id": "vod_m_601",
@@ -35194,7 +30589,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://headend-api.tonton.com.my/v210/imageHelper.php?id=6449464%3A377%3ASTILL%3APORTRAIT&iq=Wifi.1&plt=andr_tablet&appID=TONTON&w=960",
     "backdrop": "https://headend-api.tonton.com.my/v210/imageHelper.php?id=6449464%3A377%3ASTILL%3APORTRAIT&iq=Wifi.1&plt=andr_tablet&appID=TONTON&w=960",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -35205,7 +30600,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_tonton2.m3u8?username=vip_gzidmjzr&password=Uk7WNjrs&episode_id=6449464",
     "clearKey": "https://ptv2026.com/wvtonton/6449464",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD TONTON"
   },
   {
     "id": "vod_m_602",
@@ -35220,7 +30616,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://headend-api.tonton.com.my/v210/imageHelper.php?id=6449465%3A377%3ASTILL%3APORTRAIT&iq=Wifi.1&plt=andr_tablet&appID=TONTON&w=960",
     "backdrop": "https://headend-api.tonton.com.my/v210/imageHelper.php?id=6449465%3A377%3ASTILL%3APORTRAIT&iq=Wifi.1&plt=andr_tablet&appID=TONTON&w=960",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -35231,7 +30627,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_tonton2.m3u8?username=vip_gzidmjzr&password=Uk7WNjrs&episode_id=6449465",
     "clearKey": "https://ptv2026.com/wvtonton/6449465",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD TONTON"
   },
   {
     "id": "vod_m_603",
@@ -35246,7 +30643,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://headend-api.tonton.com.my/v210/imageHelper.php?id=6450680%3A377%3ASTILL%3APORTRAIT&iq=Wifi.1&plt=andr_tablet&appID=TONTON&w=960",
     "backdrop": "https://headend-api.tonton.com.my/v210/imageHelper.php?id=6450680%3A377%3ASTILL%3APORTRAIT&iq=Wifi.1&plt=andr_tablet&appID=TONTON&w=960",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -35257,7 +30654,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_tonton2.m3u8?username=vip_gzidmjzr&password=Uk7WNjrs&episode_id=6450680",
     "clearKey": "https://ptv2026.com/wvtonton/6450680",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD TONTON"
   },
   {
     "id": "vod_m_604",
@@ -35272,7 +30670,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://headend-api.tonton.com.my/v210/imageHelper.php?id=6450678%3A377%3ASTILL%3APORTRAIT&iq=Wifi.1&plt=andr_tablet&appID=TONTON&w=960",
     "backdrop": "https://headend-api.tonton.com.my/v210/imageHelper.php?id=6450678%3A377%3ASTILL%3APORTRAIT&iq=Wifi.1&plt=andr_tablet&appID=TONTON&w=960",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -35283,7 +30681,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_tonton2.m3u8?username=vip_gzidmjzr&password=Uk7WNjrs&episode_id=6450678",
     "clearKey": "https://ptv2026.com/wvtonton/6450678",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD TONTON"
   },
   {
     "id": "vod_m_605",
@@ -35298,7 +30697,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://headend-api.tonton.com.my/v210/imageHelper.php?id=6450676%3A377%3ASTILL%3APORTRAIT&iq=Wifi.1&plt=andr_tablet&appID=TONTON&w=960",
     "backdrop": "https://headend-api.tonton.com.my/v210/imageHelper.php?id=6450676%3A377%3ASTILL%3APORTRAIT&iq=Wifi.1&plt=andr_tablet&appID=TONTON&w=960",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -35309,7 +30708,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_tonton2.m3u8?username=vip_gzidmjzr&password=Uk7WNjrs&episode_id=6450676",
     "clearKey": "https://ptv2026.com/wvtonton/6450676",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD TONTON"
   },
   {
     "id": "vod_m_606",
@@ -35324,7 +30724,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://headend-api.tonton.com.my/v210/imageHelper.php?id=6450987%3A377%3ASTILL%3APORTRAIT&iq=Wifi.1&plt=andr_tablet&appID=TONTON&w=960",
     "backdrop": "https://headend-api.tonton.com.my/v210/imageHelper.php?id=6450987%3A377%3ASTILL%3APORTRAIT&iq=Wifi.1&plt=andr_tablet&appID=TONTON&w=960",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -35335,7 +30735,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_tonton2.m3u8?username=vip_gzidmjzr&password=Uk7WNjrs&episode_id=6450987",
     "clearKey": "https://ptv2026.com/wvtonton/6450987",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD TONTON"
   },
   {
     "id": "vod_m_607",
@@ -35350,7 +30751,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://headend-api.tonton.com.my/v210/imageHelper.php?id=6450824%3A377%3ASTILL%3APORTRAIT&iq=Wifi.1&plt=andr_tablet&appID=TONTON&w=960",
     "backdrop": "https://headend-api.tonton.com.my/v210/imageHelper.php?id=6450824%3A377%3ASTILL%3APORTRAIT&iq=Wifi.1&plt=andr_tablet&appID=TONTON&w=960",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -35361,33 +30762,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_tonton2.m3u8?username=vip_gzidmjzr&password=Uk7WNjrs&episode_id=6450824",
     "clearKey": "https://ptv2026.com/wvtonton/6450824",
     "isTrending": false,
-    "isPopular": false
-  },
-  {
-    "id": "vod_m_608",
-    "title": "69-Malay-Bisikan Syaitan",
-    "type": "movie",
-    "genre": [
-      "Drama",
-      "Melayu",
-      "Tempatan"
-    ],
-    "origin": "malay",
-    "poster": "https://headend-api.tonton.com.my/v210/imageHelper.php?id=6450817%3A377%3ASTILL%3APORTRAIT&iq=Wifi.1&plt=andr_tablet&appID=TONTON&w=960",
-    "backdrop": "https://headend-api.tonton.com.my/v210/imageHelper.php?id=6450817%3A377%3ASTILL%3APORTRAIT&iq=Wifi.1&plt=andr_tablet&appID=TONTON&w=960",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "4K UHD",
-    "ageRating": "P13",
-    "synopsis": "Filem 69-Malay-Bisikan Syaitan (VOD TONTON) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/get_tonton2.m3u8?username=vip_gzidmjzr&password=Uk7WNjrs&episode_id=6450817",
-    "clearKey": "https://ptv2026.com/wvtonton/6450817",
-    "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD TONTON"
   },
   {
     "id": "vod_m_609",
@@ -35402,7 +30778,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://headend-api.tonton.com.my/v210/imageHelper.php?id=6450977%3A377%3ASTILL%3APORTRAIT&iq=Wifi.1&plt=andr_tablet&appID=TONTON&w=960",
     "backdrop": "https://headend-api.tonton.com.my/v210/imageHelper.php?id=6450977%3A377%3ASTILL%3APORTRAIT&iq=Wifi.1&plt=andr_tablet&appID=TONTON&w=960",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -35413,7 +30789,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_tonton2.m3u8?username=vip_gzidmjzr&password=Uk7WNjrs&episode_id=6450977",
     "clearKey": "https://ptv2026.com/wvtonton/6450977",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD TONTON"
   },
   {
     "id": "vod_m_610",
@@ -35428,7 +30805,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://headend-api.tonton.com.my/v210/imageHelper.php?id=6451030%3A377%3ASTILL%3APORTRAIT&iq=Wifi.1&plt=andr_tablet&appID=TONTON&w=960",
     "backdrop": "https://headend-api.tonton.com.my/v210/imageHelper.php?id=6451030%3A377%3ASTILL%3APORTRAIT&iq=Wifi.1&plt=andr_tablet&appID=TONTON&w=960",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -35439,7 +30816,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_tonton2.m3u8?username=vip_gzidmjzr&password=Uk7WNjrs&episode_id=6451030",
     "clearKey": "https://ptv2026.com/wvtonton/6451030",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD TONTON"
   },
   {
     "id": "vod_m_611",
@@ -35454,7 +30832,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://headend-api.tonton.com.my/v210/imageHelper.php?id=6450816%3A377%3ASTILL%3APORTRAIT&iq=Wifi.1&plt=andr_tablet&appID=TONTON&w=960",
     "backdrop": "https://headend-api.tonton.com.my/v210/imageHelper.php?id=6450816%3A377%3ASTILL%3APORTRAIT&iq=Wifi.1&plt=andr_tablet&appID=TONTON&w=960",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -35465,7 +30843,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_tonton2.m3u8?username=vip_gzidmjzr&password=Uk7WNjrs&episode_id=6450816",
     "clearKey": "https://ptv2026.com/wvtonton/6450816",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD TONTON"
   },
   {
     "id": "vod_m_612",
@@ -35480,7 +30859,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://headend-api.tonton.com.my/v210/imageHelper.php?id=6450677%3A377%3ASTILL%3APORTRAIT&iq=Wifi.1&plt=andr_tablet&appID=TONTON&w=960",
     "backdrop": "https://headend-api.tonton.com.my/v210/imageHelper.php?id=6450677%3A377%3ASTILL%3APORTRAIT&iq=Wifi.1&plt=andr_tablet&appID=TONTON&w=960",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -35491,33 +30870,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_tonton2.m3u8?username=vip_gzidmjzr&password=Uk7WNjrs&episode_id=6450677",
     "clearKey": "https://ptv2026.com/wvtonton/6450677",
     "isTrending": false,
-    "isPopular": false
-  },
-  {
-    "id": "vod_m_613",
-    "title": "74-Malay-Sesuatu yang Tertinggal",
-    "type": "movie",
-    "genre": [
-      "Drama",
-      "Melayu",
-      "Tempatan"
-    ],
-    "origin": "malay",
-    "poster": "https://headend-api.tonton.com.my/v210/imageHelper.php?id=6450825%3A377%3ASTILL%3APORTRAIT&iq=Wifi.1&plt=andr_tablet&appID=TONTON&w=960",
-    "backdrop": "https://headend-api.tonton.com.my/v210/imageHelper.php?id=6450825%3A377%3ASTILL%3APORTRAIT&iq=Wifi.1&plt=andr_tablet&appID=TONTON&w=960",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "duration": "1j 50m",
-    "quality": "4K UHD",
-    "ageRating": "P13",
-    "synopsis": "Filem 74-Malay-Sesuatu yang Tertinggal (VOD TONTON) dengan kualiti definisi tinggi dan audio terkini.",
-    "cast": [
-      "Bintang Filem Pilihan"
-    ],
-    "streamUrl": "https://ptv2026.com/get_tonton2.m3u8?username=vip_gzidmjzr&password=Uk7WNjrs&episode_id=6450825",
-    "clearKey": "https://ptv2026.com/wvtonton/6450825",
-    "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD TONTON"
   },
   {
     "id": "vod_m_614",
@@ -35532,7 +30886,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://headend-api.tonton.com.my/v210/imageHelper.php?id=6450992%3A377%3ASTILL%3APORTRAIT&iq=Wifi.1&plt=andr_tablet&appID=TONTON&w=960",
     "backdrop": "https://headend-api.tonton.com.my/v210/imageHelper.php?id=6450992%3A377%3ASTILL%3APORTRAIT&iq=Wifi.1&plt=andr_tablet&appID=TONTON&w=960",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -35543,7 +30897,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_tonton2.m3u8?username=vip_gzidmjzr&password=Uk7WNjrs&episode_id=6450992",
     "clearKey": "https://ptv2026.com/wvtonton/6450992",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD TONTON"
   },
   {
     "id": "vod_m_615",
@@ -35558,7 +30913,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://headend-api.tonton.com.my/v210/imageHelper.php?id=6450985%3A377%3ASTILL%3APORTRAIT&iq=Wifi.1&plt=andr_tablet&appID=TONTON&w=960",
     "backdrop": "https://headend-api.tonton.com.my/v210/imageHelper.php?id=6450985%3A377%3ASTILL%3APORTRAIT&iq=Wifi.1&plt=andr_tablet&appID=TONTON&w=960",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "duration": "1j 50m",
     "quality": "4K UHD",
     "ageRating": "P13",
@@ -35569,7 +30924,8 @@ export const VOD_CATALOG: VodItem[] = [
     "streamUrl": "https://ptv2026.com/get_tonton2.m3u8?username=vip_gzidmjzr&password=Uk7WNjrs&episode_id=6450985",
     "clearKey": "https://ptv2026.com/wvtonton/6450985",
     "isTrending": false,
-    "isPopular": false
+    "isPopular": false,
+    "apkCategory": "VOD TONTON"
   },
   {
     "id": "vod_s_082",
@@ -35582,7 +30938,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://headend-api.tonton.com.my/v300/imageHelper.php?id=6606148%3A377%3ASTILL%3APORTRAIT&iq=Wifi.1&plt=andr_tablet&appID=TONTON&w=906",
     "backdrop": "https://headend-api.tonton.com.my/v300/imageHelper.php?id=6606148%3A377%3ASTILL%3APORTRAIT&iq=Wifi.1&plt=andr_tablet&appID=TONTON&w=906",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "quality": "4K UHD",
     "ageRating": "P13",
     "synopsis": "Siri drama popular Anom Suraya (TONTON SERIES | Anom Suraya) dengan episod penuh dan kualiti penstriman pantas.",
@@ -35656,307 +31012,8 @@ export const VOD_CATALOG: VodItem[] = [
         "synopsis": "Anom Suraya - S01E07 Anom Suraya"
       }
     ],
-    "duration": "7 Episod"
-  },
-  {
-    "id": "vod_s_083",
-    "title": "Susuk Rupawan",
-    "type": "series",
-    "genre": [
-      "Drama"
-    ],
-    "origin": "malay",
-    "poster": "https://headend-api.tonton.com.my/v300/imageHelper.php?id=6586723%3A377%3ASTILL%3APORTRAIT&iq=Wifi.1&plt=andr_tablet&appID=TONTON&w=906",
-    "backdrop": "https://headend-api.tonton.com.my/v300/imageHelper.php?id=6586723%3A377%3ASTILL%3APORTRAIT&iq=Wifi.1&plt=andr_tablet&appID=TONTON&w=906",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "quality": "4K UHD",
-    "ageRating": "P13",
-    "synopsis": "Siri drama popular Susuk Rupawan (TONTON SERIES | Susuk Rupawan) dengan episod penuh dan kualiti penstriman pantas.",
-    "cast": [
-      "Pelakon Utama"
-    ],
-    "streamUrl": "https://ptv2026.com/get_tonton2.m3u8?username=vip_gzidmjzr&password=Uk7WNjrs&episode_id=6586729",
-    "clearKey": "https://ptv2026.com/wvtonton/6586729",
-    "episodes": [
-      {
-        "episodeNumber": 1,
-        "title": "S01E01 Susuk Rupawan",
-        "duration": "45m",
-        "thumbnail": "https://headend-api.tonton.com.my/v300/imageHelper.php?id=6586723%3A377%3ASTILL%3APORTRAIT&iq=Wifi.1&plt=andr_tablet&appID=TONTON&w=906",
-        "streamUrl": "https://ptv2026.com/get_tonton2.m3u8?username=vip_gzidmjzr&password=Uk7WNjrs&episode_id=6586729",
-        "clearKey": "https://ptv2026.com/wvtonton/6586729",
-        "synopsis": "Susuk Rupawan - S01E01 Susuk Rupawan"
-      },
-      {
-        "episodeNumber": 2,
-        "title": "S01E02 Susuk Rupawan",
-        "duration": "45m",
-        "thumbnail": "https://headend-api.tonton.com.my/v300/imageHelper.php?id=6586723%3A377%3ASTILL%3APORTRAIT&iq=Wifi.1&plt=andr_tablet&appID=TONTON&w=906",
-        "streamUrl": "https://ptv2026.com/get_tonton.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&episode_id=6586730",
-        "clearKey": "https://ptv2026.com/wvtonton/6586730",
-        "synopsis": "Susuk Rupawan - S01E02 Susuk Rupawan"
-      },
-      {
-        "episodeNumber": 3,
-        "title": "S01E03 Susuk Rupawan",
-        "duration": "45m",
-        "thumbnail": "https://headend-api.tonton.com.my/v300/imageHelper.php?id=6586723%3A377%3ASTILL%3APORTRAIT&iq=Wifi.1&plt=andr_tablet&appID=TONTON&w=906",
-        "streamUrl": "https://ptv2026.com/get_tonton.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&episode_id=6586898",
-        "clearKey": "https://ptv2026.com/wvtonton/6586898",
-        "synopsis": "Susuk Rupawan - S01E03 Susuk Rupawan"
-      },
-      {
-        "episodeNumber": 4,
-        "title": "S01E04 Susuk Rupawan",
-        "duration": "45m",
-        "thumbnail": "https://headend-api.tonton.com.my/v300/imageHelper.php?id=6586723%3A377%3ASTILL%3APORTRAIT&iq=Wifi.1&plt=andr_tablet&appID=TONTON&w=906",
-        "streamUrl": "https://ptv2026.com/get_tonton.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&episode_id=6586877",
-        "clearKey": "https://ptv2026.com/wvtonton/6586877",
-        "synopsis": "Susuk Rupawan - S01E04 Susuk Rupawan"
-      },
-      {
-        "episodeNumber": 5,
-        "title": "S01E05 Susuk Rupawan",
-        "duration": "45m",
-        "thumbnail": "https://headend-api.tonton.com.my/v300/imageHelper.php?id=6586723%3A377%3ASTILL%3APORTRAIT&iq=Wifi.1&plt=andr_tablet&appID=TONTON&w=906",
-        "streamUrl": "https://ptv2026.com/get_tonton.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&episode_id=6586892",
-        "clearKey": "https://ptv2026.com/wvtonton/6586892",
-        "synopsis": "Susuk Rupawan - S01E05 Susuk Rupawan"
-      },
-      {
-        "episodeNumber": 6,
-        "title": "S01E06 Susuk Rupawan",
-        "duration": "45m",
-        "thumbnail": "https://headend-api.tonton.com.my/v300/imageHelper.php?id=6586723%3A377%3ASTILL%3APORTRAIT&iq=Wifi.1&plt=andr_tablet&appID=TONTON&w=906",
-        "streamUrl": "https://ptv2026.com/get_tonton.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&episode_id=6586897",
-        "clearKey": "https://ptv2026.com/wvtonton/6586897",
-        "synopsis": "Susuk Rupawan - S01E06 Susuk Rupawan"
-      },
-      {
-        "episodeNumber": 7,
-        "title": "S01E07 Susuk Rupawan",
-        "duration": "45m",
-        "thumbnail": "https://headend-api.tonton.com.my/v300/imageHelper.php?id=6586723%3A377%3ASTILL%3APORTRAIT&iq=Wifi.1&plt=andr_tablet&appID=TONTON&w=906",
-        "streamUrl": "https://ptv2026.com/get_tonton.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&episode_id=6587479",
-        "clearKey": "https://ptv2026.com/wvtonton/6587479",
-        "synopsis": "Susuk Rupawan - S01E07 Susuk Rupawan"
-      },
-      {
-        "episodeNumber": 8,
-        "title": "S01E08 Susuk Rupawan",
-        "duration": "45m",
-        "thumbnail": "https://headend-api.tonton.com.my/v300/imageHelper.php?id=6586723%3A377%3ASTILL%3APORTRAIT&iq=Wifi.1&plt=andr_tablet&appID=TONTON&w=906",
-        "streamUrl": "https://ptv2026.com/get_tonton.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&episode_id=6587480",
-        "clearKey": "https://ptv2026.com/wvtonton/6587480",
-        "synopsis": "Susuk Rupawan - S01E08 Susuk Rupawan"
-      }
-    ],
-    "duration": "8 Episod"
-  },
-  {
-    "id": "vod_s_084",
-    "title": "Keturunan",
-    "type": "series",
-    "genre": [
-      "Drama"
-    ],
-    "origin": "malay",
-    "poster": "https://headend-api.tonton.com.my/v300/imageHelper.php?id=6605352%3A377%3ASTILL%3APORTRAIT&iq=Wifi.1&plt=andr_tablet&appID=TONTON&w=906",
-    "backdrop": "https://headend-api.tonton.com.my/v300/imageHelper.php?id=6605352%3A377%3ASTILL%3APORTRAIT&iq=Wifi.1&plt=andr_tablet&appID=TONTON&w=906",
-    "year": 2023,
-    "rating": "4.8 \u2605",
-    "quality": "4K UHD",
-    "ageRating": "P13",
-    "synopsis": "Siri drama popular Keturunan (TONTON SERIES | Keturunan) dengan episod penuh dan kualiti penstriman pantas.",
-    "cast": [
-      "Pelakon Utama"
-    ],
-    "streamUrl": "https://ptv2026.com/get_tonton2.m3u8?username=vip_gzidmjzr&password=Uk7WNjrs&episode_id=6605354",
-    "clearKey": "https://ptv2026.com/wvtonton/6605354",
-    "episodes": [
-      {
-        "episodeNumber": 1,
-        "title": "S01E01 Keturunan",
-        "duration": "45m",
-        "thumbnail": "https://headend-api.tonton.com.my/v300/imageHelper.php?id=6605352%3A377%3ASTILL%3APORTRAIT&iq=Wifi.1&plt=andr_tablet&appID=TONTON&w=906",
-        "streamUrl": "https://ptv2026.com/get_tonton2.m3u8?username=vip_gzidmjzr&password=Uk7WNjrs&episode_id=6605354",
-        "clearKey": "https://ptv2026.com/wvtonton/6605354",
-        "synopsis": "Keturunan - S01E01 Keturunan"
-      },
-      {
-        "episodeNumber": 2,
-        "title": "S01E02 Keturunan",
-        "duration": "45m",
-        "thumbnail": "https://headend-api.tonton.com.my/v300/imageHelper.php?id=6605352%3A377%3ASTILL%3APORTRAIT&iq=Wifi.1&plt=andr_tablet&appID=TONTON&w=906",
-        "streamUrl": "https://ptv2026.com/get_tonton2.m3u8?username=vip_gzidmjzr&password=Uk7WNjrs&episode_id=6605355",
-        "clearKey": "https://ptv2026.com/wvtonton/6605355",
-        "synopsis": "Keturunan - S01E02 Keturunan"
-      },
-      {
-        "episodeNumber": 3,
-        "title": "S01E03 Keturunan",
-        "duration": "45m",
-        "thumbnail": "https://headend-api.tonton.com.my/v300/imageHelper.php?id=6605352%3A377%3ASTILL%3APORTRAIT&iq=Wifi.1&plt=andr_tablet&appID=TONTON&w=906",
-        "streamUrl": "https://ptv2026.com/get_tonton.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&episode_id=6605495",
-        "clearKey": "https://ptv2026.com/wvtonton/6605495",
-        "synopsis": "Keturunan - S01E03 Keturunan"
-      },
-      {
-        "episodeNumber": 4,
-        "title": "S01E04 Keturunan",
-        "duration": "45m",
-        "thumbnail": "https://headend-api.tonton.com.my/v300/imageHelper.php?id=6605352%3A377%3ASTILL%3APORTRAIT&iq=Wifi.1&plt=andr_tablet&appID=TONTON&w=906",
-        "streamUrl": "https://ptv2026.com/get_tonton.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&episode_id=6605518",
-        "clearKey": "https://ptv2026.com/wvtonton/6605518",
-        "synopsis": "Keturunan - S01E04 Keturunan"
-      },
-      {
-        "episodeNumber": 5,
-        "title": "S01E05 Keturunan",
-        "duration": "45m",
-        "thumbnail": "https://headend-api.tonton.com.my/v300/imageHelper.php?id=6605352%3A377%3ASTILL%3APORTRAIT&iq=Wifi.1&plt=andr_tablet&appID=TONTON&w=906",
-        "streamUrl": "https://ptv2026.com/get_tonton.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&episode_id=6605515",
-        "clearKey": "https://ptv2026.com/wvtonton/6605515",
-        "synopsis": "Keturunan - S01E05 Keturunan"
-      },
-      {
-        "episodeNumber": 6,
-        "title": "S01E06 Keturunan",
-        "duration": "45m",
-        "thumbnail": "https://headend-api.tonton.com.my/v300/imageHelper.php?id=6605352%3A377%3ASTILL%3APORTRAIT&iq=Wifi.1&plt=andr_tablet&appID=TONTON&w=906",
-        "streamUrl": "https://ptv2026.com/get_tonton.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&episode_id=6605654",
-        "clearKey": "https://ptv2026.com/wvtonton/6605654",
-        "synopsis": "Keturunan - S01E06 Keturunan"
-      },
-      {
-        "episodeNumber": 7,
-        "title": "S01E07 Keturunan",
-        "duration": "45m",
-        "thumbnail": "https://headend-api.tonton.com.my/v300/imageHelper.php?id=6605352%3A377%3ASTILL%3APORTRAIT&iq=Wifi.1&plt=andr_tablet&appID=TONTON&w=906",
-        "streamUrl": "https://ptv2026.com/get_tonton.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&episode_id=6605653",
-        "clearKey": "https://ptv2026.com/wvtonton/6605653",
-        "synopsis": "Keturunan - S01E07 Keturunan"
-      },
-      {
-        "episodeNumber": 8,
-        "title": "S01E08 Keturunan",
-        "duration": "45m",
-        "thumbnail": "https://headend-api.tonton.com.my/v300/imageHelper.php?id=6605352%3A377%3ASTILL%3APORTRAIT&iq=Wifi.1&plt=andr_tablet&appID=TONTON&w=906",
-        "streamUrl": "https://ptv2026.com/get_tonton.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&episode_id=6605689",
-        "clearKey": "https://ptv2026.com/wvtonton/6605689",
-        "synopsis": "Keturunan - S01E08 Keturunan"
-      },
-      {
-        "episodeNumber": 9,
-        "title": "S01E09 Keturunan",
-        "duration": "45m",
-        "thumbnail": "https://headend-api.tonton.com.my/v300/imageHelper.php?id=6605352%3A377%3ASTILL%3APORTRAIT&iq=Wifi.1&plt=andr_tablet&appID=TONTON&w=906",
-        "streamUrl": "https://ptv2026.com/get_tonton.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&episode_id=6605690",
-        "clearKey": "https://ptv2026.com/wvtonton/6605690",
-        "synopsis": "Keturunan - S01E09 Keturunan"
-      },
-      {
-        "episodeNumber": 10,
-        "title": "S01E10 Keturunan",
-        "duration": "45m",
-        "thumbnail": "https://headend-api.tonton.com.my/v300/imageHelper.php?id=6605352%3A377%3ASTILL%3APORTRAIT&iq=Wifi.1&plt=andr_tablet&appID=TONTON&w=906",
-        "streamUrl": "https://ptv2026.com/get_tonton.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&episode_id=6605676",
-        "clearKey": "https://ptv2026.com/wvtonton/6605676",
-        "synopsis": "Keturunan - S01E10 Keturunan"
-      },
-      {
-        "episodeNumber": 11,
-        "title": "S01E11 Keturunan",
-        "duration": "45m",
-        "thumbnail": "https://headend-api.tonton.com.my/v300/imageHelper.php?id=6605352%3A377%3ASTILL%3APORTRAIT&iq=Wifi.1&plt=andr_tablet&appID=TONTON&w=906",
-        "streamUrl": "https://ptv2026.com/get_tonton.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&episode_id=6605677",
-        "clearKey": "https://ptv2026.com/wvtonton/6605677",
-        "synopsis": "Keturunan - S01E11 Keturunan"
-      },
-      {
-        "episodeNumber": 12,
-        "title": "S01E12 Keturunan",
-        "duration": "45m",
-        "thumbnail": "https://headend-api.tonton.com.my/v300/imageHelper.php?id=6605352%3A377%3ASTILL%3APORTRAIT&iq=Wifi.1&plt=andr_tablet&appID=TONTON&w=906",
-        "streamUrl": "https://ptv2026.com/get_tonton.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&episode_id=6605729",
-        "clearKey": "https://ptv2026.com/wvtonton/6605729",
-        "synopsis": "Keturunan - S01E12 Keturunan"
-      },
-      {
-        "episodeNumber": 13,
-        "title": "S01E13 Keturunan",
-        "duration": "45m",
-        "thumbnail": "https://headend-api.tonton.com.my/v300/imageHelper.php?id=6605352%3A377%3ASTILL%3APORTRAIT&iq=Wifi.1&plt=andr_tablet&appID=TONTON&w=906",
-        "streamUrl": "https://ptv2026.com/get_tonton.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&episode_id=6605730",
-        "clearKey": "https://ptv2026.com/wvtonton/6605730",
-        "synopsis": "Keturunan - S01E13 Keturunan"
-      },
-      {
-        "episodeNumber": 14,
-        "title": "S01E14 Keturunan",
-        "duration": "45m",
-        "thumbnail": "https://headend-api.tonton.com.my/v300/imageHelper.php?id=6605352%3A377%3ASTILL%3APORTRAIT&iq=Wifi.1&plt=andr_tablet&appID=TONTON&w=906",
-        "streamUrl": "https://ptv2026.com/get_tonton.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&episode_id=6605741",
-        "clearKey": "https://ptv2026.com/wvtonton/6605741",
-        "synopsis": "Keturunan - S01E14 Keturunan"
-      },
-      {
-        "episodeNumber": 15,
-        "title": "S01E15 Keturunan",
-        "duration": "45m",
-        "thumbnail": "https://headend-api.tonton.com.my/v300/imageHelper.php?id=6605352%3A377%3ASTILL%3APORTRAIT&iq=Wifi.1&plt=andr_tablet&appID=TONTON&w=906",
-        "streamUrl": "https://ptv2026.com/get_tonton.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&episode_id=6605803",
-        "clearKey": "https://ptv2026.com/wvtonton/6605803",
-        "synopsis": "Keturunan - S01E15 Keturunan"
-      },
-      {
-        "episodeNumber": 16,
-        "title": "S01E16 Keturunan",
-        "duration": "45m",
-        "thumbnail": "https://headend-api.tonton.com.my/v300/imageHelper.php?id=6605352%3A377%3ASTILL%3APORTRAIT&iq=Wifi.1&plt=andr_tablet&appID=TONTON&w=906",
-        "streamUrl": "https://ptv2026.com/get_tonton.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&episode_id=6605806",
-        "clearKey": "https://ptv2026.com/wvtonton/6605806",
-        "synopsis": "Keturunan - S01E16 Keturunan"
-      },
-      {
-        "episodeNumber": 17,
-        "title": "S01E17 Keturunan",
-        "duration": "45m",
-        "thumbnail": "https://headend-api.tonton.com.my/v300/imageHelper.php?id=6605352%3A377%3ASTILL%3APORTRAIT&iq=Wifi.1&plt=andr_tablet&appID=TONTON&w=906",
-        "streamUrl": "https://ptv2026.com/get_tonton.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&episode_id=6605807",
-        "clearKey": "https://ptv2026.com/wvtonton/6605807",
-        "synopsis": "Keturunan - S01E17 Keturunan"
-      },
-      {
-        "episodeNumber": 18,
-        "title": "S01E18 Keturunan",
-        "duration": "45m",
-        "thumbnail": "https://headend-api.tonton.com.my/v300/imageHelper.php?id=6605352%3A377%3ASTILL%3APORTRAIT&iq=Wifi.1&plt=andr_tablet&appID=TONTON&w=906",
-        "streamUrl": "https://ptv2026.com/get_tonton.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&episode_id=6605757",
-        "clearKey": "https://ptv2026.com/wvtonton/6605757",
-        "synopsis": "Keturunan - S01E18 Keturunan"
-      },
-      {
-        "episodeNumber": 19,
-        "title": "S01E19 Keturunan",
-        "duration": "45m",
-        "thumbnail": "https://headend-api.tonton.com.my/v300/imageHelper.php?id=6605352%3A377%3ASTILL%3APORTRAIT&iq=Wifi.1&plt=andr_tablet&appID=TONTON&w=906",
-        "streamUrl": "https://ptv2026.com/get_tonton.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&episode_id=6605758",
-        "clearKey": "https://ptv2026.com/wvtonton/6605758",
-        "synopsis": "Keturunan - S01E19 Keturunan"
-      },
-      {
-        "episodeNumber": 20,
-        "title": "S01E20 Keturunan",
-        "duration": "45m",
-        "thumbnail": "https://headend-api.tonton.com.my/v300/imageHelper.php?id=6605352%3A377%3ASTILL%3APORTRAIT&iq=Wifi.1&plt=andr_tablet&appID=TONTON&w=906",
-        "streamUrl": "https://ptv2026.com/get_tonton.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&episode_id=6605759",
-        "clearKey": "https://ptv2026.com/wvtonton/6605759",
-        "synopsis": "Keturunan - S01E20 Keturunan"
-      }
-    ],
-    "duration": "20 Episod"
+    "duration": "7 Episod",
+    "apkCategory": "TONTON SERIES"
   },
   {
     "id": "vod_s_085",
@@ -35969,7 +31026,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://headend-api.tonton.com.my/v300/imageHelper.php?id=6602878%3A377%3ASTILL%3APORTRAIT&iq=Wifi.1&plt=andr_tablet&appID=TONTON&w=906",
     "backdrop": "https://headend-api.tonton.com.my/v300/imageHelper.php?id=6602878%3A377%3ASTILL%3APORTRAIT&iq=Wifi.1&plt=andr_tablet&appID=TONTON&w=906",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "quality": "4K UHD",
     "ageRating": "P13",
     "synopsis": "Siri drama popular Neraka Yang Terhijab (TONTON SERIES | Neraka Yang Terhijab) dengan episod penuh dan kualiti penstriman pantas.",
@@ -36160,7 +31217,8 @@ export const VOD_CATALOG: VodItem[] = [
         "synopsis": "Neraka Yang Terhijab - S01E20 Neraka Yang Terhijab"
       }
     ],
-    "duration": "20 Episod"
+    "duration": "20 Episod",
+    "apkCategory": "TONTON SERIES"
   },
   {
     "id": "vod_s_086",
@@ -36173,7 +31231,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://headend-api.tonton.com.my/v300/imageHelper.php?id=6602610%3A377%3ASTILL%3APORTRAIT&iq=Wifi.1&plt=andr_tablet&appID=TONTON&w=906",
     "backdrop": "https://headend-api.tonton.com.my/v300/imageHelper.php?id=6602610%3A377%3ASTILL%3APORTRAIT&iq=Wifi.1&plt=andr_tablet&appID=TONTON&w=906",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "quality": "4K UHD",
     "ageRating": "P13",
     "synopsis": "Siri drama popular Luka Dihujung Setia (TONTON SERIES | Luka Dihujung Setia) dengan episod penuh dan kualiti penstriman pantas.",
@@ -36265,7 +31323,8 @@ export const VOD_CATALOG: VodItem[] = [
         "synopsis": "Luka Dihujung Setia - S01E09 Luka Dihujung Setia"
       }
     ],
-    "duration": "9 Episod"
+    "duration": "9 Episod",
+    "apkCategory": "TONTON SERIES"
   },
   {
     "id": "vod_s_087",
@@ -36278,7 +31337,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://headend-api.tonton.com.my/v300/imageHelper.php?id=6602610%3A377%3ASTILL%3APORTRAIT&iq=Wifi.1&plt=andr_tablet&appID=TONTON&w=906",
     "backdrop": "https://headend-api.tonton.com.my/v300/imageHelper.php?id=6602610%3A377%3ASTILL%3APORTRAIT&iq=Wifi.1&plt=andr_tablet&appID=TONTON&w=906",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "quality": "4K UHD",
     "ageRating": "P13",
     "synopsis": "Siri drama popular Luka DiHujung Setia (TONTON SERIES | Luka DiHujung Setia) dengan episod penuh dan kualiti penstriman pantas.",
@@ -36460,7 +31519,8 @@ export const VOD_CATALOG: VodItem[] = [
         "synopsis": "Luka DiHujung Setia - S01E28 Luka DiHujung Setia"
       }
     ],
-    "duration": "19 Episod"
+    "duration": "19 Episod",
+    "apkCategory": "TONTON SERIES"
   },
   {
     "id": "vod_s_088",
@@ -36473,7 +31533,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://headend-api.tonton.com.my/v300/imageHelper.php?id=6599920%3A377%3ASTILL%3APORTRAIT&iq=Wifi.1&plt=andr_tablet&appID=TONTON&w=906",
     "backdrop": "https://headend-api.tonton.com.my/v300/imageHelper.php?id=6599920%3A377%3ASTILL%3APORTRAIT&iq=Wifi.1&plt=andr_tablet&appID=TONTON&w=906",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "quality": "4K UHD",
     "ageRating": "P13",
     "synopsis": "Siri drama popular Cahaya Anak Lorong (TONTON SERIES | Cahaya Anak Lorong) dengan episod penuh dan kualiti penstriman pantas.",
@@ -36601,7 +31661,8 @@ export const VOD_CATALOG: VodItem[] = [
         "synopsis": "Cahaya Anak Lorong - S01E13 Cahaya Anak Lorong"
       }
     ],
-    "duration": "13 Episod"
+    "duration": "13 Episod",
+    "apkCategory": "TONTON SERIES"
   },
   {
     "id": "vod_s_089",
@@ -36614,7 +31675,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://headend-api.tonton.com.my/v300/imageHelper.php?id=6594356%3A377%3ASTILL%3APORTRAIT&iq=Wifi.1&plt=andr_tablet&appID=TONTON&w=906",
     "backdrop": "https://headend-api.tonton.com.my/v300/imageHelper.php?id=6594356%3A377%3ASTILL%3APORTRAIT&iq=Wifi.1&plt=andr_tablet&appID=TONTON&w=906",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "quality": "4K UHD",
     "ageRating": "P13",
     "synopsis": "Siri drama popular Dear Farris (TONTON SERIES | Dear Farris) dengan episod penuh dan kualiti penstriman pantas.",
@@ -36733,7 +31794,8 @@ export const VOD_CATALOG: VodItem[] = [
         "synopsis": "Dear Farris - S01E12 Dear Farris"
       }
     ],
-    "duration": "12 Episod"
+    "duration": "12 Episod",
+    "apkCategory": "TONTON SERIES"
   },
   {
     "id": "vod_s_090",
@@ -36747,7 +31809,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://headend-api.tonton.com.my/v300/imageHelper.php?id=6597951%3A377%3ASTILL%3APORTRAIT&iq=Wifi.1&plt=andr_tablet&appID=TONTON&w=906",
     "backdrop": "https://headend-api.tonton.com.my/v300/imageHelper.php?id=6597951%3A377%3ASTILL%3APORTRAIT&iq=Wifi.1&plt=andr_tablet&appID=TONTON&w=906",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "quality": "4K UHD",
     "ageRating": "P13",
     "synopsis": "Siri drama popular Cinta Kedua (TONTON SERIES | Cinta Kedua) dengan episod penuh dan kualiti penstriman pantas.",
@@ -37010,7 +32072,8 @@ export const VOD_CATALOG: VodItem[] = [
         "synopsis": "Cinta Kedua - S01E28 Cinta Kedua"
       }
     ],
-    "duration": "28 Episod"
+    "duration": "28 Episod",
+    "apkCategory": "TONTON SERIES"
   },
   {
     "id": "vod_s_091",
@@ -37023,7 +32086,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://headend-api.tonton.com.my/v300/imageHelper.php?id=6593084%3A377%3ASTILL%3APORTRAIT&iq=Wifi.1&plt=andr_tablet&appID=TONTON&w=906",
     "backdrop": "https://headend-api.tonton.com.my/v300/imageHelper.php?id=6593084%3A377%3ASTILL%3APORTRAIT&iq=Wifi.1&plt=andr_tablet&appID=TONTON&w=906",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "quality": "4K UHD",
     "ageRating": "P13",
     "synopsis": "Siri drama popular Anugerah Tanpa Cahaya (TONTON SERIES | Anugerah Tanpa Cahaya) dengan episod penuh dan kualiti penstriman pantas.",
@@ -37124,7 +32187,8 @@ export const VOD_CATALOG: VodItem[] = [
         "synopsis": "Anugerah Tanpa Cahaya - S01E10 Anugerah Tanpa Cahaya"
       }
     ],
-    "duration": "10 Episod"
+    "duration": "10 Episod",
+    "apkCategory": "TONTON SERIES"
   },
   {
     "id": "vod_s_092",
@@ -37137,7 +32201,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://headend-api.tonton.com.my/v300/imageHelper.php?id=6597217%3A377%3ASTILL%3APORTRAIT&iq=Wifi.1&plt=andr_tablet&appID=TONTON&w=906",
     "backdrop": "https://headend-api.tonton.com.my/v300/imageHelper.php?id=6597217%3A377%3ASTILL%3APORTRAIT&iq=Wifi.1&plt=andr_tablet&appID=TONTON&w=906",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "quality": "4K UHD",
     "ageRating": "P13",
     "synopsis": "Siri drama popular Bayangan Lelaki Sempurna (TONTON SERIES | Bayangan Lelaki Sempurna) dengan episod penuh dan kualiti penstriman pantas.",
@@ -37400,7 +32464,8 @@ export const VOD_CATALOG: VodItem[] = [
         "synopsis": "Bayangan Lelaki Sempurna - S01E28 Bayangan Lelaki Sempurna"
       }
     ],
-    "duration": "28 Episod"
+    "duration": "28 Episod",
+    "apkCategory": "TONTON SERIES"
   },
   {
     "id": "vod_s_093",
@@ -37414,7 +32479,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://headend-api.tonton.com.my/v300/imageHelper.php?id=6592042%3A377%3ASTILL%3APORTRAIT&iq=Wifi.1&plt=andr_tablet&appID=TONTON&w=906",
     "backdrop": "https://headend-api.tonton.com.my/v300/imageHelper.php?id=6592042%3A377%3ASTILL%3APORTRAIT&iq=Wifi.1&plt=andr_tablet&appID=TONTON&w=906",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "quality": "4K UHD",
     "ageRating": "P13",
     "synopsis": "Siri drama popular Bila Cinta Menjadi Dosa (TONTON SERIES | Bila Cinta Menjadi Dosa) dengan episod penuh dan kualiti penstriman pantas.",
@@ -37695,7 +32760,8 @@ export const VOD_CATALOG: VodItem[] = [
         "synopsis": "Bila Cinta Menjadi Dosa - S01E30 Bila Cinta Menjadi Dosa"
       }
     ],
-    "duration": "30 Episod"
+    "duration": "30 Episod",
+    "apkCategory": "TONTON SERIES"
   },
   {
     "id": "vod_s_094",
@@ -37709,7 +32775,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://headend-api.tonton.com.my/v300/imageHelper.php?id=6589958%3A377%3ASTILL%3APORTRAIT&iq=Wifi.1&plt=andr_tablet&appID=TONTON&w=906",
     "backdrop": "https://headend-api.tonton.com.my/v300/imageHelper.php?id=6589958%3A377%3ASTILL%3APORTRAIT&iq=Wifi.1&plt=andr_tablet&appID=TONTON&w=906",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "quality": "4K UHD",
     "ageRating": "P13",
     "synopsis": "Siri drama popular Namamu Cinta (TONTON SERIES | Namamu Cinta) dengan episod penuh dan kualiti penstriman pantas.",
@@ -37810,7 +32876,8 @@ export const VOD_CATALOG: VodItem[] = [
         "synopsis": "Namamu Cinta - S01E10 Namamu Cinta"
       }
     ],
-    "duration": "10 Episod"
+    "duration": "10 Episod",
+    "apkCategory": "TONTON SERIES"
   },
   {
     "id": "vod_s_095",
@@ -37823,7 +32890,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://headend-api.tonton.com.my/v300/imageHelper.php?id=6588361%3A377%3ASTILL%3APORTRAIT&iq=Wifi.1&plt=andr_tablet&appID=TONTON&w=906",
     "backdrop": "https://headend-api.tonton.com.my/v300/imageHelper.php?id=6588361%3A377%3ASTILL%3APORTRAIT&iq=Wifi.1&plt=andr_tablet&appID=TONTON&w=906",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "quality": "4K UHD",
     "ageRating": "P13",
     "synopsis": "Siri drama popular DiSebalik Jubah (TONTON SERIES | DiSebalik Jubah) dengan episod penuh dan kualiti penstriman pantas.",
@@ -37906,7 +32973,8 @@ export const VOD_CATALOG: VodItem[] = [
         "synopsis": "DiSebalik Jubah - S01E08 DiSebalik Jubah"
       }
     ],
-    "duration": "8 Episod"
+    "duration": "8 Episod",
+    "apkCategory": "TONTON SERIES"
   },
   {
     "id": "vod_s_096",
@@ -37920,7 +32988,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://headend-api.tonton.com.my/v300/imageHelper.php?id=6579114%3A377%3ASTILL%3APORTRAIT&iq=Wifi.1&plt=andr_tablet&appID=TONTON&w=906",
     "backdrop": "https://headend-api.tonton.com.my/v300/imageHelper.php?id=6579114%3A377%3ASTILL%3APORTRAIT&iq=Wifi.1&plt=andr_tablet&appID=TONTON&w=906",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "quality": "4K UHD",
     "ageRating": "P13",
     "synopsis": "Siri drama popular Toksik Cinta (TONTON SERIES | Toksik Cinta) dengan episod penuh dan kualiti penstriman pantas.",
@@ -38201,7 +33269,8 @@ export const VOD_CATALOG: VodItem[] = [
         "synopsis": "Toksik Cinta - S01E30 Toksik Cinta"
       }
     ],
-    "duration": "30 Episod"
+    "duration": "30 Episod",
+    "apkCategory": "TONTON SERIES"
   },
   {
     "id": "vod_s_101",
@@ -38214,7 +33283,7 @@ export const VOD_CATALOG: VodItem[] = [
     "poster": "https://headend-api.tonton.com.my/v210/imageHelper.php?id=6542895%3A380%3ASTILL%3APORTRAIT&iq=Wifi.1&plt=andr_tablet&appID=TONTON&w=906",
     "backdrop": "https://headend-api.tonton.com.my/v210/imageHelper.php?id=6542895%3A380%3ASTILL%3APORTRAIT&iq=Wifi.1&plt=andr_tablet&appID=TONTON&w=906",
     "year": 2023,
-    "rating": "4.8 \u2605",
+    "rating": "4.8 ★",
     "quality": "4K UHD",
     "ageRating": "P13",
     "synopsis": "Siri drama popular Dari Rahim Yang Sama (TONTON SERIES | Dari Rahim Yang Sama) dengan episod penuh dan kualiti penstriman pantas.",
@@ -38360,6 +33429,7 @@ export const VOD_CATALOG: VodItem[] = [
         "synopsis": "Dari Rahim Yang Sama - 95-S1E15 Dari Rahim Yang Sama"
       }
     ],
-    "duration": "15 Episod"
+    "duration": "15 Episod",
+    "apkCategory": "TONTON SERIES"
   }
 ];
