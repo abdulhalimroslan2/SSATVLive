@@ -1,5 +1,5 @@
 import React from 'react';
-import { Search, Bell, ChevronDown } from 'lucide-react';
+import { Search, Bell } from 'lucide-react';
 
 interface HeaderProps {
   activeTab: string;
@@ -21,16 +21,36 @@ export const Header: React.FC<HeaderProps> = ({
     { id: 'kids', label: 'KIDS' },
   ];
 
+  const getMobileTitle = () => {
+    switch (activeTab) {
+      case 'home':
+        return 'Home';
+      case 'live':
+        return 'Live TV';
+      case 'movies':
+        return 'Movies';
+      case 'series':
+        return 'Series';
+      case 'sports':
+        return 'Sports';
+      case 'kids':
+        return 'Kids';
+      case 'search':
+        return 'Search';
+      default:
+        return 'SSATV+';
+    }
+  };
+
   return (
-    <header className="ssatv-header">
-      {/* Brand Logo */}
-      <div className="ssatv-logo-wrap" onClick={() => onTabChange('home')}>
-        <span className="ssatv-logo-text">SSATV</span>
-        <span className="ssatv-logo-plus">+</span>
+    <header className="ssatv-header apple-tv-header">
+      {/* Mobile Top Bar Title (Matching Apple TV IMG_5146 / IMG_5148) */}
+      <div className="apple-tv-mobile-header-left ssatv-mobile-only" onClick={() => onTabChange('home')}>
+        <h1 className="apple-tv-mobile-header-title">{getMobileTitle()}</h1>
       </div>
 
-      {/* Center Nav Items */}
-      <nav className="ssatv-nav-tabs">
+      {/* Center Nav Items (Desktop only - mobile uses floating bottom dock) */}
+      <nav className="ssatv-nav-tabs ssatv-desktop-only">
         {navItems.map((item) => {
           const isActive = activeTab === item.id;
           return (
@@ -46,8 +66,8 @@ export const Header: React.FC<HeaderProps> = ({
         })}
       </nav>
 
-      {/* Right Utilities */}
-      <div className="ssatv-header-right">
+      {/* Desktop Right Utilities */}
+      <div className="ssatv-header-right ssatv-desktop-only">
         {/* Search */}
         <button 
           className="ssatv-icon-btn" 
@@ -64,15 +84,19 @@ export const Header: React.FC<HeaderProps> = ({
           </button>
           <span className="ssatv-notif-badge">0</span>
         </div>
+      </div>
 
-        {/* User Profile Avatar */}
-        <div className="ssatv-profile-btn" title="Akaun Halim Roslan">
-          <img 
-            src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=120" 
-            alt="Profil" 
-            className="ssatv-avatar-img"
+      {/* Mobile Top-Right Profile Avatar (Matching Apple TV IMG_5146 / IMG_5148) */}
+      <div className="apple-tv-mobile-header-right ssatv-mobile-only">
+        <div className="apple-tv-mobile-avatar" title="Akaun Halim Roslan">
+          <img
+            src="/sir-halim.png"
+            alt="Profil"
+            onError={(e) => {
+              (e.target as HTMLImageElement).src =
+                'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=120';
+            }}
           />
-          <ChevronDown size={14} className="ssatv-chevron-icon" />
         </div>
       </div>
     </header>
