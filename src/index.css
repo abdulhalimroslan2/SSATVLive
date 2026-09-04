@@ -5536,51 +5536,21 @@ html, body {
   width: 224px;
   flex-shrink: 0;
   background: rgba(18, 19, 28, 0.96);
-  backdrop-filter: blur(28px);
-  -webkit-backdrop-filter: blur(28px);
-  border-right: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 18px;
   display: flex;
   flex-direction: column;
-  padding: 16px 10px;
+  padding: 18px 10px;
   position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  height: 100vh;
+  top: 12px;
+  bottom: 12px;
+  left: 12px;
+  height: calc(100vh - 24px);
   z-index: 95;
   overflow-y: auto;
-}
-
-/* 1. macOS Window Traffic Lights */
-.apple-tv-mac-traffic-lights {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 2px 8px 18px 8px;
-}
-
-.apple-tv-mac-traffic-lights .traffic-dot {
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  display: inline-block;
-  cursor: pointer;
-  transition: opacity 0.15s ease;
-}
-
-.apple-tv-mac-traffic-lights .traffic-red {
-  background: #ff5f56;
-  border: 0.5px solid rgba(0, 0, 0, 0.2);
-}
-
-.apple-tv-mac-traffic-lights .traffic-yellow {
-  background: #ffbd2e;
-  border: 0.5px solid rgba(0, 0, 0, 0.2);
-}
-
-.apple-tv-mac-traffic-lights .traffic-green {
-  background: #27c93f;
-  border: 0.5px solid rgba(0, 0, 0, 0.2);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
 }
 
 .ssatv-sidebar-nav {
@@ -5684,7 +5654,7 @@ html, body {
   min-width: 0;
   display: flex;
   flex-direction: column;
-  margin-left: 220px;
+  margin-left: 252px;
 }
 
 /* Responsive: Hide sidebar and locked bottom profile on mobile/tablet screens */
