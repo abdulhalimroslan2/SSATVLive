@@ -53,11 +53,13 @@ function App() {
   useEffect(() => {
     const handleRemotePlay = (e: any) => {
       if (e.detail) {
-        const ch = e.detail;
+        const ch = { ...e.detail };
+        if (!ch.id) ch.id = `vod_${Date.now()}`;
+        else if (!ch.id.startsWith('vod_') && ch.category !== 'LIVETV') ch.id = `vod_${ch.id}`;
         setActiveChannel(ch);
-        if (ch.category === 'MOVIES') setActiveTab('movies');
+        if (ch.category === 'LIVETV' || ch.category === 'LIVE') setActiveTab('live');
         else if (ch.category === 'SERIES') setActiveTab('series');
-        else if (ch.category === 'LIVETV') setActiveTab('livetv');
+        else setActiveTab('movies');
         window.scrollTo({ top: 0, behavior: 'smooth' });
         setTimeout(() => {
           const video = document.querySelector('video') as HTMLVideoElement;
