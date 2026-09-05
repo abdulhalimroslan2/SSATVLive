@@ -5,11 +5,18 @@
   "bundledWebRuntime": false,
   "server": {
     "androidScheme": "https",
+    "iosScheme": "capacitor",
     "cleartext": true
   },
   "android": {
     "allowMixedContent": true,
     "captureInput": true,
     "webContentsDebuggingEnabled": true
+  },
+  "ios": {
+    "contentInset": "automatic",
+    "allowsLinkPreview": false,
+    "scrollEnabled": true,
+    "backgroundColor": "#05070e"
   }
 }
