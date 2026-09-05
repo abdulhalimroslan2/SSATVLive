@@ -1056,8 +1056,9 @@ export const Player: React.FC<PlayerProps> = ({ channel, hideOverlay = false }) 
       }
 
       const currentTime = video.currentTime;
-      // Detect if video playback is stuck (time not progressing while not paused)
-      const isTimeStuck = lastTime >= 0 && Math.abs(currentTime - lastTime) < 0.05;
+      // Detect if video playback is stuck (only after media has actually started playing)
+      const hasStarted = (video.readyState >= 2 || currentTime > 0);
+      const isTimeStuck = hasStarted && lastTime >= 0 && Math.abs(currentTime - lastTime) < 0.05;
 
       if (!video.paused && isTimeStuck) {
         stallCount++;
@@ -1077,14 +1078,13 @@ export const Player: React.FC<PlayerProps> = ({ channel, hideOverlay = false }) 
           } catch (_e) {}
         } else if (stallCount >= 16) {
           // Prolonged stall (16s): Cleanly reload live stream pipeline without tearing down DOM
-          console.log('[Player] Prolonged stall (16s), reloading stream pipeline cleanly...');
+          console.log('[Player] Prolonged stall (16s), recovering playback...');
           try {
             if (player && player.isLive() && currentCleanUrl) {
               player.load(currentCleanUrl).then(() => {
                 video.play().catch(() => {});
               }).catch(() => {});
-            } else if (!isLiveStream) {
-              video.currentTime = 0;
+            } else {
               video.play().catch(() => {});
             }
           } catch (_e) {}
