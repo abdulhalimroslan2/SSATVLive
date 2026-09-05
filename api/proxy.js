@@ -13,7 +13,7 @@ const CORS_HEADERS = {
 const UNIFIED_DEVICE_UA = 'Mozilla/5.0 (Linux; Android 10; MiTV-AXSO0 Build/QTZCS200912.005) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.159 Safari/537.36';
 
 // Hetzner Nginx RAM tmpfs Edge Proxy (Request coalescing & multi-user cache)
-const HETZNER_VPS_URL = 'http://2.29.23.90';
+const HETZNER_VPS_URL = 'http://2.29.23.90.sslip.io';
 
 export default async function handler(request) {
   if (request.method === 'OPTIONS') {
@@ -174,7 +174,7 @@ export default async function handler(request) {
 
     const responseHeaders = new Headers(response.headers);
     if (usedEdgeProxy) {
-      responseHeaders.set('x-edge-cache-proxy', '2.29.23.90 (Hetzner Helsinki)');
+      responseHeaders.set('x-edge-cache-proxy', '2.29.23.90.sslip.io (Hetzner Helsinki)');
     }
     Object.entries(CORS_HEADERS).forEach(([key, value]) => {
       responseHeaders.set(key, value);
