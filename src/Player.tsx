@@ -436,6 +436,7 @@ export const Player: React.FC<PlayerProps> = ({ channel, hideOverlay = false }) 
         ['https://d3b0v7fggu5zwm.cloudfront.net/', '/cf-d3b0/'],
         ['https://slive.mana2.my/', '/mana2/'],
         ['https://vd466.okcdn.ru/', '/okcdn/'],
+        ['https://d2tolhxlph2dpt.cloudfront.net/', '/cf-d2to/'],
       ];
 
       const proxyBase = getProxyBaseUrl();

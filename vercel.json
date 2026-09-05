@@ -53,6 +53,10 @@
       "destination": "/api/proxy?path=/cf-df14/:match*"
     },
     {
+      "source": "/cf-d2to/:match*",
+      "destination": "/api/proxy?path=/cf-d2to/:match*"
+    },
+    {
       "source": "/mana2/:match*",
       "destination": "/api/proxy?path=/mana2/:match*"
     },

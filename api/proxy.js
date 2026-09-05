@@ -63,12 +63,12 @@ export default async function handler(request) {
     targetUrl = path.replace('/ngtv-vod/', 'https://ngtv-vod.gcdn.co/');
   }
   else if (path.startsWith('/viu-vod/')) {
-    targetUrl = path.replace('/viu-vod/', 'https://dms-api.viu.com/');
+    targetUrl = `${HETZNER_VPS_URL}${path}`;
     headers.set('Origin', 'https://www.viu.com');
     headers.set('Referer', 'https://www.viu.com/');
   }
   else if (path.startsWith('/viu-key/')) {
-    targetUrl = path.replace('/viu-key/', 'https://prod-in.viu.com/');
+    targetUrl = `${HETZNER_VPS_URL}${path}`;
     headers.set('Origin', 'https://www.viu.com');
     headers.set('Referer', 'https://www.viu.com/');
   }
@@ -103,6 +103,9 @@ export default async function handler(request) {
   }
   else if (path.startsWith('/cf-df14/')) {
     targetUrl = path.replace('/cf-df14/', 'https://df14pcdp16s98.cloudfront.net/');
+  }
+  else if (path.startsWith('/cf-d2to/')) {
+    targetUrl = path.replace('/cf-d2to/', 'https://d2tolhxlph2dpt.cloudfront.net/');
   }
   else if (path.startsWith('/mana2/')) {
     targetUrl = path.replace('/mana2/', 'https://slive.mana2.my/');
@@ -175,6 +178,8 @@ export default async function handler(request) {
         else if (directUrl.startsWith('/gcdn-s/')) directUrl = directUrl.replace('/gcdn-s/', 'https://ngtv-live-cbj.gcdn.co/');
         else if (directUrl.startsWith('/gcdn/')) directUrl = directUrl.replace('/gcdn/', 'http://ngtv-live-cbj.gcdn.co/');
         else if (directUrl.startsWith('/gcdn-live/')) directUrl = directUrl.replace('/gcdn-live/', 'https://ngtv-live.gcdn.co/');
+        else if (directUrl.startsWith('/viu-vod/')) directUrl = directUrl.replace('/viu-vod/', 'https://dms-api.viu.com/');
+        else if (directUrl.startsWith('/viu-key/')) directUrl = directUrl.replace('/viu-key/', 'https://prod-in.viu.com/');
         response = await fetch(directUrl, fetchOptions);
       } else {
         throw vpsErr;
@@ -268,6 +273,11 @@ export default async function handler(request) {
       return new Response(text, { status: response.status, headers: responseHeaders });
     }
 
+    if (path.startsWith('/viu-key/')) {
+      responseHeaders.set('Content-Type', 'application/octet-stream');
+      return new Response(response.body, { status: response.status, headers: responseHeaders });
+    }
+
     // If it's load-ptv rwt.m3u8, convert static loops into continuous infinite live sliding windows
     if (path.includes('rwt.m3u8')) {
       const text = await response.text();
@@ -325,6 +335,8 @@ export default async function handler(request) {
       text = text.replace(/<Location>[\s\S]*?<\/Location>/gi, '');
       text = text.replace(/<BaseURL>http:\/\/ngtv-live-cbj\.gcdn\.co\//gi, '<BaseURL>https://ngtv-live-cbj.gcdn.co/');
       text = text.replace(/<BaseURL>http:\/\/ngtv-live\.gcdn\.co\//gi, '<BaseURL>https://ngtv-live.gcdn.co/');
+      text = text.replaceAll('https://d2tolhxlph2dpt.cloudfront.net/', '/cf-d2to/');
+      text = text.replace(/[a-f0-9]{32}\/\.\.\//gi, '');
       responseHeaders.set('Content-Type', 'application/dash+xml');
       responseHeaders.set('Cache-Control', 'no-cache, no-store, must-revalidate');
       return new Response(text, {

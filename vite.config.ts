@@ -131,6 +131,32 @@ function proxyPlugin() {
           return
         }
 
+        // Special handler for Viu sub-playlists (rewrites encryption keys to /viu-key/)
+        if (url.startsWith('/viu-vod/') && (url.includes('.m3u8') || url.includes('vuclip_vod'))) {
+          setCors()
+          const targetUrl = 'http://2.29.23.90.sslip.io' + url
+          const curl = spawn('curl', ['-s', '-L', targetUrl])
+          let body = ''
+          curl.stdout.on('data', (d) => { body += d.toString() })
+          curl.on('close', () => {
+            res.setHeader('Content-Type', 'application/vnd.apple.mpegurl')
+            let content = body.replaceAll('https://prod-in.viu.com/', '/viu-key/')
+            res.end(content)
+          })
+          return
+        }
+
+        // Special handler for Viu AES-128 keys
+        if (url.startsWith('/viu-key/')) {
+          setCors()
+          const targetUrl = 'http://2.29.23.90.sslip.io' + url
+          res.setHeader('Content-Type', 'application/octet-stream')
+          const curl = spawn('curl', ['-s', '-L', targetUrl])
+          curl.stdout.pipe(res)
+          curl.on('error', () => { if (!res.headersSent) { res.writeHead(500); res.end() } })
+          return
+        }
+
         // Special handler for iris-synamedia (redirects asset segments directly to vodejitp-asset-playback-b)
         if (url.startsWith('/iris-synamedia/')) {
           setCors()
@@ -217,8 +243,9 @@ function proxyPlugin() {
           { prefix: '/astro-linear/', target: 'https://linearjitp-playback.astro.com.my/', args: ['-H', `User-Agent: ${ASTRO_UA}`] },
           { prefix: '/astro-vod/', target: 'https://vodejitp-asset-playback-b.astro.com.my/', args: ['-H', `User-Agent: ${ASTRO_UA}`] },
           { prefix: '/iris-synamedia/', target: 'https://vod-dai-ott-ap.ssai.iris.synamedia.com/', args: ['-H', `User-Agent: ${ASTRO_UA}`] },
-          { prefix: '/viu-vod/', target: 'https://dms-api.viu.com/', args: ['-H', 'Origin: https://www.viu.com', '-H', 'Referer: https://www.viu.com/'] },
-          { prefix: '/viu-key/', target: 'https://prod-in.viu.com/', args: ['-H', 'Origin: https://www.viu.com', '-H', 'Referer: https://www.viu.com/'] },
+          { prefix: '/viu-vod/', target: 'http://2.29.23.90.sslip.io/viu-vod/', args: ['-H', 'Origin: https://www.viu.com', '-H', 'Referer: https://www.viu.com/'] },
+          { prefix: '/viu-key/', target: 'http://2.29.23.90.sslip.io/viu-key/', args: ['-H', 'Origin: https://www.viu.com', '-H', 'Referer: https://www.viu.com/'] },
+          { prefix: '/cf-d2to/', target: 'http://2.29.23.90.sslip.io/cf-d2to/' },
           { prefix: '/perfecttv/', target: 'https://get.perfecttv.net/' },
           { prefix: '/cf-d2xz/', target: 'https://d2xz2v5wuvgur6.cloudfront.net/' },
           { prefix: '/cf-d2tj/', target: 'https://d2tjypxxy769fn.cloudfront.net/' },
@@ -266,6 +293,20 @@ function proxyPlugin() {
               req.pipe(curl.stdin)
               curl.stdout.pipe(res)
               curl.on('error', () => { if (!res.headersSent) { res.writeHead(500); res.end() } })
+              return
+            }
+
+            if (url.includes('.mpd')) {
+              const curl = spawn('curl', ['-s', '-L', ...baseArgs, targetUrl])
+              let body = ''
+              curl.stdout.on('data', (d) => { body += d.toString() })
+              curl.on('close', () => {
+                res.setHeader('Content-Type', 'application/dash+xml')
+                let text = body.replace(/<Location>[\s\S]*?<\/Location>/gi, '')
+                text = text.replaceAll('https://d2tolhxlph2dpt.cloudfront.net/', '/cf-d2to/')
+                text = text.replace(/[a-f0-9]{32}\/\.\.\//gi, '')
+                res.end(text)
+              })
               return
             }
 
