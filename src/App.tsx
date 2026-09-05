@@ -24,6 +24,7 @@ import { MoviesView } from './MoviesView';
 import { SeriesView } from './SeriesView';
 import { MobileBottomNav } from './MobileBottomNav';
 import { Sidebar } from './Sidebar';
+import { DeviceSelectorModal, type DeviceType } from './DeviceSelectorModal';
 import { X, Tv } from 'lucide-react';
 
 function App() {
@@ -32,6 +33,21 @@ function App() {
   const [activeTab, setActiveTab] = useState('home');
   const [searchQuery, setSearchQuery] = useState('');
   const [isLoading, setIsLoading] = useState(true);
+  const [devicePreference, setDevicePreference] = useState<DeviceType | null>(() => {
+    if (typeof window !== 'undefined') {
+      return (localStorage.getItem('ssatv_device_preference') as DeviceType) || null;
+    }
+    return null;
+  });
+  const [showDeviceModal, setShowDeviceModal] = useState(false);
+
+  const handleSelectDevice = (device: DeviceType) => {
+    setDevicePreference(device);
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('ssatv_device_preference', device);
+    }
+    setShowDeviceModal(false);
+  };
 
   useEffect(() => {
     loadChannels();
@@ -316,11 +332,24 @@ function App() {
             setSearchQuery('');
             handleTabChange('search');
           }}
+          currentDevice={devicePreference}
+          onOpenDeviceSelector={() => setShowDeviceModal(true)}
         />
 
         {/* Main Content Area */}
         <main className="ssatv-main-content">
-        {isLoading && !activeChannel && activeTab === 'home' ? (
+        {!devicePreference ? (
+          <div
+            style={{
+              textAlign: 'center',
+              padding: '12rem 2rem',
+              color: 'var(--text-secondary)',
+              fontSize: '1.25rem',
+            }}
+          >
+            Sila pilih jenis peranti anda untuk memulakan penstriman...
+          </div>
+        ) : isLoading && !activeChannel && activeTab === 'home' ? (
           <div
             style={{
               textAlign: 'center',
@@ -361,7 +390,7 @@ function App() {
                     </button>
                   </div>
                 </div>
-                <Player key={activeChannel.id} channel={activeChannel} />
+                <Player key={activeChannel.id} channel={activeChannel} devicePreference={devicePreference} />
               </section>
             )}
 
@@ -549,6 +578,25 @@ function App() {
           window.scrollTo({ top: 0, behavior: 'smooth' });
         }}
       />
+
+      {/* MANDATORY DEVICE SELECTION ONBOARDING (BEFORE HOME/HERO IF NOT YET SELECTED) */}
+      {!devicePreference && (
+        <DeviceSelectorModal
+          currentDevice={null}
+          onSelectDevice={handleSelectDevice}
+          isDismissable={false}
+        />
+      )}
+
+      {/* DEVICE SWITCHER MODAL FROM HEADER */}
+      {showDeviceModal && devicePreference && (
+        <DeviceSelectorModal
+          currentDevice={devicePreference}
+          onSelectDevice={handleSelectDevice}
+          onClose={() => setShowDeviceModal(false)}
+          isDismissable={true}
+        />
+      )}
     </div>
   );
 }
