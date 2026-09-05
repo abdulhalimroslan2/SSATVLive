@@ -12,6 +12,9 @@ const CORS_HEADERS = {
 // Unified static device fingerprint (Disguised as a single MiTV Android STB)
 const UNIFIED_DEVICE_UA = 'Mozilla/5.0 (Linux; Android 10; MiTV-AXSO0 Build/QTZCS200912.005) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.159 Safari/537.36';
 
+// Hetzner Nginx RAM tmpfs Edge Proxy (Request coalescing & multi-user cache)
+const HETZNER_VPS_URL = 'http://2.29.23.90';
+
 export default async function handler(request) {
   if (request.method === 'OPTIONS') {
     return new Response(null, { status: 204, headers: CORS_HEADERS });
@@ -102,22 +105,22 @@ export default async function handler(request) {
     targetUrl = path.replace('/mana2/', 'https://slive.mana2.my/');
   }
   else if (path.startsWith('/ptv2026/')) {
-    targetUrl = path.replace('/ptv2026/', 'https://ptv2026.com/');
+    targetUrl = `${HETZNER_VPS_URL}${path}`;
   }
   else if (path.startsWith('/load-ptv/')) {
-    targetUrl = path.replace('/load-ptv/', 'https://load.ptv2026.com/');
+    targetUrl = `${HETZNER_VPS_URL}${path}`;
   }
   else if (path.startsWith('/perfecttv/')) {
-    targetUrl = path.replace('/perfecttv/', 'https://get.perfecttv.net/');
+    targetUrl = `${HETZNER_VPS_URL}${path}`;
   }
   else if (path.startsWith('/gcdn-s/')) {
-    targetUrl = path.replace('/gcdn-s/', 'https://ngtv-live-cbj.gcdn.co/');
+    targetUrl = `${HETZNER_VPS_URL}${path}`;
   }
   else if (path.startsWith('/gcdn/')) {
-    targetUrl = path.replace('/gcdn/', 'http://ngtv-live-cbj.gcdn.co/');
+    targetUrl = `${HETZNER_VPS_URL}${path}`;
   }
   else if (path.startsWith('/gcdn-live/')) {
-    targetUrl = path.replace('/gcdn-live/', 'https://ngtv-live.gcdn.co/');
+    targetUrl = `${HETZNER_VPS_URL}${path}`;
   }
   else {
     return new Response('Invalid path prefix', { status: 400 });
@@ -144,9 +147,35 @@ export default async function handler(request) {
       fetchOptions.body = await request.arrayBuffer();
     }
 
-    const response = await fetch(targetUrl, fetchOptions);
+    let response;
+    let usedEdgeProxy = false;
+    try {
+      response = await fetch(targetUrl, fetchOptions);
+      if (!response.ok && response.status >= 500 && targetUrl.startsWith(HETZNER_VPS_URL)) {
+        throw new Error(`Hetzner VPS returned status ${response.status}`);
+      }
+      if (targetUrl.startsWith(HETZNER_VPS_URL)) {
+        usedEdgeProxy = true;
+      }
+    } catch (vpsErr) {
+      if (targetUrl.startsWith(HETZNER_VPS_URL)) {
+        let directUrl = targetUrl.replace(HETZNER_VPS_URL, '');
+        if (directUrl.startsWith('/ptv2026/')) directUrl = directUrl.replace('/ptv2026/', 'https://ptv2026.com/');
+        else if (directUrl.startsWith('/load-ptv/')) directUrl = directUrl.replace('/load-ptv/', 'https://load.ptv2026.com/');
+        else if (directUrl.startsWith('/perfecttv/')) directUrl = directUrl.replace('/perfecttv/', 'https://get.perfecttv.net/');
+        else if (directUrl.startsWith('/gcdn-s/')) directUrl = directUrl.replace('/gcdn-s/', 'https://ngtv-live-cbj.gcdn.co/');
+        else if (directUrl.startsWith('/gcdn/')) directUrl = directUrl.replace('/gcdn/', 'http://ngtv-live-cbj.gcdn.co/');
+        else if (directUrl.startsWith('/gcdn-live/')) directUrl = directUrl.replace('/gcdn-live/', 'https://ngtv-live.gcdn.co/');
+        response = await fetch(directUrl, fetchOptions);
+      } else {
+        throw vpsErr;
+      }
+    }
 
     const responseHeaders = new Headers(response.headers);
+    if (usedEdgeProxy) {
+      responseHeaders.set('x-edge-cache-proxy', '2.29.23.90 (Hetzner Helsinki)');
+    }
     Object.entries(CORS_HEADERS).forEach(([key, value]) => {
       responseHeaders.set(key, value);
     });
