@@ -2,13 +2,11 @@ import React, { useEffect, useRef, useState } from 'react';
 import type { Channel } from './mockData';
 import shaka from 'shaka-player/dist/shaka-player.ui.js';
 import Hls from 'hls.js';
-import { Maximize, Minimize, Volume2, VolumeX, Check, AlertCircle, RefreshCw, Play, Copy, ExternalLink } from 'lucide-react';
-import type { DeviceType } from './DeviceSelectorModal';
+import { Maximize, Minimize, Volume2, VolumeX, Check, AlertCircle, RefreshCw } from 'lucide-react';
 
 interface PlayerProps {
   channel: Channel;
   hideOverlay?: boolean;
-  devicePreference?: DeviceType | null;
 }
 
 // Detect iOS device
@@ -55,44 +53,13 @@ export const getProxyBaseUrl = (): string => {
   return window.location.origin;
 };
 
-export const Player: React.FC<PlayerProps> = ({ channel, hideOverlay = false, devicePreference }) => {
+export const Player: React.FC<PlayerProps> = ({ channel, hideOverlay = false }) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const videoContainerRef = useRef<HTMLDivElement>(null);
   const [engineError, setEngineError] = useState<string | null>(null);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [showOverlayControls, setShowOverlayControls] = useState(true);
   const hideControlsTimerRef = useRef<any>(null);
-
-  // iOS Compatibility & External Player State
-  const activeDevice = devicePreference || (typeof window !== 'undefined' ? (localStorage.getItem('ssatv_device_preference') as DeviceType) : null);
-  const isIosMode = activeDevice === 'ios' || IS_IOS;
-  const rawStreamUrl = channel.streamUrl ? channel.streamUrl.split('|')[0].trim() : '';
-  const isDashStream = rawStreamUrl.includes('.mpd');
-  const hasDrm = Boolean(channel.clearKey);
-  const isUnsupportedOnIos = isIosMode && (isDashStream || hasDrm);
-
-  const [forceWebPlayer, setForceWebPlayer] = useState(false);
-  const [copiedUrl, setCopiedUrl] = useState(false);
-
-  const handleOpenVlc = () => {
-    const vlcXCallback = `vlc-x-callback://x-callback-url/stream?url=${encodeURIComponent(rawStreamUrl)}`;
-    const vlcDirect = `vlc://${rawStreamUrl}`;
-    window.location.href = vlcXCallback;
-    setTimeout(() => {
-      window.location.href = vlcDirect;
-    }, 600);
-  };
-
-  const handleCopyStream = () => {
-    let text = rawStreamUrl;
-    if (channel.clearKey) {
-      text += `\nClearKey/DRM: ${channel.clearKey}`;
-    }
-    navigator.clipboard.writeText(text).then(() => {
-      setCopiedUrl(true);
-      setTimeout(() => setCopiedUrl(false), 3000);
-    });
-  };
 
   // Apple TV Player State (Gambar 2)
   const [isPlaying, setIsPlaying] = useState(true);
@@ -502,13 +469,6 @@ export const Player: React.FC<PlayerProps> = ({ channel, hideOverlay = false, de
       // Detect Stream Type
       const isHls = cleanUrl.includes('.m3u8');
       const isDash = cleanUrl.includes('.mpd');
-
-      // If iOS mode and stream is unsupported (DASH or DRM) and user hasn't forced web player,
-      // present VLC Player prompt immediately without throwing errors
-      if (isUnsupportedOnIos && !forceWebPlayer) {
-        setIsPlaying(false);
-        return;
-      }
 
       // -------------------------------------------------------------
       // STRATEGY 1: SHAKA PLAYER (Best for ClearKey DRM & DASH/HLS)
@@ -1157,7 +1117,7 @@ export const Player: React.FC<PlayerProps> = ({ channel, hideOverlay = false, de
       clearInterval(stallCheckInterval);
       cleanupPlayers();
     };
-  }, [channel.id, channel.contentId, channel.streamUrl, channel.clearKey, forceWebPlayer]);
+  }, [channel.id, channel.contentId, channel.streamUrl, channel.clearKey]);
 
 
   return (
@@ -1457,60 +1417,6 @@ export const Player: React.FC<PlayerProps> = ({ channel, hideOverlay = false, de
                 <span className="apple-tv-time-text remaining">
                   {duration > 0 ? formatRemaining(currentTime, duration) : (isVodStream ? '--:--' : '')}
                 </span>
-              </div>
-            </div>
-          </div>
-        )}
-
-        {/* iOS VLC Playback Helper (Pilihan B) */}
-        {isUnsupportedOnIos && !forceWebPlayer && (
-          <div className="apple-tv-vlc-overlay">
-            <div className="apple-tv-vlc-card">
-              <div className="apple-tv-vlc-icon-cone">
-                <Play size={28} fill="#fff" color="#fff" />
-              </div>
-
-              <h3 className="apple-tv-vlc-title">Pemain Luaran Diperlukan di iOS</h3>
-              <p className="apple-tv-vlc-sub">
-                Format siaran <strong>{channel.name}</strong> ({isDashStream ? 'MPEG-DASH' : 'DRM'}) disekat oleh pelayar Safari iPhone/iPad. Anda boleh menonton siaran ini secara lancar menggunakan aplikasi percuma <strong>VLC Media Player</strong>.
-              </p>
-
-              <div className="apple-tv-vlc-actions">
-                <button
-                  className="apple-tv-vlc-btn-primary"
-                  onClick={handleOpenVlc}
-                  type="button"
-                >
-                  <Play size={18} fill="#fff" />
-                  <span>Buka Terus di VLC Player</span>
-                </button>
-
-                <button
-                  className="apple-tv-vlc-btn-secondary"
-                  onClick={handleCopyStream}
-                  type="button"
-                >
-                  <Copy size={16} />
-                  <span>{copiedUrl ? '✓ Pautan Berjaya Disalin!' : 'Salin Pautan Stream'}</span>
-                </button>
-
-                <a
-                  href="https://apps.apple.com/my/app/vlc-media-player/id650377962"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="apple-tv-vlc-btn-secondary"
-                >
-                  <ExternalLink size={16} />
-                  <span>Muat Turun VLC di App Store (Percuma)</span>
-                </a>
-
-                <button
-                  className="apple-tv-vlc-btn-text"
-                  onClick={() => setForceWebPlayer(true)}
-                  type="button"
-                >
-                  Cuba Pemain Web Tetap (Eksperimental)
-                </button>
               </div>
             </div>
           </div>

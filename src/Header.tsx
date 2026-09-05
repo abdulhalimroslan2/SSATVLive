@@ -1,21 +1,16 @@
 import React from 'react';
 import { Search, Bell } from 'lucide-react';
-import type { DeviceType } from './DeviceSelectorModal';
 
 interface HeaderProps {
   activeTab: string;
   onTabChange: (tab: string) => void;
   onSearchClick: () => void;
-  currentDevice?: DeviceType | null;
-  onOpenDeviceSelector?: () => void;
 }
 
 export const Header: React.FC<HeaderProps> = ({
   activeTab,
   onTabChange,
   onSearchClick,
-  currentDevice,
-  onOpenDeviceSelector,
 }) => {
   const navItems = [
     { id: 'home', label: 'HOME' },
@@ -47,13 +42,6 @@ export const Header: React.FC<HeaderProps> = ({
     }
   };
 
-  const getDeviceLabel = () => {
-    if (currentDevice === 'ios') return '📱 iOS';
-    if (currentDevice === 'android') return '🤖 Android';
-    if (currentDevice === 'desktop') return '💻 PC';
-    return '⚙️ Peranti';
-  };
-
   return (
     <header className="ssatv-header apple-tv-header">
       {/* Mobile Top Bar Title (Matching Apple TV IMG_5146 / IMG_5148) */}
@@ -80,19 +68,6 @@ export const Header: React.FC<HeaderProps> = ({
 
       {/* Desktop Right Utilities */}
       <div className="ssatv-header-right ssatv-desktop-only">
-        {/* Device Switcher Pill */}
-        {onOpenDeviceSelector && (
-          <button
-            className="apple-tv-header-device-pill"
-            onClick={onOpenDeviceSelector}
-            title="Tukar Mod Peranti"
-            type="button"
-          >
-            <span className="device-pill-dot" />
-            <span>{getDeviceLabel()}</span>
-          </button>
-        )}
-
         {/* Apple TV Icon */}
         <div 
           className="ssatv-header-appletv-icon" 
@@ -124,18 +99,8 @@ export const Header: React.FC<HeaderProps> = ({
         </div>
       </div>
 
-      {/* Mobile Top-Right Profile Avatar & Device Switcher */}
+      {/* Mobile Top-Right Profile Avatar (Matching Apple TV IMG_5146 / IMG_5148) */}
       <div className="apple-tv-mobile-header-right ssatv-mobile-only">
-        {onOpenDeviceSelector && (
-          <button
-            className="apple-tv-mobile-device-pill"
-            onClick={onOpenDeviceSelector}
-            title="Tukar Mod Peranti"
-            type="button"
-          >
-            <span>{getDeviceLabel()}</span>
-          </button>
-        )}
         <div className="apple-tv-mobile-avatar" title="Akaun Halim Roslan">
           <img
             src="/sir-halim.png"
