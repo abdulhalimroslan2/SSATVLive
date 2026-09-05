@@ -292,8 +292,8 @@ function proxyPlugin() {
             const baseArgs = [
               '--compressed',
               '--tcp-nodelay',
-              '--connect-timeout', '4',
-              '--max-time', '20',
+              '--connect-timeout', '15',
+              '--max-time', '30',
               '-H', `User-Agent: ${ASTRO_UA}`,
               '-H', 'X-Forwarded-For:',
               '-H', 'X-Real-IP:',
@@ -314,12 +314,26 @@ function proxyPlugin() {
               const curl = spawn('curl', ['-s', '-L', ...baseArgs, targetUrl])
               let body = ''
               curl.stdout.on('data', (d) => { body += d.toString() })
-              curl.on('close', () => {
+              curl.on('close', (code) => {
+                if (!body || code !== 0) {
+                  console.error(`[Proxy] MPD fetch failed for ${targetUrl} (exit code ${code}, length ${body.length})`);
+                  if (!res.headersSent) {
+                    res.writeHead(502, { 'Content-Type': 'text/plain' });
+                    res.end('Proxy Fetch Failed');
+                  }
+                  return;
+                }
                 res.setHeader('Content-Type', 'application/dash+xml')
                 let text = body.replace(/<Location>[\s\S]*?<\/Location>/gi, '')
                 text = text.replaceAll('https://d2tolhxlph2dpt.cloudfront.net/', '/cf-d2to/')
+                text = text.replaceAll('https://ptv2026.com/', '/ptv2026/')
+                text = text.replaceAll('http://ptv2026.com/', '/ptv2026/')
                 text = text.replace(/[a-f0-9]{32}\/\.\.\//gi, '')
                 res.end(text)
+              })
+              curl.on('error', (err) => {
+                console.error(`[Proxy] Curl spawn error for ${targetUrl}:`, err);
+                if (!res.headersSent) { res.writeHead(500); res.end(); }
               })
               return
             }

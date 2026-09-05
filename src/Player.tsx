@@ -548,8 +548,8 @@ export const Player: React.FC<PlayerProps> = ({ channel, hideOverlay = false }) 
               }
             });
 
-            // RESPONSE FILTER: Rewrite MPD for ClearKey DRM & Edge Acceleration
-            if (isDash && isClearKeyHex) {
+            // RESPONSE FILTER: Rewrite MPD for ClearKey DRM, Widevine & Edge Acceleration
+            if (isDash) {
               networkEngine.registerResponseFilter((type: any, response: any) => {
                 if (type !== shaka.net.NetworkingEngine.RequestType.MANIFEST && type !== 0) return;
 
@@ -568,14 +568,6 @@ export const Player: React.FC<PlayerProps> = ({ channel, hideOverlay = false }) 
                   return;
                 }
 
-                const clearKeyUuid = 'urn:uuid:1077efec-c0b2-4d02-ace3-3c1e52e2fb4b';
-
-                // Extract and format clean KID as UUID (8-4-4-4-12) from channel.clearKey
-                const rawKeyId = channel.clearKey!.split(':')[0].replace(/[^0-9a-fA-F]/g, '').toLowerCase();
-                const kidUuid = rawKeyId.length === 32
-                  ? `${rawKeyId.slice(0, 8)}-${rawKeyId.slice(8, 12)}-${rawKeyId.slice(12, 16)}-${rawKeyId.slice(16, 20)}-${rawKeyId.slice(20)}`
-                  : rawKeyId;
-
                 // 1. STRIP <Location> tags completely so Shaka NEVER redirects manifest refreshes to foreign CDNs that drop KIDs
                 let rewritten = mpd.replace(/<Location>[\s\S]*?<\/Location>/gi, '');
 
@@ -584,25 +576,37 @@ export const Player: React.FC<PlayerProps> = ({ channel, hideOverlay = false }) 
                 rewritten = rewritten.replace(/<BaseURL>http:\/\/ngtv-live\.gcdn\.co\//gi, '<BaseURL>https://ngtv-live.gcdn.co/');
                 rewritten = rewritten.replace(/<BaseURL>http:\/\/(?!localhost|127\.0\.0\.1)/gi, '<BaseURL>https://');
                 rewritten = rewritten.replaceAll('https://d2tolhxlph2dpt.cloudfront.net/', getProxyBaseUrl() + '/cf-d2to/');
+                rewritten = rewritten.replaceAll('https://ptv2026.com/', getProxyBaseUrl() + '/ptv2026/');
+                rewritten = rewritten.replaceAll('http://ptv2026.com/', getProxyBaseUrl() + '/ptv2026/');
 
                 // Ensure XML namespace for cenc is declared on <MPD> so browser DOMParser does not throw NamespaceError (Shaka 4001)
                 if (!rewritten.includes('xmlns:cenc=')) {
                   rewritten = rewritten.replace(/<MPD(\s|>)/i, '<MPD xmlns:cenc="urn:mpeg:cenc:2013"$1');
                 }
 
-                // Remove trickmode tracks safely without crossing </AdaptationSet>
-                rewritten = rewritten.replace(/<AdaptationSet(?:\s[^>]*)?>((?:(?!<\/AdaptationSet>)[\s\S])*?dashif\.org\/guidelines\/trickmode[\s\S]*?)<\/AdaptationSet>/gi, '');
+                if (isClearKeyHex) {
+                  const clearKeyUuid = 'urn:uuid:1077efec-c0b2-4d02-ace3-3c1e52e2fb4b';
 
-                // 3. Remove existing ContentProtection tags cleanly without crossing tag boundaries
-                rewritten = rewritten.replace(/<ContentProtection(?:\s[^>]*)?\/>/gi, '');
-                rewritten = rewritten.replace(/<ContentProtection(?:\s[^>]*)?>((?:(?!<\/ContentProtection>)[\s\S])*?)<\/ContentProtection>/gi, '');
-                rewritten = rewritten.replace(/<(?:cenc:)?pssh[^>]*>[\s\S]*?<\/(?:cenc:)?pssh>/gi, '');
+                  // Extract and format clean KID as UUID (8-4-4-4-12) from channel.clearKey
+                  const rawKeyId = channel.clearKey!.split(':')[0].replace(/[^0-9a-fA-F]/g, '').toLowerCase();
+                  const kidUuid = rawKeyId.length === 32
+                    ? `${rawKeyId.slice(0, 8)}-${rawKeyId.slice(8, 12)}-${rawKeyId.slice(12, 16)}-${rawKeyId.slice(16, 20)}-${rawKeyId.slice(20)}`
+                    : rawKeyId;
 
-                // 4. Inject clean ClearKey ContentProtection with kidUuid into video & audio AdaptationSets
-                rewritten = rewritten.replace(
-                  /<AdaptationSet(?:\s[^>]*)?(contentType="(?:video|audio)"|mimeType="(?:video|audio)\/mp4")([^>]*)>/gi,
-                  (match) => match + `\n      <ContentProtection schemeIdUri="urn:mpeg:dash:mp4protection:2011" value="cenc" default_KID="${kidUuid}" cenc:default_KID="${kidUuid}" />\n      <ContentProtection schemeIdUri="${clearKeyUuid}" value="cenc" default_KID="${kidUuid}" cenc:default_KID="${kidUuid}" />`
-                );
+                  // Remove trickmode tracks safely without crossing </AdaptationSet>
+                  rewritten = rewritten.replace(/<AdaptationSet(?:\s[^>]*)?>((?:(?!<\/AdaptationSet>)[\s\S])*?dashif\.org\/guidelines\/trickmode[\s\S]*?)<\/AdaptationSet>/gi, '');
+
+                  // 3. Remove existing ContentProtection tags cleanly without crossing tag boundaries
+                  rewritten = rewritten.replace(/<ContentProtection(?:\s[^>]*)?\/>/gi, '');
+                  rewritten = rewritten.replace(/<ContentProtection(?:\s[^>]*)?>((?:(?!<\/ContentProtection>)[\s\S])*?)<\/ContentProtection>/gi, '');
+                  rewritten = rewritten.replace(/<(?:cenc:)?pssh[^>]*>[\s\S]*?<\/(?:cenc:)?pssh>/gi, '');
+
+                  // 4. Inject clean ClearKey ContentProtection with kidUuid into video & audio AdaptationSets
+                  rewritten = rewritten.replace(
+                    /<AdaptationSet(?:\s[^>]*)?(contentType="(?:video|audio)"|mimeType="(?:video|audio)\/mp4")([^>]*)>/gi,
+                    (match) => match + `\n      <ContentProtection schemeIdUri="urn:mpeg:dash:mp4protection:2011" value="cenc" default_KID="${kidUuid}" cenc:default_KID="${kidUuid}" />\n      <ContentProtection schemeIdUri="${clearKeyUuid}" value="cenc" default_KID="${kidUuid}" cenc:default_KID="${kidUuid}" />`
+                  );
+                }
 
                 const encoded = new TextEncoder().encode(rewritten);
                 response.data = encoded.buffer.slice(encoded.byteOffset, encoded.byteOffset + encoded.byteLength);
@@ -627,8 +631,8 @@ export const Player: React.FC<PlayerProps> = ({ channel, hideOverlay = false }) 
             };
             drmConfig.advanced = {
               'com.widevine.alpha': {
-                videoRobustness: '',
-                audioRobustness: '',
+                videoRobustness: ['SW_SECURE_CRYPTO', ''],
+                audioRobustness: ['SW_SECURE_CRYPTO', ''],
               },
             };
             console.log(`[Player] Using Widevine license server: ${licenseUrl}`);
@@ -644,6 +648,13 @@ export const Player: React.FC<PlayerProps> = ({ channel, hideOverlay = false }) 
               };
             }
           }
+
+          drmConfig.retryParameters = {
+            maxAttempts: 5,
+            baseDelay: 500,
+            backoffFactor: 1.5,
+            timeout: 30000,
+          };
 
           // Configure Shaka Player DRM & Streaming for Zero-Buffer & Mobile Stability
           player.configure({
@@ -663,7 +674,7 @@ export const Player: React.FC<PlayerProps> = ({ channel, hideOverlay = false }) 
                 baseDelay: 300,
                 backoffFactor: 1.3,
                 fuzzFactor: 0.2,
-                timeout: 15000,
+                timeout: 30000,
               }
             },
             manifest: {
@@ -677,7 +688,7 @@ export const Player: React.FC<PlayerProps> = ({ channel, hideOverlay = false }) 
                 baseDelay: 300,
                 backoffFactor: 1.3,
                 fuzzFactor: 0.2,
-                timeout: 15000,
+                timeout: 30000,
               }
             },
             abr: {
