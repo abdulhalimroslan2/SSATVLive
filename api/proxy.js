@@ -32,6 +32,7 @@ export default async function handler(request) {
 
   const queryParams = new URLSearchParams(url.searchParams);
   queryParams.delete('path');
+  queryParams.delete('match');
   const remainingQueryString = queryParams.toString();
   
   let targetUrl = '';
