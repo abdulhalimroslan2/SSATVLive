@@ -3,25 +3,6 @@ import { Smartphone, Monitor, Tv, CheckCircle2, X, ArrowRight, ShieldCheck, Play
 
 export type DeviceType = 'ios' | 'android' | 'desktop';
 
-export const detectUserDevice = (): DeviceType => {
-  if (typeof window === 'undefined' || !navigator) return 'desktop';
-  const ua = navigator.userAgent || navigator.vendor || (window as any).opera || '';
-  const platform = navigator.platform || '';
-
-  // 1. iOS: iPhone, iPad, iPod, and modern iPadOS (MacIntel with touch points)
-  const isIos =
-    /iPad|iPhone|iPod/.test(ua) ||
-    (platform === 'MacIntel' && navigator.maxTouchPoints > 1);
-
-  if (isIos) return 'ios';
-
-  // 2. Android: mobile, tablet, Android TV box
-  if (/Android/i.test(ua)) return 'android';
-
-  // 3. Desktop: PC, Mac, Linux
-  return 'desktop';
-};
-
 interface DeviceSelectorModalProps {
   currentDevice: DeviceType | null;
   onSelectDevice: (device: DeviceType) => void;
@@ -35,10 +16,14 @@ export const DeviceSelectorModal: React.FC<DeviceSelectorModalProps> = ({
   onClose,
   isDismissable = false,
 }) => {
-  const detectedHardware = typeof window !== 'undefined' ? detectUserDevice() : 'desktop';
   const [selected, setSelected] = useState<DeviceType>(() => {
     if (currentDevice) return currentDevice;
-    return detectedHardware;
+    // Auto-detect hint
+    if (typeof navigator !== 'undefined') {
+      if (/iPad|iPhone|iPod/.test(navigator.userAgent)) return 'ios';
+      if (/Android/i.test(navigator.userAgent)) return 'android';
+    }
+    return 'ios';
   });
 
   const deviceOptions = [
@@ -124,11 +109,6 @@ export const DeviceSelectorModal: React.FC<DeviceSelectorModalProps> = ({
                     <IconComp size={24} />
                   </div>
                   <div className="apple-tv-device-card-status">
-                    {opt.id === detectedHardware && (
-                      <span className="apple-tv-device-auto-detected-pill">
-                        Dikesan
-                      </span>
-                    )}
                     <span 
                       className="apple-tv-device-badge"
                       style={{ backgroundColor: `${opt.badgeColor}22`, color: opt.badgeColor, borderColor: `${opt.badgeColor}44` }}

@@ -24,8 +24,8 @@ import { MoviesView } from './MoviesView';
 import { SeriesView } from './SeriesView';
 import { MobileBottomNav } from './MobileBottomNav';
 import { Sidebar } from './Sidebar';
-import { DeviceSelectorModal, detectUserDevice, type DeviceType } from './DeviceSelectorModal';
-import { X, Tv, Sparkles } from 'lucide-react';
+import { DeviceSelectorModal, type DeviceType } from './DeviceSelectorModal';
+import { X, Tv } from 'lucide-react';
 
 function App() {
   const [channels, setChannels] = useState<Channel[]>([]);
@@ -33,44 +33,13 @@ function App() {
   const [activeTab, setActiveTab] = useState('home');
   const [searchQuery, setSearchQuery] = useState('');
   const [isLoading, setIsLoading] = useState(true);
-
-  // Seamless auto-detection to eliminate user confusion
-  const [devicePreference, setDevicePreference] = useState<DeviceType>(() => {
+  const [devicePreference, setDevicePreference] = useState<DeviceType | null>(() => {
     if (typeof window !== 'undefined') {
-      const saved = localStorage.getItem('ssatv_device_preference') as DeviceType | null;
-      if (saved && (saved === 'ios' || saved === 'android' || saved === 'desktop')) {
-        return saved;
-      }
-      const detected = detectUserDevice();
-      localStorage.setItem('ssatv_device_preference', detected);
-      return detected;
-    }
-    return 'desktop';
-  });
-
-  const [showDeviceModal, setShowDeviceModal] = useState(false);
-  const [autoDetectedToast, setAutoDetectedToast] = useState<string | null>(() => {
-    if (typeof window !== 'undefined') {
-      const hasSeenToast = localStorage.getItem('ssatv_device_detected_toast_seen');
-      if (!hasSeenToast) {
-        localStorage.setItem('ssatv_device_detected_toast_seen', 'true');
-        const detected = detectUserDevice();
-        if (detected === 'ios') return 'Peranti Dikesan: Apple iOS 📱 (Mod Siaran Dioptimumkan)';
-        if (detected === 'android') return 'Peranti Dikesan: Android 🤖 (Enjin Shaka Player)';
-        return 'Peranti Dikesan: PC & Komputer Riba 💻';
-      }
+      return (localStorage.getItem('ssatv_device_preference') as DeviceType) || null;
     }
     return null;
   });
-
-  useEffect(() => {
-    if (autoDetectedToast) {
-      const timer = setTimeout(() => {
-        setAutoDetectedToast(null);
-      }, 5000);
-      return () => clearTimeout(timer);
-    }
-  }, [autoDetectedToast]);
+  const [showDeviceModal, setShowDeviceModal] = useState(false);
 
   const handleSelectDevice = (device: DeviceType) => {
     setDevicePreference(device);
@@ -610,38 +579,17 @@ function App() {
         }}
       />
 
-      {/* AUTO-DETECTED DEVICE FLOATING TOAST (Apple TV Sleek Pill) */}
-      {autoDetectedToast && (
-        <div className="apple-tv-auto-detect-toast animate-fade-in">
-          <div className="apple-tv-toast-content">
-            <Sparkles size={16} className="apple-tv-toast-sparkle" />
-            <span>{autoDetectedToast}</span>
-          </div>
-          <div className="apple-tv-toast-actions">
-            <button
-              className="apple-tv-toast-switch-btn"
-              onClick={() => {
-                setAutoDetectedToast(null);
-                setShowDeviceModal(true);
-              }}
-              type="button"
-            >
-              Tukar
-            </button>
-            <button
-              className="apple-tv-toast-close-btn"
-              onClick={() => setAutoDetectedToast(null)}
-              type="button"
-              aria-label="Tutup"
-            >
-              <X size={14} />
-            </button>
-          </div>
-        </div>
+      {/* MANDATORY DEVICE SELECTION ONBOARDING (BEFORE HOME/HERO IF NOT YET SELECTED) */}
+      {!devicePreference && (
+        <DeviceSelectorModal
+          currentDevice={null}
+          onSelectDevice={handleSelectDevice}
+          isDismissable={false}
+        />
       )}
 
-      {/* DEVICE SWITCHER MODAL (Triggered from Header Pill or Toast) */}
-      {showDeviceModal && (
+      {/* DEVICE SWITCHER MODAL FROM HEADER */}
+      {showDeviceModal && devicePreference && (
         <DeviceSelectorModal
           currentDevice={devicePreference}
           onSelectDevice={handleSelectDevice}
