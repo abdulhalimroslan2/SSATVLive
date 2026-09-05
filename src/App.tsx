@@ -225,7 +225,7 @@ function App() {
         id: `top10_${item.id}_${Date.now()}`,
         contentId: item.id,
         name: `${item.name} (${isMovie ? 'Filem' : 'Siri TV'})`,
-        description: `Top 10 ${isMovie ? 'Filem' : 'Siri TV'} di SSATV+`,
+        description: `Top 10 ${isMovie ? 'Filem' : 'Siri TV'} Hari Ini`,
         category: isMovie ? 'MOVIES' : 'SERIES',
         thumbnail: item.poster,
         streamUrl: 'https://linearjitp-playback.astro.com.my/dash-live/sladashenc/live_ch_031_0201.mpd',
@@ -308,7 +308,7 @@ function App() {
       />
 
       <div className="ssatv-app-main-viewport">
-        {/* 1. SSATV+ TOP NAVIGATION HEADER */}
+        {/* 1. TOP NAVIGATION HEADER */}
         <Header
           activeTab={activeTab}
           onTabChange={handleTabChange}
@@ -329,7 +329,7 @@ function App() {
               fontSize: '1.25rem',
             }}
           >
-            Memuatkan SSATV+ Widescreen Experience...
+            Memuatkan Widescreen Experience...
           </div>
         ) : (
           <>

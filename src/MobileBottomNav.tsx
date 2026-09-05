@@ -74,7 +74,7 @@ export const MobileBottomNav: React.FC<MobileBottomNavProps> = ({
         }}
         title="Cari"
         type="button"
-        aria-label="Carian SSATV+"
+        aria-label="Carian"
       >
         <Search size={21} strokeWidth={2.2} />
       </button>

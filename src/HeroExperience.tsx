@@ -139,10 +139,10 @@ export const HeroExperience: React.FC<HeroExperienceProps> = ({
         {/* Minimalist Mobile Sub-Rank / One-Liner (Matching Apple TV IMG_5148 & IMG_5150) */}
         <div className="apple-tv-hero-minimal-sub">
           {current.vodItem?.type === 'series'
-            ? '#1 Show on SSATV+'
+            ? '#1 Show'
             : current.channelId
-            ? '#1 Live Channel in Malaysia'
-            : '#1 Movie on SSATV+'}
+            ? '#1 Live Channel'
+            : '#1 Movie'}
         </div>
 
         {/* Episode / Synopsis Line with MORE button (Desktop Only - Clean Minimalist on Mobile) */}

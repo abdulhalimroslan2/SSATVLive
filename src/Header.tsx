@@ -38,7 +38,7 @@ export const Header: React.FC<HeaderProps> = ({
       case 'search':
         return 'Search';
       default:
-        return 'SSATV+';
+        return 'Home';
     }
   };
 
