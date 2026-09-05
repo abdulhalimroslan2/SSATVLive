@@ -30,9 +30,26 @@ const IS_NATIVE_APP = typeof window !== 'undefined' && (
 );
 
 export const getProxyBaseUrl = (): string => {
+  // 1. Dynamic edge proxy configured in client browser/STB
+  if (typeof window !== 'undefined') {
+    const custom = localStorage.getItem('custom_edge_proxy');
+    if (custom && custom.trim()) {
+      return custom.trim().replace(/\/$/, '');
+    }
+  }
+
+  // 2. Build-time environment variable (e.g. set in Vercel settings)
+  const envProxy = (import.meta as any).env?.VITE_STREAM_PROXY_URL;
+  if (envProxy && envProxy.trim()) {
+    return envProxy.trim().replace(/\/$/, '');
+  }
+
+  // 3. Native Capacitor / APK environment
   if (IS_NATIVE_APP) {
     return 'https://ssatvlive.vercel.app';
   }
+
+  // 4. Default to current host
   return window.location.origin;
 };
 
