@@ -49,6 +49,30 @@ function App() {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, []);
 
+  // Remote channel / VOD playback event listener
+  useEffect(() => {
+    const handleRemotePlay = (e: any) => {
+      if (e.detail) {
+        const ch = e.detail;
+        setActiveChannel(ch);
+        if (ch.category === 'MOVIES') setActiveTab('movies');
+        else if (ch.category === 'SERIES') setActiveTab('series');
+        else if (ch.category === 'LIVETV') setActiveTab('livetv');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        setTimeout(() => {
+          const video = document.querySelector('video') as HTMLVideoElement;
+          if (video) {
+            video.muted = false;
+            video.volume = 1;
+            video.play().catch(() => {});
+          }
+        }, 100);
+      }
+    };
+    window.addEventListener('ssatv-play-channel', handleRemotePlay);
+    return () => window.removeEventListener('ssatv-play-channel', handleRemotePlay);
+  }, []);
+
   const loadChannels = async () => {
     setIsLoading(true);
     const data = await fetchChannels();
