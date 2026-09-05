@@ -452,6 +452,9 @@ export const Player: React.FC<PlayerProps> = ({ channel, hideOverlay = false }) 
           break;
         }
       }
+      if (cleanUrl.match(/https?:\/\/(vd\d+\.okcdn\.ru)\//)) {
+        cleanUrl = proxyBase + cleanUrl.replace(/https?:\/\/(vd\d+\.okcdn\.ru)\//, '/okcdn/$1/');
+      }
       if (cleanUrl.startsWith('/')) {
         cleanUrl = proxyBase + cleanUrl;
       }
@@ -528,6 +531,11 @@ export const Player: React.FC<PlayerProps> = ({ channel, hideOverlay = false }) 
                 if (url.startsWith('http://')) {
                   request.uris[0] = url.replace('http://', 'https://');
                 }
+                return;
+              }
+
+              if (url.match(/https?:\/\/(vd\d+\.okcdn\.ru)\//)) {
+                request.uris[0] = pBase + url.replace(/https?:\/\/(vd\d+\.okcdn\.ru)\//, '/okcdn/$1/');
                 return;
               }
 

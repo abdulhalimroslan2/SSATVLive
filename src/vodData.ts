@@ -20715,9 +20715,10 @@ export const VOD_CATALOG: VodItem[] = [
   },
   {
     "id": "vod_m_335",
-    "title": "First",
+    "title": "Gayong (2024)",
     "type": "movie",
     "genre": [
+      "Aksi",
       "Drama",
       "Melayu",
       "Tempatan"
@@ -20725,19 +20726,21 @@ export const VOD_CATALOG: VodItem[] = [
     "origin": "malay",
     "poster": "https://image.tmdb.org/t/p/w600_and_h900_bestv2/gqJTbAJqtmnlhH8567YhTd0LUIF.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w600_and_h900_bestv2/gqJTbAJqtmnlhH8567YhTd0LUIF.jpg",
-    "year": 2023,
-    "rating": "4.8 ★",
+    "year": 2024,
+    "rating": "4.9 ★",
     "duration": "1j 50m",
     "quality": "FHD 1080p",
     "ageRating": "P13",
-    "synopsis": "Filem First (VOD MALAY) dengan kualiti definisi tinggi dan audio terkini.",
+    "synopsis": "Kisah epik perjuangan pengasas Silat Seni Gayong, Dato' Meor Abdul Rahman dalam mempertahankan maruah dan seni bela diri warisan bangsa.",
     "cast": [
-      "Bintang Filem Pilihan"
+      "Beto Kusyairy",
+      "Nayan",
+      "Yayan Ruhian"
     ],
     "streamUrl": "https://ptv2026.com/okayru.m3u8?id=16032044288719",
     "clearKey": "",
-    "isTrending": false,
-    "isPopular": false,
+    "isTrending": true,
+    "isPopular": true,
     "apkCategory": "VOD MALAY"
   },
   {

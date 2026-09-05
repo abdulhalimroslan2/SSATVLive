@@ -12,6 +12,9 @@ const CORS_HEADERS = {
 // Unified static device fingerprint (Disguised as a single MiTV Android STB)
 const UNIFIED_DEVICE_UA = 'Mozilla/5.0 (Linux; Android 10; MiTV-AXSO0 Build/QTZCS200912.005) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.159 Safari/537.36';
 
+// Windows Desktop Chrome User-Agent (OKCDN and Viu require Desktop UA; they return 400/403 to Android STBs)
+const DESKTOP_CHROME_UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36';
+
 // Hetzner Nginx RAM tmpfs Edge Proxy (Request coalescing & multi-user cache)
 const HETZNER_VPS_URL = 'http://2.29.23.90.sslip.io';
 
@@ -33,11 +36,11 @@ export default async function handler(request) {
   
   let targetUrl = '';
   
-  // Anti-Tracking Header Sanitization:
-  // Strips all client device signatures, real IPs, and tracking telemetry.
-  // Upstream servers will only ever see 1 single MiTV device via the proxy IP.
+  const isOkcdnOrViu = path.includes('okayru') || path.startsWith('/okcdn/') || path.startsWith('/viu-');
+  const userAgent = isOkcdnOrViu ? DESKTOP_CHROME_UA : UNIFIED_DEVICE_UA;
+
   const headers = new Headers();
-  headers.set('User-Agent', UNIFIED_DEVICE_UA);
+  headers.set('User-Agent', userAgent);
   headers.set('Accept', '*/*');
   headers.set('Accept-Language', 'en-US,en;q=0.9');
 
@@ -105,7 +108,13 @@ export default async function handler(request) {
     targetUrl = path.replace('/mana2/', 'https://slive.mana2.my/');
   }
   else if (path.startsWith('/ptv2026/')) {
-    targetUrl = `${HETZNER_VPS_URL}${path}`;
+    if (path.includes('okayru')) {
+      targetUrl = `https://ptv2026.com${path.replace('/ptv2026', '')}`;
+      headers.set('Origin', 'https://ok.ru');
+      headers.set('Referer', 'https://ok.ru/');
+    } else {
+      targetUrl = `${HETZNER_VPS_URL}${path}`;
+    }
   }
   else if (path.startsWith('/load-ptv/')) {
     targetUrl = `${HETZNER_VPS_URL}${path}`;
@@ -134,7 +143,7 @@ export default async function handler(request) {
     let fetchOptions = {
       method: request.method,
       headers: headers,
-      redirect: 'follow',
+      redirect: path.includes('okayru') ? 'manual' : 'follow',
     };
 
     if (request.method === 'POST') {
@@ -183,65 +192,77 @@ export default async function handler(request) {
     // Strip any upstream tracking cookies
     responseHeaders.delete('set-cookie');
 
-    // If it's okayru MPD/M3U8, rewrite relative paths and handle HTML redirect
+    // If it's okayru MPD/M3U8, rewrite relative paths and handle redirect
     if (path.includes('okayru')) {
-      let text = await response.text();
-
-      // Check for HTML redirect page
-      if (text.includes('Redirecting') || text.includes('href="')) {
+      let redirTarget = response.headers.get('location');
+      if (!redirTarget) {
+        let text = await response.text();
         const match = text.match(/href="([^"]+)"/i);
         if (match) {
-          const redirTarget = match[1].replace(/&amp;/g, '&');
-          const redirRes = await fetch(redirTarget, { headers });
-          text = await redirRes.text();
-          const okcdnHost = redirTarget.match(/https?:\/\/(vd\d+\.okcdn\.ru)/)?.[1] || 'vd466.okcdn.ru';
-          const okcdnOrigin = `https://${okcdnHost}`;
-          const basePath = redirTarget.substring(okcdnOrigin.length, redirTarget.lastIndexOf('/') + 1);
+          redirTarget = match[1].replace(/&amp;/g, '&');
+        } else if (response.status === 200 && (text.includes('<MPD') || text.includes('#EXTM3U'))) {
+          redirTarget = response.url || targetUrl;
+        }
+      }
+
+      if (redirTarget && redirTarget.startsWith('http')) {
+        const okcdnHost = redirTarget.match(/https?:\/\/(vd\d+\.okcdn\.ru)/)?.[1] || 'vd466.okcdn.ru';
+        const okcdnOrigin = `https://${okcdnHost}`;
+        const basePath = redirTarget.substring(okcdnOrigin.length, redirTarget.lastIndexOf('/') + 1);
+
+        const okcdnRes = await fetch(redirTarget, {
+          headers: {
+            'User-Agent': DESKTOP_CHROME_UA,
+            'Origin': 'https://ok.ru',
+            'Referer': 'https://ok.ru/',
+          },
+        });
+
+        let text = await okcdnRes.text();
+
+        if (path.includes('.mpd')) {
+          text = text.replace(/<Period([^>]*)>/i, `<Period$1>\n    <BaseURL>/okcdn/${okcdnHost}${basePath}</BaseURL>`);
+          text = text.replace(/<Location>[\s\S]*?<\/Location>/gi, '');
+          responseHeaders.set('Content-Type', 'application/dash+xml');
+          responseHeaders.set('Cache-Control', 'no-cache, no-store, must-revalidate');
+          return new Response(text, { status: 200, headers: responseHeaders });
+        } else {
+          // .m3u8 playlist
           const rewritten = text.split('\n').map(line => {
             const l = line.trim();
             if (l && !l.startsWith('#')) {
               if (l.startsWith('http')) {
                 return l.replace(/https?:\/\/(vd\d+\.okcdn\.ru)\//, '/okcdn/$1/');
               }
-              return `/okcdn/${okcdnHost}` + basePath + l;
+              return `/okcdn/${okcdnHost}${basePath}${l}`;
             }
             return line;
           }).join('\n');
           responseHeaders.set('Content-Type', 'application/vnd.apple.mpegurl');
+          responseHeaders.set('Cache-Control', 'no-cache, no-store, must-revalidate');
           return new Response(rewritten, { status: 200, headers: responseHeaders });
         }
       }
-
-      const finalUrl = response.url || targetUrl;
-      let host = 'https://ptv2026.com';
-      try {
-        if (finalUrl) host = new URL(finalUrl).origin;
-      } catch (_) {}
-
-      if (path.includes('.mpd')) {
-        text = text.replace(/<BaseURL>\?/g, `<BaseURL>${host}/?`);
-        responseHeaders.set('Content-Type', 'application/dash+xml');
-      } else if (path.includes('.m3u8')) {
-        const baseUrl = finalUrl.substring(0, finalUrl.lastIndexOf('/') + 1);
-        text = text.split('\n').map(line => {
-          if (line.trim() && !line.startsWith('#') && !line.startsWith('http')) {
-            return baseUrl + line.trim();
-          }
-          return line;
-        }).join('\n');
-        responseHeaders.set('Content-Type', 'application/vnd.apple.mpegurl');
-      }
-
-      return new Response(text, {
-        status: response.status,
-        headers: responseHeaders,
-      });
     }
 
-    // Rewrite Viu sub-playlists to use proxy
+    // Rewrite Viu playlists, sub-playlists and encryption keys
     if (path.includes('get_viu.m3u8')) {
       let text = await response.text();
       text = text.replaceAll('https://dms-api.viu.com/', '/viu-vod/');
+      text = text.replaceAll('https://get.perfecttv.net/', '/perfecttv/');
+      responseHeaders.set('Content-Type', 'application/vnd.apple.mpegurl');
+      return new Response(text, { status: response.status, headers: responseHeaders });
+    }
+
+    if (path.startsWith('/viu-vod/') && (path.includes('.m3u8') || responseHeaders.get('content-type')?.includes('mpegurl'))) {
+      let text = await response.text();
+      text = text.replaceAll('https://prod-in.viu.com/', '/viu-key/');
+      responseHeaders.set('Content-Type', 'application/vnd.apple.mpegurl');
+      return new Response(text, { status: response.status, headers: responseHeaders });
+    }
+
+    if (path.includes('get_viu_sub_playlist.m3u8')) {
+      let text = await response.text();
       text = text.replaceAll('https://get.perfecttv.net/', '/perfecttv/');
       responseHeaders.set('Content-Type', 'application/vnd.apple.mpegurl');
       return new Response(text, { status: response.status, headers: responseHeaders });
