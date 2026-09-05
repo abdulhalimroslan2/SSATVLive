@@ -44,15 +44,17 @@ function proxyPlugin() {
                 curl2.stdout.on('data', (d) => { body2 += d.toString() })
                 curl2.on('close', () => {
                   res.setHeader('Content-Type', 'application/vnd.apple.mpegurl')
-                  const okcdnOrigin = redirTarget.match(/https?:\/\/[^/]+/)?.[0] || 'https://vd466.okcdn.ru'
+                  const hostMatch = redirTarget.match(/https?:\/\/(vd\d+\.okcdn\.ru)/)
+                  const host = hostMatch ? hostMatch[1] : 'vd466.okcdn.ru'
+                  const okcdnOrigin = hostMatch ? hostMatch[0] : 'https://vd466.okcdn.ru'
                   const basePath = redirTarget.substring(okcdnOrigin.length, redirTarget.lastIndexOf('/') + 1)
                   const rewritten = body2.split('\n').map(line => {
                     const l = line.trim()
                     if (l && !l.startsWith('#')) {
                       if (l.startsWith('http')) {
-                        return l.replace(/https?:\/\/vd\d*\.okcdn\.ru\//, '/okcdn/')
+                        return l.replace(/https?:\/\/(vd\d+\.okcdn\.ru)\//, '/okcdn/$1/')
                       }
-                      return '/okcdn' + basePath + l
+                      return `/okcdn/${host}${basePath}${l}`
                     }
                     return line
                   }).join('\n')
@@ -76,10 +78,11 @@ function proxyPlugin() {
               res.setHeader('Content-Type', 'application/vnd.apple.mpegurl')
               let proxyBase = ''
               if (effectiveUrl.includes('okcdn.ru')) {
-                const originMatch = effectiveUrl.match(/https?:\/\/[^/]+/)
+                const originMatch = effectiveUrl.match(/https?:\/\/(vd\d+\.okcdn\.ru)/)
+                const okcdnHost = originMatch ? originMatch[1] : 'vd466.okcdn.ru'
                 const origin = originMatch ? originMatch[0] : 'https://vd466.okcdn.ru'
                 const basePath = effectiveUrl.substring(origin.length, effectiveUrl.lastIndexOf('/') + 1)
-                proxyBase = '/okcdn' + basePath
+                proxyBase = `/okcdn/${okcdnHost}${basePath}`
               } else {
                 proxyBase = effectiveUrl.substring(0, effectiveUrl.lastIndexOf('/') + 1)
               }
@@ -87,7 +90,7 @@ function proxyPlugin() {
                 const l = line.trim()
                 if (l && !l.startsWith('#')) {
                   if (l.startsWith('http')) {
-                    return l.replace(/https?:\/\/[^/]*okcdn\.ru\//, '/okcdn/')
+                    return l.replace(/https?:\/\/(vd\d+\.okcdn\.ru)\//, '/okcdn/$1/')
                   }
                   return proxyBase + l
                 }
@@ -99,17 +102,28 @@ function proxyPlugin() {
           return
         }
 
-        // Special handler for okcdn.ru (must NOT send ASTRO_UA because URLs are signed)
+        // Special handler for okcdn.ru (must support dynamic subdomains vd*.okcdn.ru and send Desktop UA)
         if (url.startsWith('/okcdn/')) {
           setCors()
-          const sub = url.replace('/okcdn/', '')
-          const targetUrl = 'https://vd466.okcdn.ru/' + sub
+          const match = url.match(/^\/okcdn\/(vd\d+\.okcdn\.ru)\/(.*)$/)
+          let targetUrl = ''
+          if (match) {
+            targetUrl = `https://${match[1]}/${match[2]}`
+          } else {
+            targetUrl = 'https://vd466.okcdn.ru/' + url.replace('/okcdn/', '')
+          }
 
           if (url.includes('.m3u8')) res.setHeader('Content-Type', 'application/vnd.apple.mpegurl')
           else if (url.includes('.ts')) res.setHeader('Content-Type', 'video/mp2t')
           else if (/\.(m4f|m4s|m4v|m4a|mp4)/.test(url)) res.setHeader('Content-Type', 'video/mp4')
 
-          const curl = spawn('curl', ['-s', '-L', targetUrl])
+          const curl = spawn('curl', [
+            '-s', '-L',
+            '-H', 'User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+            '-H', 'Origin: https://ok.ru',
+            '-H', 'Referer: https://ok.ru/',
+            targetUrl
+          ])
           curl.stdout.pipe(res)
           curl.on('error', () => { if (!res.headersSent) { res.writeHead(500); res.end() } })
           return

@@ -320,7 +320,7 @@ function App() {
 
         {/* Main Content Area */}
         <main className="ssatv-main-content">
-        {isLoading ? (
+        {isLoading && !activeChannel && activeTab === 'home' ? (
           <div
             style={{
               textAlign: 'center',

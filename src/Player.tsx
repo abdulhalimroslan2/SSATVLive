@@ -553,12 +553,20 @@ export const Player: React.FC<PlayerProps> = ({ channel, hideOverlay = false }) 
               networkEngine.registerResponseFilter((type: any, response: any) => {
                 if (type !== shaka.net.NetworkingEngine.RequestType.MANIFEST && type !== 0) return;
 
-                let mpd: string;
+                let mpd = '';
                 try {
                   mpd = new TextDecoder().decode(response.data);
-                } catch (_e) { return; }
+                } catch (e: any) {
+                  console.error('[Player MPD Filter] TextDecoder error:', e);
+                  return;
+                }
 
-                if (!mpd.includes('<MPD') && !mpd.includes('<mpd')) return;
+                console.log(`[Player MPD Filter] type=${type}, status=${response?.status}, byteLength=${response?.data?.byteLength}, snippet=${mpd.slice(0, 100).replace(/\n/g, ' ')}`);
+
+                if (!mpd.includes('<MPD') && !mpd.includes('<mpd')) {
+                  console.warn('[Player MPD Filter] Not an MPD XML!');
+                  return;
+                }
 
                 const clearKeyUuid = 'urn:uuid:1077efec-c0b2-4d02-ace3-3c1e52e2fb4b';
 
@@ -575,6 +583,12 @@ export const Player: React.FC<PlayerProps> = ({ channel, hideOverlay = false }) 
                 rewritten = rewritten.replace(/<BaseURL>http:\/\/ngtv-live-cbj\.gcdn\.co\//gi, '<BaseURL>https://ngtv-live-cbj.gcdn.co/');
                 rewritten = rewritten.replace(/<BaseURL>http:\/\/ngtv-live\.gcdn\.co\//gi, '<BaseURL>https://ngtv-live.gcdn.co/');
                 rewritten = rewritten.replace(/<BaseURL>http:\/\/(?!localhost|127\.0\.0\.1)/gi, '<BaseURL>https://');
+                rewritten = rewritten.replaceAll('https://d2tolhxlph2dpt.cloudfront.net/', getProxyBaseUrl() + '/cf-d2to/');
+
+                // Ensure XML namespace for cenc is declared on <MPD> so browser DOMParser does not throw NamespaceError (Shaka 4001)
+                if (!rewritten.includes('xmlns:cenc=')) {
+                  rewritten = rewritten.replace(/<MPD(\s|>)/i, '<MPD xmlns:cenc="urn:mpeg:cenc:2013"$1');
+                }
 
                 // Remove trickmode tracks safely without crossing </AdaptationSet>
                 rewritten = rewritten.replace(/<AdaptationSet(?:\s[^>]*)?>((?:(?!<\/AdaptationSet>)[\s\S])*?dashif\.org\/guidelines\/trickmode[\s\S]*?)<\/AdaptationSet>/gi, '');
@@ -587,7 +601,7 @@ export const Player: React.FC<PlayerProps> = ({ channel, hideOverlay = false }) 
                 // 4. Inject clean ClearKey ContentProtection with kidUuid into video & audio AdaptationSets
                 rewritten = rewritten.replace(
                   /<AdaptationSet(?:\s[^>]*)?(contentType="(?:video|audio)"|mimeType="(?:video|audio)\/mp4")([^>]*)>/gi,
-                  (match) => match + `\n      <ContentProtection schemeIdUri="urn:mpeg:dash:mp4protection:2011" value="cenc" cenc:default_KID="${kidUuid}" />\n      <ContentProtection schemeIdUri="${clearKeyUuid}" value="cenc" cenc:default_KID="${kidUuid}" />`
+                  (match) => match + `\n      <ContentProtection schemeIdUri="urn:mpeg:dash:mp4protection:2011" value="cenc" default_KID="${kidUuid}" cenc:default_KID="${kidUuid}" />\n      <ContentProtection schemeIdUri="${clearKeyUuid}" value="cenc" default_KID="${kidUuid}" cenc:default_KID="${kidUuid}" />`
                 );
 
                 const encoded = new TextEncoder().encode(rewritten);
@@ -827,7 +841,7 @@ export const Player: React.FC<PlayerProps> = ({ channel, hideOverlay = false }) 
 
             return true;
           } catch (err: any) {
-            console.error(`[Player] ❌ Shaka failed for ${channel.name}:`, err?.message || err, err);
+            console.error(`[Player] ❌ Shaka failed for ${channel.name}: code=${err?.code} category=${err?.category} severity=${err?.severity} message=${err?.message} data=`, err?.data);
             return false;
           }
         };
