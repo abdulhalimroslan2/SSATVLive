@@ -296,7 +296,7 @@ function App() {
   };
 
   return (
-    <div className="ssatv-app-shell">
+    <div className={`ssatv-app-shell ${activeChannel ? 'has-active-player' : ''}`}>
       {/* 0. APPLE TV LEFT SIDEBAR (Matching ref_movies & ref_series 1:1) */}
       <Sidebar
         activeTab={activeTab}
