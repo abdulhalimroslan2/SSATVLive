@@ -7187,6 +7187,12 @@ body:has(:fullscreen) .ssatv-mobile-bottom-nav {
     margin-top: 0 !important;
   }
 
+  /* Specific padding for Live TV player where category pills are directly above it */
+  .ssatv-active-cinema-section.ssatv-live-cinema-section {
+    padding: 4px 10px 8px 10px !important;
+    margin-top: 0 !important;
+  }
+
   .ssatv-active-cinema-header {
     display: flex !important;
     align-items: center !important;
@@ -7980,7 +7986,11 @@ body:has(:fullscreen) .ssatv-mobile-bottom-nav {
   }
 
   /* Safe top padding for views so mobile header never overlaps or clips content */
-  .ssatv-livetv-container,
+  .ssatv-livetv-container {
+    padding-top: max(48px, calc(env(safe-area-inset-top, 10px) + 38px)) !important;
+    gap: 12px !important;
+  }
+
   .ssatv-movies-view,
   .search-view-container,
   .ssatv-search-view {
@@ -8004,14 +8014,14 @@ body:has(:fullscreen) .ssatv-mobile-bottom-nav {
     gap: 1.5rem !important;
   }
 
-  /* Live TV Categories directly under "Live TV" header on Mobile */
+  /* Live TV Categories directly under "Live TV" header on Mobile (Compact & tight) */
   .ssatv-browse-live-section {
     overflow-x: auto !important;
     -webkit-overflow-scrolling: touch !important;
     scrollbar-width: none !important;
-    padding: 8px 16px 10px 16px !important;
-    margin-top: 4px !important;
-    margin-bottom: 14px !important;
+    padding: 0 16px 2px 16px !important;
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
   }
 
   .ssatv-browse-live-section::-webkit-scrollbar {
@@ -8023,13 +8033,13 @@ body:has(:fullscreen) .ssatv-mobile-bottom-nav {
     flex-wrap: nowrap !important;
     gap: 8px !important;
     white-space: nowrap !important;
-    padding: 4px 0 !important;
+    padding: 2px 0 !important;
   }
 
   .ssatv-browse-live-section .ssatv-cat-pill {
     flex-shrink: 0 !important;
-    padding: 7px 18px !important;
-    font-size: 0.8rem !important;
+    padding: 5px 14px !important;
+    font-size: 0.76rem !important;
     font-weight: 700 !important;
     border-radius: 999px !important;
     line-height: 1.2 !important;
