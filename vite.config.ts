@@ -403,5 +403,33 @@ export default defineConfig({
         rewrite: (path) => path.replace(/^\/stream-m3u8/, '')
       }
     }
+  },
+  build: {
+    chunkSizeWarningLimit: 2500,
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          if (id.includes('liveEpgData.json')) {
+            return 'epg-data';
+          }
+          if (id.includes('vodData')) {
+            return 'vod-data';
+          }
+          if (id.includes('shaka-player')) {
+            return 'vendor-shaka';
+          }
+          if (id.includes('hls.js')) {
+            return 'vendor-hls';
+          }
+          if (id.includes('lucide-react')) {
+            return 'vendor-icons';
+          }
+          if (id.includes('node_modules')) {
+            return 'vendor';
+          }
+        }
+      }
+    }
   }
 })
+

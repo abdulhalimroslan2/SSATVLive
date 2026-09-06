@@ -6937,6 +6937,39 @@ html, body {
 .ssatv-active-cinema-section {
   padding: 24px 48px 16px 48px;
   background: rgba(7, 9, 14, 0.95);
+  width: 100%;
+}
+
+.ssatv-live-editorial-card {
+  padding: 18px 48px 24px 48px;
+  background: rgba(7, 9, 14, 0.75);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  margin-bottom: 16px;
+}
+
+.ssatv-btn-watch-live-sm {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #ffffff;
+  color: #000000;
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 6px 14px;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.15s ease, background 0.15s ease;
+}
+
+.ssatv-btn-watch-live-sm:hover {
+  background: #e2e8f0;
+  transform: scale(1.03);
+}
+
+.ssatv-btn-watch-live-sm:active {
+  transform: scale(0.96);
 }
 
 .ssatv-active-cinema-header {
@@ -7151,17 +7184,73 @@ body:has(:fullscreen) .ssatv-mobile-bottom-nav {
     background: rgba(255, 255, 255, 0.25) !important;
   }
 
-  /* Live TV Player Floating on Mobile */
-  .ssatv-live-player-pane {
+  /* Live TV Player Floating on Mobile (Sama Sejibik Macam Movie) */
+  .ssatv-live-cinema-section {
     position: sticky !important;
     top: 0 !important;
     z-index: 98 !important;
     background: rgba(7, 9, 14, 0.98) !important;
-    backdrop-filter: blur(20px) !important;
-    -webkit-backdrop-filter: blur(20px) !important;
-    padding: max(6px, env(safe-area-inset-top, 6px)) 10px 10px 10px !important;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
-    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.9) !important;
+    backdrop-filter: blur(24px) !important;
+    -webkit-backdrop-filter: blur(24px) !important;
+    padding: max(8px, env(safe-area-inset-top, 8px)) 10px 10px 10px !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12) !important;
+    box-shadow: 0 14px 36px rgba(0, 0, 0, 0.92) !important;
+    margin-top: 0 !important;
+    width: 100% !important;
+  }
+
+  /* Prevent WebKit containing block trap when player enters fullscreen */
+  body:has(.is-fullscreen) .ssatv-active-cinema-section,
+  .ssatv-active-cinema-section:has(.is-fullscreen) {
+    position: static !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    transform: none !important;
+    filter: none !important;
+    padding: 0 !important;
+    border: none !important;
+    background: transparent !important;
+  }
+
+  .ssatv-active-cinema-section:has(.is-fullscreen) .ssatv-active-cinema-header {
+    display: none !important;
+  }
+
+  .ssatv-btn-watch-live-sm {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: #ffffff;
+    color: #000000;
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 700;
+    padding: 6px 12px;
+    border-radius: 999px;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.15s ease, background 0.15s ease;
+  }
+  .ssatv-btn-watch-live-sm:active {
+    transform: scale(0.95);
+  }
+
+  .ssatv-live-editorial-card {
+    padding: 16px 14px 20px 14px !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(7, 9, 14, 0.75);
+  }
+
+  .ssatv-livetv-container {
+    padding: 0 !important;
+  }
+
+  .ssatv-browse-live-section,
+  .ssatv-live-shelf-section,
+  .ssatv-all-channels-section,
+  .ssatv-epg-guide-section {
+    padding-left: 14px !important;
+    padding-right: 14px !important;
   }
 }
 

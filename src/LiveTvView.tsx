@@ -16,6 +16,7 @@ import {
   X,
   AlertCircle,
   Search,
+  Tv,
 } from 'lucide-react';
 import type { Channel } from './mockData';
 import { Player } from './Player';
@@ -615,44 +616,81 @@ export const LiveTvView: React.FC<LiveTvViewProps> = ({
 
   return (
     <div className="ssatv-livetv-container">
-      {/* 1. BROWSE BY CATEGORY PILLS (Arranged strictly according to APK) */}
-      <section className="ssatv-browse-live-section" style={{ marginTop: 0, marginBottom: 8 }}>
-        <div className="ssatv-category-pills-row">
-          {APK_CATEGORIES.map((cat) => (
-            <button
-              key={cat}
-              className={`ssatv-cat-pill ${activeCategory === cat ? 'active' : ''}`}
-              onClick={() => setActiveCategory(cat)}
-            >
-              {cat}
-            </button>
-          ))}
-        </div>
-      </section>
+      {/* 1. FLOATING CINEMA PLAYER FOR LIVE TV (Style sama sejibik macam movie) */}
+      <section className="ssatv-active-cinema-section ssatv-live-cinema-section">
+        <div className="ssatv-active-cinema-header">
+          <div className="ssatv-active-cinema-info">
+            <div className="ssatv-active-cinema-badge">
+              {currentChannel.thumbnail ? (
+                <img
+                  src={currentChannel.thumbnail}
+                  alt={currentChannel.name}
+                  style={{ width: '100%', height: '100%', objectFit: 'contain', borderRadius: '6px' }}
+                  onError={(e) => { (e.target as HTMLElement).style.display = 'none'; }}
+                />
+              ) : (
+                <Tv size={18} color="#fff" />
+              )}
+            </div>
+            <div style={{ minWidth: 0, flex: 1 }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <h2 className="ssatv-active-cinema-title">
+                  {currentChannel.name}
+                </h2>
+                {currentChannel.ch_number && (
+                  <span className="ssatv-brand-num-badge" style={{ padding: '2px 7px', fontSize: '0.72rem' }}>
+                    {currentChannel.ch_number}
+                  </span>
+                )}
+                <span className="ssatv-badge-live" style={{ padding: '1px 6px', fontSize: '0.65rem' }}>
+                  LIVE
+                </span>
+              </div>
+              <span className="ssatv-active-cinema-desc">
+                {currentProgram.title} {currentProgram.timeSlot ? `• ${currentProgram.timeSlot}` : ''}
+              </span>
+            </div>
+          </div>
 
-      {/* 2. SPLIT-HERO LIVE STAGE (60% / 40%) */}
-      <section className="ssatv-live-hero-stage">
-        {/* Left: Embedded 16:9 Live Video Player with Apple TV HUD */}
-        <div className="ssatv-live-player-pane">
-          <div 
-            ref={liveViewportRef}
-            className={`ssatv-live-viewport ${isFullscreen ? 'is-fullscreen' : ''} ${showOverlayControls ? 'controls-visible' : 'controls-hidden'} ${isIdle && isFullscreen ? 'is-idle' : ''}`}
-            onMouseMove={resetHideTimer}
-            onTouchStart={resetHideTimer}
-            onClick={() => {
-              const video = document.querySelector('.ssatv-live-viewport video') as HTMLVideoElement;
-              if (video && video.muted) {
-                video.muted = false;
-                video.volume = 1;
-                setIsMuted(false);
-              }
-              if (!showOverlayControls) {
-                resetHideTimer();
-              }
-            }}
-            onDoubleClick={toggleFullscreen}
-            style={{ cursor: isFullscreen && isIdle ? 'none' : 'pointer' }}
-          >
+          <div className="ssatv-active-cinema-actions">
+            <button
+              className="ssatv-btn-watch-live-sm"
+              onClick={handleWatchLive}
+              title="Tonton Skrin Penuh (Watch Live)"
+            >
+              <Maximize size={15} />
+              <span className="ssatv-fs-btn-label">Skrin Penuh</span>
+            </button>
+            <button
+              className="ssatv-scroll-btn ssatv-active-cinema-close-btn"
+              onClick={() => setIsPlaying(!isPlaying)}
+              title={isPlaying ? "Jeda Siaran" : "Main Siaran"}
+            >
+              {isPlaying ? <Pause size={16} /> : <Play size={16} />}
+            </button>
+          </div>
+        </div>
+
+        {/* 16:9 Video Viewport */}
+        <div 
+          ref={liveViewportRef}
+          className={`ssatv-live-viewport ${isFullscreen ? 'is-fullscreen' : ''} ${showOverlayControls ? 'controls-visible' : 'controls-hidden'} ${isIdle && isFullscreen ? 'is-idle' : ''}`}
+          onMouseMove={resetHideTimer}
+          onTouchStart={resetHideTimer}
+          onClick={() => {
+            const video = document.querySelector('.ssatv-live-viewport video') as HTMLVideoElement;
+            if (video && video.muted) {
+              video.muted = false;
+              video.volume = 1;
+              setIsMuted(false);
+            }
+            if (!showOverlayControls) {
+              resetHideTimer();
+            }
+          }}
+          onDoubleClick={toggleFullscreen}
+          style={{ cursor: isFullscreen && isIdle ? 'none' : 'pointer' }}
+        >
             {currentChannel && currentChannel.streamUrl ? (
               <Player key={currentChannel.id || 'live_hero'} channel={currentChannel} hideOverlay />
             ) : (
@@ -1101,13 +1139,14 @@ export const LiveTvView: React.FC<LiveTvViewProps> = ({
                 </button>
               </div>
             </div>
-          </div>
         </div>
+      </section>
 
-        {/* Right: Live Editorial Showcase */}
-        <div className="ssatv-live-editorial-pane">
+      {/* 2. LIVE EDITORIAL HERO PANE */}
+      <section className="ssatv-live-editorial-card">
+        <div className="ssatv-editorial-content">
           {/* Real Channel Brand with Logo / Number */}
-          <div className="ssatv-live-channel-brand" style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+          <div className="ssatv-live-channel-brand" style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 6 }}>
             {currentChannel.thumbnail && (
               <img
                 src={currentChannel.thumbnail}
@@ -1118,7 +1157,7 @@ export const LiveTvView: React.FC<LiveTvViewProps> = ({
                 }}
               />
             )}
-            <span className="ssatv-brand-text">{currentChannel.name}</span>
+            <span className="ssatv-brand-text" style={{ fontSize: '1.15rem', fontWeight: 800 }}>{currentChannel.name}</span>
             {currentChannel.ch_number && (
               <span className="ssatv-brand-num-badge">{currentChannel.ch_number}</span>
             )}
@@ -1162,6 +1201,21 @@ export const LiveTvView: React.FC<LiveTvViewProps> = ({
               )}
             </button>
           </div>
+        </div>
+      </section>
+
+      {/* 3. BROWSE BY CATEGORY PILLS (Arranged strictly according to APK) */}
+      <section className="ssatv-browse-live-section" style={{ marginTop: 8, marginBottom: 12 }}>
+        <div className="ssatv-category-pills-row">
+          {APK_CATEGORIES.map((cat) => (
+            <button
+              key={cat}
+              className={`ssatv-cat-pill ${activeCategory === cat ? 'active' : ''}`}
+              onClick={() => setActiveCategory(cat)}
+            >
+              {cat}
+            </button>
+          ))}
         </div>
       </section>
 
