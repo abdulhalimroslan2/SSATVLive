@@ -74,8 +74,10 @@ export const ContinueWatchingRow: React.FC<ContinueWatchingRowProps> = ({
                 loading="lazy"
               />
 
-              {/* Apple TV Watermark Top-Right (Matching IMG_5147) */}
-              <div className="apple-tv-card-badge-logo">tv</div>
+              {/* Lemon TV Watermark Top-Right */}
+              <div className="apple-tv-card-badge-logo" style={{ padding: '2px 4px' }}>
+                <img src="/lemontv-logo.png" alt="Lemon TV" style={{ height: '12px', width: 'auto', objectFit: 'contain', display: 'block' }} />
+              </div>
 
               {/* Hover Play Icon Overlay */}
               <div className="ssatv-card-hover-play">

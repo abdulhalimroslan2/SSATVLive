@@ -118,9 +118,13 @@ export const HeroExperience: React.FC<HeroExperienceProps> = ({
           ))}
         </h1>
 
-        {/* Apple TV Meta Line with Logo & Tags */}
+        {/* Lemon TV Meta Line with Logo & Tags */}
         <div className="apple-tv-hero-genre-line">
-          <span className="apple-tv-inline-logo">tv</span>
+          <img 
+            src="/lemontv-logo.png" 
+            alt="Lemon TV" 
+            style={{ height: '18px', width: 'auto', objectFit: 'contain', verticalAlign: 'middle', marginRight: '6px' }} 
+          />
           <span className="apple-tv-meta-separator">•</span>
           <span>
             {current.vodItem?.type === 'series'
@@ -224,7 +228,7 @@ export const HeroExperience: React.FC<HeroExperienceProps> = ({
         <div className="apple-tv-sub-note">
           {current.channelId
             ? 'Siaran Langsung Tanpa Gangguan Kualiti 1080p FHD'
-            : 'Strim Definisi Tinggi Kualiti Apple TV HDR'}
+            : 'Strim Definisi Tinggi Kualiti Lemon TV HDR'}
         </div>
       </div>
 

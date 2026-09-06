@@ -1,6 +1,6 @@
 {
-  "appId": "com.ssatv.live",
-  "appName": "SSA TV Live",
+  "appId": "com.lemontv.app",
+  "appName": "Lemon TV",
   "webDir": "dist",
   "bundledWebRuntime": false,
   "server": {

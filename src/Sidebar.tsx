@@ -22,6 +22,20 @@ export const Sidebar: React.FC<SidebarProps> = ({
 }) => {
   return (
     <aside className="ssatv-apple-sidebar">
+      {/* Official Lemon TV Brand Logo */}
+      <div 
+        className="ssatv-sidebar-brand-wrap" 
+        style={{ padding: '24px 22px 14px 22px', display: 'flex', alignItems: 'center', cursor: 'pointer' }} 
+        onClick={() => onTabChange('home')} 
+        title="Lemon TV"
+      >
+        <img 
+          src="/lemontv-logo.png" 
+          alt="Lemon TV" 
+          style={{ height: '32px', width: 'auto', objectFit: 'contain', display: 'block' }} 
+        />
+      </div>
+
       {/* 1. Primary Navigation Links (Tallies 100% with Main Header Tabs) */}
       <nav className="ssatv-sidebar-nav">
         {/* Search */}
