@@ -31,6 +31,7 @@ function App() {
   const [activeChannel, setActiveChannel] = useState<Channel | null>(null);
   const [activeTab, setActiveTab] = useState('home');
   const [searchQuery, setSearchQuery] = useState('');
+  const [activeLiveCategory, setActiveLiveCategory] = useState<string>('MALAYSIA');
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -364,6 +365,8 @@ function App() {
             setSearchQuery('');
             handleTabChange('search');
           }}
+          activeLiveCategory={activeLiveCategory}
+          onLiveCategoryChange={setActiveLiveCategory}
         />
 
         {/* Main Content Area */}
@@ -493,6 +496,8 @@ function App() {
                 activeChannel={activeChannel}
                 onSelectChannel={handleChannelSelect}
                 onBack={() => handleTabChange('home')}
+                activeCategory={activeLiveCategory}
+                onCategoryChange={setActiveLiveCategory}
               />
             )}
 

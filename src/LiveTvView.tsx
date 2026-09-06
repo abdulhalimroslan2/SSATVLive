@@ -32,10 +32,12 @@ interface LiveTvViewProps {
   activeChannel: Channel | null;
   onSelectChannel: (channel: Channel) => void;
   onBack?: () => void;
+  activeCategory?: string;
+  onCategoryChange?: (cat: string) => void;
 }
 
 // Categories arranged strictly according to SSATVLive_Plus_v6 (1).apk
-const APK_CATEGORIES = [
+export const APK_CATEGORIES = [
   'MALAYSIA',
   'INDONESIA',
   'CHINESE',
@@ -55,8 +57,19 @@ export const LiveTvView: React.FC<LiveTvViewProps> = ({
   activeChannel,
   onSelectChannel,
   onBack,
+  activeCategory: propActiveCategory,
+  onCategoryChange,
 }) => {
-  const [activeCategory, setActiveCategory] = useState<string>('MALAYSIA');
+  const [internalCategory, setInternalCategory] = useState<string>('MALAYSIA');
+  const activeCategory = propActiveCategory || internalCategory;
+
+  const handleSelectCategory = (cat: string) => {
+    if (onCategoryChange) {
+      onCategoryChange(cat);
+    } else {
+      setInternalCategory(cat);
+    }
+  };
 
   // Synchronize active category with activeChannel if selected externally (e.g. from Home Live Now)
   useEffect(() => {
@@ -65,7 +78,7 @@ export const LiveTvView: React.FC<LiveTvViewProps> = ({
         (cat) => cat.toUpperCase() === activeChannel.category.toUpperCase()
       );
       if (match) {
-        setActiveCategory(match);
+        handleSelectCategory(match);
       }
     }
   }, [activeChannel]);
@@ -1204,14 +1217,14 @@ export const LiveTvView: React.FC<LiveTvViewProps> = ({
         </div>
       </section>
 
-      {/* 3. BROWSE BY CATEGORY PILLS (Arranged strictly according to APK) */}
-      <section className="ssatv-browse-live-section" style={{ marginTop: 8, marginBottom: 12 }}>
+      {/* 3. BROWSE BY CATEGORY PILLS (Shown on Mobile where desktop header is hidden) */}
+      <section className="ssatv-browse-live-section ssatv-mobile-only" style={{ marginTop: 8, marginBottom: 12 }}>
         <div className="ssatv-category-pills-row">
           {APK_CATEGORIES.map((cat) => (
             <button
               key={cat}
               className={`ssatv-cat-pill ${activeCategory === cat ? 'active' : ''}`}
-              onClick={() => setActiveCategory(cat)}
+              onClick={() => handleSelectCategory(cat)}
             >
               {cat}
             </button>
