@@ -630,7 +630,7 @@ export const LiveTvView: React.FC<LiveTvViewProps> = ({
   return (
     <div className="ssatv-livetv-container">
       {/* 1. LIVE TV CATEGORIES (Directly under "Live TV" header on mobile) */}
-      <section className="ssatv-browse-live-section ssatv-mobile-only" style={{ marginTop: 4, marginBottom: 12 }}>
+      <section className="ssatv-browse-live-section ssatv-mobile-only">
         <div className="ssatv-category-pills-row">
           {APK_CATEGORIES.map((cat) => (
             <button

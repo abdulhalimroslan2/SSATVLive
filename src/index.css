@@ -1824,10 +1824,26 @@ button, input, select, textarea {
 }
 
 .filter-pill.active {
-  background: var(--accent-red);
-  color: #fff;
-  border-color: var(--accent-red);
-  box-shadow: 0 4px 12px var(--accent-red-glow);
+  background: #ffffff !important;
+  color: #000000 !important;
+  border-color: #ffffff !important;
+  box-shadow: 0 4px 16px rgba(255, 255, 255, 0.3) !important;
+  font-weight: 700 !important;
+}
+
+.filter-pill.active svg {
+  color: #000000 !important;
+  stroke: #000000 !important;
+}
+
+.filter-pill.active:hover {
+  background: #f2f2f7 !important;
+  color: #000000 !important;
+}
+
+.filter-pill.active:hover svg {
+  color: #000000 !important;
+  stroke: #000000 !important;
 }
 
 .search-suggestions-section {
@@ -7438,18 +7454,28 @@ body:has(:fullscreen) .ssatv-mobile-bottom-nav {
 
   /* 1. Mobile Header (Matching Apple TV IMG_5146 / IMG_5148) */
   .ssatv-header.apple-tv-header {
-    height: 60px;
-    padding: 0 18px;
-    background: transparent;
-    border-bottom: none;
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 100;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    min-height: auto !important;
+    height: 56px !important;
+    padding: max(8px, env(safe-area-inset-top, 8px)) 18px 0 18px !important;
+    background: transparent !important;
+    border-bottom: none !important;
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    z-index: 100 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+  }
+
+  .ssatv-header.has-live-subnav {
+    padding-bottom: 0 !important;
+    border-bottom: none !important;
+  }
+
+  .ssatv-header.apple-tv-header .ssatv-header-main-bar {
+    height: 50px !important;
   }
 
   .apple-tv-mobile-header-left {
@@ -7953,21 +7979,29 @@ body:has(:fullscreen) .ssatv-mobile-bottom-nav {
     cursor: pointer;
   }
 
-  /* Safe top padding for views without top hero so mobile header never overlaps content */
+  /* Safe top padding for views so mobile header never overlaps or clips content */
   .ssatv-livetv-container,
   .ssatv-movies-view,
+  .search-view-container,
   .ssatv-search-view {
-    padding-top: 64px !important;
+    padding-top: max(82px, calc(env(safe-area-inset-top, 24px) + 56px)) !important;
   }
 
   /* Safe bottom padding for entire page so floating dock never covers content */
   .ssatv-home-layout,
   .ssatv-movies-view,
   .ssatv-series-view,
+  .search-view-container,
   .ssatv-search-view,
   .ssatv-live-view-wrap,
   .ssatv-livetv-container {
     padding-bottom: 96px !important;
+  }
+
+  .search-view-container {
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+    gap: 1.5rem !important;
   }
 
   /* Live TV Categories directly under "Live TV" header on Mobile */
@@ -7975,9 +8009,9 @@ body:has(:fullscreen) .ssatv-mobile-bottom-nav {
     overflow-x: auto !important;
     -webkit-overflow-scrolling: touch !important;
     scrollbar-width: none !important;
-    padding: 0 16px 4px 16px !important;
-    margin-top: 2px !important;
-    margin-bottom: 12px !important;
+    padding: 8px 16px 10px 16px !important;
+    margin-top: 4px !important;
+    margin-bottom: 14px !important;
   }
 
   .ssatv-browse-live-section::-webkit-scrollbar {
@@ -7989,14 +8023,16 @@ body:has(:fullscreen) .ssatv-mobile-bottom-nav {
     flex-wrap: nowrap !important;
     gap: 8px !important;
     white-space: nowrap !important;
+    padding: 4px 0 !important;
   }
 
   .ssatv-browse-live-section .ssatv-cat-pill {
     flex-shrink: 0 !important;
-    padding: 6px 16px !important;
-    font-size: 0.78rem !important;
+    padding: 7px 18px !important;
+    font-size: 0.8rem !important;
     font-weight: 700 !important;
     border-radius: 999px !important;
+    line-height: 1.2 !important;
   }
 
   /* Movies Kategori Filem (APK) directly under "Movies" header on Mobile */
