@@ -106,8 +106,19 @@ export const Header: React.FC<HeaderProps> = ({
           </div>
         </div>
 
-        {/* Mobile Top-Right Profile Avatar (Matching Apple TV IMG_5146 / IMG_5148) */}
+        {/* Mobile Top-Right Lemon TV Logo + Profile Avatar (Hujung Atas Kanan) */}
         <div className="apple-tv-mobile-header-right ssatv-mobile-only">
+          <div 
+            className="apple-tv-mobile-logo" 
+            onClick={() => onTabChange('home')}
+            title="Lemon TV"
+          >
+            <img 
+              src="/lemontv-logo.png" 
+              alt="Lemon TV" 
+              className="lemon-tv-mobile-img"
+            />
+          </div>
           <div className="apple-tv-mobile-avatar" title="Akaun Halim Roslan">
             <img
               src="/sir-halim.png"

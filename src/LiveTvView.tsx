@@ -629,7 +629,22 @@ export const LiveTvView: React.FC<LiveTvViewProps> = ({
 
   return (
     <div className="ssatv-livetv-container">
-      {/* 1. FLOATING CINEMA PLAYER FOR LIVE TV (Style sama sejibik macam movie) */}
+      {/* 1. LIVE TV CATEGORIES (Directly under "Live TV" header on mobile) */}
+      <section className="ssatv-browse-live-section ssatv-mobile-only" style={{ marginTop: 4, marginBottom: 12 }}>
+        <div className="ssatv-category-pills-row">
+          {APK_CATEGORIES.map((cat) => (
+            <button
+              key={cat}
+              className={`ssatv-cat-pill ${activeCategory === cat ? 'active' : ''}`}
+              onClick={() => handleSelectCategory(cat)}
+            >
+              {cat}
+            </button>
+          ))}
+        </div>
+      </section>
+
+      {/* 2. FLOATING CINEMA PLAYER FOR LIVE TV (Style sama sejibik macam movie) */}
       <section className="ssatv-active-cinema-section ssatv-live-cinema-section">
         <div className="ssatv-active-cinema-header">
           <div className="ssatv-active-cinema-info">
@@ -729,8 +744,8 @@ export const LiveTvView: React.FC<LiveTvViewProps> = ({
                     }}
                     title="Keluar Skrin Penuh (Esc / F)"
                   >
-                    <ChevronLeft size={20} />
-                    <span style={{ fontSize: '0.86rem', fontWeight: 600 }}>Kembali</span>
+                    <ChevronLeft size={18} className="ssatv-fs-back-icon" />
+                    <span className="ssatv-fs-back-text">Kembali</span>
                   </button>
 
                   <div className="ssatv-fs-channel-dropdown-anchor" ref={channelDropdownRef}>
@@ -753,7 +768,7 @@ export const LiveTvView: React.FC<LiveTvViewProps> = ({
                       )}
                       <span className="ssatv-fs-ch-name">{currentChannel.name}</span>
                       {currentChannel.ch_number && (
-                        <span className="ssatv-brand-num-badge" style={{ padding: '2px 7px', fontSize: '0.72rem' }}>
+                        <span className="ssatv-brand-num-badge ssatv-fs-ch-num">
                           {currentChannel.ch_number}
                         </span>
                       )}
@@ -879,7 +894,7 @@ export const LiveTvView: React.FC<LiveTvViewProps> = ({
                     )}
                   </div>
 
-                  <div className="ssatv-fs-prog-pill">
+                  <div className="ssatv-fs-prog-pill" title={currentProgram.title}>
                     <span className="ssatv-fs-prog-name">{currentProgram.title}</span>
                     {currentProgram.timeSlot && (
                       <span className="ssatv-fs-prog-slot">• {currentProgram.timeSlot}</span>
@@ -1217,20 +1232,7 @@ export const LiveTvView: React.FC<LiveTvViewProps> = ({
         </div>
       </section>
 
-      {/* 3. BROWSE BY CATEGORY PILLS (Shown on Mobile where desktop header is hidden) */}
-      <section className="ssatv-browse-live-section ssatv-mobile-only" style={{ marginTop: 8, marginBottom: 12 }}>
-        <div className="ssatv-category-pills-row">
-          {APK_CATEGORIES.map((cat) => (
-            <button
-              key={cat}
-              className={`ssatv-cat-pill ${activeCategory === cat ? 'active' : ''}`}
-              onClick={() => handleSelectCategory(cat)}
-            >
-              {cat}
-            </button>
-          ))}
-        </div>
-      </section>
+
 
       {/* 3. LIVE CHANNELS CAROUSEL (Real Channel Names & Real Airing EPG Shows) */}
       <section className="ssatv-live-shelf-section">

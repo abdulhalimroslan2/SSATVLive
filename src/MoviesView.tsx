@@ -107,17 +107,7 @@ export const MoviesView: React.FC<MoviesViewProps> = ({ onPlayMovie }) => {
 
   return (
     <div className="ssatv-movies-view">
-      {/* 1. CINEMATIC HERO EXPERIENCE */}
-      <HeroExperience
-        slides={movieHeroSlides}
-        onPlay={(slide) => {
-          if (slide.vodItem) {
-            onPlayMovie(slide.vodItem);
-          }
-        }}
-      />
-
-      {/* 2. CATEGORY PILLS BAR (Matching SSATVLive_Plus_v6 (1).apk 1:1) */}
+      {/* 1. CATEGORY PILLS BAR (Matching SSATVLive_Plus_v6 (1).apk 1:1) - Directly under Movies Header */}
       <section className="ssatv-genre-browse-bar">
         <div className="ssatv-genre-browse-title">Kategori Filem (APK)</div>
         <div className="ssatv-genre-pills-scroll">
@@ -143,6 +133,16 @@ export const MoviesView: React.FC<MoviesViewProps> = ({ onPlayMovie }) => {
           })}
         </div>
       </section>
+
+      {/* 2. CINEMATIC HERO EXPERIENCE */}
+      <HeroExperience
+        slides={movieHeroSlides}
+        onPlay={(slide) => {
+          if (slide.vodItem) {
+            onPlayMovie(slide.vodItem);
+          }
+        }}
+      />
 
       {/* 3. DYNAMIC CONTENT: SPECIFIC CATEGORY GRID OR ALL CATEGORY ROWS */}
       <div className="ssatv-shelves-container">
