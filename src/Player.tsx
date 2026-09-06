@@ -29,7 +29,9 @@ const IS_NATIVE_APP = typeof window !== 'undefined' && (
   (window.location.hostname === 'localhost' && window.location.port !== '5173')
 );
 
-export const getProxyBaseUrl = (): string => {
+export const HETZNER_VPS_PROXY = 'https://2.29.23.90.sslip.io';
+
+export const getProxyBaseUrl = (targetPath: string = ''): string => {
   // 1. Dynamic edge proxy configured in client browser/STB
   if (typeof window !== 'undefined') {
     const custom = localStorage.getItem('custom_edge_proxy');
@@ -44,18 +46,32 @@ export const getProxyBaseUrl = (): string => {
     return envProxy.trim().replace(/\/$/, '');
   }
 
-  // 3. Native Capacitor / APK environment
+  // 3. High-bandwidth & IP-sensitive stream endpoints -> Always direct to Hetzner VPS (20TB quota + 1 device masking)
+  // This completely eliminates Vercel Fast Data Transfer / Fast Origin Transfer usage for video streaming!
+  const normalizedPath = (targetPath || '').toLowerCase();
+  if (
+    normalizedPath.includes('/ptv2026') ||
+    normalizedPath.includes('ptv2026.com') ||
+    normalizedPath.includes('/load-ptv') ||
+    normalizedPath.includes('load.ptv2026.com') ||
+    normalizedPath.includes('/perfecttv') ||
+    normalizedPath.includes('get.perfecttv.net') ||
+    normalizedPath.includes('/depan-ptv') ||
+    normalizedPath.includes('depanptv.com') ||
+    normalizedPath.includes('/viu-') ||
+    normalizedPath.includes('/okcdn') ||
+    normalizedPath.includes('/gcdn')
+  ) {
+    return HETZNER_VPS_PROXY;
+  }
+
+  // 4. Native Capacitor / APK environment
   if (IS_NATIVE_APP) {
     return 'https://ssalivetv.vercel.app';
   }
 
-  // 4. When accessed directly on VPS IP (2.29.23.90) or sslip.io, route stream proxy through Vercel Singapore to bypass Europe CloudFront geo-blocking
-  if (typeof window !== 'undefined' && (window.location.hostname === '2.29.23.90' || window.location.hostname.includes('sslip.io'))) {
-    return 'https://ssalivetv.vercel.app';
-  }
-
-  // 5. Default to current host
-  return window.location.origin;
+  // 5. Default to current host (e.g. Vercel for Astro/CloudFront regional routing)
+  return typeof window !== 'undefined' ? window.location.origin : '';
 };
 
 export const Player: React.FC<PlayerProps> = ({ channel, hideOverlay = false }) => {
@@ -443,8 +459,6 @@ export const Player: React.FC<PlayerProps> = ({ channel, hideOverlay = false }) 
         ['https://d2tolhxlph2dpt.cloudfront.net/', '/cf-d2to/'],
       ];
 
-      const proxyBase = getProxyBaseUrl();
-
       // Clean up URL and route through proxy if needed
       let cleanUrl = channel.streamUrl ? channel.streamUrl.split('|')[0].trim() : '';
 
@@ -453,15 +467,15 @@ export const Player: React.FC<PlayerProps> = ({ channel, hideOverlay = false }) 
 
       for (const [from, to] of PROXY_MAP) {
         if (cleanUrl.startsWith(from)) {
-          cleanUrl = proxyBase + cleanUrl.replace(from, to);
+          cleanUrl = getProxyBaseUrl(to) + cleanUrl.replace(from, to);
           break;
         }
       }
       if (cleanUrl.match(/https?:\/\/(vd\d+\.okcdn\.ru)\//)) {
-        cleanUrl = proxyBase + cleanUrl.replace(/https?:\/\/(vd\d+\.okcdn\.ru)\//, '/okcdn/$1/');
+        cleanUrl = getProxyBaseUrl('/okcdn/') + cleanUrl.replace(/https?:\/\/(vd\d+\.okcdn\.ru)\//, '/okcdn/$1/');
       }
       if (cleanUrl.startsWith('/')) {
-        cleanUrl = proxyBase + cleanUrl;
+        cleanUrl = getProxyBaseUrl(cleanUrl) + cleanUrl;
       }
       currentCleanUrl = cleanUrl;
 
@@ -509,8 +523,8 @@ export const Player: React.FC<PlayerProps> = ({ channel, hideOverlay = false }) 
           const networkEngine = player.getNetworkingEngine();
           if (networkEngine) {
             networkEngine.registerRequestFilter((_type: any, request: any) => {
-              const pBase = getProxyBaseUrl();
               let url = request.uris[0];
+              const pBase = getProxyBaseUrl(url);
 
               // Direct rewrite for relative paths
               if (url.startsWith('/')) {
@@ -579,9 +593,9 @@ export const Player: React.FC<PlayerProps> = ({ channel, hideOverlay = false }) 
                 rewritten = rewritten.replace(/<BaseURL>http:\/\/ngtv-live-cbj\.gcdn\.co\//gi, '<BaseURL>https://ngtv-live-cbj.gcdn.co/');
                 rewritten = rewritten.replace(/<BaseURL>http:\/\/ngtv-live\.gcdn\.co\//gi, '<BaseURL>https://ngtv-live.gcdn.co/');
                 rewritten = rewritten.replace(/<BaseURL>http:\/\/(?!localhost|127\.0\.0\.1)/gi, '<BaseURL>https://');
-                rewritten = rewritten.replaceAll('https://d2tolhxlph2dpt.cloudfront.net/', getProxyBaseUrl() + '/cf-d2to/');
-                rewritten = rewritten.replaceAll('https://ptv2026.com/', getProxyBaseUrl() + '/ptv2026/');
-                rewritten = rewritten.replaceAll('http://ptv2026.com/', getProxyBaseUrl() + '/ptv2026/');
+                rewritten = rewritten.replaceAll('https://d2tolhxlph2dpt.cloudfront.net/', getProxyBaseUrl('/cf-d2to/') + '/cf-d2to/');
+                rewritten = rewritten.replaceAll('https://ptv2026.com/', getProxyBaseUrl('/ptv2026/') + '/ptv2026/');
+                rewritten = rewritten.replaceAll('http://ptv2026.com/', getProxyBaseUrl('/ptv2026/') + '/ptv2026/');
 
                 // Ensure XML namespace for cenc is declared on <MPD> so browser DOMParser does not throw NamespaceError (Shaka 4001)
                 if (!rewritten.includes('xmlns:cenc=')) {
@@ -632,7 +646,7 @@ export const Player: React.FC<PlayerProps> = ({ channel, hideOverlay = false }) 
             let licenseUrl = channel.clearKey!.trim();
             for (const [from, to] of PROXY_MAP) {
               if (licenseUrl.startsWith(from)) {
-                licenseUrl = getProxyBaseUrl() + licenseUrl.replace(from, to);
+                licenseUrl = getProxyBaseUrl(to) + licenseUrl.replace(from, to);
                 break;
               }
             }
