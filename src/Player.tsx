@@ -587,6 +587,10 @@ export const Player: React.FC<PlayerProps> = ({ channel, hideOverlay = false }) 
                 if (!rewritten.includes('xmlns:cenc=')) {
                   rewritten = rewritten.replace(/<MPD(\s|>)/i, '<MPD xmlns:cenc="urn:mpeg:cenc:2013"$1');
                 }
+                // Ensure UTCTiming element is present for dynamic live manifests so device clock drift does not cause live edge stall
+                if (rewritten.includes('type="dynamic"') && !rewritten.includes('<UTCTiming')) {
+                  rewritten = rewritten.replace(/<MPD([^>]*)>/i, '<MPD$1>\n  <UTCTiming schemeIdUri="urn:mpeg:dash:utc:http-iso:2014" value="https://time.akamai.com/?iso"/>');
+                }
                 // Convert non-namespaced <pssh> tags to <cenc:pssh> so Shaka's DASH parser findChildrenNS matches urn:mpeg:cenc:2013
                 rewritten = rewritten.replaceAll('<pssh>', '<cenc:pssh>').replaceAll('</pssh>', '</cenc:pssh>');
                 rewritten = rewritten.replaceAll('<pssh ', '<cenc:pssh ');
