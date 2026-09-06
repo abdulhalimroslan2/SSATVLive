@@ -112,12 +112,10 @@ export default async function handler(request) {
     targetUrl = path.replace('/mana2/', 'https://slive.mana2.my/');
   }
   else if (path.startsWith('/ptv2026/')) {
+    targetUrl = `${HETZNER_VPS_URL}${path}`;
     if (path.includes('okayru')) {
-      targetUrl = `https://ptv2026.com${path.replace('/ptv2026', '')}`;
       headers.set('Origin', 'https://ok.ru');
       headers.set('Referer', 'https://ok.ru/');
-    } else {
-      targetUrl = `${HETZNER_VPS_URL}${path}`;
     }
   }
   else if (path.startsWith('/load-ptv/')) {
@@ -172,11 +170,26 @@ export default async function handler(request) {
       }
     } catch (vpsErr) {
       if (targetUrl.startsWith(HETZNER_VPS_URL)) {
+        // STRICT USER PRIVACY & SINGLE-DEVICE REQUIREMENT:
+        // ptv2026, load-ptv, and perfecttv MUST ONLY see 1 IP and 1 Device via Hetzner VPS.
+        // Never fall back to direct Vercel multi-IP edge fetching for these services.
+        if (path.startsWith('/ptv2026/') || path.startsWith('/load-ptv/') || path.startsWith('/perfecttv/')) {
+          console.error(`[EdgeProxy Strict VPS] Upstream VPS fetch error for ${path}:`, vpsErr.message);
+          return new Response(JSON.stringify({
+            error: 'Hetzner Edge Proxy connection error',
+            path,
+            detail: vpsErr.message
+          }), {
+            status: 502,
+            headers: {
+              ...CORS_HEADERS,
+              'Content-Type': 'application/json'
+            }
+          });
+        }
+
         let directUrl = targetUrl.replace(HETZNER_VPS_URL, '');
-        if (directUrl.startsWith('/ptv2026/')) directUrl = directUrl.replace('/ptv2026/', 'https://ptv2026.com/');
-        else if (directUrl.startsWith('/load-ptv/')) directUrl = directUrl.replace('/load-ptv/', 'https://load.ptv2026.com/');
-        else if (directUrl.startsWith('/perfecttv/')) directUrl = directUrl.replace('/perfecttv/', 'https://get.perfecttv.net/');
-        else if (directUrl.startsWith('/gcdn-s/')) directUrl = directUrl.replace('/gcdn-s/', 'https://ngtv-live-cbj.gcdn.co/');
+        if (directUrl.startsWith('/gcdn-s/')) directUrl = directUrl.replace('/gcdn-s/', 'https://ngtv-live-cbj.gcdn.co/');
         else if (directUrl.startsWith('/gcdn/')) directUrl = directUrl.replace('/gcdn/', 'http://ngtv-live-cbj.gcdn.co/');
         else if (directUrl.startsWith('/gcdn-live/')) directUrl = directUrl.replace('/gcdn-live/', 'https://ngtv-live.gcdn.co/');
         else if (directUrl.startsWith('/viu-vod/')) directUrl = directUrl.replace('/viu-vod/', 'https://dms-api.viu.com/');

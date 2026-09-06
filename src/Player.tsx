@@ -635,8 +635,8 @@ export const Player: React.FC<PlayerProps> = ({ channel, hideOverlay = false }) 
             };
             drmConfig.advanced = {
               'com.widevine.alpha': {
-                videoRobustness: ['SW_SECURE_CRYPTO', ''],
-                audioRobustness: ['SW_SECURE_CRYPTO', ''],
+                videoRobustness: 'SW_SECURE_CRYPTO',
+                audioRobustness: 'SW_SECURE_CRYPTO',
               },
             };
             console.log(`[Player] Using Widevine license server: ${licenseUrl}`);
