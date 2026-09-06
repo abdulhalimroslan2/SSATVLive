@@ -7987,7 +7987,7 @@ body:has(:fullscreen) .ssatv-mobile-bottom-nav {
 
   /* Safe top padding for views so mobile header never overlaps or clips content */
   .ssatv-livetv-container {
-    padding-top: max(48px, calc(env(safe-area-inset-top, 10px) + 38px)) !important;
+    padding-top: max(58px, calc(env(safe-area-inset-top, 14px) + 48px)) !important;
     gap: 12px !important;
   }
 
@@ -8014,12 +8014,12 @@ body:has(:fullscreen) .ssatv-mobile-bottom-nav {
     gap: 1.5rem !important;
   }
 
-  /* Live TV Categories directly under "Live TV" header on Mobile (Compact & tight) */
+  /* Live TV Categories directly under "Live TV" header on Mobile (Compact & elegant spacing) */
   .ssatv-browse-live-section {
     overflow-x: auto !important;
     -webkit-overflow-scrolling: touch !important;
     scrollbar-width: none !important;
-    padding: 0 16px 2px 16px !important;
+    padding: 3px 16px 2px 16px !important;
     margin-top: 0 !important;
     margin-bottom: 0 !important;
   }
