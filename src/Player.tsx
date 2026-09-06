@@ -46,10 +46,15 @@ export const getProxyBaseUrl = (): string => {
 
   // 3. Native Capacitor / APK environment
   if (IS_NATIVE_APP) {
-    return 'https://ssatvlive.vercel.app';
+    return 'https://ssalivetv.vercel.app';
   }
 
-  // 4. Default to current host
+  // 4. When accessed directly on VPS IP (2.29.23.90) or sslip.io, route stream proxy through Vercel Singapore to bypass Europe CloudFront geo-blocking
+  if (typeof window !== 'undefined' && (window.location.hostname === '2.29.23.90' || window.location.hostname.includes('sslip.io'))) {
+    return 'https://ssalivetv.vercel.app';
+  }
+
+  // 5. Default to current host
   return window.location.origin;
 };
 
@@ -429,7 +434,6 @@ export const Player: React.FC<PlayerProps> = ({ channel, hideOverlay = false }) 
         ['https://load.ptv2026.com/', '/load-ptv/'],
         ['https://depanptv.com/', '/depan-ptv/'],
         ['https://df14pcdp16s98.cloudfront.net/', '/cf-df14/'],
-        ['https://d25tgymtnqzu8s.cloudfront.net/', '/rtm-stream/'],
         ['https://d2xz2v5wuvgur6.cloudfront.net/', '/cf-d2xz/'],
         ['https://d2tjypxxy769fn.cloudfront.net/', '/cf-d2tj/'],
         ['https://d84q7nw4qf3j3.cloudfront.net/', '/cf-d84q/'],

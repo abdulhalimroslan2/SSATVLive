@@ -295,8 +295,56 @@ function App() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+  const isInsecureHttp = typeof window !== 'undefined' &&
+    window.location.protocol === 'http:' &&
+    window.location.hostname !== 'localhost' &&
+    window.location.hostname !== '127.0.0.1';
+
   return (
     <div className={`ssatv-app-shell ${activeChannel ? 'has-active-player' : ''}`}>
+      {isInsecureHttp && (
+        <div style={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          right: 0,
+          zIndex: 99999,
+          background: 'linear-gradient(90deg, #b91c1c, #991b1b)',
+          color: '#ffffff',
+          padding: '10px 16px',
+          fontSize: '0.82rem',
+          fontWeight: 600,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          gap: '12px',
+          boxShadow: '0 4px 16px rgba(0,0,0,0.6)'
+        }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <span style={{ fontSize: '1.1rem' }}>🔒</span>
+            <span>
+              <strong>Perhatian Pelayar:</strong> Pelayar web (Chrome/Safari) menyekat dekripsi video bersulit (DRM) pada sambungan HTTP tanpa SSL. Sila tonton melalui domain rasmi selamat <strong>ssalivetv.vercel.app</strong>.
+            </span>
+          </div>
+          <a
+            href="https://ssalivetv.vercel.app"
+            style={{
+              background: '#ffffff',
+              color: '#991b1b',
+              padding: '6px 14px',
+              borderRadius: '999px',
+              fontWeight: 800,
+              textDecoration: 'none',
+              whiteSpace: 'nowrap',
+              fontSize: '0.78rem',
+              boxShadow: '0 2px 8px rgba(0,0,0,0.3)'
+            }}
+          >
+            Buka ssalivetv.vercel.app ➔
+          </a>
+        </div>
+      )}
+
       {/* 0. APPLE TV LEFT SIDEBAR (Matching ref_movies & ref_series 1:1) */}
       <Sidebar
         activeTab={activeTab}

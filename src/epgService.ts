@@ -1,5 +1,4 @@
 import type { Channel } from './mockData';
-import rawEpgData from './liveEpgData.json';
 
 export interface EpgProgramme {
   title: string;
@@ -139,7 +138,25 @@ export function getChannelEpg(
   };
 }
 
-const epgMap: Record<string, EpgProgramme[]> = rawEpgData as Record<string, EpgProgramme[]>;
+let epgMap: Record<string, EpgProgramme[]> = {};
+
+// Asynchronously load heavy 6.7MB EPG dataset in background without blocking main JS thread or freezing UI
+if (typeof window !== 'undefined') {
+  const loadEpg = () => {
+    import('./liveEpgData.json').then((mod) => {
+      epgMap = ((mod as any).default || mod) as Record<string, EpgProgramme[]>;
+      window.dispatchEvent(new CustomEvent('epg-data-ready'));
+    }).catch(err => {
+      console.warn('[EPG] Dynamic load note:', err);
+    });
+  };
+
+  if (typeof (window as any).requestIdleCallback === 'function') {
+    (window as any).requestIdleCallback(loadEpg, { timeout: 2500 });
+  } else {
+    setTimeout(loadEpg, 800);
+  }
+}
 
 // Channel alias dictionary to maximize match rate between APK channels and EPG
 const CHANNEL_ALIASES: Record<string, string> = {
