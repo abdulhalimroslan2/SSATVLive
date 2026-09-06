@@ -16,7 +16,7 @@ const UNIFIED_DEVICE_UA = 'Mozilla/5.0 (Linux; Android 10; MiTV-AXSO0 Build/QTZC
 const DESKTOP_CHROME_UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36';
 
 // Hetzner Nginx RAM tmpfs Edge Proxy (Request coalescing & multi-user cache)
-const HETZNER_VPS_URL = 'http://2.29.23.90.sslip.io';
+const HETZNER_VPS_URL = 'https://2.29.23.90.sslip.io';
 
 export default async function handler(request) {
   if (request.method === 'OPTIONS') {

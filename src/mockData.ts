@@ -1117,7 +1117,7 @@ export const MOCK_CHANNELS: Channel[] = [
     "name": "HITS Movies",
     "logo": "https://ptv2026.com/logo/hitsmovies.png",
     "thumbnail": "https://ptv2026.com/logo/hitsmovies.png",
-    "streamUrl": "/ptv2026/dash2.mpd?username=vip_gzidmjzr&password=Uk7WNjrs&channel=hitsmovies",
+    "streamUrl": "/astro-linear/dash-wv/linear/2305/default_primary.mpd",
     "category": "MOVIES",
     "ch_number": "415",
     "clearKey": "ff1febd7018d0dd711601e795e0d6210:38fbfb3a56e40ff92c9df8acbcba9ef6",
