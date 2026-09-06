@@ -587,6 +587,9 @@ export const Player: React.FC<PlayerProps> = ({ channel, hideOverlay = false }) 
                 if (!rewritten.includes('xmlns:cenc=')) {
                   rewritten = rewritten.replace(/<MPD(\s|>)/i, '<MPD xmlns:cenc="urn:mpeg:cenc:2013"$1');
                 }
+                // Convert non-namespaced <pssh> tags to <cenc:pssh> so Shaka's DASH parser findChildrenNS matches urn:mpeg:cenc:2013
+                rewritten = rewritten.replaceAll('<pssh>', '<cenc:pssh>').replaceAll('</pssh>', '</cenc:pssh>');
+                rewritten = rewritten.replaceAll('<pssh ', '<cenc:pssh ');
 
                 if (isClearKeyHex) {
                   const clearKeyUuid = 'urn:uuid:1077efec-c0b2-4d02-ace3-3c1e52e2fb4b';
@@ -633,10 +636,12 @@ export const Player: React.FC<PlayerProps> = ({ channel, hideOverlay = false }) 
               'com.widevine.alpha': licenseUrl,
               'com.microsoft.playready': licenseUrl,
             };
+            drmConfig.defaultVideoRobustnessForWidevine = 'SW_SECURE_CRYPTO';
+            drmConfig.defaultAudioRobustnessForWidevine = 'SW_SECURE_CRYPTO';
             drmConfig.advanced = {
               'com.widevine.alpha': {
-                videoRobustness: 'SW_SECURE_CRYPTO',
-                audioRobustness: 'SW_SECURE_CRYPTO',
+                videoRobustness: ['SW_SECURE_CRYPTO'],
+                audioRobustness: ['SW_SECURE_CRYPTO'],
               },
             };
             console.log(`[Player] Using Widevine license server: ${licenseUrl}`);
